@@ -17,12 +17,10 @@ I will describe the procdure I used to update the buoys in the Waddenzee. The ne
 
 Then you can open the HTML file and view the tiles in your browser using [leaflet](https://leafletjs.com/).
 
-I already did this conversion and made the map available under https://nas.hexa8.de/qgis/map.html
-
 I edit OSM data with [JOSM](https://josm.openstreetmap.de/). You can add the generated map tiles to JOSM as imagery layer.
 
 - imagery, imagery preferences
-- add TMS with `tms:file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` or `tms:https://nas.hexa8.de/qgis/{zoom}/{x}/{y}.png`
+- add TMS with `tms:file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` 
 - the activate the layer from imagery menu
 
 JOSM is pretty easy to use, how it works is explained in the [Wiki](https://josm.openstreetmap.de/wiki/Introduction). For editing seamarks you may want to set a filter filtering on `seamark` and activate hide mode, such that only seamarks are displayed to make it less confusing.
