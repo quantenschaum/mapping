@@ -20,15 +20,24 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="16.59375"
-     inkscape:cx="15.969868"
+     inkscape:zoom="42.25"
+     inkscape:cx="15.467456"
      inkscape:cy="16"
-     inkscape:window-width="1570"
-     inkscape:window-height="775"
-     inkscape:window-x="1927"
-     inkscape:window-y="1102"
+     inkscape:window-width="2205"
+     inkscape:window-height="1596"
+     inkscape:window-x="1292"
+     inkscape:window-y="281"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="svg2"
+     showguides="true">
+    <sodipodi:guide
+       position="16,47.548023"
+       orientation="-1,0"
+       id="guide432"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
   <defs
      id="defs4">
     <clipPath
@@ -1310,22 +1319,22 @@
   </defs>
   <g
      id="g374"
-     transform="matrix(1.2925758,-0.32714732,-0.32714732,-1.2925758,15.979477,16.137863)"
+     transform="matrix(1.2925758,-0.32714732,-0.32714732,-1.2925758,16.004272,16.137863)"
      clip-path="url(#clipPath6772)"
-     style="fill:#ffffff;stroke-width:0.33750002;stroke-dasharray:none;stroke:#000000">
+     style="fill:#ffffff;stroke:#231f20;stroke-width:0.3375;stroke-dasharray:none;stroke-opacity:1">
     <path
        d="M 0,0 0.411,1.65"
-       style="fill:#ffffff;stroke:#000000;stroke-width:0.33750002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffffff;stroke:#231f20;stroke-width:0.3375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
        id="path376" />
   </g>
   <g
      id="g378"
-     transform="matrix(1.2925758,-0.32714732,-0.32714732,-1.2925758,17.293435,14.047573)"
+     transform="matrix(1.2925758,-0.32714732,-0.32714732,-1.2925758,17.327895,14.047573)"
      clip-path="url(#clipPath6766)"
-     style="fill:#ffffff;stroke-width:0.33750002;stroke-dasharray:none;stroke:#000000">
+     style="fill:none;stroke:#231f20;stroke-width:0.3375;stroke-dasharray:none;stroke-opacity:1">
     <path
        d="m 0,0 -1.924,0.48 0.617,2.474 1.924,-0.48 z"
-       style="fill:#ffffff;stroke:#000000;stroke-width:0.33750002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:#231f20;stroke-width:0.3375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
        id="path380" />
   </g>
 </svg>

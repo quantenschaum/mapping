@@ -4,8 +4,31 @@
    width="32"
    height="32"
    id="svg2"
+   sodipodi:docname="top-rec.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview39467"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="26.375"
+     inkscape:cx="15.981043"
+     inkscape:cy="16"
+     inkscape:window-width="1707"
+     inkscape:window-height="1088"
+     inkscape:window-x="1751"
+     inkscape:window-y="906"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
   <defs
      id="defs4">
     <clipPath
@@ -1260,19 +1283,6 @@
     </clipPath>
     <clipPath
        clipPathUnits="userSpaceOnUse"
-       id="clipPath6772">
-      <g
-         id="g6776"
-         style="stroke-width:1"
-         transform="translate(-167.0607,-294.1733)">
-        <path
-           d="M 51.032,72.594 H 246.283 V 821.565 H 51.032 Z"
-           id="path6774"
-           style="stroke-width:1" />
-      </g>
-    </clipPath>
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
        id="clipPath6766">
       <g
          id="g6770"
@@ -1284,18 +1294,30 @@
            style="stroke-width:1" />
       </g>
     </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath39956">
+      <g
+         id="g39962">
+        <g
+           id="g39960"
+           style="stroke-width:0.75"
+           transform="matrix(1.2925758,-0.32714732,-0.32714732,-1.2925758,-103.72113,451.03261)">
+          <path
+             d="M 51.032,72.594 H 246.283 V 821.565 H 51.032 Z"
+             id="path39958"
+             style="stroke-width:0.75" />
+        </g>
+      </g>
+    </clipPath>
   </defs>
-  <g
-     id="g374"
-     transform="matrix(1.2925758,-0.32714732,-0.32714732,-1.2925758,15.979477,16.137863)"
-     clip-path="url(#clipPath6772)">
-    <path
-       d="M 0,0 0.411,1.65"
-       style="fill:none;stroke:#231f20;stroke-width:0.283;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
-       id="path376" />
-  </g>
+  <path
+     d="m 15.979477,16.137863 -0.0085,-2.267208"
+     style="fill:none;stroke:#231f20;stroke-width:0.377333;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+     id="path376"
+     clip-path="url(#clipPath39956)" />
   <rect
-     style="fill:#ffffff;fill-opacity:0.325337;stroke:#000000;stroke-width:0.45;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers fill stroke"
+     style="fill:none;fill-opacity:0.325337;stroke:#231f20;stroke-width:0.45;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers fill stroke;stroke-opacity:1"
      id="rect1202"
      width="4.6337385"
      height="3.7289186"
