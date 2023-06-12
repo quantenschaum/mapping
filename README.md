@@ -52,11 +52,11 @@ The ENC files can directly be viewed in [OpenCPN](https://opencpn.org/).
 
 [OsmAnd](https://osmand.net/) is a very good map and navigation app for all kinds activities. It features a boating profile where seamarks are displayed and it possible to include map tiles from other sources like sat imagery or custom made tiles. It is pretty complex, you should [read the manual](https://osmand.net/docs/intro).
 
-Enable the boating profile in the settings and also enable the [nautical charts](https://osmand.net/docs/user/plugins/nautical-charts) and [online maps](https://osmand.net/docs/user/plugins/online-map) extensions. When you switch to the boating profile the land areas are shown in sand colour and seamarks like buoys are displayed. You of course need to download the map for the area you are interested in. You can customize the map by tapping the boat icon in the top left corner. 
+Enable the boating profile in the settings and also enable the [nautical charts](https://osmand.net/docs/user/plugins/nautical-charts) and [online maps](https://osmand.net/docs/user/plugins/online-map) extensions. When you switch to the boating profile the land areas are shown in sand colour and seamarks like buoys are displayed. You can customize the map by tapping the boat icon in the top left corner. 
 
-You have to [download map data](https://osmand.net/docs/user/start-with/download-maps) for the regions you are interested it. These maps already contain the seamark, but they are only displayed in the nav chart map style (boating profile). You may download worldwide seamarks, which contains seamarks only but worldwide, so the map shows seamarks also for region where did not download the map data for.
+You have to [download map data](https://osmand.net/docs/user/start-with/download-maps) for the regions you are interested it. These maps already contain the seamarks, but they are only displayed in the nav chart map style (boating profile). You may download worldwide seamarks, too, which contains seamarks only but worldwide, so the map shows seamarks also for region where did not download the (detailed) map data for.
 
-The map data gets updated monthly, so the changes you made to OSM data using JOSM will not show up immediately. You may enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live) to get the updates more quickly, but some feature may show up multiple times (from map data, worldwide seamarks and the update). 
+The map data is based on OSM and gets updated monthly, so the changes you make to OSM data using JOSM will not show up immediately. You may enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live) to get the updates more quickly, but some features may show up multiple times (from map data, worldwide seamarks and the update). 
 
 ### Raster Maps
 
@@ -66,4 +66,8 @@ To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap 
 - URL: `https://tile.osmand.net/hd/{0}/{1}/{2}.png` (adjust to your needs)
 - format: SQlite
 
+So you can use any TMS maps you find on the net or upload the tiles you have generated with QGIS to a webserver.
+
 You can use his raster layer as an overlay with transparency slider displayed at the bottom of the map, so you can seamlessly switch between two maps.
+
+The raster map tiles can be predownloaded into the cache, so they are available for offline usage. Select the raster map as main map or overlay, then long press somewhere, actions, download map, zoom to the area you want to download, select the map source and zoom levels and start the download.
