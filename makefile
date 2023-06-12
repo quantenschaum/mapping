@@ -8,6 +8,9 @@ OGR=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,SPLIT_
 help:
 	cat README.md
 
+unzip:
+	unzip -o *Inland_Waddenzee_week*.zip
+
 convert:
 	rm -rf $(OUT)
 	for F in $(IN)/*.000; do $(OGR) $(OUT) "$$F"; done
@@ -38,9 +41,6 @@ copy:
 replace:
 	for F in *.qgs; do sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
 
-sync: replace
-	rm -f convert.zip
-	zip convert.zip -r icons/INT1 README.md makefile *.qgs *.csv
-	cp convert.zip README.md qgis
+sync:
 	touch qgis/.nobackup
 	rsync -hav --del qgis nas:docker/maps/tiles/

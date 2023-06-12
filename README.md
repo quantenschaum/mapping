@@ -2,12 +2,12 @@
 
 How to convert an electronic navigational chart to map tiles and how to use them to update OSM data.
 
-I will describe the procdure I used to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile`, which is in the [ZIP](convert.zip) with all other resources.
+I will describe my procedure to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile` and I use Linux.
 
 1. download ENC from https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc
-2. extract the ZIP `make unzip`
+2. extract the ZIP (`make unzip`)
 3. convert the ENC to shape files with [`ogr2ogr`](https://gdal.org/programs/ogr2ogr.html) `make waddenzee` (It uses the mapping CSVs from OpenCPN.)
-4. open them in [QGIS](https://www.qgis.org/) using `waddenzee.qgs`
+4. open them in [QGIS](https://www.qgis.org/) using `waddenzee.qgs` (You may want to add the `icons` path to QGIS: settings, options, system, SVG path)
 5. export map tiles
   - processing, toolbox, raster tools, generate XYZ tiles (dir)
   - extent: draw on canvas and select the region you want to get rendered
@@ -15,24 +15,53 @@ I will describe the procdure I used to update the buoys in the Waddenzee. The ne
   - set output dir and output html
   - run - this takes a while :coffee:
 
-Then you can open the HTML file and view the tiles in your browser using [leaflet](https://leafletjs.com/).
+The buoys and beacons in this map are pulled from [data.overheid.nl](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) which is more up to date than the data in the ENC.
+
+Then you can open the HTML file and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
+
+This procedure should in principle work for other ENCs as well, you simply have to enable the buoys and beacons layer from the ENC.
+
+## Updating OSM data
 
 I edit OSM data with [JOSM](https://josm.openstreetmap.de/). You can add the generated map tiles to JOSM as imagery layer.
 
 - imagery, imagery preferences
-- add TMS with `tms:file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` 
-- the activate the layer from imagery menu
+- add TMS with URL `file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` 
+- then activate the layer from imagery menu
 
-JOSM is pretty easy to use, how it works is explained in the [Wiki](https://josm.openstreetmap.de/wiki/Introduction). For editing seamarks you may want to set a filter filtering on `seamark` and activate hide mode, such that only seamarks are displayed to make it less confusing.
+JOSM is pretty easy to use, how it works is explained in the [Wiki](https://josm.openstreetmap.de/wiki/Introduction). 
 
-You may want to add the INT1 `icons` path to QGIS in the settings (settings, options, system, SVG path).
+For editing seamarks you may want to set a filter filtering on `seamark` and activate hide mode, such that only seamarks are displayed to make it less confusing.
 
-The ENC files can be viewed directly in [OpenCPN](https://opencpn.org/).
+Now you can update buoys and other seamarks by simply drawing them on top of the chart.
 
-The tiles can also be used in [OSMAND](https://osmand.net/), an IMHO very good mobile map and navigation app for Adroid devices.
+To get the seamarks displayed correctly in JOSM and make it easier to edit them you should add (under settings)
 
-You should also have a look into
+- Map Paint Style: `https://raw.githubusercontent.com/OpenSeaMap/josm/master/INT1_Seamark.mapcss`
+- Plugin: SeaChart
+- Plugin: SeaMapEditor
+- Tagging Preset: `https://github.com/OpenSeaMap/josm/raw/master/INT-1-preset.xml`
 
-- https://appchart.c-map.com/
-- https://webapp.navionics.com/
+## OpenCPN
 
+The ENC files can directly be viewed in [OpenCPN](https://opencpn.org/).
+
+## OsmAnd
+
+[OsmAnd](https://osmand.net/) is a very good map and navigation app for all kinds activities. It features a boating profile where seamarks are displayed and it possible to include map tiles from other sources like sat imagery or custom made tiles. It is pretty complex, you should [read the manual](https://osmand.net/docs/intro).
+
+Enable the boating profile in the settings and also enable the [nautical charts](https://osmand.net/docs/user/plugins/nautical-charts) and [online maps](https://osmand.net/docs/user/plugins/online-map) extensions. When you switch to the boating profile the land areas are shown in sand colour and seamarks like buoys are displayed. You of course need to download the map for the area you are interested in. You can customize the map by tapping the boat icon in the top left corner. 
+
+You have to [download map data](https://osmand.net/docs/user/start-with/download-maps) for the regions you are interested it. These maps already contain the seamark, but they are only displayed in the nav chart map style (boating profile). You may download worldwide seamarks, which contains seamarks only but worldwide, so the map shows seamarks also for region where did not download the map data for.
+
+The map data gets updated monthly, so the changes you made to OSM data using JOSM will not show up immediately. You may enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live) to get the updates more quickly, but some feature may show up multiple times (from map data, worldwide seamarks and the update). 
+
+### Raster Maps
+
+To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap top left, map source, add manually, then
+
+- name: name of this map
+- URL: `https://tile.osmand.net/hd/{0}/{1}/{2}.png` (adjust to your needs)
+- format: SQlite
+
+You can use his raster layer as an overlay with transparency slider displayed at the bottom of the map, so you can seamlessly switch between two maps.
