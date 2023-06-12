@@ -5,7 +5,7 @@ How to convert an electronic navigational chart to map tiles and how to use them
 I will describe my procedure to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile` and I use Linux.
 
 1. download ENC from https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc
-2. extract the ZIP (`make unzip`)
+2. extract the ZIP `make unzip`
 3. convert the ENC to shape files with [`ogr2ogr`](https://gdal.org/programs/ogr2ogr.html) `make waddenzee` (It uses the mapping CSVs from OpenCPN.)
 4. open them in [QGIS](https://www.qgis.org/) using `waddenzee.qgs` (You may want to add the `icons` path to QGIS: settings, options, system, SVG path)
 5. export map tiles
@@ -15,7 +15,7 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
   - set output dir and output html
   - run - this takes a while :coffee:
 
-The buoys and beacons in this map are pulled from [data.overheid.nl](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) which is more up to date than the data in the ENC.
+The buoys and beacons in this map are pulled from the ArcGIS MapService listet at [data.overheid.nl](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) which is more up to date than the data in the ENC.
 
 Then you can open the HTML file and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
 
@@ -28,6 +28,8 @@ I edit OSM data with [JOSM](https://josm.openstreetmap.de/). You can add the gen
 - imagery, imagery preferences
 - add TMS with URL `file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` 
 - then activate the layer from imagery menu
+
+You could use the WMS at `https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows` directly in JOSM, but then you do not get the metadata like name and light descriptor of the objects.
 
 JOSM is pretty easy to use, how it works is explained in the [Wiki](https://josm.openstreetmap.de/wiki/Introduction). 
 
