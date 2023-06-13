@@ -36,7 +36,7 @@ There are differences between the data in the ENC (yellow circles) and in the bu
 I edit OSM data with [JOSM](https://josm.openstreetmap.de/). You can add the generated map tiles to JOSM as imagery layer.
 
 - imagery, imagery preferences
-- add TMS with URL `file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` 
+- add TMS with URL `file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` or `http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/{zoom}/{x}/{y}.png`
 - then activate the layer from imagery menu
 
 You could use the WMS at `https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows` directly in JOSM, but then you do not get the metadata like name and light descriptor of the objects.
