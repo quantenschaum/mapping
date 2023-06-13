@@ -1,6 +1,10 @@
-# S57 ENC conversion
+# S-57 ENC conversion
 
-How to convert an electronic navigational chart to map tiles and how to use them to update OSM data.
+How to convert an electronic navigational chart to map tiles and how to use them to update [OSM](https://www.openstreetmap.org/) data.
+
+![example map](example.png)
+
+This is based on a [description](https://www.sigterritoires.fr/index.php/affichage-des-cartes-marines-s57-dans-qgis/) I found on the net, but it did not work well and I did not like look, so I reworked it.
 
 I will describe my procedure to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile` and I use Linux.
 
@@ -15,11 +19,15 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
   - set output dir and output html
   - run - this takes a while :coffee:
 
-The buoys and beacons in this map are pulled from the ArcGIS MapService listet at [data.overheid.nl](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) which is more up to date than the data in the ENC.
-
 Then you can open the HTML file and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
 
 This procedure should in principle work for other ENCs as well, you simply have to enable the buoys and beacons layer from the ENC.
+
+The buoys and beacons in this map are pulled from the ArcGIS MapService listed at [data.overheid.nl](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) which is more up to date than the data in the ENC.
+
+There are differences between the data in the ENC (yellow circles) and in the buoys and beacons dataset (blue circles).
+
+![differences](diff.png)
 
 ## Updating OSM data with JOSM
 
@@ -33,7 +41,6 @@ You could use the WMS at `https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarwe
 
 JOSM is pretty easy to use, how it works is explained in the [Wiki](https://josm.openstreetmap.de/wiki/Introduction). 
 
-
 To get the seamarks displayed correctly in JOSM and make it easier to edit them you should add (under settings)
 
 - Map Paint Style: `https://raw.githubusercontent.com/OpenSeaMap/josm/master/INT1_Seamark.mapcss`
@@ -44,6 +51,8 @@ To get the seamarks displayed correctly in JOSM and make it easier to edit them 
 For editing seamarks you may want to set a filter filtering on `seamark` and activate hide mode, such that only seamarks are displayed to make it less confusing.
 
 Now you can update buoys and other seamarks by simply drawing them on top of the chart.
+
+![JOSM](josm.png)
 
 ### scripted updates
 
@@ -57,7 +66,9 @@ I will look into the scripting functionality of JOSM, but before uploading data 
 
 ## OpenCPN
 
-The ENC files can directly be viewed in [OpenCPN](https://opencpn.org/).
+The ENC files can also be viewed in [OpenCPN](https://opencpn.org/).
+
+![OpenCPN](opencpn.png)
 
 ## OsmAnd
 
@@ -69,6 +80,11 @@ You have to [download map data](https://osmand.net/docs/user/start-with/download
 
 The map data is based on OSM and gets updated monthly, so the changes you make to OSM data using JOSM will not show up immediately. You may enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live) to get the updates more quickly, but some features may show up multiple times (from map data, worldwide seamarks and the update). 
 
+OSM contains two render engines, version 2 is OpenGL based, it's faster and and not bound to fixed zoom levels, but it only shows all buoys if zoomed in very close. I prefer the old version 1 render engine.
+
+![OsmAnd engine 1](osmand1.png)
+![OsmAnd engine 2](osmand2.png)
+
 ### Raster Maps
 
 To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap top left, map source, add manually, then
@@ -76,6 +92,8 @@ To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap 
 - name: name of this map
 - URL: `https://tile.osmand.net/hd/{0}/{1}/{2}.png` (adjust to your needs)
 - format: SQlite
+
+![OsmAnd custom raster map](osmand.png)
 
 So you can use any TMS maps you find on the net or upload the tiles you have generated with QGIS to a webserver.
 
