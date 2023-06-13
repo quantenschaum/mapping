@@ -5,13 +5,12 @@
   <title>Leaflet Preview</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-   crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-   crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet-hash@0.2.1/leaflet-hash.js" crossorigin=""></script>
+  <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js" crossorigin=""></script>
+  <script src="https://leaflet.github.io/Leaflet.Graticule/Leaflet.Graticule.js" crossorigin=""></script>
   <style type="text/css">
     body {
        margin: 0;
@@ -26,6 +25,54 @@
 <body>
   <div id="map"></div>
   <script>
+    function d2dm(a,n){
+        deg = (new URL(document.location)).searchParams.get("deg");
+        if(deg) {
+            n=parseInt(deg);
+            f=Math.pow(10,n);
+            return Math.round(a*f)/f;
+        }
+        a=Math.abs(a);
+        d=Math.floor(a);
+        f=Math.pow(10,n);
+        m=Math.round(((60*a)%60)*f)/f;
+        while(m>=60) { m-=60; d+=1; }
+        M=m==0?"":m.toFixed(n).replace(/\.?0+$/,"")+"'";
+        return d+'°'+M;
+    }
+
+    var grid=L.latlngGraticule({
+		showLabel: true,
+		color: '#222',
+		zoomInterval: [
+            {start: 2, end: 4, interval: 30},
+            {start: 5, end: 5, interval: 20},
+            {start: 6, end: 6, interval: 10},
+            {start: 7, end: 7, interval: 5},
+            {start: 8, end: 8, interval: 2},
+            {start: 9, end: 9, interval: 1},
+            {start: 10, end: 10, interval: 30/60},
+            {start: 11, end: 11, interval: 15/60},
+            {start: 12, end: 12, interval: 10/60},
+            {start: 13, end: 13, interval: 5/60},
+            {start: 14, end: 14, interval: 2/60},
+            {start: 15, end: 15, interval: 1/60},
+            {start: 16, end: 16, interval: 1/60/2},
+            {start: 17, end: 17, interval: 1/60/5},
+            {start: 18, end: 18, interval: 1/60/10},
+		],
+        latFormatTickLabel: function(l){
+            s=l<0?'S':l>0?'N':'';
+            return s+d2dm(l,2);
+        },
+        lngFormatTickLabel: function(l){
+            l%=360;
+            l-=Math.abs(l)>180?Math.sign(l)*360:0;
+            s=l<0?'W':l>0?'E':'';
+            return s+d2dm(l,2);
+        },
+	});
+
     var basemaps = {
       ENC:L.tileLayer('{z}/{x}/{y}.png', {
         attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
@@ -46,6 +93,7 @@
     };
 
     var overlays = {
+      Grid: grid,
       'Vaarweg Markeringen':L.tileLayer('seamarks/{z}/{x}/{y}.png', {
         attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
       }),
@@ -64,12 +112,22 @@
     var map = L.map('map', {
       center: [52.8907,5.4128],
       zoom: 10,
-      layers: [basemaps['ENC']],
+      layers: [basemaps['ENC'], overlays['Grid']],
       minZoom: 10,
       maxZoom: 16,
     });
 
     L.control.layers(basemaps, overlays, {collapsed: false}).addTo(map);
+
+    new L.Hash(map);
+
+    L.control.polylineMeasure({
+        unit: 'nauticalmiles',
+        clearMeasurementsOnStop: false,
+        showBearings: true,
+        showClearControl: true,
+        showUnitControl: true,
+    }).addTo(map);
   </script>
 </body>
 </html>
