@@ -4,7 +4,7 @@ How to convert an electronic navigational chart to map tiles and how to use them
 
 ![example map](example.png)
 
-This is based on a [description](https://www.sigterritoires.fr/index.php/affichage-des-cartes-marines-s57-dans-qgis/) I found on the net, but it did not work well and I did not like look, so I reworked it.
+This is based on a [description](https://www.sigterritoires.fr/index.php/affichage-des-cartes-marines-s57-dans-qgis/) I found on the net, but it did not work well and I did not like look, so I reworked it. The [S-57 ENC](http://www.s-57.com/) consisting of many files is transformed into shape files, one for each layer. Then these shape files are read by QGIS and rendered as specified in the [INT1](https://www.bsh.de/DE/PUBLIKATIONEN/_Anlagen/Downloads/Nautik_und_Schifffahrt/Sonstige-nautische-Publikationen/Wichtige-Zeichen-Abkuerzungen-Auswahl-Karte_1.html) (almost).
 
 I will describe my procedure to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile` and I use Linux.
 
