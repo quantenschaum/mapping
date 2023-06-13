@@ -13,11 +13,11 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 3. convert the ENC to shape files with [`ogr2ogr`](https://gdal.org/programs/ogr2ogr.html) `make waddenzee` (It uses the mapping CSVs from OpenCPN.)
 4. open them in [QGIS](https://www.qgis.org/) using `waddenzee.qgs` (You may want to add the `icons` path to QGIS: settings, options, system, SVG path)
 5. export map tiles
-  - processing, toolbox, raster tools, generate XYZ tiles (dir)
-  - extent: draw on canvas and select the region you want to get rendered
-  - max zoom: 16
-  - set output dir and output html
-  - run - this takes a while :coffee:
+   - processing, toolbox, raster tools, generate XYZ tiles (dir)
+   - extent: draw on canvas and select the region you want to get rendered
+   - max zoom: 16
+   - set output dir and output html
+   - run - this takes a while :coffee:
 
 Then you can open the HTML file and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
 
