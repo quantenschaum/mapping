@@ -21,8 +21,6 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 
 Then you can open the HTML file and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
 
-There is a [public server with the tiles I have created](http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/). By enabling OpenStreetMap, Vaarweg Markeringen (RWS) and OpenSeaMap you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. 
-
 This procedure should in principle work for other ENCs as well, you simply have to enable the buoys and beacons layer from the ENC.
 
 The buoys and beacons in this map are pulled from the ArcGIS MapService listed at [data.overheid.nl](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) which is more up to date than the data in the ENC.
@@ -30,6 +28,8 @@ The buoys and beacons in this map are pulled from the ArcGIS MapService listed a
 There are differences between the data in the ENC (yellow circles) and in the buoys and beacons dataset (blue circles).
 
 ![differences](diff.png)
+
+There is a [public server with the tiles I have created](http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/). By enabling OpenStreetMap, Vaarweg Markeringen (RWS) and OpenSeaMap you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. 
 
 ## Updating OSM data with JOSM
 
