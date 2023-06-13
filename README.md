@@ -80,7 +80,7 @@ You have to [download map data](https://osmand.net/docs/user/start-with/download
 
 The map data is based on OSM and gets updated monthly, so the changes you make to OSM data using JOSM will not show up immediately. You may enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live) to get the updates more quickly, but some features may show up multiple times (from map data, worldwide seamarks and the update). 
 
-OSM contains two render engines, version 2 is OpenGL based, it's faster and and not bound to fixed zoom levels, but it only shows all buoys if zoomed in very close. I prefer the old version 1 render engine.
+OSM contains two render engines, version 2 is OpenGL based, it's faster and and not bound to fixed zoom levels, but it only shows all buoys if zoomed in very closely and they are off position as well. I do prefer the old version 1 render engine.
 
 ![OsmAnd engine 1 vs 2](osmand12.png)
 
@@ -92,7 +92,7 @@ To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap 
 - URL: `https://tile.osmand.net/hd/{0}/{1}/{2}.png` (adjust to your needs)
 - format: SQlite
 
-![OsmAnd custom raster map](osmand.png)
+![OsmAnd custom raster map](osmand.gif)
 
 So you can use any TMS maps you find on the net or upload the tiles you have generated with QGIS to a webserver.
 
