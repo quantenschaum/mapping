@@ -82,8 +82,7 @@ The map data is based on OSM and gets updated monthly, so the changes you make t
 
 OSM contains two render engines, version 2 is OpenGL based, it's faster and and not bound to fixed zoom levels, but it only shows all buoys if zoomed in very close. I prefer the old version 1 render engine.
 
-![OsmAnd engine 1](osmand1.png)
-![OsmAnd engine 2](osmand2.png)
+![OsmAnd engine 1 vs 2](osmand12.png)
 
 ### Raster Maps
 
