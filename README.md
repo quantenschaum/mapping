@@ -21,7 +21,7 @@ Then you can open the HTML file and view the tiles in your browser, it is a pret
 
 This procedure should in principle work for other ENCs as well, you simply have to enable the buoys and beacons layer from the ENC.
 
-## Updating OSM data
+## Updating OSM data with JOSM
 
 I edit OSM data with [JOSM](https://josm.openstreetmap.de/). You can add the generated map tiles to JOSM as imagery layer.
 
@@ -33,9 +33,6 @@ You could use the WMS at `https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarwe
 
 JOSM is pretty easy to use, how it works is explained in the [Wiki](https://josm.openstreetmap.de/wiki/Introduction). 
 
-For editing seamarks you may want to set a filter filtering on `seamark` and activate hide mode, such that only seamarks are displayed to make it less confusing.
-
-Now you can update buoys and other seamarks by simply drawing them on top of the chart.
 
 To get the seamarks displayed correctly in JOSM and make it easier to edit them you should add (under settings)
 
@@ -43,6 +40,20 @@ To get the seamarks displayed correctly in JOSM and make it easier to edit them 
 - Plugin: SeaChart
 - Plugin: SeaMapEditor
 - Tagging Preset: `https://github.com/OpenSeaMap/josm/raw/master/INT-1-preset.xml`
+
+For editing seamarks you may want to set a filter filtering on `seamark` and activate hide mode, such that only seamarks are displayed to make it less confusing.
+
+Now you can update buoys and other seamarks by simply drawing them on top of the chart.
+
+### scripted updates
+
+Theoretically it is possible to update the positions and other metadata with a script that pulls the information from [the dataset](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) and inserts it into OSM. There are some problems though.
+
+- How to match the information in the dataset to node in OSM correctly?
+- How to handle additions and deletions correctly?
+- When moving nodes, sometimes connected nodes need to moved along. How to handle this correctly?
+
+I will look into the scripting functionality of JOSM, but before uploading data modified by a script it needs to checked and corrected manually.
 
 ## OpenCPN
 
