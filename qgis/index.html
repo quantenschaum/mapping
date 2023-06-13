@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Preview</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+  <style type="text/css">
+    body {
+       margin: 0;
+       padding: 0;
+    }
+    html, body, #map{
+       width: 100%;
+       height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+    var basemaps = {
+      ENC:L.tileLayer('{z}/{x}/{y}.png', {
+        attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
+      }),
+      OpenStreetMap:L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+      }),
+      OpenTopoMap:L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        attribution: '<a href="https://opentopomap.org/">OpenTopoMap</a>'
+      }),
+      'ENC van RWS':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/WMSServer', {
+        layers:'0,2,3,4,5,6,7',
+        version:'1.3.0',
+        transparent:'true',
+        format:'image/png',
+        attribution: '<a href="https://rijkswaterstaat.nl/">RWS</a>'
+       }),
+    };
+
+    var overlays = {
+      'Vaarweg Markeringen':L.tileLayer('seamarks/{z}/{x}/{y}.png', {
+        attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
+      }),
+      'Vaarweg Markeringen (WMS)':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
+        layers:'vaarweg_markering_drijvend,vaarweg_markering_drijvend_detail,vaarweg_markering_vast,vaarweg_markering_vast_detail',
+        version:'1.3.0',
+        transparent:'true',
+        format:'image/png',
+        attribution: '<a href="https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979">RWS</a>'
+       }),
+      OpenSeaMap:L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
+        attribution: '<a href="https://openseamap.org/">OpenSeaMap</a>'
+      }),
+    };
+
+    var map = L.map('map', {
+      center: [52.8907,5.4128],
+      zoom: 10,
+      layers: [basemaps['ENC']],
+      minZoom: 10,
+      maxZoom: 16,
+    });
+
+    L.control.layers(basemaps, overlays, {collapsed: false}).addTo(map);
+  </script>
+</body>
+</html>
