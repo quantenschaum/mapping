@@ -21,7 +21,7 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 
 Then you can open the HTML file and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
 
-There is a [public server with the tiles I have created](http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/index.html).
+There is a [public server with the tiles I have created](http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/).
 
 This procedure should in principle work for other ENCs as well, you simply have to enable the buoys and beacons layer from the ENC.
 
