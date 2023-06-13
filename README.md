@@ -91,7 +91,7 @@ OSM contains two render engines, version 2 is OpenGL based, it's faster and and 
 To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap top left, map source, add manually, then
 
 - name: name of this map
-- URL: `http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/{0}/{1}/{2}.png` (adjust to your needs)
+- URL: `http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/{0}/{1}/{2}.png` (or just click [here](http://osmand.net/add-tile-source?name=QGIS&min_zoom=10&max_zoom=16&url_template=http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/{0}/{1}/{2}.png))
 - format: SQlite
 
 ![OsmAnd custom raster map](osmand.gif)
