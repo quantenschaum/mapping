@@ -21,6 +21,8 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 
 Then you can open the HTML file and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
 
+There is a [public server with the tiles I have created](http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/index.html).
+
 This procedure should in principle work for other ENCs as well, you simply have to enable the buoys and beacons layer from the ENC.
 
 The buoys and beacons in this map are pulled from the ArcGIS MapService listed at [data.overheid.nl](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) which is more up to date than the data in the ENC.
@@ -89,7 +91,7 @@ OSM contains two render engines, version 2 is OpenGL based, it's faster and and 
 To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap top left, map source, add manually, then
 
 - name: name of this map
-- URL: `https://tile.osmand.net/hd/{0}/{1}/{2}.png` (adjust to your needs)
+- URL: `http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/{0}/{1}/{2}.png` (adjust to your needs)
 - format: SQlite
 
 ![OsmAnd custom raster map](osmand.gif)

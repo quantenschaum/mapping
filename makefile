@@ -44,3 +44,6 @@ replace:
 sync:
 	touch qgis/.nobackup
 	rsync -hav --del qgis nas:docker/maps/tiles/
+
+s3:
+	s3cmd sync qgis/ s3://mapfoo7aehahphuakeh/qgis/ --delete-removed --delete-after --no-check-md5
