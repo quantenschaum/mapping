@@ -2,7 +2,7 @@
 
 How to convert an ENC (electronic navigational chart) to map tiles and how to use them to update [OSM](https://www.openstreetmap.org/) data.
 
-![example map](example.png)
+![example map](img/example.png)
 
 This is based on a [post](https://www.sigterritoires.fr/index.php/affichage-des-cartes-marines-s57-dans-qgis/) I found on the net, but it did not work well and I did not like look, so I reworked it. The [S-57 ENC](http://www.s-57.com/) consisting of many files is transformed into shape files with [`ogr2ogr`](https://gdal.org/programs/ogr2ogr.html), one for each layer. Then these shape files are read by [QGIS](https://www.qgis.org/) and rendered as specified in the [INT1](https://www.bsh.de/DE/PUBLIKATIONEN/_Anlagen/Downloads/Nautik_und_Schifffahrt/Sonstige-nautische-Publikationen/Wichtige-Zeichen-Abkuerzungen-Auswahl-Karte_1.html) (almost).
 
@@ -27,7 +27,7 @@ This procedure should in principle work for other ENCs as well, you just have to
 
 There are differences between the data in the ENC (yellow circles) and those in the dataset above (blue circles).
 
-![differences](diff.png)
+![differences](img/diff.png)
 
 There is a [public server](http://waddenzee.duckdns.org/) with the tiles I have created. By enabling OpenStreetMap, Vaarweg Markeringen (RWS) and OpenSeaMap you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. 
 
@@ -50,7 +50,7 @@ To get the seamarks displayed correctly in JOSM and make it easier to edit them 
 
 For editing seamarks you may want to set a filter filtering on `seamark` and activate hide mode, such that only seamarks are displayed to make it less confusing. Now you can update buoys and other seamarks by simply drawing them on top of the chart.
 
-![JOSM](josm.png)
+![JOSM](img/josm.png)
 
 ### scripted updates
 
@@ -66,7 +66,7 @@ I will look into the scripting functionality of JOSM, but before uploading data 
 
 The ENC files can also be viewed in [OpenCPN](https://opencpn.org/).
 
-![OpenCPN](opencpn.png)
+![OpenCPN](img/opencpn.png)
 
 ## OsmAnd
 
@@ -80,7 +80,7 @@ The map data is based on OSM and gets updated monthly, so the changes you make t
 
 OSM contains two render engines, version 2 is OpenGL based, it's faster and not bound to fixed zoom levels, but it only shows all buoys if zoomed in very closely, and they are [off position](https://github.com/osmandapp/OsmAnd/issues/17413) as well. I do prefer the old version 1 render engine.
 
-![OsmAnd engine 1 vs 2](osmand12.png)
+![OsmAnd engine 1 vs 2](img/osmand12.png)
 
 ### Raster Maps
 
@@ -92,7 +92,7 @@ To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap 
   - buoys only: `http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png` (or just click [here](http://osmand.net/add-tile-source?name=Waddenzee+Boeien&min_zoom=10&max_zoom=16&url_template=http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png))
 - format: SQlite (optional)
 
-![OsmAnd custom raster map](osmand.gif)
+![OsmAnd custom raster map](img/osmand.gif)
 
 This way you can use any TMS maps you find on the net or upload the tiles you have generated with QGIS to a webserver. There are already some predefined ones built into OsmAnd.
 
