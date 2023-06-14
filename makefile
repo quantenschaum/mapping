@@ -11,7 +11,10 @@ help:
 unzip:
 	unzip -o *Inland_Waddenzee_week*.zip
 
-convert:
+%.csv:
+	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
+
+convert: s57objectclasses.csv s57attributes.csv
 	rm -rf $(OUT)
 	for F in $(IN)/*.000; do $(OGR) $(OUT) "$$F"; done
 	#cd $(OUT) && rm *.prj *.shx *.dbf
