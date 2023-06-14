@@ -29,14 +29,14 @@ There are differences between the data in the ENC (yellow circles) and in the bu
 
 ![differences](diff.png)
 
-There is a [public server with the tiles I have created](http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/). By enabling OpenStreetMap, Vaarweg Markeringen (RWS) and OpenSeaMap you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. 
+There is a [public server with the tiles I have created](http://waddenzee.duckdns.org/). By enabling OpenStreetMap, Vaarweg Markeringen (RWS) and OpenSeaMap you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. 
 
 ## Updating OSM data with JOSM
 
 I edit OSM data with [JOSM](https://josm.openstreetmap.de/). You can add the generated map tiles to JOSM as imagery layer.
 
 - imagery, imagery preferences
-- add TMS with URL `file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` or `http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/{zoom}/{x}/{y}.png`
+- add TMS with URL `file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` or `http://waddenzee.duckdns.org/{zoom}/{x}/{y}.png`
 - then activate the layer from imagery menu
 
 You could use the WMS at `https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows` directly in JOSM, but then you do not get the metadata like name and light descriptor of the objects.
@@ -91,7 +91,7 @@ OSM contains two render engines, version 2 is OpenGL based, it's faster and and 
 To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap top left, map source, add manually, then
 
 - name: name of this map
-- URL: `http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/{0}/{1}/{2}.png` (or just click [here](http://osmand.net/add-tile-source?name=QGIS&min_zoom=10&max_zoom=16&url_template=http://mapfoo7aehahphuakeh.s3-website.eu-central-1.amazonaws.com/qgis/{0}/{1}/{2}.png))
+- URL: `http://waddenzee.duckdns.org/{0}/{1}/{2}.png` (or just click [here](http://osmand.net/add-tile-source?name=QGIS&min_zoom=10&max_zoom=16&url_template=http://waddenzee.duckdns.org/{0}/{1}/{2}.png))
 - format: SQlite
 
 ![OsmAnd custom raster map](osmand.gif)
