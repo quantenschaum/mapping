@@ -42,5 +42,5 @@ replace:
 	for F in *.qgs; do sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
 
 sync:
-	touch qgis/.nobackup
-	rsync -hav --del qgis nas:docker/maps/tiles/
+	touch tiles/.nobackup
+	rsync -hav --del tiles/ nas:docker/maps/tiles/qgis/
