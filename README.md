@@ -80,8 +80,6 @@ The map data is based on OSM and gets updated monthly, so the changes you make t
 
 OSM contains two render engines, version 2 is OpenGL based, it's faster and not bound to fixed zoom levels, but it only shows all buoys if zoomed in very closely, and they are [off position](https://github.com/osmandapp/OsmAnd/issues/17413) as well. I do prefer the old version 1 render engine.
 
-![OsmAnd engine 1 vs 2](img/osmand12.png)
-
 ### Raster Maps
 
 To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap top left, map source, add manually, then
