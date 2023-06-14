@@ -91,7 +91,8 @@ OSM contains two render engines, version 2 is OpenGL based, it's faster and and 
 To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap top left, map source, add manually, then
 
 - name: name of this map
-- URL: `http://waddenzee.duckdns.org/{0}/{1}/{2}.png` (or just click [here](http://osmand.net/add-tile-source?name=QGIS&min_zoom=10&max_zoom=16&url_template=http://waddenzee.duckdns.org/{0}/{1}/{2}.png))
+- URL: `http://waddenzee.duckdns.org/{0}/{1}/{2}.png` (or just click [here](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=10&max_zoom=16&url_template=http://waddenzee.duckdns.org/{0}/{1}/{2}.png))
+  - URL: `http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png` (or just click [here](http://osmand.net/add-tile-source?name=Waddenzee+Boeien&min_zoom=10&max_zoom=16&url_template=http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png))
 - format: SQlite
 
 ![OsmAnd custom raster map](osmand.gif)
