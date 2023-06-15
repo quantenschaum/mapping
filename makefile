@@ -8,11 +8,21 @@ OGR=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,SPLIT_
 help:
 	cat README.md
 
+.PHONY: waddenzee zeeland nederland rotterdam us
+
 unzip:
 	unzip -o *Inland_Waddenzee_week*.zip
 
 %.csv:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
+
+nautical.render.xml:
+	wget https://github.com/osmandapp/OsmAnd-resources/raw/master/rendering_styles/$@
+
+marine.render.xml: nautical.render.xml
+	diff $< $@ -u >$@.diff || true
+	cp $< x$@
+	patch x$@ $@.diff
 
 convert: s57objectclasses.csv s57attributes.csv
 	rm -rf $(OUT)
@@ -20,8 +30,6 @@ convert: s57objectclasses.csv s57attributes.csv
 	#cd $(OUT) && rm *.prj *.shx *.dbf
 	cd $(OUT) && for F in * ; do G=$${F%.*}; mv -n $${F} $${G^^}.$${F#*.}; done
 	touch $(OUT)/.nobackup
-
-.PHONY: waddenzee zeeland nederland rotterdam us
 
 waddenzee:
 	$(MAKE) convert OUT=$@ IN=*Inland_Waddenzee_week*/ENC_ROOT/*/*/*/
