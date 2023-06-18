@@ -23,13 +23,21 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 
 Now you can open `tiles/index.html` and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
 
+There is a [public server](http://waddenzee.duckdns.org/) with the tiles I have created. By enabling OpenStreetMap, Vaarweg Markeringen (RWS) and OpenSeaMap you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. 
+
 This procedure should in principle work for other ENCs as well, you just have to enable the buoys and beacons layer from the ENC. The buoys and beacons for the Waddenzee are pulled from the ArcGIS MapService listed at [data.overheid.nl](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) which is more up to date than the data in the ENC.
+
+## Differences in the data
 
 There are differences between the data in the ENC (yellow circles) and those in the dataset above (blue circles).
 
 ![differences](img/diff.png)
 
-There is a [public server](http://waddenzee.duckdns.org/) with the tiles I have created. By enabling OpenStreetMap, Vaarweg Markeringen (RWS) and OpenSeaMap you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. 
+I also found differences of sector lights. As can be seen in the example image below, there are different sector definitions in the ENC and in the above dataset access. I compared these data with what is given in the [official and up to date Lichtenlijst](https://www.defensie.nl/downloads/publicaties/2022/07/27/hp2a) to confirm that information in the ENC is not correct. The data in [Vaarweg markeringen vast](https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049) agrees with the data in the Lichtlijst (at least for this example).
+
+![sectorlicht](img/sectorlicht.png)
+
+The ENC provides much information than the Vaarweg markeringen dataset (i.e. sector information for smaller lights like leading lights and light range data), but unfortunately it does contain some errors.
 
 ## Updating OSM data with JOSM
 
