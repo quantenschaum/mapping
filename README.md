@@ -33,11 +33,15 @@ There are differences between the data in the ENC (yellow circles) and those in 
 
 ![differences](img/diff.png)
 
-I also found differences of sector lights. As can be seen in the example image below, there are different sector definitions in the ENC and in the above dataset access. I compared these data with what is given in the [official and up to date Lichtenlijst](https://www.defensie.nl/downloads/publicaties/2022/07/27/hp2a) to confirm that information in the ENC is not correct. The data in [Vaarweg markeringen vast](https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049) agrees with the data in the Lichtlijst (at least for this example).
+I also found differences of sector lights. As can be seen in the example image below, there are different sector definitions in the ENC and in the above dataset access. I compared these data with what is given in the [official and up to date Lichtenlijst](https://www.defensie.nl/downloads/publicaties/2022/07/27/hp2a) (Nr. 1496) to confirm that the information in the ENC is not correct. The data in [Vaarweg markeringen vast](https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049) agrees with the data in the Lichtlijst (at least for this example).
 
-![sectorlicht](img/sectorlicht.png)
+![sectorlicht](img/sectorlicht1496.png)
 
-The ENC provides much information than the Vaarweg markeringen dataset (i.e. sector information for smaller lights like leading lights and light range data), but unfortunately it does contain some errors.
+There are differences int positions of the objects. The ENC encodes the positions in Lat and Lon ([EPSG:4326](https://epsg.io/4326)) whereas the other data set uses the UTM grid ([EPSG:25831](https://epsg.io/25831)). The Sectorlicht den Oever (Nr. 1586) shows a difference in position of ~40m. The Lichtenlijst only gives the position to 0.1' (~180m), so both are correct within this accuracy, but again the ENC seems to be off, compared with an Orthophoto.
+
+![sectorlicht](img/sectorlicht1586.png)
+
+The ENC provides much more information than the Vaarweg markeringen dataset (i.e. sector information for smaller lights like leading lights and light range data), but unfortunately it does contain some errors.
 
 ## Updating OSM data with JOSM
 
