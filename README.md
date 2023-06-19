@@ -12,6 +12,8 @@ This is based on a [post](https://www.sigterritoires.fr/index.php/affichage-des-
 - Buoys dataset: https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979
 - Beacons dataset: https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049
 
+## Map tiles
+
 I will describe my procedure to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile` and I use Linux.
 
 1. download ENC from URL above
