@@ -6,9 +6,15 @@ How to convert an ENC (electronic navigational chart) to map tiles and how to us
 
 This is based on a [post](https://www.sigterritoires.fr/index.php/affichage-des-cartes-marines-s57-dans-qgis/) I found on the net, but it did not work well and I did not like look, so I reworked it. The [S-57 ENC](http://www.s-57.com/) consisting of many files is transformed into shape files with [`ogr2ogr`](https://gdal.org/programs/ogr2ogr.html), one for each layer. Then these shape files are read by [QGIS](https://www.qgis.org/) and rendered as specified in the [INT1](https://www.bsh.de/DE/PUBLIKATIONEN/_Anlagen/Downloads/Nautik_und_Schifffahrt/Sonstige-nautische-Publikationen/Wichtige-Zeichen-Abkuerzungen-Auswahl-Karte_1.html) (almost).
 
+## Data Sources
+
+- S-57 ENC: https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc
+- Buoys dataset: https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979
+- Beacons dataset: https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049
+
 I will describe my procedure to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile` and I use Linux.
 
-1. download ENC from https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc
+1. download ENC from URl above
 2. extract the ZIP `make unzip`
 3. convert the ENC to shape files with `make waddenzee` (It uses the mapping CSVs from OpenCPN.)
 4. open them in QGIS using `waddenzee.qgs`  
@@ -23,9 +29,9 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 
 Now you can open `tiles/index.html` and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
 
-There is a [public server](http://waddenzee.duckdns.org/) with the tiles I have created. By enabling OpenStreetMap, Vaarweg Markeringen (RWS) and OpenSeaMap you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. 
+There is a [public server](http://waddenzee.duckdns.org/) with the tiles I have created. By enabling OpenStreetMap, Vaarweg Markeringen (RWS) and OpenSeaMap you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. You can use these map tiles in JOSM an OsmAnd if you like (see below).
 
-This procedure should in principle work for other ENCs as well, you just have to enable the buoys and beacons layer from the ENC. The buoys and beacons for the Waddenzee are pulled from the ArcGIS MapService listed at [data.overheid.nl](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) which is more up to date than the data in the ENC.
+This procedure should in principle work for other ENCs as well, you just have to enable the buoys and beacons layer from the ENC. The buoys and beacons for the Waddenzee are pulled from the dedicated datasets mentioned above which is more up to date than the data in the ENC.
 
 ## Differences in the data
 
@@ -33,7 +39,7 @@ There are differences between the data in the ENC (yellow circles) and those in 
 
 ![differences](img/diff.png)
 
-I also found differences in sector lights. As can be seen in the example image below, there are different sector definitions in the ENC and in the above dataset accessed via ArcGIS API. I compared these data with what is given in the [official and up to date Lichtenlijst](https://www.defensie.nl/downloads/publicaties/2022/07/27/hp2a) (Nr. 1496) to confirm that the information in the ENC is not correct. The data in [Vaarweg markeringen vast](https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049) agrees with the data in the Lichtlijst (at least for this example).
+I also found differences in sector lights. As can be seen in the example image below, there are different sector definitions in the ENC and in the above dataset accessed via ArcGIS API. I compared these data with what is given in the [official and up to date Lichtenlijst](https://www.defensie.nl/downloads/publicaties/2022/07/27/hp2a) (Nr. 1496) to confirm that the information in the ENC is not correct. The data in the beacons dataset agrees with the data in the Lichtlijst (at least for this example).
 
 ![sectorlicht](img/sectorlicht1496.png)
 
