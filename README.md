@@ -14,7 +14,7 @@ This is based on a [post](https://www.sigterritoires.fr/index.php/affichage-des-
 
 I will describe my procedure to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile` and I use Linux.
 
-1. download ENC from URl above
+1. download ENC from URL above
 2. extract the ZIP `make unzip`
 3. convert the ENC to shape files with `make waddenzee` (It uses the mapping CSVs from OpenCPN.)
 4. open them in QGIS using `waddenzee.qgs`  
