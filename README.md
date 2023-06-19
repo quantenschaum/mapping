@@ -29,11 +29,11 @@ This procedure should in principle work for other ENCs as well, you just have to
 
 ## Differences in the data
 
-There are differences between the data in the ENC (yellow circles) and those in the dataset above (blue circles).
+There are differences between the data in the ENC (yellow circles) and those in the dataset above (blue circles). Compared with the data supplied in the [Berichten aan Zeevarenden](https://www.defensie.nl/onderwerpen/berichten-aan-zeevarenden) the data in the dedicated dataset in correct.
 
 ![differences](img/diff.png)
 
-I also found differences of sector lights. As can be seen in the example image below, there are different sector definitions in the ENC and in the above dataset accessed via ArcGIS API. I compared these data with what is given in the [official and up to date Lichtenlijst](https://www.defensie.nl/downloads/publicaties/2022/07/27/hp2a) (Nr. 1496) to confirm that the information in the ENC is not correct. The data in [Vaarweg markeringen vast](https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049) agrees with the data in the Lichtlijst (at least for this example).
+I also found differences in sector lights. As can be seen in the example image below, there are different sector definitions in the ENC and in the above dataset accessed via ArcGIS API. I compared these data with what is given in the [official and up to date Lichtenlijst](https://www.defensie.nl/downloads/publicaties/2022/07/27/hp2a) (Nr. 1496) to confirm that the information in the ENC is not correct. The data in [Vaarweg markeringen vast](https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049) agrees with the data in the Lichtlijst (at least for this example).
 
 ![sectorlicht](img/sectorlicht1496.png)
 
