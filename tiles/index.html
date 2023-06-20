@@ -74,11 +74,14 @@
 	});
 
     var basemaps = {
-      'ENC (QGIS)':L.tileLayer('{z}/{x}/{y}.png', {
+      'ENC':L.tileLayer('{z}/{x}/{y}.png', {
         attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
       }),
-      OpenStreetMap:L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      'OpenStreetMap':L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+      }),
+      'OsmAnd Nautical':L.tileLayer('https://maptile.osmand.net/tile/nautical/{z}/{x}/{y}.png', {
+        attribution: '<a href="https://osmand.net/map">OsmAnd</a>'
       }),
       'ENC (RWS)':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/WMSServer', {
         layers:'0,2,3,4,5,6,7',
@@ -93,7 +96,7 @@
     };
 
     var overlays = {
-      Grid: grid,
+      'Grid': grid,
       'Vaarweg Markeringen':L.tileLayer('seamarks/{z}/{x}/{y}.png', {
         attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
       }),
@@ -104,7 +107,7 @@
         format:'image/png',
         attribution: '<a href="https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979">RWS</a>'
        }),
-      OpenSeaMap:L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
+      'OpenSeaMap':L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
         attribution: '<a href="https://openseamap.org/">OpenSeaMap</a>'
       }),
     };
@@ -112,7 +115,7 @@
     var map = L.map('map', {
       center: [52.8907,5.4128],
       zoom: 10,
-      layers: [basemaps['ENC (QGIS)'], overlays['Grid']],
+      layers: [basemaps['ENC'], overlays['Grid']],
       minZoom: 10,
       maxZoom: 16,
     });
