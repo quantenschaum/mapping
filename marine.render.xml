@@ -142,8 +142,8 @@
 
 	<renderingConstant name="waterwayStrokeColorDay" value="#86c0e4"/>
 	<renderingAttribute name="waterwayColor">
-		<case nightMode="true" attrColorValue="#1c0f5e"/>
-		<case attrColorValue="#76cbea"/>
+		<case nightMode="true" attrColorValue="#0b4c8a"/>
+		<case attrColorValue="#cceffc"/>
 	</renderingAttribute>
 
 	<renderingAttribute name="waterwayStrokeColorNight">
@@ -3498,7 +3498,8 @@
 		</switch>
 		<case minzoom="9" tag="natural" value="wetland">
 			<case additional="wetland=tidalflat" shader="wetland_tidalflat">
-				<apply_if nightMode="true" shader="" color="#323b69"/>
+				<apply_if nightMode="false" shader="" color="#cceccd"/>
+				<apply_if nightMode="true" shader="" color="#316432"/>
 			</case>
 			<case shader="wetland">
 				<apply_if nightMode="true" shader="" color="#1b3238"/>
