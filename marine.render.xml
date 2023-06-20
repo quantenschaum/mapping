@@ -340,8 +340,8 @@
 	<renderingConstant name="highwayTrackTextHaloRadiusDay" value=":1"/>
 	<renderingConstant name="highwayTrackTextHaloColorDay" value="#aaf1eae4"/>
 	<renderingAttribute name="fairwayColor">
-		<case nightMode="true" attrColorValue="#13608A3D"/>
-		<case attrColorValue="#4DC1FF3D"/>
+		<case nightMode="true" attrColorValue="#22ffffff"/>
+		<case attrColorValue="#33ffffff"/>
 	</renderingAttribute>
 	<renderingAttribute name="contourLineColor">
 		<case contourColorScheme="white" attrColorValue="#44ffffff"/>
@@ -1527,7 +1527,7 @@
 			</switch>
 
 			<!-- Seamarks -->
-			<switch minzoom="11" textColor="#0400ab" textHaloColor="#5576cbea" textHaloRadius="2">
+			<switch minzoom="8" textColor="#0400ab" textHaloColor="#5576cbea" textHaloRadius="2">
 				<!-- INT-1 P, R, S Sections: Lights, Fog Signals, Radar. seamark:name and seamark:light tags as nameTag2 (as far as possible today). The OSMAND display was validated at Texel, Den Helder, Helgoland, Elbe and Weser Approaches, Rotterdam, Cherbourg.
 				default: 		name (light:character.group.period[in seconds].fog_signal:category.group.period[in seconds].radar_transponder:category.group) 
 								e.g. T6-VH 1 (Fl.2+1.10)= Buoy T6-VH 1 with light flashes in groups of 2 and 1. This is repeated after 10 seconds.
@@ -1590,9 +1590,9 @@
 				
 				<switch> <!-- for big icons -->
 					<switch>
-						<case minzoom="11" tag="seamark:type" value="light_major" nameTag="seamark:name" nameTag2="seamark:light:character" textOrder="60"/>
-						<case minzoom="11" tag="seamark:type" value="light_major" nameTag="name" nameTag2="seamark:light:character" textOrder="60"/>
-						<case minzoom="12" tag="seamark:type" value="light_minor" nameTag2="seamark:light:character" textOrder="65"/>
+						<case minzoom="10" tag="seamark:type" value="light_major" nameTag="seamark:name" nameTag2="seamark:light:character" textOrder="60"/>
+						<case minzoom="10" tag="seamark:type" value="light_major" nameTag="name" nameTag2="seamark:light:character" textOrder="60"/>
+						<case minzoom="11" tag="seamark:type" value="light_minor" nameTag2="seamark:light:character" textOrder="65"/>
 						<case minzoom="12" tag="man_made" value="mast" nameTag="seamark:name" nameTag2="seamark:light:character" textOrder="66"/>
 						<case minzoom="12" tag="man_made" value="mast" nameTag="name" nameTag2="seamark:light:character" textOrder="66"/>
 						<case minzoom="12" tag="man_made" value="tower" nameTag="name" nameTag2="seamark:light:character" textOrder="67"/>
@@ -1645,7 +1645,7 @@
 				<!-- INT-1 J Section: Nature of the Seabed -->
 				<!-- INT-1 J1 to J12 Types of Seabed, OsmAnd nautical.render.xml renderingProperty options for seabedDetail nameTag: ""(default)=""= 1st surface type as letters according to INT-1 J1-J13, seabed_letters are generated in obf according to rendering_types.xml, nameTag2: "category"=surface tag in seamark_category, "all"=surface qualification and type included in seabed_surface_all, seagrass and weed in seabed_taxon_all including category, genus and taxon, "omit"=no display -->
 				<!-- Tested 2022-05-30 together with version 1.1 of rendering_types.xml, e.g.  http://osmand.net/go.html?lat=36.65161&lon=25.37019&z=16, feedback welcome: josail @ gmx.de -->
-				<switch minzoom="16" textWrapWidth="20" textOrder="14" textDy="10" textColor="#0400ab" textItalic="true" textHaloColor="$waterwayColor" textHaloRadius="2">
+				<switch minzoom="14" textWrapWidth="20" textOrder="14" textDy="10" textColor="#0400ab" textItalic="true" textHaloColor="$waterwayColor" textHaloRadius="2">
 					<!-- seabedDetail="default" or "simple" display with letters only -->
 					<switch seabedDetail="">
 						<case tag="seamark:type" value="seabed_area" nameTag="seabed_surface_1"/>
@@ -1944,7 +1944,8 @@
 						</case>
 						<case additional="seamark:buoy_lateral:colour=orange" icon="seamark_buoy_orange_spherical"/>
 					</case>
-					<case minzoom="12" tag="seamark:type" value="buoy_cardinal" icon="seamark_buoy_blackyellowblack_pillar">
+
+					<case minzoom="11" tag="seamark:type" value="buoy_cardinal" icon="seamark_buoy_blackyellowblack_pillar">
 						<case additional="seamark:buoy_cardinal:colour=yellow;black;yellow" icon="seamark_buoy_yellowblackyellow_pillar">
 							<case additional="seamark:buoy_cardinal:shape=spar" icon="seamark_buoy_yellowblackyellow_spar"/>
 							<case additional="seamark:buoy_cardinal:shape=pillar" icon="seamark_buoy_yellowblackyellow_pillar"/>
@@ -1971,13 +1972,13 @@
 						</case>
 					</case>
 
-					<case minzoom="11" tag="seamark:type" value="buoy_isolated_danger" icon="seamark_buoy_blackredblack_pillar">
+					<case minzoom="10" tag="seamark:type" value="buoy_isolated_danger" icon="seamark_buoy_blackredblack_pillar">
 						<case additional="seamark:buoy_isolated_danger:shape=pillar" icon="seamark_buoy_blackredblack_pillar"/>
 						<case additional="seamark:buoy_isolated_danger:shape=spar" icon="seamark_buoy_blackredblack_spar"/>
 						<case additional="seamark:buoy_isolated_danger:shape=spherical" icon="seamark_buoy_blackredblack_spherical"/>
 						<case additional="seamark:buoy_isolated_danger:shape=conical" icon="seamark_buoy_blackredblack_conical"/>
 					</case>
-						<case minzoom="11" tag="seamark:type" value="buoy_safe_water" icon="seamark_buoy_redwhite_pillar_vertical">
+					<case minzoom="9" tag="seamark:type" value="buoy_safe_water" icon="seamark_buoy_redwhite_pillar_vertical">
 						<case additional="seamark:buoy_safe_water:colour=red;white" icon="seamark_buoy_redwhite_pillar_vertical">
 							<case additional="seamark:buoy_safe_water:shape=pillar" icon="seamark_buoy_redwhite_pillar_vertical"/>
 							<case additional="seamark:buoy_safe_water:shape=spherical" icon="seamark_buoy_redwhite_spherical_vertical"/>
@@ -1985,7 +1986,7 @@
 						</case>
 					</case>
 
-					<case minzoom="12" tag="seamark:type" value="buoy_special_purpose" icon="seamark_buoy_yellow_spar">
+					<case minzoom="13" tag="seamark:type" value="buoy_special_purpose" icon="seamark_buoy_yellow_spar">
 						<case additional="seamark:buoy_special_purpose:colour=yellow" icon="seamark_buoy_yellow_pillar">
 							<case additional="seamark:buoy_special_purpose:shape=conical" icon="seamark_buoy_yellow_conical"/>
 							<case additional="seamark:buoy_special_purpose:shape=barrel" icon="seamark_buoy_yellow_barrel"/>
@@ -2011,7 +2012,7 @@
 						</case>
 					</case>
 
-					<case minzoom="12" tag="seamark:type" value="buoy_installation" icon="seamark_buoy_yellow_installation"/>
+					<case minzoom="10" tag="seamark:type" value="buoy_installation" icon="seamark_buoy_yellow_installation"/>
 
 					<apply> <!-- When to topmark shape is set -->
 						<case additional="seamark:topmark:colour=red" icon__1="seamark_topmark_oblique_red_sphere"/>
@@ -2165,14 +2166,14 @@
 							<case additional="seamark:beacon_cardinal:shape=stake" icon="seamark_beacon_yellowblack_stake"/>
 						</case>
 					</case>
-					<case minzoom="11" tag="seamark:type" value="beacon_isolated_danger" icon="seamark_beacon_blackredblack_pile">
+					<case minzoom="10" tag="seamark:type" value="beacon_isolated_danger" icon="seamark_beacon_blackredblack_pile">
 						<case additional="seamark:beacon_isolated_danger:colour=black;red;black">
 							<case additional="seamark:beacon_isolated_danger:shape=tower" icon="seamark_beacon_blackredblack_tower"/>
 							<case additional="seamark:beacon_isolated_danger:shape=stake" icon="seamark_beacon_blackredblack_stake"/>
 							<case additional="seamark:beacon_isolated_danger:shape=pile" icon="seamark_beacon_blackredblack_pile"/>
 						</case>
 					</case>
-					<case minzoom="11" tag="seamark:type" value="beacon_safe_water" icon="seamark_beacon_redwhite_pole_vertical">
+					<case minzoom="9" tag="seamark:type" value="beacon_safe_water" icon="seamark_beacon_redwhite_pole_vertical">
 						<case additional="seamark:beacon_safe_water:colour=red;white">
 							<case additional="seamark:beacon_safe_water:colour_pattern=vertical">
 								<case additional="seamark:beacon_safe_water:shape=tower" icon="seamark_beacon_redwhite_tower_vertical"/>
@@ -2180,7 +2181,7 @@
 							</case>
 						</case>
 					</case>
-					<case minzoom="12" tag="seamark:type" value="beacon_special_purpose" icon="seamark_beacon_yellow_pile">
+					<case minzoom="13" tag="seamark:type" value="beacon_special_purpose" icon="seamark_beacon_yellow_pile">
 						<case additional="seamark:beacon_special_purpose:colour=yellow">
 							<case additional="seamark:beacon_special_purpose:shape=stake" icon="seamark_beacon_yellow_stake"/>
 							<case additional="seamark:beacon_special_purpose:shape=pile" icon="seamark_beacon_yellow_pile"/>
@@ -2199,14 +2200,14 @@
 						<case additional="seamark:beacon_special_purpose:shape=cairn" icon="seamark_beacon_cairn"/>
 					</case>
 
-					<case minzoom="12" tag="seamark:type" value="light_float" icon="seamark_light_float_red">
+					<case minzoom="10" tag="seamark:type" value="light_float" icon="seamark_light_float_red">
 						<case additional="seamark:light_float:colour=red" icon="seamark_light_float_red"/>
 						<case additional="seamark:light_float:colour=green" icon="seamark_light_float_green"/>
 						<case additional="seamark:light_float:colour_pattern=vertical">
 							<case additional="seamark:light_float:colour=red;white" icon="seamark_light_float_redwhite_vertical"/>
 						</case>
 					</case>
-					<case minzoom="12" tag="seamark:type" value="light_vessel" icon="seamark_light_vessel"/>
+					<case minzoom="10" tag="seamark:type" value="light_vessel" icon="seamark_light_vessel"/>
 					<apply>
 						<case additional="seamark:topmark:shape=2 cones point together" icon__1="seamark_topmark_vertical_black_2conespointtogether"/>
 						<case additional="seamark:topmark:shape=2 cones base together" icon__1="seamark_topmark_vertical_black_2conesbasetogether"/>
