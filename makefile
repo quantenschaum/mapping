@@ -17,15 +17,21 @@ unzip:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
 
 nautical.render.xml:
-	wget https://github.com/osmandapp/OsmAnd-resources/raw/master/rendering_styles/$@
+	wget -O $@ https://github.com/osmandapp/OsmAnd-resources/raw/master/rendering_styles/$@
 
-marine.render.xml: nautical.render.xml
-	diff $< $@ -u >$@.diff || true
-	cp $< x$@
-	patch x$@ $@.diff
+xmarine.render.xml: nautical.render.xml
+	diff $< marine.render.xml -u >$@.diff || true
+	cp $< $@
+	patch $@ $@.diff
+
+export_buoys_and_beacons:
+	wget -O buoys.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
+	wget -O buoys.csv "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=csv"
+	wget -O beacons.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
+	wget -O beacons.csv "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=csv"
 
 convert: s57objectclasses.csv s57attributes.csv
-	rm -rf $(OUT)
+	#rm -rf $(OUT)
 	for F in $(IN)/*.000; do $(OGR) $(OUT) "$$F"; done
 	#cd $(OUT) && rm *.prj *.shx *.dbf
 	cd $(OUT) && for F in * ; do G=$${F%.*}; mv -n $${F} $${G^^}.$${F#*.}; done
@@ -35,7 +41,7 @@ waddenzee:
 	$(MAKE) convert OUT=$@ IN=*Inland_Waddenzee_week*/ENC_ROOT/*/*/*/
 
 zeeland:
-	$(MAKE) convert OUT=$@ IN=*Inland_Zeeland_week*/ENC_ROOT/*/*/*/
+	$(MAKE) convert OUT=waddenzee IN=*Inland_Zeeland_week*/ENC_ROOT/*/*/*/
 
 nederland:
 	$(MAKE) convert OUT=$@ IN=Nederland*/ENC_ROOT/*/
@@ -44,7 +50,7 @@ rotterdam:
 	$(MAKE) convert OUT=$@ IN=Port*/
 	
 us:
-	$(MAKE) convert OUT=$@ IN=02Region_ENCs/ENC_ROOT/*/
+	$(MAKE) convert OUT=$@ IN=*ENCs/ENC_ROOT/*/
 
 copy:
 	for F in zeeland nederland rotterdam us; do sed "s/waddenzee/$$F/g" waddenzee.qgs >$$F.qgs; done

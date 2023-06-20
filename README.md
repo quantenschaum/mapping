@@ -100,10 +100,6 @@ The map data is based on OSM and gets updated monthly, so the changes you make t
 
 OSM contains two render engines, version 2 is OpenGL based, it's faster and not bound to fixed zoom levels, but it only shows all buoys if zoomed in very closely, and they are [off position](https://github.com/osmandapp/OsmAnd/issues/17413) as well. I do prefer the old version 1 render engine.
 
-### Custom style
-
-I tweaked the nautical render style a bit to better fit my personal preferences and named it [marine style](marine.render.xml). You can try it by importing it into OsmAnd, just download and click on it, then activate it in the map settings. 
-
 ### Raster Maps
 
 To add a [custom raster map](https://osmand.net/docs/user/map/raster-maps), tap top left, map source, add manually, then
@@ -120,3 +116,8 @@ This way you can use any TMS maps you find on the net or upload the tiles you ha
 
 You can use this raster layer as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer) with a transparency slider displayed at the bottom of the map, so you can seamlessly switch between two maps. The raster map tiles can be [pre-downloaded](https://osmand.net/docs/user/map/raster-maps#download--update-tiles) into the cache, to make them available for offline usage. This navigational chart combined with a [sat image](http://osmand.net/add-tile-source?name=World+Imagery&min_zoom=2&max_zoom=20&url_template=https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}) is a very handy tool.
 
+### Custom style
+
+I tweaked the render style fo nautical maps to better fit my personal preferences and named it [marine style](marine.render.xml). You can try it by importing it into OsmAnd. Just download and click on it, then activate it in the map settings. 
+
+![styles](img/styles.png)
