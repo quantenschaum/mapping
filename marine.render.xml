@@ -3780,7 +3780,7 @@
 		</switch>
 
 		<switch>
-			<switch minzoom="14">
+			<switch minzoom="12">
 				<case tag="seamark:type" value="pipeline_area"/>
 				<case tag="seamark:type" value="pipeline_submarine"/>
 				<apply color_2="#000000">
@@ -3788,19 +3788,19 @@
 				</apply>
 			</switch>
 			<apply>
-				<case maxzoom="14" strokeWidth="0.9" pathEffect="25_7" pathEffect_2="25_7"/>
-				<case maxzoom="15" strokeWidth="1:1" pathEffect="30_10" pathEffect_2="30_10"/>
+				<case maxzoom="12" strokeWidth="0.9" pathEffect="25_7" pathEffect_2="25_7"/>
+				<case maxzoom="13" strokeWidth="1:1" pathEffect="30_10" pathEffect_2="30_10"/>
 				<case maxzoom="16" strokeWidth="1.5:1.5" strokeWidth_2="0.6" pathEffect="30_10" pathEffect_2="30_10"/>
 				<case maxzoom="17" strokeWidth="2:2" strokeWidth_2="0.7" pathEffect="37_11" pathEffect_2="37_11"/>
 				<case minzoom="18" strokeWidth="2.5:2.5" strokeWidth_2="0.8" pathEffect="40_13" pathEffect_2="40_13"/>
 			</apply>
-			<apply color="#77888888">
-				<apply_if nightMode="true" color="#99666666"/>
+			<apply color="#aaec008c">
+				<apply_if nightMode="true" color="#aa6d1047"/>
 			</apply>
 		</switch>
-		<case minzoom="14" tag="seamark:type" value="cable_submarine" strokeWidth="1" color="#55666666" pathIcon="seamark_submarine_cable" pathIconStep="6">
+		<case minzoom="12" tag="seamark:type" value="cable_submarine" strokeWidth="1" color="#aaec008c" pathIcon="seamark_submarine_cable" pathIconStep="6">
 			<apply_if minzoom="17" strokeWidth="2"/>
-			<apply_if nightMode="true" color="#55aaaaaa"/>
+			<apply_if nightMode="true" color="#aa6d1047"/>
 		</case>
 		<switch>
 			<case minzoom="14" tag="seamark:type" value="fortified_structure"/>
