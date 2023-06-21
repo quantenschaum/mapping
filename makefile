@@ -45,19 +45,41 @@ zeeland:
 
 nederland:
 	$(MAKE) convert OUT=$@ IN=Nederland*/ENC_ROOT/*/
-	
+
 rotterdam:
 	$(MAKE) convert OUT=$@ IN=Port*/
-	
+
 us:
 	$(MAKE) convert OUT=$@ IN=*ENCs/ENC_ROOT/*/
 
-copy:
-	for F in zeeland nederland rotterdam us; do sed "s/waddenzee/$$F/g" waddenzee.qgs >$$F.qgs; done
-	
 replace:
 	for F in *.qgs; do sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
 
 sync:
 	touch tiles/.nobackup
 	rsync -hav --del tiles/ nas:docker/maps/tiles/qgis/
+
+#BSH=FORMAT=application/json;type=geojson&WIDTH=1000000&HEIGHT=1000000&CRS=EPSG:4326&BBOX=54.1,7.8,54.3,8
+#BSH=FORMAT=application/json;type=geojson&WIDTH=1000000&HEIGHT=1000000&CRS=EPSG:4326&BBOX=53.3,7.1,54.8,8.8
+BSH=FORMAT=application/json;type=geojson&WIDTH=1000000&HEIGHT=1000000&CRS=EPSG:4326&BBOX=52.3333,3.3485,66.5,30.3333
+
+bsh: bsh-navaids.json bsh-hydro.json bsh-skin.json bsh-obstr.json bsh-topo.json
+
+bsh-navaids.json:
+	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_AidsAndServices/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_BerthingGeneral_Lateral_Buoys&$(BSH)"
+
+bsh-hydro.json:
+	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_Hydrography/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
+
+bsh-skin.json:
+	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_SkinOfTheEarth/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
+
+bsh-obstr.json:
+	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_RocksWrecksObstructions/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
+
+bsh-topo.json:
+	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_Topography/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
+
+bsh-bathy.json:
+	wget -O $@ "https://www.geoseaportal.de/inspire/geoserver/ELC_INSPIRE/ows?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=EL.GridCoverage&$(BSH)"
+
