@@ -8,8 +8,6 @@ OGR=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,SPLIT_
 help:
 	cat README.md
 
-.PHONY: waddenzee zeeland nederland rotterdam us
-
 unzip:
 	unzip -o *Inland_Waddenzee_week*.zip
 
@@ -30,6 +28,8 @@ export_buoys_and_beacons:
 	wget -O beacons.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
 	wget -O beacons.csv "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=csv"
 
+OUT=shapes
+
 convert: s57objectclasses.csv s57attributes.csv
 	#rm -rf $(OUT)
 	for F in $(IN)/*.000; do $(OGR) $(OUT) "$$F"; done
@@ -38,30 +38,28 @@ convert: s57objectclasses.csv s57attributes.csv
 	touch $(OUT)/.nobackup
 
 waddenzee:
-	$(MAKE) convert OUT=$@ IN=*Inland_Waddenzee_week*/ENC_ROOT/*/*/*/
+	$(MAKE) convert IN=*Inland_Waddenzee_week*/ENC_ROOT/*/*/*/
 
 zeeland:
-	$(MAKE) convert OUT=waddenzee IN=*Inland_Zeeland_week*/ENC_ROOT/*/*/*/
+	$(MAKE) convert IN=*Inland_Zeeland_week*/ENC_ROOT/*/*/*/
 
 nederland:
-	$(MAKE) convert OUT=$@ IN=Nederland*/ENC_ROOT/*/
+	$(MAKE) convert IN=Nederland*/ENC_ROOT/*/
 
 rotterdam:
-	$(MAKE) convert OUT=$@ IN=Port*/
+	$(MAKE) convert IN=Port*/
 
 us:
-	$(MAKE) convert OUT=$@ IN=*ENCs/ENC_ROOT/*/
+	$(MAKE) convert IN=*ENCs/ENC_ROOT/*/
 
 replace:
-	for F in *.qgs; do sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
+	for F in *.qgs; do echo $$F; sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
 
 sync:
 	touch tiles/.nobackup
 	rsync -hav --del tiles/ nas:docker/maps/tiles/qgis/
 
-#BSH=FORMAT=application/json;type=geojson&WIDTH=1000000&HEIGHT=1000000&CRS=EPSG:4326&BBOX=54.1,7.8,54.3,8
-#BSH=FORMAT=application/json;type=geojson&WIDTH=1000000&HEIGHT=1000000&CRS=EPSG:4326&BBOX=53.3,7.1,54.8,8.8
-BSH=FORMAT=application/json;type=geojson&WIDTH=1000000&HEIGHT=1000000&CRS=EPSG:4326&BBOX=52.3333,3.3485,66.5,30.3333
+BSH=FORMAT=application/json;type=geojson&WIDTH=1000000&HEIGHT=1000000&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333
 
 bsh: bsh-navaids.json bsh-hydro.json bsh-skin.json bsh-obstr.json bsh-topo.json
 
@@ -83,3 +81,5 @@ bsh-topo.json:
 bsh-bathy.json:
 	wget -O $@ "https://www.geoseaportal.de/inspire/geoserver/ELC_INSPIRE/ows?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=EL.GridCoverage&$(BSH)"
 
+clean-tiles:
+	rm -rf tiles/*/

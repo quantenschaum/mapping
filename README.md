@@ -4,7 +4,7 @@ How to convert an ENC (electronic navigational chart) to map tiles and how to us
 
 ![example map](img/example.png)
 
-This is based on a [post](https://www.sigterritoires.fr/index.php/affichage-des-cartes-marines-s57-dans-qgis/) I found on the net, but it did not work well and I did not like look, so I reworked it. The [S-57 ENC](http://www.s-57.com/) consisting of many files is transformed into shape files with [`ogr2ogr`](https://gdal.org/programs/ogr2ogr.html), one for each layer. Then these shape files are read by [QGIS](https://www.qgis.org/) and rendered as specified in the [INT1](https://www.bsh.de/DE/PUBLIKATIONEN/_Anlagen/Downloads/Nautik_und_Schifffahrt/Sonstige-nautische-Publikationen/Wichtige-Zeichen-Abkuerzungen-Auswahl-Karte_1.html) (almost).
+This is based on a [post](https://www.sigterritoires.fr/index.php/affichage-des-cartes-marines-s57-dans-qgis/) I found on the net, but it did not work well and I did not like look, so I reworked it. The [S-57 ENC](http://www.s-57.com/) consisting of many files is transformed into shape files with [`ogr2ogr`](https://gdal.org/programs/ogr2ogr.html), one for each layer. Then these shape files are read by [QGIS](https://www.qgis.org/) and rendered as specified in the [INT1](https://www.nauticalcharts.noaa.gov/publications/us-chart-1.html) (almost).
 
 ## Data Sources
 
@@ -31,7 +31,7 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 
 Now you can open `tiles/index.html` and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
 
-There is a [public server](http://waddenzee.duckdns.org/) with the tiles I have created. By enabling OpenStreetMap, Vaarweg Markeringen (RWS) and OpenSeaMap you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. You can use these map tiles in JOSM an OsmAnd if you like (see below).
+There is a [public server](http://waddenzee.duckdns.org/) with the tiles I have created. By enabling the OpenSeaMap overlay you can directly compare the positions of buoys and beacons in OSM and the dataset by RWS. You can use these map tiles in JOSM an OsmAnd if you like (see below).
 
 This procedure should in principle work for other ENCs as well, you just have to enable the buoys and beacons layer from the ENC. The buoys and beacons for the Waddenzee are pulled from the dedicated datasets mentioned above which is more up to date than the data in the ENC.
 
@@ -124,6 +124,6 @@ I tweaked the render style for nautical maps to better fit my personal preferenc
 
 ## Germany
 
-It is possible to extract vector data out of the WMS of the german [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) as GeoJSON files. With data QGIS can be used to render a much nice looking map that contains more information than what is available directly at the link above. Run `make bsh` and enable the BSH layer group in the map.
+It is possible to extract vector data out of the WMS of the german [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) as GeoJSON. With this data QGIS can be used to render a much nice looking map that contains more information than what is available directly at the link above. Run `make bsh` and enable the BSH layer group in the map.
 
 ![BSh data](img/bsh.png)

@@ -74,9 +74,6 @@
 	});
 
     var basemaps = {
-      'ENC':L.tileLayer('{z}/{x}/{y}.png', {
-        attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
-      }),
       'OpenStreetMap':L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
       }),
@@ -97,7 +94,10 @@
 
     var overlays = {
       'Grid': grid,
-      'Vaarweg Markeringen':L.tileLayer('seamarks/{z}/{x}/{y}.png', {
+      'ENC':L.tileLayer('{z}/{x}/{y}.png', {
+        attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
+      }),
+      'Buoys and Beacons':L.tileLayer('seamarks/{z}/{x}/{y}.png', {
         attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
       }),
       'Vaarweg Markeringen (RWS)':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
@@ -115,7 +115,7 @@
     var map = L.map('map', {
       center: [52.8907,5.4128],
       zoom: 10,
-      layers: [basemaps['ENC'], overlays['Grid']],
+      layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['ENC']],
       minZoom: 10,
       maxZoom: 16,
     });
