@@ -22,11 +22,10 @@ xmarine.render.xml: nautical.render.xml
 	cp $< $@
 	patch $@ $@.diff
 
-export_buoys_and_beacons:
-	wget -O buoys.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
-	wget -O buoys.csv "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=csv"
-	wget -O beacons.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
-	wget -O beacons.csv "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=csv"
+vwm:
+	mkdir -p $@
+	wget -O $@/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
+	wget -O $@/vast.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
 
 OUT=shapes
 
@@ -61,25 +60,32 @@ sync:
 
 BSH=FORMAT=application/json;type=geojson&WIDTH=1000000&HEIGHT=1000000&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333
 
-bsh: bsh-navaids.json bsh-hydro.json bsh-skin.json bsh-obstr.json bsh-topo.json
+bsh: bsh/navaids.json bsh/hydro.json bsh/skin.json bsh/obstr.json bsh/topo.json
 
-bsh-navaids.json:
+bsh/navaids.json:
+	mkdir -p bsh
 	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_AidsAndServices/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_BerthingGeneral_Lateral_Buoys&$(BSH)"
 
-bsh-hydro.json:
+bsh/hydro.json:
 	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_Hydrography/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
 
-bsh-skin.json:
+bsh/skin.json:
 	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_SkinOfTheEarth/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
 
-bsh-obstr.json:
+bsh/obstr.json:
 	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_RocksWrecksObstructions/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
 
-bsh-topo.json:
+bsh/topo.json:
 	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_Topography/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
-
-bsh-bathy.json:
-	wget -O $@ "https://www.geoseaportal.de/inspire/geoserver/ELC_INSPIRE/ows?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=EL.GridCoverage&$(BSH)"
 
 clean-tiles:
 	rm -rf tiles/*/
+
+clean-shapes:
+	rm -rf shapes/
+
+clean-bsh:
+	rm -rf bsh/
+
+clean-vwm:
+	rm -rf vwm/

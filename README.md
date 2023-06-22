@@ -19,9 +19,9 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 1. download ENC from URL above
 2. extract the ZIP `make unzip`
 3. convert the ENC to shape files with `make waddenzee` (It uses the mapping CSVs from OpenCPN.)
-4. open them in QGIS using `map.qgs`  
-   (You may want to add the `icons` path to QGIS: settings, options, system, SVG path)
-5. export map tiles
+4. download vaarwegmarkeringen `make vwm` 
+5. open `map.qgs` with QGIS (You may want to add the `icons` path to QGIS: settings, options, system, SVG path)
+6. export map tiles
    - processing, toolbox, raster tools, generate XYZ tiles (dir)
    - extent: draw on canvas and select the region you want to get rendered
    - max zoom: 16
