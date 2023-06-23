@@ -18,7 +18,7 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 
 1. download ENC from URL above
 2. extract the ZIP `make unzip`
-3. convert the ENC to shape files with `make waddenzee` (It uses the mapping CSVs from OpenCPN.)
+3. convert the ENC to shape files with `make shapes` (It uses the mapping CSVs from OpenCPN.)
 4. download vaarwegmarkeringen `make vwm` 
 5. open `map.qgs` with QGIS (You may want to add the `icons` path to QGIS: settings, options, system, SVG path)
 6. export map tiles
@@ -124,6 +124,6 @@ I tweaked the render style for nautical maps to better fit my personal preferenc
 
 ## Germany
 
-It is possible to extract vector data out of the WMS of the german [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) as GeoJSON. With this data QGIS can be used to render a much nice looking map that contains more information than what is available directly at the link above. Run `make bsh` and enable the BSH layer group in the map.
+It is possible to extract vector data out of the WMS of the german [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) as GeoJSON. With this data QGIS can be used to render a much nice looking map that contains more information than what is available directly at the link above. Run `make bsh` and enable the Deutschland layer group in the map.
 
 ![BSh data](img/bsh.png)

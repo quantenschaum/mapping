@@ -9,7 +9,7 @@ help:
 	cat README.md
 
 unzip:
-	unzip -o *Inland_Waddenzee_week*.zip
+	for Z in *.zip; do unzip -o "$$Z"; done
 
 %.csv:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
@@ -36,47 +36,21 @@ convert: s57objectclasses.csv s57attributes.csv
 	cd $(OUT) && for F in * ; do G=$${F%.*}; mv -n $${F} $${G^^}.$${F#*.}; done
 	touch $(OUT)/.nobackup
 
-waddenzee:
-	$(MAKE) convert IN=*Inland_Waddenzee_week*/ENC_ROOT/*/*/*/
-
-zeeland:
-	$(MAKE) convert IN=*Inland_Zeeland_week*/ENC_ROOT/*/*/*/
-
-nederland:
-	$(MAKE) convert IN=Nederland*/ENC_ROOT/*/
-
-rotterdam:
-	$(MAKE) convert IN=Port*/
-
-us:
-	$(MAKE) convert IN=*ENCs/ENC_ROOT/*/
+shapes:
+	$(MAKE) convert IN=*U7Inland_*/ENC_ROOT/*/*/*/
 
 replace:
 	for F in *.qgs; do echo $$F; sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
 
 sync:
 	touch tiles/.nobackup
-	rsync -hav --del tiles/ nas:docker/maps/tiles/qgis/
+	rsync -hav tiles/ nas:docker/maps/tiles/qgis/ $(O)
 
-BSH=FORMAT=application/json;type=geojson&WIDTH=1000000&HEIGHT=1000000&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333
+BSH=FORMAT=application/json;type=geojson&WIDTH=10000000&HEIGHT=10000000&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333
 
-bsh: bsh/navaids.json bsh/hydro.json bsh/skin.json bsh/obstr.json bsh/topo.json
-
-bsh/navaids.json:
+bsh:
 	mkdir -p bsh
-	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_AidsAndServices/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_BerthingGeneral_Lateral_Buoys&$(BSH)"
-
-bsh/hydro.json:
-	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_Hydrography/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
-
-bsh/skin.json:
-	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_SkinOfTheEarth/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
-
-bsh/obstr.json:
-	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_RocksWrecksObstructions/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
-
-bsh/topo.json:
-	wget -O $@ "https://www.geoseaportal.de/wss/service/NAUTHIS_Topography/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&$(BSH)"
+	for L in AidsAndServices Hydrography SkinOfTheEarth RocksWrecksObstructions Topography; do wget -O bsh/$$L.json "https://www.geoseaportal.de/wss/service/NAUTHIS_$$L/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=10000000&HEIGHT=10000000&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
 
 clean-tiles:
 	rm -rf tiles/*/
