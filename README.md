@@ -51,6 +51,8 @@ There are also differences in the positions of the objects. The ENC encodes the 
 
 The ENC provides much more information than the Vaarweg markeringen dataset (i.e. sector information for smaller lights like leading lights and light range data), but unfortunately it does contain some errors and the latter seems to be more reliable.
 
+I wrote a message to RWS and reported these differences. They answered that they currently do not have a system that transfers the data automatically from different data sources into the ENC. The ENC is handmade!
+
 ## Updating OSM data with JOSM
 
 I edit OSM data with [JOSM](https://josm.openstreetmap.de/). JOSM is pretty easy to use, how it works is explained in the [Wiki](https://josm.openstreetmap.de/wiki/Introduction). You can add the generated map tiles to JOSM as imagery layer.
