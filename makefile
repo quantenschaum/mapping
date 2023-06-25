@@ -42,10 +42,6 @@ shapes:
 replace:
 	for F in *.qgs; do echo $$F; sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
 
-sync:
-	touch tiles/.nobackup
-	rsync -hav tiles/ nas:docker/maps/tiles/qgis/ $(O)
-
 BSH=FORMAT=application/json;type=geojson&WIDTH=10000000&HEIGHT=10000000&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333
 
 bsh:
@@ -63,3 +59,16 @@ clean-bsh:
 
 clean-vwm:
 	rm -rf vwm/
+
+serve: replace
+	QGIS_SERVER_ADDRESS=0.0.0.0 qgis_mapserver map.qgs
+
+docker: replace
+	docker-compose up -d
+	@echo go to http://localhost:8000
+
+sync: replace
+	rsync -hav --del ./ nas:docker/qgis --exclude tiles --exclude .git $(O)
+	touch tiles/.nobackup
+	rsync -hav tiles/ nas:docker/maps/tiles/qgis/ $(O)
+

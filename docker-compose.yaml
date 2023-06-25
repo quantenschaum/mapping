@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+  qgis:
+    image: qgis-server
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/data:ro
+    working_dir: /data
+    environment:
+      QGIS_SERVER_PARALLEL_RENDERING: "1"
+      QGIS_SERVER_LANDING_PAGE_PROJECTS_DIRECTORIES: "/data"
+    command: qgis_mapserver map.qgs
