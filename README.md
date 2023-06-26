@@ -35,6 +35,15 @@ There is a [public server](http://waddenzee.duckdns.org/) with the tiles I have 
 
 This procedure should in principle work for other ENCs as well, you just have to enable the buoys and beacons layer from the ENC. The buoys and beacons for the Waddenzee are pulled from the dedicated datasets mentioned above which is more up to date than the data in the ENC.
 
+## QGIS Server
+
+QGIS comes with a [server component](https://docs.qgis.org/latest/en/docs/server_manual/), that provides among others a WMS server. So, you can run QGIS Server and create rendered tiles on demand as they are requested. Unfortunately this tile rendering is computationally expensive, so it would make much sense to cache the tiles. I use [MapProxy](https://mapproxy.org/) for tile caching and it also provides [meta tiling](https://mapproxy.org/docs/latest/labeling.html#meta-tiles), which speeds up tile creation even more. To run QGIS server and MapProxy together, you can use the make and Docker files in this project.
+
+- `make serve` starts QGIS server and MapProxy (need to be installed)
+- `make docker` builds a Docker image and runs them in Docker
+
+The necessary software needs to be installed, of course. 
+
 ## Differences in the data
 
 There are differences between the data in the ENC (yellow circles) and those in the dataset above (blue circles). Compared with the data supplied in the [Berichten aan Zeevarenden](https://www.defensie.nl/onderwerpen/berichten-aan-zeevarenden) the data in the dedicated dataset in correct.
@@ -53,7 +62,9 @@ The ENC provides much more information than the Vaarweg markeringen dataset (i.e
 
 I wrote a message to RWS and reported these differences. They answered that they currently do not have a system that transfers the data automatically from different data sources into the ENC. The ENC is handmade!
 
-## Updating OSM data with JOSM
+## Updating OSM data 
+
+### JOSM
 
 I edit OSM data with [JOSM](https://josm.openstreetmap.de/). JOSM is pretty easy to use, how it works is explained in the [Wiki](https://josm.openstreetmap.de/wiki/Introduction). You can add the generated map tiles to JOSM as imagery layer.
 
@@ -84,9 +95,13 @@ Theoretically it is possible to update the positions and other metadata with a s
 
 I will look into the scripting functionality of JOSM, but before uploading data modified by a script it needs to checked and corrected manually.
 
+### StreetComplete
+
+There is another app for updating OSM in a different and very easy way: [StreetComplete](https://github.com/streetcomplete/StreetComplete). IMHO this a great app, well-designed to provide basically a zero knowledge access to contribute to OSM. Unfortunately not for seamarks, which admittedly are special to most people. It can be installed from the [PlayStore](https://play.google.com/store/apps/details?id=de.westnordost.streetcomplete).
+
 ## OpenCPN
 
-The ENC files can also be viewed in [OpenCPN](https://opencpn.org/).
+For comparison the ENC files can also be viewed with [OpenCPN](https://opencpn.org/).
 
 ![OpenCPN](img/opencpn.png)
 
