@@ -65,10 +65,10 @@ serve: replace
 
 docker: replace
 	docker-compose up -d
-	@echo go to http://localhost:8000
+	@echo QGIS: http://localhost:8000
 
 sync: replace
-	rsync -hav --del ./ nas:docker/qgis --exclude tiles --exclude .git $(O)
+	rsync -hav --del --exclude tiles --exclude cache_data --exclude .git --delete-excluded ./ nas:docker/qgis $(O)
 	touch tiles/.nobackup
 	rsync -hav tiles/ nas:docker/maps/tiles/qgis/ $(O)
 

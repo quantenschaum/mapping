@@ -1,0 +1,34 @@
+globals:
+  cache:
+    link_single_color_images: true
+    meta_size: [6,6]
+    meta_buffer: 160
+  tiles:
+    expires_hours: 24
+
+services:
+  tms:
+
+sources:
+  qgis:
+    type: wms
+    #supported_srs: ['EPSG:3857']
+    req:
+        url: http://localhost:8000/
+        transparent: True
+
+caches:
+  bnb:
+    sources: ['qgis:vwm,navaids']
+    grids: [GLOBAL_WEBMERCATOR]
+  enc:
+    sources: ['qgis:Nederland,Deutschland']
+    grids: [GLOBAL_WEBMERCATOR]
+
+layers:
+  - name: bnb
+    title: Buoys and Beacons
+    sources: [bnb]
+  - name: enc
+    title: ENC
+    sources: [enc]

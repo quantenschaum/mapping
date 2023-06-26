@@ -112,6 +112,11 @@
       }),
     };
 
+    if(document.URL.startsWith('file') || document.URL.includes('localhost')) {
+      overlays['QGIS ENC'] = L.tileLayer('http://localhost:8001/tiles/enc/EPSG3857/{z}/{x}/{y}.png');
+      overlays['QGIS Buoys and Beacons'] = L.tileLayer('http://localhost:8001/tiles/bnb/EPSG3857/{z}/{x}/{y}.png');
+    }
+
     var map = L.map('map', {
       center: [52.8907,5.4128],
       zoom: 10,
@@ -119,6 +124,8 @@
       minZoom: 8,
       maxZoom: 16,
     });
+
+    // alert('Do NOT use for navigation!');
 
     L.control.layers(basemaps, overlays, {collapsed: false}).addTo(map);
 
