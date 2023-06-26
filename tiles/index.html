@@ -112,15 +112,20 @@
       }),
     };
 
+    var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['ENC']];
+
     if(document.URL.startsWith('file') || document.URL.includes('localhost')) {
       overlays['QGIS ENC'] = L.tileLayer('http://localhost:8001/tiles/enc/EPSG3857/{z}/{x}/{y}.png');
       overlays['QGIS Buoys and Beacons'] = L.tileLayer('http://localhost:8001/tiles/bnb/EPSG3857/{z}/{x}/{y}.png');
+      if(document.URL.includes('#ondemand')) {
+        layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QGIS Buoys and Beacons']];
+      }
     }
 
     var map = L.map('map', {
       center: [52.8907,5.4128],
       zoom: 10,
-      layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['ENC']],
+      layers: layers,
       minZoom: 8,
       maxZoom: 16,
     });

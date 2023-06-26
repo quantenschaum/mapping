@@ -42,14 +42,23 @@ shapes:
 replace:
 	for F in *.qgs; do echo $$F; sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
 
-BSH=FORMAT=application/json;type=geojson&WIDTH=10000000&HEIGHT=10000000&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333
-
 bsh:
 	mkdir -p bsh
 	for L in AidsAndServices Hydrography SkinOfTheEarth RocksWrecksObstructions Topography; do wget -O bsh/$$L.json "https://www.geoseaportal.de/wss/service/NAUTHIS_$$L/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=10000000&HEIGHT=10000000&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
 
+serve: replace
+	xdg-open "file://$(PWD)/tiles/index.html#ondemand"
+	QGIS_SERVER_ADDRESS=0.0.0.0 qgis_mapserver map.qgs & mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001
+
+docker: replace
+	docker-compose up -d
+	xdg-open "file://$(PWD)/tiles/index.html#ondemand"
+
 clean-tiles:
 	rm -rf tiles/*/
+
+clean-enc:
+	rm -rf *U7Inland_*/
 
 clean-shapes:
 	rm -rf shapes/
@@ -60,12 +69,10 @@ clean-bsh:
 clean-vwm:
 	rm -rf vwm/
 
-serve: replace
-	QGIS_SERVER_ADDRESS=0.0.0.0 qgis_mapserver map.qgs
+clean-cache:
+	rm -rf cache_data/
 
-docker: replace
-	docker-compose up -d
-	@echo QGIS: http://localhost:8000
+clean-all: clean-tiles clean-shapes clean-enc clean-bsh clean-vwm clean-cache
 
 sync: replace
 	rsync -hav --del --exclude tiles --exclude cache_data --exclude .git --delete-excluded ./ nas:docker/qgis $(O)
