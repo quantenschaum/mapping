@@ -74,8 +74,15 @@ clean-cache:
 
 clean-all: clean-tiles clean-shapes clean-enc clean-bsh clean-vwm clean-cache
 
-sync: replace
-	rsync -hav --del --exclude tiles --exclude cache_data --exclude .git --delete-excluded ./ nas:docker/qgis $(O)
+sync-tiles:
 	touch tiles/.nobackup
 	rsync -hav tiles/ nas:docker/maps/tiles/qgis/ $(O)
 
+sync-map: replace
+	rsync -hav --del --exclude tiles --exclude cache_data --exclude .git --delete-excluded ./ nas:docker/qgis $(O)
+
+josm.jar:
+	wget -O $@ https://josm.openstreetmap.de/josm-tested.jar
+
+josm: josm.jar
+	java -jar josm.jar
