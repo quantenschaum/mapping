@@ -11,6 +11,7 @@
   <script src="https://unpkg.com/leaflet-hash@0.2.1/leaflet-hash.js" crossorigin=""></script>
   <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js" crossorigin=""></script>
   <script src="https://leaflet.github.io/Leaflet.Graticule/Leaflet.Graticule.js" crossorigin=""></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" crossorigin=""></script>
   <style type="text/css">
     body {
        margin: 0;
@@ -143,6 +144,34 @@
         showClearControl: true,
         showUnitControl: true,
     }).addTo(map);
+
+    map.on('contextmenu',(e) => {
+      var b=map.getBounds();
+      L.popup()
+      .setLatLng(e.latlng)
+      .setContent('<button id="b1" type="button">Edit in JOSM</button>')
+      .addTo(map)
+      .openOn(map);
+      $('#b1').click(function() {
+        $.get('http://localhost:8111/'+(map.getZoom()>13?'load_and_zoom':'zoom'),{
+          left:b.getWest(),
+          right:b.getEast(),
+          bottom:b.getSouth(),
+          top:b.getNorth()
+        });
+        $.get('http://localhost:8111/imagery',{
+          name:'Waddenzee',
+          type:'tms',
+          url:'http://waddenzee.duckdns.org/{zoom}/{x}/{y}.png'
+        });
+        $.get('http://localhost:8111/imagery',{
+          name:'OpenStreetMap',
+          type:'tms',
+          url:'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png'
+        });
+      });
+    });
+
   </script>
 </body>
 </html>
