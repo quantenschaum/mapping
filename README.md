@@ -95,6 +95,15 @@ Theoretically it is possible to update the positions and other metadata with a s
 
 I will look into the scripting functionality of JOSM, but before uploading data modified by a script it needs to checked and corrected manually.
 
+I added a script (as Jupyter Notebook) that manipulates OSM files. 
+
+- Download data with JOSM
+- Save as OSM file
+- Run the script
+- Load the OSM
+- Review the changes
+- Upload the data
+
 ### StreetComplete
 
 There is another app for updating OSM in a different and very easy way: [StreetComplete](https://github.com/streetcomplete/StreetComplete). IMHO this a great app, well-designed to provide basically a zero knowledge access to contribute to OSM. Unfortunately not for seamarks, which admittedly are special to most people. It can be installed from the [PlayStore](https://play.google.com/store/apps/details?id=de.westnordost.streetcomplete).
