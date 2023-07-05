@@ -17,10 +17,12 @@ unzip:
 nautical.render.xml:
 	wget -O $@ https://github.com/osmandapp/OsmAnd-resources/raw/master/rendering_styles/$@
 
-xmarine.render.xml: nautical.render.xml
-	diff $< marine.render.xml -u >$@.diff || true
-	cp $< $@
-	patch $@ $@.diff
+render.diff: nautical.render.xml
+	diff $< marine.render.xml -u >$@ || true
+
+marine.render.xml: render.diff nautical.render.xml
+	cp $(word 2,$^) $@
+	patch $@ $<
 
 vwm:
 	mkdir -p $@
@@ -46,13 +48,15 @@ bsh:
 	mkdir -p bsh
 	for L in AidsAndServices Hydrography SkinOfTheEarth RocksWrecksObstructions Topography; do wget -O bsh/$$L.json "https://www.geoseaportal.de/wss/service/NAUTHIS_$$L/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=10000000&HEIGHT=10000000&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
 
-serve: replace
-	xdg-open "file://$(PWD)/tiles/index.html#ondemand"
-	QGIS_SERVER_ADDRESS=0.0.0.0 qgis_mapserver map.qgs & mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001
+serve:
+	xdg-open "http://localhost:8080/index.html#ondemand"
+	cd tiles && python -m http.server 8080
+
+qgis: replace
+	QGIS_SERVER_ADDRESS=0.0.0.0 qgis_mapserver map.qgs & mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001 & $(MAKE) serve
 
 docker: replace
-	docker-compose up -d
-	xdg-open "file://$(PWD)/tiles/index.html#ondemand"
+	docker-compose up & $(MAKE) serve
 
 clean-tiles:
 	rm -rf tiles/*/
