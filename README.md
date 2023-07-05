@@ -39,7 +39,8 @@ This procedure should in principle work for other ENCs as well, you just have to
 
 QGIS comes with a [server component](https://docs.qgis.org/latest/en/docs/server_manual/), that provides among others a WMS server. So, you can run QGIS Server and create rendered tiles on demand as they are requested. Unfortunately this tile rendering is computationally expensive, so it would make much sense to cache the tiles. I use [MapProxy](https://mapproxy.org/) for tile caching and it also provides [meta tiling](https://mapproxy.org/docs/latest/labeling.html#meta-tiles), which speeds up tile creation even more. To run QGIS server and MapProxy together, you can use the make and Docker files in this project.
 
-- `make serve` starts QGIS server and MapProxy (need to be installed)
+- `make serve` start Python based webserver to server generated tiles
+- `make qgis` starts QGIS server and MapProxy (need to be installed)
 - `make docker` builds a Docker image and runs them in Docker
 
 The necessary software needs to be installed, of course. 
