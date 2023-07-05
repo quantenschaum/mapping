@@ -1,0 +1,18 @@
+.charttools-button {
+  width: 33px;
+  background-color: white;
+  border: 1px solid gray;
+}
+.charttools-label {
+  font-family: monospace;
+  background-color: rgba(255,255,255,0.8);
+  width: fit-content !important;
+  height: fit-content !important;
+  text-align: center;
+}
+.charttools-info {
+  font-family: monospace;
+  background-color: rgba(255,255,255,0.8);
+  width: fit-content !important;
+  height: fit-content !important;
+}
