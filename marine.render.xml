@@ -86,7 +86,7 @@
 	</renderingAttribute>
 
 	<renderingProperty attr="engine_v1" type="boolean"/>
-	
+
 	<renderingAttribute name="waterwayArrows">
 		<case attrIntValue="1"/>
 	</renderingAttribute>
@@ -130,7 +130,7 @@
 	<renderingAttribute name="defaultSymbolPathSpacing">
 		<case attrFloatValue="5"/>
 	</renderingAttribute>
-	
+
 	<renderingAttribute name="defaultBlockPathSpacing">
 		<case attrFloatValue="100"/>
 	</renderingAttribute>
@@ -343,171 +343,6 @@
 		<case nightMode="true" attrColorValue="#22ffffff"/>
 		<case attrColorValue="#33ffffff"/>
 	</renderingAttribute>
-	<renderingAttribute name="contourLineColor">
-		<case contourColorScheme="white" attrColorValue="#44ffffff"/>
-		<case contourColorScheme="yellow" attrColorValue="#44FFF29E"/>
-		<case contourColorScheme="green" attrColorValue="#4400ff00"/>
-		<case contourColorScheme="light_brown" attrColorValue="#2aff7c00">
-			<apply_if noPolygons="true" attrColorValue="#2aff7c00"/>
-			<apply_if nightMode="true" attrColorValue="#2aff7c00"/>
-		</case>
-		<case contourColorScheme="brown" attrColorValue="#35bd6819">
-			<apply_if noPolygons="true" attrColorValue="#44C39F7D"/>
-			<apply_if nightMode="true" attrColorValue="#44C39F7D"/>
-		</case>
-		<case contourColorScheme="dark_brown" attrColorValue="#22522D0B">
-			<apply_if noPolygons="true" attrColorValue="#4437250B"/>
-			<apply_if nightMode="true" attrColorValue="#44C39F7D"/>
-		</case>
-		<case contourColorScheme="red" attrColorValue="#44ff0000"/>
-		<case attrColorValue="#2aff7c00">
-			<apply_if noPolygons="true" attrColorValue="#2aff7c00"/>
-			<apply_if nightMode="true" attrColorValue="#2aff7c00"/>
-		</case>
-		<!--		<case engine_v1="false" attrColorValue="#15ff7c00"/>-->
-	</renderingAttribute>
-	<renderingAttribute name="contourLineColor50m">
-		<case contourColorScheme="white" attrColorValue="#44ffffff"/>
-		<case contourColorScheme="yellow" attrColorValue="#44FFF29E"/>
-		<case contourColorScheme="green" attrColorValue="#4400ff00"/>
-		<case contourColorScheme="light_brown" attrColorValue="#2aea7300">
-			<apply_if noPolygons="true" attrColorValue="#35ea7300"/>
-			<apply_if nightMode="true" attrColorValue="#35ea7300"/>
-		</case>
-		<case contourColorScheme="brown" attrColorValue="#459C5615">
-			<apply_if noPolygons="true" attrColorValue="#66C39F7D"/>
-			<apply_if nightMode="true" attrColorValue="#66C39F7D"/>
-		</case>
-		<case contourColorScheme="dark_brown" attrColorValue="#55522D0B">
-			<apply_if noPolygons="true" attrColorValue="#8837250B"/>
-			<apply_if nightMode="true" attrColorValue="#88C39F7D"/>
-		</case>
-		<case contourColorScheme="red" attrColorValue="#44ff0000"/>
-		<case attrColorValue="#2aea7300">
-			<apply_if noPolygons="true" attrColorValue="#35ea7300"/>
-			<apply_if nightMode="true" attrColorValue="#35ea7300"/>
-		</case>
-		<!--<case engine_v1="false" attrColorValue="#15ea7300"/>-->
-	</renderingAttribute>
-	<renderingAttribute name="contourLineColor100m">
-		<case contourColorScheme="white" attrColorValue="#44ffffff"/>
-		<case contourColorScheme="yellow" attrColorValue="#44FFF29E"/>
-		<case contourColorScheme="green" attrColorValue="#4400ff00"/>
-		<case contourColorScheme="light_brown" attrColorValue="#2aea7300">
-			<apply_if noPolygons="true" attrColorValue="#35ea7300"/>
-			<apply_if nightMode="true" attrColorValue="#35ea7300"/>
-		</case>
-		<case contourColorScheme="brown" attrColorValue="#459C5615">
-			<apply_if noPolygons="true" attrColorValue="#66C39F7D"/>
-			<apply_if nightMode="true" attrColorValue="#66C39F7D"/>
-		</case>
-		<case contourColorScheme="dark_brown" attrColorValue="#55522D0B">
-			<apply_if noPolygons="true" attrColorValue="#8837250B"/>
-			<apply_if nightMode="true" attrColorValue="#88C39F7D"/>
-		</case>
-		<case contourColorScheme="red" attrColorValue="#44ff0000"/>
-		<case attrColorValue="#2aea7300">
-			<apply_if noPolygons="true" attrColorValue="#35ea7300"/>
-			<apply_if nightMode="true" attrColorValue="#35ea7300"/>
-		</case>
-		<!--<case engine_v1="false" attrColorValue="#15ea7300"/>-->
-	</renderingAttribute>
-
-	<renderingAttribute name="contour10mTextColor">
-		<case contourColorScheme="white" attrColorValue="#F1F1F1"/>
-		<case contourColorScheme="yellow" attrColorValue="#F4E166"/>
-		<case contourColorScheme="green" attrColorValue="#00D400"/>
-		<case contourColorScheme="red" attrColorValue="#D40000"/>
-		<case attrColorValue="#888888"/>
-	</renderingAttribute>
-	<renderingAttribute name="contour20mTextColor">
-		<case contourColorScheme="white" attrColorValue="#F1F1F1"/>
-		<case contourColorScheme="yellow" attrColorValue="#F4E166"/>
-		<case contourColorScheme="green" attrColorValue="#00D400"/>
-		<case contourColorScheme="red" attrColorValue="#D40000"/>
-		<case attrColorValue="#777777">
-			<apply_if nightMode="true" attrColorValue="#999999"/>
-		</case>
-	</renderingAttribute>
-	<renderingAttribute name="contour50mTextColor">
-		<case contourColorScheme="white" attrColorValue="#ffffff"/>
-		<case contourColorScheme="yellow" attrColorValue="#FFF29E"/>
-		<case contourColorScheme="green" attrColorValue="#00ff00"/>
-		<case contourColorScheme="red" attrColorValue="#ff0000"/>
-		<case attrColorValue="#777777">
-			<apply_if nightMode="true" attrColorValue="#AAAAAA"/>
-		</case>
-	</renderingAttribute>
-	<renderingAttribute name="contour100mTextColor">
-		<case contourColorScheme="white" attrColorValue="#ffffff"/>
-		<case contourColorScheme="yellow" attrColorValue="#FFF29E"/>
-		<case contourColorScheme="green" attrColorValue="#00ff00"/>
-		<case contourColorScheme="red" attrColorValue="#ff0000"/>
-		<case attrColorValue="#444444">
-			<apply_if nightMode="true" attrColorValue="#BBBBBB"/>
-		</case>
-	</renderingAttribute>
-
-	<renderingAttribute name="contourLineDepthColor100m">
-		<case depthContourColorScheme="white" attrColorValue="#44ffffff"/>
-		<case depthContourColorScheme="yellow" attrColorValue="#44FFF29E"/>
-		<case depthContourColorScheme="green" attrColorValue="#4400ff00"/>
-		<case depthContourColorScheme="light_brown" attrColorValue="#2aea7300">
-			<apply_if noPolygons="true" attrColorValue="#35ea7300"/>
-			<apply_if nightMode="true" attrColorValue="#35ea7300"/>
-		</case>
-		<case depthContourColorScheme="brown" attrColorValue="#459C5615">
-			<apply_if noPolygons="true" attrColorValue="#66C39F7D"/>
-			<apply_if nightMode="true" attrColorValue="#66C39F7D"/>
-		</case>
-		<case depthContourColorScheme="dark_brown" attrColorValue="#55522D0B">
-			<apply_if noPolygons="true" attrColorValue="#8837250B"/>
-			<apply_if nightMode="true" attrColorValue="#88C39F7D"/>
-		</case>
-		<case depthContourColorScheme="red" attrColorValue="#44ff0000"/>
-		<case nightMode="true" attrColorValue="#361DC8"/>
-		<case attrColorValue="#66282F6A"/>
-	</renderingAttribute>
-	<renderingAttribute name="contourLineDepthColor50m">
-		<case depthContourColorScheme="white" attrColorValue="#44ffffff"/>
-		<case depthContourColorScheme="yellow" attrColorValue="#44FFF29E"/>
-		<case depthContourColorScheme="green" attrColorValue="#4400ff00"/>
-		<case depthContourColorScheme="light_brown" attrColorValue="#2aea7300">
-			<apply_if noPolygons="true" attrColorValue="#35ea7300"/>
-			<apply_if nightMode="true" attrColorValue="#35ea7300"/>
-		</case>
-		<case depthContourColorScheme="brown" attrColorValue="#459C5615">
-			<apply_if noPolygons="true" attrColorValue="#66C39F7D"/>
-			<apply_if nightMode="true" attrColorValue="#66C39F7D"/>
-		</case>
-		<case depthContourColorScheme="dark_brown" attrColorValue="#55522D0B">
-			<apply_if noPolygons="true" attrColorValue="#8837250B"/>
-			<apply_if nightMode="true" attrColorValue="#88C39F7D"/>
-		</case>
-		<case depthContourColorScheme="red" attrColorValue="#44ff0000"/>
-		<case nightMode="true" attrColorValue="#321BB9"/>
-		<case attrColorValue="#45374091"/>
-	</renderingAttribute>
-	<renderingAttribute name="contourLineDepthColor20m">
-		<case depthContourColorScheme="white" attrColorValue="#44ffffff"/>
-		<case depthContourColorScheme="yellow" attrColorValue="#44FFF29E"/>
-		<case depthContourColorScheme="green" attrColorValue="#4400ff00"/>
-		<case depthContourColorScheme="light_brown" attrColorValue="#2aff7c00">
-			<apply_if noPolygons="true" attrColorValue="#2aff7c00"/>
-			<apply_if nightMode="true" attrColorValue="#2aff7c00"/>
-		</case>
-		<case depthContourColorScheme="brown" attrColorValue="#35bd6819">
-			<apply_if noPolygons="true" attrColorValue="#44C39F7D"/>
-			<apply_if nightMode="true" attrColorValue="#44C39F7D"/>
-		</case>
-		<case depthContourColorScheme="dark_brown" attrColorValue="#22522D0B">
-			<apply_if noPolygons="true" attrColorValue="#4437250B"/>
-			<apply_if nightMode="true" attrColorValue="#44C39F7D"/>
-		</case>
-		<case depthContourColorScheme="red" attrColorValue="#44ff0000"/>
-		<case nightMode="true" attrColorValue="#281694"/>
-		<case attrColorValue="#334955C1"/>
-	</renderingAttribute>
 
 	<renderingAttribute name="depthTextColor">
 		<case nightMode="true" attrColorValue="#aaaaaaaa"/>
@@ -611,7 +446,7 @@
 		<case nightMode="true" attrColorValue="#555555"/>
 		<case attrColorValue="#888888"/>
 	</renderingAttribute>
-	
+
 	<order>
 	<!-- Point -->
 		<switch area="false" point="true" objectType="1" order="128">
@@ -648,7 +483,7 @@
 			<case tag="seamark:type" value="rock"/>
 			<case tag="seamark:type" value="obstruction" order="4"/>
 			<case tag="seamark" value=""/>
-			<case tag="seamark" value="light"/> <!-- for INT-1 P -->											   
+			<case tag="seamark" value="light"/> <!-- for INT-1 P -->
 			<case tag="seamark:type" value="fishing_facility"/>
 			<case tag="seamark:type" value="seabed_area" order="5"/>
 			<case tag="seamark:type" value="weed" order="5"/>
@@ -1529,17 +1364,17 @@
 			<!-- Seamarks -->
 			<switch minzoom="8" textColor="#0400ab" textHaloColor="#5576cbea" textHaloRadius="2">
 				<!-- INT-1 P, R, S Sections: Lights, Fog Signals, Radar. seamark:name and seamark:light tags as nameTag2 (as far as possible today). The OSMAND display was validated at Texel, Den Helder, Helgoland, Elbe and Weser Approaches, Rotterdam, Cherbourg.
-				default: 		name (light:character.group.period[in seconds].fog_signal:category.group.period[in seconds].radar_transponder:category.group) 
+				default: 		name (light:character.group.period[in seconds].fog_signal:category.group.period[in seconds].radar_transponder:category.group)
 								e.g. T6-VH 1 (Fl.2+1.10)= Buoy T6-VH 1 with light flashes in groups of 2 and 1. This is repeated after 10 seconds.
-								name (light:character.period[in seconds]) or name (light:character.group), with only one number element. 
+								name (light:character.period[in seconds]) or name (light:character.group), with only one number element.
 								sectors: 		name (sector1start[bearing in degree]-end[bearing in degree]-colour-sector2 ... -sector3 ... -lightcategory)
 				sector1...5:	name (sector1character.group.colour.period[in seconds].start[bearing in degree].end[bearing in degree].category[dircetional,upper].exhibition[night,fog,etc.].visibilitydistance[in nautical miles])
-				Note1: In the default, a single number remains ambiguous, because the group brackets and the unit cannot be added to the nameTag2, so far. 
+				Note1: In the default, a single number remains ambiguous, because the group brackets and the unit cannot be added to the nameTag2, so far.
 				Note2: The group tag is/cannot? be attributed correctly, e.g. for seamarks cardinal south.
 				More specific formatting, inclusion of colours and combination of text elements in the nameTags in OSMAND will require amendments for parsing of commands from rendering_types.xml and rendering styles (nautical.render.xml).
 				aiming at OSMAND text display according to IHO Chart INT-1 Section P: Lights and Section R Fog Signals, e.g. https://map.openseamap.org/?zoom=15&lon=4.79&lat=53.00 .
 				An appropriate graphical display of sector lights with coloured circle sections requires further development of code in OSMAND. Feedback welcome: josail @ gmx.de -->
-				
+
 				<switch nameTag="seamark:name" nameTag2="seamark:light:character">
 					<!-- empty nameTag="seamark:name" is filled with "." in rendering_types.xml in order to assure nameTag2 display. Check e.g. on buoy cardinal west: https://map.openseamap.org/?zoom=16&lon=8.170&lat=53.780 -->
 					<switch textItalic="true">
@@ -1587,7 +1422,7 @@
 					<apply_if lightDetail="name_only" nameTag2="$null"/>
 					<apply_if lightDetail="omit" disable="true"/>
 				</switch>
-				
+
 				<switch> <!-- for big icons -->
 					<switch>
 						<case minzoom="10" tag="seamark:type" value="light_major" nameTag="seamark:name" nameTag2="seamark:light:character" textOrder="60"/>
@@ -1641,7 +1476,7 @@
 					<apply_if minzoom="11" tag="seamark:type" value="landmark" additional="seamark:light:1:colour" textDy="-14"/>
 					<apply textWrapWidth="25"/>
 				</switch>
-				
+
 				<!-- INT-1 J Section: Nature of the Seabed -->
 				<!-- INT-1 J1 to J12 Types of Seabed, OsmAnd nautical.render.xml renderingProperty options for seabedDetail nameTag: ""(default)=""= 1st surface type as letters according to INT-1 J1-J13, seabed_letters are generated in obf according to rendering_types.xml, nameTag2: "category"=surface tag in seamark_category, "all"=surface qualification and type included in seabed_surface_all, seagrass and weed in seabed_taxon_all including category, genus and taxon, "omit"=no display -->
 				<!-- Tested 2022-05-30 together with version 1.1 of rendering_types.xml, e.g.  http://osmand.net/go.html?lat=36.65161&lon=25.37019&z=16, feedback welcome: josail @ gmx.de -->
@@ -1671,10 +1506,10 @@
 					<!-- omit seabedDetail of seamark -->
 					<switch seabedDetail="omit">
 						<case tag="seamark:type" maxzoom="18" value="seabed_area" disable="true"/>
-						<case tag="seamark:type" minzoom="19" value="seabed_area" nameTag="seabed_surface_1"/><!-- in case SeabedDetail="omit" text is omitted, but a simplified seabed letter display at very high zoom level is maintained-->	
+						<case tag="seamark:type" minzoom="19" value="seabed_area" nameTag="seabed_surface_1"/><!-- in case SeabedDetail="omit" text is omitted, but a simplified seabed letter display at very high zoom level is maintained-->
 						<case tag="seamark:type" value="weed" disable="true"/>
 						<case tag="seamark:type" value="seagrass" disable="true"/>
-					</switch>					
+					</switch>
 					<apply_if nightMode="true" textColor="#e4d0e3"/>
 				</switch>
 
@@ -1986,7 +1821,7 @@
 						</case>
 					</case>
 
-					<case minzoom="13" tag="seamark:type" value="buoy_special_purpose" icon="seamark_buoy_yellow_spar">
+					<case minzoom="12" tag="seamark:type" value="buoy_special_purpose" icon="seamark_buoy_yellow_spar">
 						<case additional="seamark:buoy_special_purpose:colour=yellow" icon="seamark_buoy_yellow_pillar">
 							<case additional="seamark:buoy_special_purpose:shape=conical" icon="seamark_buoy_yellow_conical"/>
 							<case additional="seamark:buoy_special_purpose:shape=barrel" icon="seamark_buoy_yellow_barrel"/>
@@ -2181,7 +2016,7 @@
 							</case>
 						</case>
 					</case>
-					<case minzoom="13" tag="seamark:type" value="beacon_special_purpose" icon="seamark_beacon_yellow_pile">
+					<case minzoom="12" tag="seamark:type" value="beacon_special_purpose" icon="seamark_beacon_yellow_pile">
 						<case additional="seamark:beacon_special_purpose:colour=yellow">
 							<case additional="seamark:beacon_special_purpose:shape=stake" icon="seamark_beacon_yellow_stake"/>
 							<case additional="seamark:beacon_special_purpose:shape=pile" icon="seamark_beacon_yellow_pile"/>
@@ -2895,7 +2730,7 @@
 				<case additional="seamark:bridge:category=suspension" icon="seamark_bridge_suspension"/>-->
 				<apply shield="seamark_white_black_round_shield"/>
 			</case>
-		
+
 			<case minzoom="16" tag="seamark:type" value="building" icon="seamark_building" iconVisibleSize="20" intersectionSizeFactor="0.7">
 				<case additional="seamark:building:function=harbour_master" icon="seamark_building_harbour_master"/>
 				<case additional="seamark:building:function=church" icon="seamark_building_church"/>
@@ -3135,7 +2970,7 @@
 			</case>
 
 			<case minzoom="16" tag="seamark:type" value="waterway_gauge" icon="seamark_waterway_gauge" icon_shift_py="-0.8"/>
-			
+
 			<!-- INT-1 K11, K12, K13 Rocks -->
 			<!-- indication of dangerous navigational obstructions to start already at low zoom levels 13 -->
 			<!-- <case minzoom="13" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="seamark_rock_shield" iconOrder="150" iconVisibleSize="20" icon_shift_py="-1"> -->
@@ -3437,7 +3272,7 @@
 				</switch>
 			</apply>
 		</switch>
-		
+
 		<!-- INT-1 J Section: Nature of the Seabed, https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J  -->
 		<switch minzoom="14">
 		    <case tag="seamark:type" value="seabed_area" color="$null">
@@ -3464,7 +3299,7 @@
 				<apply_if additional="seamark:seabed_area:surface=mud" nightMode="true" shader=""/>
 				<!-- <apply_if additional="seamark:seabed_area:surface=coral" shader="reef_coral"/> alternative shader for coral-->
 				<!-- <apply_if additional="seamark:seabed_area:surface=coral" shader="reef"/> alternative shader for coral-->
-			</case>			
+			</case>
 			<case tag="seamark:type" value="weed" shader="seamark_j132_weedkelp"/>
 			<case tag="seamark:type" value="seagrass" shader="seamark_j134_seagrass"/>
 			<case tag="seamark:type" value="sand_waves" shader="seamark_j14_sand_waves"/>
@@ -3490,7 +3325,7 @@
 				<apply_if seabedDetail="omit" shader="" color="#55555555"/> <!--combination of nightMode=true and seabedDetail=omit-->
 			</apply_if>
 		</switch>
-		
+
 		<switch minzoom="10">
 			<case tag="natural" value="wood"/>
 			<case tag="landuse" value="forest"/>
@@ -3553,7 +3388,7 @@
 			<case tag="aeroway" value="terminal"/>
 			<apply_if nightMode="true" shader="diagonal_fill_white_dark_shader" color_2="#999999"/>
 		</switch>
-		
+
 		<switch minzoom="10">
 			<case tag="landuse" value="military"/>
 			<case tag="seamark:type" value="military_area"/>
@@ -3856,7 +3691,7 @@
 			<apply minzoom="17" maxzoom="17" strokeWidth_2="4:4" pathEffect_2="1_9"/>
 			<apply minzoom="18" strokeWidth_2="5.5:5.5" pathEffect_2="1_13"/>
 		</switch>
-		
+
 		<!-- INT-1 J21 J22 rock and coral line icons for edges -->
  		<switch engine_v1="false" minzoom="14" strokeWidth="0.5">
 		    <!-- TODO: 2022-05-28 icons seamark_j21_rocky and seamark_j22_coral need to be rotated by 90 degree clockwise for correct display in OSMAND -->
@@ -3864,7 +3699,7 @@
 			<apply additional="seamark:seabed_area:surface=rocky" color="#555555" pathIcon="seamark_j21_rocky" pathIconStep="40"/>
 			<apply additional="seamark:seabed_area:surface=coral" color="#555555" pathIcon="seamark_j22_coral" pathIconStep="40"/>
 		</switch>
-	
+
 		<switch minzoom="14" strokeWidth="0.5">
 			<case tag="seamark:type" value="seabed_area" color="#555555" color_2="#555555">
 				<apply_if nightMode="true" color="#888888" color_2="#888888"/>
