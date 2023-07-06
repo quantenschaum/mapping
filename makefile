@@ -90,3 +90,6 @@ josm.jar:
 
 josm: josm.jar
 	java -jar josm.jar
+
+marrekrite.gpx:
+	wget -O $@ "https://github.com/marcelrv/OpenCPN-Waypoints/raw/main/Marrekrite-Aanlegplaatsen.gpx"
