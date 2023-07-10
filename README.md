@@ -19,15 +19,16 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 1. download ENC from URL above
 2. extract the ZIP `make unzip`
 3. convert the ENC to shape files with `make shapes` (It uses the mapping CSVs from OpenCPN.)
-4. download vaarwegmarkeringen `make vwm` 
+4. download vaarwegmarkeringen `make vwm`
 5. open `map.qgs` with QGIS (You may want to add the `icons` path to QGIS: settings, options, system, SVG path)
 6. export map tiles
-   - processing, toolbox, raster tools, generate XYZ tiles (dir)
-   - extent: draw on canvas and select the region you want to get rendered
-   - max zoom: 16
-   - set output dir to `tiles` subdir
-   - html file: skip
-   - run - this takes a while :coffee:
+
+- processing, toolbox, raster tools, generate XYZ tiles (dir)
+- extent: draw on canvas and select the region you want to get rendered
+- max zoom: 16
+- set output dir to `tiles` subdir
+- html file: skip
+- run - this takes a while :coffee:
 
 Now you can open `tiles/index.html` and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
 
@@ -43,7 +44,7 @@ QGIS comes with a [server component](https://docs.qgis.org/latest/en/docs/server
 - `make qgis` starts QGIS server and MapProxy (need to be installed)
 - `make docker` builds a Docker image and runs them in Docker
 
-The necessary software needs to be installed, of course. 
+The necessary software needs to be installed, of course.
 
 ## Differences in the data
 
@@ -63,7 +64,7 @@ The ENC provides much more information than the Vaarweg markeringen dataset (i.e
 
 I wrote a message to RWS and reported these differences. They answered that they currently do not have a system that transfers the data automatically from different data sources into the ENC. The ENC is handmade!
 
-## Updating OSM data 
+## Updating OSM data
 
 ### JOSM
 
@@ -96,13 +97,13 @@ Theoretically it is possible to update the positions and other metadata with a s
 
 I will look into the scripting functionality of JOSM, but before uploading data modified by a script it needs to checked and corrected manually.
 
-I added a script (as Jupyter Notebook) that manipulates OSM files. 
+I added a script (as Jupyter Notebook) that manipulates OSM files.
 
 - Download data with JOSM
 - Save as OSM file
-- Run the script
-- Load the OSM
-- Review the changes
+- Run `update.py` (use `-h` to get help for its arguments)
+- Load the OSM (happens automatically if JOSM remote control in enabled)
+- Review the changes (just click the links in the logging output to zoom the modified nodes)
 - Upload the data
 
 ### StreetComplete
@@ -119,11 +120,11 @@ For comparison the ENC files can also be viewed with [OpenCPN](https://opencpn.o
 
 [OsmAnd](https://osmand.net/) is a very good map and navigation app for all kinds of activities. It features a boating profile where seamarks are displayed and it is possible to include map tiles from other sources like sat imagery or custom tiles. It is pretty complex, you should [read the manual](https://osmand.net/docs/intro).
 
-Enable the boating [profile](https://osmand.net/docs/user/personal/profiles/) in the settings and also enable the [nautical charts](https://osmand.net/docs/user/plugins/nautical-charts) and [online maps](https://osmand.net/docs/user/plugins/online-map) extensions. When you switch to the boating profile the land areas are shown in sand colour and seamarks like buoys are displayed. You can [customize the map](https://osmand.net/docs/user/map/configure-map-menu) by tapping the boat icon in the top left corner. 
+Enable the boating [profile](https://osmand.net/docs/user/personal/profiles/) in the settings and also enable the [nautical charts](https://osmand.net/docs/user/plugins/nautical-charts) and [online maps](https://osmand.net/docs/user/plugins/online-map) extensions. When you switch to the boating profile the land areas are shown in sand colour and seamarks like buoys are displayed. You can [customize the map](https://osmand.net/docs/user/map/configure-map-menu) by tapping the boat icon in the top left corner.
 
 You have to [download map data](https://osmand.net/docs/user/start-with/download-maps) for the regions you are interested it. These maps already contain the seamarks, but they are only displayed in the nav chart map style (boating profile). You may optionally download worldwide seamarks, too, which contains seamarks only, but worldwide, so the map shows seamarks also for regions where did not download the (detailed) map data for.
 
-The map data is based on OSM and gets updated monthly, so the changes you make to OSM data using JOSM will not show up immediately. You may enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live) to get the updates more quickly, but some features may show up multiple times (from map data, worldwide seamarks and the update). 
+The map data is based on OSM and gets updated monthly, so the changes you make to OSM data using JOSM will not show up immediately. You may enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live) to get the updates more quickly, but some features may show up multiple times (from map data, worldwide seamarks and the update).
 
 OSM contains two render engines, version 2 is OpenGL based, it's faster and not bound to fixed zoom levels, but it only shows all buoys if zoomed in very closely, and they are [off position](https://github.com/osmandapp/OsmAnd/issues/17413) as well. I do prefer the old version 1 render engine.
 
@@ -145,12 +146,19 @@ You can use this raster layer as an [overlay](https://osmand.net/docs/user/map/r
 
 ### Custom style
 
-I tweaked the render style for nautical maps to better fit my personal preferences and named it [marine style](marine.render.xml). You can try it by importing it into OsmAnd. Just download and click on it, then activate it in the map settings. I replaced the annoyingly bright green fairway colour with a transparent white, to just give a slight visual hint where the fairway is. The colour of water areas was changed to a light blue, white does not look good and there are no depth area polygons available to display shallow areas in blue and deep water white as in a proper nautical chart and tidal flats are shown in green. In OsmAnd there is depth data available for the Netherlands, but _not_ for drying heights. And I don't know where this data actually comes from or how accurate it is. I wouldn't rely on it, but at least it looks nice.
+I tweaked the render style for nautical maps to better fit my personal preferences and named it [marine style](marine.render.xml). You can try it by importing it into OsmAnd. Just download and click on it, then activate it in the map settings. I replaced the annoyingly bright green fairway colour with a transparent white, to just give a slight visual hint where the fairway is. The colour of water areas was changed to a light blue, white does not look good and there are no depth area polygons available to display shallow areas in blue and deep water white as in a proper nautical chart and tidal flats are shown in green. In OsmAnd there is depth data available for the Netherlands, but
+_not_ for drying heights. And I don't know where this data actually comes from or how accurate it is. I wouldn't rely on it, but at least it looks nice.
 
-![styles](img/styles.png) 
+![styles](img/styles.png)
 
 ## Germany
 
 It is possible to extract vector data out of the WMS of the german [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) as GeoJSON. With this data QGIS can be used to render a much nice looking map that contains more information than what is available directly at the link above. Run `make bsh` and enable the Deutschland layer group in the map.
 
 ![BSh data](img/bsh.png)
+
+## Chart Plotters
+
+It is possible to use [OSM based charts on Garmin chart plotters](https://wiki.openstreetmap.org/wiki/OpenSeaMap_and_Garmin_nautical_chart_plotter) and others. BBBike provides an [online service to extract OSM data](https://extract.bbbike.org/) in various formats. Below is an image of OpenSeaMap on the good old Garmin eTrex Vista, somewhat small, but it works.
+
+![garmin etrex](img/garmin.png)
