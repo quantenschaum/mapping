@@ -40,7 +40,11 @@ To add the Waddenzee map tiles as a [custom raster map](https://osmand.net/docs/
 - [Waddenzee with depth soundings](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=17&url_template=http://waddenzee.duckdns.org/{0}/{1}/{2}.png)
 - [Waddenzee Buoys and Beacons only](http://osmand.net/add-tile-source?name=Waddenzee+Boeien&min_zoom=8&max_zoom=17&url_template=http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png)
 
-Then use these maps as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer). You may want to [pre-download](https://osmand.net/docs/user/map/raster-maps#download--update-tiles) tiles for offline usage at sea. To get updated map tiles into OsmAnd you need to [clear the tile cache](https://osmand.net/docs/user/map/raster-maps/#clear-raster-map-cache), then new updated tiles are downloaded from the server (pre-download again for offline usage).
+You may also want to use a satellite image overlay.
+
+- [World Imagery](http://osmand.net/add-tile-source?name=World+Imagery&min_zoom=2&max_zoom=20&url_template=https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{0}/{1}/{2})
+
+Then you can use these maps as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer). You may want to [pre-download](https://osmand.net/docs/user/map/raster-maps#download--update-tiles) tiles for offline usage at sea. To get updated map tiles into OsmAnd you need to [clear the tile cache](https://osmand.net/docs/user/map/raster-maps/#clear-raster-map-cache), then new updated tiles are downloaded from the server (pre-download again for offline usage).
 
 ### Marine Style
 
