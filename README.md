@@ -1,5 +1,7 @@
 # S-57 ENC conversion
 
+TL;DR --> see [USAGE.md](USAGE.md)
+
 How to convert an ENC (electronic navigational chart) to map tiles and how to use them to update [OSM](https://www.openstreetmap.org/) data.
 
 ![example map](img/example.png)
