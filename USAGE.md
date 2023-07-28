@@ -2,7 +2,7 @@
 
 To use the maps generates by this project you do not need to know the [details of the entire process](README.md). This brief guide tells you how to simply use the use maps and other resources I provide.
 
-## Web-Service
+## Web Service
 
 http://waddenzee.duckdns.org/
 
@@ -20,7 +20,7 @@ https://osmand.net/
 
 OsmAnd is a very good map and navigation app for all kinds of activities. It is pretty complex, you should [read the manual](https://osmand.net/docs/intro).
 
-- [download map data](https://osmand.net/docs/user/start-with/download-maps) for you region of interest
+First [download map data](https://osmand.net/docs/user/start-with/download-maps) for your region of interest
 
 ### Boating profile
 
@@ -29,13 +29,13 @@ OsmAnd is a very good map and navigation app for all kinds of activities. It is 
   - [nautical charts](https://osmand.net/docs/user/plugins/nautical-charts) 
   - [online maps](https://osmand.net/docs/user/plugins/online-map) 
 
-Now you should be able to see buoys and other
+Now you should be able to see buoys and other seamarks on the chart depending on the zoom level.
 
 OsmAnd updates its map data _monthly_, so it may take a while for updates to actually show up in OsmAnd. You may want to enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live).
 
 ### Raster Maps
 
-To add the Waddenzee map tiles as a [custom raster map](https://osmand.net/docs/user/map/raster-maps) just click (one of) these links below on your device with OsmAnd installed
+To add the Waddenzee map as in the web service above to OsmAnd as [custom raster map](https://osmand.net/docs/user/map/raster-maps) just click these links below on your device with OsmAnd installed
 
 - [Waddenzee with depth soundings](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=17&url_template=http://waddenzee.duckdns.org/{0}/{1}/{2}.png)
 - [Waddenzee Buoys and Beacons only](http://osmand.net/add-tile-source?name=Waddenzee+Boeien&min_zoom=8&max_zoom=17&url_template=http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png)
@@ -44,11 +44,11 @@ You may also want to use a satellite image overlay.
 
 - [World Imagery](http://osmand.net/add-tile-source?name=World+Imagery&min_zoom=2&max_zoom=20&url_template=https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{0}/{1}/{2})
 
-Then you can use these maps as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer). You may want to [pre-download](https://osmand.net/docs/user/map/raster-maps#download--update-tiles) tiles for offline usage at sea. To get updated map tiles into OsmAnd you need to [clear the tile cache](https://osmand.net/docs/user/map/raster-maps/#clear-raster-map-cache), then new updated tiles are downloaded from the server (pre-download again for offline usage).
+Then you can use these maps as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer). You may want to [pre-download](https://osmand.net/docs/user/map/raster-maps#download--update-tiles) tiles for offline usage at sea. To get updated map tiles into OsmAnd you need to [clear the tile cache](https://osmand.net/docs/user/map/raster-maps/#clear-raster-map-cache) or set an expiration period, then new updated tiles are downloaded from the server (pre-download again for offline usage).
 
 ### Marine Style
 
-To make the map look more like a nautical chart (drying heights green) you may want to use the marine rendering style
+To make the vector map look more like a nautical chart (drying heights green) you may want to use the marine rendering style
 
 - download the [marine stlye](https://github.com/quantenschaum/mapping/raw/master/marine.render.xml)
 - open it in OsmAnd (just tap the downloaded file)
