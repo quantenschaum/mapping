@@ -57,3 +57,9 @@ To make the vector map look more like a nautical chart (drying heights green) yo
 Below you seen an example of the nautical style that comes with OsmAnd, the marine style and the raster overlay with depth soundings.
 
 ![styles](img/styles.png)
+
+## Chart Plotters
+
+It is possible to use [OSM based charts on Garmin chart plotters](https://wiki.openstreetmap.org/wiki/OpenSeaMap_and_Garmin_nautical_chart_plotter) and others. BBBike provides an [online service to extract OSM data](https://extract.bbbike.org/) in various formats. Below is an image of OpenSeaMap on the good old Garmin eTrex Vista, somewhat small, but it works.
+
+![garmin etrex](img/garmin.png)

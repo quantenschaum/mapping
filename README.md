@@ -164,9 +164,3 @@ I tweaked the render style for nautical maps to better fit my personal preferenc
 It is possible to extract vector data out of the WMS of the german [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) as GeoJSON. With this data QGIS can be used to render a much nicer looking map that contains more information than what is available directly at the link above. Run `make bsh` and enable the Deutschland layer group in the map. It does not contain spot soundings but depth contours, which in some areas get displayed multiple times. The same contour from different zoom levels and thus as a more detailed and as a coarser version, so read the map carefully.
 
 ![BSh data](img/bsh.png)
-
-## Chart Plotters
-
-It is possible to use [OSM based charts on Garmin chart plotters](https://wiki.openstreetmap.org/wiki/OpenSeaMap_and_Garmin_nautical_chart_plotter) and others. BBBike provides an [online service to extract OSM data](https://extract.bbbike.org/) in various formats. Below is an image of OpenSeaMap on the good old Garmin eTrex Vista, somewhat small, but it works.
-
-![garmin etrex](img/garmin.png)
