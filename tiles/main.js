@@ -69,7 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
-      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok/">PDOK</a>'
+      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
+    }),
+    'Luchtfoto Quick 2023 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
+      layers:'2023_quick_orthoLR',
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
     }),
   };
 
