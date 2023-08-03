@@ -525,7 +525,7 @@ def main():
     data = load_marrekrite(args.marrekrite)
   else:
     data = load_geojson(args.json)
-  update_osm("saved.osm", data, args.osm_out, add=args.add, remod=args.remod, remove=args.remove, n_dist=args.n_dist,
+  update_osm(args.osm_in, data, args.osm_out, add=args.add, remod=args.remod, remove=args.remove, n_dist=args.n_dist,
              p_dist=args.p_dist, s_dist=args.s_dist)
   requests.get(f"http://localhost:8111/open_file?filename={os.path.abspath(args.osm_out)}")
 
