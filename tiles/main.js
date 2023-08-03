@@ -64,6 +64,13 @@ document.addEventListener("DOMContentLoaded", () => {
     'Worldy Imagery':L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: '<a href="https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/">ArcGIS</a>'
     }),
+    'Luchtfoto Quick 2023 8cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
+      layers:'2023_quick_orthoHR',
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok/">PDOK</a>'
+    }),
   };
 
   var overlays = {
