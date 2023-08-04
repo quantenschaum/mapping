@@ -48,8 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   var basemaps = {
-    'OpenStreetMap':L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    'OpenStreetMap ORG':L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+    }),
+    'OpenStreetMap DE':L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
+      attribution: '<a href="https://openstreetmap.de/">OpenStreetMap</a>'
     }),
     'OsmAnd Nautical':L.tileLayer('https://maptile.osmand.net/tile/nautical/{z}/{x}/{y}.png', {
       attribution: '<a href="https://osmand.net/map">OsmAnd</a>'
@@ -100,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }),
   };
 
-  var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['ENC']];
+  var layers = [basemaps['OpenStreetMap ORG'], overlays['Grid'], overlays['ENC']];
 
   if(document.URL.startsWith('file') || document.URL.includes('localhost')) {
     overlays['QGIS ENC'] = L.tileLayer('http://localhost:8001/tiles/enc/EPSG3857/{z}/{x}/{y}.png');
