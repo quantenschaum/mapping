@@ -132,20 +132,11 @@ OSM contains two render engines, version 2 is OpenGL based, it's faster and not 
 
 ### Raster Maps
 
-To add the Waddenzee map tiles as [custom raster map](https://osmand.net/docs/user/map/raster-maps) just click these links
+To add the Waddenzee map tiles as [custom raster map](https://osmand.net/docs/user/map/raster-maps) just click these links (use SQLite storage)
 
-- [Waddenzee with depth soundings](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=17&url_template=http://waddenzee.duckdns.org/{0}/{1}/{2}.png)
-- [Waddenzee Buoys and Beacons only](http://osmand.net/add-tile-source?name=Waddenzee+Boeien&min_zoom=8&max_zoom=17&url_template=http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png)
-
-or
-
-- tap top left
-- map source
-- add manually, then
-- name: name of this map
-- zoom levels: 8 to 16 (better use zoom level 17 or [OsmAnd will crash when trying to download the tiles for offline usage](https://github.com/osmandapp/OsmAnd/issues/17599))
-- URL: `http://waddenzee.duckdns.org/{0}/{1}/{2}.png` (buoys only: `http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png`)
-- format: SQlite (optional)
+- [Waddenzee with Depth Soundings](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/{0}/{1}/{2}.png)
+- [Waddenzee Buoys and Beacons only](http://osmand.net/add-tile-source?name=Waddenzee+Boeien&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png)
+- [Waddenzee Depth Contours only](http://osmand.net/add-tile-source?name=Waddenzee+Contours&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/contours/{0}/{1}/{2}.png)
 
 ![OsmAnd custom raster map](img/osmand.gif)
 
