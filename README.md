@@ -164,3 +164,23 @@ I tweaked the render style for nautical maps to better fit my personal preferenc
 It is possible to extract vector data out of the WMS of the german [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) as GeoJSON. With this data QGIS can be used to render a much nicer looking map that contains more information than what is available directly at the link above. Run `make bsh` and enable the Deutschland layer group in the map. It does not contain spot soundings but depth contours, which in some areas get displayed multiple times. The same contour from different zoom levels and thus as a more detailed and as a coarser version, so read the map carefully.
 
 ![BSh data](img/bsh.png)
+
+## Height of Tide
+
+In QGIS it is possible to add an offset to the depth data, which can be used to show soundings and depth contour at certain height of the tide. Unfortunately the contour levels in the data above LAT are only available as integer meters and this offset in applied globally to the entire map. But it may give you a visual impression of how the waterlevel affects the navigable areas. Additionally it is possible to highlight shallow areas and draw as safety contour (with the above restrictions). To set these values set (integer) values for `height_of_tide` and `safe_depth` in the project properties (crtl+shift+P).
+
+Height of tide = 0m (LAT)
+![height of tide 0m](img/tide0.png)
+
+Height of tide = 1m
+![height of tide 1m](img/tide1.png)
+
+Height of tide = 2m
+![height of tide 2m](img/tide2.png)
+
+Height of tide = 3m
+![height of tide 3m](img/tide3.png)
+
+Height of tide = 2m, safety contour = 1m
+![height of tide 2m, safe depth 1m](img/tide2-safe1.png)
+
