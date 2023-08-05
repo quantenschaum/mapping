@@ -2,11 +2,17 @@
 
 To use the maps generates by this project you do not need to know the [details of the entire process](README.md). This brief guide tells you how to simply use the use maps and other resources I provide.
 
+![example map](img/example.png)
+
 ## Web Service
 
 http://waddenzee.duckdns.org/
 
-On this website you can view a map of the Waddenzee based on the data provided by RWS. You can switch layers in the top right corner and use some simple measurement and plotting tools on the left.
+On this website you can view a map of the Waddenzee based on the data provided by RWS. You can switch layers in the top right corner and use some simple measurement and plotting tools on the left. The map looks like in the example above.
+
+Additionally you can switch to other layers, i.e. an aerial image as background with depth contours and buoys as overlay.
+
+![sat with overlay](img/sat+contours.png)
 
 ## OpenSeaMap
 
