@@ -31,9 +31,9 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
    - html file: skip
    - run - this takes a while :coffee:
 
-Now you can open `tiles/index.html` and view the tiles in your browser, it is a pretty up to date and accurate navigational chart.
+Now you can open `tiles/index.html` and view the tiles in your browser, you will get a pretty up to date and accurate navigational chart.
 
-There is a [public server](http://waddenzee.duckdns.org/) with the tiles I have created. By enabling the OpenSeaMap overlay you can directly compare the positions of buoys and beacons in OSM to those given in the dataset by RWS. You can use these map tiles in JOSM an OsmAnd if you like (see below).
+There is a public server with the tiles I have created. By enabling the OpenSeaMap overlay you can directly compare the positions of buoys and beacons in OSM to those given in the dataset by RWS. You can use these map tiles in JOSM an OsmAnd if you like (see below and [USAGE.md](USAGE.md)).
 
 This procedure should in principle work for other ENCs as well, you just have to enable the buoys and beacons layer from the ENC and maybe make some other adjustments. The buoys and beacons for the Waddenzee are pulled from the dedicated datasets mentioned above which are more up to date than the data in the ENC.
 
@@ -99,9 +99,9 @@ It is possible to update the positions and other metadata with a script that pul
 I created a [script](update.py) that manipulates OSM files. The procedure works like this:
 
 - Download data with JOSM
-- Save as OSM file `saved.osm`
+- Save as OSM file `in.osm`
 - remove the data layer from JOSM
-- Run `update.py -i saved.osm -g vwm/drijvend.json` (use `-h` to get help for more arguments)
+- Run `update.py -g vwm/drijvend.json` (use `-h` to get help for more arguments)
 - Load the `out.osm` into JOSM (happens automatically if JOSM remote control in enabled)
 - Review the changes (just click the links in the logging output to zoom the modified nodes)
 - Upload the data
@@ -118,37 +118,7 @@ For comparison the ENC files can also be viewed with [OpenCPN](https://opencpn.o
 
 ## OsmAnd
 
-[OsmAnd](https://osmand.net/) is a very good map and navigation app for all kinds of activities. It features a boating profile where seamarks are displayed, and it is possible to include map tiles from other sources like sat imagery or custom tiles. It is pretty complex, you should [read the manual](https://osmand.net/docs/intro).
-
-_Consider paying for OsmAnd to support their amazing work!_ 
-
-Enable the boating [profile](https://osmand.net/docs/user/personal/profiles/) in the settings and also enable the [nautical charts](https://osmand.net/docs/user/plugins/nautical-charts) and [online maps](https://osmand.net/docs/user/plugins/online-map) extensions. When you switch to the boating profile the land areas are shown in sand colour and seamarks like buoys are displayed. You can [customize the map](https://osmand.net/docs/user/map/configure-map-menu) by tapping the boat icon in the top left corner.
-
-You have to [download map data](https://osmand.net/docs/user/start-with/download-maps) for the regions you are interested it. These maps _already contain the seamarks_, but they are only displayed in the nav chart map style (boating profile). You may optionally download worldwide seamarks, too, which contains seamarks only, but worldwide, so the map shows seamarks also for regions where did not download the (detailed) map data for.
-
-The map data is based on OSM and gets updated _monthly_, so the changes you make to OSM data using JOSM will not show up immediately. You may enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live) to get the updates more quickly, but some features may show up multiple times (from map data, worldwide seamarks and the update).
-
-OSM contains two render engines, version 2 is OpenGL based, it's faster and not bound to fixed zoom levels, but it only shows all buoys if zoomed in very closely, and they are [off position](https://github.com/osmandapp/OsmAnd/issues/17413) as well (has been fixed but might not be available yet). I do prefer the old version 1 render engine.
-
-### Raster Maps
-
-To add the Waddenzee map tiles as [custom raster map](https://osmand.net/docs/user/map/raster-maps) just click these links (use SQLite storage)
-
-- [Waddenzee with Depth Soundings](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/{0}/{1}/{2}.png)
-- [Waddenzee Buoys and Beacons only](http://osmand.net/add-tile-source?name=Waddenzee+Boeien&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png)
-- [Waddenzee Depth Contours only](http://osmand.net/add-tile-source?name=Waddenzee+Contours&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/contours/{0}/{1}/{2}.png)
-
-![OsmAnd custom raster map](img/osmand.gif)
-
-This way you can use any TMS maps you find on the net or upload the tiles you have generated with QGIS to a webserver. There are already some predefined ones built into OsmAnd.
-
-You can use this raster layer as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer) with a transparency slider displayed at the bottom of the map, so you can seamlessly switch between two maps. The raster map tiles can be [pre-downloaded](https://osmand.net/docs/user/map/raster-maps#download--update-tiles) into the cache, to make them available for offline usage. This navigational chart combined with a [sat image](http://osmand.net/add-tile-source?name=World+Imagery&min_zoom=2&max_zoom=20&url_template=https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}) is a very handy tool.
-
-### Custom style
-
-I tweaked the render style for nautical maps to better fit my personal preferences and named it [marine style](marine.render.xml) to avoid confusion. You can try it out by importing it into OsmAnd. Just download and click on it, then activate it in the map settings. I replaced the annoyingly bright green fairway colour with a transparent white, to just give a slight visual hint where the fairway is. The colour of water areas was changed to a light blue (white does not look good and there are no depth area polygons available to display shallow areas in blue and deep water white as in a proper nautical chart) and tidal flats are shown in green. In OsmAnd there is depth data available for the Netherlands, but _not_ for drying heights. And I don't know where this data actually comes from or how accurate it is. I wouldn't use it, this is why I have created the raster tiles from the ENC.
-
-![styles](img/styles.png)
+see [USAGE.md](USAGE.md#osmand)
 
 ## Germany
 
