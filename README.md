@@ -72,7 +72,7 @@ I wrote a message to RWS and reported these differences. They answered that they
 I edit OSM data with [JOSM](https://josm.openstreetmap.de/). JOSM is pretty easy to use, how it works is explained in the [Wiki](https://josm.openstreetmap.de/wiki/Introduction). You can add the generated map tiles to JOSM as imagery layer.
 
 - imagery, imagery preferences
-- add TMS with URL `file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` or `http://waddenzee.duckdns.org/{zoom}/{x}/{y}.png`
+- add TMS with URL `file:///path/to/qgis/tiles/{zoom}/{x}/{y}.png` or [one of these URls](USAGE.md#raster-overlay)
 - then activate the layer from imagery menu
 
 You can use the WMS at `https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows` directly in JOSM, too, but then you do not get the metadata like name and light descriptor of the objects.
