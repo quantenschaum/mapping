@@ -17,10 +17,10 @@ unzip:
 nautical.render.xml:
 	wget -O $@ https://github.com/osmandapp/OsmAnd-resources/raw/master/rendering_styles/$@
 
-render.diff: nautical.render.xml
-	diff $< marine.render.xml -u >$@ || true
+render.diff:
+	diff nautical.render.xml marine.render.xml -u >$@ || true
 
-marine.render.xml: render.diff nautical.render.xml
+marine.render.xml:
 	cp $(word 2,$^) $@
 	patch $@ $<
 
