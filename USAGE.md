@@ -70,7 +70,7 @@ Below you seen an example of the nautical style that comes with OsmAnd, the mari
 
 ![styles](img/styles.png)
 
-The marine style has two additional settings available at the very bottom of the map configuration: fairway color and wetland color. You can choose different colorings to adjust the map to your liking, either light like a paper chart or with more contrast for situations in bright sunlight. It also fixes the [wrong z ordering of tidal flats](https://github.com/osmandapp/OsmAnd/issues/17835) and added rendering of mussel banks (seabed=shells).
+The marine style has two [additional settings](https://youtu.be/P7Xc7tvhwCw) available at the very bottom of the map configuration: fairway color and wetland color. You can choose different colorings to adjust the map to your liking, either light like a paper chart or with more contrast for situations in bright sunlight. It also fixes the [wrong z ordering of tidal flats](https://github.com/osmandapp/OsmAnd/issues/17835) and added rendering of mussel banks (seabed=shells).
 
 ![marine light](img/marine_light.png)
 ![marine dark](img/marine_dark.png)
