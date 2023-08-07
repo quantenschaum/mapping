@@ -26,7 +26,7 @@ https://osmand.net/
 
 OsmAnd is a very good map and navigation app for all kinds of activities. It is pretty complex, you should [read the manual](https://osmand.net/docs/intro).
 
-There are some videos about this on YouTube: [OsmAnd Playlist](https://www.youtube.com/watch?v=3lw6bVvl6B0&list=PLVV1f2QQn7GxWiF0C0-e9oJkfkdYLZGms)
+[YouTube OsmAnd Playlist](https://www.youtube.com/playlist?list=PLVV1f2QQn7GxWiF0C0-e9oJkfkdYLZGms)
 
 First [download map data](https://osmand.net/docs/user/start-with/download-maps) for your region of interest
 
