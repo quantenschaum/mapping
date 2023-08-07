@@ -21,8 +21,8 @@ render.diff:
 	diff nautical.render.xml marine.render.xml -u >$@ || true
 
 marine.render.xml:
-	cp $(word 2,$^) $@
-	patch $@ $<
+	cp nautical.render.xml $@
+	patch $@ render.diff
 
 vwm:
 	mkdir -p $@
