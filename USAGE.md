@@ -49,9 +49,9 @@ Now you should be able to see buoys and other seamarks on the chart depending on
 
 To add the Waddenzee map as in the web service above to OsmAnd as [custom raster map](https://osmand.net/docs/user/map/raster-maps) just click these links below on your device with OsmAnd installed (SQLite storage recommended)
 
-- [Waddenzee with Depth Soundings](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/{0}/{1}/{2}.png)
-- [Waddenzee Buoys and Beacons only](http://osmand.net/add-tile-source?name=Waddenzee+Boeien&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png)
-- [Waddenzee Depth Contours only](http://osmand.net/add-tile-source?name=Waddenzee+Contours&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/contours/{0}/{1}/{2}.png)
+- [Waddenzee with Depth Soundings](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/{0}/{1}/{2}.png`
+- [Waddenzee Buoys and Beacons only](http://osmand.net/add-tile-source?name=Waddenzee+Boeien&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png`
+- [Waddenzee Depth Contours only](http://osmand.net/add-tile-source?name=Waddenzee+Contours&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/contours/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/contours/{0}/{1}/{2}.png`
 
 You may also want to use a satellite image overlay.
 
