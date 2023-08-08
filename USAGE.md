@@ -6,7 +6,7 @@ To use the maps generates by this project you do not need to know the [details o
 
 ## Web Service
 
-http://waddenzee.duckdns.org/
+🗺️ http://waddenzee.duckdns.org/
 
 On this website you can view a map of the Waddenzee based on the data provided by RWS. You can switch layers in the top right corner and use some simple measurement and plotting tools on the left. The map looks like in the example above.
 
@@ -14,7 +14,7 @@ Additionally you can switch to other layers, i.e. an [aerial image as background
 
 ## OpenSeaMap
 
-https://map.openseamap.org/
+🗺️ https://map.openseamap.org/
 
 The positions and metadata of buoys and other objects are worked into the OSM database and thus are available in the OpenSeaMap project and other software that uses this data.
 
@@ -22,7 +22,7 @@ The positions and metadata of buoys and other objects are worked into the OSM da
 
 https://osmand.net/
 
-[YouTube OsmAnd Playlist](https://www.youtube.com/playlist?list=PLVV1f2QQn7GxWiF0C0-e9oJkfkdYLZGms) with demonstration on how to use OsmAnd.
+👉 [YouTube OsmAnd Playlist](https://www.youtube.com/playlist?list=PLVV1f2QQn7GxWiF0C0-e9oJkfkdYLZGms) with demonstration on how to use OsmAnd.
 
 [OsmAnd](https://osmand.net/) is a very good map and navigation app for all kinds of activities. It features a boating profile where seamarks are displayed, and it is possible to include map tiles from other sources like sat imagery or custom tiles. It is pretty complex, you should [read the manual](https://osmand.net/docs/intro).
 
@@ -73,7 +73,7 @@ To make the vector map look more like a nautical chart (drying heights green) yo
 - open it in OsmAnd (just tap the downloaded file)
 - select it as rendering style in the boating profile
 
-This only works correctly with render engine 2!
+❗ This only works correctly with render engine 2!
 
 Below you seen an example of the nautical style that comes with OsmAnd, the marine style and the raster overlay with depth soundings.
 
