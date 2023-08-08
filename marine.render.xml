@@ -26,6 +26,10 @@
                      description="Color of Wetland/Tidal Flats"
                      category="details" type="string" defaultValue="" defaultValueDescription="lightgreen"
                      possibleValues="darkgreen"/>
+  <renderingProperty attr="shellsStyle" name="Shells Style"
+                     description="Style for Shells on Seabed"
+                     category="details" type="string" defaultValue="" defaultValueDescription="gray"
+                     possibleValues="rocks,stones,red"/>
   <renderingProperty attr="currentTrackColor" name="Current GPX color"
                      description="Color of the currently recording track"
                      type="string"
@@ -3644,7 +3648,10 @@
         <apply_if additional="seamark:seabed_area:surface=boulder" shader="seamark_j2122_rockycoral"/>
         <apply_if additional="seamark:seabed_area:surface=coral" shader="seamark_j2122_rockycoral"/>
         <!-- <apply_if additional="seamark:seabed_area:surface=shells" shader="seamark_j11_shells"/>-->
-        <apply_if additional="seamark:seabed_area:surface=shells" shader="seamark_j20_stonesgravel" color="#331d1d3b"/>
+        <apply_if additional="seamark:seabed_area:surface=shells" color="#331d1d3b"/>
+        <apply_if additional="seamark:seabed_area:surface=shells" shellsStyle="red" color="#55f22237"/>
+        <apply_if additional="seamark:seabed_area:surface=shells" shellsStyle="rocks" shader="seamark_j2122_rockycoral"/>
+        <apply_if additional="seamark:seabed_area:surface=shells" shellsStyle="stones" shader="seamark_j20_stonesgravel"/>
         <apply_if additional="seamark:seabed_area:surface=lava" shader="seamark_j2122_rockycoral"/>
         <!-- the following shaders do not follow INT-1 J Section Nature of the seabed and https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J, delete or replace as needed -->
         <apply_if additional="seamark:seabed_area:surface=sand" shader="sand_opaque"/>

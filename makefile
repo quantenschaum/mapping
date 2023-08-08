@@ -14,6 +14,8 @@ unzip:
 %.csv:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
 
+.PHONY: nautical.render.xml render.diff marine.render.xml
+
 nautical.render.xml:
 	wget -O $@ https://github.com/osmandapp/OsmAnd-resources/raw/master/rendering_styles/$@
 

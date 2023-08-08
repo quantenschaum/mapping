@@ -67,13 +67,13 @@ With the transparency slider you can seamlessly blend between the base map and t
 
 ### Marine Style
 
-To make the vector map look more like a nautical chart (drying heights green) you may want to use the marine rendering style
+To make the vector map look more like a nautical chart (drying heights green) you may want to use the marine rendering style. It also fixes the [wrong z ordering of tidal flats](https://github.com/osmandapp/OsmAnd/issues/17835) and added rendering of mussel banks (seabed=shells).
 
 - download the [marine stlye](https://github.com/quantenschaum/mapping/raw/master/marine.render.xml)
 - open it in OsmAnd (just tap the downloaded file)
 - select it as rendering style in the boating profile
 
-:exclamation: This only works correctly with render engine 2!
+:exclamation: This only works correctly with render engine 2 (OpenGL)!
 
 Below you seen an example of the nautical style that comes with OsmAnd, the marine style and the raster overlay with depth soundings.
 
@@ -81,7 +81,13 @@ Below you seen an example of the nautical style that comes with OsmAnd, the mari
 
 #### Additional Settings
 
-The marine style has two [additional settings](https://youtu.be/P7Xc7tvhwCw) available at the very bottom of the map configuration: fairway color and wetland color. You can choose different colorings to adjust the map to your liking, either light like a paper chart or with more contrast for situations in bright sunlight. It also fixes the [wrong z ordering of tidal flats](https://github.com/osmandapp/OsmAnd/issues/17835) and added rendering of mussel banks (seabed=shells).
+The marine style has [additional settings](https://youtu.be/P7Xc7tvhwCw) available at the very bottom of the map configuration: 
+
+- fairway color 
+- wetland color
+- shells style 
+
+You can choose different colorings to adjust the map to your liking, either light like a paper chart or with more contrast for situations in bright sunlight. 
 
 ![marine light](img/marine_light.png)
 ![marine dark](img/marine_dark.png)
