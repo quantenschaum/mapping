@@ -128,7 +128,7 @@ It is possible to extract vector data out of the WMS of the german [GeoSeaPortal
 
 ## Height of Tide
 
-In QGIS it is possible to add an offset to the depth data, which can be used to show soundings and depth contour at certain height of the tide. Unfortunately the contour levels in the data above LAT are only available as integer meters and this offset is applied globally to the entire map. But it may give you a visual impression of how the waterlevel affects the navigable areas. Additionally it is possible to highlight shallow areas and draw a safety contour (with the above restrictions). To change these values set (integer) values for `height_of_tide` and `safe_depth` in the project properties (Crtl+Shift+P).
+In QGIS it is possible to add an offset to the depth data, which can be used to show soundings and depth contours at certain height of the tide. Unfortunately the contour levels in the data above LAT are only available as integer meters and this offset is applied globally to the entire map. But it may give you a visual impression of how the water level affects the navigable areas. Additionally, it is possible to highlight shallow areas and draw a safety contour (with the above restrictions). To change these values set (integer) values for `height_of_tide` and `safe_depth` in the project properties (Crtl+Shift+P).
 
 Height of tide = 0m (LAT)
 ![height of tide 0m](img/tide0.png)

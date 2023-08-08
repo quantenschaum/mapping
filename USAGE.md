@@ -73,6 +73,8 @@ To make the vector map look more like a nautical chart (drying heights green) yo
 - open it in OsmAnd (just tap the downloaded file)
 - select it as rendering style in the boating profile
 
+This only works correctly with render engine 2!
+
 Below you seen an example of the nautical style that comes with OsmAnd, the marine style and the raster overlay with depth soundings.
 
 ![styles](img/styles.png)
