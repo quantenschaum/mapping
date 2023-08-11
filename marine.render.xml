@@ -1343,6 +1343,7 @@
           <case minzoom="12" tag="leisure" value="nature_reserve" textOrder="60"/>
           <case minzoom="12" tag="boundary" value="national_park" textOrder="61" textOnPath="true"/>
           <case minzoom="9" tag="natural" value="reef"/>
+          <case minzoom="9" tag="natural" value="shoal"/>
           <case minzoom="14" textSize="12" tag="natural" value="ridge" textOnPath="true" textDy="0"/>
         </switch>
         <apply_if nightMode="true" textColor="$naturalTextColor" textHaloRadius="$textHaloRadiusNight"
@@ -3322,8 +3323,7 @@
       <!-- INT-1 K11, K12, K13 Rocks -->
       <!-- indication of dangerous navigational obstructions to start already at low zoom levels 13 -->
       <!-- <case minzoom="13" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="seamark_rock_shield" iconOrder="150" iconVisibleSize="20" icon_shift_py="-1"> -->
-      <case minzoom="13" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="seamark_rock_shield"
-            iconVisibleSize="15">
+      <case minzoom="13" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="seamark_rock_shield" iconVisibleSize="15">
         <case additional="seamark:rock:water_level=covers" icon="seamark_rock_covers"/>
         <case additional="seamark:rock:water_level=awash" icon="seamark_rock_awash"/>
       </case>
@@ -3701,12 +3701,21 @@
         <apply_if nightMode="true" shader="" color="#1b3238"/>
       </case>
     </case>
-    <case minzoom="6" tag="natural" value="reef" shader="reef" color="#99100000" strokeWidth_2="2" color_2="#aaff2c2c"
-          pathEffect_2="3_3">
+    <case minzoom="6" tag="natural" value="reef" shader="reef" color="#99100000" strokeWidth_2="2" color_2="#aaff2c2c" pathEffect_2="3_3">
       <case additional="reef=coral" shader="reef_coral"/>
       <case additional="reef=rock" shader="reef_rock"/>
       <case additional="reef=stone" shader="reef_rock"/>
+      <case additional="reef=sand" shader="sand_opaque"/>
       <case nightMode="true" shader="" color="#55555555"/>
+    </case>
+    <case minzoom="6" tag="seamark:sea_area:category" value="shoal" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3" />
+    <case minzoom="6" tag="natural" value="shoal" shader="" color="#55968d8d" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3">
+      <case additional="surface=sand" shader="sand_opaque"/>
+      <case additional="surface=shells" shader="seamark_j20_stonesgravel"/>
+      <case additional="surface=stones" shader="seamark_j20_stonesgravel"/>
+      <case additional="surface=gravel" shader="seamark_j20_stonesgravel"/>
+      <case additional="surface=rock" shader="seamark_j2122_rockycoral"/>
+      <case nightMode="true" shader="" color="#55c7432c"/>
     </case>
 
     <case minzoom="10" tag="landuse" value="residential" color="$landuseResidentialColorDay">
