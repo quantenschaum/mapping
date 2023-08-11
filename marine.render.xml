@@ -3709,7 +3709,7 @@
       <case nightMode="true" shader="" color="#55aaff2c2c"/>
     </case>
     <case minzoom="6" tag="seamark:sea_area:category" value="shoal" color="#22ff6b2c" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3" />
-    <case minzoom="6" tag="natural" value="shoal" shader="" color="#22ff6b2c" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3">
+    <case minzoom="6" tag="natural" value="shoal" shader="shoal" color="#22ff6b2c" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3">
       <case additional="surface=sand" shader="sand_opaque" color="$null"/>
       <case additional="surface=shells" shader="seamark_j20_stonesgravel" color="$null"/>
       <case additional="surface=stones" shader="seamark_j20_stonesgravel" color="$null"/>
