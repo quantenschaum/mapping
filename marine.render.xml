@@ -3706,16 +3706,16 @@
       <case additional="reef=rock" shader="reef_rock"/>
       <case additional="reef=stone" shader="reef_rock"/>
       <case additional="reef=sand" shader="sand_opaque"/>
-      <case nightMode="true" shader="" color="#55555555"/>
+      <case nightMode="true" shader="" color="#55aaff2c2c"/>
     </case>
-    <case minzoom="6" tag="seamark:sea_area:category" value="shoal" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3" />
-    <case minzoom="6" tag="natural" value="shoal" shader="" color="#55968d8d" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3">
-      <case additional="surface=sand" shader="sand_opaque"/>
-      <case additional="surface=shells" shader="seamark_j20_stonesgravel"/>
-      <case additional="surface=stones" shader="seamark_j20_stonesgravel"/>
-      <case additional="surface=gravel" shader="seamark_j20_stonesgravel"/>
-      <case additional="surface=rock" shader="seamark_j2122_rockycoral"/>
-      <case nightMode="true" shader="" color="#55c7432c"/>
+    <case minzoom="6" tag="seamark:sea_area:category" value="shoal" color="#22ff6b2c" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3" />
+    <case minzoom="6" tag="natural" value="shoal" shader="" color="#22ff6b2c" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3">
+      <case additional="surface=sand" shader="sand_opaque" color="$null"/>
+      <case additional="surface=shells" shader="seamark_j20_stonesgravel" color="$null"/>
+      <case additional="surface=stones" shader="seamark_j20_stonesgravel" color="$null"/>
+      <case additional="surface=gravel" shader="seamark_j20_stonesgravel" color="$null"/>
+      <case additional="surface=rock" shader="seamark_j2122_rockycoral" color="$null"/>
+      <case nightMode="true" shader="" color="#55ff6b2c"/>
     </case>
 
     <case minzoom="10" tag="landuse" value="residential" color="$landuseResidentialColorDay">
