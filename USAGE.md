@@ -67,7 +67,7 @@ With the transparency slider you can seamlessly blend between the base map and t
 
 ### Marine Style
 
-To make the vector map look more like a nautical chart (drying heights green) you may want to use the marine rendering style. It also fixes the [wrong z ordering of tidal flats](https://github.com/osmandapp/OsmAnd/issues/17835) and [added rendering of mussel banks](https://github.com/osmandapp/OsmAnd/issues/17827) (seabed=shells).
+To make the vector map look more like a nautical chart (drying heights green) you may want to use the marine rendering style. It also fixes the [wrong z ordering of tidal flats](https://github.com/osmandapp/OsmAnd/issues/17835) and [added rendering of mussel banks](https://github.com/osmandapp/OsmAnd/issues/17827) (`seabed=shells`) and [shoals](https://github.com/osmandapp/OsmAnd/issues/17897) (`natural=shoal`).
 
 - download the [marine stlye](https://github.com/quantenschaum/mapping/raw/master/marine.render.xml)
 - open it in OsmAnd (just tap the downloaded file)
