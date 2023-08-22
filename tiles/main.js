@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     'Buoys and Beacons':L.tileLayer('seamarks/{z}/{x}/{y}.png', {
       attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
     }),
-    'Vaarweg Markeringen (RWS)':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
+    'Vaarweg Markeringen':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
       layers:'vaarweg_markering_drijvend,vaarweg_markering_drijvend_detail,vaarweg_markering_vast,vaarweg_markering_vast_detail',
       version:'1.3.0',
       transparent:'true',

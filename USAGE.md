@@ -12,6 +12,13 @@ On this website you can view a map of the Waddenzee based on the data provided b
 
 Additionally, you can switch to other layers, i.e. an [aerial image as background with depth contours and buoys as overlay](img/sat+contours.png).
 
+There are several overlays to choose from.
+
+- ENC - [ENC by RWS](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc) with Buoys and Beacons from the ENC
+- Depth Contours - DC only from the ENC, transparent
+- Buoys and Beacons - from [VWM dataset](https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979) (more up to date)
+- Vaarweg Markeringen - like Buoys and Beacons but directly from the [server by RWS](https://geo.rijkswaterstaat.nl/services/ogc/gdr/web/)
+
 ## OpenSeaMap
 
 https://map.openseamap.org/
