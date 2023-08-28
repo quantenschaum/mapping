@@ -18,18 +18,6 @@
                      description="Additional text information on seabed surface_qualification, combined surface types, category and taxon of weed or seagrass"
                      category="details" type="string" defaultValue="" defaultValueDescription="simple"
                      possibleValues="category,all,omit"/> <!-- used in INT-1 J Section: Nature of the Seabed -->
-  <renderingProperty attr="fairwayStyle" name="Fairway Color"
-                     description="Color of fairways"
-                     category="details" type="string" defaultValue="" defaultValueDescription="white"
-                     possibleValues="whiter,green,yellow,hide"/>
-  <renderingProperty attr="wetlandStyle" name="Wetland Color"
-                     description="Color of Wetland/Tidal Flats"
-                     category="details" type="string" defaultValue="" defaultValueDescription="lightgreen"
-                     possibleValues="darkgreen"/>
-  <renderingProperty attr="shellsStyle" name="Shells Style"
-                     description="Style for Shells on Seabed"
-                     category="details" type="string" defaultValue="" defaultValueDescription="gray"
-                     possibleValues="rocks,stones,red"/>
   <renderingProperty attr="currentTrackColor" name="Current GPX color"
                      description="Color of the currently recording track"
                      type="string"
@@ -42,6 +30,18 @@
                      description="Make all areal land features on map transparent"
                      type="boolean" possibleValues="" category="hide"/>
   <renderingProperty attr="legend" name="Legend" type="boolean" possibleValues="" category="ui_hidden"/>
+  <renderingProperty attr="fairwayStyle" name="Fairway Color"
+                     description="Color of fairways"
+                     category="details" type="string" defaultValue="" defaultValueDescription="white"
+                     possibleValues="whiter,green,yellow,hide"/>
+  <renderingProperty attr="wetlandStyle" name="Wetland Color"
+                     description="Color of Wetland/Tidal Flats"
+                     category="details" type="string" defaultValue="" defaultValueDescription="lightgreen"
+                     possibleValues="darkgreen"/>
+  <renderingProperty attr="shellsStyle" name="Shells Style"
+                     description="Style for Shells on Seabed"
+                     category="details" type="string" defaultValue="" defaultValueDescription="gray"
+                     possibleValues="rocks,stones,red"/>
 
   <renderingAttribute name="gpxColor"> <!-- deprecated -->
     <case attrColorValue="#b400ffff"/>
@@ -1337,11 +1337,11 @@
         <switch textItalic="true">
           <case minzoom="16" tag="natural" value="wood" textOrder="60"/>
           <case minzoom="17" tag="natural" value="wetland" textOrder="70"/>
+					<case minzoom="17" tag="natural" value="shoal" textOrder="70"/>
           <case minzoom="16" tag="landuse" value="forest" textOrder="60"/>
           <case minzoom="12" tag="leisure" value="nature_reserve" textOrder="60"/>
           <case minzoom="12" tag="boundary" value="national_park" textOrder="61" textOnPath="true"/>
           <case minzoom="9" tag="natural" value="reef"/>
-          <case minzoom="9" tag="natural" value="shoal"/>
           <case minzoom="14" textSize="12" tag="natural" value="ridge" textOnPath="true" textDy="0"/>
         </switch>
         <apply_if nightMode="true" textColor="$naturalTextColor" textHaloRadius="$textHaloRadiusNight"
@@ -3615,7 +3615,7 @@
     <switch minzoom="14">
       <case tag="seamark:type" value="seabed_area" color="$null">
         <!-- <apply_if additional="seamark:seabed_area:surface=sand" shader="seamark_j1_sand"/> omitted-->
-        <!-- <apply_if additional="seamark:seabed_area:surface=mud" shader="seamark_j2_mud"/>-->
+				<!-- <apply_if additional="seamark:seabed_area:surface=mud" shader="seamark_j2_mud"/> omitted-->
         <!-- <apply_if additional="seamark:seabed_area:surface=clay" shader="seamark_j3_clay"/> omitted-->
         <!-- <apply_if additional="seamark:seabed_area:surface=silt" shader="seamark_j4_silt"/> omitted-->
         <apply_if additional="seamark:seabed_area:surface=stones" shader="seamark_j20_stonesgravel"/>
@@ -3646,6 +3646,24 @@
       <case tag="seamark:type" value="weed" shader="seamark_j132_weedkelp"/>
       <case tag="seamark:type" value="seagrass" shader="seamark_j134_seagrass"/>
       <case tag="seamark:type" value="sand_waves" shader="seamark_j14_sand_waves"/>
+
+			<switch>
+				<case tag="natural" value="shoal"/>
+				<case tag="seamark:type" value="sea_area" assitional="seamark:sea_area:category=shoal" color_2="#99ff0000" pathEffect_2="2_3" strokeWidth_2="1">
+					<apply_if minzoom="13" strokeWidth_2="2"/>
+					<apply_if nightMode="true" color_2="#88ff0000"/>
+				</case>
+				<apply shader="shoal"/>
+			</switch>
+<!--    <case minzoom="6" tag="seamark:sea_area:category" value="shoal" color="#22ff6b2c" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3"/>-->
+<!--    <case minzoom="6" tag="natural" value="shoal" shader="shoal" color="#22ff6b2c" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3">-->
+<!--      <case additional="surface=sand" shader="sand_opaque" color="$null"/>-->
+<!--      <case additional="surface=shells" shader="seamark_j20_stonesgravel" color="$null"/>-->
+<!--      <case additional="surface=stones" shader="seamark_j20_stonesgravel" color="$null"/>-->
+<!--      <case additional="surface=gravel" shader="seamark_j20_stonesgravel" color="$null"/>-->
+<!--      <case additional="surface=rock" shader="seamark_j2122_rockycoral" color="$null"/>-->
+<!--      <case nightMode="true" shader="" color="#55ff6b2c"/>-->
+<!--    </case>-->
       <apply_if nightMode="true"> <!-- use light gray semi transparent halo _shield_night-->
         <!-- <apply_if additional="seamark:seabed_area:surface=sand" shield="seamark_j1_sand_shield_night"/> omitted-->
         <!-- <apply_if additional="seamark:seabed_area:surface=mud" shield="seamark_j2_mud_shield_night"/> omitted-->
@@ -3685,15 +3703,6 @@
       <case additional="reef=stone" shader="reef_rock"/>
       <case additional="reef=sand" shader="sand_opaque"/>
       <case nightMode="true" shader="" color="#55aaff2c2c"/>
-    </case>
-    <case minzoom="6" tag="seamark:sea_area:category" value="shoal" color="#22ff6b2c" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3"/>
-    <case minzoom="6" tag="natural" value="shoal" shader="shoal" color="#22ff6b2c" strokeWidth_2="2" color_2="#aaff6b2c" pathEffect_2="3_3">
-      <case additional="surface=sand" shader="sand_opaque" color="$null"/>
-      <case additional="surface=shells" shader="seamark_j20_stonesgravel" color="$null"/>
-      <case additional="surface=stones" shader="seamark_j20_stonesgravel" color="$null"/>
-      <case additional="surface=gravel" shader="seamark_j20_stonesgravel" color="$null"/>
-      <case additional="surface=rock" shader="seamark_j2122_rockycoral" color="$null"/>
-      <case nightMode="true" shader="" color="#55ff6b2c"/>
     </case>
 
     <case minzoom="10" tag="landuse" value="residential" color="$landuseResidentialColorDay">
