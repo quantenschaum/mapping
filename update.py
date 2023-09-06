@@ -710,7 +710,7 @@ def main():
         data = load_marrekrite(args.marrekrite)
     elif "rocks" in args.json.lower():
         data = load_bsh_rocks(args.json)
-        sm_type = "rock"
+        seamark_type = "rock"
     elif "aids" in args.json.lower():
         data = load_bsh_buoys(args.json)
     else:
