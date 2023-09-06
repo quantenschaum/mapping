@@ -3302,7 +3302,7 @@
       <!-- INT-1 K11, K12, K13 Rocks -->
       <!-- indication of dangerous navigational obstructions to start already at low zoom levels 13 -->
       <!-- <case minzoom="13" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="seamark_rock_shield" iconOrder="150" iconVisibleSize="20" icon_shift_py="-1"> -->
-      <case minzoom="13" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="seamark_rock_shield" iconVisibleSize="15">
+      <case minzoom="11" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="null" iconVisibleSize="20">
         <case additional="seamark:rock:water_level=covers" icon="seamark_rock_covers"/>
         <case additional="seamark:rock:water_level=awash" icon="seamark_rock_awash"/>
       </case>
