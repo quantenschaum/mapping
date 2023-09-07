@@ -243,6 +243,7 @@ watlev = {3: "submerged", 4: "covers", 5: "awash"}
 
 
 def load_bsh_rocks(filename):
+    print("loading BSH rocks", filename)
     data = load_json(filename)
     points = []
     positions = []
@@ -260,16 +261,20 @@ def load_bsh_rocks(filename):
             if depth is not None:
                 tags["depth"] = depth
             # if p["watlev"] != 3 or depth and depth > 5:                print(tags)
-            if ll not in positions:
-                positions.append(ll)
-                points.append(tags)
 
-    # print(len(points))
+            if ll not in positions and not any(
+                filter(lambda p: distance(p, ll) < 1, positions)
+            ):
+                points.append(tags)
+                positions.append(ll)
+
+    print(len(points))
 
     return points
 
 
 def load_bsh_buoys(filename):
+    print("loading BSH buoys", filename)
     data = load_json(filename)
     points = []
     lights = {}
@@ -338,11 +343,13 @@ def load_bsh_buoys(filename):
                 tags["seamark:light:group"] = light_grp(l.get("siggrp"))
                 # print(json.dumps(l, indent=2))
 
-            if ll not in positions:
-                positions.append(ll)
+            if ll not in positions and not any(
+                filter(lambda p: distance(p, ll) < 2, positions)
+            ):
                 points.append(tags)
+                positions.append(ll)
 
-    # print(len(points))
+    print(len(points))
 
     return points
 
@@ -603,9 +610,11 @@ def update_osm(
             print(
                 "AMBIGOUS",
                 len(p),
+                distance(ll, p[1]["ll"]),
                 match,
                 name,
                 f"http://localhost:8111/zoom?left={ll[1] - dx}&right={ll[1] + dx}&bottom={ll[0] - dy}&top={ll[0] + dy}",
+                # json.dumps(p, indent=2),
             )
         # assert len(p) <= 1, json.dumps(p, indent=2)
         for m in p:
