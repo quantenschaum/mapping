@@ -1779,6 +1779,8 @@
       <apply_if nightMode="true" textColor="#ffffff" textHaloRadius="$textHaloRadiusNight" textHaloColor="#77777777"/>
       <apply_if legend="true" textHaloColor="$defaultColor"/>
     </switch>
+    <case minzoom="10" tag="seamark:type" value="rock" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12"/>
+    <case minzoom="10" tag="seamark:type" value="wreck" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-10"/>
   </text>
 
 
