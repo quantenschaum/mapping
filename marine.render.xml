@@ -1781,6 +1781,7 @@
     </switch>
     <case minzoom="10" tag="seamark:type" value="rock" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12"/>
     <case minzoom="10" tag="seamark:type" value="wreck" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-10"/>
+    <case minzoom="10" tag="seamark:type" value="sea_area" assitional="seamark:sea_area:category=shoal" textColor="$depthTextColor" textOnPath="true" textSize="12" textMinDistance="100"/>
   </text>
 
 
