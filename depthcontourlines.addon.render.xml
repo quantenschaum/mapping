@@ -8,43 +8,40 @@
 		type="boolean" possibleValues="" category="details"/>
 	<renderingProperty attr="depthContourWidth" name="Depth contour lines width" description="Depth contour lines width" type="string" possibleValues="thin,medium,thick" defaultValueDescription="default"/>
 	<renderingProperty attr="depthContourColorScheme" name="Depth contour lines color scheme" description="Depth contour lines color scheme" type="string" possibleValues="black,grey,cyan,cyan5red,default" defaultValueDescription="default"/>
-	<renderingProperty attr="depthPointDistance" name="min distance of spot sounding" description="" type="string" possibleValues="5,10,15,30,60,120" defaultValueDescription="default"/>
+	<renderingProperty attr="depthPointDistance" name="min distance of spot sounding" description="" type="string" possibleValues="5,10,30,60,120" defaultValueDescription="15"/>
+	<renderingProperty attr="safetyContour" name="depth of safety contour" description="" type="string" possibleValues="0m,1m,2m,3m,4m,5m,10m" defaultValueDescription="off"/>
 
-	<renderingAttribute name="color3">
-		<case depthContourColorScheme="black" attrColorValue="#cc000000"/>
-		<case depthContourColorScheme="grey" attrColorValue="#cc888888"/>
-		<case depthContourColorScheme="cyan" attrColorValue="#cc099ded"/>
-		<case depthContourColorScheme="cyan5red" attrColorValue="#cc099ded"/>
+	<renderingAttribute name="color0">
 		<case attrColorValue="#cc000000"/>
 	</renderingAttribute>
 
-	<renderingAttribute name="color2">
-		<case depthContourColorScheme="black" attrColorValue="#cc000000"/>
-		<case depthContourColorScheme="grey" attrColorValue="#aa888888"/>
-		<case depthContourColorScheme="cyan" attrColorValue="#aa099ded"/>
-		<case depthContourColorScheme="cyan5red" attrColorValue="#aa099ded"/>
-		<case attrColorValue="#aa000000"/>
-	</renderingAttribute>
-
 	<renderingAttribute name="color1">
-		<case depthContourColorScheme="black" attrColorValue="#cc000000"/>
-		<case depthContourColorScheme="grey" attrColorValue="#88888888"/>
-		<case depthContourColorScheme="cyan" attrColorValue="#88099ded"/>
-		<case depthContourColorScheme="cyan5red" attrColorValue="#88ff0000"/>
-		<case attrColorValue="#88000000"/>
+		<case attrColorValue="#cc18992c"/>
 	</renderingAttribute>
 
-	<renderingAttribute name="color0">
-		<case depthContourColorScheme="black" attrColorValue="#88000000"/>
-		<case depthContourColorScheme="grey" attrColorValue="#55888888"/>
-		<case depthContourColorScheme="cyan" attrColorValue="#55099ded"/>
-		<case depthContourColorScheme="cyan5red" attrColorValue="#55099ded"/>
-		<case attrColorValue="#55000000"/>
+	<renderingAttribute name="color2a">
+		<case attrColorValue="#cc118ac2"/>
 	</renderingAttribute>
+
+	<renderingAttribute name="color2b">
+		<case attrColorValue="#88118ac2"/>
+	</renderingAttribute>
+
 
 	<renderingAttribute name="depthTextColor">
 		<case nightMode="true" attrColorValue="#aaaaaaaa"/>
 		<case attrColorValue="#333333"/>
+	</renderingAttribute>
+
+	<renderingAttribute name="safetyType">
+		<case safetyContour="0m" attrStringValue="contourtype=0m"/>
+		<case safetyContour="1m" attrStringValue="contourtype=1m"/>
+		<case safetyContour="2m" attrStringValue="contourtype=2m"/>
+		<case safetyContour="3m" attrStringValue="contourtype=3m"/>
+		<case safetyContour="4m" attrStringValue="contourtype=4m"/>
+		<case safetyContour="5m" attrStringValue="contourtype=5m"/>
+		<case safetyContour="10m" attrStringValue="contourtype=10m"/>
+		<case attrStringValue="contourtype=x"/>
 	</renderingAttribute>
 
 	<renderingConstant name="null" value="#00000000"/>
@@ -59,21 +56,7 @@
 	</order>
 
 	<text>
-		<switch depthContours="true" minzoom="6" tag="contour" value="depth" textColor="$depthTextColor" textOnPath="true">
-			<case minzoom="5" additional="contourtype=1000m" textSize="12" textMinDistance="600"/>
-			<case minzoom="7" additional="contourtype=200m" textSize="12" textMinDistance="600"/>
-			<case minzoom="10" textMinDistance="100">
-        <apply_if minzoom="14" textSize="12"/>
-<!--        <apply textSize="12"/>-->
-				<apply>
-					<case additional="contourtype=5m"   textSize="12"/>
-					<case additional="contourtype=10m"  textSize="12"/>
-					<case additional="contourtype=20m"  textSize="12"/>
-					<case additional="contourtype=50m"  textSize="12"/>
-					<case additional="contourtype=100m" textSize="12"/>
-				</apply>
-			</case>
-		</switch>
+		<case depthContours="true" minzoom="6" tag="contour" value="depth" textColor="$depthTextColor" textOnPath="true" textSize="14" textMinDistance="30" />
 
 		<case depthContours="true" minzoom="6" tag="point" value="depth" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="15" textDy="18" iconVisibleSize="2">
 		  <case depthPointDistance="5" intersectionMargin="5"/>
@@ -89,28 +72,39 @@
 	</point>
 
 	<polygon>
+    <switch minzoom="10" depthContours="true" tag="area" value="depth" >
+      <case additional="areatype=0m"   color="#cceccd"/>
+      <case additional="areatype=2m"   color="#a8e6fd"/>
+      <case additional="areatype=5m"   color="#cceffc"/>
+      <case additional="areatype=10m"  color="#e6f7fd"/>
+      <case additional="areatype=100m" color="#ffffff"/>
+    </switch>
 	</polygon>
 
 	<line>
 		<switch depthContours="true" tag="contour" value="depth" strokeWidth="1">
-			<case minzoom="5" additional="contourtype=1000m" color="$color3"/>
-			<case minzoom="7" additional="contourtype=200m" color="$color3"/>
-			<case minzoom="10">
-        <apply_if minzoom="14" color="$color0"/>
-				<apply>
-					<case additional="contourtype=1m" color="#ff00ff"/>
-					<case additional="contourtype=5m" color="$color1"/>
-					<case additional="contourtype=10m" color="$color2"/>
-					<case additional="contourtype=20m" color="$color2"/>
-					<case additional="contourtype=50m" color="$color3"/>
-					<case additional="contourtype=100m" color="$color3"/>
-				</apply>
-<!--				<apply_if tag="depth" value="2" color="#ff0000"/>-->
-<!--        <apply_if additional="contourtype=5m" color="#ff00ff"/>-->
-				<apply_if depthContourWidth="thin" strokeWidth="0.6"/>
-				<apply_if depthContourWidth="thick" strokeWidth="1.5"/>
-<!--				<apply_if minzoom="14" pathIcon="stroke_white_left" pathIconStep="100"/>-->
-			</case>
+			<case minzoom="10" additional="$safetyType" color="#d40b44" strokeWidth="1.8"/>
+
+			<case minzoom="3" additional="contourtype=100i" color="$color2b"/>
+			<case minzoom="12" additional="contourtype=10i" color="$color2b"/>
+			<case minzoom="13" additional="contourtype=5i" color="$color2b"/>
+			<case minzoom="14" additional="contourtype=1i" color="$color2b"/>
+			<case minzoom="14" additional="contourtype=-1i" color="$color1"/>
+
+			<case minzoom="12" additional="contourtype=0m" color="$color0"/>
+			<case minzoom="13" additional="contourtype=1m" color="$color2b"/>
+			<case minzoom="12" additional="contourtype=2m" color="$color2a"/>
+			<case minzoom="13" additional="contourtype=3m" color="$color2b"/>
+			<case minzoom="14" additional="contourtype=4m" color="$color2a"/>
+			<case minzoom="11" additional="contourtype=5m" color="$color2a"/>
+			<case minzoom="10" additional="contourtype=10m" color="$color2a"/>
+			<case minzoom="11" additional="contourtype=20m" color="$color2b"/>
+			<case minzoom="10" additional="contourtype=50m" color="$color2b"/>
+
+			<case minzoom="14" color="$color2a"/>
+
+      <apply_if depthContourWidth="thin" strokeWidth="0.6"/>
+      <apply_if depthContourWidth="thick" strokeWidth="1.5"/>
 		</switch>
 	</line>
 </renderingStyle>
