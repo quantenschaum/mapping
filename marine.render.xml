@@ -165,6 +165,7 @@
 
 
   <renderingConstant name="waterwayStrokeColorDay" value="#86c0e4"/>
+  <!-- color of water -->
   <renderingAttribute name="waterwayColor">
     <case nightMode="true" attrColorValue="#0b4c8a"/>
     <case attrColorValue="#a8e6fd"/>
@@ -374,9 +375,8 @@
     <case attrColorValue="#33ffffff"/>
   </renderingAttribute>
   <renderingAttribute name="wetlandColor">
-    <case wetlandStyle="darkgreen" nightMode="true" attrColorValue="#285c29"/>
     <case wetlandStyle="darkgreen" attrColorValue="#7abf7d"/>
-    <case nightMode="true" attrColorValue="#316432"/>
+    <case nightMode="true" attrColorValue="#285c29"/>
     <case attrColorValue="#cceccd"/>
   </renderingAttribute>
 
