@@ -5849,10 +5849,10 @@
 		<type tag="natural" value="wood" minzoom="6" order="61"/>
 		<entity_convert pattern="tag_transform" from_tag="landuse" from_value="wood" to_tag1="natural" />
 		<type tag="contour" value="elevation" minzoom="11" notosm="true"/>
+		<type tag="point" value="depth" minzoom="12" notosm="true"/>
 		<type tag="contour" value="depth" minzoom="3" notosm="true"/>
-		<type tag="area" value="depth" minzoom="3" notosm="true"/>
+		<type tag="area" value="depth" minzoom="10" notosm="true"/>
 		<type tag="contour" value="temperature" minzoom="3" notosm="true"/>
-		<type tag="point" value="depth" minzoom="6" notosm="true"/>
 		<type tag="elevation" additional="text" minzoom="13" notosm="true"/>
 		<type tag="temperature" additional="text" minzoom="3" notosm="true"/>
 		<type tag="leisure" value="nature_reserve" minzoom="6" order="49"/>
