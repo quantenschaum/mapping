@@ -16,6 +16,9 @@ This only works correctly with [render engine](https://osmand.net/docs/user/pers
 The custom render styles offer some config option, which can be use to adjust the look to your personal preferences.
 
 - [additional settings](USAGE.md#additional-settings)
+- hide
+  - depth areas
+  - spot soundings
 - nautical depth
   - line width
   - line color scheme
