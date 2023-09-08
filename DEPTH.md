@@ -7,7 +7,7 @@ To install the following files, download them to your phone and open them with O
 
 - install and enable the [marine map style](marine.render.xml)
 - install [depth rendering style](depthcontourlines.addon.render.xml) (replace currently installed one)
-- install OBFs containing depth data
+- install [OBFs containing depth data](https://github.com/quantenschaum/mapping/releases/tag/v1)
 
 This only works correctly with [render engine](https://osmand.net/docs/user/personal/global-settings/#map-rendering-engine) 2 and the above mentioned render styles!
 
