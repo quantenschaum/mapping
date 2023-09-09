@@ -5929,6 +5929,22 @@
 		<type tag="areatype" value="100m" minzoom="10" additional="true" notosm="true"/>
   </category>
 
+
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="0m" to_tag1="contourtype" to_value1="0m"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="1m" to_tag1="contourtype" to_value1="1m"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="2m" to_tag1="contourtype" to_value1="2m"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="3m" to_tag1="contourtype" to_value1="3m"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="4m" to_tag1="contourtype" to_value1="4m"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="5m" to_tag1="contourtype" to_value1="5m"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="10m" to_tag1="contourtype" to_value1="10m"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="20m" to_tag1="contourtype" to_value1="20m"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="50m" to_tag1="contourtype" to_value1="50m"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="100i" to_tag1="contourtype" to_value1="100i"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="10i" to_tag1="contourtype" to_value1="10i"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="5i" to_tag1="contourtype" to_value1="5i"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="1i" to_tag1="contourtype" to_value1="1i"/>
+  <entity_convert pattern="tag_transform" from_tag="contourtyp" from_value="-1i" to_tag1="contourtype" to_value1="-1i"/>
+
 	<category name="contourtype">
 		<type tag="contourtype" value="0m" minzoom="10" additional="true" notosm="true"/>
 		<type tag="contourtype" value="1m" minzoom="10" additional="true" notosm="true"/>
