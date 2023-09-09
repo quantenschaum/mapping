@@ -30,18 +30,11 @@
                      description="Make all areal land features on map transparent"
                      type="boolean" possibleValues="" category="hide"/>
   <renderingProperty attr="legend" name="Legend" type="boolean" possibleValues="" category="ui_hidden"/>
-  <renderingProperty attr="fairwayStyle" name="Fairway Color"
-                     description="Color of fairways"
-                     category="details" type="string" defaultValue="" defaultValueDescription="white"
-                     possibleValues="whiter,green,yellow,hide"/>
-  <renderingProperty attr="wetlandStyle" name="Wetland Color"
-                     description="Color of Wetland/Tidal Flats"
-                     category="details" type="string" defaultValue="" defaultValueDescription="lightgreen"
-                     possibleValues="darkgreen"/>
-  <renderingProperty attr="shellsStyle" name="Shells Style"
-                     description="Style for Shells on Seabed"
-                     category="details" type="string" defaultValue="" defaultValueDescription="gray"
-                     possibleValues="rocks,stones,red"/>
+
+  <renderingProperty attr="watercolor" name="Water Color" description="Color of Water" type="string" defaultValueDescription="default" possibleValues="blue,white,gray"/>
+  <renderingProperty attr="fairwayStyle" name="Fairway Color" description="Color of fairways" type="string" defaultValueDescription="white" possibleValues="whiter,gray,green,yellow,hide"/>
+  <renderingProperty attr="wetlandStyle" name="Wetland Color" description="Color of Wetland/Tidal Flats" type="string" defaultValueDescription="lightgreen" possibleValues="darkgreen"/>
+  <renderingProperty attr="shellsStyle" name="Shells Style" description="Style for Shells on Seabed" type="string" defaultValueDescription="gray" possibleValues="rocks,stones,red"/>
 
   <renderingAttribute name="gpxColor"> <!-- deprecated -->
     <case attrColorValue="#b400ffff"/>
@@ -165,10 +158,24 @@
 
 
   <renderingConstant name="waterwayStrokeColorDay" value="#86c0e4"/>
-  <!-- color of water -->
+
   <renderingAttribute name="waterwayColor">
-    <case nightMode="true" attrColorValue="#0b4c8a"/>
-    <case attrColorValue="#a8e6fd"/>
+		<case nightMode="true" attrColorValue="#1c0f5e"/>
+		<case attrColorValue="#76cbea"/>
+  </renderingAttribute>
+
+  <renderingAttribute name="watercolor">
+    <case watercolor="blue" attrColorValue="$waterwayColor"/>
+    <case watercolor="white" attrColorValue="#ffffff">
+      <case nightMode="true" attrColorValue="#0A0A0A"/>
+    </case>
+    <case watercolor="gray" attrColorValue="#dddddd">
+      <case nightMode="true" attrColorValue="#222222"/>
+    </case>
+    <case watercolor="hide" attrColorValue="#00ffffff"/>
+    <case attrColorValue="#a8e6fd">
+      <case nightMode="true" attrColorValue="#012f5c"/>
+    </case>
   </renderingAttribute>
 
   <renderingAttribute name="waterwayStrokeColorNight">
@@ -365,8 +372,9 @@
   <renderingConstant name="highwayTrackTextHaloRadiusDay" value=":1"/>
   <renderingConstant name="highwayTrackTextHaloColorDay" value="#aaf1eae4"/>
   <renderingAttribute name="fairwayColor">
-    <case fairwayStyle="whiter" nightMode="true" attrColorValue="#33ffffff"/>
-    <case fairwayStyle="whiter" attrColorValue="#77ffffff"/>
+    <case fairwayStyle="whiter" nightMode="true" attrColorValue="#55ffffff"/>
+    <case fairwayStyle="whiter" attrColorValue="#99ffffff"/>
+    <case fairwayStyle="gray" attrColorValue="#88888888"/>
     <case fairwayStyle="green" nightMode="true" attrColorValue="#7700ff00"/>
     <case fairwayStyle="green" attrColorValue="#76f17b"/>
     <case fairwayStyle="yellow" attrColorValue="#77fcf177"/>
@@ -1581,7 +1589,7 @@
         <!-- INT-1 J Section: Nature of the Seabed -->
         <!-- INT-1 J1 to J12 Types of Seabed, OsmAnd nautical.render.xml renderingProperty options for seabedDetail nameTag: ""(default)=""= 1st surface type as letters according to INT-1 J1-J13, seabed_letters are generated in obf according to rendering_types.xml, nameTag2: "category"=surface tag in seamark_category, "all"=surface qualification and type included in seabed_surface_all, seagrass and weed in seabed_taxon_all including category, genus and taxon, "omit"=no display -->
         <!-- Tested 2022-05-30 together with version 1.1 of rendering_types.xml, e.g.  http://osmand.net/go.html?lat=36.65161&lon=25.37019&z=16, feedback welcome: josail @ gmx.de -->
-        <switch minzoom="14" textWrapWidth="20" textOrder="14" textDy="10" textColor="#0400ab" textItalic="true" textHaloColor="$waterwayColor" textHaloRadius="2">
+        <switch minzoom="14" textWrapWidth="20" textOrder="14" textDy="10" textColor="#0400ab" textItalic="true" textHaloColor="$watercolor" textHaloRadius="2">
           <!-- seabedDetail="default" or "simple" display with letters only -->
           <switch seabedDetail="">
             <case tag="seamark:type" value="seabed_area" nameTag="seabed_surface_1"/>
@@ -3799,7 +3807,7 @@
         </switch>
         <case minzoom="11" tag="waterway" value="wadi" strokeWidth_2="1:0" color_2="#7479ec" pathEffect_2="7_5"/>
         <!--				<apply engine_v1="true" strokeWidth_2="1:0" color_2="$waterwayStrokeColorDay"/>-->
-        <apply color="$waterwayColor">
+        <apply color="$watercolor">
           <apply_if nightMode="true" color_2="$waterwayStrokeColorNight"/>
         </apply>
       </switch>
@@ -3820,7 +3828,7 @@
     <switch>
       <case minzoom="1" tag="natural" value="coastline"/>
       <apply_if noPolygons="true" color="#00555555"/>
-      <apply color="$waterwayColor"/>
+      <apply color="$watercolor"/>
       <apply_if noPolygons="true" nightMode="false" color="#00555555" color_2="#555555" strokeWidth_2="1"/>
     </switch>
     <switch>
