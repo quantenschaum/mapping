@@ -2,14 +2,13 @@
 
 ## TL;DR - How to get good depth data in OsmAnd
 
-
 To install the following files, download them to your phone and open them with OsmAnd (just tap and select OsmAnd).
 
 - install and enable the [marine map style](marine.render.xml)
-- install [depth rendering style](depthcontourlines.addon.render.xml) (replace currently installed one)
-- install [OBFs containing depth data](https://github.com/quantenschaum/mapping/releases/tag/v1)
+- install [depth rendering style](depthcontourlines.addon.render.xml) (replace!)
+- install [OBFs containing depth data](https://github.com/quantenschaum/mapping/releases/tag/v2)
 
-This only works correctly with [render engine](https://osmand.net/docs/user/personal/global-settings/#map-rendering-engine) 2 and the above mentioned render styles!
+This only works correctly with [render engine](https://osmand.net/docs/user/personal/global-settings/#map-rendering-engine) 2 and the render styles mentioned above!
 
 ### Settings
 

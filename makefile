@@ -35,6 +35,7 @@ OUT=shapes
 
 convert: s57objectclasses.csv s57attributes.csv
 	#rm -rf $(OUT)
+	mkdir -p $(OUT)
 	for F in $(IN)/*.000; do $(OGR) $(OUT) "$$F"; done
 	#cd $(OUT) && rm *.prj *.shx *.dbf
 	cd $(OUT) && for F in * ; do G=$${F%.*}; mv -n $${F} $${G^^}.$${F#*.}; done
@@ -42,6 +43,13 @@ convert: s57objectclasses.csv s57attributes.csv
 
 shapes:
 	$(MAKE) convert IN=*U7Inland_*/ENC_ROOT/*/*/*/
+
+us-shapes:
+	$(MAKE) convert OUT=us/shapes1 IN=ENC_ROOT/US1*/ -k
+	$(MAKE) convert OUT=us/shapes2 IN=ENC_ROOT/US2*/
+	$(MAKE) convert OUT=us/shapes3 IN=ENC_ROOT/US3*/
+	$(MAKE) convert OUT=us/shapes4 IN=ENC_ROOT/US4*/
+	$(MAKE) convert OUT=us/shapes5 IN=ENC_ROOT/US5*/
 
 replace:
 	for F in *.qgs; do echo $$F; sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
@@ -80,7 +88,7 @@ clean-cache:
 
 clean-all: clean-tiles clean-shapes clean-enc clean-bsh clean-vwm clean-cache
 
-sync-tiles:
+upload:
 	touch tiles/.nobackup
 	rsync -hav tiles/ nas:docker/maps/tiles/qgis/ $(O)
 

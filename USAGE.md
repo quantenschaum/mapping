@@ -52,6 +52,10 @@ OSM contains two render engines, version 2 is OpenGL based, it's faster and not 
 
 Now you should be able to see buoys and other seamarks on the chart depending on the zoom level.
 
+### Depth Data
+
+see [DEPTH.md](DEPTH.md)
+
 ### Raster Overlay
 
 To add the Waddenzee map as in the web service above to OsmAnd as [custom raster map](https://osmand.net/docs/user/map/raster-maps) just click these links below on your device with OsmAnd installed (SQLite storage recommended)
