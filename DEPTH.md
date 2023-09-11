@@ -62,6 +62,10 @@ RWS provides a full [ENC](https://en.wikipedia.org/wiki/Electronic_navigational_
 
 Using [GDAL](https://gdal.org/programs/ogr2ogr.html) the vector data can be extracted from the ENC.
 
+### United States
+
+[NOAA provides ENCs](https://charts.noaa.gov/ENCs/ENCs.shtml) for free!
+
 ## OBF Generation
 
 I managed to create an OBF containing depth contours and spot soundings. The workflow is roughly like this:
