@@ -17,18 +17,19 @@ The custom render styles offer some config option, which can be use to adjust th
 
 - [additional settings](USAGE.md#additional-settings)
 - hide
-  - depth areas
   - spot soundings
+  - depth contours
+  - depth areas
 - nautical depth
   - line width
   - line color scheme
-- dashed contours
-- area color scheme
+- dashed depth contours
+- depth area color scheme
 - spot sounding size
 - spot sounding distance
-- safety contour
+- safety depth contour
 
-The safety contour settings allows to choose a contour line (must be in the dataset!) that is drawn red and depth areas below this depth get an overlay with red diagonal lines.
+The safety contour settings allows to choose a contour line (must be in the dataset!) that is drawn in red and depth areas below this depth get an overlay red hatched overlay.
 
 Here an example of paper style areas, dashed contours and a 2m safety line.
 
@@ -36,7 +37,7 @@ Here an example of paper style areas, dashed contours and a 2m safety line.
 
 ## Data Sources
 
-IMHO the depth data supplied by OsmAnd is just a proof of concept showcase, they are very inaccurate and unreliable and not at all usable for actual navigation or trip planning.
+IMHO the depth data supplied by OsmAnd is just a proof of concept showcase, they are very inaccurate and unreliable (where do they come from?) and not at all usable for actual navigation or trip planning.
 
 ### Germany
 
@@ -68,17 +69,18 @@ I managed to create an OBF containing depth contours and spot soundings. The wor
 - convert to format readable by QGIS (if necessary)
 - import into [QGIS](https://www.qgis.org/)
 - filter the relevant rows
-- add columns
+- fix, dissolve, difference, merge as necessary
+- add fields (tags)
   - spot soundings
     - `point=depth`
     - `depth=<DEPTH>`
   - contour lines 
     - `contour=depth`
-    - `depth=<VALDCO>`
-    - `contourtype=[5m,10m,20m,50m,100m,...]`
+    - `depth=<DEPTH>`
+    - `contourtype=[5m,10m,20m,50m,100m,...]` (see below)
   - contour areas 
-    - `area=depth`
-    - `areatype=[0m,2m,5m,10m,100m]`
+    - `contourarea=depth`
+    - `areatype=[0,2,5,10,999]` (see below)
 - export layer as geopackage only containing the added columns
 - import into [JOSM](https://josm.openstreetmap.de/) via [OpenData](https://wiki.openstreetmap.org/wiki/JOSM/Plugins/OpenData) plugin
 - save as [OSM XML](https://wiki.openstreetmap.org/wiki/OSM_XML) file
@@ -86,3 +88,34 @@ I managed to create an OBF containing depth contours and spot soundings. The wor
 
 Terrible, no command line tools, but it works.
 
+### Lines and Areas
+
+There are 5 contour areas identified by tag `areatype`.
+
+- `0` - drying heights <0m (green)
+- `2` - shallow water <2m (dark blue)
+- `5` - shallow water <5m (blue)
+- `10` - water <10m (light blue)
+- `999` - deep water >10m (white)
+
+There are 15 types of contour lines identified by tag `contourtype`.
+
+- dedicated values (line of exactly this value)
+  - `0m` 
+  - `1m` 
+  - `2m` 
+  - `3m` 
+  - `4m` 
+  - `5m` 
+  - `10m`
+  - `20m`
+  - `50m`
+- intervals (value of line is multiple of this number)
+  - `-1` - drying heights
+  - `1` 
+  - `5`  
+  - `10` 
+  - `100m` - suffix `m` for compatibility with old rendering style 
+  - `1000m` - suffix `m` for compatibility with old rendering style 
+
+Coloring and zoom levels at which the lines and areas appear are assigned in [`depthcontourlines.addon.render.xml`](depthcontourlines.addon.render.xml).
