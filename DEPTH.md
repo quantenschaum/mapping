@@ -40,7 +40,7 @@ Here an example of paper style areas, dashed contours and a 2m safety line.
 
 IMHO the depth data supplied by OsmAnd is just a proof of concept showcase, they are very inaccurate and unreliable (where do they come from?) and not at all usable for actual navigation or trip planning.
 
-### Germany :flag_de:
+### Germany 🇩🇪
 
 The BSH provides access to nautical data in the [GeoSeaPortal](https://www.bsh.de/EN/DATA/GeoSeaPortal/geoseaportal_node.html). There is no documentation, but simply by examining what the webviewer does reveals some [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) endpoints. Depth contours and areas can be found in
 
@@ -54,7 +54,7 @@ BTW: They also provide a [tidal current atlas](https://www.geoseaportal.de/mapap
 - https://www.geoseaportal.de/wss/service/Gezeitenstrom_Nordsee/guest
 - https://www.geoseaportal.de/wss/service/Gezeitenstrom_Kueste/guest
 
-### Netherlands :flag_nl:
+### Netherlands 🇳🇱
 
 RWS provides a full [ENC](https://en.wikipedia.org/wiki/Electronic_navigational_chart) with contours and spot soundings for free for some regions of NL like the Waddenzee and Zeeland.
 
@@ -62,7 +62,7 @@ RWS provides a full [ENC](https://en.wikipedia.org/wiki/Electronic_navigational_
 
 Using [GDAL](https://gdal.org/programs/ogr2ogr.html) the vector data can be extracted from the ENC.
 
-### United States :flag_us: 
+### United States 🇺🇸
 
 [NOAA provides ENCs](https://charts.noaa.gov/ENCs/ENCs.shtml) for free!
 
