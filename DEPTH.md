@@ -49,7 +49,7 @@ The BSH provides access to nautical data in the [GeoSeaPortal](https://www.bsh.d
 
  What is particularly nice is, that the data can be downloaded as `application/json;type=geojson`, so we can pull vector data from this server! You can download the entire dataset in one go.
 
-BTW: They also provide a [tidal current atlas](https://en.wikipedia.org/wiki/Web_Map_Service) for free! In the webviewer you cannot select the time before/after HW, but if you use [QGIS](https://www.qgis.org/) as WMS client, you can explore the datasets and switch between different times.
+BTW: They also provide a [tidal current atlas](https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas) for free! In the webviewer you cannot select the time before/after HW, but if you use [QGIS](https://www.qgis.org/) as WMS client, you can explore the datasets and switch between different times.
 
 - https://www.geoseaportal.de/wss/service/Gezeitenstrom_Nordsee/guest
 - https://www.geoseaportal.de/wss/service/Gezeitenstrom_Kueste/guest
