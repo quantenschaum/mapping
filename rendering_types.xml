@@ -5851,7 +5851,7 @@
 		<type tag="contour" value="elevation" minzoom="11" notosm="true"/>
 		<type tag="point" value="depth" minzoom="12" notosm="true"/>
 		<type tag="contour" value="depth" minzoom="6" notosm="true"/>
-		<type tag="area" value="depth" minzoom="10" notosm="true"/>
+		<type tag="contourarea" value="depth" minzoom="10" notosm="true"/>
 		<type tag="contour" value="temperature" minzoom="3" notosm="true"/>
 		<type tag="elevation" additional="text" minzoom="13" notosm="true"/>
 		<type tag="temperature" additional="text" minzoom="3" notosm="true"/>
@@ -5921,38 +5921,9 @@
 		<type tag="wood:age" value="young" minzoom="10" additional="true"/>
 	</category>
 
-	<category name="areatype">
-		<type tag="areatype" value="0" minzoom="10" additional="true" notosm="true"/>
-		<type tag="areatype" value="2" minzoom="10" additional="true" notosm="true"/>
-		<type tag="areatype" value="5" minzoom="10" additional="true" notosm="true"/>
-		<type tag="areatype" value="10" minzoom="10" additional="true" notosm="true"/>
-		<type tag="areatype" value="999" minzoom="10" additional="true" notosm="true"/>
-  </category>
+  <type tag="contourtype" minzoom="10" additional="true" notosm="true"/>
+	<type tag="areatype"    minzoom="6" additional="true" notosm="true"/>
 
-
-<!-- usage band zoom levels 8-9;10-11;12-13;14-15;16- -->
-<!--  3: 6-7-->
-<!--  4: 8-9;10-11-->
-<!--  5: 12-13;14-15;16- -->
-
-	<category name="contourtype">
-		<type tag="contourtype" value="0m"    minzoom="10" additional="true" notosm="true"/>
-		<type tag="contourtype" value="1m"    minzoom="10" additional="true" notosm="true"/>
-		<type tag="contourtype" value="2m"    minzoom="10" additional="true" notosm="true"/>
-		<type tag="contourtype" value="3m"    minzoom="10" additional="true" notosm="true"/>
-		<type tag="contourtype" value="4m"    minzoom="10" additional="true" notosm="true"/>
-		<type tag="contourtype" value="5m"    minzoom="10" additional="true" notosm="true"/>
-		<type tag="contourtype" value="10m"   minzoom="8"  additional="true" notosm="true"/>
-		<type tag="contourtype" value="20m"   minzoom="10" additional="true" notosm="true"/>
-		<type tag="contourtype" value="50m"   minzoom="8"  additional="true" notosm="true"/>
-    <!-- for compatibility 100,1000 intervals have suffix m -->
-		<type tag="contourtype" value="100m"  minzoom="6"  additional="true" notosm="true"/>
-		<type tag="contourtype" value="1000m" minzoom="6"  additional="true" notosm="true"/>
-		<type tag="contourtype" value="10"    minzoom="10" additional="true" notosm="true"/>
-		<type tag="contourtype" value="5"     minzoom="10" additional="true" notosm="true"/>
-		<type tag="contourtype" value="1"     minzoom="10" additional="true" notosm="true"/>
-		<type tag="contourtype" value="-1"    minzoom="10" additional="true" notosm="true"/>
-	</category>
 	<category name="geocache">
 		<type tag="geocache" value="found" minzoom="15" notosm="true"/>
 		<type tag="geocache" value="not found" minzoom="15" notosm="true"/>

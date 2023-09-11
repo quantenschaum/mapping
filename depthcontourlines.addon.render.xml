@@ -6,15 +6,15 @@
 
 	<renderingProperty attr="depthContours" name="Depth contours" description="Show depth contours and points" type="boolean" possibleValues="" category="details"/>
 
-	<renderingProperty attr="hideAreas" name="Depth Areas" description="" type="boolean" possibleValues="" category="hide"/>
-
 	<renderingProperty attr="hideSpots" name="Spot Soundings" description="" type="boolean" possibleValues="" category="hide"/>
+	<renderingProperty attr="hideContours" name="Depth Contours" description="" type="boolean" possibleValues="" category="hide"/>
+	<renderingProperty attr="hideAreas" name="Depth Areas" description="" type="boolean" possibleValues="" category="hide"/>
 
 	<renderingProperty attr="depthContourWidth" name="Line Width" description="Depth contour lines width" type="string" possibleValues="thin,medium,thick" defaultValueDescription="default"/>
 
-	<renderingProperty attr="depthContoursDashed" name="Dashed Contours" description="" type="boolean" possibleValues="" defaultValueDescription=""/>
+	<renderingProperty attr="depthContoursDashed" name="Dashed Depth Contours" description="" type="boolean" possibleValues="" defaultValueDescription=""/>
 
-	<renderingProperty attr="depthContourColorScheme" name="Color Scheme" description="Depth contour lines color scheme" type="string" possibleValues="default,black,gray,hide" defaultValueDescription="default"/>
+	<renderingProperty attr="depthContourColorScheme" name="Color Scheme" description="Depth contour lines color scheme" type="string" possibleValues="default,black,gray" defaultValueDescription="default"/>
 
 	<renderingProperty attr="depthAreaColorScheme" name="Depth Area Color Scheme" description="Depth area color scheme" type="string" possibleValues="ECDIS" defaultValueDescription="paper"/>
 
@@ -22,10 +22,9 @@
 
 	<renderingProperty attr="spotDistance" name="Spot Sounding Distance" description="" type="string" possibleValues="0,5,10,15,30,60,120" defaultValueDescription="default"/>
 
-	<renderingProperty attr="safetyContour" name="Safety Contour" description="" type="string" possibleValues="0m,1m,2m,3m,4m,5m,10m" defaultValueDescription="off"/>
+	<renderingProperty attr="safetyContour" name="Safety Depth Contour" description="" type="string" possibleValues="0m,1m,2m,3m,4m,5m,10m" defaultValueDescription="off"/>
 
 	<renderingAttribute name="color0">
-		<case depthContourColorScheme="hide" attrColorValue="#00000000"/>
 		<case depthContourColorScheme="gray" attrColorValue="#aa888888"/>
 		<case attrColorValue="#cc000000">
 		  <case nightMode="true" attrColorValue="#ccaaaaaa"/>
@@ -33,7 +32,6 @@
 	</renderingAttribute>
 
 	<renderingAttribute name="color1">
-		<case depthContourColorScheme="hide" attrColorValue="#00000000"/>
 		<case depthContourColorScheme="gray" attrColorValue="#aa888888"/>
 		<case depthContourColorScheme="black" attrColorValue="#cc000000">
 		  <case nightMode="true" attrColorValue="#ccaaaaaa"/>
@@ -42,7 +40,6 @@
 	</renderingAttribute>
 
 	<renderingAttribute name="color2a">
-		<case depthContourColorScheme="hide" attrColorValue="#00000000"/>
 		<case depthContourColorScheme="gray" attrColorValue="#aa888888"/>
 		<case depthContourColorScheme="black" attrColorValue="#cc000000">
 		  <case nightMode="true" attrColorValue="#ccaaaaaa"/>
@@ -51,7 +48,6 @@
 	</renderingAttribute>
 
 	<renderingAttribute name="color2b">
-		<case depthContourColorScheme="hide" attrColorValue="#00000000"/>
 		<case depthContourColorScheme="gray" attrColorValue="#88888888"/>
 		<case depthContourColorScheme="black" attrColorValue="#88000000">
 		  <case nightMode="true" attrColorValue="#88aaaaaa"/>
@@ -112,7 +108,7 @@
 			<case tag="contour" value="depth" order="15"/>
 		</switch>
     <switch point="false" addPoint="true" objectType="3">
-      <case tag="area" value="depth" order="5"/>
+      <case tag="contourarea" value="depth" order="5"/>
     </switch>
 	</order>
 
@@ -144,7 +140,7 @@
 	<point/>
 
 	<line>
-		<switch depthContours="true" tag="contour" value="depth" strokeWidth="1">
+		<switch depthContours="true" hideContours="false" tag="contour" value="depth" strokeWidth="1">
 			<case minzoom="10" baseAppMode="boat" additional="$safetyLineType" color="#d40b44"/>
 
       <!-- intervals -->
@@ -183,7 +179,7 @@
 	</line>
 
 	<polygon>
-    <switch minzoom="10" depthContours="true" baseAppMode="boat" hideAreas="false" tag="area" value="depth">
+    <switch minzoom="10" depthContours="true" baseAppMode="boat" hideAreas="false" tag="contourarea" value="depth">
       <case depthAreaColorScheme="ECDIS">
         <case nightMode="true">
           <case additional="areatype=0"   color="#456157"/>
