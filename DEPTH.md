@@ -38,7 +38,7 @@ Here an example of paper style areas, dashed contours and a 2m safety line.
 
 ## Data Sources
 
-IMHO the depth data supplied by OsmAnd is just a proof of concept showcase, they are very inaccurate and unreliable (where do they come from?) and not at all usable for actual navigation or trip planning.
+IMHO the depth data supplied by OsmAnd is just a proof of concept showcase, they are very inaccurate and unreliable ([where do they come from?](https://github.com/osmandapp/OsmAnd/discussions/12502)) and not at all usable for actual navigation or trip planning.
 
 ### Germany 🇩🇪
 
@@ -124,3 +124,27 @@ There are 15 types of contour lines identified by tag `contourtype`.
   - `1000m` - suffix `m` for compatibility with old rendering style 
 
 Coloring and zoom levels at which the lines and areas appear are assigned in [`depthcontourlines.addon.render.xml`](depthcontourlines.addon.render.xml).
+
+QGIS expressions
+
+```
+contourtype=
+if(depth<0,'-1',
+if(depth in (0,1,2,3,4,5,10,20,50),to_string(depth)+'m',
+if(depth%1000=0,'1000m',
+if(depth%100=0,'100m',
+if(depth%10=0,'10',
+if(depth%5=0,'5',
+if(depth=1.8,'2m',
+if(depth=5.4,'5m',
+if(depth=9.1,'10m',
+if(depth=18.2,'20m',
+'1'))))))))))
+
+areatype=
+if(drval2<=0,0,
+if(drval2<=2,2,
+if(drval2<=5.4,5,
+if(drval2<=10,10,
+999))))
+```
