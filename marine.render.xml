@@ -36,7 +36,7 @@
   <renderingProperty attr="fairwayStyle" name="Fairway Color" description="Color of fairways" type="string" defaultValueDescription="white" possibleValues="whiter,gray,green,yellow"/>
 	<renderingProperty attr="hideFairways" name="Fairways" description="" type="boolean" possibleValues="" category="hide"/>
 
-  <renderingProperty attr="wetlandStyle" name="Tidal Flat Style" description="Style of Tidal Flats" type="string" defaultValueDescription="lightgreen" possibleValues="darkgreen,wetland,tidal"/>
+  <renderingProperty attr="tidalFlatStyle" name="Tidal Flat Style" description="Style of Tidal Flats" type="string" defaultValueDescription="lightgreen" possibleValues="darkgreen,wetland,tidal"/>
 	<renderingProperty attr="hideTidalFlats" name="Tidal Flats" description="" type="boolean" possibleValues="" category="hide"/>
 
   <renderingProperty attr="shellsStyle" name="Shells Style" description="Style for Shells on Seabed" type="string" defaultValueDescription="gray" possibleValues="rocks,stones,red"/>
@@ -388,10 +388,13 @@
     <case nightMode="true" attrColorValue="#22ffffff"/>
     <case attrColorValue="#33ffffff"/>
   </renderingAttribute>
-  <renderingAttribute name="wetlandColor">
-    <case wetlandStyle="darkgreen" attrColorValue="#7abf7d"/>
-    <case nightMode="true" attrColorValue="#285c29"/>
-    <case attrColorValue="#cceccd"/>
+  <renderingAttribute name="tidalFlatColor">
+    <case tidalFlatStyle="darkgreen" attrColorValue="#aa7abf7d">
+      <case nightMode="true" attrColorValue="#aa085e0c"/>
+    </case>
+    <case attrColorValue="#ddcceccd">
+      <case nightMode="true" attrColorValue="#dd046b09"/>
+    </case>
   </renderingAttribute>
 
   <renderingAttribute name="depthTextColor">
@@ -3711,9 +3714,9 @@
     </switch>
     <case minzoom="9" tag="natural" value="wetland">
       <case additional="wetland=tidalflat" hideTidalFlats="true" shader=""/>
-      <case additional="wetland=tidalflat" shader="" color="$wetlandColor">
-        <case wetlandStyle="wetland" shader="wetland"/>
-        <case wetlandStyle="tidal" shader="wetland_tidalflat"/>
+      <case additional="wetland=tidalflat" shader="" color="$tidalFlatColor">
+        <case tidalFlatStyle="wetland" shader="wetland"/>
+        <case tidalFlatStyle="tidal" shader="wetland_tidalflat"/>
       </case>
       <case shader="wetland">
         <apply_if nightMode="true" shader="" color="#1b3238"/>
