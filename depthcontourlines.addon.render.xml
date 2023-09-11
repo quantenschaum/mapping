@@ -76,41 +76,44 @@
 	</renderingAttribute>
 
 	<renderingAttribute name="safetyAreaType0">
-		<case safetyContour="0m" attrStringValue="areatype=0m"/>
-		<case safetyContour="1m" attrStringValue="areatype=0m"/>
-		<case safetyContour="2m" attrStringValue="areatype=2m"/>
-		<case safetyContour="3m" attrStringValue="areatype=2m"/>
-		<case safetyContour="4m" attrStringValue="areatype=2m"/>
-		<case safetyContour="5m" attrStringValue="areatype=5m"/>
-		<case safetyContour="10m" attrStringValue="areatype=10m"/>
-		<case attrStringValue="areatype=x"/>
-	</renderingAttribute>
-
-	<renderingAttribute name="safetyAreaType1">
-		<case safetyContour="1m" attrStringValue="areatype=0m"/>
-		<case safetyContour="2m" attrStringValue="areatype=0m"/>
-		<case safetyContour="3m" attrStringValue="areatype=0m"/>
-		<case safetyContour="4m" attrStringValue="areatype=0m"/>
-		<case safetyContour="5m" attrStringValue="areatype=2m"/>
-		<case safetyContour="10m" attrStringValue="areatype=5m"/>
+		<case safetyContour="0m"  attrStringValue="areatype=0"/>
+		<case safetyContour="1m"  attrStringValue="areatype=0"/>
+		<case safetyContour="2m"  attrStringValue="areatype=0"/>
+		<case safetyContour="3m"  attrStringValue="areatype=0"/>
+		<case safetyContour="4m"  attrStringValue="areatype=0"/>
+		<case safetyContour="5m"  attrStringValue="areatype=0"/>
+		<case safetyContour="10m" attrStringValue="areatype=0"/>
 		<case attrStringValue="areatype=x"/>
 	</renderingAttribute>
 
 	<renderingAttribute name="safetyAreaType2">
-		<case safetyContour="5m" attrStringValue="areatype=0m"/>
-		<case safetyContour="10m" attrStringValue="areatype=2m"/>
+		<case safetyContour="2m"  attrStringValue="areatype=2"/>
+		<case safetyContour="3m"  attrStringValue="areatype=2"/>
+		<case safetyContour="4m"  attrStringValue="areatype=2"/>
+		<case safetyContour="5m"  attrStringValue="areatype=2"/>
+		<case safetyContour="10m" attrStringValue="areatype=2"/>
 		<case attrStringValue="areatype=x"/>
 	</renderingAttribute>
 
-	<renderingAttribute name="safetyAreaType3">
-		<case safetyContour="10m" attrStringValue="areatype=0m"/>
+	<renderingAttribute name="safetyAreaType5">
+		<case safetyContour="5m"  attrStringValue="areatype=5"/>
+		<case safetyContour="10m" attrStringValue="areatype=5"/>
+		<case attrStringValue="areatype=x"/>
+	</renderingAttribute>
+
+	<renderingAttribute name="safetyAreaType10">
+		<case safetyContour="10m" attrStringValue="areatype=10"/>
 		<case attrStringValue="areatype=x"/>
 	</renderingAttribute>
 
 	<order>
+    <!--  higher order ==> higher up  -->
 		<switch area="false" objectType="2" order="80">
 			<case tag="contour" value="depth" order="15"/>
 		</switch>
+    <switch point="false" addPoint="true" objectType="3">
+      <case tag="area" value="depth" order="5"/>
+    </switch>
 	</order>
 
 	<text>
@@ -123,7 +126,7 @@
     </case>
 
     <!-- spot soundings -->
-		<case minzoom="6" depthContours="true" baseAppMode="boat"  hideSpots="false" tag="point" value="depth" textColor="$depthTextColor" textSize="14" textOrder="128"  intersectionMargin="30">
+		<case minzoom="6" depthContours="true" baseAppMode="boat" hideSpots="false" tag="point" value="depth" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="30">
       <apply_if spotSize="10" textSize="10"/>
       <apply_if spotSize="12" textSize="12"/>
       <apply_if spotSize="14" textSize="14"/>
@@ -138,68 +141,30 @@
     </case>
 	</text>
 
-	<point>
-	</point>
-
-	<polygon>
-    <switch minzoom="10" depthContours="true" baseAppMode="boat" hideAreas="false" tag="area" value="depth" strokeWidth="5" color_2="#aa00aa">
-      <apply>
-        <switch shader="danger">
-          <apply_if nightMode="true" shader="danger_night"/>
-          <case additional="$safetyAreaType0"/>
-          <case additional="$safetyAreaType1"/>
-          <case additional="$safetyAreaType2"/>
-          <case additional="$safetyAreaType3"/>
-        </switch>
-      </apply>
-      <case depthAreaColorScheme="ECDIS">
-        <case nightMode="true">
-          <case additional="areatype=0m"   color="#456157"/>
-          <case additional="areatype=2m"   color="#3D527C"/>
-          <case additional="areatype=5m"   color="#364559"/>
-          <case additional="areatype=10m"  color="#212B30"/>
-          <case additional="areatype=100m" color="#0A0A0A"/>
-        </case>
-        <case additional="areatype=0m"   color="#709C90"/>
-        <case additional="areatype=2m"   color="#78A6F7"/>
-        <case additional="areatype=5m"   color="#90B8F5"/>
-        <case additional="areatype=10m"  color="#A8C7E6"/>
-        <case additional="areatype=100m" color="#C2D9E8"/>
-      </case>
-      <case nightMode="true">
-        <case additional="areatype=0m"   color="#285c29"/>
-        <case additional="areatype=2m"   color="#1a71c1"/>
-        <case additional="areatype=5m"   color="#1462ac"/>
-        <case additional="areatype=10m"  color="#0f5698"/>
-        <case additional="areatype=100m" color="#0b4c8a"/>
-      </case>
-      <case additional="areatype=0m"   color="#cceccd"/>
-      <case additional="areatype=2m"   color="#a8e6fd"/>
-      <case additional="areatype=5m"   color="#cceffc"/>
-      <case additional="areatype=10m"  color="#e6f7fd"/>
-      <case additional="areatype=100m" color="#ffffff"/>
-    </switch>
-	</polygon>
+	<point/>
 
 	<line>
 		<switch depthContours="true" tag="contour" value="depth" strokeWidth="1">
 			<case minzoom="10" baseAppMode="boat" additional="$safetyLineType" color="#d40b44"/>
 
-			<case minzoom="3" additional="contourtype=100i" color="$color2b"/>
-			<case minzoom="12" additional="contourtype=10i" color="$color2b"/>
-			<case minzoom="13" additional="contourtype=5i" color="$color2b"/>
-			<case minzoom="14" additional="contourtype=1i" color="$color2b"/>
-			<case minzoom="14" additional="contourtype=-1i" color="$color1"/>
-
-			<case minzoom="12" additional="contourtype=0m" color="$color0"/>
-			<case minzoom="13" additional="contourtype=1m" color="$color2b"/>
-			<case minzoom="12" additional="contourtype=2m" color="$color2a"/>
-			<case minzoom="13" additional="contourtype=3m" color="$color2b"/>
-			<case minzoom="14" additional="contourtype=4m" color="$color2a"/>
-			<case minzoom="11" additional="contourtype=5m" color="$color2a"/>
-			<case minzoom="8" additional="contourtype=10m" color="$color2a"/>
-			<case minzoom="11" additional="contourtype=20m" color="$color2b"/>
-			<case minzoom="8" additional="contourtype=50m" color="$color2b"/>
+      <!-- intervals -->
+			<case minzoom="11" additional="contourtype=10"    color="$color2b"/>
+			<case minzoom="12" additional="contourtype=5"     color="$color2b"/>
+			<case minzoom="14" additional="contourtype=1"     color="$color2b"/>
+			<case minzoom="13" additional="contourtype=-1"    color="$color1"/>
+      <!-- for compatibility 100,1000 intervals have suffix m -->
+			<case minzoom="7"  additional="contourtype=100m"  color="$color2a"/>
+			<case minzoom="6"  additional="contourtype=1000m" color="$color2a"/>
+      <!-- dedicated contours, usable as safety contour -->
+			<case minzoom="10" additional="contourtype=0m"    color="$color0"/>
+			<case minzoom="13" additional="contourtype=1m"    color="$color2b"/>
+			<case minzoom="12" additional="contourtype=2m"    color="$color2a"/>
+			<case minzoom="13" additional="contourtype=3m"    color="$color2b"/>
+			<case minzoom="14" additional="contourtype=4m"    color="$color2b"/>
+			<case minzoom="11" additional="contourtype=5m"    color="$color2a"/>
+			<case minzoom="8"  additional="contourtype=10m"   color="$color2a"/>
+			<case minzoom="10" additional="contourtype=20m"   color="$color2a"/>
+			<case minzoom="9"  additional="contourtype=50m"   color="$color2a"/>
 
 			<case minzoom="14" color="$color2a"/>
 
@@ -208,12 +173,53 @@
         <apply additional="contourtype=2m" pathEffect="15_3_2_3_2_3" />
         <apply additional="contourtype=3m" pathEffect="15_3_2_3_2_3_2_3" />
         <apply additional="contourtype=4m" pathEffect="15_3_2_3_2_3_2_3_2_3" />
-        <apply additional="contourtype=5m" pathEffect="10_3" />
-        <apply additional="contourtype=10m" pathEffect="2_2" />
+        <apply additional="contourtype=5m" pathEffect="2_2" />
+        <apply additional="contourtype=10m" pathEffect="10_3" />
       </apply_if>
 
       <apply_if depthContourWidth="thin" strokeWidth="0.6"/>
       <apply_if depthContourWidth="thick" strokeWidth="1.5"/>
 		</switch>
 	</line>
+
+	<polygon>
+    <switch minzoom="10" depthContours="true" baseAppMode="boat" hideAreas="false" tag="area" value="depth">
+      <case depthAreaColorScheme="ECDIS">
+        <case nightMode="true">
+          <case additional="areatype=0"   color="#456157"/>
+          <case additional="areatype=2"   color="#3D527C"/>
+          <case additional="areatype=5"   color="#364559"/>
+          <case additional="areatype=10"  color="#212B30"/>
+          <case additional="areatype=999" color="#0A0A0A"/>
+        </case>
+        <case additional="areatype=0"   color="#709C90"/>
+        <case additional="areatype=2"   color="#78A6F7"/>
+        <case additional="areatype=5"   color="#90B8F5"/>
+        <case additional="areatype=10"  color="#A8C7E6"/>
+        <case additional="areatype=999" color="#C2D9E8"/>
+      </case>
+      <case nightMode="true">
+        <case additional="areatype=0"   color="#285c29"/>
+        <case additional="areatype=2"   color="#1a71c1"/>
+        <case additional="areatype=5"   color="#1462ac"/>
+        <case additional="areatype=10"  color="#0f5698"/>
+        <case additional="areatype=999" color="#0b4c8a"/>
+      </case>
+      <case additional="areatype=0"   color="#cceccd"/>
+      <case additional="areatype=2"   color="#a8e6fd"/>
+      <case additional="areatype=5"   color="#cceffc"/>
+      <case additional="areatype=10"  color="#e6f7fd"/>
+      <case additional="areatype=999" color="#ffffff"/>
+      <apply>
+        <switch shader="hazard">
+          <apply_if nightMode="true" shader="hazard_night"/>
+          <case additional="$safetyAreaType0"/>
+          <case additional="$safetyAreaType2"/>
+          <case additional="$safetyAreaType5"/>
+          <case additional="$safetyAreaType10"/>
+        </switch>
+      </apply>
+    </switch>
+	</polygon>
+
 </renderingStyle>
