@@ -33,7 +33,7 @@
 
   <renderingProperty attr="watercolor" name="Water Color" description="Color of Water" type="string" defaultValueDescription="default" possibleValues="blue,white,gray"/>
   <renderingProperty attr="fairwayStyle" name="Fairway Color" description="Color of fairways" type="string" defaultValueDescription="white" possibleValues="whiter,gray,green,yellow,hide"/>
-  <renderingProperty attr="wetlandStyle" name="Wetland Color" description="Color of Wetland/Tidal Flats" type="string" defaultValueDescription="lightgreen" possibleValues="darkgreen"/>
+  <renderingProperty attr="wetlandStyle" name="Tidal Flat Style" description="Style of Tidal Flats" type="string" defaultValueDescription="lightgreen" possibleValues="darkgreen,wetland,tidal,hide"/>
   <renderingProperty attr="shellsStyle" name="Shells Style" description="Style for Shells on Seabed" type="string" defaultValueDescription="gray" possibleValues="rocks,stones,red"/>
 
   <renderingAttribute name="gpxColor"> <!-- deprecated -->
@@ -384,6 +384,7 @@
   </renderingAttribute>
   <renderingAttribute name="wetlandColor">
     <case wetlandStyle="darkgreen" attrColorValue="#7abf7d"/>
+    <case wetlandStyle="hide" attrColorValue="#00000000"/>
     <case nightMode="true" attrColorValue="#285c29"/>
     <case attrColorValue="#cceccd"/>
   </renderingAttribute>
@@ -552,8 +553,8 @@
       <case tag="barrier" value="city_wall"/>
       <case tag="seamark:type" value="fortified_structure"/>
       <case tag="seamark:type" value="inshore_traffic_zone"/>
-      <case tag="seamark:type" value="military_area"/>
-			<case tag="seamark:type" value="cable_area"/>
+      <case tag="seamark:type" value="military_area" order="8"/>
+			<case tag="seamark:type" value="cable_area" order="8"/>
       <case tag="man_made" value="breakwater"/>
       <case tag="man_made" value="groyne"/>
       <case tag="man_made" value="bridge"/>
@@ -580,9 +581,9 @@
       <case tag="seamark:type" value="berth"/>
       <case tag="seamark:type" value="fairway"/>
       <case tag="seamark:type" value="fishing_facility"/>
-      <case tag="seamark:type" value="production_area"/>
-      <case tag="seamark:type" value="restricted_area" order="6"/>
-      <case tag="seamark:type" value="obstruction" order="6"/>
+      <case tag="seamark:type" value="production_area" order="8"/>
+      <case tag="seamark:type" value="restricted_area" order="8"/>
+      <case tag="seamark:type" value="obstruction" order="8"/>
       <case tag="seamark:type" value="harbour" ignorePolygonArea="true" ignorePolygonAsPointArea="true"/>
       <case tag="leisure" value="marina" ignorePolygonArea="true" ignorePolygonAsPointArea="true"/>
       <case tag="seamark:type" value="light_minor" ignorePolygonAsPointArea="true"/>
@@ -590,9 +591,10 @@
       <case tag="seamark:type" value="hulk"/>
       <case tag="seamark:type" value="inshore_traffic_zone"/>
       <case tag="seamark:type" value="marine_farm"/>
-      <case tag="seamark:type" value="military_area"/>
-      <case tag="seamark:type" value="pipeline_area"/>
-      <case tag="seamark:type" value="seabed_area"/>
+      <case tag="seamark:type" value="military_area" order="8"/>
+      <case tag="seamark:type" value="pipeline_area" order="8"/>
+			<case tag="seamark:type" value="cable_area" order="8"/>
+      <case tag="seamark:type" value="seabed_area" order="8"/>
       <case tag="seamark:seabed_area:surface" value=""/>
       <case tag="seamark:type" value="weed"/>
       <case tag="seamark:type" value="seagrass"/>
@@ -656,7 +658,7 @@
       </switch>
       <case tag="barrier" value="city_wall"/>
       <case tag="seamark:type" value="fortified_structure"/>
-      <case tag="seamark:type" value="fairway" order="6"/>
+      <case tag="seamark:type" value="fairway" order="8"/>
       <case tag="seamark:type" value="fishing_facility"/>
       <case tag="seamark:type" value="gate"/>
       <case tag="seamark:type" value="inshore_traffic_zone"/>
@@ -3703,7 +3705,10 @@
       <apply color="$woodColor"/>
     </switch>
     <case minzoom="9" tag="natural" value="wetland">
-      <case additional="wetland=tidalflat" shader="" color="$wetlandColor"/>
+      <case additional="wetland=tidalflat" shader="" color="$wetlandColor">
+        <case wetlandStyle="wetland" shader="wetland"/>
+        <case wetlandStyle="tidal" shader="wetland_tidalflat"/>
+      </case>
       <case shader="wetland">
         <apply_if nightMode="true" shader="" color="#1b3238"/>
       </case>
