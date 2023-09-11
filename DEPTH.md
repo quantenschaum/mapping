@@ -103,6 +103,15 @@ There are 5 contour areas identified by tag `areatype`.
 - `10` - water <10m (light blue)
 - `999` - deep water >10m (white)
 
+```
+areatype=
+if(drval2<=0,0,
+if(drval2<=2,2,
+if(drval2<=5.4,5,
+if(drval2<=10,10,
+999))))
+```
+
 There are 15 types of contour lines identified by tag `contourtype`.
 
 - dedicated values (line of exactly this value)
@@ -123,10 +132,6 @@ There are 15 types of contour lines identified by tag `contourtype`.
   - `100m` - suffix `m` for compatibility with old rendering style 
   - `1000m` - suffix `m` for compatibility with old rendering style 
 
-Coloring and zoom levels at which the lines and areas appear are assigned in [`depthcontourlines.addon.render.xml`](depthcontourlines.addon.render.xml).
-
-QGIS expressions
-
 ```
 contourtype=
 if(depth<0,'-1',
@@ -140,11 +145,6 @@ if(depth=5.4,'5m',
 if(depth=9.1,'10m',
 if(depth=18.2,'20m',
 '1'))))))))))
-
-areatype=
-if(drval2<=0,0,
-if(drval2<=2,2,
-if(drval2<=5.4,5,
-if(drval2<=10,10,
-999))))
 ```
+
+Coloring and zoom levels at which the lines and areas appear are assigned in [`depthcontourlines.addon.render.xml`](depthcontourlines.addon.render.xml).
