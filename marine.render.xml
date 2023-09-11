@@ -32,8 +32,13 @@
   <renderingProperty attr="legend" name="Legend" type="boolean" possibleValues="" category="ui_hidden"/>
 
   <renderingProperty attr="watercolor" name="Water Color" description="Color of Water" type="string" defaultValueDescription="default" possibleValues="blue,white,gray"/>
-  <renderingProperty attr="fairwayStyle" name="Fairway Color" description="Color of fairways" type="string" defaultValueDescription="white" possibleValues="whiter,gray,green,yellow,hide"/>
-  <renderingProperty attr="wetlandStyle" name="Tidal Flat Style" description="Style of Tidal Flats" type="string" defaultValueDescription="lightgreen" possibleValues="darkgreen,wetland,tidal,hide"/>
+
+  <renderingProperty attr="fairwayStyle" name="Fairway Color" description="Color of fairways" type="string" defaultValueDescription="white" possibleValues="whiter,gray,green,yellow"/>
+	<renderingProperty attr="hideFairways" name="Fairways" description="" type="boolean" possibleValues="" category="hide"/>
+
+  <renderingProperty attr="wetlandStyle" name="Tidal Flat Style" description="Style of Tidal Flats" type="string" defaultValueDescription="lightgreen" possibleValues="darkgreen,wetland,tidal"/>
+	<renderingProperty attr="hideTidalFlats" name="Tidal Flats" description="" type="boolean" possibleValues="" category="hide"/>
+
   <renderingProperty attr="shellsStyle" name="Shells Style" description="Style for Shells on Seabed" type="string" defaultValueDescription="gray" possibleValues="rocks,stones,red"/>
 
   <renderingAttribute name="gpxColor"> <!-- deprecated -->
@@ -372,19 +377,19 @@
   <renderingConstant name="highwayTrackTextHaloRadiusDay" value=":1"/>
   <renderingConstant name="highwayTrackTextHaloColorDay" value="#aaf1eae4"/>
   <renderingAttribute name="fairwayColor">
-    <case fairwayStyle="whiter" nightMode="true" attrColorValue="#55ffffff"/>
-    <case fairwayStyle="whiter" attrColorValue="#99ffffff"/>
+    <case fairwayStyle="whiter" attrColorValue="#99ffffff">
+      <case nightMode="true" attrColorValue="#55ffffff"/>
+    </case>
     <case fairwayStyle="gray" attrColorValue="#88888888"/>
-    <case fairwayStyle="green" nightMode="true" attrColorValue="#7700ff00"/>
-    <case fairwayStyle="green" attrColorValue="#76f17b"/>
+    <case fairwayStyle="green" attrColorValue="#76f17b">
+      <case nightMode="true" attrColorValue="#7700ff00"/>
+    </case>
     <case fairwayStyle="yellow" attrColorValue="#77fcf177"/>
-    <case fairwayStyle="hide" attrColorValue="#00000000"/>
     <case nightMode="true" attrColorValue="#22ffffff"/>
     <case attrColorValue="#33ffffff"/>
   </renderingAttribute>
   <renderingAttribute name="wetlandColor">
     <case wetlandStyle="darkgreen" attrColorValue="#7abf7d"/>
-    <case wetlandStyle="hide" attrColorValue="#00000000"/>
     <case nightMode="true" attrColorValue="#285c29"/>
     <case attrColorValue="#cceccd"/>
   </renderingAttribute>
@@ -3588,7 +3593,7 @@
       </apply>
     </switch>
 
-    <case minzoom="10" tag="seamark:type" value="fairway" color="$fairwayColor"/>
+    <case minzoom="10" tag="seamark:type" value="fairway" hideFairways="false" color="$fairwayColor"/>
 
     <switch>
       <case minzoom="8" tag="seamark:type" value="production_area"/>
@@ -3705,6 +3710,7 @@
       <apply color="$woodColor"/>
     </switch>
     <case minzoom="9" tag="natural" value="wetland">
+      <case additional="wetland=tidalflat" hideTidalFlats="true" shader=""/>
       <case additional="wetland=tidalflat" shader="" color="$wetlandColor">
         <case wetlandStyle="wetland" shader="wetland"/>
         <case wetlandStyle="tidal" shader="wetland_tidalflat"/>
@@ -3957,7 +3963,7 @@
       </apply>
     </switch>
 
-    <case minzoom="10" tag="seamark:type" value="fairway" color="$fairwayColor">
+    <case minzoom="10" tag="seamark:type" value="fairway" hideFairways="false" color="$fairwayColor">
       <case maxzoom="12" strokeWidth="2:2"/>
       <case maxzoom="13" strokeWidth="3:3"/>
       <case maxzoom="14" strokeWidth="4.5:4.5"/>
