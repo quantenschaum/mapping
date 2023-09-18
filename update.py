@@ -9,7 +9,8 @@ import os
 from datetime import datetime
 from math import inf, isnan, log, pi, pow, sqrt, tan
 import re
-
+import datetime
+import pendulum
 import requests
 from pyquery import PyQuery as pq
 
@@ -137,15 +138,16 @@ def pattern(s):
 
 
 topmarks = {
-    1: "cone, point up",
+    1: "cone, point up",  # starboard
     2: "cone, point down",
-    3: "sphere",
-    5: "cylinder",
+    3: "sphere",  # safe water
+    4: "2 spheres",  # isolated danger
+    5: "cylinder",  # port
     7: "x-shape",
-    10: "2 cones point together",
-    11: "2 cones base together",
-    13: "2 cones up",
-    14: "2 cones down",
+    10: "2 cones point together",  # west
+    11: "2 cones base together",  # east
+    13: "2 cones up",  # north
+    14: "2 cones down",  # south
     98: "cylinder over sphere",
     99: "cone, point up over sphere",
 }
@@ -239,6 +241,18 @@ def distance(a, b):
 # In[13]:
 
 
+def usageband(f, bands=["Approach", "Harbour", "Berthing"]):
+    return any(b in f["id"] for b in bands)
+
+
+def latlon(f):
+    p = f["properties"]
+    if "x_wgs84" in p:
+        return p["y_wgs84"], p["x_wgs84"]
+    ll = f["geometry"]["coordinates"]
+    return ll[1], ll[0]
+
+
 watlev = {3: "submerged", 4: "covers", 5: "awash"}
 
 
@@ -249,9 +263,8 @@ def load_bsh_rocks(filename):
     positions = []
     for f in data["features"]:
         # print(f)
-        if "Rock" in f["id"]:
-            ll = f["geometry"]["coordinates"]
-            ll = [ll[i] for i in (1, 0)]
+        if "Rock" in f["id"] and usageband(f):
+            ll = latlon(f)
             tags = {"ll": ll}
             p = f["properties"]
             tags["propierties"] = p
@@ -276,23 +289,22 @@ def load_bsh_rocks(filename):
 def load_bsh_buoys(filename):
     print("loading BSH buoys", filename)
     data = load_json(filename)
-    points = []
+    data = list(filter(usageband, data["features"]))
     lights = {}
-    for f in data["features"]:
+    for f in data:
         if "Light" in f["id"]:
-            p = f["properties"]
-            ll = f["geometry"]["coordinates"]
-            ll = [ll[i] for i in (1, 0)]
-            lights[str(ll)] = p
-    positions = []
-    for f in data["features"]:
+            ll = latlon(f)
+            lls = str(ll)
+            # assert lls not in lights, json.dumps((f, lights[lls]), indent=2)
+            lights[lls] = f
+    buoys = {}
+    for f in data:
         if "Buoy" in f["id"]:
             # print(json.dumps(f, indent=2))
-            ll = f["geometry"]["coordinates"]
-            ll = [ll[i] for i in (1, 0)]
-            tags = {"ll": ll}
+            ll = latlon(f)
+            lls = str(ll)
+            tags = {"ll": ll, "feature": f}
             p = f["properties"]
-            tags["properties"] = p
             # print(p["lnam"])
 
             n = p.get("objnam")
@@ -332,26 +344,55 @@ def load_bsh_buoys(filename):
                 pattern(p["colpat"]) if ";" in k else None
             )
 
-            # tc = color(l["tt_kleur_c"])
-            # tags["seamark:topmark:colour"] = tc
-            # tags["seamark:topmark:colour_pattern"] =   pattern(p["tt_pat_c"]) if tc and ";" in tc else None
-            l = lights.get(str(ll))
+            if t == "buoy_safe_water":
+                tags["seamark:topmark:colour"] = "red"
+                tags["seamark:topmark:shape"] = topmark(3)
+            elif t == "buoy_isolated_danger":
+                tags["seamark:topmark:colour"] = "black"
+                tags["seamark:topmark:shape"] = topmark(4)
+            elif t == "buoy_cardinal":
+                tags["seamark:topmark:colour"] = "black"
+                if c == "north":
+                    tags["seamark:topmark:shape"] = topmark(13)
+                if c == "south":
+                    tags["seamark:topmark:shape"] = topmark(14)
+                if c == "east":
+                    tags["seamark:topmark:shape"] = topmark(11)
+                if c == "west":
+                    tags["seamark:topmark:shape"] = topmark(10)
+
+            l = lights.get(lls)
             if l:
+                l = l["properties"]
                 tags["seamark:light:colour"] = color(l["colour"])
                 tags["seamark:light:character"] = light_chr(l["litchr"])
                 tags["seamark:light:period"] = light_per(l.get("sigper"))
                 tags["seamark:light:group"] = light_grp(l.get("siggrp"))
                 # print(json.dumps(l, indent=2))
 
-            if ll not in positions and not any(
-                filter(lambda p: distance(p, ll) < 2, positions)
-            ):
-                points.append(tags)
-                positions.append(ll)
+            similar = list(
+                filter(
+                    lambda p: p["ll"] == ll
+                    or distance(p["ll"], ll) < 100
+                    and p["seamark:name"] == tags["seamark:name"],
+                    buoys.values(),
+                )
+            )
 
-    print(len(points))
+            if similar:
+                similar.append(tags)
+                similar.sort(key=lambda p: p["feature"]["properties"]["scamax"])
+                # assert 0, json.dumps(similar, indent=2)
+                for p in similar:
+                    if str(p["ll"]) in buoys:
+                        del buoys[str(p["ll"])]
+                buoys[str(similar[0]["ll"])] = similar[0]
+            else:
+                buoys[lls] = tags
 
-    return points
+    print(len(buoys))
+
+    return buoys.values()
 
 
 def load_rws_buoys(filename):
@@ -359,9 +400,9 @@ def load_rws_buoys(filename):
     points = []
     for f in data["features"]:
         try:
-            p = f["properties"]
-            ll = p["y_wgs84"], p["x_wgs84"]
+            ll = latlon(f)
             tags = {"ll": ll}
+            p = f["properties"]
             n = p["benaming"]
             assert n and "#" not in n
             tags["seamark:name"] = n
@@ -396,6 +437,7 @@ def load_rws_buoys(filename):
             tags[f"seamark:{t}:colour_pattern"] = (
                 pattern(p["kleurpatr_"]) if ";" in k else None
             )
+            tags["seamark:topmark:shape"] = topmark(p["v_tt_c"])
             tc = color(p["tt_kleur_c"])
             tags["seamark:topmark:colour"] = tc
             tags["seamark:topmark:colour_pattern"] = (
@@ -422,6 +464,7 @@ def load_rws_buoys(filename):
 
     # print(json.dumps(points[0], indent=2))
     # print(len(points),'points')
+    print(len(points))
 
     return points
 
@@ -465,15 +508,18 @@ def load_marrekrite(gpx="marrekrite.gpx"):
 
 def update_node(n, p, dmin=1):
     ll = [float(n.attr[a]) for a in ("lat", "lon")]
+    type = p.get("seamark:type")
     name = p.get("seamark:name")
+    if name:
+        name = name.strip()
     modifications = []
     # print(n)
     # print(json.dumps(p, indent=2))
 
     d = distance(ll, p["ll"])
-    if d > dmin or isnan(d):
+    if isnan(d) or d > dmin:
         n.attr["lat"], n.attr["lon"] = [str(x) for x in p["ll"]]
-        modifications.append(("POS", p["ll"], "d", "*" if isnan(d) else round(d), "m"))
+        modifications.append(("POS", p["ll"], "" if isnan(d) else f"{round(d)}m"))
 
     for k, v in p.items():
         v = str(v) if v is not None else v
@@ -486,16 +532,18 @@ def update_node(n, p, dmin=1):
                     modifications.append(("DEL", f"{k}={w}"))
                 elif w != v:
                     tag.attr["v"] = v
-                    modifications.append(("MOD", f"{k}={v}", f"({w})"))
+                    modifications.append(("MOD", f"{k}={v}", w))
             elif v:
                 pq(f'<tag k="{k}" v="{v}" />').append_to(n)
                 modifications.append(("ADD", f"{k}={v}"))
 
+    source = None
     if modifications:
         n.attr["action"] = "modify"
         for k in "source", "seamark:source", "seamark:source:id":
             tag = n.find(f"tag[k='{k}']")
             if tag:
+                source = tag.attr("v")
                 tag.remove()
             v = p.get(k)
             if v:
@@ -503,21 +551,25 @@ def update_node(n, p, dmin=1):
 
         id = n.attr["id"]
         ll = [float(n.attr[a]) for a in ("lat", "lon")]
-        print(
-            "node",
-            id,
-            f"name={name}",
+        msg = (
+            type,
+            name,
             "matched by",
             p.get("match"),
-            f"http://localhost:8111/zoom?left={ll[1] - dx}&right={ll[1] + dx}&bottom={ll[0] - dy}&top={ll[0] + dy}&select=node{id}",
+            n.attr("timestamp"),
+            n.attr("user"),
+            source,
         )
-        for l in modifications:
-            print("    ", *[str(s).strip() for s in l])
+        modifications.insert(0, josm_zoom(ll, id))
+        modifications.insert(0, msg)
+        # for l in modifications:            print("\t", *[str(s).strip() for s in l])
 
-        # print(n)
+    return modifications
 
 
-# In[16]:
+def josm_zoom(ll, node=None, delta=0.01):
+    select = f"&select=node{node}" if node and int(node) > 0 else ""
+    return f"http://localhost:8111/zoom?left={ll[1] - delta}&right={ll[1] + delta}&bottom={ll[0] - delta}&top={ll[0] + delta}{select}"
 
 
 def get_bounds(xml):
@@ -553,8 +605,12 @@ def update_osm(
     p_dist=50,
     s_dist=1,
     sm_type=None,
+    min_age=0,
+    user=None,
 ):
     x = pq(filename=infile)
+
+    now = pendulum.now()
 
     bounds = get_bounds(x)
     print("bounds", bounds)
@@ -568,6 +624,7 @@ def update_osm(
     # print(json.dumps(data, indent=2))
 
     matches = {}
+    modifications = []
     for e in x("node"):
         n = pq(e)
         if not n.find("tag[k='seamark:type']"):
@@ -580,7 +637,13 @@ def update_osm(
             and bounds["minlon"] <= ll[1] <= bounds["maxlon"]
         ):
             continue
+        ts = n.attr("timestamp")
+        age = None
+        if ts:
+            ts = pendulum.parse(ts)
+            age = now - ts
 
+        type = n.find("tag[k='seamark:type']").attr["v"]
         name = n.find("tag[k='seamark:name']").attr["v"]
 
         # print(n)
@@ -613,23 +676,39 @@ def update_osm(
                 distance(ll, p[1]["ll"]),
                 match,
                 name,
-                f"http://localhost:8111/zoom?left={ll[1] - dx}&right={ll[1] + dx}&bottom={ll[0] - dy}&top={ll[0] + dy}",
+                josm_zoom(ll)
                 # json.dumps(p, indent=2),
             )
         # assert len(p) <= 1, json.dumps(p, indent=2)
         for m in p:
             data.remove(m)
+
+        if not n.attr["action"]:
+            if age and age.days < min_age:
+                print("SKIPPED", type, name, ts)
+                continue
+            if user and (
+                n.attr("user") == user[1:]
+                if user.startswith("-")
+                else n.attr("user") != user
+            ):
+                print("SKIPPED", type, name, n.attr("user"))
+                continue
+
         if remove and len(p) == 0:
-            print(
-                "REMOVE?",
-                name,
-                f"http://localhost:8111/zoom?left={ll[1] - dx}&right={ll[1] + dx}&bottom={ll[0] - dy}&top={ll[0] + dy}&select=node{n.attr['id']}",
-            )
-        if len(p) == 1:
+            m = ["REMOVE?", (type, name), josm_zoom(ll, n.attr["id"])]
+            print(*m[:3])
+            modifications.append(m)
+
+        if not add and len(p) == 1:
             p = p[0]
             p["match"] = match
             if remod or not n.attr["action"]:
-                update_node(n, p, s_dist)
+                m = update_node(n, p, s_dist)
+                if m:
+                    m.insert(0, "CHANGED")
+                    print(*m[:3])
+                    modifications.append(m)
 
     print("MATCHED NODES ", matches)
     print("MATCHED POINTS", len(data))
@@ -637,14 +716,24 @@ def update_osm(
     if bounds and add:
         for i, p in enumerate(data, 10000):
             n = pq(f'<node id="{-i}" visible="true" lat="nan" lon="nan"/>')
-            update_node(n, p, s_dist)
+            m = update_node(n, p, s_dist)
+            m.insert(0, "ADDED")
+            print(*m[:3])
+            modifications.append(m)
             x("osm").prepend(n)
 
-    with open(outfile, "w") as f:
-        f.write(str(x))
+    if modifications:
+        with open(outfile, "w") as f:
+            f.write(str(x))
+        requests.get(
+            f"http://localhost:8111/open_file?filename={os.path.abspath(outfile)}"
+        )
 
-
-# In[18]:
+        for i, m in enumerate(modifications, 1):
+            for l in m:
+                print(l)
+            requests.get(m[2])
+            input(f"{i}/{len(modifications)}")
 
 
 def main():
@@ -711,6 +800,18 @@ def main():
         type=int,
         default=1,
     )
+    parser.add_argument(
+        "-A",
+        "--age",
+        help="min age (days) required for node to be changed",
+        type=int,
+        default=0,
+    )
+    parser.add_argument(
+        "-U",
+        "--user",
+        help="user of previous change",
+    )
 
     args = parser.parse_args()
 
@@ -736,9 +837,8 @@ def main():
         p_dist=args.p_dist,
         s_dist=args.s_dist,
         sm_type=seamark_type,
-    )
-    requests.get(
-        f"http://localhost:8111/open_file?filename={os.path.abspath(args.osm_out)}"
+        min_age=args.age,
+        user=args.user,
     )
 
 
