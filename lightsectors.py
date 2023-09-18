@@ -13,7 +13,10 @@ def linspace(start, stop, num=10):
 
 def get_tag(key, node, type=lambda v: v):
     v = node.find(f"tag[k='{key}']").attr("v")
-    return type(v) if v else None
+    try:
+        return type(v) if v else None
+    except:
+        return None
 
 
 def set_tag(key, value, node):
@@ -142,6 +145,10 @@ types_major = ["landmark", "light_major"]
 types_minor = ["light_minor"]
 types = types_major + types_minor
 
+max_range = 8
+f_range = 0.6
+f_arc = 0.2
+
 
 def generate_sectors(infile, outfile="lightsectors.osm"):
     osm = pq(filename=infile)
@@ -166,7 +173,7 @@ def generate_sectors(infile, outfile="lightsectors.osm"):
                 # print(n)
                 # print(json.dumps(sectors, indent=2))
                 for s in sectors:
-                    r = min(s.get("range", 1) * 0.6, 8)
+                    r = min(s.get("range", 1) * f_range, max_range)
 
                     # sector start/end
                     if s.get("sector_start", 0) != s.get("sector_end", 1):
@@ -193,7 +200,7 @@ def generate_sectors(infile, outfile="lightsectors.osm"):
                         if not abs(ab[1] - ab[0]):
                             continue
                         points = [
-                            new_node(*project(ll, d + 180, r * 0.6))
+                            new_node(*project(ll, d + 180, r * f_arc))
                             for d in linspace(*ab, ceil(abs(ab[1] - ab[0]) / 5))
                         ]
                         w = new_way(points)
