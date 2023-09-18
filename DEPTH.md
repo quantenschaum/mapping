@@ -46,8 +46,8 @@ IMHO the depth data supplied by OsmAnd is just a proof of concept showcase, they
 
 The BSH provides access to nautical data in the [GeoSeaPortal](https://www.bsh.de/EN/DATA/GeoSeaPortal/geoseaportal_node.html). There is no documentation, but simply by examining what the webviewer does reveals some [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) endpoints. Depth contours and areas can be found in
 
-- https://www.geoseaportal.de/wss/service/NAUTHIS_Hydrography/guest
-- https://www.geoseaportal.de/wss/service/NAUTHIS_SkinOfTheEarth/guest
+- https://gdi.bsh.de/mapservice_gs/NAUTHIS_Hydrography/ows
+- https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows
 
  What is particularly nice is, that the data can be downloaded as `application/json;type=geojson`, so we can pull vector data from this server! You can download the entire dataset in one go.
 
