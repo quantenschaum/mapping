@@ -3883,16 +3883,17 @@
 
 
   <line>
-    <switch minzoom="6" strokeWidth="0.8" pathEffect="2_2" color="#aa000000">
+    <switch minzoom="10" strokeWidth="0.8" pathEffect="2_2" color="#aa000000">
       <case tag="lightsector" value="start"  />
       <case tag="lightsector" value="end"  />
       <case tag="lightsector" value="orientation"  pathEffect="5_3" />
-      <case tag="lightsector" value="arc" pathEffect="" strokeWidth="10" color="#aa800080">
+      <case minzoom="10" tag="lightsector" value="arc" pathEffect="" strokeWidth="10" color="#aa800080">
         <case additional="colour=white" color="#aafab20b"/>
         <case additional="colour=red" color="#aaed1c24"/>
         <case additional="colour=green" color="#aa00a650"/>
         <case additional="colour=yellow" color="#aafab20b"/>
       </case>
+      <apply_if maxzoom="11" tag="lightsector" value="arc" strokeWidth="5" />
     </switch>
 
     <switch minzoom="2"> <!-- for new OpenGL engine -->

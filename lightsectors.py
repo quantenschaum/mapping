@@ -173,7 +173,7 @@ def generate_sectors(infile, outfile="lightsectors.osm"):
                 # print(n)
                 # print(json.dumps(sectors, indent=2))
                 for s in sectors:
-                    r = min(s.get("range", 1) * f_range, max_range)
+                    r = min(s.get("range", 3) * f_range, max_range)
 
                     # sector start/end
                     if s.get("sector_start", 0) != s.get("sector_end", 1):
@@ -186,7 +186,7 @@ def generate_sectors(infile, outfile="lightsectors.osm"):
                                 set_tag("lightsector", k.replace("sector_", ""), w)
                                 set_tag(
                                     "name",
-                                    f"{d:.1f}°"
+                                    f"{d}°"
                                     + (" " + label(s) if k == "orientation" else ""),
                                     w,
                                 )
