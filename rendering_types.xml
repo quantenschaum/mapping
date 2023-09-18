@@ -5853,11 +5853,12 @@
 		<type tag="contour" value="depth" minzoom="6" notosm="true"/>
 		<type tag="contourarea" value="depth" minzoom="10" notosm="true"/>
     <category name="lightsector">
-      <type tag="lightsector" value="start"  minzoom="6" notosm="true"/>
-      <type tag="lightsector" value="end"  minzoom="6" notosm="true"/>
-      <type tag="lightsector" value="orientation"  minzoom="6" notosm="true"/>
-      <type tag="lightsector" value="arc"  minzoom="6" notosm="true"/>
-    </category><type tag="colour" additional="true" minzoom="10" notosm="true"/>
+      <type tag="lightsector" value="start"  minzoom="10" notosm="true"/>
+      <type tag="lightsector" value="end"  minzoom="10" notosm="true"/>
+      <type tag="lightsector" value="orientation"  minzoom="10" notosm="true"/>
+      <type tag="lightsector" value="arc"  minzoom="10" notosm="true"/>
+    </category>
+    <type tag="colour" additional="true" minzoom="10" notosm="true"/>
 		<type tag="contour" value="temperature" minzoom="3" notosm="true"/>
 		<type tag="elevation" additional="text" minzoom="13" notosm="true"/>
 		<type tag="temperature" additional="text" minzoom="3" notosm="true"/>

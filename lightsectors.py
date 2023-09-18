@@ -30,7 +30,6 @@ def get_ll(node, osm=None):
             r = r.attr("ref")
             r = osm(f"node[id='{r}']")
             r = get_ll(r, osm)
-            print(r)
             for i in range(2):
                 ll[i].append(r[i])
         ll = [sum(e) / len(e) for e in ll]
@@ -82,88 +81,10 @@ light_properties = {
     "character": str,
     "group": str,
     "period": str,
-    "height": float,
+    "sequence": str,
+    "height": str,
     "range": lambda s: float(s.split()[0]),
 }
-
-
-def generate_sectors(infile):
-    osm = pq(filename=infile)
-    out = pq('<osm version="0.6"/>')
-
-    for n in chain(osm("node"), osm("way")):
-        n = pq(n)
-
-        smtype = get_tag("seamark:type", n)
-        name = get_tag("seamark:name", n)
-        name = name or get_tag("name", n)
-
-        if smtype:  # and smtype.startswith("light"):
-            print(smtype, name)
-            # print(n)
-            sectors = []
-            for i in range(1, 21, 1):
-                props = {}
-                for p, t in light_properties.items():
-                    v = get_tag(f"seamark:light:{i}:{p}", n, t)
-                    if v:
-                        props[p] = v
-                if not props:
-                    break
-                if (
-                    "sector_start" in props
-                    and "sector_end" in props
-                    or "orientation" in props
-                ):
-                    sectors.append(props)
-
-            if sectors:
-                ll = get_ll(n, osm)
-                nid = n.attr("id")
-                # print(n)
-                # print(json.dumps(sectors, indent=2))
-                for s in sectors:
-                    r = min(s.get("range", 1) * 0.6, 8)
-                    for k in "orientation", "sector_start", "sector_end":
-                        if k in s:
-                            d = s[k]
-                            a = new_node(*ll)
-                            b = new_node(*project(ll, d + 180, r))
-                            w = new_way((a, b))
-                            set_tag("lightsector", k.replace("sector_", ""), w)
-                            set_tag(
-                                "name",
-                                f"{d:.1f}°"
-                                + (" " + label(s) if k == "orientation" else ""),
-                                w,
-                            )
-                            for m in a, b, w:
-                                out.append(m)
-                    ab = [s.get(k) for k in ("sector_start", "sector_end")]
-                    if all(ab):
-                        if ab[0] > ab[1]:
-                            ab[1] += 360
-                        if not abs(ab[1] - ab[0]):
-                            continue
-                        points = [
-                            new_node(*project(ll, d + 180, r * 0.6))
-                            for d in linspace(*ab, ceil(abs(ab[1] - ab[0])))
-                        ]
-                        w = new_way(points)
-                        set_tag("lightsector", "arc", w)
-                        set_tag("name", label(s), w)
-                        set_tag("colour", s["colour"], w)
-                        points.append(w)
-                        for m in points:
-                            out.append(m)
-
-    # print(osm)
-    with open("out.osm", "w") as f:
-        f.write(str(out))
-
-    requests.get(
-        f"http://localhost:8111/open_file?filename={os.path.abspath('out.osm')}"
-    )
 
 
 def label(sector):
@@ -189,11 +110,105 @@ def label(sector):
     if v:
         l = l + f" {v}m"
 
-    v = 0  # sector.get("range")
+    v = sector.get("range")
     if v:
         l = l + f" {v}M"
 
     return l
+
+
+def get_sectors(node):
+    sectors = []
+    for i in range(0 if full360 else 1, 21, 1):
+        s = {}
+        for p, t in light_properties.items():
+            x = f"{i}:" if i else ""
+            v = get_tag(f"seamark:light:{x}{p}", node, t)
+            if v:
+                s[p] = v
+        if not s and i > 0:
+            break
+        if s and i == 0 and s.get("range", 0) > 0:
+            s["sector_start"] = 180
+            s["sector_end"] = 180
+        if "sector_start" in s and "sector_end" in s or "orientation" in s:
+            sectors.append(s)
+    return sectors
+
+
+full360 = 1
+min_range = 8
+types_major = ["landmark", "light_major"]
+types_minor = ["light_minor"]
+types = types_major + types_minor
+
+
+def generate_sectors(infile, outfile="lightsectors.osm"):
+    osm = pq(filename=infile)
+    out = pq('<osm version="0.6"/>')
+
+    for n in chain(osm("node"), osm("way")):
+        n = pq(n)
+
+        smtype = get_tag("seamark:type", n)
+        name = get_tag("seamark:name", n) or get_tag("name", n)
+
+        if smtype in types:
+            # print(n)
+            sectors = get_sectors(n)
+
+            if sectors and (
+                smtype in types_major
+                or any(s.get("range", 0) >= min_range for s in sectors)
+            ):
+                print(smtype, name, [label(s) for s in sectors])
+                ll = get_ll(n, osm)
+                # print(n)
+                # print(json.dumps(sectors, indent=2))
+                for s in sectors:
+                    r = min(s.get("range", 1) * 0.6, 8)
+
+                    # sector start/end
+                    if s.get("sector_start", 0) != s.get("sector_end", 1):
+                        for k in "orientation", "sector_start", "sector_end":
+                            if k in s:
+                                d = s[k]
+                                a = new_node(*ll)
+                                b = new_node(*project(ll, d + 180, r))
+                                w = new_way((a, b))
+                                set_tag("lightsector", k.replace("sector_", ""), w)
+                                set_tag(
+                                    "name",
+                                    f"{d:.1f}°"
+                                    + (" " + label(s) if k == "orientation" else ""),
+                                    w,
+                                )
+                                for m in a, b, w:
+                                    out.append(m)
+                    # sector arc
+                    ab = [s.get(k) for k in ("sector_start", "sector_end")]
+                    if all(ab):
+                        if ab[0] >= ab[1]:
+                            ab[1] += 360
+                        if not abs(ab[1] - ab[0]):
+                            continue
+                        points = [
+                            new_node(*project(ll, d + 180, r * 0.6))
+                            for d in linspace(*ab, ceil(abs(ab[1] - ab[0]) / 5))
+                        ]
+                        w = new_way(points)
+                        set_tag("lightsector", "arc", w)
+                        set_tag("name", label(s), w)
+                        set_tag("colour", s.get("colour"), w)
+                        points.append(w)
+                        for m in points:
+                            out.append(m)
+
+    # print(osm)
+    with open(outfile, "w") as f:
+        f.write(str(out))
+
+    requests.get(f"http://localhost:8111/open_file?filename={os.path.abspath(outfile)}")
 
 
 generate_sectors("in.osm")
