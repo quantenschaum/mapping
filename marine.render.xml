@@ -875,6 +875,10 @@
       <case tag="embankment" value="yes" order="11"/>
       <case tag="osmand" value="file_trackline"/>
       <case tag="osmand" value="file_routeline"/>
+      <case tag="lightsector" value="arc"/>
+      <case tag="lightsector" value="start"/>
+      <case tag="lightsector" value="end"/>
+      <case tag="lightsector" value="orientation"/>
     </switch>
   </order>
 
@@ -1727,6 +1731,12 @@
           <case minzoom="14" tag="seamark:type" value="turning_basin" textBold="true" textDy="10"/>
           <case minzoom="11" tag="seamark:type" value="fairway" textOnPath="true"/>
           <case minzoom="11" tag="waterway" value="fairway" textOnPath="true"/>
+          <switch minzoom="11" textOnPath="true">
+            <case tag="lightsector" value="start"/>
+            <case tag="lightsector" value="end"/>
+            <case tag="lightsector" value="arc"/>
+            <case tag="lightsector" value="orientation"/>
+          </switch>
           <case minzoom="12" tag="seamark:type" value="anchorage" textDy="10" textBold="true"/>
           <case minzoom="16" tag="seamark:type" value="anchor_berth" textDy="10"/>
           <case minzoom="17" tag="seamark:type" value="small_craft_facility" textDy="-15">
@@ -1797,7 +1807,7 @@
       <apply_if nightMode="true" textColor="#ffffff" textHaloRadius="$textHaloRadiusNight" textHaloColor="#77777777"/>
       <apply_if legend="true" textHaloColor="$defaultColor"/>
     </switch>
-    <case minzoom="10" tag="seamark:type" value="rock" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12"/>
+    <case minzoom="10" tag="seamark:type" value="rock" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" />
     <case minzoom="10" tag="seamark:type" value="wreck" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-10"/>
     <case minzoom="10" tag="seamark:type" value="sea_area" assitional="seamark:sea_area:category=shoal" textColor="$depthTextColor" textOnPath="true" textSize="12" textMinDistance="100"/>
   </text>
@@ -3873,6 +3883,18 @@
 
 
   <line>
+    <switch minzoom="6" strokeWidth="0.8" pathEffect="2_2" color="#aa000000">
+      <case tag="lightsector" value="start"  />
+      <case tag="lightsector" value="end"  />
+      <case tag="lightsector" value="orientation"  pathEffect="5_3" />
+      <case tag="lightsector" value="arc" pathEffect="" strokeWidth="10" color="#aa800080">
+        <case additional="colour=white" color="#aafab20b"/>
+        <case additional="colour=red" color="#aaed1c24"/>
+        <case additional="colour=green" color="#aa00a650"/>
+        <case additional="colour=yellow" color="#aafab20b"/>
+      </case>
+    </switch>
+
     <switch minzoom="2"> <!-- for new OpenGL engine -->
       <switch>
         <case tag="osmand" value="file_trackline" color="#55ff0000" cap="ROUND">

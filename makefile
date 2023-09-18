@@ -8,8 +8,12 @@ OGR=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,SPLIT_
 help:
 	cat README.md
 
+us-encs:
+	for I in 01 05 07 08 09 11 13 14 17; do wget https://charts.noaa.gov/ENCs/$${I}CGD_ENCs.zip; done
+
 unzip:
 	for Z in *.zip; do unzip -o "$$Z"; done
+	touch */ENC_ROOT/.nobackup
 
 %.csv:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
@@ -44,19 +48,34 @@ convert: s57objectclasses.csv s57attributes.csv
 shapes:
 	$(MAKE) convert IN=*U7Inland_*/ENC_ROOT/*/*/*/
 
+DIS=01
+
 us-shapes:
-	$(MAKE) convert OUT=us/shapes1 IN=ENC_ROOT/US1*/ -k
-	$(MAKE) convert OUT=us/shapes2 IN=ENC_ROOT/US2*/
-	$(MAKE) convert OUT=us/shapes3 IN=ENC_ROOT/US3*/
-	$(MAKE) convert OUT=us/shapes4 IN=ENC_ROOT/US4*/
-	$(MAKE) convert OUT=us/shapes5 IN=ENC_ROOT/US5*/
+	mkdir us -p
+	touch us/.nobackup
+	unzip $(DIS)CGD_ENCs.zip -d us/GCD$(DIS)
+	$(MAKE) convert OUT=us/GCD$(DIS)/shapes3 IN=us/GCD$(DIS)/ENC_ROOT/US3*
+	$(MAKE) convert OUT=us/GCD$(DIS)/shapes4 IN=us/GCD$(DIS)/ENC_ROOT/US4*
+	$(MAKE) convert OUT=us/GCD$(DIS)/shapes5 IN=us/GCD$(DIS)/ENC_ROOT/US5*
 
 replace:
 	for F in *.qgs; do echo $$F; sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
 
+bsh0:
+	mkdir -p bsh
+
+	for L in AidsAndServices Hydrography SkinOfTheEarth RocksWrecksObstructions Topography; do wget -O bsh/$$L.json "https://www.geoseaportal.de/wss/service/NAUTHIS_$$L/guest?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
+
+BSHWMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
+
 bsh:
 	mkdir -p bsh
-	for L in AidsAndServices Hydrography SkinOfTheEarth RocksWrecksObstructions Topography; do wget -O bsh/$$L.json "https://www.geoseaportal.de/wss/service/NAUTHIS_$$L/guest?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=10000000&HEIGHT=10000000&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
+
+	for L in AidsAndServices SkinOfTheEarth; do wget -O bsh/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
+
+	for L in RocksWrecksObstructions; do wget -O bsh/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
+
+	for L in Hydrography Topography; do wget -O bsh/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
 
 serve:
 	xdg-open "http://localhost:8080/index.html#ondemand"
@@ -88,12 +107,17 @@ clean-cache:
 
 clean-all: clean-tiles clean-shapes clean-enc clean-bsh clean-vwm clean-cache
 
+wait:
+	sleep 60
+
 upload:
 	touch tiles/.nobackup
 	rsync -hav tiles/ nas:docker/maps/tiles/qgis/ $(O)
 
-sync-map: replace
-	rsync -hav --del --exclude tiles --exclude cache_data --exclude .git --delete-excluded ./ nas:docker/qgis $(O)
+sync: replace
+	#rsync -hav --del --exclude tiles --exclude cache_data --exclude .git --delete-excluded ./ nas:docker/qgis $(O)
+	rsync -hav --del map.qgs mapproxy.yaml marrekrite.gpx Dockerfile shapes bsh vwm icons nas:docker/qgis $(O)
+
 
 josm.jar:
 	wget -O $@ https://josm.openstreetmap.de/josm-tested.jar
