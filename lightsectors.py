@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-from geo.sphere import destination  # https://pypi.org/project/geo-py/
 from pyquery import PyQuery as pq
 import json, requests, os
 from math import ceil
 from itertools import chain
 from sys import stderr
+from math import radians, degrees, sin, cos, tan, asin, atan2, atan, exp, log, pi
 
 
 def linspace(start, stop, num=10):
@@ -75,9 +75,47 @@ def new_way(nodes, id=None):
     return w
 
 
-def project(ll, direction_deg, distance_nm):
-    d = destination((ll[1], ll[0]), distance_nm * 1852, direction_deg)
-    return d[1], d[0]
+R = 6378137.0
+
+
+def ll2grid(point):
+    lat, lon = point
+    x = radians(lon) * R
+    y = log(tan(pi / 4 + radians(lat) / 2)) * R
+    return x, y
+
+
+def grid2ll(xy):
+    x, y = xy
+    lat = degrees(2 * atan(exp(y / R)) - pi / 2.0)
+    lon = degrees(x / R)
+    return lat, lon
+
+
+def project(point, bearing, distance):
+    "https://wiki.openstreetmap.org/wiki/Mercator"
+    x, y = ll2grid(point)
+    bearing = radians(bearing)
+    distance *= 1852
+    x += sin(bearing) * distance
+    y += cos(bearing) * distance
+    return grid2ll((x, y))
+
+
+def project_gc(point, bearing, distance):
+    "great circle projection"
+    lat1, lon1 = (radians(a) for a in point)
+    bearing = radians(bearing)
+    distance *= 1852  # to meters
+    distance /= 6371008.8  # m
+
+    lat2 = asin(sin(lat1) * cos(distance) + cos(lat1) * sin(distance) * cos(bearing))
+    y = sin(bearing) * sin(distance) * cos(lat1)
+    x = cos(distance) - sin(lat1) * sin(lat2)
+
+    lon2 = lon1 + atan2(y, x)
+
+    return degrees(lat2), (degrees(lon2) + 540) % 360 - 180
 
 
 light_properties = {
@@ -231,9 +269,10 @@ def generate_sectors(infile, outfile="lightsectors.osm", config={}):
                     if all(ab):
                         if ab[0] >= ab[1]:
                             ab[1] += 360
+                        m = max(3, ceil(abs(ab[1] - ab[0]) / 5))
                         points = [
                             new_node(*project(ll, d + 180, r * f_arc))
-                            for d in linspace(*ab, ceil(abs(ab[1] - ab[0]) / 5))
+                            for d in linspace(*ab, m)
                         ]
                         w = new_way(points)
                         set_tag("lightsector", "arc", w)
