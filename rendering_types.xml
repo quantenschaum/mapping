@@ -5853,8 +5853,7 @@
 		<type tag="contour" value="depth" minzoom="6" notosm="true"/>
 		<type tag="contourarea" value="depth" minzoom="10" notosm="true"/>
     <category name="lightsector">
-      <type tag="lightsector" value="start"  minzoom="10" notosm="true"/>
-      <type tag="lightsector" value="end"  minzoom="10" notosm="true"/>
+      <type tag="lightsector" value="limit"  minzoom="10" notosm="true"/>
       <type tag="lightsector" value="orientation"  minzoom="10" notosm="true"/>
       <type tag="lightsector" value="arc"  minzoom="10" notosm="true"/>
     </category>

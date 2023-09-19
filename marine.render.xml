@@ -37,7 +37,10 @@
 	<renderingProperty attr="hideFairways" name="Fairways" description="" type="boolean" possibleValues="" category="hide"/>
 
   <renderingProperty attr="tidalFlatStyle" name="Tidal Flat Style" description="Style of Tidal Flats" type="string" defaultValueDescription="lightgreen" possibleValues="darkgreen,wetland,tidal"/>
+
 	<renderingProperty attr="hideTidalFlats" name="Tidal Flats" description="" type="boolean" possibleValues="" category="hide"/>
+
+	<renderingProperty attr="hideLightSectors" name="Light Sectors" description="" type="boolean" possibleValues="" category="hide"/>
 
   <renderingProperty attr="shellsStyle" name="Shells Style" description="Style for Shells on Seabed" type="string" defaultValueDescription="gray" possibleValues="rocks,stones,red"/>
 
@@ -876,8 +879,7 @@
       <case tag="osmand" value="file_trackline"/>
       <case tag="osmand" value="file_routeline"/>
       <case tag="lightsector" value="arc"/>
-      <case tag="lightsector" value="start"/>
-      <case tag="lightsector" value="end"/>
+      <case tag="lightsector" value="limit"/>
       <case tag="lightsector" value="orientation"/>
     </switch>
   </order>
@@ -1686,8 +1688,8 @@
         </switch>
 
         <switch minzoom="11" textColor="#0400ab" textWrapWidth="19" textHaloColor="#88ffffff" textHaloRadius="2">
-          <case minzoom="13" tag="seamark:type" value="landmark" textOrder="59" nameTag="seamark:name"/>
-          <case minzoom="13" tag="seamark:type" value="landmark" textOrder="59" nameTag=""/>
+          <case minzoom="11" tag="seamark:type" value="landmark" textOrder="59" nameTag="seamark:name"/>
+          <case minzoom="11" tag="seamark:type" value="landmark" textOrder="59" nameTag=""/>
           <case minzoom="17" tag="seamark:type" value="pylon" textOrder="59"/>
           <case minzoom="13" tag="seamark:type" value="production_area" textOrder="59"/>
           <case minzoom="16" tag="seamark:type" value="marine_farm" textOrder="59"/>
@@ -1732,9 +1734,8 @@
           <case minzoom="11" tag="seamark:type" value="fairway" textOnPath="true"/>
           <case minzoom="11" tag="waterway" value="fairway" textOnPath="true"/>
           <switch minzoom="11" textOnPath="true">
-            <case tag="lightsector" value="start"/>
-            <case tag="lightsector" value="end"/>
             <case tag="lightsector" value="arc"/>
+            <case tag="lightsector" value="limit"/>
             <case tag="lightsector" value="orientation"/>
           </switch>
           <case minzoom="12" tag="seamark:type" value="anchorage" textDy="10" textBold="true"/>
@@ -2362,12 +2363,10 @@
       </switch>
       <switch>
         <switch>
-          <case minzoom="9" maxzoom="10" tag="seamark:type" value="light_major" icon="seamark_light_major_small"
-                iconOrder="60"/>
+          <case minzoom="9" maxzoom="10" tag="seamark:type" value="light_major" icon="seamark_light_major_small" iconOrder="60"/>
         </switch>
         <switch>
-          <case minzoom="11" tag="seamark:type" value="light_major" icon="seamark_light_major" iconOrder="60"
-                iconVisibleSize="20" intersectionSizeFactor="0.7"/>
+          <case minzoom="11" tag="seamark:type" value="light_major" icon="seamark_light_major" iconOrder="60" iconVisibleSize="20" intersectionSizeFactor="0.7"/>
           <switch minzoom="12">
             <case tag="seamark:type" value="light_minor"/>
             <case tag="man_made" value="lighthouse"/>
@@ -3883,10 +3882,9 @@
 
 
   <line>
-    <switch minzoom="10" strokeWidth="0.8" pathEffect="2_2" color="#aa000000">
-      <case tag="lightsector" value="start"  />
-      <case tag="lightsector" value="end"  />
-      <case tag="lightsector" value="orientation"  pathEffect="5_3" />
+    <switch minzoom="10" hideLightSectors="false" strokeWidth="0.8" pathEffect="2_2" color="#aa666666">
+      <case tag="lightsector" value="limit"  />
+      <case tag="lightsector" value="orientation"  pathEffect="6_3" />
       <case minzoom="10" tag="lightsector" value="arc" pathEffect="" strokeWidth="10" color="#aa800080">
         <case additional="colour=white" color="#aafab20b"/>
         <case additional="colour=red" color="#aaed1c24"/>
@@ -3894,6 +3892,7 @@
         <case additional="colour=yellow" color="#aafab20b"/>
       </case>
       <apply_if maxzoom="11" tag="lightsector" value="arc" strokeWidth="5" />
+      <apply_if maxzoom="10" tag="lightsector" value="arc" strokeWidth="3" />
     </switch>
 
     <switch minzoom="2"> <!-- for new OpenGL engine -->
