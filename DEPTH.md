@@ -10,7 +10,7 @@ To install the following files, download them to your phone and open them with O
 - install [depth rendering style](depthcontourlines.addon.render.xml) (replace!)
 - install [OBFs containing depth data](https://github.com/quantenschaum/mapping/releases)
 
-Download the files from the [latest release](https://github.com/quantenschaum/mapping/releases).
+Download the files from the [releases](https://github.com/quantenschaum/mapping/releases).
 
 :exclamation: This only works correctly with [render engine](https://osmand.net/docs/user/personal/global-settings/#map-rendering-engine) 2 and the render styles mentioned above!
 
