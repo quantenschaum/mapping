@@ -174,19 +174,19 @@ def get_sectors(node, full=False):
         for p, t in light_properties.items():
             x = f"{i}:" if i else ""
             v = get_tag(f"seamark:light:{x}{p}", node, t)
-            if v:
+            if v is not None:
                 s[p] = v
         if not s and i > 0:
             break
-        if s and i == 0:
-            s["sector_start"] = 180
-            s["sector_end"] = 180
-        if "sector_start" in s and "sector_end" in s or "orientation" in s:
+        if s and all(x not in s for x in ("sector_start", "sector_end", "orientation")):
+            s["sector_start"] = 0
+            s["sector_end"] = 360
+        if s and any(x in s for x in ("sector_start", "sector_end", "orientation")):
             sectors.append(s)
     return sectors
 
 
-def generate_sectors(infile, outfile="lightsectors.osm", config={}):
+def generate_sectors(infile, outfile, config={}):
     print("reading", infile)
     osm = pq(filename=infile)
     out = pq('<osm version="0.6"/>')
@@ -255,7 +255,7 @@ def generate_sectors(infile, outfile="lightsectors.osm", config={}):
                     for d0, d1 in (start, end), (end, start):
                         if (
                             d0 is not None
-                            and d0 != d1
+                            and (d1 is None or d0 % 360 != d1 % 360)
                             and lines.get(d0, {}).get("range", 0) < r
                         ):
                             lines[d0] = {
@@ -266,7 +266,7 @@ def generate_sectors(infile, outfile="lightsectors.osm", config={}):
 
                     # sector arc
                     ab = [start, end]
-                    if all(ab):
+                    if all(x is not None for x in ab):
                         if ab[0] >= ab[1]:
                             ab[1] += 360
                         m = max(3, ceil(abs(ab[1] - ab[0]) / 5))
@@ -323,14 +323,12 @@ def main():
     parser.add_argument(
         "infile",
         help="OSM XML file to read",
-        metavar="in-osm",
-        default="in.osm",
+        default="lights.osm",
         nargs="?",
     )
     parser.add_argument(
         "outfile",
         help="OSM XML file to write",
-        metavar="out-osm",
         default="lightsectors.osm",
         nargs="?",
     )
