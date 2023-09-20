@@ -136,7 +136,7 @@ def nformat(v):
     return f"{v:.1f}".replace(".0", "")
 
 
-def light_label(sector, sep="\u00A0"):
+def light_label(sector, extended=False, sep="\u00A0"):
     l = ""
     c = sector.get("character")
     if c and c != "?":
@@ -154,6 +154,9 @@ def light_label(sector, sep="\u00A0"):
     p = sector.get("period")
     if p and p != "?":
         l += f"{sep}{p}s"
+
+    if not extended:
+        return l
 
     h = sector.get("height")
     if h:
@@ -243,7 +246,7 @@ def generate_sectors(infile, outfile, config={}):
 
         name = get_tag("seamark:name", n) or get_tag("name", n)
         merged_sectors = merge(sectors)
-        merged_label = light_label(merged_sectors)
+        merged_label = light_label(merged_sectors, True)
 
         print(f"{i}/{N}", seamark_type, name, merged_label.replace("\u00A0", " "))
         ll = get_ll(n, osm)

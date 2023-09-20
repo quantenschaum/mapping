@@ -3892,6 +3892,7 @@
         <case additional="colour=red" color="#aaed1c24"/>
         <case additional="colour=green" color="#aa00a650"/>
         <case additional="colour=yellow" color="#aafab20b"/>
+        <case additional="colour=orange" color="#aafab20b"/>
       </case>
       <apply_if maxzoom="11" tag="lightsector" value="arc" strokeWidth="5" />
       <apply_if maxzoom="10" tag="lightsector" value="arc" strokeWidth="3" />
