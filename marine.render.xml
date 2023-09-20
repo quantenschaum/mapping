@@ -1498,8 +1498,8 @@
           <case minzoom="13" tag="seamark:type" value="beacon_isolated_danger"/>
           <case minzoom="13" tag="seamark:type" value="beacon_safe_water"/>
           <case minzoom="14" tag="seamark:type" value="beacon_special_purpose"/>
-          <case minzoom="17" tag="seamark:type" value="rock"/>
-          <case minzoom="17" tag="seamark:type" value="wreck"/>
+<!--          <case minzoom="17" tag="seamark:type" value="rock"/>-->
+<!--          <case minzoom="17" tag="seamark:type" value="wreck"/>-->
           <case minzoom="14" tag="seamark:type" value="light_float"/>
           <case minzoom="14" tag="seamark:type" value="light_vessel"/>
           <case minzoom="17" tag="seamark:type" value="radar_reflector"/>
@@ -1536,21 +1536,18 @@
 
         <switch> <!-- for big icons -->
           <switch>
-            <case minzoom="10" tag="seamark:type" value="light_major" nameTag="seamark:name" nameTag2="seamark:light:character" textOrder="60"/>
-            <case minzoom="10" tag="seamark:type" value="light_major" nameTag="name" nameTag2="seamark:light:character"                  textOrder="60"/>
-            <case minzoom="11" tag="seamark:type" value="light_minor" nameTag2="seamark:light:character"                  textOrder="65"/>
-            <case minzoom="12" tag="man_made" value="mast" nameTag="seamark:name" nameTag2="seamark:light:character"                  textOrder="66"/>
-            <case minzoom="12" tag="man_made" value="mast" nameTag="name" nameTag2="seamark:light:character"                  textOrder="66"/>
-            <case minzoom="12" tag="man_made" value="tower" nameTag="name" nameTag2="seamark:light:character"                  textOrder="67"/>
-            <case minzoom="12" tag="man_made" value="tower" nameTag="seamark:name" nameTag2="seamark:light:character"                  textOrder="67"/>
-            <case minzoom="11" tag="seamark:type" value="landmark" nameTag="seamark:name"                  nameTag2="seamark:light:character" textOrder="68"/>
-            <case minzoom="11" tag="seamark:type" value="landmark" nameTag="name" nameTag2="seamark:light:character"                  textOrder="68"/>
-            <case minzoom="11" tag="man_made" value="offshore_platform" nameTag="name"                  nameTag2="seamark:light:character" textOrder="69"/>
-            <case minzoom="11" tag="man_made" value="offshore_platform" nameTag="seamark:name"                  nameTag2="seamark:light:character" textOrder="69"/>
-						<case minzoom="11" tag="seamark:type" value="platform" nameTag="seamark:name" nameTag2="seamark:light:character" textOrder="69"/>
-						<case minzoom="11" tag="seamark:type" value="platform" nameTag="name" nameTag2="seamark:light:character" textOrder="69"/>
-            <case minzoom="11" tag="man_made" value="lighthouse" nameTag="name" nameTag2="seamark:light:character"                  textOrder="70"/>
-            <case minzoom="11" tag="man_made" value="lighthouse" nameTag="seamark:name"                  nameTag2="seamark:light:character" textOrder="70"/>
+            <case minzoom="11" tag="seamark:type" value="light_major" nameTag2="seamark:light:character" textOrder="50">
+              <case additional="lightsector=source" textOrder="1"/>
+            </case>
+            <case minzoom="12" tag="seamark:type" value="light_minor" nameTag2="seamark:light:character" textOrder="55">
+              <case additional="lightsector=source" textOrder="2"/>
+            </case>
+            <case minzoom="11" tag="seamark:type" value="landmark" nameTag2="seamark:light:character" textOrder="60"/>
+            <case minzoom="12" tag="man_made" value="mast" nameTag2="seamark:light:character" textOrder="66"/>
+            <case minzoom="12" tag="man_made" value="tower" nameTag2="seamark:light:character" textOrder="67"/>
+            <case minzoom="11" tag="man_made" value="offshore_platform" nameTag2="seamark:light:character" textOrder="69"/>
+						<case minzoom="11" tag="seamark:type" value="platform" nameTag2="seamark:light:character" textOrder="69"/>
+<!--            <case minzoom="11" tag="man_made" value="lighthouse" nameTag2="seamark:light:character" textOrder="70"/>-->
             <!-- INT-1 P Section: Lights, lightDetail nameTag2 composed in rendering_types.xml -->
             <apply_if lightDetail="sectors" nameTag2="seamark:light:add_sectors"/>
             <apply_if lightDetail="sector1" nameTag2="seamark:light:1:add_sector"/>
@@ -1599,7 +1596,7 @@
                     textDy="-14"/>
           <apply_if minzoom="11" tag="seamark:type" value="landmark" additional="seamark:light:colour" textDy="-14"/>
           <apply_if minzoom="11" tag="seamark:type" value="landmark" additional="seamark:light:1:colour" textDy="-14"/>
-          <apply textWrapWidth="25"/>
+          <apply textWrapWidth="20"/>
         </switch>
 
         <!-- INT-1 J Section: Nature of the Seabed -->
@@ -1808,9 +1805,9 @@
       <apply_if nightMode="true" textColor="#ffffff" textHaloRadius="$textHaloRadiusNight" textHaloColor="#77777777"/>
       <apply_if legend="true" textHaloColor="$defaultColor"/>
     </switch>
-    <case minzoom="10" tag="seamark:type" value="rock" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" />
-    <case minzoom="10" tag="seamark:type" value="wreck" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-10"/>
-    <case minzoom="10" tag="seamark:type" value="sea_area" assitional="seamark:sea_area:category=shoal" textColor="$depthTextColor" textOnPath="true" textSize="12" textMinDistance="100"/>
+    <case minzoom="10" tag="seamark:type" value="rock" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth"/>
+    <case minzoom="10" tag="seamark:type" value="wreck" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-10" nameTag2="depth"/>
+<!--    <case minzoom="10" tag="seamark:type" value="sea_area" additional="seamark:sea_area:category=shoal" textColor="$depthTextColor" textOnPath="true" textSize="12" textMinDistance="100"/>-->
   </text>
 
 
@@ -2363,14 +2360,19 @@
       </switch>
       <switch>
         <switch>
-          <case minzoom="9" maxzoom="10" tag="seamark:type" value="light_major" icon="seamark_light_major_small" iconOrder="60"/>
+          <case minzoom="9" maxzoom="11" tag="seamark:type" value="light_major" icon="seamark_light_major_small" iconOrder="50">
+            <case additional="lightsector=source" iconOrder="1"/>
+          </case>
         </switch>
         <switch>
-          <case minzoom="11" tag="seamark:type" value="light_major" icon="seamark_light_major" iconOrder="60" iconVisibleSize="20" intersectionSizeFactor="0.7"/>
+          <case minzoom="12" tag="seamark:type" value="light_major" icon="seamark_light_major" iconOrder="50" iconVisibleSize="20" intersectionSizeFactor="0.7">
+            <case additional="lightsector=source" iconOrder="1"/>
+          </case>
           <switch minzoom="12">
             <case tag="seamark:type" value="light_minor"/>
             <case tag="man_made" value="lighthouse"/>
-            <apply icon="seamark_light_minor" iconVisibleSize="16" intersectionSizeFactor="0.6" iconOrder="65"/>
+            <apply icon="seamark_light_minor" iconVisibleSize="16" intersectionSizeFactor="0.6" iconOrder="55"/>
+            <apply_if additional="lightsector=source" iconOrder="2"/>
           </switch>
           <case minzoom="12" tag="seamark:type" value="fog_signal" icon="seamark_fog_signal" iconVisibleSize="16"
                 intersectionSizeFactor="0.5" iconOrder="70" icon_2="seamark_fog_signal_additional_center_big"/>

@@ -5856,6 +5856,7 @@
       <type tag="lightsector" value="limit"  minzoom="10" notosm="true"/>
       <type tag="lightsector" value="orientation"  minzoom="10" notosm="true"/>
       <type tag="lightsector" value="arc"  minzoom="10" notosm="true"/>
+      <type tag="lightsector" value="source" additional="true"  minzoom="8" notosm="true"/>
     </category>
     <type tag="colour" additional="true" minzoom="10" notosm="true"/>
 		<type tag="contour" value="temperature" minzoom="3" notosm="true"/>

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from pyquery import PyQuery as pq
-import json, requests, os
+import requests, os
 from math import ceil
 from itertools import chain
 from sys import stderr
@@ -127,7 +127,7 @@ light_properties = {
     "group": str,
     "period": str,
     "sequence": str,
-    "height": str,
+    "height": lambda s: float(s.split()[0]),
     "range": lambda s: float(s.split()[0]),
 }
 
@@ -136,40 +136,50 @@ def nformat(v):
     return f"{v:.1f}".replace(".0", "")
 
 
-def light_label(sector):
-    l = sector.get("character", "?")
+def light_label(sector, height=False, sep="\u00A0"):
+    l = ""
+    c = sector.get("character")
+    if c and c != "?":
+        l += c
 
     g = sector.get("group")
-    if g:
+    if l and g and g != "?":
         l += f"({g})"
 
     c = sector.get("colour")
-    if c:
-        s = "" if g else "."
+    if c and c != "?":
+        s = "" if not l or l[-1] == ")" else sep
         l += s + "".join(sorted((p[0].upper() for p in c.split(";")), reverse=True))
 
     p = sector.get("period")
-    if p:
-        l += f" {p}s"
+    if p and p != "?":
+        l += f"{sep}{p}s"
 
-    h = 0  # sector.get("height")
+    h = sector.get("height") if height else 0
     if h:
-        l += f" {h}m"
+        if isinstance(h, list):
+            a, b = min(h), max(h)
+            l += f"{sep}{nformat(a)}-{nformat(b)}m" if a != b else f"{sep}{nformat(a)}m"
+        else:
+            l += f"{sep}{nformat(h)}m"
 
     r = sector.get("range")
     if r:
         if isinstance(r, list):
             a, b = min(r), max(r)
-            l += f" {nformat(a)}-{nformat(b)}M" if a != b else f" {nformat(a)}M"
+            l += f"{sep}{nformat(a)}-{nformat(b)}M" if a != b else f"{sep}{nformat(a)}M"
         else:
-            l += f" {nformat(r)}M"
+            l += f"{sep}{nformat(r)}M"
 
     return l
 
 
-def get_sectors(node, full=False):
+SSO = "sector_start", "sector_end", "orientation"
+
+
+def get_sectors(node):
     sectors = []
-    for i in range(0 if full else 1, 21, 1):
+    for i in range(0, 21, 1):
         s = {}
         for p, t in light_properties.items():
             x = f"{i}:" if i else ""
@@ -178,12 +188,29 @@ def get_sectors(node, full=False):
                 s[p] = v
         if not s and i > 0:
             break
-        if s and all(x not in s for x in ("sector_start", "sector_end", "orientation")):
+        if s and all(x not in s for x in SSO):
             s["sector_start"] = 0
             s["sector_end"] = 360
-        if s and any(x in s for x in ("sector_start", "sector_end", "orientation")):
+        if s and any(x in s for x in SSO):
             sectors.append(s)
     return sectors
+
+
+def merge(sectors):
+    merged = {}
+    for s in sectors:
+        for k, v in s.items():
+            if k == "colour" and k in merged:
+                if v not in merged[k]:
+                    merged[k] += ";" + v
+            elif k in ("range", "height"):
+                merged[k] = merged.get(k, []) + [v]
+            elif k in merged:
+                if v != merged[k]:
+                    merged[k] = "?"
+            else:
+                merged[k] = v
+    return merged
 
 
 def generate_sectors(infile, outfile, config={}):
@@ -191,118 +218,96 @@ def generate_sectors(infile, outfile, config={}):
     osm = pq(filename=infile)
     out = pq('<osm version="0.6"/>')
 
-    full = config.get("full", False)
     major = config.get("major", ["light_major", "landmark"])
-    minor = config.get("minor", ["light_minor"])
-    types = major + minor
-    min_range = config.get("min_range", 8)
-    max_range = config.get("max_range", 8)
+    min_range = config.get("min_range", 5)
+    max_range = config.get("max_range", 10)
+    full_range = config.get("full", 999)
     f_range = config.get("f_range", 0.6)
     f_arc = config.get("f_arc", 0.2)
 
-    N = len(osm("node")) + len(osm("way"))
+    osm_objects = list(chain(osm("node"), osm("way")))
+    N = len(osm_objects)
 
-    for i, n in enumerate(chain(osm("node"), osm("way")), 1):
+    for i, n in enumerate(osm_objects, 1):
         n = pq(n)
 
-        smtype = get_tag("seamark:type", n)
+        seamark_type = get_tag("seamark:type", n)
+        sectors = get_sectors(n)
+
+        if (
+            not sectors
+            or seamark_type not in major
+            and not any(s.get("range", 0) >= min_range for s in sectors)
+        ):
+            continue
+
         name = get_tag("seamark:name", n) or get_tag("name", n)
+        merged_sectors = merge(sectors)
+        merged_label = light_label(merged_sectors, True)
 
-        if smtype in types:
-            sectors = get_sectors(n, full)
+        print(f"{i}/{N}", seamark_type, name, merged_label.replace("\u00A0", " "))
+        ll = get_ll(n, osm)
 
-            if sectors and (
-                smtype in major or any(s.get("range", 0) >= min_range for s in sectors)
-            ):
-                print(
-                    f"{i}/{N}", smtype, f"'{name}'", [light_label(s) for s in sectors]
-                )
-                ll = get_ll(n, osm)
-                # print(n)
-                # print(json.dumps(sectors, indent=2))
-                lines = {}
-                ss = {}
-                for s in sectors:
-                    r = min(s.get("range", 3) * f_range, max_range)
-                    ori, start, end = [
-                        s.get(k) for k in ("orientation", "sector_start", "sector_end")
-                    ]
+        center = new_node(*ll)
+        t = "light_major" if seamark_type in major else "light_minor"
+        set_tag("lightsector", "source", center)
+        set_tag("seamark:type", t, center)
+        if name:
+            set_tag("seamark:name", name, center)
+        set_tag("seamark:light:character", merged_label, center)
+        out.append(center)
 
-                    ## merged characteristics
-                    for k in light_properties.keys():
-                        v = s.get(k)
-                        if v:
-                            if k == "colour" and k in ss:
-                                if v not in ss[k]:
-                                    ss[k] += ";" + v
-                            elif k == "range":
-                                ss[k] = ss.get(k, []) + [v]
-                            elif k in ss:
-                                if v != ss[k]:
-                                    ss[k] = "?"
-                            else:
-                                ss[k] = v
+        lines = {}
+        for s in sectors:
+            r0 = s.get("range", min_range)  # nominal range
+            r1 = min(r0 * f_range, max_range)  # rendered range
+            a, b, o = [s.get(k) for k in SSO]
+            is_ori = o is not None
+            is_sector = a is not None and b is not None
+            is_full = is_sector and a % 360 == b % 360
 
-                    # leading line
-                    if ori is not None:
-                        lines[ori] = {
-                            "range": r,
-                            "name": f"{nformat(ori)}° {light_label(s)}",
-                            "sector": "orientation",
+            # leading line
+            if is_ori:
+                lines[o] = {
+                    "range": r1,
+                    "name": f"{nformat(o)}° {light_label(s)}",
+                    "sector": "orientation",
+                }
+
+            # sector limits
+            if is_sector and not is_full:
+                for d in a, b:
+                    if lines.get(d, {}).get("range", 0) < r1:
+                        lines[d] = {
+                            "range": r1,
+                            "name": f"{nformat(d)}°",
+                            "sector": "limit",
                         }
 
-                    # sector limits
-                    for d0, d1 in (start, end), (end, start):
-                        if (
-                            d0 is not None
-                            and (d1 is None or d0 % 360 != d1 % 360)
-                            and lines.get(d0, {}).get("range", 0) < r
-                        ):
-                            lines[d0] = {
-                                "range": r,
-                                "name": f"{nformat(d0)}°",
-                                "sector": "limit",
-                            }
+            # sector arc
+            if is_sector and (not is_full or r0 >= full_range):
+                if a >= b:
+                    b += 360
+                m = max(3, ceil(abs(b - a) / 5))
+                points = [
+                    new_node(*project(ll, d + 180, r1 * f_arc))
+                    for d in linspace(a, b, m)
+                ]
+                w = new_way(points)
+                set_tag("lightsector", "arc", w)
+                set_tag("name", light_label(s), w)
+                set_tag("colour", s.get("colour"), w)
+                for m in points + [w]:
+                    out.append(m)
 
-                    # sector arc
-                    ab = [start, end]
-                    if all(x is not None for x in ab):
-                        if ab[0] >= ab[1]:
-                            ab[1] += 360
-                        m = max(3, ceil(abs(ab[1] - ab[0]) / 5))
-                        points = [
-                            new_node(*project(ll, d + 180, r * f_arc))
-                            for d in linspace(*ab, m)
-                        ]
-                        w = new_way(points)
-                        set_tag("lightsector", "arc", w)
-                        set_tag("name", light_label(s), w)
-                        set_tag("colour", s.get("colour"), w)
-                        for m in points + [w]:
-                            out.append(m)
-
-                if lines:
-                    a = new_node(*ll)
-                    set_tag(
-                        "seamark:type",
-                        major[0] if smtype in major else minor[0],
-                        a,
-                    )
-                    n = name + " " if name else ""
-                    set_tag(
-                        "seamark:name",
-                        n + light_label(ss),
-                        a,
-                    )
-                    out.append(a)
-
-                    for d, l in lines.items():
-                        b = new_node(*project(ll, d + 180, l["range"]))
-                        w = new_way((a, b))
-                        set_tag("lightsector", l["sector"], w)
-                        set_tag("name", l["name"], w)
-                        for m in b, w:
-                            out.append(m)
+        if lines:
+            for d, l in lines.items():
+                b = new_node(*project(ll, d + 180, l["range"]))
+                w = new_way((center, b))
+                set_tag("lightsector", l["sector"], w)
+                set_tag("name", l["name"], w)
+                for m in b, w:
+                    out.append(m)
 
     print("writing", outfile)
     with open(outfile, "w") as f:
@@ -315,7 +320,7 @@ def main():
 
     parser = ArgumentParser(
         prog="light sector generator",
-        description="generate light sector limits and arcs from OSM xml",
+        description="generate light sector limits and arcs from OSM data",
         epilog="https://github.com/quantenschaum/mapping/",
         formatter_class=ArgumentDefaultsHelpFormatter,
     )
@@ -335,36 +340,29 @@ def main():
     parser.add_argument(
         "-j",
         "--josm",
-        help="open output file in JOSM (remote control)",
+        help="open output file in JOSM (via remote control)",
         action="store_true",
     )
     parser.add_argument(
         "-M",
         "--major",
-        help="seamark:type for major lights",
+        help="seamark:type for major lights (comma separated list, major lights are always included, even if range<min_range)",
         type=lambda s: s.split(","),
         default="light_major,landmark",
     )
     parser.add_argument(
-        "-m",
-        "--minor",
-        help="seamark:type for minor lights",
-        type=lambda s: s.split(","),
-        default="light_minor",
-    )
-    parser.add_argument(
         "-r",
         "--min-range",
-        help="min. range a minor light must have for sectors to be generated",
+        help="min. range non-major light must have to be included",
         type=float,
-        default=8,
+        default=5,
     )
     parser.add_argument(
         "-R",
         "--max-range",
         help="max. range used for generating sectors",
         type=float,
-        default=8,
+        default=10,
     )
     parser.add_argument(
         "-f",
@@ -381,11 +379,17 @@ def main():
         default=0.2,
     )
     parser.add_argument(
-        "-o", "--full", help="generate arcs for 360° sectors", action="store_true"
+        "-o",
+        "--full",
+        help="generate arcs for 360° sectors if range >= this value",
+        type=float,
+        default=15,
     )
 
     args = parser.parse_args()
-    args.get = MethodType(lambda s, k, d=None: getattr(s, k) or d, args)
+    args.get = MethodType(
+        lambda s, k, d=None: d if getattr(s, k) is None else getattr(s, k), args
+    )
 
     generate_sectors(args.infile, args.outfile, args)
 
