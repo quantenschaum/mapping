@@ -127,7 +127,7 @@ light_properties = {
     "group": str,
     "period": str,
     "sequence": str,
-    "height": lambda s: float(s.split()[0]),
+    "height": lambda s: float(s.split()[0].replace("m", "")),
     "range": lambda s: float(s.split()[0]),
 }
 
@@ -136,7 +136,7 @@ def nformat(v):
     return f"{v:.1f}".replace(".0", "")
 
 
-def light_label(sector, height=False, sep="\u00A0"):
+def light_label(sector, sep="\u00A0"):
     l = ""
     c = sector.get("character")
     if c and c != "?":
@@ -155,7 +155,7 @@ def light_label(sector, height=False, sep="\u00A0"):
     if p and p != "?":
         l += f"{sep}{p}s"
 
-    h = sector.get("height") if height else 0
+    h = sector.get("height")
     if h:
         if isinstance(h, list):
             a, b = min(h), max(h)
@@ -243,7 +243,7 @@ def generate_sectors(infile, outfile, config={}):
 
         name = get_tag("seamark:name", n) or get_tag("name", n)
         merged_sectors = merge(sectors)
-        merged_label = light_label(merged_sectors, True)
+        merged_label = light_label(merged_sectors)
 
         print(f"{i}/{N}", seamark_type, name, merged_label.replace("\u00A0", " "))
         ll = get_ll(n, osm)

@@ -1596,7 +1596,7 @@
                     textDy="-14"/>
           <apply_if minzoom="11" tag="seamark:type" value="landmark" additional="seamark:light:colour" textDy="-14"/>
           <apply_if minzoom="11" tag="seamark:type" value="landmark" additional="seamark:light:1:colour" textDy="-14"/>
-          <apply textWrapWidth="20"/>
+          <apply textWrapWidth="25"/>
         </switch>
 
         <!-- INT-1 J Section: Nature of the Seabed -->
@@ -2368,7 +2368,7 @@
           <case minzoom="12" tag="seamark:type" value="light_major" icon="seamark_light_major" iconOrder="50" iconVisibleSize="20" intersectionSizeFactor="0.7">
             <case additional="lightsector=source" iconOrder="1"/>
           </case>
-          <switch minzoom="12">
+          <switch minzoom="11">
             <case tag="seamark:type" value="light_minor"/>
             <case tag="man_made" value="lighthouse"/>
             <apply icon="seamark_light_minor" iconVisibleSize="16" intersectionSizeFactor="0.6" iconOrder="55"/>
