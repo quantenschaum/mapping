@@ -2,7 +2,7 @@
 
 Currently, it is [not possible to render light sectors](https://github.com/osmandapp/OsmAnd/issues/16894) directly in OsmAnd.
 
-The workaround to get light sector displayed is to create dedicated lines for the sector limits and sector arcs based on the [attributes of sector lights](https://wiki.openstreetmap.org/wiki/Seamarks/Lights#Sectored_light_attributes) in the OSM database. 
+The workaround to get light sectors displayed is to create dedicated lines for the sector limits and sector arcs based on the [attributes of sector lights](https://wiki.openstreetmap.org/wiki/Seamarks/Lights#Sectored_light_attributes) in the OSM database. 
 
 The procedure is as follows:
 
@@ -13,6 +13,13 @@ The procedure is as follows:
 - generate an OBF with the [OsmAndMapCreator](https://osmand.net/docs/versions/map-creator) using these [rendering_types.xml](rendering_types.xml) from the output file
 
 :exclamation: The sectors in this OBF are displayed in OsmAnd with the [marine style](marine.render.xml) only.
+
+The script creates
+
+- a colored arc for the sector with characteristics label
+- lines at sector limits with bearing label
+- a line for `light:orientation` with bearing and characteristics label
+- a marker at the light source with characteristics label
 
 Example OBFs can be found in the [releases](https://github.com/quantenschaum/mapping/releases).
 
