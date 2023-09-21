@@ -3853,11 +3853,21 @@
   <line>
     <switch minzoom="10" hideLightSectors="false" strokeWidth="0.8" pathEffect="2_2" color="#aa666666">
       <case tag="lightsector" value="limit"  />
-      <case tag="lightsector" value="orientation"  pathEffect="6_3" />
+      <case tag="lightsector" value="orientation"  pathEffect="6_3" color_2="#88800080" strokeWidth_2="6">
+        <case additional="colour=white"  color_2="#88fab20b"/>
+        <case additional="colour=red"    color_2="#88ed1c24"/>
+        <case additional="colour=green"  color_2="#8800a650"/>
+        <case additional="colour=yellow" color_2="#88fab20b"/>
+        <case additional="colour=orange" color_2="#88fab20b"/>
+        <apply>
+          <case maxzoom="10" strokeWidth_2="2"/>
+          <case maxzoom="12" strokeWidth_2="4"/>
+        </apply>
+      </case>
       <case minzoom="10" tag="lightsector" value="arc" pathEffect="" strokeWidth="10" color="#aa800080">
-        <case additional="colour=white" color="#aafab20b"/>
-        <case additional="colour=red" color="#aaed1c24"/>
-        <case additional="colour=green" color="#aa00a650"/>
+        <case additional="colour=white"  color="#aafab20b"/>
+        <case additional="colour=red"    color="#aaed1c24"/>
+        <case additional="colour=green"  color="#aa00a650"/>
         <case additional="colour=yellow" color="#aafab20b"/>
         <case additional="colour=orange" color="#aafab20b"/>
         <apply>

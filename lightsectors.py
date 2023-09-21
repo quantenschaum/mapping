@@ -278,22 +278,29 @@ def generate_sectors(infile, outfile, config={}):
             is_sector = a is not None and b is not None
             is_full = is_sector and a % 360 == b % 360
 
-            # leading line
+            # directional line
             if is_ori:
                 lines[o] = {
+                    "lightsector": "orientation",
+                    "orientation": o,
                     "range": r1,
                     "name": f"{nformat(o)}° {light_label(s)}",
-                    "sector": "orientation",
+                    "colour": s.get("colour"),
                 }
 
             # sector limits
             if is_sector and not is_full:
                 for d in a, b:
-                    if lines.get(d, {}).get("range", 0) < r1:
+                    l0 = lines.get(d, {})
+                    if (
+                        l0.get("range", 0) < r1
+                        and l0.get("lightsector") != "orientation"
+                    ):
                         lines[d] = {
+                            "lightsector": "limit",
+                            "orientation": d,
                             "range": r1,
                             "name": f"{nformat(d)}°",
-                            "sector": "limit",
                         }
 
             # sector arc
@@ -307,8 +314,8 @@ def generate_sectors(infile, outfile, config={}):
                 ]
                 w = new_way(points)
                 set_tag("lightsector", "arc", w)
-                set_tag("name", light_label(s), w)
                 set_tag("colour", s.get("colour"), w)
+                set_tag("name", light_label(s), w)
                 for m in points + [w]:
                     out.append(m)
 
@@ -316,8 +323,8 @@ def generate_sectors(infile, outfile, config={}):
             for d, l in lines.items():
                 b = new_node(*project(ll, d + 180, l["range"]))
                 w = new_way((center, b))
-                set_tag("lightsector", l["sector"], w)
-                set_tag("name", l["name"], w)
+                for k, v in l.items():
+                    set_tag(k, v, w)
                 for m in b, w:
                     out.append(m)
 
