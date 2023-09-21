@@ -1,5 +1,3 @@
-# S-57 ENC conversion
-
 ## TL;DR 
 
 :point_right: [USAGE.md](USAGE.md)
@@ -8,6 +6,8 @@ also interesting for OsmAnd users
 
 - [DEPTH.md](DEPTH.md)
 - [LIGHTS.md](LIGHTS.md)
+
+# S-57 ENC conversion
 
 How to convert an ENC (electronic navigational chart) to map tiles and how to use them to update [OSM](https://www.openstreetmap.org/) data.
 
