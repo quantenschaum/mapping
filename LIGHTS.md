@@ -18,7 +18,7 @@ The script creates
 
 - a colored arc for the sector with characteristics label
 - lines at sector limits with bearing label
-- a line for `light:orientation` with bearing and characteristics label
+- a line for directional lights with bearing and characteristics label
 - a marker at the light source with characteristics label
 
 :point_right: Example OBFs can be found in the [releases](https://github.com/quantenschaum/mapping/releases).
