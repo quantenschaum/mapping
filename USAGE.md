@@ -52,9 +52,10 @@ OSM contains two render engines, version 2 is OpenGL based, it's faster and not 
 
 Now you should be able to see buoys and other seamarks on the chart depending on the zoom level.
 
-### Depth Data
+### Depth and Lights
 
-see [DEPTH.md](DEPTH.md)
+- [DEPTH.md](DEPTH.md)
+- [LIGHTS.md](LIGHTS.md)
 
 ### Raster Overlay
 
