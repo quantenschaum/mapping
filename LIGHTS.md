@@ -6,7 +6,7 @@ The workaround to get light sectors displayed is to create dedicated lines for t
 
 The procedure is as follows:
 
-- download OSM data with JOSM (filter for lights only)
+- download OSM data with [JOSM](https://josm.openstreetmap.de/) (use [overpass](https://overpass-turbo.eu/) to filter for lights only)
 - save as OSM XML file
 - run [lightsectors.py](lightsectors.py) on this file
 - review the output file in JOSM (optional)
@@ -26,3 +26,19 @@ The script creates
 In OsmAnd light sectors look like this.
 
 ![light sectors](img/lightsectors.png)
+
+overpass query
+
+```
+[out:xml][timeout:90][bbox:{{bbox}}];
+(
+  nwr["seamark:light:colour"][~"seamark:type"~"landmark"];
+  nwr["seamark:light:colour"][~"seamark:type"~"light"];
+  nwr["seamark:light:colour"][~"seamark:type"~"beacon"];
+  nwr["seamark:light:1:colour"][~"seamark:type"~"landmark"];
+  nwr["seamark:light:1:colour"][~"seamark:type"~"light"];
+  nwr["seamark:light:1:colour"][~"seamark:type"~"beacon"];
+);
+(._;>;);
+out meta;
+```
