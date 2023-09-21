@@ -21,7 +21,7 @@ The script creates
 - a line for `light:orientation` with bearing and characteristics label
 - a marker at the light source with characteristics label
 
-Example OBFs can be found in the [releases](https://github.com/quantenschaum/mapping/releases).
+:point_right: Example OBFs can be found in the [releases](https://github.com/quantenschaum/mapping/releases).
 
 In OsmAnd light sectors look like this.
 
