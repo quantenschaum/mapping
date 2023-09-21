@@ -1470,7 +1470,7 @@
       </switch>
 
       <!-- Seamarks -->
-      <switch minzoom="8" textColor="#0400ab" textHaloColor="#5576cbea" textHaloRadius="2">
+      <switch minzoom="8" textColor="#0400ab" textHaloColor="#66dddddd" textHaloRadius="2">
         <!-- INT-1 P, R, S Sections: Lights, Fog Signals, Radar. seamark:name and seamark:light tags as nameTag2 (as far as possible today). The OSMAND display was validated at Texel, Den Helder, Helgoland, Elbe and Weser Approaches, Rotterdam, Cherbourg.
 				default: 		name (light:character.group.period[in seconds].fog_signal:category.group.period[in seconds].radar_transponder:category.group)
 								e.g. T6-VH 1 (Fl.2+1.10)= Buoy T6-VH 1 with light flashes in groups of 2 and 1. This is repeated after 10 seconds.
@@ -3851,25 +3851,25 @@
 
 
   <line>
-    <switch minzoom="10" hideLightSectors="false" strokeWidth="0.8" pathEffect="2_2" color="#aa666666">
-      <case tag="lightsector" value="limit"  />
+    <switch minzoom="10" hideLightSectors="false" strokeWidth="0.8" pathEffect="2_2" color="#dd666666">
+      <case tag="lightsector" value="limit"/>
       <case tag="lightsector" value="orientation"  pathEffect="6_3" color_2="#88800080" strokeWidth_2="6">
-        <case additional="colour=white"  color_2="#88fab20b"/>
-        <case additional="colour=red"    color_2="#88ed1c24"/>
-        <case additional="colour=green"  color_2="#8800a650"/>
-        <case additional="colour=yellow" color_2="#88fab20b"/>
-        <case additional="colour=orange" color_2="#88fab20b"/>
+        <case additional="colour=white"  color_2="#66fab20b"/>
+        <case additional="colour=red"    color_2="#66ed1c24"/>
+        <case additional="colour=green"  color_2="#6600a650"/>
+        <case additional="colour=yellow" color_2="#66fab20b"/>
+        <case additional="colour=orange" color_2="#66fab20b"/>
         <apply>
           <case maxzoom="10" strokeWidth_2="2"/>
           <case maxzoom="12" strokeWidth_2="4"/>
         </apply>
       </case>
-      <case minzoom="10" tag="lightsector" value="arc" pathEffect="" strokeWidth="10" color="#aa800080">
-        <case additional="colour=white"  color="#aafab20b"/>
-        <case additional="colour=red"    color="#aaed1c24"/>
-        <case additional="colour=green"  color="#aa00a650"/>
-        <case additional="colour=yellow" color="#aafab20b"/>
-        <case additional="colour=orange" color="#aafab20b"/>
+      <case minzoom="10" tag="lightsector" value="arc" pathEffect="" strokeWidth="10" color="#88800080">
+        <case additional="colour=white"  color="#99fab20b"/>
+        <case additional="colour=red"    color="#99ed1c24"/>
+        <case additional="colour=green"  color="#9900a650"/>
+        <case additional="colour=yellow" color="#99fab20b"/>
+        <case additional="colour=orange" color="#99fab20b"/>
         <apply>
           <case maxzoom="10" strokeWidth="3"/>
           <case maxzoom="11" strokeWidth="5"/>
