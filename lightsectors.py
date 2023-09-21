@@ -204,8 +204,9 @@ def merge(sectors):
     for s in sectors:
         for k, v in s.items():
             if k == "colour" and k in merged:
-                if v not in merged[k]:
-                    merged[k] += ";" + v
+                for c in v.split(";"):
+                    if c not in merged[k]:
+                        merged[k] += ";" + v
             elif k in ("range", "height"):
                 merged[k] = merged.get(k, []) + [v]
             elif k in merged:
@@ -221,7 +222,8 @@ def colors(sectors):
     for s in sectors:
         c = s.get("colour")
         if c:
-            cols.add(c)
+            for p in c.split(";"):
+                cols.add(p)
     return ";".join(sorted(cols, reverse=True))
 
 
