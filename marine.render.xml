@@ -1635,8 +1635,7 @@
       </switch>
 
       <switch>
-        <switch textColor="#222222" textWrapWidth="19" textHaloColor="#aaffffff" textHaloRadius="2" textOnPath="true"
-                textBold="true">
+        <switch textColor="#222222" textWrapWidth="19" textHaloColor="#aaffffff" textHaloRadius="2" textOnPath="true" textBold="true">
           <case minzoom="13" tag="seamark:type" value="recommended_track"/>
           <case minzoom="13" tag="seamark:type" value="recommended_traffic_lane"/>
           <case minzoom="13" tag="seamark:type" value="navigation_line"/>
@@ -3981,25 +3980,12 @@
       <case minzoom="18" strokeWidth="17:17"/>
     </case>
 
-    <switch minzoom="10">
+    <switch minzoom="10" strokeWidth="1" color="#333333">
       <case tag="seamark:type" value="recommended_track"/>
       <case tag="seamark:type" value="recommended_traffic_lane"/>
-      <case tag="seamark:type" value="navigation_line">
-        <case maxzoom="13" pathEffect="3_5"/>
-        <case maxzoom="16" pathEffect="4_7"/>
-        <case minzoom="17" pathEffect="5_9"/>
-      </case>
-      <apply>
-        <case maxzoom="10" strokeWidth="0.6"/>
-        <case maxzoom="12" strokeWidth="0.8"/>
-        <case maxzoom="14" strokeWidth="1.2:1.2"/>
-        <case maxzoom="15" strokeWidth="1.7:1.7"/>
-        <case maxzoom="16" strokeWidth="2:2"/>
-        <case minzoom="17" strokeWidth="2.5:2.5"/>
-      </apply>
-      <apply color="#333333">
-        <apply_if nightMode="true" color="#dddddd"/>
-      </apply>
+      <case tag="seamark:type" value="navigation_line" pathEffect="3_3"/>
+      <apply_if minzoom="14" strokeWidth="1.5"/>
+      <apply_if nightMode="true" color="#dddddd"/>
     </switch>
 
     <switch>
