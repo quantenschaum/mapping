@@ -35,6 +35,7 @@
 
   <renderingProperty attr="fairwayStyle" name="Fairway Color" description="Color of fairways" type="string" defaultValueDescription="white" possibleValues="whiter,gray,green,yellow"/>
 	<renderingProperty attr="hideFairways" name="Fairways" description="" type="boolean" possibleValues="" category="hide"/>
+	<renderingProperty attr="hideFerries" name="Ferry Routes" description="" type="boolean" possibleValues="" category="hide"/>
 
   <renderingProperty attr="tidalFlatStyle" name="Tidal Flat Style" description="Style of Tidal Flats" type="string" defaultValueDescription="lightgreen" possibleValues="darkgreen,wetland,tidal"/>
 
@@ -886,6 +887,11 @@
 
 
   <text>
+    <switch minzoom="10" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth">
+      <case tag="seamark:type" value="rock" />
+      <case tag="seamark:type" value="wreck" textDy="-10" />
+    </switch>
+<!--    <case minzoom="10" tag="seamark:type" value="sea_area" additional="seamark:sea_area:category=shoal" textColor="$depthTextColor" textOnPath="true" textSize="12" textMinDistance="100"/>-->
     <case minzoom="11" tag="osmand" value="file_waypoint"> <!-- for new OpenGL engine -->
       <case additional="file_has_waypoints=true" textWrapWidth="25" textHaloRadius=":1" textColor="#000000"
             textHaloColor="#ffc8c8" textOrder="1">
@@ -1356,8 +1362,7 @@
         <case minzoom="13" tag="military" value="danger_area"/>
         <apply_if nightMode="true" textColor="#f6dada" textHaloRadius="$textHaloRadiusNight" textHaloColor="#88a20035"/>
       </switch>
-      <switch textSize="12" textColor="$naturalTextColor" textWrapWidth="20" textHaloRadius="$textHaloRadiusDay"
-              textHaloColor="#ccfddb8f" nameTag="">
+      <switch textSize="12" textColor="$naturalTextColor" textWrapWidth="20" textHaloRadius="$textHaloRadiusDay" textHaloColor="#ccfddb8f" nameTag="">
         <switch textItalic="true">
           <case minzoom="16" tag="natural" value="wood" textOrder="60"/>
           <case minzoom="17" tag="natural" value="wetland" textOrder="70"/>
@@ -1365,7 +1370,7 @@
           <case minzoom="16" tag="landuse" value="forest" textOrder="60"/>
           <case minzoom="12" tag="leisure" value="nature_reserve" textOrder="60"/>
           <case minzoom="12" tag="boundary" value="national_park" textOrder="61" textOnPath="true"/>
-          <case minzoom="9" tag="natural" value="reef"/>
+          <case minzoom="9" tag="natural" value="reef" nameTag2="depth"/>
           <case minzoom="14" textSize="12" tag="natural" value="ridge" textOnPath="true" textDy="0"/>
         </switch>
         <apply_if nightMode="true" textColor="$naturalTextColor" textHaloRadius="$textHaloRadiusNight"
@@ -1763,9 +1768,6 @@
       <apply_if nightMode="true" textColor="#ffffff" textHaloRadius="$textHaloRadiusNight" textHaloColor="#77777777"/>
       <apply_if legend="true" textHaloColor="$defaultColor"/>
     </switch>
-    <case minzoom="10" tag="seamark:type" value="rock" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth"/>
-    <case minzoom="10" tag="seamark:type" value="wreck" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-10" nameTag2="depth"/>
-<!--    <case minzoom="10" tag="seamark:type" value="sea_area" additional="seamark:sea_area:category=shoal" textColor="$depthTextColor" textOnPath="true" textSize="12" textMinDistance="100"/>-->
   </text>
 
 
@@ -4557,7 +4559,7 @@
       <apply_if nightMode="true" color="#666666" color_2="#999999"/>
     </case>
 
-    <case minzoom="8" tag="route" value="ferry" color="#4E77FF" strokeWidth="1:1" pathEffect="6_3">
+    <case minzoom="8" tag="route" value="ferry" hideFerries="false" color="#4E77FF" strokeWidth="1:1" pathEffect="6_3">
       <apply_if minzoom="16"> <!-- for new OpenGL engine only -->
         <apply_if additional="oneway=yes" pathIcon="oneway_blue" pathIconStep="70"/>
         <apply additional="oneway=-1" pathIcon="oneway_reverse_blue" pathIconStep="70"/>
