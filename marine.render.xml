@@ -1668,20 +1668,9 @@
           <apply_if nightMode="true" textColor="#eaf6ff" textHaloColor="#5545a5e2"/>
         </switch>
         <switch textColor="#8c0000" textWrapWidth="19" textHaloColor="#99ffc9c9" textHaloRadius="2" textOrder="61">
-          <case minzoom="13" tag="seamark:type" value="restricted_area" nameTag="seamark:name"
-                nameTag2="seamark:restricted_area:information"/>
-          <case minzoom="13" tag="seamark:type" value="restricted_area" nameTag="seamark:restricted_area:information"
-                nameTag2="seamark:name"/>
-          <case minzoom="16" maxzoom="17" tag="seamark:type" value="obstruction" nameTag="seamark:name">
-            <apply_if additional="seamark:obstruction:category=stump" textDy="-13"/>
-          </case>
-          <case minzoom="18" tag="seamark:type" value="obstruction" nameTag="seamark:name"
-                nameTag2="seamark:obstruction:water_level">
-            <apply_if additional="seamark:obstruction:category=stump" textDy="-13"/>
-          </case>
-          <case minzoom="18" tag="seamark:type" value="obstruction" nameTag="seamark:obstruction:water_level">
-            <apply_if additional="seamark:obstruction:category=stump" textDy="-13"/>
-          </case>
+          <case minzoom="13" tag="seamark:type" value="restricted_area" nameTag="seamark:name" nameTag2="seamark:restricted_area:information"/>
+          <case minzoom="13" tag="seamark:type" value="restricted_area" nameTag="seamark:restricted_area:information" nameTag2="seamark:name"/>
+          <case minzoom="16" tag="seamark:type" value="obstruction" nameTag2="depth" textDy="-13"/>
           <case minzoom="13" tag="seamark:type" value="cable_area" nameTag="seamark:name"/>
           <case minzoom="13" tag="seamark:type" value="precautionary_area" nameTag="seamark:name"/>
           <case minzoom="15" tag="seamark:type" value="seaplane_landing_area" nameTag="seamark:name"/>
@@ -3210,15 +3199,14 @@
       </switch>
 
       <case minzoom="13" tag="seamark:type" value="obstruction">
-        <case minzoom="15" additional="seamark:obstruction:category=foul_ground" icon="seamark_k311_foul_ground">
+        <case minzoom="14" additional="seamark:obstruction:category=foul_ground" icon="seamark_k311_foul_ground">
           <apply_if nightMode="true" shield="seamark_k311_foul_ground_shield_night"/>
         </case>
         <!-- alternative to INT-1 K31.1 icon: upward anchor icon="seamark_obstruction_foul_ground"/> -->
         <case additional="seamark:obstruction:category=fish_haven" icon="seamark_restricted_area_fish_sanctuary"/>
         <case additional="seamark:obstruction:category=boom" icon="seamark_obstruction_boom"/>
         <case additional="seamark:obstruction:category=construction" icon="seamark_obstruction_construction"/>
-        <case minzoom="16" additional="seamark:obstruction:category=stump" icon="seamark_obstruction_stump"
-              icon_shift_py="-0.8"/>
+        <case minzoom="14" additional="seamark:obstruction:category=stump" icon="seamark_obstruction_stump" icon_shift_py="-0.8"/>
       </case>
 
       <case minzoom="15" tag="seamark:type" value="distance_mark" icon="seamark_distance_mark" iconOrder="150">
@@ -3299,8 +3287,7 @@
 
       <!-- INT-1 K11, K12, K13 Rocks -->
       <!-- indication of dangerous navigational obstructions to start already at low zoom levels 13 -->
-      <!-- <case minzoom="13" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="seamark_rock_shield" iconOrder="150" iconVisibleSize="20" icon_shift_py="-1"> -->
-      <case minzoom="11" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="null" iconVisibleSize="20">
+      <case minzoom="12" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="null" iconVisibleSize="20">
         <case additional="seamark:rock:water_level=covers" icon="seamark_rock_covers"/>
         <case additional="seamark:rock:water_level=awash" icon="seamark_rock_awash"/>
       </case>
