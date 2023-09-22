@@ -175,7 +175,7 @@ def load_bsh_rocks(filename):
             ll = latlon(f)
             tags = {"ll": ll}
             p = f["properties"]
-            tags["propierties"] = p
+            tags["properties"] = p
             tags["seamark:type"] = "rock"
             tags["seamark:rock:water_level"] = s57toOSM("watlev", p)
             depth = p.get("valsou")
@@ -206,7 +206,7 @@ def load_bsh_wrecks(filename):
             ll = latlon(f)
             tags = {"ll": ll}
             p = f["properties"]
-            tags["propierties"] = p
+            tags["properties"] = p
             tags["seamark:type"] = "wreck"
             tags["seamark:wreck:category"] = s57toOSM("catwrk", p)
             if "watlev" in p:
@@ -242,7 +242,7 @@ def load_bsh_obstructions(filename):
             ll = latlon(f)
             tags = {"ll": ll}
             p = f["properties"]
-            tags["propierties"] = p
+            tags["properties"] = p
             tags["seamark:type"] = "obstruction"
             if "catobs" in p:
                 tags["seamark:obstruction:category"] = s57toOSM("catobs", p)
@@ -253,6 +253,61 @@ def load_bsh_obstructions(filename):
 
             if ll not in positions and not any(
                 filter(lambda p: distance(p, ll) < 50, positions)
+            ):
+                points.append(tags)
+                positions.append(ll)
+
+    print(len(points))
+
+    return points
+
+
+def is_int(v):
+    try:
+        int(v)
+        return True
+    except:
+        return False
+
+
+def load_bsh_seabed(filename):
+    # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dobstruction
+    print("loading BSH nature of seabed", filename)
+    data = load_json(filename)
+    points = []
+    positions = []
+    for f in data["features"]:
+        # print(f)
+        if "Seabed" in f["id"] and usageband(f) and gtype(f) == "Point":
+            # print(json.dumps(f, indent=2))
+            ll = latlon(f)
+            tags = {"ll": ll}
+            p = f["properties"]
+            tags["properties"] = p
+
+            found = 0
+
+            if is_int(p.get("natsur")):
+                found = 1
+                tags["seamark:type"] = "seabed_area"
+                tags["seamark:seabed_area:surface"] = s57toOSM("natsur", p)
+                if p.get("natqua"):
+                    tags["seamark:seabed_area:quality"] = s57toOSM("natqua", p)
+
+            if is_int(p.get("catwed")):
+                cat = s57toOSM("catwed", p)
+                if cat == "sea_grass":
+                    found = 3
+                    tags["seamark:type"] = "seagrass"
+                else:
+                    found = 2
+                    tags["seamark:type"] = "weed"
+                    tags["seamark:weed:category"] = s57toOSM("catwed", p)
+
+            if (
+                found
+                and ll not in positions
+                and not any(filter(lambda p: distance(p, ll) < 50, positions))
             ):
                 points.append(tags)
                 positions.append(ll)
@@ -811,6 +866,9 @@ def main():
     elif "obstr" in infile:
         seamark_type = "obstruction"
         data = load_bsh_obstructions(datafile)
+    elif "seabed" in infile:
+        seamark_type = "seabed_area|weed|seagrass"
+        data = load_bsh_seabed(datafile)
 
     update_osm(
         infile,

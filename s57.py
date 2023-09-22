@@ -81,10 +81,47 @@ S57 = {
         9: "ground_tackle",
         10: "boom",
     },
+    "NATSUR": {
+        1: "mud",
+        2: "clay",
+        3: "silt",
+        4: "sand",
+        5: "stones",
+        6: "gravel",
+        7: "pebbles",
+        8: "cobbles",
+        9: "rocky",
+        11: "lava",
+        14: "coral",
+        17: "shells",
+        18: "boulders",
+    },
+    "NATQUA": {
+        1: "fine",
+        2: "medium",
+        3: "coarse",
+        4: "broken",
+        5: "sticky",
+        6: "soft",
+        7: "stiff",
+        8: "volcanic",
+        9: "calcareous",
+        10: "hard",
+    },
+    "CATWED": {
+        1: "kelp",
+        2: "sea_weed",
+        3: "sea_grass",
+        4: "sargasso",
+    },
 }
 
 
 def s57toOSM(attr, value):
     if isinstance(value, dict):
         return s57toOSM(attr, value[attr])
+    try:
+        value = int(value)
+    except:
+        pass
     return S57[attr.upper()][value]
