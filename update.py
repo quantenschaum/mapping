@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
 
 import json
 import os
@@ -13,19 +11,16 @@ import datetime
 import pendulum
 import requests
 from pyquery import PyQuery as pq
+from s57 import *
 
 
 dx = 0.01
 dy = dx
-# In[2]:
 
 
 def load_json(filename):
     with open(filename) as f:
         return json.load(f)
-
-
-# In[3]:
 
 
 types = [
@@ -88,115 +83,39 @@ def type_cat(c, p):
     return t, cat
 
 
-# In[4]:
-
-
-colors = {1: "white", 2: "black", 3: "red", 4: "green", 6: "yellow", 7: "grey"}
-
-
 def color(s, osm=0):
     if s == "#":
         return
-    for k, v in colors.items():
+    for k, v in S57["COLOUR"].items():
         s = s.replace(str(k), v)
     return s.replace(",", ";")
-
-
-# In[5]:
-
-
-shapes = {
-    1: "conical",
-    2: "can",
-    3: "spherical",
-    4: "pillar",
-    5: "spar",
-    6: "barrel",
-    7: "super-buoy",
-}
 
 
 def shape(s):
     if s == "#":
         return
-    return shapes[int(s)]
+    return s57toOSM("boyshp", int(s))
 
 
-# In[6]:
-
-
-patterns = {1: "horizontal", 2: "vertical"}
+colpat = {1: "horizontal", 2: "vertical"}
 
 
 def pattern(s):
     if s == "#":
         return
-    return patterns[int(s)]
-
-
-# In[7]:
-
-
-topmarks = {
-    1: "cone, point up",  # starboard
-    2: "cone, point down",
-    3: "sphere",  # safe water
-    4: "2 spheres",  # isolated danger
-    5: "cylinder",  # port
-    7: "x-shape",
-    10: "2 cones point together",  # west
-    11: "2 cones base together",  # east
-    13: "2 cones up",  # north
-    14: "2 cones down",  # south
-    98: "cylinder over sphere",
-    99: "cone, point up over sphere",
-}
+    return colpat[int(s)]
 
 
 def topmark(s):
     if s == "#":
         return
-    return topmarks[int(s)]
-
-
-# In[8]:
-
-
-light_characters = {
-    1: "F",
-    2: "Fl",
-    3: "LFl",
-    4: "Q",
-    5: "VQ",
-    6: "UQ",
-    7: "Iso",
-    8: "Oc",
-    9: "IQ",
-    10: "IVQ",
-    11: "IUQ",
-    12: "Mo",
-    13: "FFl",
-    14: "FLFl",
-    15: "OcFl",
-    16: "FLFl",
-    17: "OcAlt",
-    18: "LFlAlt",
-    19: "FlAlt",
-    25: "Q+LFl",
-    26: "VQ+LFl",
-    27: "UQ+LFl",
-    28: "Al",
-    29: "F+FlAlt",
-}
+    return s57toOSM("topshp", int(s))
 
 
 def light_chr(s):
     if s == "#":
         return
-    return light_characters[int(s)]
-
-
-# In[9]:
+    return s57toOSM("litchr", int(s))
 
 
 def light_per(s):
@@ -209,17 +128,11 @@ def light_per(s):
         return str(float(s))
 
 
-# In[10]:
-
-
 def light_grp(s):
     s = s.strip() if s else s
     if not s or s == "#":
         return
     return s.replace("(1)", "").replace("(", "").replace(")", "") or None
-
-
-# In[11]:
 
 
 def latlon_to_grid(lat, lon):
@@ -230,19 +143,17 @@ def latlon_to_grid(lat, lon):
     return x, y
 
 
-# In[12]:
-
-
 def distance(a, b):
     a, b = [latlon_to_grid(*p) for p in (a, b)]
     return sqrt(sum([pow(a[i] - b[i], 2) for i in range(2)]))
 
 
-# In[13]:
-
-
 def usageband(f, bands=["Approach", "Harbour", "Berthing"]):
     return any(b in f["id"] for b in bands)
+
+
+def gtype(f):
+    return f["geometry"]["type"]
 
 
 def latlon(f):
@@ -253,9 +164,6 @@ def latlon(f):
     return ll[1], ll[0]
 
 
-watlev = {3: "submerged", 4: "covers", 5: "awash"}
-
-
 def load_bsh_rocks(filename):
     print("loading BSH rocks", filename)
     data = load_json(filename)
@@ -263,20 +171,88 @@ def load_bsh_rocks(filename):
     positions = []
     for f in data["features"]:
         # print(f)
-        if "Rock" in f["id"] and usageband(f):
+        if "Rock" in f["id"] and usageband(f) and gtype(f) == "Point":
             ll = latlon(f)
             tags = {"ll": ll}
             p = f["properties"]
             tags["propierties"] = p
             tags["seamark:type"] = "rock"
-            tags["seamark:rock:water_level"] = watlev[p["watlev"]]
+            tags["seamark:rock:water_level"] = s57toOSM("watlev", p)
             depth = p.get("valsou")
-            if depth is not None:
-                tags["depth"] = depth
-            # if p["watlev"] != 3 or depth and depth > 5:                print(tags)
+            if "valsou" in p:
+                tags["depth"] = float(p["valsou"])
 
             if ll not in positions and not any(
                 filter(lambda p: distance(p, ll) < 1, positions)
+            ):
+                points.append(tags)
+                positions.append(ll)
+
+    print(len(points))
+
+    return points
+
+
+def load_bsh_wrecks(filename):
+    # https://wiki.openstreetmap.org/wiki/Seamarks/Wrecks
+    # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dwreck
+    print("loading BSH wrecks", filename)
+    data = load_json(filename)
+    points = []
+    positions = []
+    for f in data["features"]:
+        # print(f)
+        if "Wreck" in f["id"] and usageband(f) and gtype(f) == "Point":
+            ll = latlon(f)
+            tags = {"ll": ll}
+            p = f["properties"]
+            tags["propierties"] = p
+            tags["seamark:type"] = "wreck"
+            tags["seamark:wreck:category"] = s57toOSM("catwrk", p)
+            if "watlev" in p:
+                tags["seamark:wreck:water_level"] = s57toOSM("watlev", p)
+            if "valsou" in p:
+                tags["depth"] = float(p["valsou"])
+
+            if ll not in positions and not any(
+                filter(lambda p: distance(p, ll) < 50, positions)
+            ):
+                points.append(tags)
+                positions.append(ll)
+
+    print(len(points))
+
+    return points
+
+
+def load_bsh_obstructions(filename):
+    # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dobstruction
+    print("loading BSH obstructions", filename)
+    data = load_json(filename)
+    points = []
+    positions = []
+    for f in data["features"]:
+        # print(f)
+        if (
+            ("Obstruction" in f["id"] or "Foul" in f["id"])
+            and usageband(f)
+            and gtype(f) == "Point"
+        ):
+            # print(json.dumps(f, indent=2))
+            ll = latlon(f)
+            tags = {"ll": ll}
+            p = f["properties"]
+            tags["propierties"] = p
+            tags["seamark:type"] = "obstruction"
+            if "catobs" in p:
+                tags["seamark:obstruction:category"] = s57toOSM("catobs", p)
+            if "watlev" in p:
+                tags["seamark:obstruction:water_level"] = s57toOSM("watlev", p)
+            if "valsou" in p:
+                tags["depth"] = float(p["valsou"])
+
+            if ll not in positions and not any(
+                filter(lambda p: distance(p, ll) < 50, positions)
             ):
                 points.append(tags)
                 positions.append(ll)
@@ -650,11 +626,11 @@ def update_osm(
 
         p = []
         match = "NONE"
-        if not p and name:
+        if name:
             p = list(
                 filter(
                     lambda p: distance(ll, p["ll"]) <= n_dist
-                    and name == p["seamark:name"],
+                    and name == p.get("seamark:name"),
                     data,
                 )
             )
@@ -747,26 +723,24 @@ def main():
     )
 
     parser.add_argument(
-        "-i", "--osm-in", help="OSM XML file to read", metavar="osm", default="in.osm"
+        "infile",
+        help="OSM XML file to read",
     )
     parser.add_argument(
-        "-o",
-        "--osm-out",
+        "datafile",
+        help="data source file to read (geojson/gpx)",
+    )
+    parser.add_argument(
+        "outfile",
         help="OSM XML file to write",
-        metavar="osm",
-        default="out.osm",
+        nargs="?",
     )
     parser.add_argument(
-        "-g",
-        "--json",
-        help="GeoJSON input file to read",
-        metavar="geojson",
-        default="vwm/drijvend.json",
+        "-a",
+        "--add",
+        help="add buoys",
+        action="store_true",
     )
-    parser.add_argument(
-        "-M", "--marrekrite", help="GPX file with marrekrite points", metavar="gpx"
-    )
-    parser.add_argument("-a", "--add", help="add buoys", action="store_true")
     parser.add_argument(
         "-m",
         "--remod",
@@ -815,21 +789,33 @@ def main():
 
     args = parser.parse_args()
 
-    seamark_type = "buoy_.*"
-    if args.marrekrite:
-        data = load_marrekrite(args.marrekrite)
-    elif "rocks" in args.json.lower():
-        data = load_bsh_rocks(args.json)
+    infile = args.infile
+    outfile = args.outfile or args.infile.replace(".osm", ".out.osm")
+    datafile = args.datafile
+
+    if "drijvend" in datafile:
+        seamark_type = "buoy_.*"
+        data = load_rws_buoys(datafile)
+    elif "marrekrite" in datafile:
+        seamark_type = "buoy_.*"
+        data = load_marrekrite(datafile)
+    elif "buoy" in infile:
+        seamark_type = "buoy_.*"
+        data = load_bsh_buoys(datafile)
+    elif "rock" in infile:
         seamark_type = "rock"
-    elif "aids" in args.json.lower():
-        data = load_bsh_buoys(args.json)
-    else:
-        data = load_rws_buoys(args.json)
+        data = load_bsh_rocks(datafile)
+    elif "wreck" in infile:
+        seamark_type = "wreck"
+        data = load_bsh_wrecks(datafile)
+    elif "obstr" in infile:
+        seamark_type = "obstruction"
+        data = load_bsh_obstructions(datafile)
 
     update_osm(
-        args.osm_in,
+        infile,
         data,
-        args.osm_out,
+        outfile,
         add=args.add,
         remod=args.remod,
         remove=args.remove,

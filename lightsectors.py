@@ -355,7 +355,6 @@ def main():
     parser.add_argument(
         "outfile",
         help="OSM XML file to write",
-        default="lightsectors.osm",
         nargs="?",
     )
     parser.add_argument(
@@ -412,11 +411,13 @@ def main():
         lambda s, k, d=None: d if getattr(s, k) is None else getattr(s, k), args
     )
 
-    generate_sectors(args.infile, args.outfile, args)
+    outfile = args.outfile or args.infile.replace(".osm", "-sectors.osm")
+
+    generate_sectors(args.infile, outfile, args)
 
     if args.josm:
         requests.get(
-            f"http://localhost:8111/open_file?filename={os.path.abspath(args.outfile)}"
+            f"http://localhost:8111/open_file?filename={os.path.abspath(outfile)}"
         )
 
 
