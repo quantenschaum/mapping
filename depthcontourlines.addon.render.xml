@@ -8,6 +8,7 @@
 
 	<renderingProperty attr="hideSpots" name="Spot Soundings" description="" type="boolean" possibleValues="" category="hide"/>
 	<renderingProperty attr="hideContours" name="Depth Contours" description="" type="boolean" possibleValues="" category="hide"/>
+	<renderingProperty attr="hideMinorContours" name="Minor Depth Contours" description="" type="boolean" possibleValues="" category="hide"/>
 	<renderingProperty attr="hideAreas" name="Depth Areas" description="" type="boolean" possibleValues="" category="hide"/>
 
 	<renderingProperty attr="depthContourWidth" name="Line Width" description="Depth contour lines width" type="string" possibleValues="thin,medium,thick" defaultValueDescription="default"/>
@@ -144,25 +145,25 @@
 			<case minzoom="10" baseAppMode="boat" additional="$safetyLineType" color="#d40b44"/>
 
       <!-- intervals -->
-			<case minzoom="11" additional="contourtype=10"    color="$color2b"/>
-			<case minzoom="12" additional="contourtype=5"     color="$color2b"/>
-			<case minzoom="14" additional="contourtype=1"     color="$color2b"/>
-			<case minzoom="13" additional="contourtype=-1"    color="$color1"/>
+			<case minzoom="11" additional="contourtype=10"    color="$color2b" hideMinorContours="false"/>
+			<case minzoom="12" additional="contourtype=5"     color="$color2b" hideMinorContours="false"/>
+			<case minzoom="14" additional="contourtype=1"     color="$color2b" hideMinorContours="false"/>
+			<case minzoom="13" additional="contourtype=-1"    color="$color1"  hideMinorContours="false"/>
       <!-- for compatibility 100,1000 intervals have suffix m -->
 			<case minzoom="7"  additional="contourtype=100m"  color="$color2a"/>
 			<case minzoom="6"  additional="contourtype=1000m" color="$color2a"/>
       <!-- dedicated contours, usable as safety contour -->
 			<case minzoom="10" additional="contourtype=0m"    color="$color0"/>
-			<case minzoom="13" additional="contourtype=1m"    color="$color2b"/>
+			<case minzoom="13" additional="contourtype=1m"    color="$color2b" hideMinorContours="false"/>
 			<case minzoom="12" additional="contourtype=2m"    color="$color2a"/>
-			<case minzoom="13" additional="contourtype=3m"    color="$color2b"/>
-			<case minzoom="14" additional="contourtype=4m"    color="$color2b"/>
+			<case minzoom="13" additional="contourtype=3m"    color="$color2b" hideMinorContours="false"/>
+			<case minzoom="14" additional="contourtype=4m"    color="$color2b" hideMinorContours="false"/>
 			<case minzoom="11" additional="contourtype=5m"    color="$color2a"/>
 			<case minzoom="8"  additional="contourtype=10m"   color="$color2a"/>
-			<case minzoom="10" additional="contourtype=20m"   color="$color2a"/>
-			<case minzoom="9"  additional="contourtype=50m"   color="$color2a"/>
+			<case minzoom="10" additional="contourtype=20m"   color="$color2a" hideMinorContours="false"/>
+			<case minzoom="9"  additional="contourtype=50m"   color="$color2a" hideMinorContours="false"/>
 
-			<case minzoom="14" color="$color2a"/>
+			<case minzoom="14" color="$color2a" hideMinorContours="false"/>
 
       <apply_if depthContoursDashed="true">
         <apply additional="contourtype=1m" pathEffect="15_3_2_3" />
