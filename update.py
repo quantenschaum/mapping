@@ -183,7 +183,7 @@ def load_bsh_rocks(filename):
                 tags["depth"] = float(p["valsou"])
 
             if ll not in positions and not any(
-                filter(lambda p: distance(p, ll) < 1, positions)
+                filter(lambda p: distance(p, ll) < 5, positions)
             ):
                 points.append(tags)
                 positions.append(ll)
@@ -343,8 +343,8 @@ def load_bsh_buoys(filename):
             tags["seamark:name"] = n
             tags["seamark"] = None
 
-            if "sorind" in p:
-                tags["seamark:source"] = p["sorind"] + " " + p["sordat"]
+            # if "sorind" in p:
+            #     tags["seamark:source"] = p["sorind"] + " " + p["sordat"]
 
             k = color(p["colour"])
             if not k:
@@ -517,7 +517,7 @@ def load_marrekrite(gpx="marrekrite.gpx"):
         tags = {}
         tags["ll"] = wpt.latitude, wpt.longitude
         tags["seamark:name"] = wpt.name.split()[0]
-        tags["seamark:source"] = "https://github.com/marcelrv/OpenCPN-Waypoints"
+        # tags["seamark:source"] = "https://github.com/marcelrv/OpenCPN-Waypoints"
         tags["seamark:type"] = "mooring"
         if wpt.name.startswith("MB"):
             tags["seamark:mooring:category"] = "buoy"
@@ -638,6 +638,7 @@ def update_osm(
     sm_type=None,
     min_age=0,
     user=None,
+    review=False,
 ):
     x = pq(filename=infile)
 
@@ -760,11 +761,12 @@ def update_osm(
             f"http://localhost:8111/open_file?filename={os.path.abspath(outfile)}"
         )
 
-        for i, m in enumerate(modifications, 1):
-            for l in m:
-                print(l)
-            requests.get(m[2])
-            input(f"{i}/{len(modifications)}")
+        if review:
+            for i, m in enumerate(modifications, 1):
+                for l in m:
+                    print(l)
+                requests.get(m[2])
+                input(f"{i}/{len(modifications)}")
 
 
 def main():
