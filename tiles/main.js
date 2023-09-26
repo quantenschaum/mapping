@@ -62,98 +62,108 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
-      attribution: '<a href="https://rijkswaterstaat.nl/">RWS</a>'
+      attribution: '<a href="https://rijkswaterstaat.nl/">RWS</a> <a href="https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/">Chart Server</a>'
      }),
     'Worldy Imagery':L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      attribution: '<a href="https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/">ArcGIS</a>'
+      attribution: '<a href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">ArcGIS ESRI World Imagery</a>'
     }),
     'Luchtfoto 2023 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2023_quick_orthoLR',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
+      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2023 8cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2023_quick_orthoHR',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
+      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2022 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2022_ortho25',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
+      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2021 8cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2021_orthoHR',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
+      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2020 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2020_ortho25',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
+      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2019 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2019_ortho25',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
+      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2018 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2018_ortho25',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
+      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2017 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2017_ortho25',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
+      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2016 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2016_ortho25',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/introductie/-/article/luchtfoto-pdok">PDOK</a>'
+      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
   };
 
   var overlays = {
     'Grid': grid,
     'ENC':L.tileLayer('{z}/{x}/{y}.png', {
-      attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
+      attribution: '<a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS ENC</a>, <a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
     }),
     'Depth Contours':L.tileLayer('contours/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
+      attribution: '<a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS ENC</a>, <a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
     }),
     'Buoys and Beacons':L.tileLayer('seamarks/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://github.com/quantenschaum/mapping">RWS + QGIS + TilesXYZ</a>'
+      attribution: '<a href="https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979">RWS Buoys</a>, <a href="https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049">RWS Beacons</a>, <a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
     }),
     'Vaarweg Markeringen':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
       layers:'vaarweg_markering_drijvend,vaarweg_markering_drijvend_detail,vaarweg_markering_vast,vaarweg_markering_vast_detail',
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
-      attribution: '<a href="https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979">RWS</a>'
+      attribution: '<a href="https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979">RWS Buoys</a> <a href="https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049">RWS Beacons</a>'
      }),
     'OpenSeaMap':L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
       attribution: '<a href="https://openseamap.org/">OpenSeaMap</a>'
     }),
   };
+
+  for (let i = -6; i <= 6; i++) {
+    let s=(i>=0?'+':'')+i;
+    overlays['Tide HW Helgoland '+s+'h']=L.tileLayer('tides/'+s+'/{z}/{x}/{y}.png', {
+      attribution: '<a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
+    });
+  }
+  overlays['Tide Figures']=L.tileLayer('tides/fig/{z}/{x}/{y}.png', {
+    attribution: '<a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
+  });
 
   var layers = [basemaps['OpenStreetMap ORG'], overlays['Grid'], overlays['ENC']];
 
