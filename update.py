@@ -334,72 +334,61 @@ def load_bsh_beacons(filename):
     return load_bsh(filename, "beacon")
 
 
+rws_buoy = {
+    "benaming": "objnam",
+    "obj_vorm_c": "boyshp",
+    "obj_kleur_": "colour",
+    "kleurpatr_": "colpat",
+}
+rws_topmark = {
+    "v_tt_c": "topshp",
+    "tt_kleur_c": "colour",
+    "tt_pat_c": "colpat",
+}
+rws_light = {
+    "licht_kl_c": "colour",
+    "sign_kar_c": "litchr",
+    "sign_gr_c": "siggrp",
+    "sign_perio": "sigper",
+}
+
+
 def load_rws_buoys(filename):
     data = load_json(filename)
     points = []
     for f in data["features"]:
-        try:
-            ll = latlon(f)
-            tags = {"ll": ll}
+        ll = latlon(f)
+        tags = {"ll": ll}
+        # print(json.dumps(f["properties"], indent=2))
+
+        for i, l in enumerate((rws_buoy, rws_topmark, rws_light)):
             p = f["properties"]
-            n = p["benaming"]
-            assert n and "#" not in n
-            tags["seamark:name"] = n
-            tags["seamark:source"] = None
-            tags["seamark:source:id"] = None
+            p = {b: p[a] for a, b in l.items() if p.get(a) and p[a] != "#"}
+            if i == 0 and "boyshp" not in p:
+                p["boyshp"] = 5
+            if p:
+                add_tags(tags, p)
+        typ = tags["seamark:type"]
+        if typ == "buoy_safe_water":
+            tags[f"seamark:{typ}:colour"] = "red;white"
+        if f["properties"].get("obj_vorm_c", "#") == "#":
+            del tags[f"seamark:{typ}:shape"]
+        if (
+            ";" not in tags[f"seamark:{typ}:colour"]
+            and f"seamark:{typ}:colour_pattern" in tags
+        ):
+            del tags[f"seamark:{typ}:colour_pattern"]
+        # add_generic_topmark(tags)
+        add_system(tags)
 
-            k = s57colors(p["obj_kleur_"])
-            if not k:
-                continue
-            t, c = type_cat(k, p["kleurpatr_"])
-            tags["seamark:type"] = t
-            if c:
-                tags[f"seamark:{t}:category"] = c
-            tags["seamark:buoy_lateral:system"] = (
-                (
-                    "cevni"
-                    if c and (k.count(";") % 2 or "danger" in c or "separation" in c)
-                    else "iala-a"
-                )
-                if "lateral" in t
-                else None
-            )
-            tags[f"seamark:{t}:shape"] = shape(p["obj_vorm_c"])
-            tags[f"seamark:{t}:colour"] = "red;white" if t == "buoy_safe_water" else k
-            tags[f"seamark:{t}:colour_pattern"] = (
-                pattern(p["kleurpatr_"]) if ";" in k else None
-            )
-            tags["seamark:topmark:shape"] = topmark(p["v_tt_c"])
-            tc = s57colors(p["tt_kleur_c"])
-            tags["seamark:topmark:colour"] = tc
-            tags["seamark:topmark:colour_pattern"] = (
-                pattern(p["tt_pat_c"]) if tc and ";" in tc else None
-            )
-            tags["seamark:light:colour"] = s57colors(p["licht_kl_c"])
-            tags["seamark:light:character"] = light_chr(p["sign_kar_c"])
-            tags["seamark:light:period"] = light_per(p["sign_perio"])
-            tags["seamark:light:group"] = light_grp(p["sign_gr_c"])
+        points.append(tags)
 
-            tags["seamark"] = None
-            fill_types(tags)
-
-            tags["properties"] = p
-
-            points.append(tags)
-
-            # if 'PM 40-WE 1' in tags['seamark:name']:
-            #    print(json.dumps(tags, indent=2))
-            #    print(json.dumps(f, indent=2))
-            #   break
-        except:
-            print(json.dumps(f, indent=2))
-            raise
-
-    # print(json.dumps(points[0], indent=2))
-    # print(len(points),'points')
     print(len(points))
 
     return points
+
+
+load_rws_buoys("data/vwm/drijvend.json")
 
 
 def load_marrekrite(gpx="marrekrite.gpx"):
@@ -442,13 +431,7 @@ deprecated_tags = (
 
 def update_node(n, tags, dmin=1):
     ll = [float(n.attr[a]) for a in ("lat", "lon")]
-    type = tags.get("seamark:type")
-    name = tags.get("seamark:name")
-    if name:
-        name = name.strip().replace("  ", " ")
     modifications = []
-    # print(n)
-    # print(json.dumps(p, indent=2))
 
     d = distance(ll, tags["ll"])
     if isnan(d) or d > dmin:
@@ -482,8 +465,8 @@ def update_node(n, tags, dmin=1):
 
         ll = [float(n.attr[a]) for a in ("lat", "lon")]
         msg = (
-            type,
-            name,
+            tags.get("seamark:type"),
+            tags.get("seamark:name"),
             "matched by",
             tags.get("match"),
             n.attr("timestamp"),
@@ -494,6 +477,11 @@ def update_node(n, tags, dmin=1):
         # for l in modifications:            print("\t", *[str(s).strip() for s in l])
 
     return modifications
+
+
+def str_equals(a, b):
+    a, b = [str(s).lower().replace(" ", "") for s in (a, b)]
+    return a == b
 
 
 def update_osm(
@@ -524,7 +512,6 @@ def update_osm(
             points,
         )
     )
-    # print(json.dumps(data, indent=2))
 
     matches = {}
     modifications = []
@@ -553,8 +540,6 @@ def update_osm(
         )
         lnam = n.find("tag[k='seamark:lnam']").attr["v"]
 
-        # print(n)
-
         p = []
         match = "NONE"
 
@@ -567,7 +552,7 @@ def update_osm(
             p = list(
                 filter(
                     lambda e: distance(ll, e["ll"]) <= n_dist
-                    and name == e.get("seamark:name"),
+                    and str_equals(name, e.get("seamark:name")),
                     data,
                 )
             )
@@ -578,8 +563,6 @@ def update_osm(
             p = list(filter(lambda e: distance(ll, e["ll"]) <= p_dist, data))
             if p:
                 match = "POSI"
-
-        # print(json.dumps(p, indent=2))
 
         matches[match] = matches.get(match, 0) + 1
 
@@ -594,7 +577,7 @@ def update_osm(
                 josm_zoom(ll)
                 # json.dumps(p, indent=2),
             )
-        # assert len(p) <= 1, json.dumps(p, indent=2)
+
         for m in p:
             data.remove(m)
 

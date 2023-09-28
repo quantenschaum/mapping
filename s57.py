@@ -412,11 +412,14 @@ def s57type(props):
             return bb + "_special_purpose"
         # otherwise decide by color
         col = s57attr("colour", props)
+        pat = s57attr("colpat", props) if "colpat" in props else None
+        if "yellow" in col and "black" in col:
+            return bb + "_cardinal"
         if "yellow" in col or "grey" in col:
             return bb + "_special_purpose"
         if "black" in col and "red" in col:
             return bb + "_isolated_danger"
-        if "white" in col and "red" in col and col.count(";") == 1:
+        if "white" in col and "red" in col and pat == "vertical":
             return bb + "_safe_water"
         if "green" in col or "red" in col:
             return bb + "_lateral"
@@ -476,9 +479,11 @@ def s57translate(props):
             w = s57attr(k, v)
             t = t.format(typ=typ)
             # print(k, "=", v, "-->", t, "=", w)
-            assert t not in tags, props
+            assert t not in tags, (t, props, tags)
             tags[t] = w
-    tags[f"seamark:{typ}:category"] = s57cat(props)
+    cat = s57cat(props)
+    if cat:
+        tags[f"seamark:{typ}:category"] = cat
     return tags
 
 
@@ -537,6 +542,8 @@ def add_system(tags):
         if k not in tags:
             col = tags.get(f"seamark:{typ}:colour")
             cat = tags.get(f"seamark:{typ}:category")
+            if not col or not cat:
+                return
             if cat and (col.count(";") % 2 or "danger" in cat or "separation" in cat):
                 tags[k] = "cevni"
             else:
