@@ -22,118 +22,6 @@ def load_json(filename):
         return json.load(f)
 
 
-types = [
-    "buoy_isolated_danger",
-    "buoy_safe_water",
-    "buoy_special_purpose",
-    "buoy_cardinal",
-    "buoy_lateral",
-]
-
-
-def type_cat(c, p):
-    # print(c, p)
-    c = color(c)
-    p = pattern(p)
-    # print(c, p)
-    cat = None
-    if "black" in c and "red" in c:
-        t = "buoy_isolated_danger"
-    elif "white" in c and "red" in c and p == "vertical":
-        t = "buoy_safe_water"
-    elif "black" in c and "yellow" in c:
-        t = "buoy_cardinal"
-        if c == "black;yellow":
-            cat = "north"
-        elif c == "black;yellow;black":
-            cat = "east"
-        elif c == "yellow;black":
-            cat = "south"
-        elif c == "yellow;black;yellow":
-            cat = "west"
-    elif "yellow" in c:
-        t = "buoy_special_purpose"
-    elif "grey" in c:
-        t = "buoy_special_purpose"
-    elif "green" in c or "red" in c:
-        t = "buoy_lateral"
-        if c.startswith("green"):
-            if "red" in c:
-                if c.count(";") > 2:
-                    cat = "channel_separation"
-                else:
-                    cat = "preferred_channel_port"
-            elif "white" in c:
-                cat = "danger_left"
-            else:
-                assert c.count(";") == 0
-                cat = "starboard"
-        elif c.startswith("red"):
-            if "green" in c:
-                if c.count(";") > 2:
-                    cat = "channel_separation"
-                else:
-                    cat = "preferred_channel_starboard"
-            elif "white" in c:
-                cat = "danger_right"
-            else:
-                assert c.count(";") == 0
-                cat = "port"
-    return t, cat
-
-
-def color(s, osm=0):
-    if s == "#":
-        return
-    for k, v in S57["COLOUR"].items():
-        s = s.replace(str(k), v)
-    return s.replace(",", ";")
-
-
-def shape(s):
-    if s == "#":
-        return
-    return s57toOSM("boyshp", int(s))
-
-
-colpat = {1: "horizontal", 2: "vertical"}
-
-
-def pattern(s):
-    if s == "#":
-        return
-    return colpat[int(s)]
-
-
-def topmark(s):
-    if s == "#":
-        return
-    return s57toOSM("topshp", int(s))
-
-
-def light_chr(s):
-    if s == "#":
-        return
-    return s57toOSM("litchr", int(s))
-
-
-def light_per(s):
-    s = s.strip() if s else s
-    if not s or s == "#":
-        return
-    try:
-        return str(int(s))
-    except:
-        return str(float(s))
-
-
-def light_grp(s):
-    s = s.strip() if s else s
-    if not s or s == "#":
-        return
-    return s.replace("(1)", "").replace("(", "").replace(")", "") or None
-
-
 def latlon_to_grid(lat, lon):
     f = 20037508.34
     x = (lon * f) / 180
@@ -147,7 +35,8 @@ def distance(a, b):
     return sqrt(sum([pow(a[i] - b[i], 2) for i in range(2)]))
 
 
-def usageband(f, bands=["Approach", "Harbour", "Berthing"]):
+def in_usageband(f, bands=["Approach", "Harbour", "Berthing"]):
+    # https://www.nauticalcharts.noaa.gov/charts/rescheming-and-improving-electronic-navigational-charts.html
     return any(b in f["id"] for b in bands)
 
 
@@ -163,104 +52,6 @@ def latlon(f):
     return ll[1], ll[0]
 
 
-def load_bsh_rocks(filename):
-    print("loading BSH rocks", filename)
-    data = load_json(filename)
-    points = []
-    positions = []
-    for f in data["features"]:
-        # print(f)
-        if "Rock" in f["id"] and usageband(f) and gtype(f) == "Point":
-            ll = latlon(f)
-            tags = {"ll": ll}
-            p = f["properties"]
-            tags["properties"] = p
-            tags["seamark:type"] = "rock"
-            tags["seamark:rock:water_level"] = s57toOSM("watlev", p)
-            depth = p.get("valsou")
-            if "valsou" in p:
-                tags["depth"] = float(p["valsou"])
-
-            if ll not in positions and not any(
-                filter(lambda p: distance(p, ll) < 5, positions)
-            ):
-                points.append(tags)
-                positions.append(ll)
-
-    print(len(points))
-
-    return points
-
-
-def load_bsh_wrecks(filename):
-    # https://wiki.openstreetmap.org/wiki/Seamarks/Wrecks
-    # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dwreck
-    print("loading BSH wrecks", filename)
-    data = load_json(filename)
-    points = []
-    positions = []
-    for f in data["features"]:
-        # print(f)
-        if "Wreck" in f["id"] and usageband(f) and gtype(f) == "Point":
-            ll = latlon(f)
-            tags = {"ll": ll}
-            p = f["properties"]
-            tags["properties"] = p
-            tags["seamark:type"] = "wreck"
-            tags["seamark:wreck:category"] = s57toOSM("catwrk", p)
-            if "watlev" in p:
-                tags["seamark:wreck:water_level"] = s57toOSM("watlev", p)
-            if "valsou" in p:
-                tags["depth"] = float(p["valsou"])
-
-            if ll not in positions and not any(
-                filter(lambda p: distance(p, ll) < 50, positions)
-            ):
-                points.append(tags)
-                positions.append(ll)
-
-    print(len(points))
-
-    return points
-
-
-def load_bsh_obstructions(filename):
-    # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dobstruction
-    print("loading BSH obstructions", filename)
-    data = load_json(filename)
-    points = []
-    positions = []
-    for f in data["features"]:
-        # print(f)
-        if (
-            ("Obstruction" in f["id"] or "Foul" in f["id"])
-            and usageband(f)
-            and gtype(f) == "Point"
-        ):
-            # print(json.dumps(f, indent=2))
-            ll = latlon(f)
-            tags = {"ll": ll}
-            p = f["properties"]
-            tags["properties"] = p
-            tags["seamark:type"] = "obstruction"
-            if "catobs" in p:
-                tags["seamark:obstruction:category"] = s57toOSM("catobs", p)
-            if "watlev" in p:
-                tags["seamark:obstruction:water_level"] = s57toOSM("watlev", p)
-            if "valsou" in p:
-                tags["depth"] = float(p["valsou"])
-
-            if ll not in positions and not any(
-                filter(lambda p: distance(p, ll) < 50, positions)
-            ):
-                points.append(tags)
-                positions.append(ll)
-
-    print(len(points))
-
-    return points
-
-
 def is_int(v):
     try:
         int(v)
@@ -269,160 +60,278 @@ def is_int(v):
         return False
 
 
-def load_bsh_seabed(filename):
-    # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dobstruction
-    print("loading BSH nature of seabed", filename)
+def josm_zoom(ll, node=None, delta=0.01):
+    select = f"&select=node{node}" if node and int(node) > 0 else ""
+    return f"http://localhost:8111/zoom?left={ll[1] - delta}&right={ll[1] + delta}&bottom={ll[0] - delta}&top={ll[0] + delta}{select}"
+
+
+def get_bounds(xml):
+    bounds = xml("osm bounds")
+    if bounds:
+        return {
+            a: float(bounds.attr[a]) for a in ("minlat", "maxlat", "minlon", "maxlon")
+        }
+    b = {"minlat": +inf, "maxlat": -inf, "minlon": +inf, "maxlon": -inf}
+    for e in xml("node"):
+        n = pq(e)
+        if not n.attr["lat"]:
+            continue
+        ll = [float(n.attr[a]) for a in ("lat", "lon")]
+        b["minlat"] = min(b["minlat"], ll[0])
+        b["maxlat"] = max(b["maxlat"], ll[0])
+        b["minlon"] = min(b["minlon"], ll[1])
+        b["maxlon"] = max(b["maxlon"], ll[1])
+    return b
+
+
+def get_lnam(f):
+    return f["properties"]["lnam"]
+
+
+def load_geojson(filename, geotype="point"):
+    print("loading GeoJSON", filename)
     data = load_json(filename)
+    features = {}
+    merged = 0
+    for f1 in data["features"]:
+        if gtype(f1).lower() == geotype and in_usageband(f1):
+            p1 = f1["properties"]
+            lnam = get_lnam(f1)
+            f0 = features.get(lnam)
+            if f0:
+                assert lnam == get_lnam(f0)
+                p0 = f0["properties"]
+                s0, s1 = [p["scamax"] for p in (p0, p1)]
+                if s1 < s0:
+                    merged += 1
+                    features[lnam] = f1
+            else:
+                features[lnam] = f1
+
+    print("total", len(data["features"]), "filtered", len(features))
+    # print(features)
+
+    return list(features.values())
+
+
+# load_geojson("data/bsh/AidsAndServices.json")
+# load_geojson("data/bsh/Hydrography.json")
+# load_geojson("data/bsh/RocksWrecksObstructions.json")
+# load_geojson("data/bsh/SkinOfTheEarth.json", "polygon")
+# load_geojson("data/bsh/Topography.json")
+# oops
+
+
+def load_bsh_rocks(filename):
+    data = load_geojson(filename)
     points = []
-    positions = []
     for f in data["features"]:
         # print(f)
-        if "Seabed" in f["id"] and usageband(f) and gtype(f) == "Point":
+        if "Rock" in f["id"]:
+            ll = latlon(f)
+            tags = {"ll": ll}
+            p = f["properties"]
+            tags["properties"] = p
+            tags["seamark:type"] = "rock"
+            tags["seamark:lnam"] = p["lnam"]
+            tags["seamark:rock:water_level"] = s57attr("watlev", p)
+            depth = p.get("valsou")
+            if "valsou" in p:
+                tags["depth"] = float(p["valsou"])
+
+            points.append(tags)
+
+    print("rocks", len(points))
+
+    return points
+
+
+def load_bsh_wrecks(filename):
+    # https://wiki.openstreetmap.org/wiki/Seamarks/Wrecks
+    # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dwreck
+    data = load_geojson(filename)
+    points = []
+    for f in data["features"]:
+        # print(f)
+        if "Wreck" in f["id"]:
+            ll = latlon(f)
+            tags = {"ll": ll}
+            p = f["properties"]
+            tags["properties"] = p
+            tags["seamark:type"] = "wreck"
+            tags["seamark:lnam"] = p["lnam"]
+            tags["seamark:wreck:category"] = s57attr("catwrk", p)
+            if "watlev" in p:
+                tags["seamark:wreck:water_level"] = s57attr("watlev", p)
+            if "valsou" in p:
+                tags["depth"] = float(p["valsou"])
+
+            points.append(tags)
+
+    print("wrecks", len(points))
+
+    return points
+
+
+def load_bsh_obstructions(filename):
+    # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dobstruction
+    data = load_geojson(filename)
+    points = []
+    for f in data["features"]:
+        # print(f)
+        if "Obstruction" in f["id"] or "Foul" in f["id"]:
             # print(json.dumps(f, indent=2))
             ll = latlon(f)
             tags = {"ll": ll}
             p = f["properties"]
             tags["properties"] = p
+            tags["seamark:type"] = "obstruction"
+            tags["seamark:lnam"] = p["lnam"]
+            if "catobs" in p:
+                tags["seamark:obstruction:category"] = s57attr("catobs", p)
+            if "watlev" in p:
+                tags["seamark:obstruction:water_level"] = s57attr("watlev", p)
+            if "valsou" in p:
+                tags["depth"] = float(p["valsou"])
+
+            points.append(tags)
+
+    print("obstructions", len(points))
+
+    return points
+
+
+def load_bsh_seabed(filename):
+    # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dobstruction
+    data = load_geojson(filename)
+    points = []
+    for f in data["features"]:
+        # print(f)
+        if "Seabed" in f["id"]:
+            # print(json.dumps(f, indent=2))
+            ll = latlon(f)
+            tags = {"ll": ll}
+            p = f["properties"]
+            tags["properties"] = p
+            tags["seamark:lnam"] = p["lnam"]
 
             found = 0
 
             if is_int(p.get("natsur")):
                 found = 1
                 tags["seamark:type"] = "seabed_area"
-                tags["seamark:seabed_area:surface"] = s57toOSM("natsur", p)
+                tags["seamark:seabed_area:surface"] = s57attr("natsur", p)
                 if p.get("natqua"):
-                    tags["seamark:seabed_area:quality"] = s57toOSM("natqua", p)
+                    tags["seamark:seabed_area:quality"] = s57attr("natqua", p)
 
             if is_int(p.get("catwed")):
-                cat = s57toOSM("catwed", p)
+                cat = s57attr("catwed", p)
                 if cat == "sea_grass":
                     found = 3
                     tags["seamark:type"] = "seagrass"
                 else:
                     found = 2
                     tags["seamark:type"] = "weed"
-                    tags["seamark:weed:category"] = s57toOSM("catwed", p)
+                    tags["seamark:weed:category"] = s57attr("catwed", p)
 
-            if (
-                found
-                and ll not in positions
-                and not any(filter(lambda p: distance(p, ll) < 50, positions))
-            ):
-                points.append(tags)
-                positions.append(ll)
+            points.append(tags)
 
-    print(len(points))
+    print("seabed infos", len(points))
 
     return points
 
 
-def load_bsh_buoys(filename):
-    print("loading BSH buoys", filename)
-    data = load_json(filename)
-    data = list(filter(usageband, data["features"]))
-    lights = {}
+_keys = set()
+
+
+def add_keys(p):
+    try:
+        p = p["properties"]
+    except:
+        pass
+    _keys.update(p.keys())
+
+
+def print_keys():
+    print("processed", _keys.intersection(S57keys.keys()))
+    print("ununsed  ", _keys.difference(S57keys.keys()))
+
+
+def group_by(data, key=lambda v: v):
+    grp = {}
+    for e in data:
+        k = key(e)
+        grp[k] = grp.get(k, []) + [e]
+    return grp
+
+
+def load_bsh(filename, kind):
+    data = load_geojson(filename)
+
+    print("kind", kind)
+
+    lights = group_by(
+        filter(lambda f: "Light" in f["id"], data),
+        lambda f: str(latlon(f)),
+    )
+    print("lights", len(lights))
+
+    daymarks = group_by(
+        filter(lambda f: "Daymark" in f["id"], data),
+        lambda f: str(latlon(f)),
+    )
+    print("daymarks", len(daymarks))
+
+    buoys = []
     for f in data:
-        if "Light" in f["id"]:
+        if kind in f["id"].lower():
             ll = latlon(f)
-            lls = str(ll)
-            # assert lls not in lights, json.dumps((f, lights[lls]), indent=2)
-            lights[lls] = f
-    buoys = {}
-    for f in data:
-        if "Buoy" in f["id"]:
-            # print(json.dumps(f, indent=2))
-            ll = latlon(f)
-            lls = str(ll)
-            tags = {"ll": ll, "feature": f}
-            p = f["properties"]
-            # print(p["lnam"])
+            tags = {"ll": ll}
+            add_tags(tags, f)
+            assert tags["seamark:type"].startswith(kind), (f, tags)
+            add_system(tags)
 
-            n = p.get("objnam")
-
-            tags["seamark:name"] = n
-            tags["seamark"] = None
-
-            # if "sorind" in p:
-            #     tags["seamark:source"] = p["sorind"] + " " + p["sordat"]
-
-            k = color(p["colour"])
-            if not k:
-                continue
-            t, c = type_cat(k, p.get("colpat", "#"))
-            tags["seamark:type"] = t
-            for u in types:
-                if u == t:
-                    continue
-                tags[f"seamark:{u}:category"] = None
-                tags[f"seamark:{u}:shape"] = None
-                tags[f"seamark:{u}:colour"] = None
-                tags[f"seamark:{u}:colour_pattern"] = None
-            if c:
-                tags[f"seamark:{t}:category"] = c
-            tags["seamark:buoy_lateral:system"] = (
-                (
-                    "cevni"
-                    if c and (k.count(";") % 2 or "danger" in c or "separation" in c)
-                    else "iala-a"
-                )
-                if "lateral" in t
-                else None
-            )
-            tags[f"seamark:{t}:shape"] = shape(p["boyshp"])
-            tags[f"seamark:{t}:colour"] = "red;white" if t == "buoy_safe_water" else k
-            tags[f"seamark:{t}:colour_pattern"] = (
-                pattern(p["colpat"]) if ";" in k else None
-            )
-
-            if t == "buoy_safe_water":
-                tags["seamark:topmark:colour"] = "red"
-                tags["seamark:topmark:shape"] = topmark(3)
-            elif t == "buoy_isolated_danger":
-                tags["seamark:topmark:colour"] = "black"
-                tags["seamark:topmark:shape"] = topmark(4)
-            elif t == "buoy_cardinal":
-                tags["seamark:topmark:colour"] = "black"
-                if c == "north":
-                    tags["seamark:topmark:shape"] = topmark(13)
-                if c == "south":
-                    tags["seamark:topmark:shape"] = topmark(14)
-                if c == "east":
-                    tags["seamark:topmark:shape"] = topmark(11)
-                if c == "west":
-                    tags["seamark:topmark:shape"] = topmark(10)
-
-            l = lights.get(lls)
-            if l:
-                l = l["properties"]
-                tags["seamark:light:colour"] = color(l["colour"])
-                tags["seamark:light:character"] = light_chr(l["litchr"])
-                tags["seamark:light:period"] = light_per(l.get("sigper"))
-                tags["seamark:light:group"] = light_grp(l.get("siggrp"))
-                # print(json.dumps(l, indent=2))
-
-            similar = list(
-                filter(
-                    lambda p: p["ll"] == ll
-                    or distance(p["ll"], ll) < 100
-                    and p["seamark:name"] == tags["seamark:name"],
-                    buoys.values(),
-                )
-            )
-
-            if similar:
-                similar.append(tags)
-                similar.sort(key=lambda p: p["feature"]["properties"]["scamax"])
-                # assert 0, json.dumps(similar, indent=2)
-                for p in similar:
-                    if str(p["ll"]) in buoys:
-                        del buoys[str(p["ll"])]
-                buoys[str(similar[0]["ll"])] = similar[0]
+            d = daymarks.get(str(ll))
+            if d:
+                d = group_by(d, lambda e: int(e["properties"]["scamax"]))
+                d = d[min(d.keys())]
+                d = [s57translate(e["properties"]) for e in d]
+                update_nc(tags, d[0])
             else:
-                buoys[lls] = tags
+                add_generic_topmark(tags)
 
-    print(len(buoys))
+            l = lights.get(str(ll))
+            if l:
+                l = group_by(l, lambda e: int(e["properties"]["scamax"]))
+                l = l[min(l.keys())]
+                l = [s57translate(e["properties"]) for e in l]
+                if len(l) == 1:
+                    update_nc(tags, l[0])
+                else:
+                    for i, e in enumerate(l, 1):
+                        s = {}
+                        for k, v in e.items():
+                            s[k.replace("light:", f"light:{i}:")] = v
+                        update_nc(tags, s)
 
-    return buoys.values()
+            if 0:
+                print("-" * 100)
+                for k, v in tags.items():
+                    print(k, "=", v)
+
+            buoys.append(tags)
+
+    print(kind, len(buoys))
+
+    return buoys
+
+
+def load_bsh_buoys(filename):
+    return load_bsh(filename, "buoy")
+
+
+def load_bsh_beacons(filename):
+    return load_bsh(filename, "beacon")
 
 
 def load_rws_buoys(filename):
@@ -439,18 +348,11 @@ def load_rws_buoys(filename):
             tags["seamark:source"] = None
             tags["seamark:source:id"] = None
 
-            k = color(p["obj_kleur_"])
+            k = s57colors(p["obj_kleur_"])
             if not k:
                 continue
             t, c = type_cat(k, p["kleurpatr_"])
             tags["seamark:type"] = t
-            for u in types:
-                if u == t:
-                    continue
-                tags[f"seamark:{u}:category"] = None
-                tags[f"seamark:{u}:shape"] = None
-                tags[f"seamark:{u}:colour"] = None
-                tags[f"seamark:{u}:colour_pattern"] = None
             if c:
                 tags[f"seamark:{t}:category"] = c
             tags["seamark:buoy_lateral:system"] = (
@@ -468,17 +370,18 @@ def load_rws_buoys(filename):
                 pattern(p["kleurpatr_"]) if ";" in k else None
             )
             tags["seamark:topmark:shape"] = topmark(p["v_tt_c"])
-            tc = color(p["tt_kleur_c"])
+            tc = s57colors(p["tt_kleur_c"])
             tags["seamark:topmark:colour"] = tc
             tags["seamark:topmark:colour_pattern"] = (
                 pattern(p["tt_pat_c"]) if tc and ";" in tc else None
             )
-            tags["seamark:light:colour"] = color(p["licht_kl_c"])
+            tags["seamark:light:colour"] = s57colors(p["licht_kl_c"])
             tags["seamark:light:character"] = light_chr(p["sign_kar_c"])
             tags["seamark:light:period"] = light_per(p["sign_perio"])
             tags["seamark:light:group"] = light_grp(p["sign_gr_c"])
 
             tags["seamark"] = None
+            fill_types(tags)
 
             tags["properties"] = p
 
@@ -497,12 +400,6 @@ def load_rws_buoys(filename):
     print(len(points))
 
     return points
-
-
-# load_geojson('vwm/drijvend.json')
-
-
-# In[14]:
 
 
 def load_marrekrite(gpx="marrekrite.gpx"):
@@ -533,27 +430,36 @@ def load_marrekrite(gpx="marrekrite.gpx"):
     return points
 
 
-# In[15]:
+deprecated_tags = (
+    "source",
+    "seamark:source",
+    "seamark:source:id",
+    "seamark",
+    "buoy",
+    "beacon",
+)
 
 
-def update_node(n, p, dmin=1):
+def update_node(n, tags, dmin=1):
     ll = [float(n.attr[a]) for a in ("lat", "lon")]
-    type = p.get("seamark:type")
-    name = p.get("seamark:name")
+    type = tags.get("seamark:type")
+    name = tags.get("seamark:name")
     if name:
-        name = name.strip()
+        name = name.strip().replace("  ", " ")
     modifications = []
     # print(n)
     # print(json.dumps(p, indent=2))
 
-    d = distance(ll, p["ll"])
+    d = distance(ll, tags["ll"])
     if isnan(d) or d > dmin:
-        n.attr["lat"], n.attr["lon"] = [str(x) for x in p["ll"]]
-        modifications.append(("POS", p["ll"], "" if isnan(d) else f"{round(d)}m"))
+        n.attr["lat"], n.attr["lon"] = [str(x) for x in tags["ll"]]
+        modifications.append(("POS", tags["ll"], "" if isnan(d) else f"{round(d)}m"))
 
-    for k, v in p.items():
+    fill_types(tags)
+
+    for k, v in tags.items():
         v = str(v) if v is not None else v
-        if (k.startswith("seamark") or k.startswith("depth")) and "source" not in k:
+        if k.startswith("seamark") or k.startswith("depth"):
             tag = n.find(f"tag[k='{k}']")
             if tag:
                 w = tag.attr["v"]
@@ -567,61 +473,27 @@ def update_node(n, p, dmin=1):
                 pq(f'<tag k="{k}" v="{v}" />').append_to(n)
                 modifications.append(("ADD", f"{k}={v}"))
 
-    source = None
     if modifications:
         n.attr["action"] = "modify"
-        for k in "source", "seamark:source", "seamark:source:id":
+        for k in deprecated_tags:
             tag = n.find(f"tag[k='{k}']")
             if tag:
-                source = tag.attr("v")
                 tag.remove()
-            v = p.get(k)
-            if v:
-                pq(f'<tag k="{k}" v="{v}" />').append_to(n)
 
-        id = n.attr["id"]
         ll = [float(n.attr[a]) for a in ("lat", "lon")]
         msg = (
             type,
             name,
             "matched by",
-            p.get("match"),
+            tags.get("match"),
             n.attr("timestamp"),
             n.attr("user"),
-            source,
         )
-        modifications.insert(0, josm_zoom(ll, id))
+        modifications.insert(0, josm_zoom(ll, n.attr["id"]))
         modifications.insert(0, msg)
         # for l in modifications:            print("\t", *[str(s).strip() for s in l])
 
     return modifications
-
-
-def josm_zoom(ll, node=None, delta=0.01):
-    select = f"&select=node{node}" if node and int(node) > 0 else ""
-    return f"http://localhost:8111/zoom?left={ll[1] - delta}&right={ll[1] + delta}&bottom={ll[0] - delta}&top={ll[0] + delta}{select}"
-
-
-def get_bounds(xml):
-    bounds = xml("osm bounds")
-    if bounds:
-        return {
-            a: float(bounds.attr[a]) for a in ("minlat", "maxlat", "minlon", "maxlon")
-        }
-    b = {"minlat": +inf, "maxlat": -inf, "minlon": +inf, "maxlon": -inf}
-    for e in xml("node"):
-        n = pq(e)
-        if not n.attr["lat"]:
-            continue
-        ll = [float(n.attr[a]) for a in ("lat", "lon")]
-        b["minlat"] = min(b["minlat"], ll[0])
-        b["maxlat"] = max(b["maxlat"], ll[0])
-        b["minlon"] = min(b["minlon"], ll[1])
-        b["maxlon"] = max(b["maxlon"], ll[1])
-    return b
-
-
-# In[17]:
 
 
 def update_osm(
@@ -675,26 +547,38 @@ def update_osm(
             age = now - ts
 
         type = n.find("tag[k='seamark:type']").attr["v"]
-        name = n.find("tag[k='seamark:name']").attr["v"]
+        name = (
+            n.find("tag[k='seamark:name']").attr["v"]
+            or n.find("tag[k='name']").attr["v"]
+        )
+        lnam = n.find("tag[k='seamark:lnam']").attr["v"]
 
         # print(n)
 
         p = []
         match = "NONE"
-        if name:
+
+        if lnam:
+            p = list(filter(lambda e: lnam == e.get("seamark:lnam"), data))
+            if p:
+                match = "LNAM"
+
+        if not p and name:
             p = list(
                 filter(
-                    lambda p: distance(ll, p["ll"]) <= n_dist
-                    and name == p.get("seamark:name"),
+                    lambda e: distance(ll, e["ll"]) <= n_dist
+                    and name == e.get("seamark:name"),
                     data,
                 )
             )
             if p:
                 match = "NAME"
+
         if not p:
-            p = list(filter(lambda p: distance(ll, p["ll"]) <= p_dist, data))
+            p = list(filter(lambda e: distance(ll, e["ll"]) <= p_dist, data))
             if p:
-                match = "POS"
+                match = "POSI"
+
         # print(json.dumps(p, indent=2))
 
         matches[match] = matches.get(match, 0) + 1
@@ -741,9 +625,7 @@ def update_osm(
                     print(*m[:3])
                     modifications.append(m)
 
-    print("MATCHED NODES ", matches)
-    print("MATCHED POINTS", len(data))
-
+    added = 0
     if bounds and add:
         for i, p in enumerate(data, 10000):
             n = pq(f'<node id="{-i}" visible="true" lat="nan" lon="nan"/>')
@@ -752,10 +634,15 @@ def update_osm(
             print(*m[:3])
             modifications.append(m)
             x("osm").prepend(n)
+            added += 1
+
+    print("MATCHED", matches)
+    print("ADDED", added)
 
     if modifications:
         with open(outfile, "w") as f:
             f.write(str(x))
+
         requests.get(
             f"http://localhost:8111/open_file?filename={os.path.abspath(outfile)}"
         )
@@ -810,6 +697,12 @@ def main():
         action="store_true",
     )
     parser.add_argument(
+        "-j",
+        "--review",
+        help="load and review changes in JOSM",
+        action="store_true",
+    )
+    parser.add_argument(
         "-N",
         "--n-dist",
         help="distance in meters for matching nodes by name",
@@ -858,6 +751,9 @@ def main():
     elif "buoy" in infile:
         seamark_type = "buoy_.*"
         data = load_bsh_buoys(datafile)
+    elif "beacon" in infile:
+        seamark_type = "beacon_.*"
+        data = load_bsh_beacons(datafile)
     elif "rock" in infile:
         seamark_type = "rock"
         data = load_bsh_rocks(datafile)
@@ -870,6 +766,8 @@ def main():
     elif "seabed" in infile:
         seamark_type = "seabed_area|weed|seagrass"
         data = load_bsh_seabed(datafile)
+
+    print("seamark:type", seamark_type)
 
     update_osm(
         infile,
@@ -884,6 +782,7 @@ def main():
         sm_type=seamark_type,
         min_age=args.age,
         user=args.user,
+        review=args.review,
     )
 
 

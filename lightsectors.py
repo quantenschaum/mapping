@@ -273,7 +273,7 @@ def generate_sectors(infile, outfile, config={}):
 
         lines = {}
         for s in sectors:
-            r0 = s.get("range", min_range)  # nominal range
+            r0 = s.get("range", max(min_range, 3))  # nominal range
             r1 = min(r0 * f_range, max_range)  # rendered range
             a, b, o = [s.get(k) for k in SSO]
             is_ori = o is not None
