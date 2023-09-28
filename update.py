@@ -289,7 +289,6 @@ def load_bsh(filename, kind):
             tags = {"ll": ll}
             add_tags(tags, f)
             assert tags["seamark:type"].startswith(kind), (f, tags)
-            add_system(tags)
 
             d = daymarks.get(str(ll))
             if d:
@@ -364,31 +363,17 @@ def load_rws_buoys(filename):
         for i, l in enumerate((rws_buoy, rws_topmark, rws_light)):
             p = f["properties"]
             p = {b: p[a] for a, b in l.items() if p.get(a) and p[a] != "#"}
-            if i == 0 and "boyshp" not in p:
-                p["boyshp"] = 5
+            if i == 0:
+                p["buoy_type"] = 5
             if p:
                 add_tags(tags, p)
-        typ = tags["seamark:type"]
-        if typ == "buoy_safe_water":
-            tags[f"seamark:{typ}:colour"] = "red;white"
-        if f["properties"].get("obj_vorm_c", "#") == "#":
-            del tags[f"seamark:{typ}:shape"]
-        if (
-            ";" not in tags[f"seamark:{typ}:colour"]
-            and f"seamark:{typ}:colour_pattern" in tags
-        ):
-            del tags[f"seamark:{typ}:colour_pattern"]
         # add_generic_topmark(tags)
-        add_system(tags)
 
         points.append(tags)
 
     print(len(points))
 
     return points
-
-
-load_rws_buoys("data/vwm/drijvend.json")
 
 
 def load_marrekrite(gpx="marrekrite.gpx"):
@@ -649,16 +634,21 @@ def main():
     )
 
     parser.add_argument(
-        "infile",
-        help="OSM XML file to read",
+        "mode",
+        help="mode of operation (what kind of data to read and update)",
     )
     parser.add_argument(
         "datafile",
         help="data source file to read (geojson/gpx)",
     )
     parser.add_argument(
+        "infile",
+        help="OSM XML file to read",
+    )
+    parser.add_argument(
         "outfile",
         help="OSM XML file to write",
+        default="out.osm",
         nargs="?",
     )
     parser.add_argument(
@@ -721,32 +711,33 @@ def main():
 
     args = parser.parse_args()
 
-    infile = args.infile
-    outfile = args.outfile or args.infile.replace(".osm", ".out.osm")
+    mode = args.mode
     datafile = args.datafile
+    infile = args.infile
+    outfile = args.outfile
 
-    if "drijvend" in datafile:
+    if all(s in mode for s in ("rws", "buoy")):
         seamark_type = "buoy_.*"
         data = load_rws_buoys(datafile)
-    elif "marrekrite" in datafile:
+    elif all(s in mode for s in ("marre",)):
         seamark_type = "buoy_.*"
         data = load_marrekrite(datafile)
-    elif "buoy" in infile:
+    elif all(s in mode for s in ("bsh", "buoy")):
         seamark_type = "buoy_.*"
         data = load_bsh_buoys(datafile)
-    elif "beacon" in infile:
+    elif all(s in mode for s in ("bsh", "beacon")):
         seamark_type = "beacon_.*"
         data = load_bsh_beacons(datafile)
-    elif "rock" in infile:
+    elif all(s in mode for s in ("bsh", "rock")):
         seamark_type = "rock"
         data = load_bsh_rocks(datafile)
-    elif "wreck" in infile:
+    elif all(s in mode for s in ("bsh", "wreck")):
         seamark_type = "wreck"
         data = load_bsh_wrecks(datafile)
-    elif "obstr" in infile:
+    elif all(s in mode for s in ("bsh", "obstr")):
         seamark_type = "obstruction"
         data = load_bsh_obstructions(datafile)
-    elif "seabed" in infile:
+    elif all(s in mode for s in ("bsh", "seabed")):
         seamark_type = "seabed_area|weed|seagrass"
         data = load_bsh_seabed(datafile)
 

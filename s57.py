@@ -402,8 +402,8 @@ def s57type(props):
         return "mooring"
     if "topshp" in props:
         return "topmark"
-    if any(k in props for k in ("boyshp", "bcnshp", "beacon_type")):
-        bb = "buoy" if "boyshp" in props else "beacon"
+    if any(k in props for k in ("boyshp", "buoy_type", "bcnshp", "beacon_type")):
+        bb = "buoy" if "boyshp" in props or "buoy_type" in props else "beacon"
         if "catlam" in props:
             return bb + "_lateral"
         if "catcam" in props:
@@ -484,6 +484,7 @@ def s57translate(props):
     cat = s57cat(props)
     if cat:
         tags[f"seamark:{typ}:category"] = cat
+    fix_tags(tags)
     return tags
 
 
@@ -499,6 +500,18 @@ def add_tags(tags, props):
     except:
         pass
     update_nc(tags, s57translate(props))
+
+
+def fix_tags(tags):
+    typ = tags["seamark:type"]
+    if typ == "buoy_safe_water":
+        tags[f"seamark:{typ}:colour"] = "red;white"
+    if (
+        ";" not in tags.get(f"seamark:{typ}:colour", "")
+        and f"seamark:{typ}:colour_pattern" in tags
+    ):
+        tags[f"seamark:{typ}:colour_pattern"] = None
+    add_system(tags)
 
 
 def fill_types(tags):
