@@ -502,18 +502,6 @@ def add_tags(tags, props):
     update_nc(tags, s57translate(props))
 
 
-def fix_tags(tags):
-    typ = tags["seamark:type"]
-    if typ == "buoy_safe_water":
-        tags[f"seamark:{typ}:colour"] = "red;white"
-    if (
-        ";" not in tags.get(f"seamark:{typ}:colour", "")
-        and f"seamark:{typ}:colour_pattern" in tags
-    ):
-        tags[f"seamark:{typ}:colour_pattern"] = None
-    add_system(tags)
-
-
 def fill_types(tags):
     typ = tags["seamark:type"]
     for t in S57types.values():
@@ -560,12 +548,29 @@ def add_system(tags):
             if cat and (col.count(";") % 2 or "danger" in cat or "separation" in cat):
                 tags[k] = "cevni"
             else:
-                x = (
-                    "a"
+                tags[k] = (
+                    "iala-a"
                     if (cat == "port" and col.startswith("red"))
                     or (cat == "starboard" and col.startswith("green"))
                     or (cat == "preferred_channel_port" and col.startswith("green"))
                     or (cat == "preferred_channel_starboard" and col.startswith("red"))
-                    else "b"
+                    else "iala-b"
                 )
-                tags[k] = f"iala-{x}"
+
+
+def fix_tags(tags):
+    typ = tags["seamark:type"]
+
+    k = f"seamark:{typ}:colour"
+    if typ == "buoy_safe_water":
+        tags[k] = "red;white"
+
+    p = f"seamark:{typ}:colour_pattern"
+    if p in tags and ";" not in tags.get(k, ""):
+        tags[p] = None
+
+    k = f"seamark:{typ}:shape"
+    if not tags.get(k, 1):
+        del tags[k]
+
+    add_system(tags)

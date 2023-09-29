@@ -125,7 +125,7 @@ def load_geojson(filename, geotype="point"):
 def load_bsh_rocks(filename):
     data = load_geojson(filename)
     points = []
-    for f in data["features"]:
+    for f in data:
         # print(f)
         if "Rock" in f["id"]:
             ll = latlon(f)
@@ -151,7 +151,7 @@ def load_bsh_wrecks(filename):
     # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dwreck
     data = load_geojson(filename)
     points = []
-    for f in data["features"]:
+    for f in data:
         # print(f)
         if "Wreck" in f["id"]:
             ll = latlon(f)
@@ -177,7 +177,7 @@ def load_bsh_obstructions(filename):
     # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dobstruction
     data = load_geojson(filename)
     points = []
-    for f in data["features"]:
+    for f in data:
         # print(f)
         if "Obstruction" in f["id"] or "Foul" in f["id"]:
             # print(json.dumps(f, indent=2))
@@ -205,7 +205,7 @@ def load_bsh_seabed(filename):
     # https://wiki.openstreetmap.org/wiki/Tag:seamark:type%3Dobstruction
     data = load_geojson(filename)
     points = []
-    for f in data["features"]:
+    for f in data:
         # print(f)
         if "Seabed" in f["id"]:
             # print(json.dumps(f, indent=2))
@@ -234,7 +234,8 @@ def load_bsh_seabed(filename):
                     tags["seamark:type"] = "weed"
                     tags["seamark:weed:category"] = s57attr("catwed", p)
 
-            points.append(tags)
+            if found:
+                points.append(tags)
 
     print("seabed infos", len(points))
 
@@ -617,10 +618,12 @@ def update_osm(
 
         if review:
             for i, m in enumerate(modifications, 1):
-                for l in m:
-                    print(l)
+                for j, l in enumerate(m):
+                    print(f"{'  'if j>1 else ''}{l}", end=" " if j == 0 else "\n")
+                if len(m) <= 4 and "seamark:lnam" in str(m[3]):
+                    continue
                 requests.get(m[2])
-                input(f"{i}/{len(modifications)}")
+                input(f"  {i}/{len(modifications)}")
 
 
 def main():
@@ -640,15 +643,18 @@ def main():
     parser.add_argument(
         "datafile",
         help="data source file to read (geojson/gpx)",
+        metavar="source",
     )
     parser.add_argument(
         "infile",
         help="OSM XML file to read",
+        metavar="in.osm",
     )
     parser.add_argument(
         "outfile",
         help="OSM XML file to write",
         default="out.osm",
+        metavar="out.osm",
         nargs="?",
     )
     parser.add_argument(

@@ -256,6 +256,7 @@ def generate_sectors(infile, outfile, config={}):
             continue
 
         name = get_tag("seamark:name", n) or get_tag("name", n)
+        lnam = get_tag("seamark:lnam", n)
         merged_label = light_label(merge(sectors), True)
 
         print(f"{i}/{N}", seamark_type, name, merged_label.replace("\u00A0", " "))
@@ -267,6 +268,8 @@ def generate_sectors(infile, outfile, config={}):
         set_tag("seamark:type", t, center)
         if name:
             set_tag("seamark:name", name, center)
+        if lnam:
+            set_tag("seamark:lnam", lnam, center)
         set_tag("seamark:light:character", merged_label, center)
         set_tag("seamark:light:colour", colors(sectors), center)
         out.append(center)
@@ -349,12 +352,13 @@ def main():
     parser.add_argument(
         "infile",
         help="OSM XML file to read",
-        default="lights.osm",
-        nargs="?",
+        metavar="in.osm",
     )
     parser.add_argument(
         "outfile",
         help="OSM XML file to write",
+        default="out.osm",
+        metavar="out.osm",
         nargs="?",
     )
     parser.add_argument(
@@ -411,7 +415,7 @@ def main():
         lambda s, k, d=None: d if getattr(s, k) is None else getattr(s, k), args
     )
 
-    outfile = args.outfile or args.infile.replace(".osm", "-sectors.osm")
+    outfile = args.outfile
 
     generate_sectors(args.infile, outfile, args)
 
