@@ -6888,6 +6888,7 @@
 	<type tag="seamark:height" minzoom="11" additional="text" notosm="true"/>
 	<type tag="seamark:clearance_height" minzoom="11" additional="text" notosm="true"/>
 	<!-- <type tag="seamark:name" minzoom="11" additional="text"/> -->
+  <type tag="seamark:lnam" minzoom="10" additional="true" notosm="true"/>
 	<type tag="seamark:period" minzoom="11" additional="true" notosm="true"/>
 	<type tag="seamark:range" minzoom="11" additional="true" notosm="true"/>
 	<type tag="seamark:reference" minzoom="11" additional="text" notosm="true"/>

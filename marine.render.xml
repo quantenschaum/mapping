@@ -43,6 +43,10 @@
 
 	<renderingProperty attr="hideLightSectors" name="Light Sectors" description="" type="boolean" possibleValues="" category="hide"/>
 
+	<renderingProperty attr="hideLightSectorSources" name="Light Sector Sources" description="" type="boolean" possibleValues="" category="hide"/>
+
+	<renderingProperty attr="hideNoLNAM" name="OSM Seamarks (some)" description="" type="boolean" possibleValues="" category="hide"/>
+
   <renderingProperty attr="shellsStyle" name="Shells Style" description="Style for Shells on Seabed" type="string" defaultValueDescription="gray" possibleValues="rocks,stones,red"/>
 
   <renderingAttribute name="gpxColor"> <!-- deprecated -->
@@ -887,10 +891,6 @@
 
 
   <text>
-    <switch minzoom="10" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth">
-      <case tag="seamark:type" value="rock" />
-      <case tag="seamark:type" value="wreck" textDy="-10" />
-    </switch>
 <!--    <case minzoom="10" tag="seamark:type" value="sea_area" additional="seamark:sea_area:category=shoal" textColor="$depthTextColor" textOnPath="true" textSize="12" textMinDistance="100"/>-->
     <case minzoom="11" tag="osmand" value="file_waypoint"> <!-- for new OpenGL engine -->
       <case additional="file_has_waypoints=true" textWrapWidth="25" textHaloRadius=":1" textColor="#000000"
@@ -1488,6 +1488,11 @@
 				aiming at OSMAND text display according to IHO Chart INT-1 Section P: Lights and Section R Fog Signals, e.g. https://map.openseamap.org/?zoom=15&lon=4.79&lat=53.00 .
 				An appropriate graphical display of sector lights with coloured circle sections requires further development of code in OSMAND. Feedback welcome: josail @ gmx.de -->
 
+        <switch minzoom="12" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth">
+          <case tag="seamark:type" value="rock" />
+          <case tag="seamark:type" value="wreck" textDy="-10" />
+          <apply_if additional="seamark:lnam" textOrder="20"/>
+        </switch>
         <switch nameTag="seamark:name" nameTag2="seamark:light:character">
           <!-- empty nameTag="seamark:name" is filled with "." in rendering_types.xml in order to assure nameTag2 display. Check e.g. on buoy cardinal west: https://map.openseamap.org/?zoom=16&lon=8.170&lat=53.780 -->
           <switch textItalic="true">
@@ -1577,6 +1582,7 @@
           <apply_if minzoom="11" tag="seamark:type" value="landmark" additional="seamark:light:colour" textDy="-14"/>
           <apply_if minzoom="11" tag="seamark:type" value="landmark" additional="seamark:light:1:colour" textDy="-14"/>
           <apply textWrapWidth="25"/>
+          <apply_if hideLightSectorSources="true" additional="lightsector=source" textDy="30"/>
         </switch>
 
         <!-- INT-1 J Section: Nature of the Seabed -->
@@ -1637,6 +1643,11 @@
           <case minzoom="15" textSize="14"/>
         </apply>
         <apply_if nightMode="true" textColor="#eaf6ff" textHaloColor="#5545a5e2"/>
+        <apply_if hideNoLNAM="true">
+          <case additional="seamark:lnam"/>
+          <case disable="true"/>
+        </apply_if>
+        <apply_if additional="seamark:lnam" textOrder="20"/>
       </switch>
 
       <switch>
@@ -2316,8 +2327,14 @@
           <case additional="seamark:light:colour=white;red" shield="light_whitered_shield"/>
           <case additional="seamark:light:colour=violet" shield="light_violet_shield"/>
         </apply>
+        <apply_if hideNoLNAM="true">
+          <case additional="seamark:lnam"/>
+          <case disable="true"/>
+        </apply_if>
+        <apply_if additional="seamark:lnam" iconOrder="20"/>
       </switch>
       <switch>
+        <apply_if hideLightSectorSources="true" disable="true"/>
         <switch>
           <case minzoom="9" maxzoom="11" tag="seamark:type" value="light_major" icon="seamark_light_major_small" iconOrder="50">
             <case additional="lightsector=source" iconOrder="1" shield="light_violet_center_shield"/>
@@ -2452,6 +2469,11 @@
           <case additional="seamark:light:colour=white;red" shield="light_whitered_center_shield"/>
           <case additional="seamark:light:colour=violet" shield="light_violet_center_shield"/>
         </apply>
+        <apply_if hideNoLNAM="true">
+          <case additional="seamark:lnam"/>
+          <case disable="true"/>
+        </apply_if>
+        <apply_if additional="seamark:lnam" iconOrder="20"/>
       </switch>
       <switch>
         <case minzoom="11" tag="seamark:type" value="landmark" icon="seamark_landmark_tower" iconOrder="58"
