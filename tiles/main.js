@@ -170,9 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if(document.URL.startsWith('file') || document.URL.includes('localhost')) {
     overlays['QGIS ENC'] = L.tileLayer('http://localhost:8001/tiles/enc/EPSG3857/{z}/{x}/{y}.png');
     overlays['QGIS Buoys and Beacons'] = L.tileLayer('http://localhost:8001/tiles/bnb/EPSG3857/{z}/{x}/{y}.png');
-    if(document.URL.includes('#ondemand')) {
-      layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QGIS Buoys and Beacons']];
-    }
   }
 
   var map = L.map('map', {
@@ -221,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
   map.on('layeradd layerremove overlayadd overlayremove',storeActiveLayers);
 
 
-  new L.Hash(map);
+  new L.Hash(map); // try https://github.com/KoGor/leaflet-fullHash
 
   L.control.polylineMeasure({
       unit: 'nauticalmiles',
