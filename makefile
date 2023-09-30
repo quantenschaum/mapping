@@ -50,6 +50,13 @@ tides:
 	wget https://data.bsh.de/OpenData/Main/Gezeitenstrom_Kueste/Gezeitenstrom_Kueste.zip   -O data/$@/Kueste.zip
 
 
+bsh.osm: empty.osm
+	for L in buoys beacons facil lights; do ./update.py bsh-$$L data/bsh/AidsAndServices.json $< bsh-$$L.osm -a; done
+	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json $< bsh-$$L.osm -a; done
+	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json $< bsh-$$L.osm -a; done
+	for L in beacons facil lights; do ./lightsectors.py bsh-$$L.osm bsh-$$L-sectors.osm -j; done
+
+
 
 
 
@@ -102,4 +109,6 @@ data/omc:
 	unzip $@.zip -d $@
 
 omc: data/omc
-	cd $< && ./OsmAndMapCreator.sh
+	$</OsmAndMapCreator.sh
+	mv -v data/omc/*obf data/obf/
+
