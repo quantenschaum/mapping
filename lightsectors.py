@@ -6,6 +6,7 @@ from math import ceil
 from itertools import chain
 from sys import stderr
 from math import radians, degrees, sin, cos, tan, asin, atan2, atan, exp, log, pi
+from s57 import *
 
 
 def linspace(start, stop, num=10):
@@ -140,7 +141,7 @@ def nformat(v):
     return f"{v:.1f}".replace(".0", "")
 
 
-def light_label(sector, extended=False, sep="\u00A0"):
+def label(sector, height_range=False, sep="\u00A0"):
     l = ""
     c = sector.get("character")
     if c and c != "?":
@@ -159,24 +160,30 @@ def light_label(sector, extended=False, sep="\u00A0"):
     if p and p != "?":
         l += f"{sep}{p}s"
 
-    if not extended:
-        return l.replace(";", "/")
+    if height_range:
+        h = sector.get("height")
+        if h:
+            if isinstance(h, list):
+                a, b = min(h), max(h)
+                l += (
+                    f"{sep}{nformat(a)}-{nformat(b)}m"
+                    if a != b
+                    else f"{sep}{nformat(a)}m"
+                )
+            else:
+                l += f"{sep}{nformat(h)}m"
 
-    h = sector.get("height")
-    if h:
-        if isinstance(h, list):
-            a, b = min(h), max(h)
-            l += f"{sep}{nformat(a)}-{nformat(b)}m" if a != b else f"{sep}{nformat(a)}m"
-        else:
-            l += f"{sep}{nformat(h)}m"
-
-    r = sector.get("range")
-    if r:
-        if isinstance(r, list):
-            a, b = min(r), max(r)
-            l += f"{sep}{nformat(a)}-{nformat(b)}M" if a != b else f"{sep}{nformat(a)}M"
-        else:
-            l += f"{sep}{nformat(r)}M"
+        r = sector.get("range")
+        if r:
+            if isinstance(r, list):
+                a, b = min(r), max(r)
+                l += (
+                    f"{sep}{nformat(a)}-{nformat(b)}M"
+                    if a != b
+                    else f"{sep}{nformat(a)}M"
+                )
+            else:
+                l += f"{sep}{nformat(r)}M"
 
     m = []
     for p in "status", "visibility", "exhibition":
@@ -187,32 +194,6 @@ def light_label(sector, extended=False, sep="\u00A0"):
         l += sep + "(" + ",".join(m) + ")"
 
     return l.replace(";", "/")
-
-
-abbrevs = {
-    "permanent": "perm",
-    "occasional": "occ",
-    "recommended": "rcmnd",
-    "not_in_use": "unused",
-    "intermittent": "itmd",
-    "reserved": "res",
-    "temporary": "temp",
-    "private": "priv",
-    "mandatory": "mand",
-    "extinguished": "exti",
-    "illuminated": "illum",
-    "historic": "hist",
-    "public": "pub",
-    "synchronized": "sync",
-    "watched": "wat",
-    "unwatched": "unw",
-    "existence_doubtful": "dbtfl",
-    "intensified": "intsfd",
-    "unintensified": "uintsfd",
-    "restricted": "restr",
-    "obscured": "obscrd",
-    "part_obscured": "p.obscrd",
-}
 
 
 def abbrev(s):
@@ -311,9 +292,20 @@ def generate_sectors(infile, outfile, config={}):
 
         name = get_tag("seamark:name", n) or get_tag("name", n)
         lnam = get_tag("seamark:lnam", n)
-        merged_label = light_label(merge(sectors), True)
 
-        print(f"{i}/{N}", seamark_type, name, merged_label.replace("\u00A0", " "))
+        gsectors = group_by(
+            sectors,
+            lambda s: "-".join(s.get(p, "?") for p in ("character", "group", "period")),
+        )
+
+        merged_label = " ".join(label(merge(s), True) for s in gsectors.values())
+        if len(gsectors) > 1:
+            print(
+                f"{i}/{N}",
+                seamark_type,
+                name,
+                merged_label.replace(" ", " + ").replace("\u00A0", " "),
+            )
         ll = get_ll(n, osm)
 
         center = new_node(*ll)
@@ -343,7 +335,7 @@ def generate_sectors(infile, outfile, config={}):
                     "lightsector": "orientation",
                     "orientation": o,
                     "range": r1,
-                    "name": f"{nformat(o)}° {light_label(s)}",
+                    "name": f"{nformat(o)}° {label(s)}",
                     "colour": s.get("colour"),
                 }
 
@@ -374,7 +366,7 @@ def generate_sectors(infile, outfile, config={}):
                 w = new_way(points)
                 set_tag("lightsector", "arc", w)
                 set_tag("colour", s.get("colour"), w)
-                set_tag("name", light_label(s), w)
+                set_tag("name", label(s), w)
                 for m in points + [w]:
                     out.append(m)
 

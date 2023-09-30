@@ -2975,7 +2975,7 @@
         </apply>
       </switch>
 
-      <case minzoom="14" tag="leisure" value="marina" icon="seamark_harbour_default_small" iconOrder="5"
+      <case minzoom="14" tag="leisure" value="marina" icon="seamark_harbour_marina" iconOrder="5"
             iconVisibleSize="15" intersectionSizeFactor="0.8">
         <apply_if nightMode="true" shield="seamark_harbour_default_small_night_shield"/>
       </case>
@@ -3244,10 +3244,11 @@
           <apply_if nightMode="true" shield="seamark_k311_foul_ground_shield_night"/>
         </case>
         <!-- alternative to INT-1 K31.1 icon: upward anchor icon="seamark_obstruction_foul_ground"/> -->
-        <case additional="seamark:obstruction:category=fish_haven" icon="seamark_restricted_area_fish_sanctuary"/>
         <case additional="seamark:obstruction:category=boom" icon="seamark_obstruction_boom"/>
+        <case additional="seamark:obstruction:category=fish_haven" icon="seamark_restricted_area_fish_sanctuary"/>
         <case additional="seamark:obstruction:category=construction" icon="seamark_obstruction_construction"/>
         <case minzoom="14" additional="seamark:obstruction:category=stump" icon="seamark_obstruction_stump" icon_shift_py="-0.8"/>
+        <apply_if additional="depth:exposition=shoaler" shield="seamark_rock_shield"/>
       </case>
 
       <case minzoom="15" tag="seamark:type" value="distance_mark" icon="seamark_distance_mark" iconOrder="150">

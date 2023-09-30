@@ -438,12 +438,112 @@ S57 = {
     },
     "CONRAD": {
         1: "conspicuous",
-        2: None,  # "not_conspicuous",
+        2: "not_conspicuous",
         3: "reflector",
     },
     "CONVIS": {
         1: "conspicuous",
-        2: None,  # "not_conspicuous",
+        2: "not_conspicuous",
+    },
+    "CATRTB": {
+        1: "ramark",
+        2: "racon",
+        3: "leading",
+    },
+    "VALMXR": None,
+    "RADWAL": None,
+    "CALSGN": None,
+    "COMCHA": None,
+    "CATSCF": {
+        1: "visitor_berth",
+        2: "nautical_club",
+        3: "boat_hoist",
+        4: "sailmaker",
+        5: "boatyard",
+        6: "public_inn",
+        7: "restaurant",
+        8: "chandler",
+        9: "provisions",
+        10: "doctor",
+        11: "pharmacy",
+        12: "watertap",
+        13: "fuelstation",
+        14: "electricity",
+        15: "bottle_gas",
+        16: "showers",
+        17: "launderette",
+        18: "toilets",
+        19: "post_box",
+        20: "telephone",
+        21: "refuse_bin",
+        22: "car_park",
+        23: "boat_trailers_park",
+        24: "caravan_site",
+        25: "camping_site",
+        26: "pump-out",
+        27: "emergency_telephone",
+        28: "slipway",
+        29: "visitors_mooring",
+        30: "scrubbing_berth",
+        31: "picnic_area",
+        32: "mechanics_workshop",
+        33: "security_service",
+    },
+    "CATSIW": {
+        1: "danger",
+        2: "maritime_obstruction",
+        3: "cable",
+        4: "military",
+        5: "distress",
+        6: "weather",
+        7: "storm",
+        8: "ice",
+        9: "time",
+        10: "tide",
+        11: "tidal_stream",
+        12: "tide_gauge",
+        13: "tide_scale",
+        14: "diving",
+        15: "water_level_gauge",
+    },
+    "CATSIT": {
+        1: "port_control",
+        2: "port_entry_departure",
+        3: "ipt",
+        4: "berthing",
+        5: "dock",
+        6: "lock",
+        7: "flood_barrage",
+        8: "bridge_passage",
+        9: "dredging",
+        10: "traffic_control",
+    },
+    "CATPIL": {
+        1: "cruising_vessel",
+        2: "helicopter",
+        3: "from_shore",
+    },
+    "TRAFIC": {
+        1: "inbound",
+        2: "outbound",
+        3: "one-way",
+        4: "two-way",
+    },
+    "CATROS": {
+        1: "omnidirectional",
+        2: "directional",
+        3: "rotating_pattern",
+        4: "consol",
+        5: "rdf",
+        6: "qtg",
+        7: "aeronautical",
+        8: "decca",
+        9: "loran",
+        10: "dgps",
+        11: "toran",
+        12: "omega",
+        13: "syledis",
+        14: "chiaka",
     },
 }
 
@@ -499,13 +599,26 @@ S57keys = {
     # facilities
     "cathaf": "seamark:harbour:category",
     "catcrn": "seamark:crane:category",
+    "catscf": "seamark:small_craft_facility:category",
+    # stations
+    "catsit": "seamark:signal_station_traffic:category",
+    "catsiw": "seamark:signal_station_warning:category",
+    "catros": "seamark:radio_station:category",
+    "calsgn": "seamark:{typ}:callsign",
+    "comcha": "seamark:{typ}:channel",
+    "catpil": "seamark:pilot_boarding:category",
     # fog signal
     "catfog": "seamark:fog_signal:category",
-    "sigfrq": "seamark:fog_signal:frequency",
+    "sigfrq": "seamark:{typ}:frequency",
+    # transponder
+    "catrtb": "seamark:radar_transponder:category",
+    "valmxr": "seamark:{typ}:range",
+    "radwal": "seamark:{typ}:wavelength",
     # other/general
     "conrad": "seamark:{typ}:reflectivity",
     "convis": "seamark:{typ}:conspicuity",
     "catmor": "seamark:mooring:category",
+    "trafic": "seamark:{typ}:traffic_flow",
     "elevat": "seamark:{typ}:elevation",
     "status": "seamark:{typ}:status",
     "persta": "seamark:period_start",
@@ -565,21 +678,38 @@ def cleanup(s):
     return s
 
 
+def is_something(props):
+    keys = (
+        set(S57keys.keys())
+        .intersection(props.keys())
+        .difference(
+            ["objnam", "lnam", "convis", "height", "colour", "inform", "status"]
+        )
+    )
+    return bool(keys)
+
+
 def s57type(props):
-    typs = set(
-        [
-            v.split(":")[1]
-            for k, v in S57keys.items()
-            if v.count(":") == 2 and k in props
-        ]
+    if "rock_type" in props:
+        return "rock"
+    if "obstruction_type" in props:
+        return "obstruction"
+    types = set(
+        v.split(":")[1] for k, v in S57keys.items() if v.count(":") == 2 and k in props
     ).difference(["{typ}"])
-    if len(typs) == 1:
-        return list(typs)[0]
+    if len(types) == 1:
+        return list(types)[0]
 
     # if "catlmk" in props:
     #     return "landmark"
     if "catsil" in props:
         return "tank"
+    if "catpil" in props:
+        return "pilot_boarding"
+    if "comcha" in props:
+        return "radio_station"
+    if "calsgn" in props:
+        return "radio_station"
     if "buishp" in props:
         return "building"
     # if "cathaf" in props:
@@ -588,12 +718,10 @@ def s57type(props):
     #     return "platform"
     # if "catcrn" in props:
     #     return "crane"
-    if "rock_type" in props:
-        return "rock"
     # if "catwrk" in props:
     #     return "wreck"
-    if "catobs" in props or "obstr_type" in props:
-        return "obstruction"
+    # if "catobs" in props or "obstr_type" in props:
+    #     return "obstruction"
     # if "catmor" in props:
     #     return "mooring"
     # if "topshp" in props:
@@ -630,7 +758,7 @@ def s57type(props):
             return bb + "_lateral"
     if any(k in props for k in ("litchr", "litvis", "catlit", "light_type")):
         return "light"
-    assert 0, props
+    assert 0, (types, props)
 
 
 def s57cat(props):
@@ -808,3 +936,37 @@ def merge_sectors(sectors):
         except:
             pass
         return tags
+
+
+def group_by(data, key=lambda v: v):
+    grp = {}
+    for e in data:
+        k = key(e)
+        grp[k] = grp.get(k, []) + [e]
+    return grp
+
+
+abbrevs = {
+    "permanent": "perm",
+    "occasional": "occas",
+    "recommended": "rcmnd",
+    "not_in_use": "unused",
+    "intermittent": "interm",
+    "reserved": "resvd",
+    "temporary": "temp",
+    "private": "priv",
+    "mandatory": "mand",
+    "extinguished": "exting",
+    "illuminated": "illum",
+    "historic": "hist",
+    "public": "pub",
+    "synchronized": "sync",
+    "watched": "watchd",
+    "unwatched": "unwtchd",
+    "existence_doubtful": "ED",
+    "intensified": "intens",
+    "unintensified": "uintens",
+    "restricted": "restr",
+    "obscured": "obscd",
+    "part_obscured": "p.obscd",
+}

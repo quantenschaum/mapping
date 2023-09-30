@@ -114,24 +114,17 @@ def load_geojson(filename, geotype="point"):
     return list(features.values())
 
 
-def group_by(data, key=lambda v: v):
-    grp = {}
-    for e in data:
-        k = key(e)
-        grp[k] = grp.get(k, []) + [e]
-    return grp
-
-
 def load_bsh(filename, kind):
     data = load_geojson(filename)
 
-    g = group_by(data, lambda e: e["id"].split(".")[0].split("_")[-1])
-    print(g.keys())
+    if 1:
+        g = group_by(data, lambda e: e["id"].split(".")[0].split("_")[-1])
+        print(sorted(g.keys()))
 
-    p = set()
-    for l in (f["properties"].keys() for f in data):
-        p.update(l)
-    print(p.difference(S57keys.keys()))
+        p = set()
+        for l in (f["properties"].keys() for f in data):
+            p.update(l)
+        print(sorted(p.difference(S57keys.keys())))
 
     print("kind", kind)
 
@@ -142,26 +135,28 @@ def load_bsh(filename, kind):
     print("lights", len(lights))
 
     daymarks = group_by(
-        filter(lambda f: "Daymark" in f["id"], data),
+        filter(
+            lambda f: is_something(f["properties"])
+            and (
+                "Daymark" in f["id"]
+                or ("Equipment" in f["id"] and "catrtb" in str(f))
+                or ("Facility" in f["id"] and "feat" in kind)
+                or ("Feature" in f["id"] and "faci" in kind)
+            ),
+            data,
+        ),
         lambda f: str(latlon(f)),
     )
     print("daymarks", len(daymarks))
 
     points = []
-    kinds = kind.split(",")
     for f in data:
-        if any(k in f["id"].lower() for k in kinds):
+        if kind in f["id"].lower():
             ll = latlon(f)
             tags = {"ll": ll}
             p = f["properties"]
 
-            keys = (
-                set(S57keys.keys())
-                .intersection(p.keys())
-                .difference(["objnam", "lnam", "convis", "height", "colour"])
-            )
-
-            if not keys:
+            if not is_something(p):
                 continue
 
             add_tags(tags, f)
@@ -188,7 +183,7 @@ def load_bsh(filename, kind):
             add_generic_topmark(tags)
             fix_tags(tags)
 
-            # if "refl" in str(tags):
+            # if "" in str(tags):
             #     print("-" * 100)
             #     for k, v in tags.items():
             #         print(k, "=", v)
@@ -199,14 +194,18 @@ def load_bsh(filename, kind):
 
             points.append(tags)
 
-    print(set((t["seamark:type"] for t in points)))
-
-    print(kind, len(points))
+    g = group_by(points, lambda t: t["seamark:type"])
+    print("\n".join([f">{k} {len(v)}" for k, v in g.items()]))
 
     return points
 
 
-# load_bsh("data/bsh/AidsAndServices.json", "buoy,beac,faci,feat")
+# load_bsh("data/bsh/AidsAndServices.json", "buoy")
+# load_bsh("data/bsh/AidsAndServices.json", "beac")
+# load_bsh("data/bsh/AidsAndServices.json", "faci")
+# load_bsh("data/bsh/AidsAndServices.json", "stat")
+# load_bsh("data/bsh/AidsAndServices.json", "serv")
+# load_bsh("data/bsh/AidsAndServices.json", "equi")
 
 
 def load_bsh_lights(filename):
@@ -216,15 +215,14 @@ def load_bsh_lights(filename):
     print("kind", kind)
 
     other = group_by(
-        filter(lambda f: "light" not in f["id"].lower(), data),
+        filter(lambda f: "Light" not in f["id"], data),
         lambda f: str(latlon(f)),
     )
 
     lights = []
-    kinds = kind.split(",")
     typ = "light"
     for f in data:
-        if any(k in f["id"].lower() for k in kinds):
+        if kind in f["id"].lower():
             ll = latlon(f)
             if str(ll) in other:
                 continue
@@ -256,14 +254,15 @@ def load_bsh_lights(filename):
 def load_bsh_obstr(filename, kind):
     data = load_geojson(filename)
     points = []
-    kinds = kind.split(",")
+    typ = {"r": "rock", "w": "wreck", "o": "obstruction"}[kind[0]]
     for f in data:
-        if any(k in f["id"].lower() for k in kinds):
+        if kind in f["id"].lower():
             ll = latlon(f)
             tags = {"ll": ll}
-            f["properties"][kinds[0] + "_type"] = 1
+            f["properties"][typ + "_type"] = 1
             add_tags(tags, f)
             fix_tags(tags)
+            assert tags["seamark:type"] == typ, (f, tags)
             points.append(tags)
 
     print(kind, len(points))
@@ -271,7 +270,9 @@ def load_bsh_obstr(filename, kind):
     return points
 
 
-# load_bsh_obstr("data/bsh/RocksWrecksObstructions.json", "obstruction")
+# load_bsh_obstr("data/bsh/RocksWrecksObstructions.json", "rock")
+# load_bsh_obstr("data/bsh/RocksWrecksObstructions.json", "wreck")
+# load_bsh_obstr("data/bsh/RocksWrecksObstructions.json", "obstr")
 
 
 def load_bsh_seabed(filename):
@@ -279,9 +280,8 @@ def load_bsh_seabed(filename):
     data = load_geojson(filename)
     points = []
     kind = "seabed"
-    kinds = [kind]
     for f in data:
-        if any(k in f["id"].lower() for k in kinds):
+        if kind in f["id"].lower():
             ll = latlon(f)
             tags = {"ll": ll}
             p = f["properties"]
@@ -289,6 +289,10 @@ def load_bsh_seabed(filename):
             if any(is_int(p.get(k)) for k in ("natsur", "catwed", "catseg")):
                 add_tags(tags, p)
                 fix_tags(tags)
+                assert tags["seamark:type"] in ("seabed_area", "weed", "seagrass"), (
+                    f,
+                    tags,
+                )
                 points.append(tags)
 
     print(kind, len(points))
@@ -466,7 +470,7 @@ def update_osm(
 
     matches = {}
     modifications = []
-    for e in x("node"):
+    for e in list(x("node")):
         n = pq(e)
         if not n.find("tag[k='seamark:type']"):
             continue
@@ -567,7 +571,7 @@ def update_osm(
             m.insert(0, "ADDED")
             print(*m[:3])
             modifications.append(m)
-            x("osm").prepend(n)
+            x("osm").append(n)
             added += 1
 
     print("MATCHED", matches)
@@ -715,11 +719,20 @@ def main():
         seamark_type = "light_.*|landmark"
         data = load_bsh_lights(datafile)
     elif all(s in mode for s in ("bsh", "fac")):
-        seamark_type = "light_.*|landmark"
+        seamark_type = "xxx"
         data = load_bsh(datafile, "facility")
     elif all(s in mode for s in ("bsh", "feat")):
-        seamark_type = "light_.*|landmark"
+        seamark_type = "xxx"
         data = load_bsh(datafile, "feature")
+    elif all(s in mode for s in ("bsh", "serv")):
+        seamark_type = "xxx"
+        data = load_bsh(datafile, "service")
+    elif all(s in mode for s in ("bsh", "stat")):
+        seamark_type = "xxx"
+        data = load_bsh(datafile, "station")
+    elif all(s in mode for s in ("bsh", "equi")):
+        seamark_type = "xxx"
+        data = load_bsh(datafile, "equipment")
 
     print("seamark:type", seamark_type)
 
