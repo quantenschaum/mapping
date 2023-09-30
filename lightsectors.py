@@ -124,6 +124,10 @@ light_properties = {
     "orientation": float,
     "colour": str,
     "character": str,
+    "category": str,
+    "status": str,
+    "visibility": str,
+    "exhibition": str,
     "group": str,
     "period": str,
     "sequence": str,
@@ -156,7 +160,7 @@ def light_label(sector, extended=False, sep="\u00A0"):
         l += f"{sep}{p}s"
 
     if not extended:
-        return l
+        return l.replace(";", "/")
 
     h = sector.get("height")
     if h:
@@ -174,15 +178,63 @@ def light_label(sector, extended=False, sep="\u00A0"):
         else:
             l += f"{sep}{nformat(r)}M"
 
-    return l
+    m = []
+    for p in "status", "visibility", "exhibition":
+        s = sector.get(p)
+        if s:
+            m = m + abbrev(s)
+    if m:
+        l += sep + "(" + ",".join(m) + ")"
+
+    return l.replace(";", "/")
+
+
+abbrevs = {
+    "permanent": "perm",
+    "occasional": "occ",
+    "recommended": "rcmnd",
+    "not_in_use": "unused",
+    "intermittent": "itmd",
+    "reserved": "res",
+    "temporary": "temp",
+    "private": "priv",
+    "mandatory": "mand",
+    "extinguished": "exti",
+    "illuminated": "illum",
+    "historic": "hist",
+    "public": "pub",
+    "synchronized": "sync",
+    "watched": "wat",
+    "unwatched": "unw",
+    "existence_doubtful": "dbtfl",
+    "intensified": "intsfd",
+    "unintensified": "uintsfd",
+    "restricted": "restr",
+    "obscured": "obscrd",
+    "part_obscured": "p.obscrd",
+}
+
+
+def abbrev(s):
+    return [abbrevs.get(p, p[:4]) for p in s.split(";")]
 
 
 SSO = "sector_start", "sector_end", "orientation"
 
+categories = (
+    "directional",
+    "leading",
+    "front",
+    "rear",
+    "lower",
+    "upper",
+    "bearing",
+)
+
 
 def get_sectors(node):
     sectors = []
-    for i in range(0, 21, 1):
+    for i in range(50):
         s = {}
         for p, t in light_properties.items():
             x = f"{i}:" if i else ""
@@ -191,11 +243,15 @@ def get_sectors(node):
                 s[p] = v
         if not s and i > 0:
             break
+        cat = s.get("category")
+        if cat and not set(cat.split(";")).intersection(categories):
+            continue
         if s and all(x not in s for x in SSO):
             s["sector_start"] = 0
             s["sector_end"] = 360
         if s and any(x in s for x in SSO):
             sectors.append(s)
+
     return sectors
 
 
@@ -203,17 +259,15 @@ def merge(sectors):
     merged = {}
     for s in sectors:
         for k, v in s.items():
-            if k == "colour" and k in merged:
-                for c in v.split(";"):
-                    if c not in merged[k]:
-                        merged[k] += ";" + v
-            elif k in ("range", "height"):
+            if k in ("range", "height"):
                 merged[k] = merged.get(k, []) + [v]
+            elif k in merged:
+                merged[k] = ";".join(set(merged[k].split(";") + str(v).split(";")))
             elif k in merged:
                 if v != merged[k]:
                     merged[k] = "?"
             else:
-                merged[k] = v
+                merged[k] = str(v)
     return merged
 
 
@@ -232,7 +286,7 @@ def generate_sectors(infile, outfile, config={}):
     osm = pq(filename=infile)
     out = pq('<osm version="0.6"/>')
 
-    major = config.get("major", ["light_major", "landmark"])
+    major = config.get("major", ["light_major"])
     min_range = config.get("min_range", 5)
     max_range = config.get("max_range", 10)
     full_range = config.get("full", 999)
@@ -372,7 +426,7 @@ def main():
         "--major",
         help="seamark:type for major lights (comma separated list, major lights are always included, even if range<min_range)",
         type=lambda s: s.split(","),
-        default="light_major,landmark",
+        default="light_major",
     )
     parser.add_argument(
         "-r",

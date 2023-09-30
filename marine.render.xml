@@ -47,6 +47,8 @@
 
 	<renderingProperty attr="hideNoLNAM" name="OSM Seamarks (some)" description="" type="boolean" possibleValues="" category="hide"/>
 
+	<renderingProperty attr="showLNAMmarker" name="ENC marker" description="" type="boolean" possibleValues=""/>
+
   <renderingProperty attr="shellsStyle" name="Shells Style" description="Style for Shells on Seabed" type="string" defaultValueDescription="gray" possibleValues="rocks,stones,red"/>
 
   <renderingAttribute name="gpxColor"> <!-- deprecated -->
@@ -1488,10 +1490,15 @@
 				aiming at OSMAND text display according to IHO Chart INT-1 Section P: Lights and Section R Fog Signals, e.g. https://map.openseamap.org/?zoom=15&lon=4.79&lat=53.00 .
 				An appropriate graphical display of sector lights with coloured circle sections requires further development of code in OSMAND. Feedback welcome: josail @ gmx.de -->
 
-        <switch minzoom="12" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth">
+        <switch minzoom="12" additional="depth:exposition=shoaler" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth" >
           <case tag="seamark:type" value="rock" />
           <case tag="seamark:type" value="wreck" textDy="-10" />
           <apply_if additional="seamark:lnam" textOrder="20"/>
+        </switch>
+        <switch minzoom="13" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth">
+          <case tag="seamark:type" value="rock" />
+          <case tag="seamark:type" value="wreck" textDy="-10" />
+          <apply_if additional="seamark:lnam" textOrder="25"/>
         </switch>
         <switch nameTag="seamark:name" nameTag2="seamark:light:character">
           <!-- empty nameTag="seamark:name" is filled with "." in rendering_types.xml in order to assure nameTag2 display. Check e.g. on buoy cardinal west: https://map.openseamap.org/?zoom=16&lon=8.170&lat=53.780 -->
@@ -1647,7 +1654,10 @@
           <case additional="seamark:lnam"/>
           <case disable="true"/>
         </apply_if>
-        <apply_if additional="seamark:lnam" textOrder="20"/>
+        <apply>
+          <case additional="lightsector=source"/>
+          <case additional="seamark:lnam" textOrder="20"/>
+        </apply>
       </switch>
 
       <switch>
@@ -2331,10 +2341,12 @@
           <case additional="seamark:lnam"/>
           <case disable="true"/>
         </apply_if>
-        <apply_if additional="seamark:lnam" iconOrder="20"/>
+        <apply_if additional="seamark:lnam" iconOrder="20">
+          <case hideNoLNAM="false" showLNAMmarker="true" shield="white_blue_square_shield"/>
+        </apply_if>
       </switch>
       <switch>
-        <apply_if hideLightSectorSources="true" disable="true"/>
+        <apply_if hideLightSectorSources="true" additional="lightsector=source" disable="true"/>
         <switch>
           <case minzoom="9" maxzoom="11" tag="seamark:type" value="light_major" icon="seamark_light_major_small" iconOrder="50">
             <case additional="lightsector=source" iconOrder="1" shield="light_violet_center_shield"/>
@@ -2465,15 +2477,20 @@
           <case additional="seamark:light:colour=blue" shield="light_blue_center_shield"/>
           <case additional="seamark:light:colour=orange" shield="light_orange_center_shield"/>
           <case additional="seamark:light:colour=white;green" shield="light_whitegreen_center_shield"/>
+          <case additional="seamark:light:colour=yellow;green" shield="light_whitegreen_center_shield"/>
           <case additional="seamark:light:colour=red;green" shield="light_redgreen_center_shield"/>
           <case additional="seamark:light:colour=white;red" shield="light_whitered_center_shield"/>
+          <case additional="seamark:light:colour=yellow;red" shield="light_whitered_center_shield"/>
           <case additional="seamark:light:colour=violet" shield="light_violet_center_shield"/>
         </apply>
         <apply_if hideNoLNAM="true">
           <case additional="seamark:lnam"/>
           <case disable="true"/>
         </apply_if>
-        <apply_if additional="seamark:lnam" iconOrder="20"/>
+        <apply>
+          <case additional="lightsector=source"/>
+          <case additional="seamark:lnam" iconOrder="20"/>
+        </apply>
       </switch>
       <switch>
         <case minzoom="11" tag="seamark:type" value="landmark" icon="seamark_landmark_tower" iconOrder="58"
@@ -3311,9 +3328,15 @@
 
       <!-- INT-1 K11, K12, K13 Rocks -->
       <!-- indication of dangerous navigational obstructions to start already at low zoom levels 13 -->
-      <case minzoom="12" tag="seamark:type" value="rock" icon="seamark_rock_submerged" shield="null" iconVisibleSize="20">
+      <case minzoom="12" tag="seamark:type" value="rock"  additional="depth:exposition=shoaler" shield="seamark_rock_shield" icon="seamark_rock_submerged" iconVisibleSize="20" iconOrder="30">
         <case additional="seamark:rock:water_level=covers" icon="seamark_rock_covers"/>
         <case additional="seamark:rock:water_level=awash" icon="seamark_rock_awash"/>
+        <apply_if additional="seamark:lnam" iconOrder="20"/>
+      </case>
+      <case minzoom="13" tag="seamark:type" value="rock" icon="seamark_rock_submerged" iconVisibleSize="20" iconOrder="40">
+        <case additional="seamark:rock:water_level=covers" icon="seamark_rock_covers"/>
+        <case additional="seamark:rock:water_level=awash" icon="seamark_rock_awash"/>
+        <apply_if additional="seamark:lnam" iconOrder="25"/>
       </case>
 
       <!-- INT-1 J Section Nature of the Seabed -->
@@ -3331,8 +3354,7 @@
         <case minzoom="15" tag="seamark:type" value="spring" icon="seamark_j15_spring" iconOrder="5">
           <apply_if nightMode="true" shield="seamark_j15_spring_shield_night"/>
         </case>
-        <apply_if seabedDetail="omit" icon=""
-                  shield=""/> <!-- no display of sebedDetail selected in renderingProperties-->
+        <apply_if seabedDetail="omit" icon="" shield=""/> <!-- no display of sebedDetail selected in renderingProperties-->
       </switch>
 
       <case minzoom="11" tag="natural" value="peak" iconOrder="115">

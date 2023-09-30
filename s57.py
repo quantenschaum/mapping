@@ -25,8 +25,7 @@ S57 = {
         7: "super-buoy",
     },
     "BCNSHP": {
-        # 1: "post",
-        1: None,
+        1: None,  # "post"
         2: "withy",
         3: "tower",
         4: "pile",
@@ -278,7 +277,7 @@ S57 = {
         30: "hat",
     },
     "CATMOR": {
-        1: "dophin",
+        1: "dolphin",
         2: "deviation_dolphin",
         3: "bollard",
         4: "wall",
@@ -300,13 +299,152 @@ S57 = {
     "SECTR1": None,
     "SECTR2": None,
     "ORIENT": None,
+    "VERLEN": None,
     "MLTYLT": None,
     "VALNMR": None,
     "SIGGRP": lambda s: s.replace("(1)", "").replace("(", "").replace(")", "") or None,
     "SIGPER": None,
     "SIGSEQ": None,
+    "SIGFRQ": None,
     "HEIGHT": None,
     "ELEVAT": None,
+    "VALSOU": None,
+    "SOUACC": None,
+    "QUASOU": {
+        1: "known",
+        2: None,  # "unknown",  # remove depth tag
+        3: "doubtful",
+        4: "unreliable",
+        5: "no_bottom",
+        6: "least_depth_known",
+        7: "least_depth_unknown",
+        8: "not_surveyed",
+        9: "not_confirmed",
+        10: "maintained",
+        11: "not_maintained",
+    },
+    "EXPSOU": {
+        1: "within_range",
+        2: "shoaler",
+        3: "deeper",
+    },
+    "TECSOU": {
+        1: "echo",
+        2: "sonar",
+        3: "multi-beam",
+        4: "diver",
+        5: "lead-line",
+        6: "wire-drag",
+        7: "laser",
+        8: "acoustic",
+        9: "electromagnetic",
+        10: "photogrammetry",
+        11: "satellite_imagery",
+        12: "levelling",
+        13: "sonar",
+        14: "computer_generated",
+    },
+    "CATSIL": {
+        1: "silo",
+        2: "tank",
+        3: "grain_elevator",
+        4: "water_tower",
+    },
+    "CATLMK": {
+        1: "cairn",
+        2: "cemetery",
+        3: "chimney",
+        9: "monument",
+        10: "column",
+        14: "cross",
+        4: "dish_aerial",
+        15: "dome",
+        5: "flagstaff",
+        6: "flare_stack",
+        7: "mast",
+        11: "memorial",
+        12: "obelisk",
+        16: "radar_scanner",
+        20: "spire",
+        13: "statue",
+        17: "tower",
+        18: "windmill",
+        19: "windmotor",
+        8: "windsock",
+    },
+    "BUISHP": {
+        5: "high-rise",
+        6: "pyramid",
+        7: "cylindrical",
+        8: "spherical",
+        9: "cubic",
+    },
+    "CATHAF": {
+        1: "roro",
+        3: "ferry",
+        4: "fishing",
+        5: "marina",
+        #:"marina_no_facilities",
+        6: "naval",
+        7: "tanker",
+        8: "passenger",
+        9: "shipyard",
+        10: "container",
+        11: "bulk",
+        12: "syncrolift",
+        13: "straddle_carrier",
+    },
+    "CATOFP": {
+        1: "oil",
+        2: "production",
+        3: "observation",
+        4: "alp",
+        5: "salm",
+        6: "mooring",
+        7: "artificial_island",
+        8: "fpso",
+        9: "accommodation",
+        10: "nccb",
+    },
+    "CATCRN": {
+        2: "container",
+        3: "sheerlegs",
+        4: "travelling",
+        5: "a-frame",
+    },
+    "NATCON": {
+        1: "masonry",
+        2: "concreted",
+        3: "loose_boulders",
+        4: "hard-surfaced",
+        5: "unsurfaced",
+        6: "wooden",
+        7: "metal",
+        8: "grp",
+        9: "painted",
+        # :"framework",
+    },
+    "CATFOG": {
+        1: "explosive",
+        2: "diaphone",
+        3: "siren",
+        4: "nautophone",
+        5: "reed",
+        6: "tyfon",
+        7: "bell",
+        8: "whistle",
+        9: "gong",
+        10: "horn",
+    },
+    "CONRAD": {
+        1: "conspicuous",
+        2: None,  # "not_conspicuous",
+        3: "reflector",
+    },
+    "CONVIS": {
+        1: "conspicuous",
+        2: None,  # "not_conspicuous",
+    },
 }
 
 S57keys = {
@@ -316,29 +454,58 @@ S57keys = {
     # buoys/beacons
     "boyshp": "seamark:{typ}:shape",
     "bcnshp": "seamark:{typ}:shape",
-    "topshp": "seamark:{typ}:shape",
+    "topshp": "seamark:topmark:shape",
     "catlam": "seamark:{typ}:category",
     "catspm": "seamark:{typ}:category",
     "catcam": "seamark:{typ}:category",
     "colpat": "seamark:{typ}:colour_pattern",
     "marsys": "seamark:{typ}:system",
+    "natcon": "seamark:{typ}:construction",
+    "verlen": "seamark:{typ}:vertical_length",
     # lights
-    "catlit": "seamark:{typ}:category",
-    "litchr": "seamark:{typ}:character",
+    "catlit": "seamark:light:category",
+    "litchr": "seamark:light:character",
     "siggrp": "seamark:{typ}:group",
     "sigper": "seamark:{typ}:period",
     "sigseq": "seamark:{typ}:sequence",
+    "litvis": "seamark:light:visibility",
+    "exclit": "seamark:light:exhibition",
+    "mltylt": "seamark:light:multiple",
     "height": "seamark:{typ}:height",
     "verdat": "seamark:{typ}:vertical_datum",
     "valnmr": "seamark:{typ}:range",
     "sectr1": "seamark:{typ}:sector_start",
     "sectr2": "seamark:{typ}:sector_end",
     "orient": "seamark:{typ}:orientation",
-    "litvis": "seamark:{typ}:visibility",
-    "exclit": "seamark:{typ}:exhibition",
-    "mltylt": "seamark:{typ}:multiple",
+    # depth
+    "valsou": "depth",
+    "quasou": "depth:source_quality",
+    "souacc": "depth:accuracy",
+    "expsou": "depth:exposition",
+    "tecsou": "depth:technique",
+    "watlev": "seamark:{typ}:water_level",
+    "catwrk": "seamark:wreck:category",
+    "catobs": "seamark:obstruction:category",
+    # seabed
+    "natsur": "seamark:seabed_area:surface",
+    "natqua": "seamark:seabed_area:quality",
+    "catwed": "seamark:weed:category",
+    "catseg": "seamark:seagrass:category",
+    # landmarks
+    "catlmk": "seamark:landmark:category",
+    "catsil": "seamark:tank:category",
+    "buishp": "seamark:building:shape",
+    "catofp": "seamark:platform:category",
+    # facilities
+    "cathaf": "seamark:harbour:category",
+    "catcrn": "seamark:crane:category",
+    # fog signal
+    "catfog": "seamark:fog_signal:category",
+    "sigfrq": "seamark:fog_signal:frequency",
     # other/general
-    "catmor": "seamark:{typ}:category",
+    "conrad": "seamark:{typ}:reflectivity",
+    "convis": "seamark:{typ}:conspicuity",
+    "catmor": "seamark:mooring:category",
     "elevat": "seamark:{typ}:elevation",
     "status": "seamark:{typ}:status",
     "persta": "seamark:period_start",
@@ -386,22 +553,60 @@ def s57attr(attr, value):
 
 
 def cleanup(s):
-    is_str = isinstance(s, str)
-    s = s.strip() if is_str else s
     try:
-        if is_str:
-            v = float(s)
-            return str(int(v) if int(v) == v else v)
+        s = s.strip()
+    except:
+        pass
+    try:
+        v = float(s)
+        return str(int(v) if int(v) == v else v)
     except:
         pass
     return s
 
 
 def s57type(props):
-    if "catmor" in props:
-        return "mooring"
-    if "topshp" in props:
-        return "topmark"
+    typs = set(
+        [
+            v.split(":")[1]
+            for k, v in S57keys.items()
+            if v.count(":") == 2 and k in props
+        ]
+    ).difference(["{typ}"])
+    if len(typs) == 1:
+        return list(typs)[0]
+
+    # if "catlmk" in props:
+    #     return "landmark"
+    if "catsil" in props:
+        return "tank"
+    if "buishp" in props:
+        return "building"
+    # if "cathaf" in props:
+    #     return "harbour"
+    # if "catofp" in props:
+    #     return "platform"
+    # if "catcrn" in props:
+    #     return "crane"
+    if "rock_type" in props:
+        return "rock"
+    # if "catwrk" in props:
+    #     return "wreck"
+    if "catobs" in props or "obstr_type" in props:
+        return "obstruction"
+    # if "catmor" in props:
+    #     return "mooring"
+    # if "topshp" in props:
+    #     return "topmark"
+    # if "catfog" in props:
+    #     return "fog_signal"
+    # if "catseg" in props:
+    #     return "seagrass"
+    if "catwed" in props:
+        v = s57attr("catwed", props)
+        return "seagrass" if "grass" in v else "weed"
+    # if "natsur" in props:
+    #     return "seabed_area"
     if any(k in props for k in ("boyshp", "buoy_type", "bcnshp", "beacon_type")):
         bb = "buoy" if "boyshp" in props or "buoy_type" in props else "beacon"
         if "catlam" in props:
@@ -479,12 +684,13 @@ def s57translate(props):
             w = s57attr(k, v)
             t = t.format(typ=typ)
             # print(k, "=", v, "-->", t, "=", w)
-            assert t not in tags, (t, props, tags)
+            # assert t not in tags, (t, props, tags)
             tags[t] = w
     cat = s57cat(props)
-    if cat:
-        tags[f"seamark:{typ}:category"] = cat
-    fix_tags(tags)
+    k = f"seamark:{typ}:category"
+    if cat and k not in tags:
+        tags[k] = cat
+    # fix_tags(tags)
     return tags
 
 
@@ -517,22 +723,23 @@ def add_generic_topmark(tags):
     typ = tags["seamark:type"]
     cat = tags.get(f"seamark:{typ}:category")
     tm = {}
-    if typ == "buoy_safe_water":
-        tm["seamark:topmark:colour"] = "red"
-        tm["seamark:topmark:shape"] = s57attr("topshp", 3)
-    elif typ == "buoy_isolated_danger":
-        tm["seamark:topmark:colour"] = "black"
-        tm["seamark:topmark:shape"] = s57attr("topshp", 4)
-    elif typ == "buoy_cardinal":
-        tm["seamark:topmark:colour"] = "black"
-        if cat == "north":
-            tm["seamark:topmark:shape"] = s57attr("topshp", 13)
-        if cat == "south":
-            tm["seamark:topmark:shape"] = s57attr("topshp", 14)
-        if cat == "east":
-            tm["seamark:topmark:shape"] = s57attr("topshp", 11)
-        if cat == "west":
-            tm["seamark:topmark:shape"] = s57attr("topshp", 10)
+    for b in ("buoy", "beacon"):
+        if typ == f"{b}_safe_water":
+            tm["seamark:topmark:colour"] = "red"
+            tm["seamark:topmark:shape"] = s57attr("topshp", 3)
+        elif typ == f"{b}_isolated_danger":
+            tm["seamark:topmark:colour"] = "black"
+            tm["seamark:topmark:shape"] = s57attr("topshp", 4)
+        elif typ == f"{b}_cardinal":
+            tm["seamark:topmark:colour"] = "black"
+            if cat == "north":
+                tm["seamark:topmark:shape"] = s57attr("topshp", 13)
+            if cat == "south":
+                tm["seamark:topmark:shape"] = s57attr("topshp", 14)
+            if cat == "east":
+                tm["seamark:topmark:shape"] = s57attr("topshp", 11)
+            if cat == "west":
+                tm["seamark:topmark:shape"] = s57attr("topshp", 10)
     update_nc(tags, tm)
 
 
@@ -561,16 +768,43 @@ def add_system(tags):
 def fix_tags(tags):
     typ = tags["seamark:type"]
 
-    k = f"seamark:{typ}:colour"
+    c = f"seamark:{typ}:colour"
     if typ == "buoy_safe_water":
-        tags[k] = "red;white"
+        tags[c] = "red;white"
 
     p = f"seamark:{typ}:colour_pattern"
-    if p in tags and ";" not in tags.get(k, ""):
+    if p in tags and ";" not in tags.get(c, ""):
         tags[p] = None
 
-    k = f"seamark:{typ}:shape"
-    if not tags.get(k, 1):
-        del tags[k]
+    for s in "shape", "reflectivity", "conspicuity":
+        s = f"seamark:{typ}:{s}"
+        if not tags.get(s, 1):
+            del tags[s]
+
+    g = "seamark:seagrass:category"
+    if typ == "seagrass" and "grass" in tags.get(g, ""):
+        del tags[g]
+
+    if typ == "beacon_lateral" and c not in tags and s not in tags and len(tags) <= 4:
+        tags[s] = "perch"
+
+    r = f"seamark:{typ}:reflectivity"
+    if tags.get(r) == "reflector":
+        tags["seamark:radar_reflector"] = "yes"
 
     add_system(tags)
+
+
+def merge_sectors(sectors):
+    if len(sectors) == 1:
+        return sectors[0]
+    else:
+        tags = {}
+        for i, s in enumerate(sectors, 1):
+            si = {k.replace("light:", f"light:{i}:"): v for k, v in s.items()}
+            update_nc(tags, si)
+        try:
+            del tags["seamark:lnam"]
+        except:
+            pass
+        return tags

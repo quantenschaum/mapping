@@ -93,6 +93,7 @@
 	<type tag="note" additional="text" minzoom="12" order="128"/>
 	<type tag="note_tag" value="yes" minzoom="12" notosm="true" order="128"/>
 	<type tag="depth" additional="text" minzoom="6" order="128"/>
+	<type tag="depth:exposition" additional="true" minzoom="6" />
 <!--	<entity_convert pattern="tag_transform" from_tag="comment" to_tag1="note"/>-->
 
 	<type tag="survey" value="ground" minzoom="13" additional="true" notosm="true" />
