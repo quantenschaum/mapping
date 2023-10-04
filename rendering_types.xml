@@ -5859,6 +5859,8 @@
       <type tag="lightsector" value="arc"  minzoom="10" notosm="true"/>
       <type tag="lightsector" value="source" additional="true"  minzoom="8" notosm="true"/>
     </category>
+    <type tag="seamark:navigation_line:orientation" additional="text"  minzoom="10" notosm="true"/>
+    <type tag="seamark:recommended_track:orientation" additional="text"  minzoom="10" notosm="true"/>
     <type tag="colour" additional="true" minzoom="10" notosm="true"/>
 		<type tag="contour" value="temperature" minzoom="3" notosm="true"/>
 		<type tag="elevation" additional="text" minzoom="13" notosm="true"/>

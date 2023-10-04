@@ -686,6 +686,9 @@
       <case tag="seamark:type" value="recommended_track" order="81"/>
       <case tag="seamark:type" value="recommended_traffic_lane" order="81"/>
       <case tag="seamark:type" value="navigation_line" order="81"/>
+      <case tag="seamark:type" value="separation_line" />
+      <case tag="seamark:type" value="separation_lane" />
+      <case tag="seamark:type" value="separation_boundary" />
       <case tag="seamark:type" value="obstruction"/>
       <case tag="seamark:type" value="seabed_area"/>
 
@@ -1662,9 +1665,9 @@
 
       <switch>
         <switch textColor="#222222" textWrapWidth="19" textHaloColor="#aaffffff" textHaloRadius="2" textOnPath="true" textBold="true">
-          <case minzoom="13" tag="seamark:type" value="recommended_track"/>
-          <case minzoom="13" tag="seamark:type" value="recommended_traffic_lane"/>
-          <case minzoom="13" tag="seamark:type" value="navigation_line"/>
+          <case minzoom="13" tag="seamark:type" value="recommended_track" nameTag2="seamark:recommended_track:orientation"/>
+          <case minzoom="13" tag="seamark:type" value="recommended_traffic_lane" nameTag2="seamark:recommended_track:orientation"/>
+          <case minzoom="13" tag="seamark:type" value="navigation_line" nameTag2="seamark:navigation_line:orientation"/>
           <case minzoom="8" tag="route" value="ferry" nameTag2="ref"/>
           <case minzoom="15" tag="seamark:type" value="dam" nameTag="seamark:name"/>
           <case minzoom="15" tag="seamark:type" value="dam" nameTag=""/>
@@ -2373,9 +2376,9 @@
                 icon_5="seamark_signal_station_additional" iconVisibleSize="20" intersectionSizeFactor="0.6"
                 iconOrder="71"/>
           <case minzoom="12" tag="seamark:type" value="radio_station" icon="seamark_radio_station"
-                icon_4="seamark_radar_transponder_additional_big" iconVisibleSize="20" intersectionSizeFactor="0.6"
+                icon_4="seamark_radar_transponder_additional_center_big" iconVisibleSize="20" intersectionSizeFactor="0.6"
                 iconOrder="71">
-            <apply_if nightMode="true" icon_4="seamark_radar_transponder_additional_big_night"/>
+            <apply_if nightMode="true" icon_4="seamark_radar_transponder_additional_center_big_night"/>
           </case>
           <case minzoom="12" tag="seamark:type" value="radar_station" icon="seamark_radio_station"
                 icon_4="seamark_radar_station_additional" iconVisibleSize="20" intersectionSizeFactor="0.6"
@@ -3954,7 +3957,6 @@
     <case minzoom="5" tag="natural" value="coastline_line" color="#cc999999" strokeWidth=":1"/>
 
     <switch>
-      <case minzoom="9" tag="seamark:type" value="separation_line"/>
       <case minzoom="9" tag="seamark:type" value="separation_lane"/>
       <apply onewayArrowsColor="#648DD0">
         <case engine_v1="true" cap="ROUND" color="#339c00ff">
@@ -3975,6 +3977,9 @@
       </apply>
     </switch>
     <switch>
+      <case minzoom="9" tag="seamark:type" value="separation_line" color="#559c00ff" cap="SQUARE" pathEffect="">
+        <apply_if nightMode="true" color="#aac05dff"/>
+      </case>
       <case minzoom="9" tag="seamark:type" value="separation_boundary" color="#339c00ff" cap="SQUARE">
         <apply_if nightMode="true" color="#88c05dff"/>
       </case>
@@ -3987,6 +3992,7 @@
         <case maxzoom="16" strokeWidth="4" pathEffect="8_20"/>
         <case minzoom="17" strokeWidth="5" pathEffect="12_24"/>
       </apply>
+      <apply_if tag="seamark:type" value="separation_line" pathEffect="null"/>
     </switch>
 
     <switch minzoom="14">
