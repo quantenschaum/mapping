@@ -202,16 +202,6 @@ def abbrev(s):
 
 SSO = "sector_start", "sector_end", "orientation"
 
-categories = (
-    "directional",
-    "leading",
-    "front",
-    "rear",
-    "lower",
-    "upper",
-    "bearing",
-)
-
 
 def get_sectors(node):
     sectors = []
@@ -225,7 +215,7 @@ def get_sectors(node):
         if not s and i > 0:
             break
         cat = s.get("category")
-        if cat and not set(cat.split(";")).intersection(categories):
+        if cat and not set(cat.split(";")).intersection(nav_light_categories):
             continue
         if s and all(x not in s for x in SSO):
             s["sector_start"] = 0
@@ -299,13 +289,12 @@ def generate_sectors(infile, outfile, config={}):
         )
 
         merged_label = " ".join(label(merge(s), True) for s in gsectors.values())
-        if len(gsectors) > 1:
-            print(
-                f"{i}/{N}",
-                seamark_type,
-                name,
-                merged_label.replace(" ", " + ").replace("\u00A0", " "),
-            )
+        print(
+            f"{i}/{N}",
+            seamark_type,
+            name,
+            merged_label.replace(" ", " + ").replace("\u00A0", " "),
+        )
         ll = get_ll(n, osm)
 
         center = new_node(*ll)
@@ -416,7 +405,7 @@ def main():
     parser.add_argument(
         "-M",
         "--major",
-        help="seamark:type for major lights (comma separated list, major lights are always included, even if range<min_range)",
+        help="seamark:type(s) for major lights (comma separated list, major lights are always included, even if range<min_range)",
         type=lambda s: s.split(","),
         default="light_major",
     )
@@ -432,14 +421,14 @@ def main():
         "--max-range",
         help="max. range used for generating sectors",
         type=float,
-        default=10,
+        default=12,
     )
     parser.add_argument(
         "-f",
         "--f-range",
         help="factor to scale range limit lines",
         type=float,
-        default=0.6,
+        default=0.8,
     )
     parser.add_argument(
         "-a",
@@ -453,7 +442,7 @@ def main():
         "--full",
         help="generate arcs for 360° sectors if range >= this value",
         type=float,
-        default=15,
+        default=19,
     )
 
     args = parser.parse_args()
