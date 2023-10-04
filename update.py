@@ -4,14 +4,15 @@
 import json
 import os
 from datetime import datetime
-from math import inf, isnan, log, pi, pow, sqrt, tan
+from math import inf, isnan, log, pi, pow, sqrt, tan, isfinite
 import re
 import datetime
 import pendulum
 import requests
 from pyquery import PyQuery as pq
 from s57 import *
-
+from functools import reduce
+from os.path import basename, splitext
 
 dx = 0.01
 dy = dx
@@ -37,7 +38,10 @@ def distance(a, b):
 
 def in_usageband(f, bands=["Approach", "Harbour", "Berthing"]):
     # https://www.nauticalcharts.noaa.gov/charts/rescheming-and-improving-electronic-navigational-charts.html
-    return any(b in f["id"] for b in bands)
+    if "id" in f:
+        return any(b in f["id"] for b in bands)
+    else:
+        return True
 
 
 def gtype(f):
@@ -81,7 +85,7 @@ def get_bounds(xml):
         b["maxlat"] = max(b["maxlat"], ll[0])
         b["minlon"] = min(b["minlon"], ll[1])
         b["maxlon"] = max(b["maxlon"], ll[1])
-    return b
+    return b if isfinite(sum(b.values())) else None
 
 
 def get_lnam(f):
@@ -93,38 +97,138 @@ def load_geojson(filename, geotype="point"):
     data = load_json(filename)
     features = {}
     merged = 0
-    for f1 in data["features"]:
-        if gtype(f1).lower() == geotype and in_usageband(f1):
-            p1 = f1["properties"]
-            lnam = get_lnam(f1)
-            f0 = features.get(lnam)
-            if f0:
-                assert lnam == get_lnam(f0)
-                p0 = f0["properties"]
-                s0, s1 = [p["scamax"] for p in (p0, p1)]
-                if s1 < s0:
-                    merged += 1
-                    features[lnam] = f1
+
+    filtered = filter(
+        lambda f: gtype(f).lower() == geotype and in_usageband(f),
+        data["features"],
+    )
+
+    grouped = group_by(filtered, get_lnam)
+
+    def key(e):
+        p = e["properties"]
+        return int(p["scamax"] or p["scamin"])
+
+    selected = [sorted(g, key=key)[0] for g in grouped.values()]
+
+    print("total", len(data["features"]), "selected", len(selected))
+
+    keys = set()
+    types = set()
+    for e in selected:
+        p = e["properties"]
+        keys.update(p.keys())
+        types.add(s57type(p))
+
+    print("known keys", keys.intersection(S57keys.keys()))
+    print("other keys", keys.difference(S57keys.keys()))
+    print("types", types)
+
+    return selected
+
+
+# f = "data/waddenzee/BOYLAT.json"
+# d = load_geojson(f)
+
+
+def load_enc(filenames, others):
+    if isinstance(filenames, str):
+        data = load_geojson(filenames)
+    else:
+        data = reduce(lambda a, b: a + b, [load_geojson(f) for f in filenames])
+
+    if isinstance(others, str):
+        other = load_geojson(others)
+    else:
+        other = reduce(lambda a, b: a + b, [load_geojson(f) for f in others])
+    other = {k: v[0] for k, v in group_by(other, get_lnam).items()}
+
+    points = []
+    for f in data:
+        ll = latlon(f)
+        tags = {"ll": ll}
+        p = f["properties"]
+
+        # if not is_something(p): continue
+
+        add_tags(tags, f)
+
+        refs = p.get("lnam_refs") or []
+        refs = [add_tags({}, other[r]) for r in refs if r in other]
+        for t, rs in group_by(refs, smtype).items():
+            if t == "light":
+                update_nc(tags, merge_lights(rs))
             else:
-                features[lnam] = f1
+                for r in rs:
+                    update_nc(tags, r)
 
-    print("total", len(data["features"]), "filtered", len(features))
-    # print(features)
+        # add_generic_topmark(tags)
+        fix_tags(tags)
 
-    return list(features.values())
+        # if "light:x" in str(tags):
+        #     print("-" * 100)
+        #     print(p)
+        #     for r in refs:
+        #         print(r)
+        #     for k, v in tags.items():
+        #         print(k, "=", v)
+
+        points.append(tags)
+
+    g = group_by(points, smtype)
+    print("\n".join([f">{k} {len(v)}" for k, v in g.items()]))
+
+    return points
+
+
+def load_rws():
+    return load_enc(
+        [
+            f"data/waddenzee/{l}.json"
+            for l in (
+                "BOYLAT",
+                "BOYCAR",
+                "BOYSAW",
+                "BOYSPP",
+                "BCNLAT",
+                "BCNCAR",
+                "BCNISD",
+                "BCNSPP",
+                "LNDMRK",
+                "PILPNT",
+                # "LIGHTS",
+                "UWTROC",
+                "WRECKS",
+                "OBSTRN",
+                "OFSPLF",
+            )
+        ],
+        [
+            f"data/waddenzee/{l}.json"
+            for l in (
+                "TOPMAR",
+                "DAYMAR",
+                "LIGHTS",
+                "RTPBCN",
+                "FOGSIG",
+            )
+        ],
+    )
+
+
+load_rws()
 
 
 def load_bsh(filename, kind):
     data = load_geojson(filename)
 
-    if 1:
-        g = group_by(data, lambda e: e["id"].split(".")[0].split("_")[-1])
-        print(sorted(g.keys()))
-
-        p = set()
-        for l in (f["properties"].keys() for f in data):
-            p.update(l)
-        print(sorted(p.difference(S57keys.keys())))
+    # g = group_by(data, lambda e: e["id"].split(".")[0].split("_")[-1])
+    # print(sorted(g.keys()))
+    #
+    # p = set()
+    # for l in (f["properties"].keys() for f in data):
+    #     p.update(l)
+    # print(sorted(p.difference(S57keys.keys())))
 
     print("kind", kind)
 
@@ -168,7 +272,7 @@ def load_bsh(filename, kind):
                 d = d[min(d.keys())]
                 d = [s57translate(e["properties"]) for e in d]
                 for m in d:
-                    assert m["seamark:type"] != "light", m
+                    assert smtype(m) != "light", m
                     update_nc(tags, m)
 
             l = lights.get(str(ll))
@@ -177,8 +281,8 @@ def load_bsh(filename, kind):
                 l = l[min(l.keys())]
                 l = [s57translate(e["properties"]) for e in l]
                 for m in l:
-                    assert m["seamark:type"] == "light", m
-                update_nc(tags, merge_sectors(l))
+                    assert smtype(m) == "light", m
+                update_nc(tags, merge_lights(l))
 
             add_generic_topmark(tags)
             fix_tags(tags)
@@ -188,13 +292,13 @@ def load_bsh(filename, kind):
             #     for k, v in tags.items():
             #         print(k, "=", v)
 
-            typ = tags["seamark:type"]
+            typ = smtype(tags)
             if typ in ("harbour",):
                 continue
 
             points.append(tags)
 
-    g = group_by(points, lambda t: t["seamark:type"])
+    g = group_by(points, smtype)
     print("\n".join([f">{k} {len(v)}" for k, v in g.items()]))
 
     return points
@@ -228,7 +332,7 @@ def load_bsh_lights(filename):
                 continue
             tags = {"ll": ll}
             add_tags(tags, f)
-            assert tags["seamark:type"].startswith(kind), (f, tags)
+            assert smtype(tags).startswith(kind), (f, tags)
 
             if (
                 float(tags.get(f"seamark:{typ}:range", 0)) > 19
@@ -242,7 +346,7 @@ def load_bsh_lights(filename):
             lights.append(tags)
 
     glights = group_by(lights, lambda e: str(e["ll"]))
-    lights = [merge_sectors(s) for s in glights.values()]
+    lights = [merge_lights(s) for s in glights.values()]
 
     print(kind, len(lights))
     return lights
@@ -262,7 +366,7 @@ def load_bsh_obstr(filename, kind):
             f["properties"][typ + "_type"] = 1
             add_tags(tags, f)
             fix_tags(tags)
-            assert tags["seamark:type"] == typ, (f, tags)
+            assert smtype(tags) == typ, (f, tags)
             points.append(tags)
 
     print(kind, len(points))
@@ -289,7 +393,7 @@ def load_bsh_seabed(filename):
             if any(is_int(p.get(k)) for k in ("natsur", "catwed", "catseg")):
                 add_tags(tags, p)
                 fix_tags(tags)
-                assert tags["seamark:type"] in ("seabed_area", "weed", "seagrass"), (
+                assert smtype(tags) in ("seabed_area", "weed", "seagrass"), (
                     f,
                     tags,
                 )
@@ -341,7 +445,7 @@ def load_rws_buoys(filename):
 
         points.append(tags)
 
-    print(len(points))
+    print("RWS buoys", len(points))
 
     return points
 
@@ -454,19 +558,25 @@ def update_osm(
     user=None,
     review=False,
 ):
-    x = pq(filename=infile)
+    x = pq(filename=infile) if infile else pq("<osm version='0.6'/>")
+    add |= not infile
 
     now = pendulum.now()
 
     bounds = get_bounds(x)
     print("bounds", bounds)
-    data = list(
-        filter(
-            lambda p: bounds["minlat"] <= p["ll"][0] <= bounds["maxlat"]
-            and bounds["minlon"] <= p["ll"][1] <= bounds["maxlon"],
-            points,
+    data = (
+        list(
+            filter(
+                lambda p: bounds["minlat"] <= p["ll"][0] <= bounds["maxlat"]
+                and bounds["minlon"] <= p["ll"][1] <= bounds["maxlon"],
+                points,
+            )
         )
+        if bounds
+        else points
     )
+    print("points", len(data))
 
     matches = {}
     modifications = []
@@ -564,7 +674,7 @@ def update_osm(
                     modifications.append(m)
 
     added = 0
-    if bounds and add:
+    if add:
         for i, p in enumerate(data, 10000):
             n = pq(f'<node id="{-i}" visible="true" lat="nan" lon="nan"/>')
             m = update_node(n, p, s_dist)
@@ -618,6 +728,7 @@ def main():
         "infile",
         help="OSM XML file to read",
         metavar="in.osm",
+        nargs="?",
     )
     parser.add_argument(
         "outfile",
@@ -733,6 +844,11 @@ def main():
     elif all(s in mode for s in ("bsh", "equi")):
         seamark_type = "xxx"
         data = load_bsh(datafile, "equipment")
+
+    elif all(s in mode for s in ("enc", "buoy")):
+        seamark_type = "buoy_.*"
+        # BOYLAT BOYCAR BOYSAW BOYSPP BCNLAT BCNCAR BCNISD BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN
+        data = load_rws()
 
     print("seamark:type", seamark_type)
 

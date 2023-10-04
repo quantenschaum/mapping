@@ -1,4 +1,8 @@
 # https://wiki.openstreetmap.org/wiki/Seamarks/Seamark_Attributes
+
+from collections import OrderedDict
+from itertools import groupby
+
 S57 = {
     "COLOUR": {
         1: "white",
@@ -52,6 +56,9 @@ S57 = {
         23: "trapezium, down",
         24: "triangle, point up",
         25: "triangle, point down",
+        29: "triangle, point up over circle",
+        31: "rhombus over circle",
+        33: "other",
         98: "cylinder over sphere",
         99: "cone, point up over sphere",
     },
@@ -103,6 +110,7 @@ S57 = {
         20: "vertical",
     },
     "WATLEV": {
+        1: "part-submerged",
         2: "dry",
         3: "submerged",
         4: "covers",
@@ -165,6 +173,12 @@ S57 = {
         2: "starboard",
         3: "preferred_channel_starboard",
         4: "preferred_channel_port",
+        # non-standard/inland
+        7: "channel_right",
+        8: "channel_left",
+        10: "channel_separation",
+        15: "danger_right",
+        16: "danger_left",
     },
     "CATCAM": {
         1: "north",
@@ -207,6 +221,7 @@ S57 = {
         46: "yachting",
         50: "no_entry",
         52: "unknown_purpose",
+        53: "wellhead",
         55: "marine_farm",
     },
     "STATUS": {
@@ -545,6 +560,11 @@ S57 = {
         13: "syledis",
         14: "chiaka",
     },
+    "CATPLE": {
+        1: "stake",
+        3: "post",
+        4: "tripodal",
+    },
 }
 
 S57keys = {
@@ -562,6 +582,7 @@ S57keys = {
     "marsys": "seamark:{typ}:system",
     "natcon": "seamark:{typ}:construction",
     "verlen": "seamark:{typ}:vertical_length",
+    "catple": "seamark:pile:category",
     # lights
     "catlit": "seamark:light:category",
     "litchr": "seamark:light:character",
@@ -628,7 +649,7 @@ S57keys = {
     # "sordat": "seamark:source_date",
 }
 
-S57types = {
+S57layer_types = {
     "BOYLAT": "buoy_lateral",
     "BOYCAR": "buoy_cardinal",
     "BOYSAW": "buoy_safe_water",
@@ -639,10 +660,22 @@ S57types = {
     "BCNSAW": "beacon_safe_water",
     "BCNISD": "beacon_isolated_danger",
     "BCNSPP": "beacon_special_purpose",
+    "PILPNT": "pile",
+    "LNDMRK": "landmark",
+    "LIGHTS": "light",
+    "TOPMAR": "topmark",
+    "OFSPLF": "platform",
+    "UWTROC": "rock",
+    "WRECKS": "wreck",
+    "OBSTRN": "obstruction",
 }
 
 
-var_tags = set(k for k in S57keys.values() if "{typ}" in k)
+bb_types = set(
+    k
+    for k in S57keys.values()
+    if "{typ}" in k and any(k.startswith(s) for s in ("buoy", "beacon"))
+)
 
 
 def s57attr(attr, value):
@@ -690,9 +723,13 @@ def is_something(props):
 
 
 def s57type(props):
+    if "_type_" in props:
+        return props["_type_"]
     if "rock_type" in props:
         return "rock"
     if "obstruction_type" in props:
+        return "obstruction"
+    if "catobs" in props:
         return "obstruction"
     types = set(
         v.split(":")[1] for k, v in S57keys.items() if v.count(":") == 2 and k in props
@@ -700,8 +737,6 @@ def s57type(props):
     if len(types) == 1:
         return list(types)[0]
 
-    # if "catlmk" in props:
-    #     return "landmark"
     if "catsil" in props:
         return "tank"
     if "catpil" in props:
@@ -712,29 +747,11 @@ def s57type(props):
         return "radio_station"
     if "buishp" in props:
         return "building"
-    # if "cathaf" in props:
-    #     return "harbour"
-    # if "catofp" in props:
-    #     return "platform"
-    # if "catcrn" in props:
-    #     return "crane"
-    # if "catwrk" in props:
-    #     return "wreck"
-    # if "catobs" in props or "obstr_type" in props:
-    #     return "obstruction"
-    # if "catmor" in props:
-    #     return "mooring"
-    # if "topshp" in props:
-    #     return "topmark"
-    # if "catfog" in props:
-    #     return "fog_signal"
-    # if "catseg" in props:
-    #     return "seagrass"
     if "catwed" in props:
         v = s57attr("catwed", props)
         return "seagrass" if "grass" in v else "weed"
-    # if "natsur" in props:
-    #     return "seabed_area"
+    if any(k in props for k in ("litchr", "litvis", "catlit", "light_type")):
+        return "light"
     if any(k in props for k in ("boyshp", "buoy_type", "bcnshp", "beacon_type")):
         bb = "buoy" if "boyshp" in props or "buoy_type" in props else "beacon"
         if "catlam" in props:
@@ -756,8 +773,6 @@ def s57type(props):
             return bb + "_safe_water"
         if "green" in col or "red" in col:
             return bb + "_lateral"
-    if any(k in props for k in ("litchr", "litvis", "catlit", "light_type")):
-        return "light"
     assert 0, (types, props)
 
 
@@ -834,21 +849,22 @@ def add_tags(tags, props):
     except:
         pass
     update_nc(tags, s57translate(props))
+    return tags
 
 
 def fill_types(tags):
-    typ = tags["seamark:type"]
-    for t in S57types.values():
+    typ = smtype(tags)
+    for t in S57layer_types.values():
         if t == typ:
             continue
-        for k in var_tags:
+        for k in bb_types:
             k = k.format(typ=t)
             if k not in tags:
                 tags[k] = None
 
 
 def add_generic_topmark(tags):
-    typ = tags["seamark:type"]
+    typ = smtype(tags)
     cat = tags.get(f"seamark:{typ}:category")
     tm = {}
     for b in ("buoy", "beacon"):
@@ -872,7 +888,7 @@ def add_generic_topmark(tags):
 
 
 def add_system(tags):
-    typ = tags["seamark:type"]
+    typ = smtype(tags)
     if "lateral" in typ:
         k = f"seamark:{typ}:system"
         if k not in tags:
@@ -894,7 +910,7 @@ def add_system(tags):
 
 
 def fix_tags(tags):
-    typ = tags["seamark:type"]
+    typ = smtype(tags)
 
     c = f"seamark:{typ}:colour"
     if typ == "buoy_safe_water":
@@ -913,6 +929,7 @@ def fix_tags(tags):
     if typ == "seagrass" and "grass" in tags.get(g, ""):
         del tags[g]
 
+    s = f"seamark:{typ}:shape"
     if typ == "beacon_lateral" and c not in tags and s not in tags and len(tags) <= 4:
         tags[s] = "perch"
 
@@ -920,26 +937,76 @@ def fix_tags(tags):
     if tags.get(r) == "reflector":
         tags["seamark:radar_reflector"] = "yes"
 
-    add_system(tags)
+    if typ == "pile" and not tags.get("catple"):
+        smtype(tags, "beacon_special_purpose")
+
+    # add_system(tags)
 
 
-def merge_sectors(sectors):
-    if len(sectors) == 1:
-        return sectors[0]
+nav_light_categories = [
+    "directional",
+    "leading",
+    "front",
+    "rear",
+    "lower",
+    "upper",
+    "moire",
+    "bearing",
+]
+
+
+low_light = [
+    "fog",
+    "low",
+    "faint",
+    "obscured",
+    "part_obscured",
+    "occasional",
+    "not_in_use",
+    "temporary",
+    "extinguished",
+    "existence_doubtful",
+]
+
+
+def light_order(l):
+    p = l.get("seamark:light:category", "")
+    c = 0 if any(v in p for v in nav_light_categories) else 30
+    r = -float(l.get("seamark:light:range", 0))
+    props = "visibility", "exhibition", "status"
+    x = [
+        10 if any(v in l.get("seamark:light:" + p, "") for v in low_light) else 0
+        for p in props
+    ]
+    return c + r + sum(x)
+
+
+def smtype(x, t=None):
+    if t:
+        x["seamark:type"] = t
+        return
+    return x["seamark:type"]
+
+
+def merge_lights(lights):
+    if len(lights) == 1:
+        return lights[0]
     else:
-        tags = {}
-        for i, s in enumerate(sectors, 1):
+        merged = {}
+        lights = sorted(lights, key=light_order)
+        klnam = "seamark:lnam"
+        for i, s in enumerate(lights, 1):
+            assert smtype(s) == "light", s
             si = {k.replace("light:", f"light:{i}:"): v for k, v in s.items()}
-            update_nc(tags, si)
-        try:
-            del tags["seamark:lnam"]
-        except:
-            pass
-        return tags
+            update_nc(merged, si)
+        if klnam in merged:
+            del merged[klnam]
+        return merged
 
 
 def group_by(data, key=lambda v: v):
-    grp = {}
+    # return dict(groupby(data, key))
+    grp = OrderedDict()
     for e in data:
         k = key(e)
         grp[k] = grp.get(k, []) + [e]

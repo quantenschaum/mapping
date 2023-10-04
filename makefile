@@ -3,26 +3,41 @@
 # https://www.teledynecaris.com/s-57/frames/S57catalog.htm
 
 SHELL=/bin/bash
+OGR_OPTS=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON,UPDATES=APPLY" S57_CSV="$(PWD)"
+
+.PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm data/vwm data/bsh
 
 help:
 	cat README.md
 
+vwm: data/vwm data/vwm.sqlite
 
-vwm:
-	mkdir -p data/$@
-	wget -O data/$@/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
-	wget -O data/$@/vast.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
+data/vwm:
+	mkdir -p $@
+	wget -O $@/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
+	wget -O $@/vast.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
+	for F in $@/*.json; do echo $$F; jq . $$F>$@/tmp; mv $@/tmp $$F; done
+
+data/vwm.sqlite: data/vwm
+	rm -f $@
+	for F in $$(find $</ -name "*.json"); do $(OGR_OPTS) ogr2ogr $@ $$F -skipfailures -append -dsco SPATIALITE=YES; done
 
 BSHWMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 
-bsh:
-	rm -rf data/$@
-	mkdir -p data/$@
-	for L in AidsAndServices SkinOfTheEarth; do wget -O data/$@/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
-	for L in RocksWrecksObstructions; do wget -O data/$@/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
-	for L in Hydrography Topography; do wget -O data/$@/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
-	rm -f data/$@.sqlite
-	for F in $$(find data/$@/ -name "*.json"); do $(OGR_OPTS) ogr2ogr data/$@.sqlite $$F -append -dsco SPATIALITE=YES; done
+bsh: data/bsh data/bsh.sqlite
+
+data/bsh:
+	rm -rf $@
+	mkdir -p $@
+	for L in AidsAndServices SkinOfTheEarth; do wget -O $@/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
+	for L in RocksWrecksObstructions; do wget -O $@/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
+	for L in Hydrography Topography; do wget -O $@/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
+
+	for F in $@/*.json; do echo $$F; jq . $$F>$@/tmp; mv $@/tmp $$F; done
+
+data/bsh.sqlite: data/bsh
+	rm -f $@
+	for F in $$(find $</ -name "*.json"); do $(OGR_OPTS) ogr2ogr $@ $$F -skipfailures -append -dsco SPATIALITE=YES; done
 
 us-encs:
 	rm -rf data/$@
@@ -34,12 +49,18 @@ us-encs:
 
 %.sqlite: s57attributes.csv s57objectclasses.csv
 	rm -f $@
-	for F in $$(find $(basename $@)/ -name "*.000"); do $(OGR_OPTS) ogr2ogr $@ $$F -append -dsco SPATIALITE=YES; done
+	for F in $$(find $(basename $@) -name "*.000"); do $(OGR_OPTS) ogr2ogr $@ $$F -skipfailures -append -dsco SPATIALITE=YES; done
 
 waddenzee:
 	rm -rf data/$@
 	cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
 	$(MAKE) data/$@.sqlite
+
+LAYERS=BOYLAT BOYCAR BOYSAW BOYSPP BCNLAT BCNCAR BCNISD BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN HRBFAC OFSPLF
+
+foo:
+	for L in $(LAYERS); do rm -f $$L.json; ogr2ogr data/waddenzee/$$L.json data/waddenzee.sqlite $$L -append; done
+	for F in data/waddenzee/*.json; do echo $$F; jq . $$F>tmp; mv tmp $$F; done
 
 marrekrite.gpx:
 	wget -O data/$@ "https://github.com/marcelrv/OpenCPN-Waypoints/raw/main/Marrekrite-Aanlegplaatsen.gpx"
@@ -51,7 +72,7 @@ tides:
 
 
 bsh.osm: empty.osm
-	for L in buoys beacons facilities lights services stations equipment; do ./update.py bsh-$$L data/bsh/AidsAndServices.json $< bsh-$$L.osm -a; done
+	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json $< bsh-$$L.osm -a; done
 	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json $< bsh-$$L.osm -a; done
 	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json $< bsh-$$L.osm -a; done
 	for L in beacons facilities lights; do ./lightsectors.py bsh-$$L.osm bsh-$$L-sectors.osm -j; done
@@ -63,7 +84,6 @@ bsh.osm: empty.osm
 
 
 
-.PHONY: nautical.render.xml render.diff marine.render.xml
 
 nautical.render.xml:
 	wget -O $@ https://github.com/osmandapp/OsmAnd-resources/raw/master/rendering_styles/$@
