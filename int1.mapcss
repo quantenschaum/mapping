@@ -327,7 +327,7 @@ node["depth"] {
     text: "depth";
 }
 node["depth:exposition"=shoaler] {
-    text-color: #aa0000;
+    text-color: #a00;
 }
 /* J: Nature of seabed */
 /* reference in https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J */
@@ -335,71 +335,71 @@ node["depth:exposition"=shoaler] {
     text:
 	eval(
 		replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
-		replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(		
+		replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
 		/* 1st, 2nd, and 3rd seabad types and their qualification according to INT-1 12.2 syntax, reference in https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J */
 		concat(
 			/* 1st element of seabed qualtifying and type values */
-			concat( 
+			concat(
 				cond(count(split(";", tag("seamark:seabed_area:surface_qualification")))=0, /* equal to single value, no list */
 					tag("seamark:seabed_area:surface_qualiication"),
 					get(split(";", tag("seamark:seabed_area:surface_qualification")), 0) /* list element 0 is the 1st element from the list */
-				),		
+				),
 				cond(count(split(";", tag("seamark:seabed_area:surface")))=0, /* equal to single value, no list */
 					tag("seamark:seabed_area:surface"),
 					get(split(";", tag("seamark:seabed_area:surface")), 0) /* list element 0 is the 1st element from the list */
-				)				
+				)
 			),
 			/* 2nd element of seabed type appended, if available */
-			cond(count(split(";", tag("seamark:seabed_area:surface_qualification")))>1 || count(split(";", tag("seamark:seabed_area:surface")))>1, 
-				concat( eval("."),		
-					get(split(";", tag("seamark:seabed_area:surface_qualification")), 1), /* list element 1 is the 2nd element from the list */			
-					get(split(";", tag("seamark:seabed_area:surface")), 1) /* list element 1 is the 2nd element from the list */					
+			cond(count(split(";", tag("seamark:seabed_area:surface_qualification")))>1 || count(split(";", tag("seamark:seabed_area:surface")))>1,
+				concat( eval("."),
+					get(split(";", tag("seamark:seabed_area:surface_qualification")), 1), /* list element 1 is the 2nd element from the list */
+					get(split(";", tag("seamark:seabed_area:surface")), 1) /* list element 1 is the 2nd element from the list */
 				),
 				eval("") /* dummy required for completion of cond-function */
 			),
 			/* 3rd element of seabed type appended, if available */
-			cond(count(split(";", tag("seamark:seabed_area:surface_qualification")))>2 || count(split(";", tag("seamark:seabed_area:surface")))>2, 
-				concat( eval("."),		
-					get(split(";", tag("seamark:seabed_area:surface_qualification")), 2), /* list element 2 is the 3rd element from the list */			
-					get(split(";", tag("seamark:seabed_area:surface")), 2) /* list element 2 is the 3rd element from the list */					
+			cond(count(split(";", tag("seamark:seabed_area:surface_qualification")))>2 || count(split(";", tag("seamark:seabed_area:surface")))>2,
+				concat( eval("."),
+					get(split(";", tag("seamark:seabed_area:surface_qualification")), 2), /* list element 2 is the 3rd element from the list */
+					get(split(";", tag("seamark:seabed_area:surface")), 2) /* list element 2 is the 3rd element from the list */
 				),
 				eval("") /* dummy required for completion of cond-function */
-			)			
+			)
 		),
-		/* transform seabed qualification to letters, reference in https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J */	
-		fine, "f"), medium, "m"), coarse, "c"), broken, "bk"), sticky, "sy"), soft, "so"), stiff, "sf"), 
+		/* transform seabed qualification to letters, reference in https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J */
+		fine, "f"), medium, "m"), coarse, "c"), broken, "bk"), sticky, "sy"), soft, "so"), stiff, "sf"),
 		volcanic, "v"), calcareous, "ca"), hard, "h"),
-		
-		/* transform seabed type to letters, reference in https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J */		
-		sand, "S"), mud, "M"), clay, "Cy"), silt, "Si"), stones, "St"), gravel, "G"), pebbles, "P"), 
+
+		/* transform seabed type to letters, reference in https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J */
+		sand, "S"), mud, "M"), clay, "Cy"), silt, "Si"), stones, "St"), gravel, "G"), pebbles, "P"),
 		cobbles, "Cb"), rocky, "R"), boulders, "Bo"), coral, "Co"), shells, "Sh"), lava, "Lv")
 	);
 	text-color: blue;
 	font-size: 11;
 }
-node|z15-["seamark:type"=seabed_area].seabed_surface { 
+node|z15-["seamark:type"=seabed_area].seabed_surface {
 	set             seabed_text;
 }
-area|z15-["seamark:type"=seabed_area].seabed_surface { 
+area|z15-["seamark:type"=seabed_area].seabed_surface {
 	set             seabed_text;
-	text-position: 	center; 
+	text-position: 	center;
 }
-way|z11-["seamark:seabed_area:surface"=rocky]:clockwise  { 
+way|z11-["seamark:seabed_area:surface"=rocky]:clockwise  {
 	repeat-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/J/J21clockwise.svg";
 }
-way|z11-["seamark:seabed_area:surface"=rocky]:anticlockwise  { 
+way|z11-["seamark:seabed_area:surface"=rocky]:anticlockwise  {
 	repeat-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/J/J21.svg";
 }
-way|z11-["seamark:seabed_area:surface"=coral]:clockwise  { 
+way|z11-["seamark:seabed_area:surface"=coral]:clockwise  {
 	repeat-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/J/J22clockwise.svg";
 }
-way|z11-["seamark:seabed_area:surface"=coral]:anticlockwise  { 
+way|z11-["seamark:seabed_area:surface"=coral]:anticlockwise  {
 	repeat-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/J/J22.svg";
 }
-area|z15-["seamark:seabed_area:surface"~=stones], area|z15-["seamark:seabed_area:surface"~=gravel]  { 
+area|z15-["seamark:seabed_area:surface"~=stones], area|z15-["seamark:seabed_area:surface"~=gravel]  {
 	fill-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/J/J20.svg";
 }
-area|z11-["seamark:seabed_area:surface"~=rocky], area|z15-["seamark:seabed_area:surface"~=coral]  { 
+area|z11-["seamark:seabed_area:surface"~=rocky], area|z15-["seamark:seabed_area:surface"~=coral]  {
 	fill-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/J/J2122_rockycoral.MapCSS.shader.svg";
 	/* backup fill-image:		"https://raw.githubusercontent.com/osmandapp/OsmAnd-resources/master/icons/svg/shaders_int1/h_seamark_j2122_rockycoral.svg"; */
 }
@@ -434,8 +434,8 @@ area["seamark:type"=seagrass] {
 	text-position: center;
 }
 *|z15-["seamark:type"=seabed_area].seabed_text, *|z15-["seamark:type"=weed].seabed_text, *|z15-["seamark:type"=seagrass].seabed_text {
-	font-family:    SansSerif; 
-	font-size:      11; 
+	font-family:    SansSerif;
+	font-size:      11;
 	font-style: 	italic;
     text-halo-colour: white;
 	text-halo-radius: 2;
@@ -759,7 +759,7 @@ node["seamark:light:character"]::light {
         ".",
         tag("seamark:light:period"),"s"
         ),"()","."),"..","."));
-    text-color: black;
+    text-color: #555;
     font-size: 11;
     -font-style: italic;
     text-anchor-horizontal: left;
