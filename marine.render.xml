@@ -2317,10 +2317,8 @@
             </case>
           </apply>
         </switch>
-        <apply_if additional="seamark:fog_signal:category">
-          <apply icon_2="seamark_fog_signal_additional">
-            <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_night"/>
-          </apply>
+        <apply_if additional="seamark:fog_signal:category" icon_2="seamark_fog_signal_additional">
+          <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_night"/>
         </apply_if>
         <apply_if additional="seamark:radar_reflector=yes" icon_3="seamark_radar_reflector_additional">
           <apply_if nightMode="true" icon_3="seamark_radar_reflector_additional_night"/>
@@ -2401,11 +2399,6 @@
             <apply_if additional="seamark:platform:category=fpso" icon_3="seamark_platform_fpso_additional"/>
           </case>
           <apply>
-            <case additional="seamark:fog_signal:category" icon_2="seamark_fog_signal_additional_center_big">
-              <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_center_big_night"/>
-            </case>
-          </apply>
-          <apply>
             <case additional="seamark:topmark:shape=2 cones point together"
                   icon__1="seamark_topmark_vertical_black_2conespointtogether_big"/>
             <case additional="seamark:topmark:shape=2 cones base together"
@@ -2463,6 +2456,9 @@
                   icon_5="seamark_radio_station_aeronautical_additional"/>
             <case additional="seamark:radio_station:category=dgps" icon_5="seamark_radio_station_dgps_additional"/>
             <apply_if nightMode="true" icon_4="seamark_radar_transponder_additional_center_big_night"/>
+          </apply_if>
+          <apply_if additional="seamark:fog_signal:category" icon_2="seamark_fog_signal_additional_center_big">
+            <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_center_big_night"/>
           </apply_if>
           <apply_if additional="seamark:radar_reflector=yes" icon_3="seamark_radar_reflector_additional_center_big">
             <apply_if nightMode="true" icon_3="seamark_radar_reflector_additional_center_big_night"/>
@@ -2546,11 +2542,6 @@
           <case additional="seamark:landmark:category=cairn" icon="seamark_landmark_cairn"/>
           <apply iconVisibleSize="13" intersectionSizeFactor="0.4"/>
         </case>
-        <apply>
-          <case additional="seamark:fog_signal:category" icon_2="seamark_fog_signal_additional_big">
-            <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_big_night"/>
-          </case>
-        </apply>
         <!--				<apply>
 						<case additional="seamark:topmark:shape=2 cones point together" icon__1="seamark_topmark_vertical_black_2conespointtogether_big"/>
 						<case additional="seamark:topmark:shape=2 cones base together" icon__1="seamark_topmark_vertical_black_2conesbasetogether_big"/>
@@ -2605,6 +2596,9 @@
                 icon_5="seamark_radio_station_aeronautical_additional"/>
           <case additional="seamark:radio_station:category=dgps" icon_5="seamark_radio_station_dgps_additional"/>
           <apply_if nightMode="true" icon_4="seamark_radar_transponder_additional_big_night"/>
+        </apply_if>
+        <apply_if additional="seamark:fog_signal:category" icon_2="seamark_fog_signal_additional_big">
+          <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_big_night"/>
         </apply_if>
         <apply_if additional="seamark:radar_reflector=yes" icon_3="seamark_radar_reflector_additional_big">
           <apply_if nightMode="true" icon_3="seamark_radar_reflector_additional_big_night"/>
