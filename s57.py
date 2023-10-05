@@ -2,6 +2,7 @@
 
 from collections import OrderedDict
 from itertools import groupby
+import re
 
 S57 = {
     "COLOUR": {
@@ -195,34 +196,63 @@ S57 = {
         6: "border",
     },
     "CATSPM": {
+        # https://wiki.openstreetmap.org/wiki/Seamarks/Special_Purpose_Marks
         1: "firing_danger_area",
         2: "target",
         3: "marker_ship",
         4: "degaussing_range",
-        8: "outfall",
-        9: "odas",
+        5: "barge",
         6: "cable",
         7: "spoil_ground",
+        8: "outfall",
+        9: "odas",
         10: "recording",
+        11: "seaplane_anchorage",
         12: "recreation_zone",
+        13: "private",
         14: "mooring",
+        15: "lanby",
         16: "leading",
         17: "measured_distance",
         18: "notice",
         19: "tss",
         20: "anchoring",
+        21: "no_berthing",
+        22: "no_overtaking",
+        23: "no_two-way_traffic",
+        24: "reduced_wake",
+        25: "speed_limit",
+        26: "stop",
         27: "warning",
+        28: "sound_ship_siren",
+        29: "restricted_vertical_clearance",
+        30: "maximum_vessel_draught",
+        31: "restricted_horizontal_clearance",
+        32: "strong_current",
+        33: "berthing",
+        34: "overhead_power_cable",
+        35: "channel_edge_gradient",
+        36: "telephone",
+        37: "ferry_crossing",
+        # 38:"traffic_lights",
         39: "pipeline",
         40: "anchorage",
         41: "clearing",
         42: "control",
+        43: "diving",
         44: "refuge_beacon",
         45: "foul_ground",
         46: "yachting",
+        47: "heliport",
+        48: "gps",
+        49: "seaplane_landing",
         50: "no_entry",
+        51: "work_in_progress",
         52: "unknown_purpose",
         53: "wellhead",
+        54: "	channel_separation",
         55: "marine_farm",
+        56: "artificial_reef",
     },
     "STATUS": {
         1: "permanent",
@@ -303,6 +333,8 @@ S57 = {
     "MARSYS": {
         1: "iala-a",
         2: "iala-b",
+        9: "none",
+        10: "other",
     },
     "LNAM": None,
     "OBJNAM": None,
@@ -327,7 +359,7 @@ S57 = {
     "SOUACC": None,
     "QUASOU": {
         1: "known",
-        2: None,  # "unknown",  # remove depth tag
+        2: "unknown",  # remove depth tag
         3: "doubtful",
         4: "unreliable",
         5: "no_bottom",
@@ -386,6 +418,7 @@ S57 = {
         18: "windmill",
         19: "windmotor",
         8: "windsock",
+        21: "boulder",
     },
     "BUISHP": {
         5: "high-rise",
@@ -469,6 +502,7 @@ S57 = {
     "RADWAL": None,
     "CALSGN": None,
     "COMCHA": None,
+    "ESTRNG": None,
     "CATSCF": {
         1: "visitor_berth",
         2: "nautical_club",
@@ -634,6 +668,7 @@ S57keys = {
     # transponder
     "catrtb": "seamark:radar_transponder:category",
     "valmxr": "seamark:{typ}:range",
+    "estrng": "seamark:{typ}:range",
     "radwal": "seamark:{typ}:wavelength",
     # other/general
     "conrad": "seamark:{typ}:reflectivity",
@@ -644,12 +679,13 @@ S57keys = {
     "status": "seamark:{typ}:status",
     "persta": "seamark:period_start",
     "perend": "seamark:period_end",
-    # "inform": "seamark:description",
+    "inform": "seamark:information",
     # "sorind": "seamark:source",
     # "sordat": "seamark:source_date",
 }
 
-S57layer_types = {
+S57types = {
+    # primary
     "BOYLAT": "buoy_lateral",
     "BOYCAR": "buoy_cardinal",
     "BOYSAW": "buoy_safe_water",
@@ -662,14 +698,36 @@ S57layer_types = {
     "BCNSPP": "beacon_special_purpose",
     "PILPNT": "pile",
     "LNDMRK": "landmark",
-    "LIGHTS": "light",
-    "TOPMAR": "topmark",
     "OFSPLF": "platform",
     "UWTROC": "rock",
     "WRECKS": "wreck",
     "OBSTRN": "obstruction",
+    "SBDARE": "seabed_area",
+    "HRBFAC": "harbour",
+    "SMCFAC": "small_craft_facility",
+    # secondary
+    "LIGHTS": "light",
+    "TOPMAR": "topmark",
+    "DAYMAR": "topmark",
+    "FOGSIG": "fog_signal",
+    "RTPBCN": "radar_transponder",
 }
 
+secondary = (
+    "LIGHTS",
+    "TOPMAR",
+    "DAYMAR",
+    "FOGSIG",
+    "RTPBCN",
+)
+
+
+def is_primary(l):
+    return l not in secondary
+
+
+layers1 = tuple(l for l in S57types.keys() if is_primary(l))
+layers2 = tuple(l for l in S57types.keys() if not is_primary(l))
 
 bb_types = set(
     k
@@ -723,12 +781,13 @@ def is_something(props):
 
 
 def s57type(props):
-    if "_type_" in props:
-        return props["_type_"]
-    if "rock_type" in props:
-        return "rock"
-    if "obstruction_type" in props:
-        return "obstruction"
+    _type_ = props.get("_type_")
+    if _type_:
+        return _type_
+    # if "rock_type" in props:
+    #     return "rock"
+    # if "obstruction_type" in props:
+    #     return "obstruction"
     if "catobs" in props:
         return "obstruction"
     types = set(
@@ -854,7 +913,7 @@ def add_tags(tags, props):
 
 def fill_types(tags):
     typ = smtype(tags)
-    for t in S57layer_types.values():
+    for t in S57types.values():
         if t == typ:
             continue
         for k in bb_types:
@@ -911,6 +970,7 @@ def add_system(tags):
 
 def fix_tags(tags):
     typ = smtype(tags)
+    is_bb = "buoy" in typ or "beacon" in typ
 
     c = f"seamark:{typ}:colour"
     if typ == "buoy_safe_water":
@@ -939,6 +999,32 @@ def fix_tags(tags):
 
     if typ == "pile" and not tags.get("catple"):
         smtype(tags, "beacon_special_purpose")
+
+    i = "seamark:information"
+    r = "seamark:radio_station:category"
+    if is_bb and "AIS" in tags.get(i, ""):
+        tags[r] = "ais"
+        m = re.search(r"MMSI\s*(\d+)", tags[i])
+        if m:
+            tags["seamark:radio_station:mmsi"] = m.groups()[0]
+
+    # q = "depth:source_quality"
+    # if tags.get(q) == "unknown":
+    #     for k in filter(lambda k: k.startswith("depth"), list(tags.keys())):
+    #         del tags[k]
+
+    n = "seamark:name"
+    l = "seamark:lnam"
+    if (
+        len(tags.get(n, "")) > 6
+        and is_bb
+        and (tags.get(l, "").startswith("022") or tags.get(l, "").startswith("22"))
+    ):
+        ln = tags[n]
+        sn = " ".join(filter(lambda p: not any(l.islower() for l in p), ln.split()))
+        if sn:
+            tags["seamark:description"] = ln
+            tags[n] = sn
 
     # add_system(tags)
 
@@ -1031,9 +1117,16 @@ abbrevs = {
     "watched": "watchd",
     "unwatched": "unwtchd",
     "existence_doubtful": "ED",
+    "high": "high",
+    "low": "low",
+    "faint": "faint",
     "intensified": "intens",
     "unintensified": "uintens",
     "restricted": "restr",
     "obscured": "obscd",
     "part_obscured": "p.obscd",
+    "fog": "fog",
+    # "24h": "24h",
+    # "night": "night",
+    # "day": "day",
 }

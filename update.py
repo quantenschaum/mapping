@@ -3,6 +3,7 @@
 
 import json
 import os
+from os.path import isfile
 from datetime import datetime
 from math import inf, isnan, log, pi, pow, sqrt, tan, isfinite
 import re
@@ -13,6 +14,7 @@ from pyquery import PyQuery as pq
 from s57 import *
 from functools import reduce
 from os.path import basename, splitext
+from sys import stderr
 
 dx = 0.01
 dy = dx
@@ -45,7 +47,11 @@ def in_usageband(f, bands=["Approach", "Harbour", "Berthing"]):
 
 
 def gtype(f):
-    return f["geometry"]["type"]
+    g = f.get("geometry")
+    if g:
+        t = g.get("type")
+        if t:
+            return t.lower() if t else None
 
 
 def latlon(f):
@@ -92,14 +98,14 @@ def get_lnam(f):
     return f["properties"]["lnam"]
 
 
-def load_geojson(filename, geotype="point"):
+def load_geojson(filename, geotype="point", inject={}):
     print("loading GeoJSON", filename)
     data = load_json(filename)
     features = {}
     merged = 0
 
     filtered = filter(
-        lambda f: gtype(f).lower() == geotype and in_usageband(f),
+        lambda f: gtype(f) == geotype and in_usageband(f),
         data["features"],
     )
 
@@ -107,7 +113,7 @@ def load_geojson(filename, geotype="point"):
 
     def key(e):
         p = e["properties"]
-        return int(p["scamax"] or p["scamin"])
+        return int(p["scamax"] or p["scamin"] or 99999999)
 
     selected = [sorted(g, key=key)[0] for g in grouped.values()]
 
@@ -117,6 +123,7 @@ def load_geojson(filename, geotype="point"):
     types = set()
     for e in selected:
         p = e["properties"]
+        update_nc(p, inject)
         keys.update(p.keys())
         types.add(s57type(p))
 
@@ -131,16 +138,25 @@ def load_geojson(filename, geotype="point"):
 # d = load_geojson(f)
 
 
-def load_enc(filenames, others):
-    if isinstance(filenames, str):
-        data = load_geojson(filenames)
-    else:
-        data = reduce(lambda a, b: a + b, [load_geojson(f) for f in filenames])
+def load_enc(layer_files, other_files):
+    if isinstance(layer_files, str):
+        layer_files = [layer_files]
+    if isinstance(other_files, str):
+        other_files = [other_files]
 
-    if isinstance(others, str):
-        other = load_geojson(others)
-    else:
-        other = reduce(lambda a, b: a + b, [load_geojson(f) for f in others])
+    def load(f):
+        try:
+            t = S57types.get(splitext(basename(f))[0])
+            t = {"_type_": t} if t else {}
+            return load_geojson(f, inject=t)
+        except Exception as x:
+            print(x, f, file=stderr)
+            return []
+
+    data, other = [
+        reduce(lambda a, b: a + b, [load(f) for f in files], [])
+        for files in (layer_files, other_files)
+    ]
     other = {k: v[0] for k, v in group_by(other, get_lnam).items()}
 
     points = []
@@ -165,7 +181,7 @@ def load_enc(filenames, others):
         # add_generic_topmark(tags)
         fix_tags(tags)
 
-        # if "light:x" in str(tags):
+        # if "mmsi" in str(tags):
         #     print("-" * 100)
         #     print(p)
         #     for r in refs:
@@ -181,42 +197,39 @@ def load_enc(filenames, others):
     return points
 
 
-def load_rws():
+def load_enc_layers(
+    datadir="data/waddenzee",
+    layers=(
+        "BOYLAT",
+        "BOYCAR",
+        "BOYSAW",
+        "BOYSPP",
+        "BCNLAT",
+        "BCNCAR",
+        "BCNISD",
+        "BCNSPP",
+        "LNDMRK",
+        "PILPNT",
+        "OFSPLF",
+        "HRBFAC",
+        # "UWTROC",
+        # "WRECKS",
+        # "OBSTRN",
+    ),
+    others=layers2,
+):
+    def filelist(directory, layers):
+        files = [f"{datadir}/{l}.json" for l in layers]
+        files = list(filter(isfile, files))
+        return files
+
     return load_enc(
-        [
-            f"data/waddenzee/{l}.json"
-            for l in (
-                "BOYLAT",
-                "BOYCAR",
-                "BOYSAW",
-                "BOYSPP",
-                "BCNLAT",
-                "BCNCAR",
-                "BCNISD",
-                "BCNSPP",
-                "LNDMRK",
-                "PILPNT",
-                # "LIGHTS",
-                "UWTROC",
-                "WRECKS",
-                "OBSTRN",
-                "OFSPLF",
-            )
-        ],
-        [
-            f"data/waddenzee/{l}.json"
-            for l in (
-                "TOPMAR",
-                "DAYMAR",
-                "LIGHTS",
-                "RTPBCN",
-                "FOGSIG",
-            )
-        ],
+        filelist(datadir, layers),
+        filelist(datadir, others),
     )
 
 
-load_rws()
+# load_enc_layers("data/us")
 
 
 def load_bsh(filename, kind):
@@ -363,7 +376,7 @@ def load_bsh_obstr(filename, kind):
         if kind in f["id"].lower():
             ll = latlon(f)
             tags = {"ll": ll}
-            f["properties"][typ + "_type"] = 1
+            f["properties"]["_type_"] = typ
             add_tags(tags, f)
             fix_tags(tags)
             assert smtype(tags) == typ, (f, tags)
@@ -558,6 +571,7 @@ def update_osm(
     user=None,
     review=False,
 ):
+    infile = infile if infile != "none" else None
     x = pq(filename=infile) if infile else pq("<osm version='0.6'/>")
     add |= not infile
 
@@ -802,6 +816,7 @@ def main():
     infile = args.infile
     outfile = args.outfile
 
+    seamark_type = "xxx"
     if all(s in mode for s in ("rws", "buoy")):
         seamark_type = "buoy_.*"
         data = load_rws_buoys(datafile)
@@ -830,25 +845,20 @@ def main():
         seamark_type = "light_.*|landmark"
         data = load_bsh_lights(datafile)
     elif all(s in mode for s in ("bsh", "fac")):
-        seamark_type = "xxx"
         data = load_bsh(datafile, "facility")
     elif all(s in mode for s in ("bsh", "feat")):
-        seamark_type = "xxx"
         data = load_bsh(datafile, "feature")
     elif all(s in mode for s in ("bsh", "serv")):
-        seamark_type = "xxx"
         data = load_bsh(datafile, "service")
     elif all(s in mode for s in ("bsh", "stat")):
-        seamark_type = "xxx"
         data = load_bsh(datafile, "station")
     elif all(s in mode for s in ("bsh", "equi")):
-        seamark_type = "xxx"
         data = load_bsh(datafile, "equipment")
 
-    elif all(s in mode for s in ("enc", "buoy")):
-        seamark_type = "buoy_.*"
-        # BOYLAT BOYCAR BOYSAW BOYSPP BCNLAT BCNCAR BCNISD BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN
-        data = load_rws()
+    elif all(s in mode for s in ("enc", "rock")):
+        data = load_enc_layers(datafile, ["UWTROC", "WRECKS", "OBSTRN"], [])
+    elif all(s in mode for s in ("enc")):
+        data = load_enc_layers(datafile)
 
     print("seamark:type", seamark_type)
 
