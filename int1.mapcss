@@ -19,7 +19,7 @@ meta {
 
 /* For JOSM, creating a light background color */
 canvas {
-    /*	fill-color:			aliceblue; */
+  fill-color:			white;
 	antialiasing:		'full';
 	default-points:         false; /* hides points */
 	default-lines:          false; /* hides lines */
@@ -27,7 +27,7 @@ canvas {
 }
 
 /* Defaults */
-node {
+node:unconnected {
 	symbol-shape:	circle;
 	symbol-size:	2;
 	color:			yellow;
@@ -42,10 +42,15 @@ node["seamark:type"] {
 	text-anchor-horizontal:	center;
 	text-anchor-vertical:	below;
 }
+way["seamark:type"] {
+	text:			"seamark:name";
+	text-color:		black;
+	font-size: 11;
+}
 way {
 	width:				default;
 	color:				gray;
-	opacity:			0.3;
+	opacity:			0.4;
 }
 node:unconnected {
 	symbol-shape:	circle;
@@ -92,7 +97,7 @@ relation[waterway] > way::int1_water {
 way[waterway]::int1_water {
 	set				river;
 	width:			1;
-	color:			black;
+	color:			#66f;
 	casing-width:	+1;
 	casing-color:	skyblue;
 	casing-opacity:	0.9;
@@ -113,6 +118,7 @@ way[waterway=fairway]::int1_water {
 	width:			+5;
 	-casing-width:	+5;
 	color: white;
+	opacity: 0.6;
 }
 area[natural=water]::int1_water,
 area[water]::int1_water,
@@ -284,6 +290,8 @@ node["seamark:landmark:category"=windmotor].landmark::int1_landmark {
 }
 node["seamark:landmark:category"=flagstaff].landmark::int1_landmark {
 	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/E/E27.svg";
+	icon-height: 25;
+	icon-offset-y: -12;
 }
 
 /* F: Ports */
@@ -323,10 +331,14 @@ way[man_made=pier]::int1_pier {
 /* G: Topographic Terms */
 /* H: Tides, Currents */
 /* I: Depths */
-node["depth"] {
-    text: "depth";
+node["depth"]::depth {
+  text: "depth";
+  text-color:		black;
+  font-size: 11;
+  text-anchor-horizontal:	right;
+  text-anchor-vertical:	center;
 }
-node["depth:exposition"=shoaler] {
+node["depth:exposition"=shoaler]::depth {
     text-color: #a00;
 }
 /* J: Nature of seabed */
@@ -558,6 +570,9 @@ way["seamark:type"=pipeline_submarine]::int1_pipeline {
 	repeat-image-width:		32;
 	repeat-image-spacing:	2;
 }
+node["seamark:type"=platform] {
+	icon-image:			"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/L/L10.svg";
+}
 
 /* M: Tracks, Routes */
 way["seamark:type"=recommended_track]::int1_recommended_track {
@@ -568,7 +583,7 @@ way["seamark:type"=recommended_track]::int1_recommended_track {
 }
 way["seamark:type"=navigation_line]::int1_navigation_line {
     color:          black;
-    width:          3;
+    width:          2;
     dashes:         8,6;
     opacity:        1.0;
 }
@@ -747,23 +762,53 @@ node["seamark:type"=beacon_special_purpose]::int1_buoy {
 }
 
 node["seamark:light:character"]::light {
-    text: eval(replace(replace(concat(
+    text: eval(replace(replace(replace(replace(concat(
         tag("seamark:light:character"),"(",
         tag("seamark:light:group"),")",
-        replace(replace(replace(replace(
+        replace(replace(replace(replace(replace(replace(
             tag("seamark:light:colour"),
         "white","W"),
         "red","R"),
         "green","G"),
-        "yellow","Y"),
-        ".",
-        tag("seamark:light:period"),"s"
-        ),"()","."),"..","."));
+        "orange","Or"),
+        "blue","Bu"),
+        "yellow","Y"),".",
+        any(tag("seamark:light:period"),"?"),"s.",
+        any(tag("seamark:light:height"),"?"),"m.",
+        any(tag("seamark:light:range"),"?"),"M",
+        ""),"()","."),".?s",""),".?m",""),".?M",""));
     text-color: #555;
     font-size: 11;
     -font-style: italic;
     text-anchor-horizontal: left;
     text-anchor-vertical: center;
+}
+
+way[lightsector] {
+  text: "name";
+  text-color: #555;
+  font-size: 11;
+  color: gray;
+}
+way[lightsector=arc] {
+  color: #800080;
+	width:			10;
+}
+way[lightsector=arc][colour=orange],
+way[lightsector=arc][colour=yellow],
+way[lightsector=arc][colour=white] {
+  color: #fab20b;
+}
+way[lightsector=arc][colour=red] {
+  color: #ed1c24;
+}
+way[lightsector=arc][colour=green] {
+  color: #00a650;
+}
+way[lightsector=limit] {
+  color: black;
+  width: 1;
+  dashes: 3,3;
 }
 
 node|z15-["seamark:type"=mooring]["seamark:mooring:category"=buoy]::int1_buoy {
@@ -874,5 +919,40 @@ node["seamark:small_craft_facility:category"=restaurant].small_craft::int1_small
 node["seamark:small_craft_facility:category"=slipway].small_craft::int1_small_craft {
 	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/U/U5.svg";
 	icon-width:		32;
+}
+node["seamark:radar_transponder:category"=racon]::racon {
+	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/S/S1.svg";
+	icon-width:	80;
+	text: eval(concat("Racon (",tag("seamark:radar_transponder:group"),")"));
+	text-anchor-vertical: above;
+	text-anchor-horizontal: center;
+	text-color: purple;
+	font-size: 14;
+	font-weight: bold;
+}
+node["seamark:radar_transponder:category"=ramark]::racon {
+	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/S/S1.svg";
+	icon-width:	80;
+	text: eval(concat("Ramark (",tag("seamark:radar_transponder:group"),")"));
+	text-anchor-vertical: above;
+	text-anchor-horizontal: center;
+	text-color: purple;
+	font-size: 14;
+	font-weight: bold;
+}
+node["seamark:radio_station:category"]::radio_station {
+	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/S/S1.svg";
+	icon-width:	80;
+	text: eval(upper(tag("seamark:radio_station:category")));
+	text-anchor-vertical: above;
+	text-anchor-horizontal: center;
+	text-color: purple;
+	font-size: 14;
+	font-weight: bold;
+}
+node["seamark:radar_reflector"=yes]::radar_reflector {
+	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/S/S4.svg";
+	icon-width:	25;
+	icon-offset-y: -30;
 }
 /* END */
