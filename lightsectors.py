@@ -197,7 +197,7 @@ def label(sector, height_range=False, sep="\u00A0"):
 
 
 def abbrev(s):
-    return [abbrevs.get(p, p[:4]) for p in s.split(";")]
+    return [abbrevs[p] for p in s.split(";") if p in abbrevs]
 
 
 SSO = "sector_start", "sector_end", "orientation"
