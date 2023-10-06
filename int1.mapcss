@@ -794,6 +794,9 @@ way[lightsector=arc] {
   color: #800080;
 	width:			10;
 }
+way["lightsector:low"=yes] {
+  dashes: 6,3;
+}
 way[lightsector=arc][colour=orange],
 way[lightsector=arc][colour=yellow],
 way[lightsector=arc][colour=white] {
@@ -809,6 +812,11 @@ way[lightsector=limit] {
   color: black;
   width: 1;
   dashes: 3,3;
+}
+way[lightsector=orientation] {
+  color: black;
+  width: 1;
+  dashes: 6,3;
 }
 
 node|z15-["seamark:type"=mooring]["seamark:mooring:category"=buoy]::int1_buoy {

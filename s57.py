@@ -738,14 +738,14 @@ bb_types = set(
 
 def s57attr(attr, value):
     try:
+        a = attr.upper()
         if isinstance(value, dict):
             return s57attr(attr, value[attr])
         try:
-            if "," in value:
+            if "," in value and S57[a]:
                 return ";".join(s57attr(attr, c.strip()) for c in value.split(","))
         except:
             pass
-        a = attr.upper()
         value = cleanup(value)
         try:
             return S57[a](value)
@@ -762,7 +762,7 @@ def cleanup(s):
     except:
         pass
     try:
-        v = float(s)
+        v = float(s.replace(",", "."))
         return str(int(v) if int(v) == v else v)
     except:
         pass
@@ -820,8 +820,8 @@ def s57type(props):
         if "catspm" in props:
             return bb + "_special_purpose"
         # otherwise decide by color
-        col = s57attr("colour", props)
-        pat = s57attr("colpat", props) if "colpat" in props else None
+        col = s57attr("colour", props) if "colour" in props else ""
+        pat = s57attr("colpat", props) if "colpat" in props else ""
         if "yellow" in col and "black" in col:
             return bb + "_cardinal"
         if "yellow" in col or "grey" in col:
@@ -832,6 +832,8 @@ def s57type(props):
             return bb + "_safe_water"
         if "green" in col or "red" in col:
             return bb + "_lateral"
+        if bb == "beacon":
+            return bb + "_special_purpose"
     assert 0, (types, props)
 
 
@@ -968,6 +970,13 @@ def add_system(tags):
                 )
 
 
+shape_replace = {
+    "triangle": "cone",
+    "square": "cylinder",
+    "circle": "sphere",
+}
+
+
 def fix_tags(tags):
     typ = smtype(tags)
     is_bb = "buoy" in typ or "beacon" in typ
@@ -976,9 +985,23 @@ def fix_tags(tags):
     if typ == "buoy_safe_water":
         tags[c] = "red;white"
 
-    p = f"seamark:{typ}:colour_pattern"
-    if p in tags and ";" not in tags.get(c, ""):
-        tags[p] = None
+    c = ":colour"
+    for k in tags.keys():
+        if k.endswith(c) and ";" in tags[k]:
+            cs = list(set(tags[k].split(";")))
+            if len(cs) == 1:
+                tags[k] = cs[0]
+
+    p = ":colour_pattern"
+    for k in tags.keys():
+        if k.endswith(p):
+            if ";" not in tags.get(k.replace(p, c), ""):
+                tags[k] = None
+
+    s = "seamark:topmark:shape"
+    if "buoy" in typ and s in tags:
+        for k, v in shape_replace.items():
+            tags[s] = tags[s].replace(k, v)
 
     for s in "shape", "reflectivity", "conspicuity":
         s = f"seamark:{typ}:{s}"
@@ -1029,7 +1052,7 @@ def fix_tags(tags):
     # add_system(tags)
 
 
-nav_light_categories = [
+nav_light_categories = (
     "directional",
     "leading",
     "front",
@@ -1038,10 +1061,18 @@ nav_light_categories = [
     "upper",
     "moire",
     "bearing",
-]
+)
+
+leading_lights = (
+    "leading",
+    "front",
+    "rear",
+    "lower",
+    "upper",
+)
 
 
-low_light = [
+low_light = (
     "fog",
     "low",
     "faint",
@@ -1052,7 +1083,7 @@ low_light = [
     "temporary",
     "extinguished",
     "existence_doubtful",
-]
+)
 
 
 def light_order(l):
@@ -1070,7 +1101,7 @@ def light_order(l):
 def smtype(x, t=None):
     if t:
         x["seamark:type"] = t
-        return
+        return x
     return x["seamark:type"]
 
 

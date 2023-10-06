@@ -426,15 +426,19 @@ rws_buoy = {
     "kleurpatr_": "colpat",
 }
 rws_topmark = {
+    "_type_": "topmark",
     "v_tt_c": "topshp",
     "tt_kleur_c": "colour",
     "tt_pat_c": "colpat",
 }
 rws_light = {
+    "_type_": "light",
     "licht_kl_c": "colour",
     "sign_kar_c": "litchr",
     "sign_gr_c": "siggrp",
     "sign_perio": "sigper",
+    # "licht_hgt": "height",
+    # "licht_rich": "orient",
 }
 
 
@@ -450,7 +454,7 @@ def load_rws_buoys(filename):
             p = f["properties"]
             p = {b: p[a] for a, b in l.items() if p.get(a) and p[a] != "#"}
             if i == 0:
-                p["buoy_type"] = 5
+                p["buoy_type"] = 1
             if p:
                 add_tags(tags, p)
                 fix_tags(tags)
@@ -458,9 +462,80 @@ def load_rws_buoys(filename):
 
         points.append(tags)
 
-    print("RWS buoys", len(points))
+    print("buoys", len(points))
 
     return points
+
+
+rws_beacon = {
+    "benaming": "objnam",
+    "obj_vorm_c": "bcnshp",
+    "obj_kleur_": "colour",
+    "kleurpatr_": "colpat",
+    # "obj_hoogte": "verlen",
+}
+rws_racon = {
+    "_type_": "radar_transponder",
+    "racon_code": "siggrp",
+}
+
+
+def load_rws_beacons(filename):
+    data = load_json(filename)
+    points = []
+    for f in data["features"]:
+        ll = latlon(f)
+        tags = {"ll": ll}
+        # print(json.dumps(f["properties"], indent=2))
+
+        t = "_type_"
+        for i, l in enumerate((rws_beacon, rws_topmark, rws_light, rws_racon)):
+            p = f["properties"]
+            p = {b: p[a] for a, b in l.items() if p.get(a) and p[a] != "#"}
+            if t in l:
+                p[t] = l[t]
+            if i == 0:
+                p["beacon_type"] = 1
+            if p:
+                add_tags(tags, p)
+        # add_generic_topmark(tags)
+
+        sectors = []
+        p = f["properties"]
+        for i in range(1, 16, 1):
+            c = f"licht_{i}_k_"[:10]
+            g = f"licht_{i}_g"
+            if i == 11:
+                g = g.replace("_g", "g")
+            if p[c] == "#":
+                break
+            sectors.append((s57attr("colour", p[c]), float(p[g].replace(",", "."))))
+        if sectors:
+            lights = []
+            for i, s in enumerate(sectors):
+                l = smtype({k: v for k, v in tags.items() if "light" in k}, "light")
+                l["seamark:light:colour"] = s[0]
+                l["seamark:light:sector_start"] = s[1]
+                l["seamark:light:sector_end"] = sectors[(i + 1) % len(sectors)][1]
+                if s[0] != "black":
+                    lights.append(l)
+            lights = merge_lights(lights)
+            update_nc(tags, lights)
+
+        fix_tags(tags)
+
+        if "light:1" in str(tags):
+            print(f["properties"])
+            print(tags)
+
+        points.append(tags)
+
+    print("beacons", len(points))
+
+    return points
+
+
+load_rws_beacons("data/vwm/vast.json")
 
 
 def load_marrekrite(gpx="marrekrite.gpx"):
@@ -820,6 +895,9 @@ def main():
     if all(s in mode for s in ("rws", "buoy")):
         seamark_type = "buoy_.*"
         data = load_rws_buoys(datafile)
+    if all(s in mode for s in ("rws", "beac")):
+        seamark_type = "beacon_.*"
+        data = load_rws_beacons(datafile)
     elif all(s in mode for s in ("marre",)):
         seamark_type = "buoy_.*"
         data = load_marrekrite(datafile)

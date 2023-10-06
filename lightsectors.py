@@ -252,17 +252,32 @@ def colors(sectors):
     return ";".join(sorted(cols, reverse=True))
 
 
+config_defaults = {
+    "major": ["light_major"],
+    "min_range": 5,
+    "max_range": 12,
+    "f_range": 0.8,
+    "f_arc": 0.2,
+    "full": 19,
+    "range0": 0,
+    "leading": False,
+}
+
+
 def generate_sectors(infile, outfile, config={}):
     print("reading", infile)
     osm = pq(filename=infile)
     out = pq('<osm version="0.6"/>')
 
-    major = config.get("major", ["light_major"])
-    min_range = config.get("min_range", 5)
-    max_range = config.get("max_range", 10)
-    full_range = config.get("full", 999)
-    f_range = config.get("f_range", 0.6)
-    f_arc = config.get("f_arc", 0.2)
+    update_nc(config, config_defaults)
+    major = config["major"]
+    min_range = config["min_range"]
+    max_range = config["max_range"]
+    full_range = config["full"]
+    f_range = config["f_range"]
+    f_arc = config["f_arc"]
+    range0 = config["range0"]
+    leading = config["leading"]
 
     osm_objects = list(chain(osm("node"), osm("way")))
     N = len(osm_objects)
@@ -276,7 +291,7 @@ def generate_sectors(infile, outfile, config={}):
         if (
             not sectors
             or seamark_type not in major
-            and not any(s.get("range", 0) >= min_range for s in sectors)
+            and not any(s.get("range", range0) >= min_range for s in sectors)
         ):
             continue
 
@@ -311,15 +326,19 @@ def generate_sectors(infile, outfile, config={}):
 
         lines = {}
         for s in sectors:
-            r0 = s.get("range", max(min_range, 3))  # nominal range
+            r0 = s.get("range", max(min_range, range0))  # nominal range
             r1 = min(r0 * f_range, max_range)  # rendered range
             a, b, o = [s.get(k) for k in SSO]
             is_ori = o is not None
             is_sector = a is not None and b is not None
             is_full = is_sector and a % 360 == b % 360
+            is_leading = len(sectors) == 1 and any(
+                k in s.get("category", "") for k in leading_lights
+            )
+            is_low = any(k in str(s) for k in low_light)
 
             # directional line
-            if is_ori:
+            if r1 and is_ori:
                 lines[o] = {
                     "lightsector": "orientation",
                     "orientation": o,
@@ -328,8 +347,11 @@ def generate_sectors(infile, outfile, config={}):
                     "colour": s.get("colour"),
                 }
 
+            if is_leading and not leading:
+                continue
+
             # sector limits
-            if is_sector and not is_full:
+            if r1 and is_sector and not is_full:
                 for d in a, b:
                     l0 = lines.get(d, {})
                     if (
@@ -344,7 +366,7 @@ def generate_sectors(infile, outfile, config={}):
                         }
 
             # sector arc
-            if is_sector and (not is_full or r0 >= full_range):
+            if r1 and is_sector and (not is_full or r0 >= full_range):
                 if a >= b:
                     b += 360
                 m = max(3, ceil(abs(b - a) / 5))
@@ -356,6 +378,8 @@ def generate_sectors(infile, outfile, config={}):
                 set_tag("lightsector", "arc", w)
                 set_tag("colour", s.get("colour"), w)
                 set_tag("name", label(s), w)
+                if is_low:
+                    set_tag("lightsector:low", "yes", w)
                 for m in points + [w]:
                     out.append(m)
 
@@ -392,8 +416,8 @@ def main():
     parser.add_argument(
         "outfile",
         help="OSM XML file to write",
-        default="out.osm",
-        metavar="out.osm",
+        default="lights.osm",
+        metavar="lights.osm",
         nargs="?",
     )
     parser.add_argument(
@@ -407,52 +431,63 @@ def main():
         "--major",
         help="seamark:type(s) for major lights (comma separated list, major lights are always included, even if range<min_range)",
         type=lambda s: s.split(","),
-        default="light_major",
+        default=config_defaults["major"],
     )
     parser.add_argument(
         "-r",
         "--min-range",
         help="min. range non-major light must have to be included",
         type=float,
-        default=5,
+        default=config_defaults["min_range"],
     )
     parser.add_argument(
         "-R",
         "--max-range",
         help="max. range used for generating sectors",
         type=float,
-        default=12,
+        default=config_defaults["max_range"],
     )
     parser.add_argument(
         "-f",
         "--f-range",
         help="factor to scale range limit lines",
         type=float,
-        default=0.8,
+        default=config_defaults["f_range"],
     )
     parser.add_argument(
         "-a",
         "--f-arc",
         help="factor to scale radius of arcs",
         type=float,
-        default=0.2,
+        default=config_defaults["f_arc"],
     )
     parser.add_argument(
         "-o",
         "--full",
         help="generate arcs for 360° sectors if range >= this value",
         type=float,
-        default=19,
+        default=config_defaults["full"],
+    )
+    parser.add_argument(
+        "--range0",
+        help="default range to assume if no range is given in the input dataset",
+        type=float,
+        default=config_defaults["range0"],
+    )
+    parser.add_argument(
+        "-l",
+        "--leading",
+        help="generate arcs and limits for single sector leading lights",
+        action="store_true",
     )
 
     args = parser.parse_args()
-    args.get = MethodType(
-        lambda s, k, d=None: d if getattr(s, k) is None else getattr(s, k), args
-    )
 
+    infile = args.infile
     outfile = args.outfile
+    config = {k: getattr(args, k) for k in config_defaults.keys()}
 
-    generate_sectors(args.infile, outfile, args)
+    generate_sectors(infile, outfile, config)
 
     if args.josm:
         requests.get(

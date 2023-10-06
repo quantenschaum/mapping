@@ -2010,21 +2010,18 @@
               <case additional="seamark:topmark:colour=green" icon__1="seamark_topmark_oblique_green_cylinder"/>
               <case additional="seamark:topmark:colour=black" icon__1="seamark_topmark_oblique_black_cylinder"/>
               <case additional="seamark:topmark:colour=yellow" icon__1="seamark_topmark_oblique_yellow_cylinder"/>
-              <case additional="seamark:topmark:colour=red;white;red"
-                    icon__1="seamark_topmark_oblique_redwhitered_cylinder"/>
+              <case additional="seamark:topmark:colour=red;white;red" icon__1="seamark_topmark_oblique_redwhitered_cylinder"/>
             </case>
             <switch>
-              <case additional="seamark:topmark:shape=board" icon__1="seamark_topmark_oblique_redwhitered_board"/>
-              <case additional="seamark:topmark:shape=square" icon__1="seamark_topmark_oblique_redwhitered_board"/>
-              <case additional="seamark:topmark:shape=rectangle" icon__1="seamark_topmark_oblique_redwhitered_board"/>
+              <case additional="seamark:topmark:shape=board" icon__1="seamark_topmark_oblique_black_cylinder"/>
+              <case additional="seamark:topmark:shape=square" icon__1="seamark_topmark_oblique_black_cylinder"/>
+              <case additional="seamark:topmark:shape=rectangle" icon__1="seamark_topmark_oblique_black_cylinder"/>
               <apply>
                 <case additional="seamark:topmark:colour=red" icon__1="seamark_topmark_oblique_red_board"/>
                 <case additional="seamark:topmark:colour=green" icon__1="seamark_topmark_oblique_green_board"/>
-                <case additional="seamark:topmark:colour=red;white;red"
-                      icon__1="seamark_topmark_oblique_redwhitered_board"/>
+                <case additional="seamark:topmark:colour=red;white;red" icon__1="seamark_topmark_oblique_redwhitered_board"/>
                 <case additional="seamark:topmark:colour=white;red">
-                  <case additional="seamark:topmark:colour_pattern=border"
-                        icon__1="seamark_topmark_oblique_whitered_board_border"/>
+                  <case additional="seamark:topmark:colour_pattern=border" icon__1="seamark_topmark_oblique_whitered_board_border"/>
                 </case>
               </apply>
             </switch>
@@ -2045,10 +2042,8 @@
             </switch>
             <switch>
               <case additional="seamark:topmark:shape=cone" icon__1="seamark_topmark_oblique_black_conepointup"/>
-              <case additional="seamark:topmark:shape=cone, point up"
-                    icon__1="seamark_topmark_oblique_black_conepointup"/>
-              <case additional="seamark:topmark:shape=triangle, point up"
-                    icon__1="seamark_topmark_oblique_black_conepointup"/>
+              <case additional="seamark:topmark:shape=cone, point up" icon__1="seamark_topmark_oblique_black_conepointup"/>
+              <case additional="seamark:topmark:shape=triangle, point up" icon__1="seamark_topmark_oblique_black_conepointup"/>
               <apply>
                 <case additional="seamark:topmark:colour=red" icon__1="seamark_topmark_oblique_red_conepointup"/>
                 <case additional="seamark:topmark:colour=green" icon__1="seamark_topmark_oblique_green_conepointup"/>
@@ -2228,21 +2223,18 @@
                     icon__1="seamark_topmark_vertical_redwhitered_cylinder"/>
             </case>
             <switch>
-              <case additional="seamark:topmark:shape=square" icon__1="seamark_topmark_vertical_redwhitered_board"/>
-              <case additional="seamark:topmark:shape=board" icon__1="seamark_topmark_vertical_redwhitered_board"/>
+              <case additional="seamark:topmark:shape=square" icon__1="seamark_topmark_vertical_black_cylinder"/>
+              <case additional="seamark:topmark:shape=board" icon__1="seamark_topmark_vertical_black_cylinder"/>
               <case additional="seamark:topmark:shape=rectangle" icon__1="seamark_topmark_vertical_redwhitered_board"/>
               <apply>
                 <case additional="seamark:topmark:colour=red" icon__1="seamark_topmark_vertical_red_board"/>
                 <case additional="seamark:topmark:colour=green" icon__1="seamark_topmark_vertical_green_board"/>
-                <case additional="seamark:topmark:colour=red;white;red"
-                      icon__1="seamark_topmark_vertical_redwhitered_board"/>
+                <case additional="seamark:topmark:colour=red;white;red" icon__1="seamark_topmark_vertical_redwhitered_board"/>
                 <case additional="seamark:topmark:colour=white;red">
-                  <case additional="seamark:topmark:colour_pattern=border"
-                        icon__1="seamark_topmark_vertical_whitered_board_border"/>
+                  <case additional="seamark:topmark:colour_pattern=border" icon__1="seamark_topmark_vertical_whitered_board_border"/>
                 </case>
                 <case additional="seamark:topmark:colour=white;black">
-                  <case additional="seamark:topmark:colour_pattern=border"
-                        icon__1="seamark_topmark_vertical_whiteblack_board_border"/>
+                  <case additional="seamark:topmark:colour_pattern=border" icon__1="seamark_topmark_vertical_whiteblack_board_border"/>
                 </case>
               </apply>
             </switch>
@@ -3894,7 +3886,7 @@
           <case maxzoom="12" strokeWidth_2="4"/>
         </apply>
       </case>
-      <case minzoom="10" tag="lightsector" value="arc" pathEffect="" strokeWidth="10" color="#88800080">
+      <case minzoom="10" tag="lightsector" value="arc" pathEffect="" strokeWidth="10" color="#88800080" cap="BUTT">
         <case additional="colour=white"  color="#99fab20b"/>
         <case additional="colour=red"    color="#99ed1c24"/>
         <case additional="colour=green"  color="#9900a650"/>
@@ -3905,6 +3897,7 @@
           <case maxzoom="11" strokeWidth="5"/>
           <case maxzoom="12" strokeWidth="7"/>
         </apply>
+        <apply_if additional="lightsector:low=yes" pathEffect="6_3" />
       </case>
     </switch>
 
