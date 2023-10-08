@@ -28,15 +28,26 @@ canvas {
 
 /* Defaults */
 node:unconnected {
+	symbol-size: 6;
+	symbol-fill-color: red;
+}
+node:connection {
+	symbol-size: 6;
+	-symbol-shape:	circle;
+	symbol-stroke-color: blue;
+}
+node:tagged {
 	symbol-shape:	circle;
-	symbol-size:	2;
-	color:			yellow;
+	symbol-fill-color: green;
 }
 node["seamark:type"] {
-	symbol-shape:	circle;
-	symbol-size:	3;
-	color:			blue;
-	text:			"seamark:name";
+	-symbol-shape:	circle;
+	symbol-size: 5;
+	symbol-fill-opacity: 0;
+	symbol-stroke-width: 1;
+	symbol-stroke-color: black;
+	symbol-stroke-opacity: 0;
+	text:			eval(any(tag("seamark:name"),tag("name")));
 	text-color:		black;
 	font-size: 11;
 	text-anchor-horizontal:	center;
@@ -52,18 +63,7 @@ way {
 	color:				gray;
 	opacity:			0.4;
 }
-node:unconnected {
-	symbol-shape:	circle;
-	symbol-size:	4;
-}
-node:connection {
-	symbol-shape:	circle;
-	symbol-size:	3;
-	color:			red;
-}
-node:tagged {
-	color:			green;
-}
+
 relation[type=multipolygon] >[role=inner] way {
 	width:			2;
 	color:			gray;
@@ -333,7 +333,7 @@ way[man_made=pier]::int1_pier {
 /* I: Depths */
 node["depth"]::depth {
   text: "depth";
-  text-color:		black;
+  text-color:		blue;
   font-size: 11;
   text-anchor-horizontal:	right;
   text-anchor-vertical:	center;
@@ -341,6 +341,63 @@ node["depth"]::depth {
 node["depth:exposition"=shoaler]::depth {
     text-color: #a00;
 }
+way[contour=depth] {
+  color: #118ac2;
+  width: 1;
+  text: "depth";
+  text-color: gray;
+  font-size: 11;
+}
+way[contour=depth][depth=0] {
+  color: black;
+}
+way[contour=depth][depth^="-"] {
+  color: green;
+}
+way[contourarea=depth] {
+  width: 0;
+  fill-opacity: 0.8;
+  fill-color: lightblue;
+}
+way[contourarea=depth][areatype=0] {
+  fill-color: #cceccd;
+}
+way[contourarea=depth][areatype=2] {
+  fill-color: #a8e6fd;
+}
+way[contourarea=depth][areatype=5] {
+  fill-color: #cceffc;
+}
+way[contourarea=depth][areatype=10] {
+  fill-color: #e6f7fd;
+}
+way[contourarea=depth][areatype=999] {
+  fill-color: white;
+}
+relation[contourarea=depth] {
+  width: 1;
+  fill-opacity: 0.8;
+  fill-color: lightblue;
+}
+relation[contourarea=depth] way {
+  width: 0;
+}
+relation[contourarea=depth][areatype=0] {
+  fill-color: #cceccd;
+}
+relation[contourarea=depth][areatype=2] {
+  fill-color: #a8e6fd;
+}
+relation[contourarea=depth][areatype=5] {
+  fill-color: #cceffc;
+}
+relation[contourarea=depth][areatype=10] {
+  fill-color: #e6f7fd;
+}
+relation[contourarea=depth][areatype=999] {
+  fill-color: white;
+}
+
 /* J: Nature of seabed */
 /* reference in https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J */
 *["seamark:seabed_area:surface"]::seabed {set seabed_surface;
@@ -469,24 +526,28 @@ node["seamark:type"=obstruction]::int1_obstruction {
 	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/K/K40.svg";
 	icon-width:		16;
 }
-node["seamark:type"=rock]["depth:exposition"=shoaler]::rock_shade {
+node["depth:exposition"=shoaler]::shoaler1{
+	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/K/K40.svg";
+	icon-width:		16;
+}
+node["depth:exposition"=shoaler]::shoaler2{
 	symbol-shape: 	circle;
 	symbol-size: 	16;
 	symbol-fill-color: skyblue;
 	symbol-fill-opacity: 0.7;
 }
-node["seamark:type"=rock]["depth:exposition"=shoaler]::rock_obstruction {
-	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/K/K40.svg";
-	icon-width:		16;
-}
 node["seamark:type"=rock]::int1_obstruction {
 	-icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/K/K13_.svg";
 	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/K/K13.svg";
 	icon-width:		12;
-    set             .rock;
+  set .rock;
 }
 node["seamark:type"=rock]["seamark:rock:water_level"=dry].rock::int1_obstruction {
-	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/K/K10.svg";
+	-icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/K/K10.svg";
+	icon-image:		none;
+	symbol-shape: 	circle;
+	symbol-size: 	6;
+	symbol-fill-color: black;
 }
 node["seamark:type"=rock]["seamark:rock:water_level"=submerged].rock::int1_obstruction {
 	icon-image:		"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/K/K13.svg";
@@ -529,7 +590,7 @@ node["seamark:wreck:category"=funnel_showing].wreck::int1_obstruction {
 }
 node["seamark:type"=restricted_area]["seamark:restricted_area:category"=foul_ground]::int1_obstruction {
     icon-image:     "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/K/K31.svg";
-    text:           eval("foul");
+    -text:           eval("foul");
     text-color:     black;
     text-anchor-vertical:    center;
 	text-anchor-horizontal:  center;
@@ -539,7 +600,7 @@ node["seamark:type"=restricted_area]["seamark:restricted_area:category"=foul_gro
 }
 node["seamark:type"=obstruction]["seamark:obstruction:category"=foul_ground]::int1_obstruction {
 	icon-image:     "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/K/K31.svg";
-    text:           eval("foul");
+    -text:           eval("foul");
     text-color:     black;
     -text-anchor-vertical:    below;
 	-text-anchor-horizontal:  center;
@@ -548,7 +609,7 @@ node["seamark:type"=obstruction]["seamark:obstruction:category"=foul_ground]::in
 	text-halo-opacity: 0.5;
 }
 area["seamark:type"=obstruction]["seamark:obstruction:category"=foul_ground]::int1_obstruction {
-    text:           eval("foul");
+    -text:           eval("foul");
     text-color:     black;
     text-position:    center;
 	text-halo-colour: white;
@@ -610,7 +671,7 @@ way["seamark:type"=separation_zone]:closed::int1_separation_zone {
 node["seamark:type"=calling-in_point]::int1_RDOCAL {
 	icon-image:		eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/M/M40.", cond(tag("seamark:calling-in_point:traffic_flow") == "one-way", "1", "2") , ".svg"));
 	icon-height:	24;
-    icon-rotation: eval((tag("seamark:calling-in_point:orientation")+92)*3.1415/180);
+  icon-rotation: eval((tag("seamark:calling-in_point:orientation")+92)*3.1415/180);
 	text-color:		darkmagenta;
 	font-size:		14;
 	text-anchor-vertical:	center;
@@ -721,44 +782,34 @@ node["seamark:light:category"=spotlight]::int1_light {
 }
 
 /* Q: Buoys, Beacons */
-node["seamark:daymark:shape"]::int1_daymark {
-	icon-image:		eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/Q/Q9/", replace(replace(tag("seamark:daymark:shape"), " ", "_"), ",", ""), "/", any(replace(tag("seamark:daymark:colour"), ";", "_"), "generic"), ".svg"));
-	icon-width:		16;
+node["seamark:type"^=buoy]::int1_buoy,
+node["seamark:type"^=beacon]::int1_buoy {
+  icon-image:		eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/Q/",
+    any(replace(tag(concat("seamark:",tag("seamark:type"),":shape")), "pile", "buoyant"), cond(regexp_test("buoy.*", tag("seamark:type")),"pillar","buoyant")), "/",
+    cond(has_tag_key(concat("seamark:",tag("seamark:type"),":colour_pattern")),
+    concat(tag(concat("seamark:",tag("seamark:type"),":colour_pattern")),"/"), ""),
+    any(replace(tag(concat("seamark:",tag("seamark:type"),":colour")),";","_"), "generic"), ".svg" ));
+  icon-height:	16;
+  icon-opacity:	1;
+  icon-offset-x:  1;
+  icon-offset-y:  -6;
 }
-node["seamark:type"=buoy_lateral]["seamark:daymark:shape"]::int1_daymark,
-node["seamark:type"=beacon_lateral]["seamark:daymark:shape"]::int1_daymark,
-node["seamark:type"=buoy_cardinal]["seamark:daymark:shape"]::int1_daymark,
-node["seamark:type"=beacon_cardinal]["seamark:daymark:shape"]::int1_daymark,
-node["seamark:type"=buoy_isolated_danger]["seamark:daymark:shape"]::int1_daymark,
-node["seamark:type"=beacon_isolated_danger]["seamark:daymark:shape"]::int1_daymark,
-node["seamark:type"=buoy_safe_water]["seamark:daymark:shape"]::int1_daymark,
-node["seamark:type"=beacon_safe_water]["seamark:daymark:shape"]::int1_daymark,
-node["seamark:type"=buoy_special_purpose]["seamark:daymark:shape"]::int1_daymark,
-node["seamark:type"=beacon_special_purpose]["seamark:daymark:shape"]::int1_daymark {
-    icon-offset-x:  1;
-    icon-offset-y:  -20;
-}
-
-node["seamark:beacon_lateral:category"=port]["seamark:beacon_lateral:shape"=perch]::int1_buoy {
+node["seamark:type"^=beacon]["seamark:beacon_lateral:shape"=perch]::int1_buoy {
 	icon-image:		eval(concat("https://raw.githubusercontent.com/OpenSeaMap/josm/master/icons/svg/Q/Q91/",tag("seamark:beacon_lateral:category"),".svg"));
 	icon-height:	16;
-    icon-offset-y:  -8;
+  icon-offset-y:  -8;
 }
-node["seamark:type"=buoy_lateral]::int1_buoy,
-node["seamark:type"=beacon_lateral]["seamark:beacon_lateral:shape"!=perch]::int1_buoy,
-node["seamark:type"=buoy_cardinal]::int1_buoy,
-node["seamark:type"=beacon_cardinal]::int1_buoy,
-node["seamark:type"=buoy_isolated_danger]::int1_buoy,
-node["seamark:type"=beacon_isolated_danger]::int1_buoy,
-node["seamark:type"=buoy_safe_water]::int1_buoy,
-node["seamark:type"=beacon_safe_water]::int1_buoy,
-node["seamark:type"=buoy_special_purpose]::int1_buoy,
-node["seamark:type"=beacon_special_purpose]::int1_buoy {
-	icon-image:		eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/Q/", any(replace(tag(concat("seamark:",tag("seamark:type"),":shape")), "pile", "buoyant"), "buoyant"), "/", cond(has_tag_key(concat("seamark:",tag("seamark:type"),":colour_pattern")),concat(tag(concat("seamark:",tag("seamark:type"),":colour_pattern")),"/"), ""), any(replace(tag(concat("seamark:",tag("seamark:type"),":colour")),";","_"), "generic"), ".svg" ));
+node["seamark:type"^=beacon]["seamark:beacon_lateral:shape"=withy]::int1_buoy {
+	icon-image:		eval(concat("https://raw.githubusercontent.com/OpenSeaMap/josm/master/icons/svg/Q/Q92/",tag("seamark:beacon_lateral:category"),".svg"));
 	icon-height:	16;
-	icon-opacity:	1;
-    icon-offset-x:  1;
-    icon-offset-y:  -6;
+  icon-offset-y:  -8;
+}
+node["seamark:beacon_lateral:shape"=lattice]::int1_buoy,
+node["seamark:beacon_cardinal:shape"=lattice]::int1_buoy,
+node["seamark:beacon_isolated_danger:shape"=lattice]::int1_buoy,
+node["seamark:beacon_safe_water:shape"=lattice]::int1_buoy,
+node["seamark:beacon_special_purpose:shape"=lattice]::int1_buoy{
+    icon-image:     "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/Q/Q111/generic.svg";
 }
 
 node["seamark:light:character"]::light {
@@ -828,35 +879,54 @@ node|z15-["seamark:type"=mooring]["seamark:mooring:category"=buoy]::int1_buoy {
 }
 
 /* Topmarks */
-node["seamark:type"=buoy_lateral]["seamark:topmark:shape"]::int1_topmark,
-node["seamark:type"=buoy_cardinal]["seamark:topmark:shape"]::int1_topmark,
-node["seamark:type"=buoy_isolated_danger]["seamark:topmark:shape"]::int1_topmark,
-node["seamark:type"=buoy_safe_water]["seamark:topmark:shape"]::int1_topmark,
-node["seamark:type"=buoy_special_purpose]["seamark:topmark:shape"]::int1_topmark {
-    icon-image:     eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/Q/Q9/", any(replace(replace(tag("seamark:topmark:shape"), ",", ""), " ", "_"), "sphere"), "/", cond(has_tag_key("seamark:topmark:colour_pattern"), concat(tag("seamark:topmark:colour_pattern"), "/")), any(replace(tag("seamark:topmark:colour"),";","_"), "generic"), ".svg"));
-    icon-width:    6;
-    icon-offset-x:  4;
-    icon-offset-y:  -20;
-}
-node["seamark:type"=beacon_lateral]["seamark:topmark:shape"]::int1_topmark,
-node["seamark:type"=beacon_cardinal]["seamark:topmark:shape"]::int1_topmark,
-node["seamark:type"=beacon_isolated_danger]["seamark:topmark:shape"]::int1_topmark,
-node["seamark:type"=beacon_safe_water]["seamark:topmark:shape"]::int1_topmark,
-node["seamark:type"=beacon_special_purpose]["seamark:topmark:shape"]::int1_topmark {
-    icon-image:     eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/Q/Q9/", any(replace(replace(tag("seamark:topmark:shape"), ",", ""), " ", "_"), "sphere"), "/", cond(has_tag_key("seamark:topmark:colour_pattern"), concat(tag("seamark:topmark:colour_pattern"), "/")), any(replace(tag("seamark:topmark:colour"),";","_"), "generic"), ".svg"));
+node["seamark:topmark:shape"]::int1_topmark {
+    icon-image:     eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/Q/Q9/",
+    replace(replace(replace(tag("seamark:topmark:shape"), ",", ""), " ", "_"),"circle","sphere"), "/",
+    tag("seamark:topmark:colour_pattern"), "/",
+    any(replace(tag("seamark:topmark:colour"),";","_"), "generic"), ".svg"));
     icon-width:    6;
     icon-offset-x:  1;
+    icon-offset-y:  -22;
+}
+node["seamark:type"^=buoy]::int1_topmark {
+    icon-rotation: eval(15*3.1415/180);
+}
+node["seamark:buoy_lateral:shape"=can]::int1_topmark,
+node["seamark:buoy_lateral:shape"=conical]::int1_topmark,
+node["seamark:buoy_lateral:shape"=spherical]::int1_topmark {
+    icon-offset-y:  -18;
+}
+node["seamark:type"^=beacon]::int1_topmark {
     icon-offset-y:  -20;
 }
 
-node["seamark:beacon_lateral:shape"=lattice]::int1_buoy,
-node["seamark:beacon_cardinal:shape"=lattice]::int1_buoy,
-node["seamark:beacon_isolated_danger:shape"=lattice]::int1_buoy,
-node["seamark:beacon_safe_water:shape"=lattice]::int1_buoy,
-node["seamark:beacon_special_purpose:shape"=lattice]::int1_buoy{
-    icon-image:     "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/Q/Q111/generic.svg";
-    icon-height:    16;
+node["seamark:daymark:shape"]::int1_daymark {
+    icon-image:     eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/Q/Q9/",
+    replace(replace(replace(tag("seamark:daymark:shape"), ",", ""), " ", "_"),"circle","sphere"), "/",
+    tag("seamark:daymark:colour_pattern"), "/",
+    any(replace(tag("seamark:daymark:colour"),";","_"), "generic"), ".svg"));
+    icon-width:    12;
+    icon-offset-x:  0;
+    icon-offset-y:  -10;
 }
+/*
+node["seamark:daymark:shape"]::int1_daymark {
+	icon-image:		eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/Q/Q9/", replace(replace(tag("seamark:daymark:shape"), " ", "_"), ",", ""), "/", any(replace(tag("seamark:daymark:colour"), ";", "_"), "generic"), ".svg"));
+	icon-width:		16;
+}
+node["seamark:type"=buoy_lateral]["seamark:daymark:shape"]::int1_daymark,
+node["seamark:type"=beacon_lateral]["seamark:daymark:shape"]::int1_daymark,
+node["seamark:type"=buoy_cardinal]["seamark:daymark:shape"]::int1_daymark,
+node["seamark:type"=beacon_cardinal]["seamark:daymark:shape"]::int1_daymark,
+node["seamark:type"=buoy_isolated_danger]["seamark:daymark:shape"]::int1_daymark,
+node["seamark:type"=beacon_isolated_danger]["seamark:daymark:shape"]::int1_daymark,
+node["seamark:type"=buoy_safe_water]["seamark:daymark:shape"]::int1_daymark,
+node["seamark:type"=beacon_safe_water]["seamark:daymark:shape"]::int1_daymark,
+node["seamark:type"=buoy_special_purpose]["seamark:daymark:shape"]::int1_daymark,
+node["seamark:type"=beacon_special_purpose]["seamark:daymark:shape"]::int1_daymark {
+    icon-offset-x:  1;
+    icon-offset-y:  -20;
+}*/
 
 node["seamark:type"=notice]::int1_notice {
     z-index:        1;
@@ -963,4 +1033,8 @@ node["seamark:radar_reflector"=yes]::radar_reflector {
 	icon-width:	25;
 	icon-offset-y: -30;
 }
-/* END */
+node["seamark:landmark:conspicuity"=conspicious]::conspicious {
+	symbol-shape:	circle;
+	symbol-size:	16;
+	color:			red;
+}
