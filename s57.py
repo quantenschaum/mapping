@@ -30,7 +30,7 @@ S57 = {
         7: "super-buoy",
     },
     "BCNSHP": {
-        1: None,  # "post"
+        1: None,  # stake, pole, perch, post
         2: "withy",
         3: "tower",
         4: "pile",
@@ -44,12 +44,17 @@ S57 = {
         3: "sphere",  # safe water
         4: "2 spheres",  # isolated danger
         5: "cylinder",  # port
+        6: "board",
         7: "x-shape",
+        8: "cross",
+        9: "cube, point up",
         10: "2 cones point together",  # west
         11: "2 cones base together",  # east
         12: "rhombus",  # east
         13: "2 cones up",  # north
         14: "2 cones down",  # south
+        15: "besom, point up",
+        16: "besom, point down",
         19: "square",
         20: "rectangle, horizontal",
         21: "rectangle, vertical",
@@ -57,6 +62,7 @@ S57 = {
         23: "trapezium, down",
         24: "triangle, point up",
         25: "triangle, point down",
+        28: "t-shape",
         29: "triangle, point up over circle",
         31: "rhombus over circle",
         33: "other",
@@ -677,8 +683,8 @@ S57keys = {
     "trafic": "seamark:{typ}:traffic_flow",
     "elevat": "seamark:{typ}:elevation",
     "status": "seamark:{typ}:status",
-    "persta": "seamark:period_start",
-    "perend": "seamark:period_end",
+    "persta": "seamark:{typ}:period_start",
+    "perend": "seamark:{typ}:period_end",
     "inform": "seamark:information",
     # "sorind": "seamark:source",
     # "sordat": "seamark:source_date",
@@ -691,6 +697,7 @@ S57types = {
     "BOYSAW": "buoy_safe_water",
     "BOYISD": "buoy_isolated_danger",
     "BOYSPP": "buoy_special_purpose",
+    "BOYINB": "buoy_installation",
     "BCNLAT": "beacon_lateral",
     "BCNCAR": "beacon_cardinal",
     "BCNSAW": "beacon_safe_water",

@@ -15,6 +15,7 @@ from s57 import *
 from functools import reduce
 from os.path import basename, splitext
 from sys import stderr
+from lxml import etree
 
 dx = 0.01
 dy = dx
@@ -178,8 +179,8 @@ def load_enc(layer_files, other_files):
                 for r in rs:
                     update_nc(tags, r)
 
-        # add_generic_topmark(tags)
         fix_tags(tags)
+        add_generic_topmark(tags)
 
         # if "mmsi" in str(tags):
         #     print("-" * 100)
@@ -524,9 +525,9 @@ def load_rws_beacons(filename):
 
         fix_tags(tags)
 
-        if "light:1" in str(tags):
-            print(f["properties"])
-            print(tags)
+        # if "light:1" in str(tags):
+        #     print(f["properties"])
+        #     print(tags)
 
         points.append(tags)
 
@@ -535,7 +536,7 @@ def load_rws_beacons(filename):
     return points
 
 
-load_rws_beacons("data/vwm/vast.json")
+# load_rws_beacons("data/vwm/vast.json")
 
 
 def load_marrekrite(gpx="marrekrite.gpx"):
@@ -764,7 +765,7 @@ def update_osm(
 
     added = 0
     if add:
-        for i, p in enumerate(data, 10000):
+        for i, p in enumerate(data, 1):
             n = pq(f'<node id="{-i}" visible="true" lat="nan" lon="nan"/>')
             m = update_node(n, p, s_dist)
             m.insert(0, "ADDED")
@@ -777,8 +778,10 @@ def update_osm(
     print("ADDED", added)
 
     if modifications:
-        with open(outfile, "w") as f:
-            f.write(str(x))
+        with open(outfile, "wb") as f:
+            etree.indent(x.root, space="  ")
+            s = etree.tostring(x.root, pretty_print=True, encoding="utf-8")
+            f.write(s)
 
         requests.get(
             f"http://localhost:8111/open_file?filename={os.path.abspath(outfile)}"
