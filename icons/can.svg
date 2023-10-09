@@ -4,7 +4,7 @@
    width="32"
    height="32"
    id="svg2"
-   sodipodi:docname="pillar.svg"
+   sodipodi:docname="can.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -23,14 +23,14 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="64"
-     inkscape:cx="12.492188"
-     inkscape:cy="14.65625"
+     inkscape:cx="14.820312"
+     inkscape:cy="13.40625"
      inkscape:window-width="2391"
      inkscape:window-height="1826"
      inkscape:window-x="1436"
      inkscape:window-y="88"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2"
+     inkscape:current-layer="g4073"
      showguides="true">
     <sodipodi:guide
        position="16,21.058596"
@@ -43,6 +43,13 @@
        position="27.817128,16"
        orientation="0,1"
        id="guide215"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,16"
+       orientation="-0.25881905,0.96592583"
+       id="guide1002"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
@@ -66,56 +73,57 @@
       COLORING{}
   </style>
   <g
-     id="g1701"
+     id="g4073"
      transform="rotate(15,16,16)">
     <path
-       class="fill vertical02 uniform"
-       id="path300"
-       d="M 16 4.4882812 L 15.193359 4.4882812 L 14.621094 12.576172 L 12.871094 16.837891 L 16 16 L 16 4.4882812 z " />
-    <path
-       class="fill vertical12 uniform"
-       id="path304"
-       d="M 16 4.4882812 L 16 16 L 18.507812 15.328125 L 17.378906 12.576172 L 16.794922 4.4882812 L 16 4.4882812 z " />
-    <path
-       class="fill horizontal34 horizontal12"
-       id="path1687"
-       d="m 14.371094,13.158203 -1.503906,3.681641 5.640624,-1.511719 -0.890624,-2.169922 z" />
-    <path
-       class="fill horizontal24 horizontal12"
-       id="path1930"
-       d="m 14.775391,10.279297 -0.166016,2.296875 -0.238281,0.582031 h 3.246094 l -0.238282,-0.582031 -0.166015,-2.296875 z" />
-    <path
-       class="fill horizontal14 horizontal02"
-       id="path1927"
-       d="m 14.982422,7.4023438 -0.207031,2.8769532 h 2.4375 L 17.005859,7.4023438 Z" />
-    <path
-       class="fill horizontal04 horizontal02"
-       id="path1924"
-       d="m 15.193359,4.4882812 -0.210937,2.9140626 h 2.023437 L 16.794922,4.4882812 Z" />
-    <path
-       class="fill horizontal23"
-       id="path1684"
-       d="m 14.638672,12.162109 -0.0293,0.414063 -1.742187,4.263672 5.640624,-1.511719 -1.128906,-2.751953 -0.0293,-0.414063 z" />
+       class="fill horizontal03"
+       id="path3990"
+       d="m 12.871094,11.953125 v 1.349609 h 6.257812 v -1.349609 z" />
     <path
        class="fill horizontal13"
-       id="path1936"
-       d="m 14.916016,8.3242188 -0.277344,3.8378902 h 2.710937 L 17.072266,8.3242188 Z" />
+       id="path1030"
+       d="M 12.870847 13.301934 L 12.872074 14.642207 L 19.128974 14.660132 L 19.129363 13.30325 L 12.870847 13.301934 z " />
     <path
-       class="fill horizontal03"
-       id="path1933"
-       d="m 15.193359,4.4882812 -0.277343,3.8359376 h 2.15625 L 16.794922,4.4882812 Z" />
+       class="fill horizontal23"
+       id="path1763"
+       d="M 19.128974 14.660132 L 12.872074 14.642207 L 12.872061 16.838129 L 19.127939 15.161871 L 19.128974 14.660132 z " />
     <path
-       class="outline"
-       id="path1690"
-       d="m 15.205078,4.4882812 -0.583984,8.0878908 -1.75,4.261719 5.636718,-1.509766 -1.128906,-2.751953 -0.583984,-8.0878908 z" />
+       class="fill vertical02 uniform"
+       id="path1765"
+       d="m 16,11.953125 h -3.128906 v 4.884766 L 16,16 Z" />
+    <path
+       class="fill vertical12 uniform"
+       id="path3983"
+       d="M 16,11.953125 V 16 l 3.128906,-0.837891 v -3.208984 z" />
+    <path
+       class="fill horizontal34 horizontal12"
+       id="path1750"
+       d="m 19.128906,14.988281 h -6.257812 v 1.84961 l 6.257812,-1.675782 z" />
+    <path
+       class="fill horizontal24 horizontal12"
+       id="path4000"
+       d="m 12.871094,13.976562 v 1.011719 h 6.257812 v -1.011719 z" />
+    <path
+       class="fill horizontal14 horizontal02"
+       id="path3997"
+       d="m 12.871094,12.964844 v 1.011718 h 6.257812 v -1.011718 z" />
+    <path
+       class="fill horizontal04 horizontal02"
+       id="path3994"
+       d="m 12.871094,11.953125 v 1.011719 h 6.257812 v -1.011719 z" />
+    <path
+       class="outline "
+       id="path349"
+       d="m 19.128906,15.161612 v -3.208806 h -6.257812 v 4.885582" />
   </g>
   <path
      class="outline"
      d="m 11.457132,16 h 9.085736"
-     id="path5179"/>
+     id="path5179" />
   <circle
      class="base"
      id="path5349"
      cx="16"
      cy="16"
-     r="1" /></svg>
+     r="1" />
+</svg>

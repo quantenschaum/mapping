@@ -4,12 +4,14 @@
    width="32"
    height="32"
    id="svg2"
-   sodipodi:docname="spar.svg"
+   sodipodi:docname="2_cones_down.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3019" />
   <sodipodi:namedview
      id="namedview10"
      pagecolor="#ffffff"
@@ -20,12 +22,12 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      showgrid="false"
-     inkscape:zoom="64"
-     inkscape:cx="15.578125"
-     inkscape:cy="15.914062"
+     inkscape:zoom="78.5"
+     inkscape:cx="15.127389"
+     inkscape:cy="11.394904"
      inkscape:window-width="2285"
      inkscape:window-height="1809"
-     inkscape:window-x="1529"
+     inkscape:window-x="1481"
      inkscape:window-y="140"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2"
@@ -54,79 +56,44 @@
        orientation="1,0"
        id="guide3217"
        inkscape:locked="false" />
+    <sodipodi:guide
+       position="12.83112,18.085792"
+       orientation="0,-1"
+       id="guide807"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="12.819277,21.485475"
+       orientation="0,-1"
+       id="guide809"
+       inkscape:locked="false" />
   </sodipodi:namedview>
-  <defs
-     id="defs20" />
   <style
      type="text/css"
      id="base">
       .outline {
-        fill: none;
-        stroke: #111111;
+        stroke: black;
         stroke-width: 0.5;
       }
       .fill {
-        stroke: none;
-        stroke-width: 0.3;
         fill: none;
-      }
-      .base {
-        fill: white;
       }
       COLORING{}
   </style>
-  <g
-     id="g336"
-     transform="rotate(15,16,16)">
-    <path
-       class="fill vertical02 uniform"
-       id="path303"
-       d="M 16,4.8398438 H 15 V 16 h 1 z" />
-    <path
-       class="fill vertical12 uniform"
-       id="path1019"
-       d="M 16,4.8398438 V 16 h 1 V 4.8398438 Z" />
-    <path
-       class="fill horizontal34 horizontal12"
-       id="path4777"
-       d="M 17,13.210938 H 15 V 16 h 2 z" />
-    <path
-       class="fill horizontal24 horizontal12"
-       id="path4785"
-       d="m 15,10.419922 v 2.791016 h 2 v -2.791016 z" />
-    <path
-       class="fill horizontal14 horizontal02"
-       id="path4782"
-       d="m 15,7.6308594 v 2.7890626 h 2 V 7.6308594 Z" />
-    <path
-       class="fill horizontal04 horizontal02"
-       id="path4779"
-       d="m 15,4.8398438 v 2.7910156 h 2 V 4.8398438 Z" />
-    <path
-       class="fill horizontal23"
-       id="path4686"
-       d="M 17,12.279297 H 15 V 16 h 2 z" />
-    <path
-       class="fill horizontal13"
-       id="path4791"
-       d="m 15,8.5605469 v 3.7187501 h 2 V 8.5605469 Z" />
-    <path
-       class="fill horizontal03"
-       id="path4788"
-       d="m 15,4.8398438 v 3.7207031 h 2 V 4.8398438 Z" />
-    <path
-       class="outline"
-       d="M 15,16 V 4.840764 h 2 V 16"
-       id="path3219" />
-  </g>
   <path
      class="outline"
-     d="m 13,16 h 6"
-     id="path5181" />
-  <circle
-     class="base"
-     id="path5349"
-     cx="16"
-     cy="16"
-     r="1" />
+     d="M 16,13.914208 V 16"
+     id="path241" />
+  <path
+     class="outline"
+     d="m 16,9.471629 v 1.042896"
+     id="path297"
+     sodipodi:nodetypes="cc" />
+  <path
+     class="outline fill uniform"
+     d="m 16,13.852686 1.606904,-3.393243 -3.213809,-0.01094 z"
+     id="path982" />
+  <path
+     class="outline fill uniform"
+     d="m 15.999271,9.4522879 -1.606904,-3.3932435 3.213809,-0.01094 z"
+     id="path295" />
 </svg>

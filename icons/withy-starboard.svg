@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="withy-starboard.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="78.5"
+     inkscape:cx="11.050955"
+     inkscape:cy="12.388535"
+     inkscape:window-width="2285"
+     inkscape:window-height="1809"
+     inkscape:window-x="1223"
+     inkscape:window-y="153"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2"
+     showguides="true">
+    <sodipodi:guide
+       position="29.834395,16"
+       orientation="0,1"
+       id="guide1528"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,20.585987"
+       orientation="-1,0"
+       id="guide1530"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="17.171975,27.159236"
+       orientation="0,-1"
+       id="guide3117"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs20" />
+  <style
+     type="text/css"
+     id="base">
+      .outline {
+        fill: none;
+        stroke: #111111;
+        stroke-width: 0.5;
+      }
+  </style>
+  <path
+     class="outline" style="fill:none;stroke:black;stroke-width:0.5;"
+     d="M 16,4.840764 V 16"
+     id="path241" />
+  <path
+     class="outline" style="fill:none;stroke:black;stroke-width:0.5;"
+     d="m 15,16 h 2"
+     id="path5181" />
+  <path
+     id="path849"
+     class="outline" style="fill:none;stroke:black;stroke-width:0.5;"
+     d="M 13.26941,8.2622231 16,7.0947271 l 2.73059,1.167496"/>
+  <path
+     id="path389"
+     class="outline" style="fill:none;stroke:black;stroke-width:0.5;"
+     d="M 11.787054,12.325219 16,10.420382 l 4.212946,1.904837"/>
+</svg>

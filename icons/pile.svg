@@ -73,43 +73,43 @@
       .base {
         fill: white;
       }
-      FILL{}
+      COLORING{}
   </style>
   <g>
     <path
-       class="fill v02"
+       class="fill vertical02 uniform"
        id="path303"
        d="M 16 4.8398438 L 15 4.8398438 L 15 16 L 16 16 L 16 4.8398438 z " />
     <path
-       class="fill v12"
+       class="fill vertical12 uniform"
        id="path1019"
        d="M 16 4.8398438 L 16 16 L 17 16 L 17 4.8398438 L 16 4.8398438 z " />
     <path
-       class="fill h34 h12"
+       class="fill horizontal34 horizontal12"
        id="path4777"
        d="M 17 13.210938 L 15 13.210938 L 15 16 L 17 16 L 17 13.210938 z " />
     <path
-       class="fill h24 h12"
+       class="fill horizontal24 horizontal12"
        id="path4785"
        d="M 15 10.419922 L 15 13.210938 L 17 13.210938 L 17 10.419922 L 15 10.419922 z " />
     <path
-       class="fill h14 h02"
+       class="fill horizontal14 horizontal02"
        id="path4782"
        d="M 15 7.6308594 L 15 10.419922 L 17 10.419922 L 17 7.6308594 L 15 7.6308594 z " />
     <path
-       class="fill h04 h02"
+       class="fill horizontal04 horizontal02"
        id="path4779"
        d="M 15 4.8398438 L 15 7.6308594 L 17 7.6308594 L 17 4.8398438 L 15 4.8398438 z " />
     <path
-       class="fill h23"
+       class="fill horizontal23"
        id="path4686"
        d="M 17 12.279297 L 15 12.279297 L 15 16 L 17 16 L 17 12.279297 z " />
     <path
-       class="fill h13"
+       class="fill horizontal13"
        id="path4791"
        d="M 15 8.5605469 L 15 12.279297 L 17 12.279297 L 17 8.5605469 L 15 8.5605469 z " />
     <path
-       class="fill h03"
+       class="fill horizontal03"
        id="path4788"
        d="M 15 4.8398438 L 15 8.5605469 L 17 8.5605469 L 17 4.8398438 L 15 4.8398438 z " />
     <path
@@ -122,7 +122,7 @@
      d="m 13,16 h 6"
      id="path5181" />
   <circle
-     class="outline base"
+     class="base"
      id="path5349"
      cx="16"
      cy="16"

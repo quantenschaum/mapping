@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="lattice.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xml:space="preserve"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+   id="namedview10"
+   pagecolor="#ffffff"
+   bordercolor="#eeeeee"
+   borderopacity="1"
+   inkscape:showpageshadow="0"
+   inkscape:pageopacity="0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#505050"
+   showgrid="false"
+   inkscape:zoom="48.90625"
+   inkscape:cx="13.720128"
+   inkscape:cy="16"
+   inkscape:window-width="2285"
+   inkscape:window-height="1809"
+   inkscape:window-x="1529"
+   inkscape:window-y="140"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="svg2"
+   showguides="true"><sodipodi:guide
+     position="29.834395,16"
+     orientation="0,1"
+     id="guide1528"
+     inkscape:locked="false"
+     inkscape:label=""
+     inkscape:color="rgb(0,134,229)" /><sodipodi:guide
+     position="16,20.585987"
+     orientation="-1,0"
+     id="guide1530"
+     inkscape:locked="false"
+     inkscape:label=""
+     inkscape:color="rgb(0,134,229)" /><sodipodi:guide
+     position="17.171975,27.159236"
+     orientation="0,-1"
+     id="guide3117"
+     inkscape:locked="false" /></sodipodi:namedview><defs
+   id="defs20" /><style
+   type="text/css"
+   id="base">
+      .outline {
+        fill: none;
+        stroke: #111111;
+        stroke-width: 0.5;
+      }
+      .fill {
+        stroke: none;
+        stroke-width: 0.3;
+        fill: none;
+      }
+      .base {
+        fill: white;
+      }
+      COLORING{}
+  </style><g
+   id="g3904">
+  <path
+   class="fill horizontal23"
+   id="path3020"
+   d="M 18.966797 12.279297 L 13.033203 12.279297 L 12.703125 16 L 19.296875 16 L 18.966797 12.279297 z " />
+  <path
+   class="fill horizontal13"
+   id="path3863"
+   d="M 13.361328 8.5605469 L 13.033203 12.279297 L 18.966797 12.279297 L 18.638672 8.5605469 L 13.361328 8.5605469 z " />
+  <path
+   class="fill horizontal03"
+   id="path3860"
+   d="M 13.691406 4.8398438 L 13.361328 8.5605469 L 18.638672 8.5605469 L 18.308594 4.8398438 L 13.691406 4.8398438 z " />
+  <path
+   class="fill vertical02 uniform"
+   id="path3022"
+   d="M 16 4.8398438 L 13.691406 4.8398438 L 12.703125 16 L 16 16 L 16 4.8398438 z " />
+  <path
+   class="fill vertical12 uniform"
+   id="path3768"
+   d="M 16 4.8398438 L 16 16 L 19.296875 16 L 18.308594 4.8398438 L 16 4.8398438 z " />
+  <path
+   class="fill horizontal34 horizontal12"
+   id="path3024"
+   d="M 19.050781 13.210938 L 12.949219 13.210938 L 12.703125 16 L 19.296875 16 L 19.050781 13.210938 z " />
+  <path
+   class="fill horizontal24 horizontal12"
+   id="path3872"
+   d="M 13.197266 10.419922 L 12.949219 13.210938 L 19.050781 13.210938 L 18.802734 10.419922 L 13.197266 10.419922 z " />
+  <path
+   class="fill horizontal14 horizontal02"
+   id="path3869"
+   d="M 13.443359 7.6308594 L 13.197266 10.419922 L 18.802734 10.419922 L 18.556641 7.6308594 L 13.443359 7.6308594 z " />
+  <path
+   class="fill horizontal04 horizontal02"
+   id="path3866"
+   d="M 13.691406 4.8398438 L 13.443359 7.6308594 L 18.556641 7.6308594 L 18.308594 4.8398438 L 13.691406 4.8398438 z " /></g>
+  <path
+   id="path1500"
+   class="outline"
+   d="M 19.296146,16 18.307633,4.840764 H 13.692367 L 12.703854,16" />
+  <path
+   class="outline"
+   d="m 11.26861,16 h 9.46278"
+   id="path5181" /><circle
+   class="base"
+   id="path5349"
+   cx="16"
+   cy="16"
+   r="1" /><g
+   id="g3172"><path
+   class="outline"
+     d="m 13.560339,6.5909455 5.071289,2.3251953"
+     id="path249" /><path
+   class="outline"
+     d="M 18.440888,6.5909455 13.369599,8.9161408"
+     id="path1644" /><path
+   class="outline"
+     d="m 13.17986,10.42268 5.861987,2.687731"
+     id="path1646" /><path
+   class="outline"
+     d="m 18.821367,10.42268 -5.861986,2.687731"
+     id="path1648" /></g></svg>

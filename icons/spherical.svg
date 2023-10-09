@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="spherical.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs20" />
+  <sodipodi:namedview
+     id="namedview18"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="64"
+     inkscape:cx="13.359375"
+     inkscape:cy="13.40625"
+     inkscape:window-width="2391"
+     inkscape:window-height="1826"
+     inkscape:window-x="1436"
+     inkscape:window-y="88"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2"
+     showguides="true">
+    <sodipodi:guide
+       position="16,21.058596"
+       orientation="-1,0"
+       id="guide163"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="27.817128,16"
+       orientation="0,1"
+       id="guide215"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,16"
+       orientation="-0.25881905,0.96592583"
+       id="guide1002"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="17.453125,21.0625"
+       orientation="0,-1"
+       id="guide294"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <style
+     type="text/css"
+     id="base">
+      .outline {
+        fill: none;
+        stroke: #111111;
+        stroke-width: 0.5;
+      }
+      .fill {
+        stroke: none;
+        stroke-width: 0.3;
+        fill: none;
+      }
+      .base {
+        fill: white;
+      }
+      COLORING{}
+  </style>
+  <path
+     class="fill horizontal03"
+     id="path10040"
+     d="M 14.121094 12.384766 L 19.568359 13.84375 C 19.133905 12.613375 18.017069 11.552734 16.359375 11.552734 C 15.437287 11.552734 14.684271 11.881397 14.121094 12.384766 z " />
+  <path
+     class="fill horizontal23"
+     id="path9190"
+     d="M 19.708984 15.628906 L 13.142578 13.869141 C 12.895544 14.582659 12.877329 15.350778 13.117188 16 L 19.601562 16 C 19.645911 15.879964 19.682091 15.756024 19.708984 15.628906 z " />
+  <path
+     class="fill horizontal13"
+     id="path10043"
+     d="M 14.121094 12.384766 C 13.665139 12.792299 13.334715 13.314182 13.142578 13.869141 L 19.708984 15.628906 C 19.829203 15.060673 19.776268 14.432548 19.568359 13.84375 L 14.121094 12.384766 z " />
+  <path
+     class="fill vertical02 uniform"
+     id="path8444"
+     d="M 17.173828 11.644531 C 16.918782 11.584896 16.647914 11.552734 16.359375 11.552734 C 13.730923 11.552734 12.460344 14.222132 13.117188 16 L 16.007812 16 L 17.173828 11.644531 z " />
+  <path
+     class="fill vertical12 uniform"
+     id="path10037"
+     d="M 17.173828 11.644531 L 16.007812 16 L 19.601562 16 C 20.186301 14.417298 19.242126 12.128141 17.173828 11.644531 z " />
+  <path
+     class="fill horizontal34 horizontal12"
+     id="path9188"
+     d="M 19.460938 16 L 13.029297 14.277344 C 12.89938 14.867852 12.922405 15.472786 13.117188 16 L 19.460938 16 z " />
+  <path
+     class="fill horizontal24 horizontal12"
+     id="path10052"
+     d="M 13.517578 13.097656 C 13.282987 13.463249 13.119616 13.866816 13.029297 14.277344 L 19.460938 16 L 19.601562 16 C 19.742318 15.619019 19.792827 15.197139 19.761719 14.769531 L 13.517578 13.097656 z " />
+  <path
+     class="fill horizontal14 horizontal02"
+     id="path10049"
+     d="M 14.548828 12.0625 C 14.123494 12.331814 13.778034 12.691756 13.517578 13.097656 L 19.761719 14.769531 C 19.726614 14.286992 19.58722 13.797111 19.349609 13.349609 L 14.548828 12.0625 z " />
+  <path
+     class="fill horizontal04 horizontal02"
+     id="path10046"
+     d="M 14.548828 12.0625 L 19.349609 13.349609 C 18.815187 12.343111 17.788961 11.552734 16.359375 11.552734 C 15.653882 11.552734 15.047594 11.746691 14.548828 12.0625 z " />
+  <path
+     class="outline "
+     id="path8447"
+     d="m 16.359375,11.552277 c -2.628455,0 -3.898406,2.669853 -3.241562,4.447723 h 6.483124 c 0.656844,-1.77787 -0.613107,-4.447723 -3.241562,-4.447723"/>
+  <path
+     class="outline"
+     d="m 11.816507,16 h 9.085736"
+     id="path915" />
+  <circle
+     class="base"
+     id="path5349"
+     cx="16"
+     cy="16"
+     r="1" />
+</svg>
