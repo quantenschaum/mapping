@@ -1,0 +1,1383 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='-21228958' action='modify' visible='true' lat='54.71566061578' lon='13.35852639748' />
+  <node id='-21228959' action='modify' visible='true' lat='54.7201484444' lon='13.38568944907'>
+    <tag k='seamark:topmark:shape' v='sphere' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21228960' action='modify' visible='true' lat='54.71631752915' lon='13.36142318321' />
+  <node id='-21228961' action='modify' visible='true' lat='54.70697100544' lon='13.39622752739'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
+    <tag k='seamark:buoy_special_purpose:shape' v='barrel' />
+    <tag k='seamark:topmark:colour' v='yellow' />
+    <tag k='seamark:topmark:shape' v='x-shape' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21228962' action='modify' visible='true' lat='54.70602879599' lon='13.37416904045' />
+  <node id='-21228963' action='modify' visible='true' lat='54.71471141801' lon='13.37797313279'>
+    <tag k='seamark:beacon_lateral:category' v='port' />
+    <tag k='seamark:beacon_lateral:colour' v='red' />
+    <tag k='seamark:beacon_lateral:shape' v='tower' />
+    <tag k='seamark:beacon_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='square' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21228964' action='modify' visible='true' lat='54.71794237334' lon='13.38742036795'>
+    <tag k='seamark:topmark:shape' v='circle' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21228965' action='modify' visible='true' lat='54.70779164679' lon='13.377837407'>
+    <tag k='seamark:buoy_lateral:category' v='port' />
+    <tag k='seamark:buoy_lateral:colour' v='red' />
+    <tag k='seamark:buoy_lateral:shape' v='spherical' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21228966' action='modify' visible='true' lat='54.71012250653' lon='13.3801953382'>
+    <tag k='seamark:buoy_lateral:category' v='starboard' />
+    <tag k='seamark:buoy_lateral:colour' v='green' />
+    <tag k='seamark:buoy_lateral:shape' v='can' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21228967' action='modify' visible='true' lat='54.71825102372' lon='13.34571616722' />
+  <node id='-21228968' action='modify' visible='true' lat='54.71794237334' lon='13.38429183936'>
+    <tag k='seamark:topmark:shape' v='triangle, point up' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21228969' action='modify' visible='true' lat='54.70962395128' lon='13.35618751121' />
+  <node id='-21228970' action='modify' visible='true' lat='54.71926815795' lon='13.39678545023'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='stake' />
+    <tag k='seamark:topmark:colour' v='yellow' />
+    <tag k='seamark:topmark:shape' v='x-shape' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21228971' action='modify' visible='true' lat='54.71134327705' lon='13.38948721055'>
+    <tag k='seamark:buoy_cardinal:category' v='east' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='spar' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones base together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21228972' action='modify' visible='true' lat='54.70897498116' lon='13.38016901837'>
+    <tag k='seamark:buoy_lateral:category' v='starboard' />
+    <tag k='seamark:buoy_lateral:colour' v='green' />
+    <tag k='seamark:buoy_lateral:shape' v='conical' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21228973' action='modify' visible='true' lat='54.70912476667' lon='13.39171397037'>
+    <tag k='seamark:buoy_cardinal:category' v='west' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='conical' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones point together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21228974' action='modify' visible='true' lat='54.71355820481' lon='13.37795051183'>
+    <tag k='seamark:buoy_lateral:category' v='port' />
+    <tag k='seamark:buoy_lateral:colour' v='red' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21228975' action='modify' visible='true' lat='54.7036483799' lon='13.38790195061'>
+    <tag k='seamark:type' v='obstruction' />
+  </node>
+  <node id='-21228976' action='modify' visible='true' lat='54.71246746401' lon='13.38952832585'>
+    <tag k='seamark:buoy_cardinal:category' v='east' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='pillar' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones base together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21228977' action='modify' visible='true' lat='54.72239930763' lon='13.3827736768'>
+    <tag k='seamark:beacon_safe_water:colour' v='red;white' />
+    <tag k='seamark:beacon_safe_water:colour_pattern' v='vertical' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='sphere' />
+    <tag k='seamark:type' v='beacon_safe_water' />
+  </node>
+  <node id='-21228978' action='modify' visible='true' lat='54.70900493831' lon='13.38247800877'>
+    <tag k='seamark:buoy_safe_water:colour' v='red;white' />
+    <tag k='seamark:buoy_safe_water:colour_pattern' v='vertical' />
+    <tag k='seamark:buoy_safe_water:shape' v='conical' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='sphere' />
+    <tag k='seamark:type' v='buoy_safe_water' />
+  </node>
+  <node id='-21228979' action='modify' visible='true' lat='54.70369797333' lon='13.37747352196'>
+    <tag k='depth:exposition' v='shoaler' />
+    <tag k='seamark:type' v='rock' />
+  </node>
+  <node id='-21228980' action='modify' visible='true' lat='54.71471487916' lon='13.38728307171'>
+    <tag k='seamark:beacon_cardinal:category' v='south' />
+    <tag k='seamark:beacon_cardinal:colour' v='yellow;black' />
+    <tag k='seamark:beacon_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:beacon_cardinal:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones down' />
+    <tag k='seamark:type' v='beacon_cardinal' />
+  </node>
+  <node id='-21228981' action='modify' visible='true' lat='54.71344190515' lon='13.34979312492' />
+  <node id='-21228982' action='modify' visible='true' lat='54.71024319698' lon='13.39175878453'>
+    <tag k='seamark:buoy_cardinal:category' v='west' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='can' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones point together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21228983' action='modify' visible='true' lat='54.71354106799' lon='13.36880462242' />
+  <node id='-21228984' action='modify' visible='true' lat='54.71703087524' lon='13.37796478222'>
+    <tag k='seamark:beacon_lateral:category' v='port' />
+    <tag k='seamark:beacon_lateral:shape' v='withy' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21228985' action='modify' visible='true' lat='54.71564820869' lon='13.35580129457' />
+  <node id='-21228986' action='modify' visible='true' lat='54.70444976333' lon='13.38177742377'>
+    <tag k='seamark:rock:water_level' v='awash' />
+    <tag k='seamark:type' v='rock' />
+  </node>
+  <node id='-21228987' action='modify' visible='true' lat='54.71471859583' lon='13.35947055651' />
+  <node id='-21228988' action='modify' visible='true' lat='54.70778032885' lon='13.39623682394'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
+    <tag k='seamark:buoy_special_purpose:shape' v='spherical' />
+    <tag k='seamark:topmark:colour' v='yellow' />
+    <tag k='seamark:topmark:shape' v='x-shape' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21228989' action='modify' visible='true' lat='54.70778740256' lon='13.38473718835'>
+    <tag k='seamark:buoy_cardinal:category' v='north' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='spherical' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones up' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21228990' action='modify' visible='true' lat='54.71579695717' lon='13.35756080223' />
+  <node id='-21228991' action='modify' visible='true' lat='54.71139823517' lon='13.39643637495'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
+    <tag k='seamark:buoy_special_purpose:shape' v='spar' />
+    <tag k='seamark:topmark:colour' v='yellow' />
+    <tag k='seamark:topmark:shape' v='x-shape' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21228992' action='modify' visible='true' lat='54.71249246606' lon='13.39416849984'>
+    <tag k='seamark:buoy_isolated_danger:colour' v='black;red;black' />
+    <tag k='seamark:buoy_isolated_danger:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_isolated_danger:shape' v='pillar' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 spheres' />
+    <tag k='seamark:type' v='buoy_isolated_danger' />
+  </node>
+  <node id='-21228993' action='modify' visible='true' lat='54.71416083027' lon='13.35434215141' />
+  <node id='-21228994' action='modify' visible='true' lat='54.70362358317' lon='13.38476913048'>
+    <tag k='depth' v='10' />
+    <tag k='name' v='bar' />
+    <tag k='seamark:name' v='foo' />
+    <tag k='seamark:type' v='wreck' />
+  </node>
+  <node id='-21228995' action='modify' visible='true' lat='54.7177997763' lon='13.37800886086'>
+    <tag k='seamark:beacon_lateral:category' v='port' />
+    <tag k='seamark:beacon_lateral:shape' v='perch' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21228996' action='modify' visible='true' lat='54.7178005808' lon='13.38033477961'>
+    <tag k='seamark:beacon_lateral:category' v='starboard' />
+    <tag k='seamark:beacon_lateral:shape' v='perch' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21228997' action='modify' visible='true' lat='54.71357825381' lon='13.38492186942'>
+    <tag k='seamark:buoy_cardinal:category' v='north' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones up' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21228998' action='modify' visible='true' lat='54.70779023205' lon='13.38013733412'>
+    <tag k='seamark:buoy_lateral:category' v='starboard' />
+    <tag k='seamark:buoy_lateral:colour' v='green' />
+    <tag k='seamark:buoy_lateral:shape' v='spherical' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21228999' action='modify' visible='true' lat='54.71585663569' lon='13.37799960199'>
+    <tag k='seamark:beacon_lateral:category' v='port' />
+    <tag k='seamark:beacon_lateral:colour' v='red' />
+    <tag k='seamark:beacon_lateral:shape' v='lattice' />
+    <tag k='seamark:beacon_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229000' action='modify' visible='true' lat='54.71794237334' lon='13.38637752508'>
+    <tag k='seamark:topmark:shape' v='square' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229001' action='modify' visible='true' lat='54.71007022418' lon='13.36447017265' />
+  <node id='-21229002' action='modify' visible='true' lat='54.71919294921' lon='13.36644427849' />
+  <node id='-21229003' action='modify' visible='true' lat='54.70367317662' lon='13.38927524163'>
+    <tag k='seamark:obstruction:category' v='stump' />
+    <tag k='seamark:type' v='obstruction' />
+  </node>
+  <node id='-21229004' action='modify' visible='true' lat='54.72237402336' lon='13.39212234096'>
+    <tag k='seamark:beacon_cardinal:category' v='west' />
+    <tag k='seamark:beacon_cardinal:colour' v='yellow;black;yellow' />
+    <tag k='seamark:beacon_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones point together' />
+    <tag k='seamark:type' v='beacon_cardinal' />
+  </node>
+  <node id='-21229005' action='modify' visible='true' lat='54.71021905891' lon='13.38944609526'>
+    <tag k='seamark:buoy_cardinal:category' v='east' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='can' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones base together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229006' action='modify' visible='true' lat='54.71900824289' lon='13.38742036795'>
+    <tag k='seamark:topmark:shape' v='2 spheres' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229007' action='modify' visible='true' lat='54.71136159643' lon='13.39180359869'>
+    <tag k='seamark:buoy_cardinal:category' v='west' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='spar' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones point together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229008' action='modify' visible='true' lat='54.70361341297' lon='13.38175418429'>
+    <tag k='depth:exposition' v='shoaler' />
+    <tag k='seamark:rock:water_level' v='awash' />
+    <tag k='seamark:type' v='rock' />
+  </node>
+  <node id='-21229009' action='modify' visible='true' lat='54.71471314858' lon='13.38262810225'>
+    <tag k='seamark:beacon_safe_water:colour' v='red;white' />
+    <tag k='seamark:beacon_safe_water:colour_pattern' v='vertical' />
+    <tag k='seamark:beacon_safe_water:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='circle' />
+    <tag k='seamark:type' v='beacon_safe_water' />
+  </node>
+  <node id='-21229010' action='modify' visible='true' lat='54.70906485254' lon='13.38709598957'>
+    <tag k='seamark:buoy_cardinal:category' v='south' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='conical' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones down' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229011' action='modify' visible='true' lat='54.72125441577' lon='13.38041107797'>
+    <tag k='seamark:beacon_lateral:category' v='starboard' />
+    <tag k='seamark:beacon_lateral:colour' v='green' />
+    <tag k='seamark:beacon_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229012' action='modify' visible='true' lat='54.70362358317' lon='13.3865286596'>
+    <tag k='seamark:obstruction:category' v='foul_ground' />
+    <tag k='seamark:type' v='obstruction' />
+  </node>
+  <node id='-21229013' action='modify' visible='true' lat='54.70443286296' lon='13.38616715627'>
+    <tag k='seamark:type' v='wreck' />
+    <tag k='seamark:wreck:category' v='dangerous' />
+  </node>
+  <node id='-21229014' action='modify' visible='true' lat='54.70358314421' lon='13.38328646405'>
+    <tag k='depth:exposition' v='shoaler' />
+    <tag k='seamark:rock:water_level' v='dry' />
+    <tag k='seamark:type' v='rock' />
+  </node>
+  <node id='-21229015' action='modify' visible='true' lat='54.7151772199' lon='13.3700491674' />
+  <node id='-21229016' action='modify' visible='true' lat='54.70442159604' lon='13.3890936446'>
+    <tag k='seamark:type' v='wreck' />
+    <tag k='seamark:wreck:category' v='hull_showing' />
+  </node>
+  <node id='-21229017' action='modify' visible='true' lat='54.7044272295' lon='13.38763040044'>
+    <tag k='seamark:type' v='wreck' />
+    <tag k='seamark:wreck:category' v='non-dangerous' />
+  </node>
+  <node id='-21229018' action='modify' visible='true' lat='54.71879635167' lon='13.3555866964' />
+  <node id='-21229019' action='modify' visible='true' lat='54.70903489543' lon='13.38478699917'>
+    <tag k='seamark:buoy_cardinal:category' v='north' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='conical' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones up' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229020' action='modify' visible='true' lat='54.70620236254' lon='13.37112205101' />
+  <node id='-21229021' action='modify' visible='true' lat='54.71250496709' lon='13.39648858684'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
+    <tag k='seamark:buoy_special_purpose:shape' v='pillar' />
+    <tag k='seamark:topmark:colour' v='yellow' />
+    <tag k='seamark:topmark:shape' v='x-shape' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229022' action='modify' visible='true' lat='54.70778174358' lon='13.39393689682'>
+    <tag k='seamark:buoy_isolated_danger:colour' v='black;red;black' />
+    <tag k='seamark:buoy_isolated_danger:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_isolated_danger:shape' v='spherical' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 spheres' />
+    <tag k='seamark:type' v='buoy_isolated_danger' />
+  </node>
+  <node id='-21229023' action='modify' visible='true' lat='54.71812682772' lon='13.39674023568'>
+    <tag k='seamark:beacon_special_purpose:colour' v='white' />
+    <tag k='seamark:beacon_special_purpose:shape' v='cairn' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229024' action='modify' visible='true' lat='54.7136402306' lon='13.36120860649' />
+  <node id='-21229025' action='modify' visible='true' lat='54.71125168' lon='13.3779052699'>
+    <tag k='seamark:buoy_lateral:category' v='port' />
+    <tag k='seamark:buoy_lateral:colour' v='red' />
+    <tag k='seamark:buoy_lateral:shape' v='spar' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21229026' action='modify' visible='true' lat='54.71017078275' lon='13.38482071673'>
+    <tag k='seamark:buoy_cardinal:category' v='north' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='can' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones up' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229027' action='modify' visible='true' lat='54.71698682617' lon='13.35524337364' />
+  <node id='-21229028' action='modify' visible='true' lat='54.70667346797' lon='13.39146392418' />
+  <node id='-21229029' action='modify' visible='true' lat='54.72033314551' lon='13.35580127312' />
+  <node id='-21229030' action='modify' visible='true' lat='54.70354919286' lon='13.3906056173'>
+    <tag k='depth:exposition' v='shoaler' />
+    <tag k='seamark:obstruction:category' v='stump' />
+    <tag k='seamark:type' v='obstruction' />
+  </node>
+  <node id='-21229031' action='modify' visible='true' lat='54.71585750095' lon='13.38032708672'>
+    <tag k='seamark:beacon_lateral:category' v='starboard' />
+    <tag k='seamark:beacon_lateral:colour' v='green' />
+    <tag k='seamark:beacon_lateral:shape' v='lattice' />
+    <tag k='seamark:beacon_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229032' action='modify' visible='true' lat='54.7147122833' lon='13.38030061752'>
+    <tag k='seamark:beacon_lateral:category' v='starboard' />
+    <tag k='seamark:beacon_lateral:colour' v='green' />
+    <tag k='seamark:beacon_lateral:shape' v='tower' />
+    <tag k='seamark:beacon_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='triangle, point up' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229033' action='modify' visible='true' lat='54.71512764051' lon='13.34666030479' />
+  <node id='-21229034' action='modify' visible='true' lat='54.71356488781' lon='13.38027429769'>
+    <tag k='seamark:buoy_lateral:category' v='starboard' />
+    <tag k='seamark:buoy_lateral:colour' v='green' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21229035' action='modify' visible='true' lat='54.72236770228' lon='13.394459507'>
+    <tag k='seamark:beacon_isolated_danger:colour' v='black;red;black' />
+    <tag k='seamark:beacon_isolated_danger:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 spheres' />
+    <tag k='seamark:type' v='beacon_isolated_danger' />
+  </node>
+  <node id='-21229036' action='modify' visible='true' lat='54.7135983028' lon='13.391893227'>
+    <tag k='seamark:buoy_cardinal:category' v='west' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones point together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229037' action='modify' visible='true' lat='54.72241194977' lon='13.37809934472'>
+    <tag k='seamark:beacon_lateral:category' v='port' />
+    <tag k='seamark:beacon_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229038' action='modify' visible='true' lat='54.70366948501' lon='13.3789156748'>
+    <tag k='depth:exposition' v='shoaler' />
+    <tag k='seamark:rock:water_level' v='submerged' />
+    <tag k='seamark:type' v='rock' />
+  </node>
+  <node id='-21229039' action='modify' visible='true' lat='54.71471574445' lon='13.38961055643'>
+    <tag k='seamark:beacon_cardinal:category' v='east' />
+    <tag k='seamark:beacon_cardinal:colour' v='black;yellow;black' />
+    <tag k='seamark:beacon_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:beacon_cardinal:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones base together' />
+    <tag k='seamark:type' v='beacon_cardinal' />
+  </node>
+  <node id='-21229040' action='modify' visible='true' lat='54.70778881731' lon='13.38243726123'>
+    <tag k='seamark:buoy_safe_water:colour' v='red;white' />
+    <tag k='seamark:buoy_safe_water:colour_pattern' v='vertical' />
+    <tag k='seamark:buoy_safe_water:shape' v='spherical' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='sphere' />
+    <tag k='seamark:type' v='buoy_safe_water' />
+  </node>
+  <node id='-21229041' action='modify' visible='true' lat='54.71019492084' lon='13.387133406'>
+    <tag k='seamark:buoy_cardinal:category' v='south' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='can' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones down' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229042' action='modify' visible='true' lat='54.7212589556' lon='13.37807672375'>
+    <tag k='seamark:beacon_lateral:category' v='port' />
+    <tag k='seamark:beacon_lateral:colour' v='red' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229043' action='modify' visible='true' lat='54.7180279329' lon='13.34846274925' />
+  <node id='-21229044' action='modify' visible='true' lat='54.72010592864' lon='13.37805410279'>
+    <tag k='seamark:beacon_lateral:category' v='port' />
+    <tag k='seamark:beacon_lateral:colour' v='red' />
+    <tag k='seamark:beacon_lateral:shape' v='pile' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229045' action='modify' visible='true' lat='54.70778315833' lon='13.3916369697'>
+    <tag k='seamark:buoy_cardinal:category' v='west' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='spherical' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones point together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229046' action='modify' visible='true' lat='54.7116073488' lon='13.35550086571' />
+  <node id='-21229047' action='modify' visible='true' lat='54.71245496298' lon='13.38720823885'>
+    <tag k='seamark:buoy_cardinal:category' v='south' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='pillar' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones down' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229048' action='modify' visible='true' lat='54.71589610186' lon='13.35680980516' />
+  <node id='-21229049' action='modify' visible='true' lat='54.71898965238' lon='13.38349361395'>
+    <tag k='seamark:topmark:shape' v='2 cones down' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229050' action='modify' visible='true' lat='54.70443849642' lon='13.3847039121'>
+    <tag k='seamark:type' v='wreck' />
+  </node>
+  <node id='-21229051' action='modify' visible='true' lat='54.718870714' lon='13.34932105614' />
+  <node id='-21229052' action='modify' visible='true' lat='54.71523298425' lon='13.35611243082' />
+  <node id='-21229053' action='modify' visible='true' lat='54.70445539678' lon='13.38031417961'>
+    <tag k='seamark:rock:water_level' v='covers' />
+    <tag k='seamark:type' v='rock' />
+  </node>
+  <node id='-21229054' action='modify' visible='true' lat='54.70918468072' lon='13.39633195117'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
+    <tag k='seamark:buoy_special_purpose:shape' v='conical' />
+    <tag k='seamark:topmark:colour' v='yellow' />
+    <tag k='seamark:topmark:shape' v='x-shape' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229055' action='modify' visible='true' lat='54.7113799158' lon='13.39411998682'>
+    <tag k='seamark:buoy_isolated_danger:colour' v='black;red;black' />
+    <tag k='seamark:buoy_isolated_danger:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_isolated_danger:shape' v='spar' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 spheres' />
+    <tag k='seamark:type' v='buoy_isolated_danger' />
+  </node>
+  <node id='-21229056' action='modify' visible='true' lat='54.7201484444' lon='13.38737745261'>
+    <tag k='seamark:topmark:shape' v='x-shape' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229057' action='modify' visible='true' lat='54.7152763785' lon='13.3595456369' />
+  <node id='-21229058' action='modify' visible='true' lat='54.71126999943' lon='13.38022165803'>
+    <tag k='seamark:buoy_lateral:category' v='starboard' />
+    <tag k='seamark:buoy_lateral:colour' v='green' />
+    <tag k='seamark:buoy_lateral:shape' v='spar' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21229059' action='modify' visible='true' lat='54.7201484444' lon='13.38400144553'>
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229060' action='modify' visible='true' lat='54.72194980689' lon='13.39689169051'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:topmark:colour' v='yellow' />
+    <tag k='seamark:topmark:shape' v='x-shape' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229061' action='modify' visible='true' lat='54.71014664465' lon='13.38250802746'>
+    <tag k='seamark:buoy_safe_water:colour' v='red;white' />
+    <tag k='seamark:buoy_safe_water:colour_pattern' v='vertical' />
+    <tag k='seamark:buoy_safe_water:shape' v='can' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='sphere' />
+    <tag k='seamark:type' v='buoy_safe_water' />
+  </node>
+  <node id='-21229062' action='modify' visible='true' lat='54.7201484444' lon='13.38231344199'>
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229063' action='modify' visible='true' lat='54.71794237334' lon='13.38220615363'>
+    <tag k='seamark:topmark:shape' v='board' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229064' action='modify' visible='true' lat='54.71163214066' lon='13.34786193443' />
+  <node id='-21229065' action='modify' visible='true' lat='54.71794237334' lon='13.38533468222'>
+    <tag k='seamark:topmark:shape' v='triangle, point down' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229066' action='modify' visible='true' lat='54.70531590702' lon='13.39173217727' />
+  <node id='-21229067' action='modify' visible='true' lat='54.71245026338' lon='13.37090747429' />
+  <node id='-21229068' action='modify' visible='true' lat='54.71471401387' lon='13.38495558698'>
+    <tag k='seamark:beacon_cardinal:category' v='north' />
+    <tag k='seamark:beacon_cardinal:colour' v='black;yellow' />
+    <tag k='seamark:beacon_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:beacon_cardinal:shape' v='lattice' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones up' />
+    <tag k='seamark:type' v='beacon_cardinal' />
+  </node>
+  <node id='-21229069' action='modify' visible='true' lat='54.72238034443' lon='13.38978517492'>
+    <tag k='seamark:beacon_cardinal:category' v='east' />
+    <tag k='seamark:beacon_cardinal:colour' v='black;yellow;black' />
+    <tag k='seamark:beacon_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones base together' />
+    <tag k='seamark:type' v='beacon_cardinal' />
+  </node>
+  <node id='-21229070' action='modify' visible='true' lat='54.70909480961' lon='13.38940497997'>
+    <tag k='seamark:buoy_cardinal:category' v='east' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='conical' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones base together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229071' action='modify' visible='true' lat='54.70611557936' lon='13.37264554573'>
+    <tag k='name' v='foo' />
+  </node>
+  <node id='-21229072' action='modify' visible='true' lat='54.7224056287' lon='13.38043651076'>
+    <tag k='seamark:beacon_lateral:category' v='starboard' />
+    <tag k='seamark:beacon_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229073' action='modify' visible='true' lat='54.71247996504' lon='13.39184841284'>
+    <tag k='seamark:buoy_cardinal:category' v='west' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='pillar' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones point together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229074' action='modify' visible='true' lat='54.71128831885' lon='13.38253804616'>
+    <tag k='seamark:buoy_safe_water:colour' v='red;white' />
+    <tag k='seamark:buoy_safe_water:colour_pattern' v='vertical' />
+    <tag k='seamark:buoy_safe_water:shape' v='spar' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='sphere' />
+    <tag k='seamark:type' v='buoy_safe_water' />
+  </node>
+  <node id='-21229075' action='modify' visible='true' lat='54.72010317014' lon='13.38038564518'>
+    <tag k='seamark:beacon_lateral:category' v='starboard' />
+    <tag k='seamark:beacon_lateral:colour' v='green' />
+    <tag k='seamark:beacon_lateral:shape' v='pile' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229076' action='modify' visible='true' lat='54.71900204606' lon='13.38611144995'>
+    <tag k='seamark:topmark:shape' v='2 cones point together' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229077' action='modify' visible='true' lat='54.71359161981' lon='13.38956944114'>
+    <tag k='seamark:buoy_cardinal:category' v='east' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones base together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229078' action='modify' visible='true' lat='54.7114833893' lon='13.36318271233' />
+  <node id='-21229079' action='modify' visible='true' lat='54.71357157081' lon='13.38259808355'>
+    <tag k='seamark:buoy_safe_water:colour' v='red;white' />
+    <tag k='seamark:buoy_safe_water:colour_pattern' v='vertical' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='sphere' />
+    <tag k='seamark:type' v='buoy_safe_water' />
+  </node>
+  <node id='-21229080' action='modify' visible='true' lat='54.71358493681' lon='13.38724565528'>
+    <tag k='seamark:buoy_cardinal:category' v='south' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones down' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229081' action='modify' visible='true' lat='54.71703346136' lon='13.38028788915'>
+    <tag k='seamark:beacon_lateral:category' v='starboard' />
+    <tag k='seamark:beacon_lateral:shape' v='withy' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229082' action='modify' visible='true' lat='54.70441032913' lon='13.39202013294'>
+    <tag k='seamark:type' v='wreck' />
+    <tag k='seamark:wreck:category' v='distributed_remains' />
+  </node>
+  <node id='-21229083' action='modify' visible='true' lat='54.71713555734' lon='13.36657302452' />
+  <node id='-21229084' action='modify' visible='true' lat='54.71476817572' lon='13.35705656839' />
+  <node id='-21229085' action='modify' visible='true' lat='54.70446103024' lon='13.37885093544'>
+    <tag k='seamark:name' v='foo' />
+    <tag k='seamark:rock:water_level' v='submerged' />
+    <tag k='seamark:type' v='rock' />
+  </node>
+  <node id='-21229086' action='modify' visible='true' lat='54.71029147305' lon='13.39638416306'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
+    <tag k='seamark:buoy_special_purpose:shape' v='can' />
+    <tag k='seamark:topmark:colour' v='yellow' />
+    <tag k='seamark:topmark:shape' v='x-shape' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229087' action='modify' visible='true' lat='54.71026733501' lon='13.39407147379'>
+    <tag k='seamark:buoy_isolated_danger:colour' v='black;red;black' />
+    <tag k='seamark:buoy_isolated_danger:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_isolated_danger:shape' v='can' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 spheres' />
+    <tag k='seamark:type' v='buoy_isolated_danger' />
+  </node>
+  <node id='-21229088' action='modify' visible='true' lat='54.70446666369' lon='13.37738769127'>
+    <tag k='depth' v='3' />
+    <tag k='seamark:type' v='rock' />
+  </node>
+  <node id='-21229089' action='modify' visible='true' lat='54.71130663826' lon='13.38485443429'>
+    <tag k='seamark:buoy_cardinal:category' v='north' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='spar' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones up' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229090' action='modify' visible='true' lat='54.7124049588' lon='13.37792789086'>
+    <tag k='seamark:buoy_lateral:category' v='port' />
+    <tag k='seamark:buoy_lateral:colour' v='red' />
+    <tag k='seamark:buoy_lateral:shape' v='pillar' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21229091' action='modify' visible='true' lat='54.71579695717' lon='13.35163848473' />
+  <node id='-21229092' action='modify' visible='true' lat='54.7091547237' lon='13.39402296077'>
+    <tag k='seamark:buoy_isolated_danger:colour' v='black;red;black' />
+    <tag k='seamark:buoy_isolated_danger:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_isolated_danger:shape' v='conical' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 spheres' />
+    <tag k='seamark:type' v='buoy_isolated_danger' />
+  </node>
+  <node id='-21229093' action='modify' visible='true' lat='54.71470621324' lon='13.364513088' />
+  <node id='-21229094' action='modify' visible='true' lat='54.71361166879' lon='13.39654079873'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
+    <tag k='seamark:topmark:colour' v='yellow' />
+    <tag k='seamark:topmark:shape' v='x-shape' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229095' action='modify' visible='true' lat='54.7147183403' lon='13.39659301062'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow;red' />
+    <tag k='seamark:beacon_special_purpose:colour_pattern' v='cross' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='red;white;red' />
+    <tag k='seamark:topmark:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229096' action='modify' visible='true' lat='54.71895189182' lon='13.3803602124'>
+    <tag k='seamark:beacon_lateral:category' v='starboard' />
+    <tag k='seamark:beacon_lateral:colour' v='green' />
+    <tag k='seamark:beacon_lateral:shape' v='stake' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229097' action='modify' visible='true' lat='54.70610318175' lon='13.38502662255' />
+  <node id='-21229098' action='modify' visible='true' lat='54.70894502399' lon='13.37786002797'>
+    <tag k='seamark:buoy_lateral:category' v='port' />
+    <tag k='seamark:buoy_lateral:colour' v='red' />
+    <tag k='seamark:buoy_lateral:shape' v='conical' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21229099' action='modify' visible='true' lat='54.7136049858' lon='13.39421701286'>
+    <tag k='seamark:buoy_isolated_danger:colour' v='black;red;black' />
+    <tag k='seamark:buoy_isolated_danger:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 spheres' />
+    <tag k='seamark:type' v='buoy_isolated_danger' />
+  </node>
+  <node id='-21229100' action='modify' visible='true' lat='54.72003570609' lon='13.34721820427' />
+  <node id='-21229101' action='modify' visible='true' lat='54.71585836621' lon='13.38265457145'>
+    <tag k='seamark:beacon_safe_water:colour' v='red;white' />
+    <tag k='seamark:beacon_safe_water:colour_pattern' v='vertical' />
+    <tag k='seamark:beacon_safe_water:shape' v='lattice' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='sphere' />
+    <tag k='seamark:type' v='beacon_safe_water' />
+  </node>
+  <node id='-21229102' action='modify' visible='true' lat='54.71794237334' lon='13.38324899649'>
+    <tag k='seamark:topmark:shape' v='rhombus' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229103' action='modify' visible='true' lat='54.71646626278' lon='13.37185161186' />
+  <node id='-21229104' action='modify' visible='true' lat='54.71471747501' lon='13.39426552589'>
+    <tag k='seamark:beacon_isolated_danger:colour' v='black;red;black' />
+    <tag k='seamark:beacon_isolated_danger:colour_pattern' v='horizontal' />
+    <tag k='seamark:beacon_isolated_danger:shape' v='lattice' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 spheres' />
+    <tag k='seamark:type' v='beacon_isolated_danger' />
+  </node>
+  <node id='-21229105' action='modify' visible='true' lat='54.7223866655' lon='13.38744800888'>
+    <tag k='seamark:beacon_cardinal:category' v='south' />
+    <tag k='seamark:beacon_cardinal:colour' v='yellow;black' />
+    <tag k='seamark:beacon_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones down' />
+    <tag k='seamark:type' v='beacon_cardinal' />
+  </node>
+  <node id='-21229106' action='modify' visible='true' lat='54.7100983684' lon='13.37788264893'>
+    <tag k='seamark:buoy_lateral:category' v='port' />
+    <tag k='seamark:buoy_lateral:colour' v='red' />
+    <tag k='seamark:buoy_lateral:shape' v='can' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21229107' action='modify' visible='true' lat='54.70778457308' lon='13.38933704259'>
+    <tag k='seamark:buoy_cardinal:category' v='east' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='spherical' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones base together' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229108' action='modify' visible='true' lat='54.71132495766' lon='13.38717082242'>
+    <tag k='seamark:buoy_cardinal:category' v='south' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='spar' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones down' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229109' action='modify' visible='true' lat='54.71899584922' lon='13.38480253195'>
+    <tag k='seamark:topmark:shape' v='2 cones base together' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229110' action='modify' visible='true' lat='54.71471660973' lon='13.39193804116'>
+    <tag k='seamark:beacon_cardinal:category' v='west' />
+    <tag k='seamark:beacon_cardinal:colour' v='yellow;black;yellow' />
+    <tag k='seamark:beacon_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:beacon_cardinal:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones point together' />
+    <tag k='seamark:type' v='beacon_cardinal' />
+  </node>
+  <node id='-21229111' action='modify' visible='true' lat='54.70364102562' lon='13.38035636217'>
+    <tag k='depth:exposition' v='shoaler' />
+    <tag k='seamark:rock:water_level' v='covers' />
+    <tag k='seamark:type' v='rock' />
+  </node>
+  <node id='-21229112' action='modify' visible='true' lat='54.71659020705' lon='13.34769027306' />
+  <node id='-21229113' action='modify' visible='true' lat='54.7124299609' lon='13.38256806486'>
+    <tag k='seamark:buoy_safe_water:colour' v='red;white' />
+    <tag k='seamark:buoy_safe_water:colour_pattern' v='vertical' />
+    <tag k='seamark:buoy_safe_water:shape' v='pillar' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='sphere' />
+    <tag k='seamark:type' v='buoy_safe_water' />
+  </node>
+  <node id='-21229114' action='modify' visible='true' lat='54.70778598781' lon='13.38703711547'>
+    <tag k='seamark:buoy_cardinal:category' v='south' />
+    <tag k='seamark:buoy_cardinal:colour' v='yellow;black' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='spherical' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones down' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229115' action='modify' visible='true' lat='54.70441596258' lon='13.39055688877'>
+    <tag k='seamark:type' v='wreck' />
+    <tag k='seamark:wreck:category' v='mast_showing' />
+  </node>
+  <node id='-21229116' action='modify' visible='true' lat='54.71820144809' lon='13.36346166206' />
+  <node id='-21229117' action='modify' visible='true' lat='54.71589610186' lon='13.35650939775' />
+  <node id='-21229118' action='modify' visible='true' lat='54.70444412987' lon='13.38324066794'>
+    <tag k='name' v='bar' />
+    <tag k='seamark:rock:water_level' v='dry' />
+    <tag k='seamark:type' v='rock' />
+  </node>
+  <node id='-21229119' action='modify' visible='true' lat='54.71898345554' lon='13.38218469595'>
+    <tag k='seamark:topmark:shape' v='2 cones up' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229120' action='modify' visible='true' lat='54.71241745985' lon='13.38024797786'>
+    <tag k='seamark:buoy_lateral:category' v='starboard' />
+    <tag k='seamark:buoy_lateral:colour' v='green' />
+    <tag k='seamark:buoy_lateral:shape' v='pillar' />
+    <tag k='seamark:buoy_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='buoy_lateral' />
+  </node>
+  <node id='-21229121' action='modify' visible='true' lat='54.72239298657' lon='13.38511084284'>
+    <tag k='seamark:beacon_cardinal:category' v='north' />
+    <tag k='seamark:beacon_cardinal:colour' v='black;yellow' />
+    <tag k='seamark:beacon_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones up' />
+    <tag k='seamark:type' v='beacon_cardinal' />
+  </node>
+  <node id='-21229122' action='modify' visible='true' lat='54.71244246194' lon='13.38488815185'>
+    <tag k='seamark:buoy_cardinal:category' v='north' />
+    <tag k='seamark:buoy_cardinal:colour' v='black;yellow' />
+    <tag k='seamark:buoy_cardinal:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_cardinal:shape' v='pillar' />
+    <tag k='seamark:topmark:colour' v='black' />
+    <tag k='seamark:topmark:shape' v='2 cones up' />
+    <tag k='seamark:type' v='buoy_cardinal' />
+  </node>
+  <node id='-21229123' action='modify' visible='true' lat='54.71895286886' lon='13.37803148182'>
+    <tag k='seamark:beacon_lateral:category' v='port' />
+    <tag k='seamark:beacon_lateral:colour' v='red' />
+    <tag k='seamark:beacon_lateral:shape' v='stake' />
+    <tag k='seamark:topmark:colour' v='red' />
+    <tag k='seamark:topmark:shape' v='cylinder' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <node id='-21229124' action='modify' visible='true' lat='54.7184121441' lon='13.36221711708' />
+  <node id='-21229125' action='modify' visible='true' lat='54.71606963856' lon='13.36234586311' />
+  <node id='-21229126' action='modify' visible='true' lat='54.71541272118' lon='13.35932033134' />
+  <node id='-21229127' action='modify' visible='true' lat='54.70765853536' lon='13.37462888205' />
+  <node id='-21229128' action='modify' visible='true' lat='54.72212291279' lon='13.34032302415' />
+  <node id='-21229129' action='modify' visible='true' lat='54.72238484269' lon='13.37428847459' />
+  <node id='-21229130' action='modify' visible='true' lat='54.71973749609' lon='13.36365576267' />
+  <node id='-21229131' action='modify' visible='true' lat='54.71554982102' lon='13.35747062892' />
+  <node id='-21229132' action='modify' visible='true' lat='54.7154615085' lon='13.35800975293' />
+  <node id='-21229133' action='modify' visible='true' lat='54.71508036805' lon='13.35751354426' />
+  <node id='-21229134' action='modify' visible='true' lat='54.71498431235' lon='13.35984705806' />
+  <node id='-21229135' action='modify' visible='true' lat='54.71466824119' lon='13.35842012286' />
+  <node id='-21229136' action='modify' visible='true' lat='54.71509586628' lon='13.35802315593' />
+  <node id='-21229137' action='modify' visible='true' lat='54.71532517064' lon='13.35707901835' />
+  <node id='-21229138' action='modify' visible='true' lat='54.71526629222' lon='13.35819482267' />
+  <node id='-21229139' action='modify' visible='true' lat='54.71555756928' lon='13.35775494039' />
+  <node id='-21229140' action='modify' visible='true' lat='54.71548629955' lon='13.35719704092' />
+  <node id='-21229141' action='modify' visible='true' lat='54.71515473875' lon='13.35722386301' />
+  <node id='-21229142' action='modify' visible='true' lat='54.71503079009' lon='13.35776566923' />
+  <node id='-21229143' action='modify' visible='true' lat='54.72033237713' lon='13.36117740154' />
+  <node id='-21229144' action='modify' visible='true' lat='54.71946483936' lon='13.36323733807' />
+  <node id='-21229145' action='modify' visible='true' lat='54.70739651031' lon='13.34066343162' />
+  <node id='-21229146' action='modify' visible='true' lat='54.71795399892' lon='13.39259908579'>
+    <tag k='seamark:daymark:shape' v='triangle, point down' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229147' action='modify' visible='true' lat='54.72016006933' lon='13.38957784556'>
+    <tag k='seamark:daymark:shape' v='cylinder' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229148' action='modify' visible='true' lat='54.71795399892' lon='13.39468477152'>
+    <tag k='seamark:daymark:shape' v='circle' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229149' action='modify' visible='true' lat='54.71795399892' lon='13.39364192866'>
+    <tag k='seamark:daymark:shape' v='square' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229150' action='modify' visible='true' lat='54.71901986814' lon='13.39468477152'>
+    <tag k='seamark:daymark:shape' v='2 spheres' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229151' action='modify' visible='true' lat='54.72016006933' lon='13.39295385264'>
+    <tag k='seamark:daymark:shape' v='sphere' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229152' action='modify' visible='true' lat='54.71795399892' lon='13.3894705572'>
+    <tag k='seamark:daymark:shape' v='board' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229153' action='modify' visible='true' lat='54.71899508082' lon='13.38944909953'>
+    <tag k='seamark:daymark:shape' v='2 cones up' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229154' action='modify' visible='true' lat='54.71900747448' lon='13.39206693552'>
+    <tag k='seamark:daymark:shape' v='2 cones base together' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229155' action='modify' visible='true' lat='54.71901367132' lon='13.39337585352'>
+    <tag k='seamark:daymark:shape' v='2 cones point together' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229156' action='modify' visible='true' lat='54.72016006933' lon='13.3912658491'>
+    <tag k='seamark:daymark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229157' action='modify' visible='true' lat='54.72016006933' lon='13.39464185618'>
+    <tag k='seamark:daymark:shape' v='x-shape' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229158' action='modify' visible='true' lat='54.71900127764' lon='13.39075801752'>
+    <tag k='seamark:daymark:shape' v='2 cones down' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229159' action='modify' visible='true' lat='54.71795399892' lon='13.39051340006'>
+    <tag k='seamark:daymark:shape' v='rhombus' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229160' action='modify' visible='true' lat='54.71795399892' lon='13.39155624293'>
+    <tag k='seamark:daymark:shape' v='triangle, point up' />
+    <tag k='seamark:type' v='daymark' />
+  </node>
+  <node id='-21229161' action='modify' visible='true' lat='54.71607540323' lon='13.39335061591'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='green;white' />
+    <tag k='seamark:topmark:colour_pattern' v='border' />
+    <tag k='seamark:topmark:shape' v='square' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229162' action='modify' visible='true' lat='54.7147231066' lon='13.39772500521'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow;red' />
+    <tag k='seamark:beacon_special_purpose:colour_pattern' v='saltire' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='red;white;red' />
+    <tag k='seamark:topmark:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:shape' v='square' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229163' action='modify' visible='true' lat='54.71605409277' lon='13.39445740551'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='red;white' />
+    <tag k='seamark:topmark:colour_pattern' v='border' />
+    <tag k='seamark:topmark:shape' v='rhombus' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229164' action='modify' visible='true' lat='54.71034217552' lon='13.39855666637'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='cross' />
+    <tag k='seamark:buoy_special_purpose:shape' v='spherical' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229165' action='modify' visible='true' lat='54.70927607814' lon='13.39859958172'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red;yellow' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='vertical' />
+    <tag k='seamark:buoy_special_purpose:shape' v='spherical' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229166' action='modify' visible='true' lat='54.70925128485' lon='13.40031619549'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red;yellow' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_special_purpose:shape' v='spherical' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229167' action='modify' visible='true' lat='54.7081506145' lon='13.39843323399'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red;yellow' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_special_purpose:shape' v='spar' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229168' action='modify' visible='true' lat='54.71038650468' lon='13.40048105569'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='cross' />
+    <tag k='seamark:buoy_special_purpose:shape' v='can' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229169' action='modify' visible='true' lat='54.71034221247' lon='13.40239777043'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='cross' />
+    <tag k='seamark:buoy_special_purpose:shape' v='conical' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229170' action='modify' visible='true' lat='54.71034221247' lon='13.4040844794'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='cross' />
+    <tag k='seamark:buoy_special_purpose:shape' v='pillar' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229171' action='modify' visible='true' lat='54.70933322834' lon='13.40383109174'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red;yellow' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_special_purpose:shape' v='can' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229172' action='modify' visible='true' lat='54.70935802158' lon='13.40211447797'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red;yellow' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='vertical' />
+    <tag k='seamark:buoy_special_purpose:shape' v='can' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229173' action='modify' visible='true' lat='54.70926678828' lon='13.40735784686'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red;yellow' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='horizontal' />
+    <tag k='seamark:buoy_special_purpose:shape' v='conical' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229174' action='modify' visible='true' lat='54.70929158157' lon='13.40564123309'>
+    <tag k='seamark:buoy_special_purpose:colour' v='yellow;red;yellow' />
+    <tag k='seamark:buoy_special_purpose:colour_pattern' v='vertical' />
+    <tag k='seamark:buoy_special_purpose:shape' v='conical' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-21229175' action='modify' visible='true' lat='54.71605944062' lon='13.39576961507'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='green;white' />
+    <tag k='seamark:topmark:colour_pattern' v='cross' />
+    <tag k='seamark:topmark:shape' v='square' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229176' action='modify' visible='true' lat='54.71603813015' lon='13.39687640467'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='red;white' />
+    <tag k='seamark:topmark:colour_pattern' v='cross' />
+    <tag k='seamark:topmark:shape' v='rhombus' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229177' action='modify' visible='true' lat='54.71603484008' lon='13.39806941204'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='black;yellow;black' />
+    <tag k='seamark:topmark:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:shape' v='square' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229178' action='modify' visible='true' lat='54.7160135296' lon='13.39917620164'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='black;yellow;black' />
+    <tag k='seamark:topmark:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:shape' v='rhombus' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229179' action='modify' visible='true' lat='54.71692045031' lon='13.39811200087'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='black;yellow;black' />
+    <tag k='seamark:topmark:colour_pattern' v='vertical' />
+    <tag k='seamark:topmark:shape' v='square' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229180' action='modify' visible='true' lat='54.7168991403' lon='13.39921879047'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='black;yellow;black' />
+    <tag k='seamark:topmark:colour_pattern' v='vertical' />
+    <tag k='seamark:topmark:shape' v='rhombus' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229181' action='modify' visible='true' lat='54.71692374032' lon='13.39689769909'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='red;white' />
+    <tag k='seamark:topmark:colour_pattern' v='saltire' />
+    <tag k='seamark:topmark:shape' v='rhombus' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229182' action='modify' visible='true' lat='54.71694505033' lon='13.39579090949'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='green;white' />
+    <tag k='seamark:topmark:colour_pattern' v='saltire' />
+    <tag k='seamark:topmark:shape' v='square' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229183' action='modify' visible='true' lat='54.71810750129' lon='13.39781478648'>
+    <tag k='seamark:beacon_special_purpose:colour' v='red' />
+    <tag k='seamark:beacon_special_purpose:shape' v='cairn' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229184' action='modify' visible='true' lat='54.71806642705' lon='13.39878664919'>
+    <tag k='seamark:beacon_special_purpose:colour' v='red;yellow' />
+    <tag k='seamark:beacon_special_purpose:colour_pattern' v='horizontal' />
+    <tag k='seamark:beacon_special_purpose:shape' v='cairn' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229185' action='modify' visible='true' lat='54.71652756952' lon='13.38564602346'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:topmark:colour' v='violet' />
+    <tag k='seamark:topmark:shape' v='triangle, point up' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229186' action='modify' visible='true' lat='54.71674648512' lon='13.3862855783'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
+    <tag k='seamark:topmark:colour' v='orange' />
+    <tag k='seamark:topmark:shape' v='triangle, point down' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229187' action='modify' visible='true' lat='54.71678753166' lon='13.38807396315'>
+    <tag k='seamark:beacon_special_purpose:colour' v='black;white;black;white' />
+    <tag k='seamark:beacon_special_purpose:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='red;white' />
+    <tag k='seamark:topmark:colour_pattern' v='border' />
+    <tag k='seamark:topmark:shape' v='triangle, point down' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229188' action='modify' visible='true' lat='54.71656861629' lon='13.3874344083'>
+    <tag k='seamark:beacon_special_purpose:colour' v='yellow;black' />
+    <tag k='seamark:beacon_special_purpose:colour_pattern' v='horizontal' />
+    <tag k='seamark:topmark:colour' v='red;white' />
+    <tag k='seamark:topmark:colour_pattern' v='border' />
+    <tag k='seamark:topmark:shape' v='triangle, point up' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229189' action='modify' visible='true' lat='54.71660966301' lon='13.3894359781'>
+    <tag k='seamark:beacon_special_purpose:colour' v='red;white;red' />
+    <tag k='seamark:beacon_special_purpose:colour_pattern' v='vertical' />
+    <tag k='seamark:beacon_special_purpose:shape' v='tower' />
+    <tag k='seamark:topmark:colour' v='white;blue;white' />
+    <tag k='seamark:topmark:colour_pattern' v='vertical' />
+    <tag k='seamark:topmark:shape' v='rhombus' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229190' action='modify' visible='true' lat='54.7168969889' lon='13.39026503068'>
+    <tag k='seamark:beacon_special_purpose:colour' v='green;white;green' />
+    <tag k='seamark:beacon_special_purpose:colour_pattern' v='vertical' />
+    <tag k='seamark:beacon_special_purpose:shape' v='lattice' />
+    <tag k='seamark:topmark:colour' v='blue;white' />
+    <tag k='seamark:topmark:colour_pattern' v='cross' />
+    <tag k='seamark:topmark:shape' v='square' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-21229214' action='modify' visible='true' lat='54.71586098587' lon='13.38113458666'>
+    <tag k='seamark:beacon_lateral:category' v='starboard' />
+    <tag k='seamark:beacon_lateral:colour' v='black' />
+    <tag k='seamark:beacon_lateral:shape' v='lattice' />
+    <tag k='seamark:beacon_lateral:system' v='iala-a' />
+    <tag k='seamark:topmark:colour' v='green' />
+    <tag k='seamark:topmark:shape' v='cone, point up' />
+    <tag k='seamark:type' v='beacon_lateral' />
+  </node>
+  <way id='-1086' action='modify' visible='true'>
+    <nd ref='-21229051' />
+    <nd ref='-21229018' />
+    <nd ref='-21229116' />
+    <nd ref='-21229083' />
+    <nd ref='-21229015' />
+    <nd ref='-21228983' />
+    <nd ref='-21229078' />
+    <nd ref='-21229046' />
+    <nd ref='-21228981' />
+    <nd ref='-21229112' />
+    <nd ref='-21229043' />
+    <nd ref='-21229051' />
+  </way>
+  <way id='-1087' action='modify' visible='true'>
+    <nd ref='-21229126' />
+    <nd ref='-21229057' />
+    <nd ref='-21229134' />
+    <nd ref='-21228987' />
+    <nd ref='-21229135' />
+    <nd ref='-21229084' />
+    <nd ref='-21229052' />
+    <nd ref='-21228985' />
+    <nd ref='-21229117' />
+    <nd ref='-21229048' />
+    <nd ref='-21228990' />
+    <nd ref='-21229126' />
+    <tag k='contour' v='depth' />
+    <tag k='depth' v='0' />
+  </way>
+  <way id='-1088' action='modify' visible='true'>
+    <nd ref='-21229124' />
+    <nd ref='-21229083' />
+    <nd ref='-21229015' />
+    <nd ref='-21228983' />
+    <nd ref='-21229078' />
+    <nd ref='-21229046' />
+    <nd ref='-21228981' />
+    <nd ref='-21229112' />
+    <nd ref='-21229043' />
+    <nd ref='-21229051' />
+    <nd ref='-21229018' />
+    <nd ref='-21229124' />
+    <tag k='contour' v='depth' />
+    <tag k='depth' v='5' />
+  </way>
+  <way id='-1089' action='modify' visible='true'>
+    <nd ref='-21229125' />
+    <nd ref='-21229093' />
+    <nd ref='-21229024' />
+    <nd ref='-21228993' />
+    <nd ref='-21229091' />
+    <nd ref='-21229027' />
+    <nd ref='-21229125' />
+    <tag k='contour' v='depth' />
+    <tag k='depth' v='2' />
+  </way>
+  <way id='-1090' action='modify' visible='true'>
+    <nd ref='-21228990' />
+    <nd ref='-21228958' />
+    <nd ref='-21229057' />
+    <nd ref='-21229134' />
+    <nd ref='-21228987' />
+    <nd ref='-21229135' />
+    <nd ref='-21229084' />
+    <nd ref='-21229052' />
+    <nd ref='-21228985' />
+    <nd ref='-21229117' />
+    <nd ref='-21229048' />
+    <nd ref='-21228990' />
+    <tag k='areatype' v='0' />
+    <tag k='contourarea' v='depth' />
+  </way>
+  <way id='-1091' action='modify' visible='true'>
+    <nd ref='-21229097' />
+    <nd ref='-21229066' />
+  </way>
+  <way id='-1092' action='modify' visible='true'>
+    <nd ref='-21228962' />
+    <nd ref='-21229097' />
+    <nd ref='-21229028' />
+  </way>
+  <way id='-1093' action='modify' visible='true'>
+    <nd ref='-21229027' />
+    <nd ref='-21228960' />
+    <nd ref='-21229093' />
+    <nd ref='-21229024' />
+    <nd ref='-21228993' />
+    <nd ref='-21229091' />
+    <nd ref='-21229027' />
+  </way>
+  <way id='-1094' action='modify' visible='true'>
+    <nd ref='-21229002' />
+    <nd ref='-21229103' />
+    <nd ref='-21229067' />
+    <nd ref='-21229001' />
+    <nd ref='-21228969' />
+    <nd ref='-21229064' />
+    <nd ref='-21229033' />
+    <nd ref='-21228967' />
+    <nd ref='-21229100' />
+    <nd ref='-21229029' />
+    <nd ref='-21229143' />
+    <nd ref='-21229144' />
+    <nd ref='-21229002' />
+  </way>
+  <way id='-1095' action='modify' visible='true'>
+    <nd ref='-21229002' />
+    <nd ref='-21229103' />
+    <nd ref='-21229067' />
+    <nd ref='-21229001' />
+    <nd ref='-21228969' />
+    <nd ref='-21229064' />
+    <nd ref='-21229033' />
+    <nd ref='-21228967' />
+    <nd ref='-21229100' />
+    <nd ref='-21229029' />
+    <nd ref='-21229130' />
+    <nd ref='-21229002' />
+    <tag k='contour' v='depth' />
+    <tag k='depth' v='10' />
+  </way>
+  <way id='-1096' action='modify' visible='true'>
+    <nd ref='-21229127' />
+    <nd ref='-21229129' />
+    <nd ref='-21229128' />
+    <nd ref='-21229145' />
+    <nd ref='-21229127' />
+  </way>
+  <way id='-1097' action='modify' visible='true'>
+    <nd ref='-21229131' />
+    <nd ref='-21229139' />
+    <nd ref='-21229132' />
+    <nd ref='-21229138' />
+    <nd ref='-21229136' />
+    <nd ref='-21229142' />
+    <nd ref='-21229133' />
+    <nd ref='-21229141' />
+    <nd ref='-21229137' />
+    <nd ref='-21229140' />
+    <nd ref='-21229131' />
+    <tag k='contour' v='depth' />
+    <tag k='depth' v='-1' />
+  </way>
+  <relation id='-434' action='modify' visible='true'>
+    <member type='way' ref='-1090' role='inner' />
+    <member type='way' ref='-1093' role='outer' />
+    <tag k='areatype' v='2' />
+    <tag k='contourarea' v='depth' />
+    <tag k='type' v='multipolygon' />
+  </relation>
+  <relation id='-435' action='modify' visible='true'>
+    <member type='way' ref='-1093' role='inner' />
+    <member type='way' ref='-1086' role='outer' />
+    <tag k='areatype' v='5' />
+    <tag k='contourarea' v='depth' />
+    <tag k='type' v='multipolygon' />
+  </relation>
+  <relation id='-436' action='modify' visible='true'>
+    <member type='way' ref='-1086' role='inner' />
+    <member type='way' ref='-1094' role='outer' />
+    <tag k='areatype' v='10' />
+    <tag k='contourarea' v='depth' />
+    <tag k='type' v='multipolygon' />
+  </relation>
+  <relation id='-437' action='modify' visible='true'>
+    <member type='way' ref='-1094' role='inner' />
+    <member type='way' ref='-1096' role='outer' />
+    <tag k='areatype' v='999' />
+    <tag k='contourarea' v='depth' />
+    <tag k='type' v='multipolygon' />
+  </relation>
+</osm>

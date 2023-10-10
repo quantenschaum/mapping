@@ -18,7 +18,7 @@ colors = {
     "grey": "#808080",
     # "brown":"brown",
     # "amber":"amber",
-    # "violet":"violet",
+    "violet": "violet",
     "orange": "#F7A837",
     # "magenta":"#DE44E8",
     # "pink":"pink",
