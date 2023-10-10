@@ -769,16 +769,27 @@ node["seamark:type"=light_minor]::int1_lighthouse {
 	icon-image:				"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/P/P1.minor.svg";
 }
 
-node["seamark:light:colour"]::int1_light {
+node["seamark:light:category"!=floodlight]["seamark:light:colour"]::int1_light {
 	icon-image:				eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/P/P10.1_",tag("seamark:light:colour"),".svg"));
-    icon-offset-x:          -5;
+    icon-offset-x:          -6;
     icon-offset-y:          -6;
+    icon-rotation: eval(160*3.1415/180);
 }
 
 node["seamark:light:category"=spotlight]::int1_light {
     icon-image:             eval(concat("https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/P/P11_", any(tag("seamark:light:colour"), "white"), ".svg"));
     icon-offset-x:          0;
     icon-offset-y:          0;
+}
+
+node["seamark:light:category"=floodlight]::floodlight {
+    icon-image:             "icons/INT1/floodlight.svg";
+    icon-width:            45;
+    icon-offset-x:          0;
+    icon-offset-y:          10;
+}
+node["seamark:light:category"=floodlight]["seamark:light:colour"=white]::floodlight {
+    icon-image:             "icons/INT1/floodlight-w.svg";
 }
 
 /* Q: Buoys, Beacons */
