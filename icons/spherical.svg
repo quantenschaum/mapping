@@ -23,7 +23,7 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="64"
-     inkscape:cx="13.359375"
+     inkscape:cx="13.929688"
      inkscape:cy="13.40625"
      inkscape:window-width="2391"
      inkscape:window-height="1826"
@@ -58,71 +58,147 @@
        orientation="0,-1"
        id="guide294"
        inkscape:locked="false" />
+    <sodipodi:guide
+       position="13.142578,18.130859"
+       orientation="0.25881905,0.96592583"
+       id="guide303"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="14.121094,19.615234"
+       orientation="0.25881905,0.96592583"
+       id="guide305"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="14.549453,19.937499"
+       orientation="0.25881905,0.96592583"
+       id="guide307"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="13.518203,18.902344"
+       orientation="0.25881905,0.96592583"
+       id="guide309"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="13.029922,17.722656"
+       orientation="0.25881905,0.96592583"
+       id="guide311"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,16"
+       orientation="0.96592583,-0.25881905"
+       id="guide302"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16.400112,21.71903"
+       orientation="0.96592583,-0.25881905"
+       id="guide312"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="18.763763,21.984797"
+       orientation="0.96592583,-0.25881905"
+       id="guide314"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,134,229)" />
   </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
       .outline {
         fill: none;
-        stroke: #111111;
-        stroke-width: 0.5;
+        stroke: black;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
       }
       .fill {
+        fill: none;
         stroke: none;
         stroke-width: 0.3;
-        fill: none;
       }
-      .base {
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
         fill: white;
+        stroke: black;
+        stroke-width: 0.5;
       }
       COLORING{}
   </style>
   <path
-     class="fill horizontal03"
-     id="path10040"
-     d="M 14.121094 12.384766 L 19.568359 13.84375 C 19.133905 12.613375 18.017069 11.552734 16.359375 11.552734 C 15.437287 11.552734 14.684271 11.881397 14.121094 12.384766 z " />
+     class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02"
+     id="path313"
+     d="m 16.359375,11.552277 c -2.628455,0 -3.898406,2.669853 -3.241562,4.447723 h 6.483124 c 0.656844,-1.77787 -0.613107,-4.447723 -3.241562,-4.447723" />
   <path
-     class="fill horizontal23"
-     id="path9190"
-     d="M 19.708984 15.628906 L 13.142578 13.869141 C 12.895544 14.582659 12.877329 15.350778 13.117188 16 L 19.601562 16 C 19.645911 15.879964 19.682091 15.756024 19.708984 15.628906 z " />
+     id="path372"
+     class="fill vertical12"
+     d="M 17.166016 11.644531 L 16 16 L 19.601562 16 C 20.187002 14.4154 19.239497 12.124381 17.166016 11.644531 z " />
   <path
+     id="path383"
+     class="fill vertical13"
+     d="M 16.054688 11.566406 L 14.867188 16 L 19.601562 16 C 20.258406 14.222132 18.987827 11.552734 16.359375 11.552734 C 16.255328 11.552734 16.154442 11.55826 16.054688 11.566406 z " />
+  <path
+     id="path388"
+     class="fill vertical23"
+     d="M 18.208984 12.085938 L 17.160156 16 L 19.601562 16 C 20.077589 14.711547 19.540796 12.955472 18.208984 12.085938 z " />
+  <path
+     id="path301"
      class="fill horizontal13"
-     id="path10043"
-     d="M 14.121094 12.384766 C 13.665139 12.792299 13.334715 13.314182 13.142578 13.869141 L 19.708984 15.628906 C 19.829203 15.060673 19.776268 14.432548 19.568359 13.84375 L 14.121094 12.384766 z " />
+     d="M 14.123047 12.384766 C 13.078925 13.315725 12.690483 14.845047 13.117188 16 L 19.601562 16 C 19.84433 15.342905 19.821884 14.564448 19.566406 13.84375 L 14.123047 12.384766 z " />
   <path
-     class="fill vertical02 uniform"
-     id="path8444"
-     d="M 17.173828 11.644531 C 16.918782 11.584896 16.647914 11.552734 16.359375 11.552734 C 13.730923 11.552734 12.460344 14.222132 13.117188 16 L 16.007812 16 L 17.173828 11.644531 z " />
+     id="path371"
+     class="fill horizontal23"
+     d="M 19.708984 15.628906 L 13.142578 13.869141 C 12.895146 14.582581 12.877166 15.35034 13.117188 16 L 19.601562 16 C 19.645943 15.879876 19.682134 15.756048 19.708984 15.628906 z " />
   <path
-     class="fill vertical12 uniform"
-     id="path10037"
-     d="M 17.173828 11.644531 L 16.007812 16 L 19.601562 16 C 20.186301 14.417298 19.242126 12.128141 17.173828 11.644531 z " />
+     id="path304"
+     class="fill horizontal14"
+     d="M 14.548828 12.0625 C 13.189344 12.923299 12.636645 14.699323 13.117188 16 L 19.601562 16 C 19.901336 15.188606 19.798469 14.192042 19.349609 13.347656 L 14.548828 12.0625 z " />
   <path
-     class="fill horizontal34 horizontal12"
-     id="path9188"
-     d="M 19.460938 16 L 13.029297 14.277344 C 12.89938 14.867852 12.922405 15.472786 13.117188 16 L 19.460938 16 z " />
-  <path
+     id="path984"
      class="fill horizontal24 horizontal12"
-     id="path10052"
-     d="M 13.517578 13.097656 C 13.282987 13.463249 13.119616 13.866816 13.029297 14.277344 L 19.460938 16 L 19.601562 16 C 19.742318 15.619019 19.792827 15.197139 19.761719 14.769531 L 13.517578 13.097656 z " />
+     d="M 19.761719 14.771484 L 13.515625 13.097656 C 12.944034 13.988984 12.787094 15.106541 13.117188 16 L 19.601562 16 C 19.74209 15.619637 19.792319 15.198479 19.761719 14.771484 z " />
   <path
-     class="fill horizontal14 horizontal02"
-     id="path10049"
-     d="M 14.548828 12.0625 C 14.123494 12.331814 13.778034 12.691756 13.517578 13.097656 L 19.761719 14.769531 C 19.726614 14.286992 19.58722 13.797111 19.349609 13.349609 L 14.548828 12.0625 z " />
+     id="path989"
+     class="fill horizontal34"
+     d="M 19.457031 16 L 13.027344 14.277344 C 12.898027 14.86784 12.922492 15.473022 13.117188 16 L 19.457031 16 z " />
   <path
-     class="fill horizontal04 horizontal02"
-     id="path10046"
-     d="M 14.548828 12.0625 L 19.349609 13.349609 C 18.815187 12.343111 17.788961 11.552734 16.359375 11.552734 C 15.653882 11.552734 15.047594 11.746691 14.548828 12.0625 z " />
+     class="inline cross12"
+     d="m 16,16 1.166016,-4.355469"
+     id="path262" />
   <path
-     class="outline "
-     id="path8447"
-     d="m 16.359375,11.552277 c -2.628455,0 -3.898406,2.669853 -3.241562,4.447723 h 6.483124 c 0.656844,-1.77787 -0.613107,-4.447723 -3.241562,-4.447723"/>
+     class="inline cross12"
+     d="m 13.518203,13.097656 c 1.874311,0.89326 3.934649,1.484975 6.243516,1.673828"
+     id="path264" />
   <path
      class="outline"
+     id="path8447"
+     d="m 16.359375,11.552277 c -2.628455,0 -3.898406,2.669853 -3.241562,4.447723 h 6.483124 c 0.656844,-1.77787 -0.613107,-4.447723 -3.241562,-4.447723" />
+  <path
+     class="baseline"
      d="m 11.816507,16 h 9.085736"
      id="path915" />
   <circle
-     class="base"
+     class="basepoint"
      id="path5349"
      cx="16"
      cy="16"

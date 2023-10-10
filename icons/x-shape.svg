@@ -73,15 +73,32 @@
       .outline {
         fill: none;
         stroke: black;
-        stroke-width: 0.5;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
       }
       .fill {
+        fill: grey;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
         fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
       }
       COLORING{}
   </style>
   <path
-     class="outline"
+     class="baseline"
      d="M 15.992405,12.214367 16,16"
      id="path241"
      sodipodi:nodetypes="cc" />

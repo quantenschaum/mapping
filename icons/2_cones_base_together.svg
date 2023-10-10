@@ -23,7 +23,7 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="78.5"
-     inkscape:cx="14.184713"
+     inkscape:cx="13.229299"
      inkscape:cy="11.394904"
      inkscape:window-width="2285"
      inkscape:window-height="1809"
@@ -71,29 +71,54 @@
      type="text/css"
      id="base">
       .outline {
+        fill: none;
         stroke: black;
-        stroke-width: 0.5;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
       }
       .fill {
         fill: none;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
       }
       COLORING{}
   </style>
   <path
-     class="outline"
+     class="baseline"
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="outline"
-     d="m 16,9.471629 v 1.042896"
-     id="path297"
-     sodipodi:nodetypes="cc" />
+     class="baseline"
+     d="M 16,9.7009292 V 10.743827"
+     id="path297" />
   <path
-     class="outline fill uniform"
-     d="m 16,13.852686 1.606904,-3.393243 -3.213809,-0.01094 z"
+     class="fill uniform"
+     d="m 16,14.081988 1.606904,-3.393243 -3.213809,-0.01094 z"
      id="path982" />
   <path
-     class="outline fill uniform"
-     d="m 15.999271,6.1778231 -1.606904,3.3932435 3.213809,0.01094 z"
+     class="fill uniform"
+     d="m 15.999271,6.4071233 -1.606904,3.3932435 3.213809,0.01094 z"
      id="path295" />
+  <path
+     class="outline"
+     d="m 16,14.081988 1.606904,-3.393243 -3.213809,-0.01094 z"
+     id="path15" />
+  <path
+     class="outline"
+     d="m 15.999271,6.4071233 -1.606904,3.3932435 3.213809,0.01094 z"
+     id="path17" />
 </svg>

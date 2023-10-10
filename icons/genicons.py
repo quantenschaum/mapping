@@ -6,7 +6,7 @@ from os.path import isfile, basename, splitext, dirname
 from itertools import product
 from re import findall, sub
 
-patterns = (None, "vertical", "horizontal", "cross", "border")
+patterns = (None, "vertical", "horizontal", "cross", "saltire", "border")
 colors = {
     "": None,
     "white": "white",
@@ -77,54 +77,54 @@ def main():
                         + ".svg"
                     )
                     # print(out)
-                    style = ""
-                    for i, c in enumerate(filter(bool, cs)):
-                        c = colors[c]
-                        fill = "fill"
-                        if s == "stake" or s == "barrel" and i == 1 and p == "cross":
-                            fill = "stroke"
-                        if p:
-                            style += f".fill.{p}{i}{n} {{ {fill}: {c}; }}\n"
-                        else:
-                            style += f".fill {{ {fill}: {c}; }}\n"
-                    # print(style)
-                    # svgout = svg.replace("COLORING{}", style)
+
+                    width_out = 0.3
+                    width_in = 0.8
+                    width_base = 0.5
+                    color_out = "black"
+                    color_base_out = "black"
+                    color_base_fill = "white"
 
                     svgout = svg
+                    styles = []
                     for i, c in enumerate(filter(bool, cs)):
                         c = colors[c]
                         lines = []
                         for l in svgout.splitlines():
                             if "class" in l and "style" not in l:
-                                if (f"{p}{i}{n}" if p else "uniform") in l:
-                                    if "fill" in l and "outline" in l:
-                                        l += f' style="fill:{c};stroke:black;stroke-width:0.5;"'
-                                    elif "fill" in l:
-                                        l += f' style="fill:{c};stroke:none;"'
-                                    elif "outline" in l or "inline" in l:
-                                        l += f' style="fill:none;stroke:{c};stroke-width:0.7;"'
+                                css_class = f"{p}{i}{n}" if p else "uniform"
+                                if css_class in l:
+                                    if "fill" in l:
+                                        style = f"fill:{c}; stroke:none;"
+                                    elif "outline" in l:
+                                        style = f"fill:none; stroke:{c}; stroke-width:{width_in};"
+                                    elif "inline" in l:
+                                        style = f"fill:none; stroke:{c}; stroke-width:{width_in};"
+                                    else:
+                                        assert 0, (p, i, c, n, l)
+                                    l += f' style="{style}"'  # style in element, JOSM does not support global <style/>
+                                    styles.append(f".{css_class} {{ {style} }}")
                             lines.append(l)
                         svgout = "\n".join(lines)
 
                     lines = []
                     for l in svgout.splitlines():
                         if "class" in l and "style" not in l:
-                            if "fill" in l and "outline" in l:
-                                l += (
-                                    f' style="fill:none;stroke:black;stroke-width:0.5;"'
-                                )
-                            elif "fill" in l:
-                                l += f' style="fill:none;stroke:none;"'
+                            if "fill" in l:
+                                style = f"fill:none; stroke:none;"
                             elif "outline" in l:
-                                l += (
-                                    f' style="fill:none;stroke:black;stroke-width:0.5;"'
-                                )
+                                style = f"fill:none; stroke:{color_out}; stroke-width:{width_out};"
                             elif "inline" in l:
-                                l += f' style="fill:none;stroke:none;stroke-width:0.5;"'
-                            elif "base" in l:
-                                l += f' style="fill:white;stroke:black;stroke-width:0.5;"'
+                                style = f"fill:none; stroke:none;"
+                            elif "baseline" in l:
+                                style = f"fill:none; stroke:{color_base_out}; stroke-width:{width_base};"
+                            elif "basepoint" in l:
+                                style = f"fill:{color_base_fill}; stroke:{color_base_out}; stroke-width:{width_base};"
+                            l += f' style="{style}"'
                         lines.append(l)
                     svgout = "\n".join(lines)
+
+                    svgout = svgout.replace("COLORING{}", "\n".join(styles))
                     # print(svgout)
 
                     makedirs(dirname(out), exist_ok=True)

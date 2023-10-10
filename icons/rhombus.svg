@@ -22,9 +22,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      showgrid="false"
-     inkscape:zoom="78.5"
-     inkscape:cx="12.006369"
-     inkscape:cy="11.394904"
+     inkscape:zoom="157"
+     inkscape:cx="14.340764"
+     inkscape:cy="12.563694"
      inkscape:window-width="2285"
      inkscape:window-height="1809"
      inkscape:window-x="1481"
@@ -73,23 +73,74 @@
       .outline {
         fill: none;
         stroke: black;
-        stroke-width: 0.5;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
       }
       .fill {
         fill: none;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
       }
       COLORING{}
   </style>
   <path
-     class="outline"
+     class="baseline"
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="fill border12 uniform"
-     d="m 15.986192,9.4156735 2.405624,2.3928925 -2.393198,2.41468 -2.405624,-2.392896 z"
+     class="fill uniform border12 horizontal03 vertical03 cross02 saltire02"
+     d="m 15.986192,9.3265012 2.405624,2.3928918 -2.393198,2.41468 -2.405624,-2.392896 z"
      id="path982" />
   <path
+     id="path296"
+     class="fill horizontal13"
+     d="M 17.599609 10.929688 L 14.396484 10.929688 L 13.59375 11.740234 L 15.998047 14.134766 L 18.392578 11.71875 L 17.599609 10.929688 z " />
+  <path
+     id="path1037"
+     class="fill horizontal23"
+     d="M 17.587891 12.53125 L 14.388672 12.53125 L 15.998047 14.134766 L 17.587891 12.53125 z " />
+  <path
+     id="path302"
+     class="fill vertical13"
+     d="M 15.193359 10.126953 L 15.193359 13.333984 L 15.998047 14.134766 L 18.392578 11.71875 L 15.986328 9.3261719 L 15.193359 10.126953 z " />
+  <path
+     id="path307"
+     class="fill vertical23"
+     d="M 16.792969 10.128906 L 16.792969 13.332031 L 18.392578 11.71875 L 16.792969 10.128906 z " />
+  <path
+     class="inline cross12"
+     d="m 15.985072,9.551151 0.009,4.352652"
+     id="path255"
+     sodipodi:nodetypes="cc" />
+  <path
+     class="inline cross12"
+     d="m 13.799564,11.742133 4.37792,-0.02589"
+     id="path257"
+     sodipodi:nodetypes="cc" />
+  <path
+     class="inline saltire12"
+     d="M 17.189453,10.522461 14.795899,12.9375"
+     id="path259" />
+  <path
+     class="inline saltire12"
+     d="m 14.789593,10.533839 2.405719,2.392919"
+     id="path261" />
+  <path
      class="outline border02"
-     d="m 15.986192,9.4156735 2.405624,2.3928925 -2.393198,2.41468 -2.405624,-2.392896 z"
+     d="m 15.986192,9.3265012 2.405624,2.3928918 -2.393198,2.41468 -2.405624,-2.392896 z"
      id="path13" />
 </svg>

@@ -4,7 +4,7 @@
    width="32"
    height="32"
    id="svg2"
-   sodipodi:docname="beacon.svg"
+   sodipodi:docname="pile.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -21,14 +21,14 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="78.5"
-     inkscape:cx="15.910828"
-     inkscape:cy="10.350318"
+     inkscape:cx="14.006369"
+     inkscape:cy="11.394904"
      inkscape:window-width="2285"
      inkscape:window-height="1809"
      inkscape:window-x="1529"
      inkscape:window-y="140"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2"
+     inkscape:current-layer="g19"
      showguides="true">
     <sodipodi:guide
        position="29.834395,16"
@@ -45,84 +45,119 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="17.171975,27.159236"
-       orientation="0,-1"
+       position="17.171975,26"
+       orientation="0,1"
        id="guide3117"
-       inkscape:locked="false" />
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
        position="17,16"
        orientation="1,0"
        id="guide3217"
        inkscape:locked="false" />
+    <sodipodi:guide
+       position="15.6,23.171975"
+       orientation="-1,0"
+       id="guide242"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16.4,27.159236"
+       orientation="-1,0"
+       id="guide244"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
   </sodipodi:namedview>
-  <defs
-     id="defs20" />
   <style
      type="text/css"
      id="base">
       .outline {
         fill: none;
-        stroke: #111111;
-        stroke-width: 0.5;
+        stroke: black;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
       }
       .fill {
+        fill: none;
         stroke: none;
         stroke-width: 0.3;
-        fill: none;
       }
-      .base {
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
         fill: white;
+        stroke: black;
+        stroke-width: 0.5;
       }
       COLORING{}
   </style>
-  <g>
+  <g
+     id="g19">
     <path
-       class="fill vertical02 uniform"
-       id="path303"
-       d="M 16 4.8398438 L 15 4.8398438 L 15 16 L 16 16 L 16 4.8398438 z " />
+       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02"
+       d="M 17,16 V 6 h -2 v 10 z"
+       id="path3219" />
     <path
-       class="fill vertical12 uniform"
-       id="path1019"
-       d="M 16 4.8398438 L 16 16 L 17 16 L 17 4.8398438 L 16 4.8398438 z " />
+       id="path1099"
+       class="fill vertical12"
+       d="M 16 6 L 16 16 L 17 16 L 17 6 L 16 6 z " />
     <path
-       class="fill horizontal34 horizontal12"
-       id="path4777"
-       d="M 17 13.210938 L 15 13.210938 L 15 16 L 17 16 L 17 13.210938 z " />
+       id="path1104"
+       class="fill vertical13"
+       d="M 15.599609 6 L 15.599609 16 L 17 16 L 17 6 L 15.599609 6 z " />
     <path
-       class="fill horizontal24 horizontal12"
-       id="path4785"
-       d="M 15 10.419922 L 15 13.210938 L 17 13.210938 L 17 10.419922 L 15 10.419922 z " />
+       id="path1109"
+       class="fill vertical23"
+       d="M 16.400391 6 L 16.400391 16 L 17 16 L 17 6 L 16.400391 6 z " />
     <path
-       class="fill horizontal14 horizontal02"
-       id="path4782"
-       d="M 15 7.6308594 L 15 10.419922 L 17 10.419922 L 17 7.6308594 L 15 7.6308594 z " />
-    <path
-       class="fill horizontal04 horizontal02"
-       id="path4779"
-       d="M 15 4.8398438 L 15 7.6308594 L 17 7.6308594 L 17 4.8398438 L 15 4.8398438 z " />
-    <path
-       class="fill horizontal23"
-       id="path4686"
-       d="M 17 12.279297 L 15 12.279297 L 15 16 L 17 16 L 17 12.279297 z " />
-    <path
+       id="path308"
        class="fill horizontal13"
-       id="path4791"
-       d="M 15 8.5605469 L 15 12.279297 L 17 12.279297 L 17 8.5605469 L 15 8.5605469 z " />
+       d="M 17 9.3339844 L 15 9.3339844 L 15 16 L 17 16 L 17 9.3339844 z " />
     <path
-       class="fill horizontal03"
-       id="path4788"
-       d="M 15 4.8398438 L 15 8.5605469 L 17 8.5605469 L 17 4.8398438 L 15 4.8398438 z " />
+       id="path313"
+       class="fill horizontal23"
+       d="M 17 12.666016 L 15 12.666016 L 15 16 L 17 16 L 17 12.666016 z " />
+    <path
+       id="path309"
+       class="fill horizontal14"
+       d="M 17 8.5 L 15 8.5 L 15 16 L 17 16 L 17 8.5 z " />
+    <path
+       id="path314"
+       class="fill horizontal24 horizontal12"
+       d="M 17 11 L 15 11 L 15 16 L 17 16 L 17 11 z " />
+    <path
+       id="path319"
+       class="fill horizontal34"
+       d="M 17 13.5 L 15 13.5 L 15 16 L 17 16 L 17 13.5 z " />
+    <path
+       class="inline cross12"
+       d="M 16,6 V 16"
+       id="path315" />
+    <path
+       class="inline cross12"
+       d="m 15,11 h 2"
+       id="path317" />
     <path
        class="outline"
-       d="M 15,16 V 4.840764 h 2 V 16"
-       id="path3219" />
+       d="M 17,16 V 6 h -2 v 10 z"
+       id="path385" />
   </g>
   <path
-     class="outline"
+     class="baseline"
      d="m 13,16 h 6"
      id="path5181" />
   <circle
-     class="base"
+     class="basepoint"
      id="path5349"
      cx="16"
      cy="16"

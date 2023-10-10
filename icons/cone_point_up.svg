@@ -68,23 +68,45 @@
        inkscape:locked="false" />
   </sodipodi:namedview>
   <style
-     type="text/css"
-     id="base">
+   type="text/css"
+   id="base">
       .outline {
+        fill: none;
         stroke: black;
-        stroke-width: 0.5;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
       }
       .fill {
         fill: none;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
       }
       COLORING{}
   </style>
   <path
-     class="outline"
+     class="baseline"
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="outline fill uniform"
+     class="fill uniform"
+     d="m 16,10.514525 1.606904,3.393243 -3.213809,0.01094 z"
+     id="path982"/>
+  <path
+     class="outline"
      d="m 16,10.514525 1.606904,3.393243 -3.213809,0.01094 z"
      id="path982"/>
 </svg>

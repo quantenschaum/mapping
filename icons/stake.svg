@@ -10,6 +10,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs11" />
   <sodipodi:namedview
      id="namedview10"
      pagecolor="#ffffff"
@@ -21,7 +23,7 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="78.5"
-     inkscape:cx="14.910828"
+     inkscape:cx="13"
      inkscape:cy="12.388535"
      inkscape:window-width="2285"
      inkscape:window-height="1809"
@@ -55,29 +57,54 @@
        id="guide3217"
        inkscape:locked="false" />
   </sodipodi:namedview>
-  <defs
-     id="defs20" />
   <style
      type="text/css"
      id="base">
       .outline {
         fill: none;
-        stroke: #111111;
-        stroke-width: 0.5;
+        stroke: black;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
       }
       .fill {
         fill: none;
-        stroke: #111111;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
         stroke-width: 0.5;
       }
       COLORING{}
   </style>
   <path
-     class="outline color"
+     class="outline uniform horizontal02 horizontal03"
      d="M 16,4.840764 V 16"
      id="path241" />
   <path
-     class="outline"
+     class="inline horizontal12"
+     d="M 16,10.420382 V 16"
+     id="path294" />
+  <path
+     class="inline horizontal13"
+     d="M 16,8.0255979 V 16"
+     id="path295" />
+  <path
+     class="inline horizontal23"
+     d="M 16,12.012799 V 16"
+     id="path393" />
+  <path
+     class="baseline"
      d="m 15,16 h 2"
      id="path5181" />
 </svg>

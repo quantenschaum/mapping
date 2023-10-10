@@ -61,13 +61,26 @@
      type="text/css"
      id="base">
       .outline {
+        fill: none;
         stroke: black;
-        stroke-width: 0.5;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
       }
       .fill {
         fill: none;
+        stroke: none;
+        stroke-width: 0.3;
       }
-      .base {
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
         fill: white;
         stroke: black;
         stroke-width: 0.5;
@@ -75,29 +88,47 @@
       COLORING{}
   </style>
   <circle
-     class="outline fill uniform horizontal12"
+     class="fill uniform horizontal02"
+     id="circle320"
+     cx="16"
+     cy="9.5421457"
+     r="2.3941736" />
+  <circle
+     class="fill uniform horizontal12"
      id="circle305"
      cx="13.401989"
      cy="13.605825"
      r="2.3941736" />
   <circle
-     class="outline fill uniform horizontal12"
+     class="fill uniform horizontal12"
      id="circle318"
      cx="18.598574"
      cy="13.605826"
      r="2.3941736" />
   <circle
-     class="outline fill uniform horizontal02"
+     class="outline"
      id="circle320"
      cx="16"
      cy="9.5421457"
      r="2.3941736" />
-  <path
+  <circle
      class="outline"
+     id="circle305"
+     cx="13.401989"
+     cy="13.605825"
+     r="2.3941736" />
+  <circle
+     class="outline"
+     id="circle318"
+     cx="18.598574"
+     cy="13.605826"
+     r="2.3941736" />
+  <path
+     class="baseline"
      d="M 10.456122,15.999999 H 21.543876"
      id="path5181" />
   <circle
-     class="base"
+     class="basepoint"
      id="path5349"
      cx="16"
      cy="16"

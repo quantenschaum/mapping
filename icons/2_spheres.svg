@@ -4,7 +4,7 @@
    width="32"
    height="32"
    id="svg2"
-   sodipodi:docname="2 spheres.svg"
+   sodipodi:docname="2_spheres.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -23,7 +23,7 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="78.5"
-     inkscape:cx="16.082803"
+     inkscape:cx="15.140127"
      inkscape:cy="11.394904"
      inkscape:window-width="2285"
      inkscape:window-height="1809"
@@ -71,33 +71,62 @@
      type="text/css"
      id="base">
       .outline {
+        fill: none;
         stroke: black;
-        stroke-width: 0.5;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
       }
       .fill {
         fill: none;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
       }
       COLORING{}
   </style>
   <path
-     class="outline"
-     d="M 16,9.6802089 V 10.514525"
-     id="path705"
-     sodipodi:nodetypes="cc" />
+     class="baseline"
+     d="M 16,9.7566423 V 10.590959"
+     id="path705" />
   <path
-     class="outline"
+     class="baseline"
      d="M 16,13.914208 V 16"
      id="path241" />
   <circle
-     class="outline fill uniform"
+     class="fill uniform"
      id="path348"
      cx="16"
      cy="12.236607"
      r="1.7220814" />
   <circle
-     class="outline fill uniform"
+     class="fill uniform"
      id="circle703"
      cx="16"
-     cy="7.9581275"
+     cy="8.1109962"
+     r="1.7220814" />
+  <circle
+     class="outline"
+     id="circle15"
+     cx="16"
+     cy="12.236607"
+     r="1.7220814" />
+  <circle
+     class="outline"
+     id="circle17"
+     cx="16"
+     cy="8.1109962"
      r="1.7220814" />
 </svg>

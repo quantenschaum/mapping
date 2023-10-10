@@ -66,21 +66,38 @@
        orientation="0,-1"
        id="guide809"
        inkscape:locked="false" />
-  </sodipodi:namedview>
-  <style
-     type="text/css"
-     id="base">
+  </sodipodi:namedview><style
+   type="text/css"
+   id="base">
       .outline {
+        fill: none;
         stroke: black;
-        stroke-width: 0.5;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
       }
       .fill {
         fill: none;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
       }
       COLORING{}
   </style>
   <path
-     class="outline"
+     class="baseline"
      d="M 16,13.914208 V 16"
      id="path241" />
   <path

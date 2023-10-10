@@ -50,31 +50,49 @@
        id="guide3117"
        inkscape:locked="false" />
   </sodipodi:namedview>
-  <defs
-     id="defs20" />
   <style
      type="text/css"
      id="base">
       .outline {
         fill: none;
-        stroke: #111111;
+        stroke: black;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
+      }
+      .fill {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
         stroke-width: 0.5;
       }
   </style>
   <path
-     class="outline" style="fill:none;stroke:black;stroke-width:0.5;"
+     class="outline" style="fill:none;stroke:black;stroke-width:0.3;"
      d="M 16,4.840764 V 16"
      id="path241" />
   <path
-     class="outline" style="fill:none;stroke:black;stroke-width:0.5;"
-     d="m 15,16 h 2"
-     id="path5181" />
-  <path
      id="path849"
-     class="outline" style="fill:none;stroke:black;stroke-width:0.5;"
+     class="outline" style="fill:none;stroke:black;stroke-width:0.3;"
      d="M 13.26941,7.0527047 16,8.2202007 18.73059,7.0527047"/>
   <path
      id="path389"
-     class="outline" style="fill:none;stroke:black;stroke-width:0.5;"
+     class="outline" style="fill:none;stroke:black;stroke-width:0.3;"
      d="M 11.787054,10.373813 16,12.27865 20.212946,10.373813"/>
+  <path
+     class="baseline" style="fill:none;stroke:black;stroke-width:0.5;"
+     d="m 15,16 h 2"
+     id="path5181" />
 </svg>
