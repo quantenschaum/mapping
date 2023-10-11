@@ -114,9 +114,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .vertical03 { fill:violet; stroke:none; }
-.vertical13 { fill:black; stroke:none; }
-.vertical23 { fill:violet; stroke:none; }
+      COLORING{}
   </style>
   <path
      class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"

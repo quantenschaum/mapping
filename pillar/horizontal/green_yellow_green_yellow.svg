@@ -75,10 +75,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .horizontal04 { fill:#5BCE3E; stroke:none; }
-.horizontal14 { fill:#FCD345; stroke:none; }
-.horizontal24 { fill:#5BCE3E; stroke:none; }
-.horizontal34 { fill:#FCD345; stroke:none; }
+      COLORING{}
   </style>
   <g
      id="g1701"

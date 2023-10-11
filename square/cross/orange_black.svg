@@ -114,9 +114,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .cross02 { fill:#F7A837; stroke:none; }
-.cross12 { fill:none; stroke:black; stroke-width:0.8; }
-.cross12 { fill:none; stroke:black; stroke-width:0.8; }
+      COLORING{}
   </style>
   <path
      class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"

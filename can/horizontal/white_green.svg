@@ -103,8 +103,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .horizontal02 { fill:white; stroke:none; }
-.horizontal12 { fill:#5BCE3E; stroke:none; }
+      COLORING{}
   </style>
   <g
      id="g4073"

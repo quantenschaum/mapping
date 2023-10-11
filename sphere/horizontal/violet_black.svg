@@ -95,8 +95,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .horizontal02 { fill:violet; stroke:none; }
-.horizontal12 { fill:black; stroke:none; }
+      COLORING{}
   </style>
   <path
      class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"

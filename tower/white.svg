@@ -77,7 +77,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .uniform { fill:white; stroke:none; }
+      COLORING{}
   </style>
 
   <path

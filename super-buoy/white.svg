@@ -111,9 +111,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .uniform { fill:white; stroke:none; }
-.uniform { fill:white; stroke:none; }
-.uniform { fill:white; stroke:none; }
+      COLORING{}
   </style>
   <path
    class="fill uniform horizontal02 horizontal03 vertical02 vertical03 cross02" style="fill:white; stroke:none;"

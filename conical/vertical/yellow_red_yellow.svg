@@ -101,9 +101,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .vertical03 { fill:#FCD345; stroke:none; }
-.vertical13 { fill:#C72C14; stroke:none; }
-.vertical23 { fill:#FCD345; stroke:none; }
+      COLORING{}
   </style>
   <g
      id="g4073"

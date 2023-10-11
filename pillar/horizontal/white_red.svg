@@ -75,8 +75,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .horizontal02 { fill:white; stroke:none; }
-.horizontal12 { fill:#C72C14; stroke:none; }
+      COLORING{}
   </style>
   <g
      id="g1701"

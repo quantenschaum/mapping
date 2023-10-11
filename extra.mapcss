@@ -319,17 +319,14 @@ node["seamark:light:category"=floodlight]::int1_light {
 }
 
 node["seamark:light:category"=floodlight]::floodlight {
-  icon-image:             "https://raw.githubusercontent.com/quantenschaum/mapping/icons/floodlight.svg";
-  icon-width:            45;
+  icon-image:             eval(concat("https://raw.githubusercontent.com/quantenschaum/mapping/icons/floodlight/",any(tag("seamark:light:colour"),"generic"),".svg"));
+  icon-width:            60;
   icon-offset-x:          0;
   icon-offset-y:          10;
   icon-opacity: 0.8;
 }
-node["seamark:light:category"=floodlight]["seamark:light:colour"=white]::floodlight {
-  icon-image:             "https://raw.githubusercontent.com/quantenschaum/mapping/icons/floodlight-w.svg";
-  icon-opacity: 0.8;
-}
-node|z14-["seamark:light:character"]::light {
+
+node|z14-["seamark:light:character"]["seamark:light:category"!=floodlight]::light {
     text: eval(replace(replace(replace(replace(concat(
         tag("seamark:light:character"),"(",
         tag("seamark:light:group"),")",
@@ -387,4 +384,61 @@ way[lightsector=orientation] {
   color: black;
   width: 1;
   dashes: 6,3;
+}
+
+node["seamark:fog_signal"=yes]::int1_fog_signal,
+node["seamark:fog_signal:category"]::int1_fog_signal  {
+	icon-image:		"https://raw.githubusercontent.com/quantenschaum/mapping/icons/fogsignal.svg";
+	icon-height:	60;
+  icon-offset-x:  0;
+  icon-offset-y:  0;
+  text: "seamark:fog_signal:category";
+	text-color:		#555;
+	font-size: 11;
+  text-anchor-horizontal: center;
+  text-anchor-vertical: center;
+  text-offset-x: -30;
+  text-offset-y: -25;
+}
+
+node|z12-["seamark:radar_reflector"=yes]::int1_radar_reflector {
+	icon-image:		"https://raw.githubusercontent.com/quantenschaum/mapping/icons/radar_reflector.svg";
+	icon-height:	60;
+  icon-offset-x:  0;
+  icon-offset-y:  20;
+  icon-offset-y:  eval(cond(regexp_test("can|barrel|spherical|super-buoy",tag(concat("seamark:",tag("seamark:type"),":shape"))),-8,
+    cond(regexp_test("conical",tag(concat("seamark:",tag("seamark:type"),":shape"))),-11,
+    cond(regexp_test("light_.*",tag("seamark:type")),-10,
+    -21))));
+}
+node["seamark:type"^=buoy]::int1_radar_reflector {
+  icon-rotation: eval(cond(regexp_test("barrel|super-buoy",tag(concat("seamark:",tag("seamark:type"),":shape"))),0,15/180*3.1415));
+}
+node["seamark:topmark:shape"]::int1_radar_reflector {
+  icon-offset-y:  eval(cond(regexp_test("can|barrel|spherical|super-buoy",tag(concat("seamark:",tag("seamark:type"),":shape"))),-8,
+    cond(regexp_test("conical",tag(concat("seamark:",tag("seamark:type"),":shape"))),-11,
+    cond(regexp_test("light_.*",tag("seamark:type")),-10,
+    -21)))-cond(regexp_test("2.*",tag("seamark:topmark:shape")),14,8));
+}
+node["seamark:topmark:shape"]["seamark:type"^=beacon]::int1_radar_reflector {
+  icon-offset-y:  eval(-18-cond(regexp_test("2.*",tag("seamark:topmark:shape")),14,8));
+}
+
+node|z12-["seamark:radar_transponder:category"]::int1_radar_transponder {
+	symbol-shape:	circle;
+	symbol-size: 80;
+	symbol-fill-color: none;
+	symbol-stroke-color: #800080;
+	symbol-stroke-width: 4;
+	symbol-stroke-opacity: 0.5;
+	text: eval(replace(concat(upper(tag("seamark:radar_transponder:category")),
+	  "(",tag("seamark:radar_transponder:group"),")"),"()",""));
+	text-color: #800080;
+	font-size: 11;
+	font-weight: bold;
+  text-anchor-horizontal: left;
+  text-anchor-vertical: center;
+  text-offset-x: 0;
+  text-offset-y: 40;
+
 }

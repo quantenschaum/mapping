@@ -77,7 +77,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      
+      COLORING{}
   </style>
 
   <path

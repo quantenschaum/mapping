@@ -90,9 +90,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .cross02 { fill:white; stroke:none; }
-.cross12 { fill:none; stroke:#C72C14; stroke-width:0.8; }
-.cross12 { fill:none; stroke:#C72C14; stroke-width:0.8; }
+      COLORING{}
   </style>
   <g
      id="g336"

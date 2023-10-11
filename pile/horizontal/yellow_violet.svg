@@ -99,8 +99,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .horizontal02 { fill:#FCD345; stroke:none; }
-.horizontal12 { fill:violet; stroke:none; }
+      COLORING{}
   </style>
   <g
      id="g19">

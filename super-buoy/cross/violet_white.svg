@@ -111,8 +111,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .cross02 { fill:violet; stroke:none; }
-.cross12 { fill:white; stroke:none; }
+      COLORING{}
   </style>
   <path
    class="fill uniform horizontal02 horizontal03 vertical02 vertical03 cross02" style="fill:violet; stroke:none;"

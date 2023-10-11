@@ -85,7 +85,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      
+      COLORING{}
   </style>
   <circle
      class="fill uniform horizontal02 vertical13" style="fill:none; stroke:none;"

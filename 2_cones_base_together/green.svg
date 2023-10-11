@@ -95,8 +95,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .uniform { fill:#5BCE3E; stroke:none; }
-.uniform { fill:#5BCE3E; stroke:none; }
+      COLORING{}
   </style>
   <path
      class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"

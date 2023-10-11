@@ -101,9 +101,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .cross02 { fill:#808080; stroke:none; }
-.cross12 { fill:none; stroke:black; stroke-width:0.8; }
-.cross12 { fill:none; stroke:black; stroke-width:0.8; }
+      COLORING{}
   </style>
   <g
      id="g4073"

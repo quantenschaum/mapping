@@ -77,9 +77,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .squared02 { fill:black; stroke:none; }
-.squared12 { fill:#C72C14; stroke:none; }
-.squared12 { fill:#C72C14; stroke:none; }
+      COLORING{}
   </style>
 
   <path

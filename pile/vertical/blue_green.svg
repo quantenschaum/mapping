@@ -99,8 +99,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .vertical02 { fill:#002EF5; stroke:none; }
-.vertical12 { fill:#5BCE3E; stroke:none; }
+      COLORING{}
   </style>
   <g
      id="g19">

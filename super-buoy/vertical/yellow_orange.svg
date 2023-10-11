@@ -111,8 +111,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .vertical02 { fill:#FCD345; stroke:none; }
-.vertical12 { fill:#F7A837; stroke:none; }
+      COLORING{}
   </style>
   <path
    class="fill uniform horizontal02 horizontal03 vertical02 vertical03 cross02" style="fill:#FCD345; stroke:none;"

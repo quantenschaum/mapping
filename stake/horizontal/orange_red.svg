@@ -85,8 +85,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .horizontal02 { fill:none; stroke:#F7A837; stroke-width:0.8; }
-.horizontal12 { fill:none; stroke:#C72C14; stroke-width:0.8; }
+      COLORING{}
   </style>
   <path
      class="outline uniform horizontal02 horizontal03" style="fill:none; stroke:#F7A837; stroke-width:0.8;"

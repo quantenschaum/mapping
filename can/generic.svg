@@ -103,7 +103,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      
+      COLORING{}
   </style>
   <g
      id="g4073"

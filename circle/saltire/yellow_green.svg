@@ -100,9 +100,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .saltire02 { fill:#FCD345; stroke:none; }
-.saltire12 { fill:none; stroke:#5BCE3E; stroke-width:0.8; }
-.saltire12 { fill:none; stroke:#5BCE3E; stroke-width:0.8; }
+      COLORING{}
   </style>
   <path
      class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"

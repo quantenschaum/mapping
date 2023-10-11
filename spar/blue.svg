@@ -90,7 +90,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .uniform { fill:#002EF5; stroke:none; }
+      COLORING{}
   </style>
   <g
      id="g336"

@@ -101,10 +101,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .horizontal04 { fill:#F7A837; stroke:none; }
-.horizontal14 { fill:#808080; stroke:none; }
-.horizontal24 { fill:#F7A837; stroke:none; }
-.horizontal34 { fill:#808080; stroke:none; }
+      COLORING{}
   </style>
   <g
      id="g4073"

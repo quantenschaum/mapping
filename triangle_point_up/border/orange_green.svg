@@ -95,8 +95,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .border02 { fill:none; stroke:#F7A837; stroke-width:0.8; }
-.border12 { fill:#5BCE3E; stroke:none; }
+      COLORING{}
   </style>
   <path
      class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"

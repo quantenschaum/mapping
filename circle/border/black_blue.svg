@@ -100,8 +100,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .border02 { fill:none; stroke:black; stroke-width:0.8; }
-.border12 { fill:#002EF5; stroke:none; }
+      COLORING{}
   </style>
   <path
      class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"

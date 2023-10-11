@@ -77,9 +77,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .horizontal03 { fill:white; stroke:none; }
-.horizontal13 { fill:black; stroke:none; }
-.horizontal23 { fill:white; stroke:none; }
+      COLORING{}
   </style>
 
   <path

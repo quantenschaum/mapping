@@ -75,8 +75,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .vertical03 { fill:white; stroke:none; }
-.vertical13 { fill:none; stroke:#F7A837; stroke-width:0.8; }
+      COLORING{}
   </style>
   <g
      id="g1701"

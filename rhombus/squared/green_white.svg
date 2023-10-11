@@ -100,9 +100,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .squared02 { fill:#5BCE3E; stroke:none; }
-.squared12 { fill:white; stroke:none; }
-.squared12 { fill:white; stroke:none; }
+      COLORING{}
   </style>
   <path
      class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"

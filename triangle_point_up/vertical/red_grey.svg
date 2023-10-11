@@ -95,8 +95,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .vertical02 { fill:#C72C14; stroke:none; }
-.vertical12 { fill:#808080; stroke:none; }
+      COLORING{}
   </style>
   <path
      class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"

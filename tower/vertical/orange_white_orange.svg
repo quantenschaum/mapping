@@ -77,9 +77,7 @@
         stroke: black;
         stroke-width: 0.5;
       }
-      .vertical03 { fill:#F7A837; stroke:none; }
-.vertical13 { fill:white; stroke:none; }
-.vertical23 { fill:#F7A837; stroke:none; }
+      COLORING{}
   </style>
 
   <path
