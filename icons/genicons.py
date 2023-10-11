@@ -60,7 +60,7 @@ def main():
             secs = {int(m[0]) for m in matches} if p else {1}
             print(s, p, secs)
             for n in secs:
-                colors = light_colors if "light" in s else object_colors
+                colors = light_colors if s == "light" else object_colors
                 cols = tuple(
                     product(
                         *([tuple(filter(lambda c: c or n == 1, colors.keys()))] * n)
