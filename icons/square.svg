@@ -23,8 +23,8 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="222.03153"
-     inkscape:cx="15.40547"
-     inkscape:cy="11.946502"
+     inkscape:cx="15.815321"
+     inkscape:cy="12.315818"
      inkscape:window-width="2285"
      inkscape:window-height="1809"
      inkscape:window-x="1481"
@@ -80,6 +80,11 @@
        inkscape:label=""
        inkscape:locked="false"
        inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,19.779297"
+       orientation="0,-1"
+       id="guide306"
+       inkscape:locked="false" />
   </sodipodi:namedview>
   <style
      type="text/css"
@@ -91,7 +96,7 @@
       }
       .inline {
         fill: none;
-        stroke: red;
+        stroke: none;
         stroke-width: 0.8;
       }
       .fill {
@@ -116,45 +121,59 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="fill uniform border12 horizontal03 vertical03 cross02 saltire02"
-     d="m 14.288277,10.519026 3.393066,-0.009 0.01519,3.399682 -3.393066,0.009 z"
+     class="fill uniform border12 horizontal02 vertical02 horizontal03 vertical03 cross02 saltire02 squared02"
+     d="m 14.288277,10.519 3.383515,-0.009 0.01515,3.390231 -3.383515,0.009 z"
      id="path982" />
   <path
      id="path297"
      class="fill horizontal13"
-     d="M 17.6875 11.648438 L 14.292969 11.648438 L 14.302734 13.917969 L 17.697266 13.910156 L 17.6875 11.648438 z " />
+     d="m 17.677932,11.645272 h -3.384976 l 0.0098,2.263222 3.384977,-0.0078 z" />
   <path
      id="path979"
      class="fill vertical13"
-     d="M 15.404297 10.515625 L 15.404297 13.916016 L 17.697266 13.910156 L 17.681641 10.509766 L 15.404297 10.515625 z " />
+     d="m 15.401156,10.515609 v 3.390937 l 2.286514,-0.0059 -0.01559,-3.390936 z" />
   <path
      class="fill horizontal23"
      id="path974"
-     d="M 17.693359 12.78125 L 14.296875 12.78125 L 14.302734 13.917969 L 17.697266 13.910156 L 17.693359 12.78125 z " />
+     d="m 17.683774,12.774935 h -3.386923 l 0.0059,1.133559 3.384977,-0.0078 z" />
   <path
      class="fill vertical23"
      id="path985"
-     d="M 16.580078 10.511719 L 16.580078 13.912109 L 17.697266 13.910156 L 17.681641 10.509766 L 16.580078 10.511719 z " />
+     d="m 16.573627,10.511713 v 3.390937 l 1.114043,-0.002 -0.01559,-3.390936 z" />
+  <path
+     id="path308"
+     class="fill horizontal12"
+     d="M 17.679688 12.220703 L 14.296875 12.220703 L 14.302734 13.910156 L 17.6875 13.900391 L 17.679688 12.220703 z " />
+  <path
+     id="path382"
+     class="fill vertical12"
+     d="M 16 10.513672 L 16 13.904297 L 17.6875 13.900391 L 17.671875 10.509766 L 16 10.513672 z " />
+  <path
+     id="path309"
+     class="fill squared12"
+     d="M 16 12.220703 L 14.296875 12.220703 L 14.302734 13.910156 L 16 13.904297 L 16 12.220703 z " />
+  <path
+     id="path383"
+     class="fill squared12"
+     d="M 16 10.513672 L 16 12.220703 L 17.679688 12.220703 L 17.671875 10.509766 L 16 10.513672 z " />
   <path
      class="inline cross12"
-     d="m 16,10.514525 v 3.399683"
+     d="m 15.995182,10.514512 v 3.390231"
      id="path311" />
   <path
      class="inline cross12"
-     d="m 14.295872,12.218867 3.393581,-0.0089"
+     d="m 14.295851,12.214115 3.384028,-0.0089"
      id="path313" />
   <path
      class="inline saltire12"
-     d="m 14.430989,10.66007 3.130589,3.108594"
-     id="path315"
-     sodipodi:nodetypes="cc" />
+     d="m 14.430587,10.659652 3.121777,3.099952"
+     id="path315" />
   <path
      class="inline saltire12"
-     d="m 17.532337,10.675545 -3.100084,3.109537"
-     id="path317"
-     sodipodi:nodetypes="cc" />
+     d="m 17.523205,10.675084 -3.091357,3.100892"
+     id="path317" />
   <path
      class="outline border02"
-     d="m 14.288277,10.519026 3.393066,-0.009 0.01519,3.399682 -3.393066,0.009 z"
+     d="m 14.288277,10.519 3.383515,-0.009 0.01515,3.390231 -3.383515,0.009 z"
      id="path13" />
 </svg>

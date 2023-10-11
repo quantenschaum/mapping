@@ -100,17 +100,9 @@
        id="path303"
        d="M 17,4.8398438 H 15 V 16 h 2 z" />
     <path
-       id="path314"
-       class="fill vertical13"
-       d="M 15.496094 4.8398438 L 15.496094 16 L 17 16 L 17 4.8398438 L 15.496094 4.8398438 z " />
-    <path
        id="path309"
        class="fill vertical12"
        d="M 16 4.8398438 L 16 16 L 17 16 L 17 4.8398438 L 16 4.8398438 z " />
-    <path
-       id="path319"
-       class="fill vertical23"
-       d="M 16.503906 4.8398438 L 16.503906 16 L 17 16 L 17 4.8398438 L 16.503906 4.8398438 z " />
     <path
        id="path307"
        class="fill horizontal14"
@@ -132,7 +124,7 @@
        class="fill horizontal34"
        d="M 17 13.210938 L 15 13.210938 L 15 16 L 17 16 L 17 13.210938 z " />
     <path
-       class="inline cross12"
+       class="inline cross12 vertical13"
        d="M 16,4.840764 V 16"
        id="path260" />
     <path

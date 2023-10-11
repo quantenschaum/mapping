@@ -4,10 +4,10 @@
 from os import listdir, makedirs
 from os.path import isfile, basename, splitext, dirname
 from itertools import product
-from re import findall, sub
+from re import findall
 
-patterns = (None, "vertical", "horizontal", "cross", "saltire", "border")
-colors = {
+patterns = (None, "vertical", "horizontal", "cross", "saltire", "border", "squared")
+object_colors = {
     "": None,
     "white": "white",
     "black": "black",
@@ -22,6 +22,15 @@ colors = {
     "orange": "#F7A837",
     # "magenta":"#DE44E8",
     # "pink":"pink",
+}
+light_colors = {
+    "generic": "#800080",
+    "white": "yellow",
+    "red": "red",
+    "green": "green",
+    "blue": "blue",
+    "yellow": "yellow",
+    "orange": "orange",
 }
 
 
@@ -51,6 +60,7 @@ def main():
             secs = {int(m[0]) for m in matches} if p else {1}
             print(s, p, secs)
             for n in secs:
+                colors = light_colors if "light" in s else object_colors
                 cols = tuple(
                     product(
                         *([tuple(filter(lambda c: c or n == 1, colors.keys()))] * n)

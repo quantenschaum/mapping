@@ -23,8 +23,8 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="78.5"
-     inkscape:cx="12.961783"
-     inkscape:cy="11.382166"
+     inkscape:cx="16.159236"
+     inkscape:cy="13.433121"
      inkscape:window-width="2285"
      inkscape:window-height="1809"
      inkscape:window-x="1481"
@@ -66,9 +66,10 @@
        orientation="0,-1"
        id="guide809"
        inkscape:locked="false" />
-  </sodipodi:namedview><style
-   type="text/css"
-   id="base">
+  </sodipodi:namedview>
+  <style
+     type="text/css"
+     id="base">
       .outline {
         fill: none;
         stroke: black;
@@ -101,14 +102,18 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <circle
-     class="fill uniform"
+     class="fill uniform horizontal02"
      id="path348"
      cx="16"
      cy="12.236607"
      r="1.7220814" />
+  <path
+     id="circle369"
+     class="fill horizontal12"
+     d="M 17.722656 12.236328 L 14.277344 12.236328 A 1.7220814 1.7220814 0 0 0 16 13.958984 A 1.7220814 1.7220814 0 0 0 17.722656 12.236328 z " />
   <circle
      class="outline"
-     id="path348"
+     id="circle13"
      cx="16"
      cy="12.236607"
      r="1.7220814" />
