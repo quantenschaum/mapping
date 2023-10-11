@@ -34,6 +34,9 @@ light_colors = {
 }
 
 
+outpath = "gen"
+
+
 def read(f):
     with open(f) as f:
         return f.read()
@@ -47,9 +50,11 @@ def write(f, c):
 def main():
     for f in list(filter(lambda f: isfile(f) and f.endswith(".svg"), listdir("."))):
         svg = read(f)
-        if "COLORING{}" not in svg:
-            continue
         s = splitext(f)[0]
+        if "COLORING{}" not in svg:
+            makedirs(outpath, exist_ok=True)
+            write("/".join((outpath, f"{s}.svg")), svg)
+            continue
         # print(s)
         for p in patterns:
             # print(s, p)
@@ -81,7 +86,7 @@ def main():
                         "/".join(
                             filter(
                                 bool,
-                                ("gen", s, p, "_".join([c or "generic" for c in cs])),
+                                (outpath, s, p, "_".join([c or "generic" for c in cs])),
                             )
                         )
                         + ".svg"

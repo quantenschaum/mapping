@@ -5,7 +5,7 @@
 SHELL=/bin/bash
 OGR_OPTS=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON,UPDATES=APPLY" S57_CSV="$(PWD)"
 
-.PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm data/vwm data/bsh
+.PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm data/vwm data/bsh icons
 
 help:
 	cat README.md
@@ -20,7 +20,7 @@ data/vwm:
 
 data/vwm.sqlite: data/vwm
 	rm -f $@
-	for F in $$(find $</ -name "*.json"); do $(OGR_OPTS) ogr2ogr $@ $$F -skipfailures -append -dsco SPATIALITE=YES; done
+	for F in $$(find $</ -name "*.json"); do $(OGR_OPTS) ogr2ogr $@ $$F -skipfailures -append $(OGR_OPTS2); done
 
 BSHWMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 
@@ -37,30 +37,45 @@ data/bsh:
 
 data/bsh.sqlite: data/bsh
 	rm -f $@
-	for F in $$(find $</ -name "*.json"); do $(OGR_OPTS) ogr2ogr $@ $$F -skipfailures -append -dsco SPATIALITE=YES; done
+	for F in $$(find $</ -name "*.json"); do $(OGR_OPTS) ogr2ogr $@ $$F -skipfailures -append $(OGR_OPTS2); done
 
-us-encs:
-	rm -rf data/$@
-	mkdir -p data/$@
-	for I in 01 05 07 08 09 11 13 14 17; do wget -O data/$@/$${I}CGD_ENCs.zip https://charts.noaa.gov/ENCs/$${I}CGD_ENCs.zip; done
+CGDS=01 05 07 08 09 11 13 14 17
+CGDS=01
+
+data/us:
+	rm -rf $@
+	mkdir -p $@
+	for I in $(CGDS); do wget -O $@/$${I}CGD_ENCs.zip https://charts.noaa.gov/ENCs/$${I}CGD_ENCs.zip; done
+	for F in $@/*.zip; do unzip $$F -d $@; done
+
+us: data/us
+	$(MAKE) data/$@.sqlite
+	$(MAKE) data/$@.json
 
 %.csv:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
 
+LAYERS1=BOYLAT BOYCAR BOYISD BOYSAW BOYSPP BOYINB BCNLAT BCNCAR BCNISD BCNSAW BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN OFSPLF SBDARE HRBFAC SMCFAC
+LAYERS2=DEPARE DEPCNT SOUNDG M_COVR
+
 %.sqlite: s57attributes.csv s57objectclasses.csv
-	rm -f $@
-	for F in $$(find $(basename $@) -name "*.000"); do $(OGR_OPTS) ogr2ogr $@ $$F -skipfailures -append -dsco SPATIALITE=YES; done
+	rm -f $@*
+	for F in $$(find $(basename $@) -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr $@ $$F $(LAYERS1) $(LAYERS2) -skipfailures -append $(OGR_OPTS2); done
+
+%.json: %.sqlite
+	for L in $(LAYERS1); do rm -f $(basename $@)/$$L.json; echo $$L; ogr2ogr $(basename $@)/$$L.json $< $$L; done
+	#for F in $(basename $@)/*.json; do echo $$F; jq . $$F>tmp; mv tmp $$F; done
+
+%/shapes: %/
+	rm -f $@/*
+	for F in $$(find $< -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr $@ $$F $(LAYERS1) $(LAYERS2) -skipfailures -append $(OGR_OPTS2); done
+	#for L in $(LAYERS1); do rm -f $</$$L.json; echo $$L; ogr2ogr $</$$L.json $@/$$L.shp $$L; done
 
 waddenzee:
 	rm -rf data/$@
 	cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
 	$(MAKE) data/$@.sqlite
-
-LAYERS=BOYLAT BOYCAR BOYSAW BOYSPP BCNLAT BCNCAR BCNISD BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN HRBFAC OFSPLF
-
-foo:
-	for L in $(LAYERS); do rm -f $$L.json; ogr2ogr data/waddenzee/$$L.json data/waddenzee.sqlite $$L -append; done
-	for F in data/waddenzee/*.json; do echo $$F; jq . $$F>tmp; mv tmp $$F; done
+	$(MAKE) data/$@.json
 
 marrekrite.gpx:
 	wget -O data/$@ "https://github.com/marcelrv/OpenCPN-Waypoints/raw/main/Marrekrite-Aanlegplaatsen.gpx"
@@ -132,3 +147,6 @@ omc: data/omc
 	$</OsmAndMapCreator.sh
 	mv -v data/omc/*obf data/obf/
 
+icons:
+	cd icons && ./genicons.py
+	cp extra.mapcss icons/gen

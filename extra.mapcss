@@ -1,12 +1,10 @@
 meta {
-	title:				"INT1 like rendering for nautical charts";
-	icon:				"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/IHO_c.svg";
+	title:				"improved INT1 like rendering for nautical charts";
 	author:				"quantenschaum";
 	version:			"0.1";
-	description:		"JOSM rendering of nautical symbols inspired by IHO standard INT1";
+	description:		"improvements for https://github.com/OpenNauticalChart/josm/blob/master/INT1_MapCSS.mapcss mean to be used on top of (AFTER) this style";
 	min-josm-version:	18000;
 }
-
 
 canvas {
   fill-color: lightgray;
@@ -214,10 +212,10 @@ node["seamark:type"^=beacon]::int1_buoy {
 }
 
 node["seamark:beacon_lateral:shape"=perch]::int1_buoy {
-	icon-image:		eval(concat("icons/perch-",tag("seamark:beacon_lateral:category"),".svg"));
+	icon-image:		eval(concat("icons/gen/perch-",tag("seamark:beacon_lateral:category"),".svg"));
 }
 node["seamark:beacon_lateral:shape"=withy]::int1_buoy {
-	icon-image:		eval(concat("icons/withy-",tag("seamark:beacon_lateral:category"),".svg"));
+	icon-image:		eval(concat("icons/gen/withy-",tag("seamark:beacon_lateral:category"),".svg"));
 }
 node["seamark:beacon_special_purpose:category"=notice]::int1_buoy {
 	icon-image:		eval(concat("icons/gen/square/",
@@ -321,14 +319,14 @@ node["seamark:light:category"=floodlight]::int1_light {
 }
 
 node["seamark:light:category"=floodlight]::floodlight {
-  icon-image:             "icons/INT1/floodlight.svg";
+  icon-image:             "icons/gen/floodlight.svg";
   icon-width:            45;
   icon-offset-x:          0;
   icon-offset-y:          10;
   icon-opacity: 0.8;
 }
 node["seamark:light:category"=floodlight]["seamark:light:colour"=white]::floodlight {
-  icon-image:             "icons/INT1/floodlight-w.svg";
+  icon-image:             "icons/gen/floodlight-w.svg";
   icon-opacity: 0.8;
 }
 node|z14-["seamark:light:character"]::light {
