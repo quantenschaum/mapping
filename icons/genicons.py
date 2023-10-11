@@ -23,6 +23,10 @@ object_colors = {
     # "magenta":"#DE44E8",
     # "pink":"pink",
 }
+lights = {
+    "light",
+    "floodlight",
+}
 light_colors = {
     "generic": "#800080",
     "white": "yellow",
@@ -65,7 +69,7 @@ def main():
             secs = {int(m[0]) for m in matches} if p else {1}
             print(s, p, secs)
             for n in secs:
-                colors = light_colors if s == "light" else object_colors
+                colors = light_colors if s in lights else object_colors
                 cols = tuple(
                     product(
                         *([tuple(filter(lambda c: c or n == 1, colors.keys()))] * n)
@@ -139,7 +143,7 @@ def main():
                         lines.append(l)
                     svgout = "\n".join(lines)
 
-                    svgout = svgout.replace("COLORING{}", "\n".join(styles))
+                    # svgout = svgout.replace("COLORING{}", "\n".join(styles))
                     # print(svgout)
 
                     makedirs(dirname(out), exist_ok=True)

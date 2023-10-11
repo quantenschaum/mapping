@@ -149,4 +149,4 @@ omc: data/omc
 
 icons:
 	cd icons && ./genicons.py
-	cp extra.mapcss icons/gen
+	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
