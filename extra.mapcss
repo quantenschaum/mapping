@@ -401,7 +401,7 @@ node["seamark:fog_signal:category"]::int1_fog_signal  {
   text-offset-y: -25;
 }
 
-node["seamark:radar_reflector"=yes]::int1_radar_reflector {
+node|z12-["seamark:radar_reflector"=yes]::int1_radar_reflector {
 	icon-image:		"icons/gen/radar_reflector.svg";
 	icon-height:	60;
   icon-offset-x:  0;
@@ -422,4 +422,23 @@ node["seamark:topmark:shape"]::int1_radar_reflector {
 }
 node["seamark:topmark:shape"]["seamark:type"^=beacon]::int1_radar_reflector {
   icon-offset-y:  eval(-18-cond(regexp_test("2.*",tag("seamark:topmark:shape")),14,8));
+}
+
+node|z12-["seamark:radar_transponder:category"]::int1_radar_transponder {
+	symbol-shape:	circle;
+	symbol-size: 80;
+	symbol-fill-color: none;
+	symbol-stroke-color: #800080;
+	symbol-stroke-width: 4;
+	symbol-stroke-opacity: 0.5;
+	text: eval(replace(concat(upper(tag("seamark:radar_transponder:category")),
+	  "(",tag("seamark:radar_transponder:group"),")"),"()",""));
+	text-color: #800080;
+	font-size: 11;
+	font-weight: bold;
+  text-anchor-horizontal: left;
+  text-anchor-vertical: center;
+  text-offset-x: 0;
+  text-offset-y: 40;
+
 }
