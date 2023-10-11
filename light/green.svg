@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="light.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs9" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="45.254834"
+     inkscape:cx="11.192175"
+     inkscape:cy="18.771475"
+     inkscape:window-width="2285"
+     inkscape:window-height="1809"
+     inkscape:window-x="1006"
+     inkscape:window-y="147"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g390"
+     showguides="true">
+    <sodipodi:guide
+       position="29.834395,16"
+       orientation="0,1"
+       id="guide1528"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,20.585987"
+       orientation="-1,0"
+       id="guide1530"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,16"
+       orientation="0.70710678,0.70710678"
+       id="guide292"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
+  <style
+     type="text/css"
+     id="base">
+      .outline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
+      }
+      .fill {
+        fill: #800080;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .uniform { fill:green; stroke:none; }
+  </style>
+  <g
+     id="g390"
+     inkscape:transform-center-x="0.0"
+     inkscape:transform-center-y="0.0">
+    <path
+      class="fill uniform" style="fill:green; stroke:none;"
+       d="m 23.129659,26.226475 c 0.891806,0.878519 2.327513,0.868236 3.207029,-0.02348 0.878519,-0.891806 0.86733,-2.328599 -0.02448,-3.207118 C 25.4195,22.116271 20.328463,19.122631 17.25,17.25 c 1.825402,2.876297 4.986947,8.09687 5.879659,8.976475"
+       id="path392" />
+  </g>
+</svg>

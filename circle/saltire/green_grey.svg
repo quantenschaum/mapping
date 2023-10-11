@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="circle.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs13" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="78.5"
+     inkscape:cx="14.273885"
+     inkscape:cy="13.433121"
+     inkscape:window-width="2285"
+     inkscape:window-height="1809"
+     inkscape:window-x="1481"
+     inkscape:window-y="140"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2"
+     showguides="true">
+    <sodipodi:guide
+       position="29.834395,16"
+       orientation="0,1"
+       id="guide1528"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,20.585987"
+       orientation="-1,0"
+       id="guide1530"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="17.171975,27.159236"
+       orientation="0,-1"
+       id="guide3117"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="17,16"
+       orientation="1,0"
+       id="guide3217"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="12.83112,18.085792"
+       orientation="0,-1"
+       id="guide807"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="12.819277,21.485475"
+       orientation="0,-1"
+       id="guide809"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="16,20.094611"
+       orientation="0,-1"
+       id="guide244"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <style
+     type="text/css"
+     id="base">
+      .outline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
+      }
+      .fill {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .saltire02 { fill:#5BCE3E; stroke:none; }
+.saltire12 { fill:none; stroke:#808080; stroke-width:0.8; }
+.saltire12 { fill:none; stroke:#808080; stroke-width:0.8; }
+  </style>
+  <path
+     class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"
+     d="M 16,13.914208 V 16"
+     id="path241" />
+  <circle
+     class="fill uniform border12 vertical02 horizontal02 cross02 saltire02 squared02" style="fill:#5BCE3E; stroke:none;"
+     id="path348"
+     cx="16"
+     cy="11.905389"
+     r="2.0098038" />
+  <path
+     id="path366"
+     class="fill vertical12" style="fill:none; stroke:none;"
+     d="M 16,9.8945939 V 13.915542 A 2.0098038,2.0098038 0 0 0 18.010474,11.905067 2.0098038,2.0098038 0 0 0 16,9.8945939 Z" />
+  <path
+     id="circle369"
+     class="fill horizontal12" style="fill:none; stroke:none;"
+     d="M 18.010474,11.905067 H 13.989525 A 2.0098038,2.0098038 0 0 0 16,13.915542 2.0098038,2.0098038 0 0 0 18.010474,11.905067 Z" />
+  <path
+     class="inline cross12" style="fill:none; stroke:none;"
+     d="m 13.989525,11.905067 4.020279,3.22e-4"
+     id="path309" />
+  <path
+     class="inline cross12" style="fill:none; stroke:none;"
+     d="m 15.999826,9.8950885 -3.22e-4,4.0202795"
+     id="path311" />
+  <path
+     class="inline saltire12" style="fill:none; stroke:#808080; stroke-width:0.8;"
+     d="m 17.421162,10.483959 -2.842994,2.842539"
+     id="path313" />
+  <path
+     class="inline saltire12" style="fill:none; stroke:#808080; stroke-width:0.8;"
+     d="m 14.578168,10.483959 2.842994,2.842539"
+     id="path369" />
+  <path
+     id="circle303"
+     class="fill squared12" style="fill:none; stroke:none;"
+     d="M 16 11.90625 L 13.990234 11.90625 A 2.0098038 2.0098038 0 0 0 16 13.916016 L 16 11.90625 z " />
+  <path
+     id="path438"
+     class="fill squared12" style="fill:none; stroke:none;"
+     d="M 16 9.8964844 L 16 11.90625 L 18.009766 11.90625 A 2.0098038 2.0098038 0 0 0 16 9.8964844 z " />
+  <circle
+     class="outline border02" style="fill:none; stroke:black; stroke-width:0.3;"
+     id="circle13"
+     cx="16"
+     cy="11.905389"
+     r="2.0098038" />
+</svg>

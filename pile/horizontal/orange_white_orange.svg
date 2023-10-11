@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="pile.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="78.5"
+     inkscape:cx="14.006369"
+     inkscape:cy="11.394904"
+     inkscape:window-width="2285"
+     inkscape:window-height="1809"
+     inkscape:window-x="1529"
+     inkscape:window-y="140"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g19"
+     showguides="true">
+    <sodipodi:guide
+       position="29.834395,16"
+       orientation="0,1"
+       id="guide1528"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,20.585987"
+       orientation="-1,0"
+       id="guide1530"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="17.171975,26"
+       orientation="0,1"
+       id="guide3117"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="17,16"
+       orientation="1,0"
+       id="guide3217"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="15.6,23.171975"
+       orientation="-1,0"
+       id="guide242"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16.4,27.159236"
+       orientation="-1,0"
+       id="guide244"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
+  <style
+     type="text/css"
+     id="base">
+      .outline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
+      }
+      .fill {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .horizontal03 { fill:#F7A837; stroke:none; }
+.horizontal13 { fill:white; stroke:none; }
+.horizontal23 { fill:#F7A837; stroke:none; }
+  </style>
+  <g
+     id="g19">
+    <path
+       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#F7A837; stroke:none;"
+       d="M 17,16 V 6 h -2 v 10 z"
+       id="path3219" />
+    <path
+       id="path1099"
+       class="fill vertical12" style="fill:none; stroke:none;"
+       d="M 16 6 L 16 16 L 17 16 L 17 6 L 16 6 z " />
+    <path
+       id="path1104"
+       class="fill vertical13" style="fill:none; stroke:none;"
+       d="M 15.599609 6 L 15.599609 16 L 17 16 L 17 6 L 15.599609 6 z " />
+    <path
+       id="path1109"
+       class="fill vertical23" style="fill:none; stroke:none;"
+       d="M 16.400391 6 L 16.400391 16 L 17 16 L 17 6 L 16.400391 6 z " />
+    <path
+       id="path308"
+       class="fill horizontal13" style="fill:white; stroke:none;"
+       d="M 17 9.3339844 L 15 9.3339844 L 15 16 L 17 16 L 17 9.3339844 z " />
+    <path
+       id="path313"
+       class="fill horizontal23" style="fill:#F7A837; stroke:none;"
+       d="M 17 12.666016 L 15 12.666016 L 15 16 L 17 16 L 17 12.666016 z " />
+    <path
+       id="path309"
+       class="fill horizontal14" style="fill:none; stroke:none;"
+       d="M 17 8.5 L 15 8.5 L 15 16 L 17 16 L 17 8.5 z " />
+    <path
+       id="path314"
+       class="fill horizontal24 horizontal12" style="fill:none; stroke:none;"
+       d="M 17 11 L 15 11 L 15 16 L 17 16 L 17 11 z " />
+    <path
+       id="path319"
+       class="fill horizontal34" style="fill:none; stroke:none;"
+       d="M 17 13.5 L 15 13.5 L 15 16 L 17 16 L 17 13.5 z " />
+    <path
+       class="inline cross12" style="fill:none; stroke:none;"
+       d="M 16,6 V 16"
+       id="path315" />
+    <path
+       class="inline cross12" style="fill:none; stroke:none;"
+       d="m 15,11 h 2"
+       id="path317" />
+    <path
+       class="outline" style="fill:none; stroke:black; stroke-width:0.3;"
+       d="M 17,16 V 6 h -2 v 10 z"
+       id="path385" />
+  </g>
+  <path
+     class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"
+     d="m 13,16 h 6"
+     id="path5181" />
+  <circle
+     class="basepoint" style="fill:white; stroke:black; stroke-width:0.5;"
+     id="path5349"
+     cx="16"
+     cy="16"
+     r="1" />
+</svg>
