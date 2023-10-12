@@ -22,9 +22,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      showgrid="false"
-     inkscape:zoom="78.5"
-     inkscape:cx="13.152866"
-     inkscape:cy="11.394904"
+     inkscape:zoom="157"
+     inkscape:cx="14.203822"
+     inkscape:cy="12.366242"
      inkscape:window-width="2285"
      inkscape:window-height="1809"
      inkscape:window-x="1481"
@@ -102,13 +102,23 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="fill uniform border12 vertical02" style="fill:#5BCE3E; stroke:none;"
+     class="fill uniform border12 vertical02 vertical03 horizontal03 cross02" style="fill:#5BCE3E; stroke:none;"
      d="m 16.00009,10.514525 1.999822,3.393243 -3.999645,0.01094 z"
      id="path982" />
   <path
      id="path364"
-     class="fill uniform vertical12" style="fill:#5BCE3E; stroke:none;"
+     class="fill uniform vertical12 vertical23" style="fill:#5BCE3E; stroke:none;"
      d="M 16 10.513672 L 16 13.914062 L 18 13.908203 L 16 10.513672 z " />
+  <path
+     class="inline vertical13 cross12" style="fill:none; stroke:none;"
+     stroke-linecap="round"
+     d="M 16,13.645723 V 11.048101"
+     id="path306" />
+  <path
+     class="inline horizontal13 cross12" style="fill:none; stroke:none;"
+     stroke-linecap="round"
+     d="m 15.016429,12.746912 h 1.967142"
+     id="path298" />
   <path
      class="outline border02" style="fill:none; stroke:black; stroke-width:0.3;"
      d="m 16.00009,10.514525 1.999822,3.393243 -3.999645,0.01094 z"
