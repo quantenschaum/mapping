@@ -14,15 +14,16 @@ canvas {
 	fill-opacity: 1;
 }
 
-node {
-	symbol-shape:	none;
+node|z-14 {
+	-symbol-shape:	none;
+	symbol-size:	1;
 }
 node:unconnected {
 	symbol-shape:	circle;
 	symbol-size: 6;
 	symbol-fill-color: red;
 }
-node:connection {
+node|z12-:connection {
 	symbol-shape:	circle;
 	symbol-stroke-color: blue;
 }
@@ -44,7 +45,7 @@ node|z12-["seamark:type"][!"seamark:seabed_area:surface"] {
 	text-anchor-horizontal:	center;
 	text-anchor-vertical:	below;
 }
-way["seamark:type"] {
+way["seamark:type"][!"seamark:seabed_area:surface"] {
 	text:			"seamark:name";
 	text-color:		black;
 	font-size: 11;
@@ -59,9 +60,21 @@ way[waterway]::int1_water {
 	color:			#66f;
 }
 way[waterway=fairway]::int1_water {
+	text: eval(any(tag("seamark:name"),tag("name")));
+  text-color: black;
+  font-size: 11;
 	width:			+5;
 	color: white;
 	opacity: 0.8;
+}
+relation["seamark:type"=fairway]::int1_water,
+way["seamark:type"=fairway]:closed::int1_water {
+	text: eval(any(tag("seamark:name"),tag("name")));
+  text-color: black;
+  font-size: 11;
+  width: 0;
+  fill-color: white;
+  fill-opacity: 0.5;
 }
 *[boat?].river::int1_water {
 	casing-width:	+10;
@@ -141,6 +154,28 @@ node["seamark:type"=rock]["seamark:rock:water_level"=dry].rock::int1_obstruction
 
 *["seamark:seabed_area:surface"] {
 	symbol-shape: 	none;
+}
+way["seamark:seabed_area:surface"] {
+	color: green;
+	width: 2;
+	fill-color: gray;
+}
+*["seamark:seabed_area:surface"] {set seabed_surface;
+    text:	eval(
+      replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+      replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+      join(" ",
+        concat(get(split(";",tag("seamark:seabed_area:quality")),0),"-",get(split(";",tag("seamark:seabed_area:surface")),0)),
+        concat(get(split(";",tag("seamark:seabed_area:quality")),1),"-",get(split(";",tag("seamark:seabed_area:surface")),1)),
+        concat(get(split(";",tag("seamark:seabed_area:quality")),2),"-",get(split(";",tag("seamark:seabed_area:surface")),2))
+      ),
+
+      fine, "f"), medium, "m"), coarse, "c"), broken, "bk"), sticky, "sy"), soft, "so"), stiff, "sf"),
+      volcanic, "v"), calcareous, "ca"), hard, "h"),
+
+      sand, "S"), mud, "M"), clay, "Cy"), silt, "Si"), stones, "St"), gravel, "G"), pebbles, "P"),
+      cobbles, "Cb"), rocky, "R"), boulders, "Bo"), coral, "Co"), shells, "Sh"), lava, "Lv"),"-","")
+	);
 }
 
 node["depth"]::int1_depth {
@@ -460,3 +495,33 @@ node|z12-["seamark:radar_transponder:category"]::int1_radar_transponder {
   text-offset-y: 40;
 
 }
+
+way["seamark:type"^=cable_area]::int1_cable {
+	repeat-image:			"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/L/L31.svg";
+	repeat-image-width:		16;
+	repeat-image-spacing:	0;
+	fill-color: #800080;
+	fill-opacity: 0.1;
+}
+way["seamark:type"^=pipeline_area]::int1_pipeline {
+	repeat-image:			"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/L/L40.svg";
+	repeat-image-width:		32;
+	repeat-image-spacing:	2;
+	fill-color: #800080;
+	fill-opacity: 0.1;
+}
+
+way[natural=shoal]::shoal,
+way["seamark:sea_area:category"=shoal]::shoal {
+  color: darkred;
+  width: 2;
+	fill-color: black;
+	fill-opacity: 0.1;
+}
+way["seamark:sea_area:category"=shoal]::shoal {
+  dashes: 3.3;
+}
+way[natural=shoal][surface=sand]::shoal {
+	fill-color: orange;
+}
+
