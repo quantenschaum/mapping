@@ -88,9 +88,27 @@ node["seamark:landmark:category"=windmill]::int1_landmark  {
   icon-height: 18;
 	icon-offset-y: -7;
 }
-node["seamark:type"=platform] {
-	icon-image:			"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/L/L10.svg";
+node["seamark:type"=platform]::int1_platform {
+	symbol-size: 14;
+	symbol-shape:	square;
+	symbol-fill-color: none;
+	symbol-stroke-color: black;
+	symbol-stroke-width: 2;
 }
+node["seamark:type"=platform]::int1_platform2 {
+	symbol-size: 6;
+	symbol-shape:	circle;
+	symbol-fill-color: black;
+	symbol-stroke-color: none;
+}
+
+node["seamark:landmark:conspicuity"=conspicuous]::int1_conspicuous {
+	symbol-size: 8;
+	symbol-shape:	circle;
+	symbol-fill-color: red;
+	symbol-stroke-color: none;
+}
+
 way["seamark:type"=navigation_line]::int1_navigation_line {
     width:          2;
 }

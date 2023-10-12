@@ -1283,6 +1283,7 @@
   </node>
   <node id='-22495772' action='modify' visible='true' lat='54.72453608692' lon='13.38414050855'>
     <tag k='seamark:landmark:category' v='spire' />
+    <tag k='seamark:landmark:conspicuity' v='conspicuous' />
     <tag k='seamark:landmark:function' v='church' />
     <tag k='seamark:type' v='landmark' />
   </node>
@@ -1333,34 +1334,41 @@
   </node>
   <node id='-22495784' action='modify' visible='true' lat='54.72667425393' lon='13.38911024001'>
     <tag k='seamark:landmark:category' v='monument' />
+    <tag k='seamark:landmark:conspicuity' v='conspicuous' />
     <tag k='seamark:type' v='landmark' />
   </node>
   <node id='-22495785' action='modify' visible='true' lat='54.72667007797' lon='13.39098678116'>
     <tag k='seamark:landmark:category' v='dome' />
+    <tag k='seamark:landmark:conspicuity' v='conspicuous' />
     <tag k='seamark:landmark:function' v='radar' />
     <tag k='seamark:type' v='landmark' />
   </node>
   <node id='-22495786' action='modify' visible='true' lat='54.72666590202' lon='13.39286332231'>
     <tag k='seamark:landmark:category' v='mast' />
+    <tag k='seamark:landmark:conspicuity' v='conspicuous' />
     <tag k='seamark:landmark:function' v='radar' />
     <tag k='seamark:type' v='landmark' />
   </node>
   <node id='-22495787' action='modify' visible='true' lat='54.72666172606' lon='13.39473986347'>
     <tag k='seamark:landmark:category' v='radar_scanner' />
+    <tag k='seamark:landmark:conspicuity' v='conspicuous' />
     <tag k='seamark:landmark:function' v='radar' />
     <tag k='seamark:type' v='landmark' />
   </node>
   <node id='-22495788' action='modify' visible='true' lat='54.7266575501' lon='13.39661640462'>
     <tag k='seamark:landmark:category' v='tower' />
+    <tag k='seamark:landmark:conspicuity' v='conspicuous' />
     <tag k='seamark:landmark:function' v='radar' />
     <tag k='seamark:type' v='landmark' />
   </node>
   <node id='-22495789' action='modify' visible='true' lat='54.72665337415' lon='13.39849294577'>
     <tag k='seamark:landmark:category' v='mast' />
+    <tag k='seamark:landmark:conspicuity' v='conspicuous' />
     <tag k='seamark:type' v='landmark' />
   </node>
   <node id='-22495790' action='modify' visible='true' lat='54.72664919819' lon='13.40036948693'>
     <tag k='seamark:landmark:category' v='tower' />
+    <tag k='seamark:landmark:conspicuity' v='conspicuous' />
     <tag k='seamark:type' v='landmark' />
   </node>
   <node id='-22495791' action='modify' visible='true' lat='54.71588981619' lon='13.3789286032'>
