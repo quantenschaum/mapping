@@ -22,9 +22,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      showgrid="false"
-     inkscape:zoom="78.5"
-     inkscape:cx="15.140127"
-     inkscape:cy="11.394904"
+     inkscape:zoom="157"
+     inkscape:cx="15.11465"
+     inkscape:cy="13.16879"
      inkscape:window-width="2285"
      inkscape:window-height="1809"
      inkscape:window-x="1481"
@@ -72,8 +72,8 @@
      id="base">
       .outline {
         fill: none;
-        stroke: black;
-        stroke-width: 0.3;
+        stroke: red;
+        stroke-width: 0.8;
       }
       .inline {
         fill: none;
@@ -100,14 +100,25 @@
   <path
      class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"
      d="M 15.998622,14.5672 16,16"
-     id="path241"
-     sodipodi:nodetypes="cc" />
+     id="path241" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#333333;stroke-width:1.2px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+     stroke-linecap="square"
+     d="m 15.986192,9.8105794 0.01243,4.8075756"
+     id="path1064" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#333333;stroke-width:1.2px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+     stroke-linecap="square"
+     d="m 13.588617,12.208154 4.807576,0.01243"
+     id="path1066" />
   <path
      class="outline uniform" style="fill:none; stroke:#F7A837; stroke-width:0.8;"
+     stroke-linecap="square"
      d="m 15.986192,9.8105794 0.01243,4.8075756"
      id="path351" />
   <path
      class="outline uniform" style="fill:none; stroke:#F7A837; stroke-width:0.8;"
+     stroke-linecap="square"
      d="m 13.588617,12.208154 4.807576,0.01243"
      id="path353" />
 </svg>

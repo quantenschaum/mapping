@@ -15,7 +15,7 @@ canvas {
 }
 
 node {
-	symbol-shape:	none;
+	-symbol-shape:	none;
 }
 node:unconnected {
 	symbol-shape:	circle;
@@ -59,9 +59,21 @@ way[waterway]::int1_water {
 	color:			#66f;
 }
 way[waterway=fairway]::int1_water {
+	text: eval(any(tag("seamark:name"),tag("name")));
+  text-color: black;
+  font-size: 11;
 	width:			+5;
 	color: white;
 	opacity: 0.8;
+}
+relation["seamark:type"=fairway]::int1_water,
+way["seamark:type"=fairway]:closed::int1_water {
+	text: eval(any(tag("seamark:name"),tag("name")));
+  text-color: black;
+  font-size: 11;
+  width: 0;
+  fill-color: white;
+  fill-opacity: 0.5;
 }
 *[boat?].river::int1_water {
 	casing-width:	+10;
@@ -88,9 +100,27 @@ node["seamark:landmark:category"=windmill]::int1_landmark  {
   icon-height: 18;
 	icon-offset-y: -7;
 }
-node["seamark:type"=platform] {
-	icon-image:			"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/L/L10.svg";
+node["seamark:type"=platform]::int1_platform {
+	symbol-size: 14;
+	symbol-shape:	square;
+	symbol-fill-color: none;
+	symbol-stroke-color: black;
+	symbol-stroke-width: 2;
 }
+node["seamark:type"=platform]::int1_platform2 {
+	symbol-size: 6;
+	symbol-shape:	circle;
+	symbol-fill-color: black;
+	symbol-stroke-color: none;
+}
+
+node["seamark:landmark:conspicuity"=conspicuous]::int1_conspicuous {
+	symbol-size: 8;
+	symbol-shape:	circle;
+	symbol-fill-color: red;
+	symbol-stroke-color: none;
+}
+
 way["seamark:type"=navigation_line]::int1_navigation_line {
     width:          2;
 }
