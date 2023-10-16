@@ -103,6 +103,9 @@ bsh.osm: empty.osm
 nautical.render.xml:
 	wget -O $@ https://github.com/osmandapp/OsmAnd-resources/raw/master/rendering_styles/$@
 
+rendering_types0.xml:
+	wget -O $@ https://github.com/osmandapp/OsmAnd-resources/raw/master/obf_creation/rendering_types.xml
+
 render.diff:
 	diff nautical.render.xml marine.render.xml -u >$@ || true
 

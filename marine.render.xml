@@ -2312,6 +2312,9 @@
         <apply_if additional="seamark:fog_signal:category" icon_2="seamark_fog_signal_additional">
           <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_night"/>
         </apply_if>
+        <apply_if additional="seamark:fog_signal=yes" icon_2="seamark_fog_signal_additional">
+          <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_night"/>
+        </apply_if>
         <apply_if additional="seamark:radar_reflector=yes" icon_3="seamark_radar_reflector_additional">
           <apply_if nightMode="true" icon_3="seamark_radar_reflector_additional_night"/>
         </apply_if>
@@ -2452,6 +2455,9 @@
           <apply_if additional="seamark:fog_signal:category" icon_2="seamark_fog_signal_additional_center_big">
             <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_center_big_night"/>
           </apply_if>
+          <apply_if additional="seamark:fog_signal=yes" icon_2="seamark_fog_signal_additional_center_big">
+            <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_center_big_night"/>
+          </apply_if>
           <apply_if additional="seamark:radar_reflector=yes" icon_3="seamark_radar_reflector_additional_center_big">
             <apply_if nightMode="true" icon_3="seamark_radar_reflector_additional_center_big_night"/>
           </apply_if>
@@ -2590,6 +2596,9 @@
           <apply_if nightMode="true" icon_4="seamark_radar_transponder_additional_big_night"/>
         </apply_if>
         <apply_if additional="seamark:fog_signal:category" icon_2="seamark_fog_signal_additional_big">
+          <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_big_night"/>
+        </apply_if>
+        <apply_if additional="seamark:fog_signal=yes" icon_2="seamark_fog_signal_additional_big">
           <apply_if nightMode="true" icon_2="seamark_fog_signal_additional_big_night"/>
         </apply_if>
         <apply_if additional="seamark:radar_reflector=yes" icon_3="seamark_radar_reflector_additional_big">

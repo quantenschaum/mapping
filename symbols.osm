@@ -2443,6 +2443,172 @@
     <tag k='seamark:radar_reflector' v='yes' />
     <tag k='seamark:type' v='buoy_isolated_danger' />
   </node>
+  <node id='-22496001' action='modify' visible='true' lat='54.71780718952' lon='13.44757132173'>
+    <tag k='seamark:fog_signal:category' v='horn' />
+    <tag k='seamark:name' v='fogcat=horn+racon=L' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:radar_transponder:group' v='L' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-22496002' action='modify' visible='true' lat='54.7128368764' lon='13.44280771852'>
+    <tag k='seamark:fog_signal' v='yes' />
+    <tag k='seamark:light:character' v='Iso' />
+    <tag k='seamark:light:colour' v='white' />
+    <tag k='seamark:light:period' v='4' />
+    <tag k='seamark:name' v='fog=yes+racon' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:type' v='light_major' />
+  </node>
+  <node id='-22496003' action='modify' visible='true' lat='54.72015580372' lon='13.4429686296'>
+    <tag k='seamark:buoy_special_purpose:shape' v='spar' />
+    <tag k='seamark:fog_signal' v='yes' />
+    <tag k='seamark:name' v='fog=yes+racon' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-22496004' action='modify' visible='true' lat='54.71517956872' lon='13.43817286134'>
+    <tag k='seamark:landmark:category' v='tower' />
+    <tag k='seamark:name' v='racon=L' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:radar_transponder:group' v='L' />
+    <tag k='seamark:type' v='landmark' />
+  </node>
+  <node id='-22496005' action='modify' visible='true' lat='54.71774521929' lon='13.43832306504'>
+    <tag k='seamark:name' v='racon=L' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:radar_transponder:group' v='L' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-22496006' action='modify' visible='true' lat='54.71791873569' lon='13.45658354402'>
+    <tag k='seamark:fog_signal:category' v='horn' />
+    <tag k='seamark:name' v='fogcat=horn' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-22496007' action='modify' visible='true' lat='54.71294843625' lon='13.45181994081'>
+    <tag k='seamark:fog_signal' v='yes' />
+    <tag k='seamark:light:character' v='Iso' />
+    <tag k='seamark:light:colour' v='white' />
+    <tag k='seamark:light:period' v='4' />
+    <tag k='seamark:name' v='fog=yes' />
+    <tag k='seamark:type' v='light_major' />
+  </node>
+  <node id='-22496008' action='modify' visible='true' lat='54.71773282523' lon='13.44293646455'>
+    <tag k='seamark:fog_signal' v='yes' />
+    <tag k='seamark:name' v='fog=yes+racon' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-22496009' action='modify' visible='true' lat='54.71774521929' lon='13.4334307158'>
+    <tag k='seamark:name' v='racon' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-22496010' action='modify' visible='true' lat='54.7153530961' lon='13.45643334031'>
+    <tag k='seamark:fog_signal:category' v='horn' />
+    <tag k='seamark:landmark:category' v='tower' />
+    <tag k='seamark:name' v='fogcat=horn' />
+    <tag k='seamark:type' v='landmark' />
+  </node>
+  <node id='-22496011' action='modify' visible='true' lat='54.71302280931' lon='13.45645479798'>
+    <tag k='seamark:fog_signal:category' v='horn' />
+    <tag k='seamark:light:character' v='Iso' />
+    <tag k='seamark:light:colour' v='white' />
+    <tag k='seamark:light:period' v='4' />
+    <tag k='seamark:name' v='fogcat=horn' />
+    <tag k='seamark:type' v='light_major' />
+  </node>
+  <node id='-22496012' action='modify' visible='true' lat='54.72034170306' lon='13.45661570907'>
+    <tag k='seamark:buoy_special_purpose:shape' v='spar' />
+    <tag k='seamark:fog_signal:category' v='horn' />
+    <tag k='seamark:name' v='fogcat=horn' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-22496013' action='modify' visible='true' lat='54.71284927195' lon='13.43819431901'>
+    <tag k='seamark:light:character' v='Iso' />
+    <tag k='seamark:light:colour' v='white' />
+    <tag k='seamark:light:period' v='4' />
+    <tag k='seamark:name' v='racon=L' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:radar_transponder:group' v='L' />
+    <tag k='seamark:type' v='light_major' />
+  </node>
+  <node id='-22496014' action='modify' visible='true' lat='54.71784437161' lon='13.45194868684'>
+    <tag k='seamark:fog_signal' v='yes' />
+    <tag k='seamark:name' v='fog=yes' />
+    <tag k='seamark:type' v='beacon_special_purpose' />
+  </node>
+  <node id='-22496015' action='modify' visible='true' lat='54.71517956872' lon='13.43328051209'>
+    <tag k='seamark:landmark:category' v='tower' />
+    <tag k='seamark:name' v='racon' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:type' v='landmark' />
+  </node>
+  <node id='-22496016' action='modify' visible='true' lat='54.71291124967' lon='13.44744257569'>
+    <tag k='seamark:fog_signal:category' v='horn' />
+    <tag k='seamark:light:character' v='Iso' />
+    <tag k='seamark:light:colour' v='white' />
+    <tag k='seamark:light:period' v='4' />
+    <tag k='seamark:name' v='fogcat=horn+racon=L' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:radar_transponder:group' v='L' />
+    <tag k='seamark:type' v='light_major' />
+  </node>
+  <node id='-22496017' action='modify' visible='true' lat='54.72016819703' lon='13.43835523009'>
+    <tag k='seamark:buoy_special_purpose:shape' v='spar' />
+    <tag k='seamark:name' v='racon=L' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:radar_transponder:group' v='L' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-22496018' action='modify' visible='true' lat='54.71524154287' lon='13.44742111802'>
+    <tag k='seamark:fog_signal:category' v='horn' />
+    <tag k='seamark:landmark:category' v='tower' />
+    <tag k='seamark:name' v='fogcat=horn+racon=L' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:radar_transponder:group' v='L' />
+    <tag k='seamark:type' v='landmark' />
+  </node>
+  <node id='-22496019' action='modify' visible='true' lat='54.72026734343' lon='13.45198085189'>
+    <tag k='seamark:buoy_special_purpose:shape' v='spar' />
+    <tag k='seamark:fog_signal' v='yes' />
+    <tag k='seamark:name' v='fog=yes' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-22496020' action='modify' visible='true' lat='54.72023016356' lon='13.44760348678'>
+    <tag k='seamark:buoy_special_purpose:shape' v='spar' />
+    <tag k='seamark:fog_signal:category' v='horn' />
+    <tag k='seamark:name' v='fogcat=horn+racon=L' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:radar_transponder:group' v='L' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-22496021' action='modify' visible='true' lat='54.71516717388' lon='13.44278626084'>
+    <tag k='seamark:fog_signal' v='yes' />
+    <tag k='seamark:landmark:category' v='tower' />
+    <tag k='seamark:name' v='fog=yes+racon' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:type' v='landmark' />
+  </node>
+  <node id='-22496022' action='modify' visible='true' lat='54.71284927195' lon='13.43330196977'>
+    <tag k='seamark:light:character' v='Iso' />
+    <tag k='seamark:light:colour' v='white' />
+    <tag k='seamark:light:period' v='4' />
+    <tag k='seamark:name' v='racon' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:type' v='light_major' />
+  </node>
+  <node id='-22496023' action='modify' visible='true' lat='54.72016819703' lon='13.43346288085'>
+    <tag k='seamark:buoy_special_purpose:shape' v='spar' />
+    <tag k='seamark:name' v='racon' />
+    <tag k='seamark:radar_transponder:category' v='racon' />
+    <tag k='seamark:type' v='buoy_special_purpose' />
+  </node>
+  <node id='-22496024' action='modify' visible='true' lat='54.71527872731' lon='13.45179848313'>
+    <tag k='seamark:fog_signal' v='yes' />
+    <tag k='seamark:landmark:category' v='tower' />
+    <tag k='seamark:name' v='fog=yes' />
+    <tag k='seamark:type' v='landmark' />
+  </node>
   <way id='-44388' action='modify' visible='true'>
     <nd ref='-22495630' />
     <nd ref='-22495597' />

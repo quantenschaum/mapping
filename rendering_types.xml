@@ -2062,6 +2062,10 @@
 		<entity_convert pattern="tag_transform" from_tag="flood_prone" from_value="yes" to_tag1="ford" to_value1="yes" poi="no"/>
 		<entity_convert pattern="tag_transform" from_tag="highway" from_value="ford" to_tag1="ford" to_value1="yes"/>
 
+		<type tag="highway" value="emergency_bay" minzoom="14"/>
+		<type tag="osmand_emergency_bay_stub" value="." minzoom="14" additional="text"/>
+		<entity_convert pattern="tag_transform" from_tag="highway" from_value="emergency_bay" to_tag1="highway" to_tag2="osmand_emergency_bay_stub" to_value2="." poi="no"/>
+
 		<type tag="highway" value="construction" minzoom="14" />
 		<type tag="highway" value="proposed" minzoom="14" />
 
@@ -6390,6 +6394,7 @@
 		<entity_convert pattern="tag_transform" from_tag="diaper" from_value="room" to_tag1="changing_table:location" to_value1="room" map="no"/>
 		<entity_convert pattern="tag_transform" from_tag="sanitary_dump_station" from_value="public" to_tag1="sanitary_dump_station" to_value1="yes" map="no"/>
 		<entity_convert pattern="tag_transform" from_tag="sanitary_dump_station" from_value="customers" to_tag1="sanitary_dump_station" to_value1="yes" map="no"/>
+		<type tag="amenity" value="dressing_room" minzoom="15" />
 		<type tag="amenity" value="smoking_area" minzoom="15" />
 		<type tag="amenity" value="car_rental" minzoom="15" />
 		<type tag="amenity" value="car_pooling" minzoom="15" />
@@ -6929,16 +6934,16 @@
 	<entity_convert pattern="tag_transform" from_tag="seamark:light:1:group" to_tag1="seamark:light:group"/>
 	<entity_convert pattern="tag_transform" from_tag="seamark:light:1:period" to_tag1="seamark:light:period"/>
 	<!-- <apply_if lightDetail="" (default) nameTag2="seamark:light:character" (incl. light:group, light:period, fog_signal:category, fog_signal:group, fog_signal:period)/>, if-conditions assure nameTag2 display in case only seamark:light:character exists -->
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:group" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signal:categoryx" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:categoryx" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:period" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signal:categoryx" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:categoryx" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:range" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signal:categoryx" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:categoryx" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:fog_signal:categoryx" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signal:categoryx" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:categoryx" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:group" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signal:categoryx" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:categoryx" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:period" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signal:categoryx" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:categoryx" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:range" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signal:categoryx" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:categoryx" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:fog_signal:categoryx" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signal:categoryx" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:categoryx" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:fog_signal:categoryx" if_not_tag1="seamark:light:character" if_not_tag2="seamark:light:1:character" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:categoryx" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character" additional="text"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:radar_transponder:categoryx" if_not_tag1="seamark:light:character" if_not_tag2="seamark:light:1:character" if_not_tag3="seamark:fog_signal" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character" additional="text"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:group" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:period" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:range" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:fog_signalx:category" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:group" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:period" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:range" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:fog_signalx:category" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:fog_signalx:category" if_not_tag1="seamark:light:character" if_not_tag2="seamark:light:1:character" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character" additional="text"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:radar_transponderx:category" if_not_tag1="seamark:light:character" if_not_tag2="seamark:light:1:character" if_not_tag3="seamark:fog_signalx" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character" additional="text"/>
 	<!-- <apply_if lightDetail="sectors" nameTag2="seamark:light:add_sectors"/> -->
 	<entity_convert pattern="tag_combine" separator="-" from_tag="seamark:light:1:sector_start" from_tag1="seamark:light:1:sector_end" from_tag2="seamark:light:1:colour" from_tag3="seamark:light:2:sector_start" from_tag4="seamark:light:2:sector_end" from_tag5="seamark:light:2:colour" from_tag6="seamark:light:3:sector_start" from_tag7="seamark:light:3:sector_end" from_tag8="seamark:light:3:colour" from_tag15="seamark:light:category" to_tag1="seamark:light:add_sectors"/>
 	<!-- <apply_if lightDetail="sector1..5" nameTag2="seamark:light:1:add_sector"/> -->
@@ -7102,6 +7107,7 @@
 		<type tag="seamark:light:2:colour" minzoom="11" additional="true"/>
 		<type tag="seamark:light:3:colour" minzoom="11" additional="true"/>
 
+		<type tag="seamark:fog_signal" minzoom="11" additional="true"/>
 		<type tag="seamark:fog_signal:category" minzoom="11" additional="true"/>
 		<type tag="seamark:platform:category" minzoom="11" additional="true"/>
 		<type tag="seamark:radar_reflector" minzoom="11" additional="true"/>
@@ -7626,5 +7632,6 @@
 		<routing_type tag="obstacle:wheelchair" mode="amend"/>
 		<routing_type tag="incline" mode="amend"/>
 		<routing_type tag="via_ferrata_scale" mode="amend"/>
+		<routing_type tag="hazard" mode="amend"/>
 	</category>
 </osmand_types>
