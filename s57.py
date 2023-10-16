@@ -1122,7 +1122,7 @@ def merge_lights(lights):
         lights = sorted(lights, key=light_order)
         klnam = "seamark:lnam"
         for i, s in enumerate(lights, 1):
-            assert smtype(s) == "light", s
+            assert smtype(s).startswith("light"), (i, lights)
             si = {k.replace("light:", f"light:{i}:"): v for k, v in s.items()}
             update_nc(merged, si)
         if klnam in merged:

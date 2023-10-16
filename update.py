@@ -126,7 +126,10 @@ def load_geojson(filename, geotype="point", inject={}):
         p = e["properties"]
         update_nc(p, inject)
         keys.update(p.keys())
-        types.add(s57type(p))
+        try:
+            types.add(s57type(p))
+        except:
+            types.add("unknown")
 
     print("known keys", keys.intersection(S57keys.keys()))
     print("other keys", keys.difference(S57keys.keys()))
