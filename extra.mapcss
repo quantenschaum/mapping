@@ -14,15 +14,16 @@ canvas {
 	fill-opacity: 1;
 }
 
-node {
+node|z-14 {
 	-symbol-shape:	none;
+	symbol-size:	1;
 }
 node:unconnected {
 	symbol-shape:	circle;
 	symbol-size: 6;
 	symbol-fill-color: red;
 }
-node:connection {
+node|z12-:connection {
 	symbol-shape:	circle;
 	symbol-stroke-color: blue;
 }
@@ -44,7 +45,7 @@ node|z12-["seamark:type"][!"seamark:seabed_area:surface"] {
 	text-anchor-horizontal:	center;
 	text-anchor-vertical:	below;
 }
-way["seamark:type"] {
+way["seamark:type"][!"seamark:seabed_area:surface"] {
 	text:			"seamark:name";
 	text-color:		black;
 	font-size: 11;
@@ -154,6 +155,28 @@ node["seamark:type"=rock]["seamark:rock:water_level"=dry].rock::int1_obstruction
 *["seamark:seabed_area:surface"] {
 	symbol-shape: 	none;
 }
+way["seamark:seabed_area:surface"] {
+	color: green;
+	width: 2;
+	fill-color: gray;
+}
+*["seamark:seabed_area:surface"] {set seabed_surface;
+    text:	eval(
+      replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+      replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+      join(" ",
+        concat(get(split(";",tag("seamark:seabed_area:quality")),0),"-",get(split(";",tag("seamark:seabed_area:surface")),0)),
+        concat(get(split(";",tag("seamark:seabed_area:quality")),1),"-",get(split(";",tag("seamark:seabed_area:surface")),1)),
+        concat(get(split(";",tag("seamark:seabed_area:quality")),2),"-",get(split(";",tag("seamark:seabed_area:surface")),2))
+      ),
+
+      fine, "f"), medium, "m"), coarse, "c"), broken, "bk"), sticky, "sy"), soft, "so"), stiff, "sf"),
+      volcanic, "v"), calcareous, "ca"), hard, "h"),
+
+      sand, "S"), mud, "M"), clay, "Cy"), silt, "Si"), stones, "St"), gravel, "G"), pebbles, "P"),
+      cobbles, "Cb"), rocky, "R"), boulders, "Bo"), coral, "Co"), shells, "Sh"), lava, "Lv"),"-","")
+	);
+}
 
 node["depth"]::int1_depth {
   text: none;
@@ -228,8 +251,8 @@ node["seamark:type"=light_vessel]::int1_buoy,
 node["seamark:type"^=buoy]::int1_buoy,
 node["seamark:type"^=beacon]::int1_buoy {
 	icon-image:		eval(concat("https://raw.githubusercontent.com/quantenschaum/mapping/icons/",
-	  any(replace(tag(concat("seamark:",tag("seamark:type"),":shape")),
-	    "lattice",cond(regexp_test(".*;.*",tag(concat("seamark:",tag("seamark:type"),":colour"))),"tower","lattice")),
+	  any(replace(replace(tag(concat("seamark:",tag("seamark:type"),":shape")),
+	    "lattice",cond(regexp_test(".*;.*",tag(concat("seamark:",tag("seamark:type"),":colour"))),"tower","lattice")),"post","pile"),
 	    cond(regexp_test("buoy.*",tag("seamark:type")),"spar",cond(regexp_test("light_.*",tag("seamark:type")),"light_float","pile"))),"/",
 	  cond(regexp_test(".*;.*",tag(concat("seamark:",tag("seamark:type"),":colour"))),
 	    any(tag(concat("seamark:",tag("seamark:type"),":colour_pattern")),"horizontal"),""),"/",
@@ -287,7 +310,7 @@ node["seamark:type"=mooring]["seamark:mooring:category"=buoy]::int1_topmark {
 }
 node["seamark:topmark:shape"]::int1_topmark {
 	icon-image:		eval(concat("https://raw.githubusercontent.com/quantenschaum/mapping/icons/",
-	  replace(replace(replace(tag("seamark:topmark:shape"),"board","square"), ",", ""), " ", "_"), "/",
+	  replace(replace(replace(replace(replace(replace(tag("seamark:topmark:shape"),"rectangle, vertical","square"),"rectangle, horizontal","square"),"board","square"),"trapezium","triangle point"), ",", ""), " ", "_"), "/",
 	  tag("seamark:topmark:colour_pattern"), "/",
 	  any(replace(tag("seamark:topmark:colour"),";","_"), "generic"),
 	  ".svg"));
@@ -308,6 +331,9 @@ node["seamark:type"=landmark]::int1_topmark {
   icon-offset-y:  -26;
 }
 node["seamark:topmark:shape"=board]::int1_topmark {
+	icon-width:	80;
+}
+node["seamark:topmark:shape"^=rectangle]::int1_topmark {
 	icon-width:	80;
 }
 
@@ -336,7 +362,7 @@ node["seamark:light:1:colour"]::int1_light {
   icon-rotation: eval(0*3.1415/180);
 }
 node["seamark:light:colour"]::int1_light {
-	icon-image:				eval(concat("https://raw.githubusercontent.com/quantenschaum/mapping/icons/light/",tag("seamark:light:colour"),".svg"));
+	icon-image:				eval(concat("https://raw.githubusercontent.com/quantenschaum/mapping/icons/light/",cond(regexp_test(".*;.*",tag("seamark:light:colour")),"generic",tag("seamark:light:colour")),".svg"));
   icon-width: 60;
   icon-offset-x: 0;
   icon-offset-y: 0;
@@ -349,11 +375,19 @@ node["seamark:light:category"=floodlight]::int1_light {
 }
 
 node["seamark:light:category"=floodlight]::floodlight {
-  icon-image:             eval(concat("https://raw.githubusercontent.com/quantenschaum/mapping/icons/floodlight/",any(tag("seamark:light:colour"),"generic"),".svg"));
-  icon-width:            60;
-  icon-offset-x:          0;
-  icon-offset-y:          10;
+  icon-image: eval(concat("https://raw.githubusercontent.com/quantenschaum/mapping/icons/floodlight/",any(tag("seamark:light:colour"),"generic"),".svg"));
+  icon-width: 60;
+  icon-offset-x: 0;
+  icon-offset-y: 10;
   icon-opacity: 0.8;
+}
+
+
+node["seamark:type"^=light_]::int1_lighthouse {
+	icon-image: eval(concat("https://raw.githubusercontent.com/quantenschaum/mapping/icons/",tag("seamark:type"),".svg"));
+  icon-width: 60;
+  icon-offset-x: 0;
+  icon-offset-y: 0;
 }
 
 node|z14-["seamark:light:character"]["seamark:light:category"!=floodlight]::light {
@@ -456,7 +490,7 @@ node["seamark:topmark:shape"]["seamark:type"^=beacon]::int1_radar_reflector {
 
 node|z12-["seamark:radar_transponder:category"]::int1_radar_transponder {
 	symbol-shape:	circle;
-	symbol-size: 80;
+	symbol-size: 70;
 	symbol-fill-color: none;
 	symbol-stroke-color: #800080;
 	symbol-stroke-width: 4;
@@ -466,9 +500,56 @@ node|z12-["seamark:radar_transponder:category"]::int1_radar_transponder {
 	text-color: #800080;
 	font-size: 11;
 	font-weight: bold;
-  text-anchor-horizontal: left;
+  text-anchor-horizontal: center;
   text-anchor-vertical: center;
   text-offset-x: 0;
-  text-offset-y: 40;
+  text-offset-y: 42;
 
 }
+node|z12-["seamark:radio_station:category"]::int1_radio_station {
+	symbol-shape:	circle;
+	symbol-size: 70;
+	symbol-fill-color: none;
+	symbol-stroke-color: #800080;
+	symbol-stroke-width: 4;
+	symbol-stroke-opacity: 0.5;
+	text: eval(concat(upper(tag("seamark:radio_station:category"))));
+	text-color: #800080;
+	font-size: 11;
+	font-weight: bold;
+  text-anchor-horizontal: center;
+  text-anchor-vertical: center;
+  text-offset-x: 0;
+  text-offset-y: 42;
+
+}
+
+way["seamark:type"^=cable_area]::int1_cable {
+	repeat-image:			"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/L/L31.svg";
+	repeat-image-width:		16;
+	repeat-image-spacing:	0;
+	fill-color: #800080;
+	fill-opacity: 0.1;
+}
+way["seamark:type"^=pipeline_area]::int1_pipeline {
+	repeat-image:			"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/L/L40.svg";
+	repeat-image-width:		32;
+	repeat-image-spacing:	2;
+	fill-color: #800080;
+	fill-opacity: 0.1;
+}
+
+way[natural=shoal]::shoal,
+way["seamark:sea_area:category"=shoal]::shoal {
+  color: darkred;
+  width: 2;
+	fill-color: black;
+	fill-opacity: 0.1;
+}
+way["seamark:sea_area:category"=shoal]::shoal {
+  dashes: 3.3;
+}
+way[natural=shoal][surface=sand]::shoal {
+	fill-color: orange;
+}
+
