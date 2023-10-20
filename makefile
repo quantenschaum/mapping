@@ -87,10 +87,11 @@ tides:
 
 
 bsh.osm:
-	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none bsh-$$L.osm -a; done
-	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none bsh-$$L.osm -a; done
-	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none bsh-$$L.osm -a; done
-	for L in beacons facilities lights; do ./lightsectors.py bsh-$$L.osm bsh-$$L-sectors.osm -j; done
+	mkdir bsh
+	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none bsh/$$L.osm -a; done
+	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none bsh/$$L.osm -a; done
+	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none bsh/$$L.osm -a; done
+	for L in beacons facilities lights; do ./lightsectors.py bsh-$$L.osm bsh/$$L-sectors.osm -j; done
 
 
 
