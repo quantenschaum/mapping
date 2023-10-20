@@ -3677,6 +3677,8 @@
       <case tag="seamark:type" value="seagrass" shader="seamark_j134_seagrass"/>
       <case tag="seamark:type" value="sand_waves" shader="seamark_j14_sand_waves"/>
 
+
+
 			<switch>
 				<case tag="natural" value="shoal"/>
 				<case tag="seamark:type" value="sea_area" assitional="seamark:sea_area:category=shoal" color_2="#99ff0000" pathEffect_2="2_3" strokeWidth_2="1">
@@ -4108,10 +4110,8 @@
     <switch engine_v1="false" minzoom="14" strokeWidth="0.5">
       <!-- TODO: 2022-05-28 icons seamark_j21_rocky and seamark_j22_coral need to be rotated by 90 degree clockwise for correct display in OSMAND -->
       <case tag="seamark:type" value="seabed_area" color="#555555" pathIcon="stroke_gray" pathIconStep="10"/>
-      <apply additional="seamark:seabed_area:surface=rocky" color="#555555" pathIcon="seamark_j21_rocky"
-             pathIconStep="40"/>
-      <apply additional="seamark:seabed_area:surface=coral" color="#555555" pathIcon="seamark_j22_coral"
-             pathIconStep="40"/>
+      <apply additional="seamark:seabed_area:surface=rocky" color="#555555" pathIcon="seamark_j21_rocky" pathIconStep="25"/>
+      <apply additional="seamark:seabed_area:surface=coral" color="#555555" pathIcon="seamark_j22_coral" pathIconStep="25"/>
     </switch>
 
     <switch minzoom="14" strokeWidth="0.5">

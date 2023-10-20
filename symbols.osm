@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <osm version='0.6' generator='JOSM'>
-  <node id='-22495537' action='modify' visible='true' lat='54.71566061578' lon='13.35852639748' />
+  <node id='-22495537' action='modify' visible='true' lat='54.72046947119' lon='13.35698144509' />
   <node id='-22495538' action='modify' visible='true' lat='54.7205698151' lon='13.38530893302'>
     <tag k='seamark:topmark:shape' v='sphere' />
     <tag k='seamark:type' v='beacon_special_purpose' />
   </node>
-  <node id='-22495539' action='modify' visible='true' lat='54.71631752915' lon='13.36142318321' />
+  <node id='-22495539' action='modify' visible='true' lat='54.72112630664' lon='13.35987823082' />
   <node id='-22495540' action='modify' visible='true' lat='54.70697100544' lon='13.39622752739'>
     <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
     <tag k='seamark:buoy_special_purpose:shape' v='barrel' />
@@ -46,12 +46,12 @@
     <tag k='seamark:topmark:shape' v='cone, point up' />
     <tag k='seamark:type' v='buoy_lateral' />
   </node>
-  <node id='-22495546' action='modify' visible='true' lat='54.71825102372' lon='13.34571616722' />
+  <node id='-22495546' action='modify' visible='true' lat='54.72305957187' lon='13.34417121483' />
   <node id='-22495547' action='modify' visible='true' lat='54.71836376697' lon='13.38424892402'>
     <tag k='seamark:topmark:shape' v='triangle, point up' />
     <tag k='seamark:type' v='beacon_special_purpose' />
   </node>
-  <node id='-22495548' action='modify' visible='true' lat='54.70962395128' lon='13.35618751121' />
+  <node id='-22495548' action='modify' visible='true' lat='54.71443352268' lon='13.35464255882' />
   <node id='-22495549' action='modify' visible='true' lat='54.71926815795' lon='13.39678545023'>
     <tag k='seamark:beacon_special_purpose:colour' v='yellow' />
     <tag k='seamark:beacon_special_purpose:shape' v='stake' />
@@ -136,7 +136,7 @@
     <tag k='seamark:topmark:shape' v='2 cones down' />
     <tag k='seamark:type' v='beacon_cardinal' />
   </node>
-  <node id='-22495560' action='modify' visible='true' lat='54.71344190515' lon='13.34979312492' />
+  <node id='-22495560' action='modify' visible='true' lat='54.71825102372' lon='13.34824817253' />
   <node id='-22495561' action='modify' visible='true' lat='54.71024319698' lon='13.39175878453'>
     <tag k='seamark:buoy_cardinal:category' v='west' />
     <tag k='seamark:buoy_cardinal:colour' v='yellow;black;yellow' />
@@ -146,18 +146,18 @@
     <tag k='seamark:topmark:shape' v='2 cones point together' />
     <tag k='seamark:type' v='buoy_cardinal' />
   </node>
-  <node id='-22495562' action='modify' visible='true' lat='54.71354106799' lon='13.36880462242' />
+  <node id='-22495562' action='modify' visible='true' lat='54.7183501748' lon='13.36725967003' />
   <node id='-22495563' action='modify' visible='true' lat='54.71703087524' lon='13.37796478222'>
     <tag k='seamark:beacon_lateral:category' v='port' />
     <tag k='seamark:beacon_lateral:shape' v='withy' />
     <tag k='seamark:type' v='beacon_lateral' />
   </node>
-  <node id='-22495564' action='modify' visible='true' lat='54.71564820869' lon='13.35580129457' />
+  <node id='-22495564' action='modify' visible='true' lat='54.72045706557' lon='13.35425634218' />
   <node id='-22495565' action='modify' visible='true' lat='54.70444976333' lon='13.38177742377'>
     <tag k='seamark:rock:water_level' v='awash' />
     <tag k='seamark:type' v='rock' />
   </node>
-  <node id='-22495566' action='modify' visible='true' lat='54.71471859583' lon='13.35947055651' />
+  <node id='-22495566' action='modify' visible='true' lat='54.71952756297' lon='13.35792560412' />
   <node id='-22495567' action='modify' visible='true' lat='54.70778032885' lon='13.39623682394'>
     <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
     <tag k='seamark:buoy_special_purpose:shape' v='spherical' />
@@ -174,7 +174,7 @@
     <tag k='seamark:topmark:shape' v='2 cones up' />
     <tag k='seamark:type' v='buoy_cardinal' />
   </node>
-  <node id='-22495569' action='modify' visible='true' lat='54.71579695717' lon='13.35756080223' />
+  <node id='-22495569' action='modify' visible='true' lat='54.72060579641' lon='13.35601584984' />
   <node id='-22495570' action='modify' visible='true' lat='54.71139823517' lon='13.39643637495'>
     <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
     <tag k='seamark:buoy_special_purpose:shape' v='spar' />
@@ -191,7 +191,7 @@
     <tag k='seamark:topmark:shape' v='2 spheres' />
     <tag k='seamark:type' v='buoy_isolated_danger' />
   </node>
-  <node id='-22495572' action='modify' visible='true' lat='54.71416083027' lon='13.35434215141' />
+  <node id='-22495572' action='modify' visible='true' lat='54.71896986357' lon='13.35279719902' />
   <node id='-22495573' action='modify' visible='true' lat='54.70362358317' lon='13.38476913048'>
     <tag k='depth' v='10' />
     <tag k='name' v='bar' />
@@ -238,8 +238,8 @@
     <tag k='seamark:topmark:shape' v='square' />
     <tag k='seamark:type' v='beacon_special_purpose' />
   </node>
-  <node id='-22495580' action='modify' visible='true' lat='54.71007022418' lon='13.36447017265' />
-  <node id='-22495581' action='modify' visible='true' lat='54.71919294921' lon='13.36644427849' />
+  <node id='-22495580' action='modify' visible='true' lat='54.71487974265' lon='13.36292522026' />
+  <node id='-22495581' action='modify' visible='true' lat='54.72400138563' lon='13.3648993261' />
   <node id='-22495582' action='modify' visible='true' lat='54.70367317662' lon='13.38927524163'>
     <tag k='seamark:obstruction:category' v='stump' />
     <tag k='seamark:type' v='obstruction' />
@@ -321,7 +321,7 @@
     <tag k='seamark:rock:water_level' v='dry' />
     <tag k='seamark:type' v='rock' />
   </node>
-  <node id='-22495594' action='modify' visible='true' lat='54.7151772199' lon='13.3700491674' />
+  <node id='-22495594' action='modify' visible='true' lat='54.71998613264' lon='13.36850421501' />
   <node id='-22495595' action='modify' visible='true' lat='54.70442159604' lon='13.3890936446'>
     <tag k='seamark:type' v='wreck' />
     <tag k='seamark:wreck:category' v='hull_showing' />
@@ -330,7 +330,7 @@
     <tag k='seamark:type' v='wreck' />
     <tag k='seamark:wreck:category' v='non-dangerous' />
   </node>
-  <node id='-22495597' action='modify' visible='true' lat='54.71879635167' lon='13.3555866964' />
+  <node id='-22495597' action='modify' visible='true' lat='54.72360483514' lon='13.35404174401' />
   <node id='-22495598' action='modify' visible='true' lat='54.70903489543' lon='13.38478699917'>
     <tag k='seamark:buoy_cardinal:category' v='north' />
     <tag k='seamark:buoy_cardinal:colour' v='black;yellow' />
@@ -366,7 +366,7 @@
     <tag k='seamark:beacon_special_purpose:shape' v='cairn' />
     <tag k='seamark:type' v='beacon_special_purpose' />
   </node>
-  <node id='-22495603' action='modify' visible='true' lat='54.7136402306' lon='13.36120860649' />
+  <node id='-22495603' action='modify' visible='true' lat='54.71844932564' lon='13.3596636541' />
   <node id='-22495604' action='modify' visible='true' lat='54.71125168' lon='13.3779052699'>
     <tag k='seamark:buoy_lateral:category' v='port' />
     <tag k='seamark:buoy_lateral:colour' v='red' />
@@ -385,9 +385,9 @@
     <tag k='seamark:topmark:shape' v='2 cones up' />
     <tag k='seamark:type' v='buoy_cardinal' />
   </node>
-  <node id='-22495606' action='modify' visible='true' lat='54.71698682617' lon='13.35524337364' />
+  <node id='-22495606' action='modify' visible='true' lat='54.72179552427' lon='13.35369842125' />
   <node id='-22495607' action='modify' visible='true' lat='54.70667346797' lon='13.39146392418' />
-  <node id='-22495608' action='modify' visible='true' lat='54.72033314551' lon='13.35580127312' />
+  <node id='-22495608' action='modify' visible='true' lat='54.72514144669' lon='13.35425632073' />
   <node id='-22495609' action='modify' visible='true' lat='54.70354919286' lon='13.3906056173'>
     <tag k='depth:exposition' v='shoaler' />
     <tag k='seamark:obstruction:category' v='stump' />
@@ -411,7 +411,7 @@
     <tag k='seamark:topmark:shape' v='triangle, point up' />
     <tag k='seamark:type' v='beacon_lateral' />
   </node>
-  <node id='-22495612' action='modify' visible='true' lat='54.71512764051' lon='13.34666030479' />
+  <node id='-22495612' action='modify' visible='true' lat='54.71993655913' lon='13.3451153524' />
   <node id='-22495613' action='modify' visible='true' lat='54.71356488781' lon='13.38027429769'>
     <tag k='seamark:buoy_lateral:category' v='starboard' />
     <tag k='seamark:buoy_lateral:colour' v='green' />
@@ -481,7 +481,7 @@
     <tag k='seamark:topmark:shape' v='cylinder' />
     <tag k='seamark:type' v='beacon_lateral' />
   </node>
-  <node id='-22495622' action='modify' visible='true' lat='54.7180279329' lon='13.34846274925' />
+  <node id='-22495622' action='modify' visible='true' lat='54.72283650751' lon='13.34691779686' />
   <node id='-22495623' action='modify' visible='true' lat='54.72010592864' lon='13.37805410279'>
     <tag k='seamark:beacon_lateral:category' v='port' />
     <tag k='seamark:beacon_lateral:colour' v='red' />
@@ -499,7 +499,7 @@
     <tag k='seamark:topmark:shape' v='2 cones point together' />
     <tag k='seamark:type' v='buoy_cardinal' />
   </node>
-  <node id='-22495625' action='modify' visible='true' lat='54.7116073488' lon='13.35550086571' />
+  <node id='-22495625' action='modify' visible='true' lat='54.71641668496' lon='13.35395591332' />
   <node id='-22495626' action='modify' visible='true' lat='54.71245496298' lon='13.38720823885'>
     <tag k='seamark:buoy_cardinal:category' v='south' />
     <tag k='seamark:buoy_cardinal:colour' v='yellow;black' />
@@ -509,7 +509,7 @@
     <tag k='seamark:topmark:shape' v='2 cones down' />
     <tag k='seamark:type' v='buoy_cardinal' />
   </node>
-  <node id='-22495627' action='modify' visible='true' lat='54.71589610186' lon='13.35680980516' />
+  <node id='-22495627' action='modify' visible='true' lat='54.72070492934' lon='13.35526485277' />
   <node id='-22495628' action='modify' visible='true' lat='54.71941103513' lon='13.38345069861'>
     <tag k='seamark:topmark:shape' v='2 cones down' />
     <tag k='seamark:type' v='beacon_special_purpose' />
@@ -517,8 +517,8 @@
   <node id='-22495629' action='modify' visible='true' lat='54.70443849642' lon='13.3847039121'>
     <tag k='seamark:type' v='wreck' />
   </node>
-  <node id='-22495630' action='modify' visible='true' lat='54.71902088268' lon='13.3510543418' />
-  <node id='-22495631' action='modify' visible='true' lat='54.71523298425' lon='13.35611243082' />
+  <node id='-22495630' action='modify' visible='true' lat='54.72382933951' lon='13.34950938941' />
+  <node id='-22495631' action='modify' visible='true' lat='54.72004189038' lon='13.35456747843' />
   <node id='-22495632' action='modify' visible='true' lat='54.70445539678' lon='13.38031417961'>
     <tag k='seamark:rock:water_level' v='covers' />
     <tag k='seamark:type' v='rock' />
@@ -543,7 +543,7 @@
     <tag k='seamark:topmark:shape' v='cross' />
     <tag k='seamark:type' v='beacon_special_purpose' />
   </node>
-  <node id='-22495636' action='modify' visible='true' lat='54.7152763785' lon='13.3595456369' />
+  <node id='-22495636' action='modify' visible='true' lat='54.72008527948' lon='13.35800068451' />
   <node id='-22495637' action='modify' visible='true' lat='54.71126999943' lon='13.38022165803'>
     <tag k='seamark:buoy_lateral:category' v='starboard' />
     <tag k='seamark:buoy_lateral:colour' v='green' />
@@ -579,13 +579,13 @@
     <tag k='seamark:topmark:shape' v='board' />
     <tag k='seamark:type' v='beacon_special_purpose' />
   </node>
-  <node id='-22495643' action='modify' visible='true' lat='54.71163214066' lon='13.34786193443' />
+  <node id='-22495643' action='modify' visible='true' lat='54.71644147388' lon='13.34631698204' />
   <node id='-22495644' action='modify' visible='true' lat='54.71836376697' lon='13.38529176688'>
     <tag k='seamark:topmark:shape' v='triangle, point down' />
     <tag k='seamark:type' v='beacon_special_purpose' />
   </node>
   <node id='-22495645' action='modify' visible='true' lat='54.70531590702' lon='13.39173217727' />
-  <node id='-22495646' action='modify' visible='true' lat='54.71245026338' lon='13.37090747429' />
+  <node id='-22495646' action='modify' visible='true' lat='54.71725949956' lon='13.3693625219' />
   <node id='-22495647' action='modify' visible='true' lat='54.71471401387' lon='13.38495558698'>
     <tag k='seamark:beacon_cardinal:category' v='north' />
     <tag k='seamark:beacon_cardinal:colour' v='black;yellow' />
@@ -659,7 +659,7 @@
     <tag k='seamark:topmark:shape' v='2 cones base together' />
     <tag k='seamark:type' v='buoy_cardinal' />
   </node>
-  <node id='-22495657' action='modify' visible='true' lat='54.7114833893' lon='13.36318271233' />
+  <node id='-22495657' action='modify' visible='true' lat='54.71629274016' lon='13.36163775994' />
   <node id='-22495658' action='modify' visible='true' lat='54.71357157081' lon='13.38259808355'>
     <tag k='seamark:buoy_safe_water:colour' v='red;white' />
     <tag k='seamark:buoy_safe_water:colour_pattern' v='vertical' />
@@ -689,8 +689,8 @@
     <tag k='seamark:type' v='wreck' />
     <tag k='seamark:wreck:category' v='distributed_remains' />
   </node>
-  <node id='-22495662' action='modify' visible='true' lat='54.71713555734' lon='13.36657302452' />
-  <node id='-22495663' action='modify' visible='true' lat='54.71476817572' lon='13.35705656839' />
+  <node id='-22495662' action='modify' visible='true' lat='54.7219442378' lon='13.36502807213' />
+  <node id='-22495663' action='modify' visible='true' lat='54.71957713698' lon='13.355511616' />
   <node id='-22495664' action='modify' visible='true' lat='54.70446103024' lon='13.37885093544'>
     <tag k='seamark:name' v='foo' />
     <tag k='seamark:rock:water_level' v='submerged' />
@@ -734,7 +734,7 @@
     <tag k='seamark:topmark:shape' v='cylinder' />
     <tag k='seamark:type' v='buoy_lateral' />
   </node>
-  <node id='-22495670' action='modify' visible='true' lat='54.71579695717' lon='13.35163848473' />
+  <node id='-22495670' action='modify' visible='true' lat='54.72060579641' lon='13.35009353234' />
   <node id='-22495671' action='modify' visible='true' lat='54.7091547237' lon='13.39402296077'>
     <tag k='seamark:buoy_isolated_danger:colour' v='black;red;black' />
     <tag k='seamark:buoy_isolated_danger:colour_pattern' v='horizontal' />
@@ -744,7 +744,7 @@
     <tag k='seamark:topmark:shape' v='2 spheres' />
     <tag k='seamark:type' v='buoy_isolated_danger' />
   </node>
-  <node id='-22495672' action='modify' visible='true' lat='54.71470621324' lon='13.364513088' />
+  <node id='-22495672' action='modify' visible='true' lat='54.71951518185' lon='13.36296813561' />
   <node id='-22495673' action='modify' visible='true' lat='54.71361166879' lon='13.39654079873'>
     <tag k='seamark:buoy_special_purpose:colour' v='yellow' />
     <tag k='seamark:topmark:colour' v='yellow' />
@@ -786,7 +786,7 @@
     <tag k='seamark:topmark:shape' v='2 spheres' />
     <tag k='seamark:type' v='buoy_isolated_danger' />
   </node>
-  <node id='-22495679' action='modify' visible='true' lat='54.72013581573' lon='13.34765152568' />
+  <node id='-22495679' action='modify' visible='true' lat='54.72494414031' lon='13.34610657329' />
   <node id='-22495680' action='modify' visible='true' lat='54.71585836621' lon='13.38265457145'>
     <tag k='seamark:beacon_safe_water:colour' v='red;white' />
     <tag k='seamark:beacon_safe_water:colour_pattern' v='vertical' />
@@ -799,7 +799,7 @@
     <tag k='seamark:topmark:shape' v='rhombus' />
     <tag k='seamark:type' v='beacon_special_purpose' />
   </node>
-  <node id='-22495682' action='modify' visible='true' lat='54.71646626278' lon='13.37185161186' />
+  <node id='-22495682' action='modify' visible='true' lat='54.72127502263' lon='13.37030665947' />
   <node id='-22495683' action='modify' visible='true' lat='54.71471747501' lon='13.39426552589'>
     <tag k='seamark:beacon_isolated_danger:colour' v='black;red;black' />
     <tag k='seamark:beacon_isolated_danger:colour_pattern' v='horizontal' />
@@ -862,7 +862,7 @@
     <tag k='seamark:rock:water_level' v='covers' />
     <tag k='seamark:type' v='rock' />
   </node>
-  <node id='-22495691' action='modify' visible='true' lat='54.71659020705' lon='13.34769027306' />
+  <node id='-22495691' action='modify' visible='true' lat='54.7213989522' lon='13.34614532067' />
   <node id='-22495692' action='modify' visible='true' lat='54.7124299609' lon='13.38256806486'>
     <tag k='seamark:buoy_safe_water:colour' v='red;white' />
     <tag k='seamark:buoy_safe_water:colour_pattern' v='vertical' />
@@ -885,9 +885,10 @@
     <tag k='seamark:type' v='wreck' />
     <tag k='seamark:wreck:category' v='mast_showing' />
   </node>
-  <node id='-22495695' action='modify' visible='true' lat='54.71820144809' lon='13.36346166206' />
-  <node id='-22495696' action='modify' visible='true' lat='54.71589610186' lon='13.35650939775' />
+  <node id='-22495695' action='modify' visible='true' lat='54.72301000212' lon='13.36191670967' />
+  <node id='-22495696' action='modify' visible='true' lat='54.72070492934' lon='13.35496444536' />
   <node id='-22495697' action='modify' visible='true' lat='54.70444412987' lon='13.38324066794'>
+    <tag k='depth' v='-2' />
     <tag k='name' v='bar' />
     <tag k='seamark:rock:water_level' v='dry' />
     <tag k='seamark:type' v='rock' />
@@ -930,28 +931,28 @@
     <tag k='seamark:topmark:shape' v='cylinder' />
     <tag k='seamark:type' v='beacon_lateral' />
   </node>
-  <node id='-22495703' action='modify' visible='true' lat='54.7184121441' lon='13.36221711708' />
-  <node id='-22495704' action='modify' visible='true' lat='54.71606963856' lon='13.36234586311' />
-  <node id='-22495705' action='modify' visible='true' lat='54.71541272118' lon='13.35932033134' />
-  <node id='-22495706' action='modify' visible='true' lat='54.70765853536' lon='13.37462888205' />
-  <node id='-22495707' action='modify' visible='true' lat='54.72212291279' lon='13.34032302415' />
-  <node id='-22495708' action='modify' visible='true' lat='54.72238484269' lon='13.37428847459' />
-  <node id='-22495709' action='modify' visible='true' lat='54.71973749609' lon='13.36365576267' />
-  <node id='-22495710' action='modify' visible='true' lat='54.71554982102' lon='13.35747062892' />
-  <node id='-22495711' action='modify' visible='true' lat='54.7154615085' lon='13.35800975293' />
-  <node id='-22495712' action='modify' visible='true' lat='54.71508036805' lon='13.35751354426' />
-  <node id='-22495713' action='modify' visible='true' lat='54.71498431235' lon='13.35984705806' />
-  <node id='-22495714' action='modify' visible='true' lat='54.71466824119' lon='13.35842012286' />
-  <node id='-22495715' action='modify' visible='true' lat='54.71509586628' lon='13.35802315593' />
-  <node id='-22495716' action='modify' visible='true' lat='54.71532517064' lon='13.35707901835' />
-  <node id='-22495717' action='modify' visible='true' lat='54.71526629222' lon='13.35819482267' />
-  <node id='-22495718' action='modify' visible='true' lat='54.71555756928' lon='13.35775494039' />
-  <node id='-22495719' action='modify' visible='true' lat='54.71548629955' lon='13.35719704092' />
-  <node id='-22495720' action='modify' visible='true' lat='54.71515473875' lon='13.35722386301' />
-  <node id='-22495721' action='modify' visible='true' lat='54.71503079009' lon='13.35776566923' />
-  <node id='-22495722' action='modify' visible='true' lat='54.72033237713' lon='13.36117740154' />
-  <node id='-22495723' action='modify' visible='true' lat='54.71946483936' lon='13.36323733807' />
-  <node id='-22495724' action='modify' visible='true' lat='54.70739651031' lon='13.34066343162' />
+  <node id='-22495703' action='modify' visible='true' lat='54.72322067314' lon='13.36067216469' />
+  <node id='-22495704' action='modify' visible='true' lat='54.72087844545' lon='13.36080091072' />
+  <node id='-22495705' action='modify' visible='true' lat='54.72022160599' lon='13.35777537895' />
+  <node id='-22495706' action='modify' visible='true' lat='54.71246833986' lon='13.37308392966' />
+  <node id='-22495707' action='modify' visible='true' lat='54.72693100166' lon='13.33877807176' />
+  <node id='-22495708' action='modify' visible='true' lat='54.72719290049' lon='13.3727435222' />
+  <node id='-22495709' action='modify' visible='true' lat='54.72454586792' lon='13.36211081028' />
+  <node id='-22495710' action='modify' visible='true' lat='54.72035868957' lon='13.35592567653' />
+  <node id='-22495711' action='modify' visible='true' lat='54.72027038752' lon='13.35646480054' />
+  <node id='-22495712' action='modify' visible='true' lat='54.71988929228' lon='13.35596859187' />
+  <node id='-22495713' action='modify' visible='true' lat='54.71979324797' lon='13.35830210567' />
+  <node id='-22495714' action='modify' visible='true' lat='54.7194772143' lon='13.35687517047' />
+  <node id='-22495715' action='modify' visible='true' lat='54.71990478867' lon='13.35647820354' />
+  <node id='-22495716' action='modify' visible='true' lat='54.72013406583' lon='13.35553406596' />
+  <node id='-22495717' action='modify' visible='true' lat='54.7200751944' lon='13.35664987028' />
+  <node id='-22495718' action='modify' visible='true' lat='54.72036643691' lon='13.356209988' />
+  <node id='-22495719' action='modify' visible='true' lat='54.72029517563' lon='13.35565208853' />
+  <node id='-22495720' action='modify' visible='true' lat='54.71996365416' lon='13.35567891062' />
+  <node id='-22495721' action='modify' visible='true' lat='54.7198397202' lon='13.35622071684' />
+  <node id='-22495722' action='modify' visible='true' lat='54.7251406784' lon='13.35963244915' />
+  <node id='-22495723' action='modify' visible='true' lat='54.72427324353' lon='13.36169238568' />
+  <node id='-22495724' action='modify' visible='true' lat='54.71220634588' lon='13.33911847923' />
   <node id='-22495725' action='modify' visible='true' lat='54.72227138887' lon='13.41138771209'>
     <tag k='seamark:daymark:shape' v='triangle, point down' />
     <tag k='seamark:type' v='daymark' />
@@ -2608,6 +2609,84 @@
     <tag k='seamark:name' v='fog=yes' />
     <tag k='seamark:type' v='landmark' />
   </node>
+  <node id='-22496027' action='modify' visible='true' lat='54.71049093106' lon='13.33954806805' />
+  <node id='-22496028' action='modify' visible='true' lat='54.70969756185' lon='13.34139342785' />
+  <node id='-22496029' action='modify' visible='true' lat='54.70925128485' lon='13.343281703' />
+  <node id='-22496030' action='modify' visible='true' lat='54.70992069851' lon='13.34371085644' />
+  <node id='-22496031' action='modify' visible='true' lat='54.71068927094' lon='13.34478374004' />
+  <node id='-22496032' action='modify' visible='true' lat='54.71046613851' lon='13.34538455486' />
+  <node id='-22496033' action='modify' visible='true' lat='54.70977194087' lon='13.34568496227' />
+  <node id='-22496034' action='modify' visible='true' lat='54.70885459005' lon='13.3447408247' />
+  <node id='-22496035' action='modify' visible='true' lat='54.70820995274' lon='13.34319587231' />
+  <node id='-22496036' action='modify' visible='true' lat='54.70863144753' lon='13.34036345959' />
+  <node id='-22496037' action='modify' visible='true' lat='54.70977194087' lon='13.33920474529' />
+  <node id='-22496049' action='modify' visible='true' lat='54.71083802521' lon='13.34815259457' />
+  <node id='-22496050' action='modify' visible='true' lat='54.71004466279' lon='13.34999795437' />
+  <node id='-22496051' action='modify' visible='true' lat='54.70959838961' lon='13.35188622952' />
+  <node id='-22496052' action='modify' visible='true' lat='54.71026779754' lon='13.35231538296' />
+  <node id='-22496053' action='modify' visible='true' lat='54.71103636339' lon='13.35338826656' />
+  <node id='-22496054' action='modify' visible='true' lat='54.71081323287' lon='13.35398908138' />
+  <node id='-22496055' action='modify' visible='true' lat='54.71011904118' lon='13.35428948879' />
+  <node id='-22496056' action='modify' visible='true' lat='54.70920169821' lon='13.35334535122' />
+  <node id='-22496057' action='modify' visible='true' lat='54.70855706641' lon='13.35180039883' />
+  <node id='-22496058' action='modify' visible='true' lat='54.70897855759' lon='13.34896798611' />
+  <node id='-22496059' action='modify' visible='true' lat='54.71011904118' lon='13.34780927181' />
+  <node id='-22496060' action='modify' visible='true' lat='54.71096198669' lon='13.35690732479' />
+  <node id='-22496061' action='modify' visible='true' lat='54.71016862669' lon='13.35875268459' />
+  <node id='-22496062' action='modify' visible='true' lat='54.70972235487' lon='13.36064095974' />
+  <node id='-22496063' action='modify' visible='true' lat='54.71039176076' lon='13.36107011318' />
+  <node id='-22496064' action='modify' visible='true' lat='54.71116032426' lon='13.36214299679' />
+  <node id='-22496065' action='modify' visible='true' lat='54.71093719442' lon='13.36274381161' />
+  <node id='-22496066' action='modify' visible='true' lat='54.71024300485' lon='13.36304421902' />
+  <node id='-22496067' action='modify' visible='true' lat='54.70932566469' lon='13.36210008144' />
+  <node id='-22496068' action='modify' visible='true' lat='54.70868103486' lon='13.36055512905' />
+  <node id='-22496069' action='modify' visible='true' lat='54.70910252475' lon='13.35772271633' />
+  <node id='-22496070' action='modify' visible='true' lat='54.71024300485' lon='13.35656400204' />
+  <node id='-22496082' action='modify' visible='true' lat='54.71063968606' lon='13.36531873226' />
+  <node id='-22496083' action='modify' visible='true' lat='54.70984631976' lon='13.36716409206' />
+  <node id='-22496084' action='modify' visible='true' lat='54.70984631976' lon='13.36888070583' />
+  <node id='-22496085' action='modify' visible='true' lat='54.7100694556' lon='13.36948152065' />
+  <node id='-22496086' action='modify' visible='true' lat='54.71083802521' lon='13.37055440426' />
+  <node id='-22496087' action='modify' visible='true' lat='54.7106148936' lon='13.37115521908' />
+  <node id='-22496088' action='modify' visible='true' lat='54.70992069851' lon='13.37145562649' />
+  <node id='-22496089' action='modify' visible='true' lat='54.70900335106' lon='13.37051148891' />
+  <node id='-22496090' action='modify' visible='true' lat='54.70835871611' lon='13.36896653652' />
+  <node id='-22496091' action='modify' visible='true' lat='54.70878020935' lon='13.3661341238' />
+  <node id='-22496092' action='modify' visible='true' lat='54.70992069851' lon='13.36497540951' />
+  <node id='-22496094' action='modify' visible='true' lat='54.70801160074' lon='13.3448910284' />
+  <node id='-22496095' action='modify' visible='true' lat='54.70721818302' lon='13.34673638821' />
+  <node id='-22496096' action='modify' visible='true' lat='54.70677187873' lon='13.34862466335' />
+  <node id='-22496097' action='modify' visible='true' lat='54.70744133332' lon='13.3490538168' />
+  <node id='-22496098' action='modify' visible='true' lat='54.70820995274' lon='13.3501267004' />
+  <node id='-22496099' action='modify' visible='true' lat='54.70798680667' lon='13.35072751522' />
+  <node id='-22496100' action='modify' visible='true' lat='54.70729256659' lon='13.35102792263' />
+  <node id='-22496101' action='modify' visible='true' lat='54.70637515969' lon='13.35008378506' />
+  <node id='-22496102' action='modify' visible='true' lat='54.70573048296' lon='13.34853883266' />
+  <node id='-22496103' action='modify' visible='true' lat='54.70615200352' lon='13.34570641994' />
+  <node id='-22496104' action='modify' visible='true' lat='54.70729256659' lon='13.34454770565' />
+  <node id='-22496117' action='modify' visible='true' lat='54.70803639479' lon='13.35647817135' />
+  <node id='-22496118' action='modify' visible='true' lat='54.70724297756' lon='13.35832353115' />
+  <node id='-22496119' action='modify' visible='true' lat='54.70679667354' lon='13.3602118063' />
+  <node id='-22496120' action='modify' visible='true' lat='54.70746612772' lon='13.36064095974' />
+  <node id='-22496121' action='modify' visible='true' lat='54.70823474667' lon='13.36171384335' />
+  <node id='-22496122' action='modify' visible='true' lat='54.70801160074' lon='13.36231465816' />
+  <node id='-22496123' action='modify' visible='true' lat='54.70731736108' lon='13.36261506557' />
+  <node id='-22496124' action='modify' visible='true' lat='54.70639995474' lon='13.361670928' />
+  <node id='-22496125' action='modify' visible='true' lat='54.70575527841' lon='13.36012597561' />
+  <node id='-22496126' action='modify' visible='true' lat='54.70617679871' lon='13.35729356289' />
+  <node id='-22496127' action='modify' visible='true' lat='54.70731736108' lon='13.35613484859' />
+  <node id='-22496128' action='modify' visible='true' lat='54.70339966795' lon='13.339033041' />
+  <node id='-22496129' action='modify' visible='true' lat='54.70369722943' lon='13.34263792992' />
+  <node id='-22496130' action='modify' visible='true' lat='54.70285413291' lon='13.34366789818' />
+  <node id='-22496131' action='modify' visible='true' lat='54.7010686942' lon='13.34383955956' />
+  <node id='-22496132' action='modify' visible='true' lat='54.69943197301' lon='13.34169379234' />
+  <node id='-22496133' action='modify' visible='true' lat='54.69913438025' lon='13.34023467064' />
+  <node id='-22496140' action='modify' visible='true' lat='54.70325088639' lon='13.34701529503' />
+  <node id='-22496141' action='modify' visible='true' lat='54.70354844896' lon='13.35062018394' />
+  <node id='-22496142' action='modify' visible='true' lat='54.70220940022' lon='13.35207930565' />
+  <node id='-22496143' action='modify' visible='true' lat='54.70091990409' lon='13.35182181358' />
+  <node id='-22496144' action='modify' visible='true' lat='54.6992831769' lon='13.34967604637' />
+  <node id='-22496145' action='modify' visible='true' lat='54.69898558305' lon='13.34821692467' />
   <way id='-44388' action='modify' visible='true'>
     <nd ref='-22495630' />
     <nd ref='-22495597' />
@@ -2760,6 +2839,123 @@
     <tag k='seamark:navigation_line:category' v='leading' />
     <tag k='seamark:navigation_line:orientation' v='123' />
     <tag k='seamark:type' v='navigation_line' />
+  </way>
+  <way id='-44405' action='modify' visible='true'>
+    <nd ref='-22496027' />
+    <nd ref='-22496028' />
+    <nd ref='-22496029' />
+    <nd ref='-22496030' />
+    <nd ref='-22496031' />
+    <nd ref='-22496032' />
+    <nd ref='-22496033' />
+    <nd ref='-22496034' />
+    <nd ref='-22496035' />
+    <nd ref='-22496036' />
+    <nd ref='-22496037' />
+    <nd ref='-22496027' />
+    <tag k='seamark:seabed_area:surface' v='sand' />
+    <tag k='seamark:type' v='seabed_area' />
+  </way>
+  <way id='-44419' action='modify' visible='true'>
+    <nd ref='-22496049' />
+    <nd ref='-22496050' />
+    <nd ref='-22496051' />
+    <nd ref='-22496052' />
+    <nd ref='-22496053' />
+    <nd ref='-22496054' />
+    <nd ref='-22496055' />
+    <nd ref='-22496056' />
+    <nd ref='-22496057' />
+    <nd ref='-22496058' />
+    <nd ref='-22496059' />
+    <nd ref='-22496049' />
+    <tag k='seamark:seabed_area:surface' v='stones' />
+    <tag k='seamark:type' v='seabed_area' />
+  </way>
+  <way id='-44421' action='modify' visible='true'>
+    <nd ref='-22496060' />
+    <nd ref='-22496061' />
+    <nd ref='-22496062' />
+    <nd ref='-22496063' />
+    <nd ref='-22496064' />
+    <nd ref='-22496065' />
+    <nd ref='-22496066' />
+    <nd ref='-22496067' />
+    <nd ref='-22496068' />
+    <nd ref='-22496069' />
+    <nd ref='-22496070' />
+    <nd ref='-22496060' />
+    <tag k='seamark:seabed_area:surface' v='rocky' />
+    <tag k='seamark:type' v='seabed_area' />
+  </way>
+  <way id='-44425' action='modify' visible='true'>
+    <nd ref='-22496082' />
+    <nd ref='-22496083' />
+    <nd ref='-22496084' />
+    <nd ref='-22496085' />
+    <nd ref='-22496086' />
+    <nd ref='-22496087' />
+    <nd ref='-22496088' />
+    <nd ref='-22496089' />
+    <nd ref='-22496090' />
+    <nd ref='-22496091' />
+    <nd ref='-22496092' />
+    <nd ref='-22496082' />
+    <tag k='seamark:seabed_area:surface' v='coral' />
+    <tag k='seamark:type' v='seabed_area' />
+  </way>
+  <way id='-44428' action='modify' visible='true'>
+    <nd ref='-22496094' />
+    <nd ref='-22496095' />
+    <nd ref='-22496096' />
+    <nd ref='-22496097' />
+    <nd ref='-22496098' />
+    <nd ref='-22496099' />
+    <nd ref='-22496100' />
+    <nd ref='-22496101' />
+    <nd ref='-22496102' />
+    <nd ref='-22496103' />
+    <nd ref='-22496104' />
+    <nd ref='-22496094' />
+    <tag k='seamark:seabed_area:surface' v='mud' />
+    <tag k='seamark:type' v='seabed_area' />
+  </way>
+  <way id='-44432' action='modify' visible='true'>
+    <nd ref='-22496117' />
+    <nd ref='-22496118' />
+    <nd ref='-22496119' />
+    <nd ref='-22496120' />
+    <nd ref='-22496121' />
+    <nd ref='-22496122' />
+    <nd ref='-22496123' />
+    <nd ref='-22496124' />
+    <nd ref='-22496125' />
+    <nd ref='-22496126' />
+    <nd ref='-22496127' />
+    <nd ref='-22496117' />
+    <tag k='seamark:seabed_area:quality' v='hard' />
+    <tag k='seamark:seabed_area:surface' v='rocky' />
+    <tag k='seamark:type' v='seabed_area' />
+  </way>
+  <way id='-44433' action='modify' visible='true'>
+    <nd ref='-22496128' />
+    <nd ref='-22496129' />
+    <nd ref='-22496130' />
+    <nd ref='-22496131' />
+    <nd ref='-22496132' />
+    <nd ref='-22496133' />
+    <tag k='seamark:seabed_area:surface' v='rocky' />
+    <tag k='seamark:type' v='seabed_area' />
+  </way>
+  <way id='-44440' action='modify' visible='true'>
+    <nd ref='-22496140' />
+    <nd ref='-22496141' />
+    <nd ref='-22496142' />
+    <nd ref='-22496143' />
+    <nd ref='-22496144' />
+    <nd ref='-22496145' />
+    <tag k='seamark:seabed_area:surface' v='coral' />
+    <tag k='seamark:type' v='seabed_area' />
   </way>
   <relation id='-809' action='modify' visible='true'>
     <member type='way' ref='-44392' role='inner' />
