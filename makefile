@@ -5,7 +5,7 @@
 SHELL=/bin/bash
 OGR_OPTS=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON,UPDATES=APPLY" S57_CSV="$(PWD)"
 
-.PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm data/vwm data/bsh icons
+.PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm data/vwm data/bsh icons obf
 
 help:
 	cat README.md
@@ -151,6 +151,17 @@ omc: data/omc
 	$</OsmAndMapCreator.sh
 	mv -v data/omc/*obf data/obf/
 
+obf: data/omc
+	mkdir -p $@
+	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch.xml
+	for F in $@/*.obf; do mv -v $$F $${F/_2./.}; done
+	ls -lh $@/*.obf
+	cp -v $@/*.obf data/obf/
+
 icons:
 	cd icons && ./genicons.py
 	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
+
+lights:
+	wget -O $@.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];(  nw["seamark:light:range"][~"seamark:type"~"landmark"];  nw["seamark:light:range"][~"seamark:type"~"light"];  nw["seamark:light:range"][~"seamark:type"~"beacon"];  nw["seamark:light:1:range"][~"seamark:type"~"landmark"];  nw["seamark:light:1:range"][~"seamark:type"~"light"];  nw["seamark:light:1:range"][~"seamark:type"~"beacon"];);(._;>;);out meta;'
+	./lightsectors.py $@.osm $@-sectors.osm
