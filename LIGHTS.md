@@ -12,13 +12,20 @@ The procedure is as follows:
 - review the output file in JOSM (optional)
 - generate an OBF with the [OsmAndMapCreator](https://osmand.net/docs/versions/map-creator) using these [rendering_types.xml](rendering_types.xml) from the output file
 
-:exclamation: The sectors in this OBF are displayed in OsmAnd with the [marine style](marine.render.xml) only.
+:exclamation: The sectors in this OBF are displayed in OsmAnd with the [marine style](marine.render.xml) only. The sections in `marine.render.xml` and in `rendering_types.xml` responsible for light sector rendering can be found by searing for `lightsector`.
+
+There are custom settings in the hide section of the map config to hide
+
+- *light sectors* - hides the sector limits and arcs 
+- *light sector sources* - hides light source icons, the label is still displayed
+
+The icons and labels have a higher render priority and get displayed above other icons/labels, so you might want to hide the *light sector sources* to be able to see the actual beacon/lighthouse icon.
 
 The script creates
 
 - a colored arc for the sector with characteristics label
 - lines at sector limits with bearing label
-- a line for directional lights with bearing and characteristics label
+- a colored line for directional lights with bearing and characteristics label
 - a marker at the light source with characteristics label
 
 :point_right: Example OBFs can be found in the [releases](https://github.com/quantenschaum/mapping/releases).
@@ -30,14 +37,14 @@ In OsmAnd light sectors look like this.
 overpass query
 
 ```
-[out:xml][timeout:90][bbox:{{bbox}}];
+[out:xml][timeout:90];
 (
-  nwr["seamark:light:colour"][~"seamark:type"~"landmark"];
-  nwr["seamark:light:colour"][~"seamark:type"~"light"];
-  nwr["seamark:light:colour"][~"seamark:type"~"beacon"];
-  nwr["seamark:light:1:colour"][~"seamark:type"~"landmark"];
-  nwr["seamark:light:1:colour"][~"seamark:type"~"light"];
-  nwr["seamark:light:1:colour"][~"seamark:type"~"beacon"];
+  nwr["seamark:light:range"][~"seamark:type"~"landmark"];
+  nwr["seamark:light:range"][~"seamark:type"~"light"];
+  nwr["seamark:light:range"][~"seamark:type"~"beacon"];
+  nwr["seamark:light:1:range"][~"seamark:type"~"landmark"];
+  nwr["seamark:light:1:range"][~"seamark:type"~"light"];
+  nwr["seamark:light:1:range"][~"seamark:type"~"beacon"];
 );
 (._;>;);
 out meta;
