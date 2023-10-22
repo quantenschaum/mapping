@@ -383,7 +383,7 @@ node["seamark:light:category"=floodlight]::floodlight {
 }
 
 
-node["seamark:type"^=light_]::int1_lighthouse {
+node["seamark:type"^=light_m]::int1_lighthouse {
 	icon-image: eval(concat("icons/gen/",tag("seamark:type"),".svg"));
   icon-width: 60;
   icon-offset-x: 0;
