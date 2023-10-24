@@ -144,6 +144,7 @@ josm: data/josm.jar
 
 
 data/omc:
+	mkdir -p data
 	wget -O $@.zip https://download.osmand.net/latest-night-build/OsmAndMapCreator-main.zip
 	unzip $@.zip -d $@
 

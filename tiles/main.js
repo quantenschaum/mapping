@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var overlays = {
     'Grid': grid,
-    'ENC':L.tileLayer('{z}/{x}/{y}.png', {
+    'ENC':L.tileLayer('enc/{z}/{x}/{y}.png', {
       attribution: '<a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS ENC</a>, <a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
     }),
     'Depth Contours':L.tileLayer('contours/{z}/{x}/{y}.png', {
