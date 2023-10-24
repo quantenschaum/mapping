@@ -165,3 +165,6 @@ icons:
 lights:
 	wget -O $@.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];(  nw["seamark:light:range"][~"seamark:type"~"landmark"];  nw["seamark:light:range"][~"seamark:type"~"light"];  nw["seamark:light:range"][~"seamark:type"~"beacon"];  nw["seamark:light:1:range"][~"seamark:type"~"landmark"];  nw["seamark:light:1:range"][~"seamark:type"~"light"];  nw["seamark:light:1:range"][~"seamark:type"~"beacon"];);(._;>;);out meta;'
 	./lightsectors.py $@.osm $@-sectors.osm
+	mkdir -p osm
+	cp $@-sectors.osm osm
+	$(MAKE) obf
