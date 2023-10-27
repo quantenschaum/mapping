@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <osmand_types>
     <!-- Version 1.3, 2023-05-27 adding tags for nautical rendering for seamarks in INT-1 P, R, S sections Lights, Fog Signals, Radar -->
-
+	
 	<!-- currently name tags are indexed with name and additional in nameTags separated by comma -->
 
 	<!--
 		<category ?name>
-
-		<type
+		
+		<type 
 		tag="" value="" - necessary
 		minzoom="" - indexed for map section (min zoom)
 		?additional="true/text" - attach tag/value to another map object
@@ -18,7 +18,7 @@
 		?order - order to store sequentially as tag in object (default 50)
 		?propagateToNodes - propagate this tag from way to their node
 		/>
-
+		
 		Entity convert used to convert tags.
 		if_tag1="1" if_tag2="2" means 1 and 2
 		Examples:
@@ -26,7 +26,7 @@
 		<entity_convert pattern="tag_transform" from_tag="attraction" if_not_tag1="tourism" to_tag1="attraction" to_tag2="tourism" to_value2="attraction"/>
 
 		<entity_convert pattern="tag_transform" from_tag="attraction" if_not_tag1="tourism" to_tag1="attraction" to_tag2="tourism" to_value2="attraction" apply_to="node,way,relation"/>
-
+		
 		if_region_name="gb" - checks if source file name contains a string. $us means "starts with us"
 		if_not_region_name="gb" - checks if source file name does not contains a string
 		if_starts_with_tag1="ref" if_starts_with_value1="dn" - checks if value of tag starts with substring
@@ -55,7 +55,7 @@
 		- nameTags, namePrefix - propagate names from relation to way/node with prefix
 		- additionalTags, additionalNamePrefix - propagates unique value from relations to tag (uses group sort to resolve conflicts)
 		- relationGroupPrefix - name prefix for all relation groups by default equal to "tag_value"
-		- relationGroupNameTags  - create groups like road_ref_1, road_ref_2,
+		- relationGroupNameTags  - create groups like road_ref_1, road_ref_2, 
 		- relationGroupAdditionalTags - propagates additional tags from relation to way/node
 
 		ORDER of execution transform tags vs relation propagation tags:
@@ -92,10 +92,9 @@
 	<type tag="fixme_tag" value="yes" minzoom="12" notosm="true" order="128"/>
 	<type tag="note" additional="text" minzoom="12" order="128"/>
 	<type tag="note_tag" value="yes" minzoom="12" notosm="true" order="128"/>
-	<type tag="depth" additional="text" minzoom="6" order="128"/>
-	<type tag="depth:exposition" additional="true" minzoom="6" />
+	<type tag="depth" additional="text" minzoom="12" order="128"/>
 <!--	<entity_convert pattern="tag_transform" from_tag="comment" to_tag1="note"/>-->
-
+	
 	<type tag="survey" value="ground" minzoom="13" additional="true" notosm="true" />
 	<entity_convert pattern="tag_transform" from_tag="source" if_contains_tag1="source" if_contains_value1="GPS" to_tag1="survey" to_value1="ground" apply_to="way" poi="false" />
 	<entity_convert pattern="tag_transform" from_tag="source" if_contains_tag1="source" if_contains_value1="mapillary" to_tag1="survey" to_value1="ground" apply_to="way" poi="false" />
@@ -890,7 +889,7 @@
 <!--	<type tag="osmand_ele_start" additional="true" order="80"/>
 	<type tag="osmand_ele_end" additional="true" order="80"/>-->
 
-
+	
 	<!--  not used
 	<type tag="wiki_id" additional="text" map="false" lang="true"/>
 	-->
@@ -919,7 +918,7 @@
 	<type tag="region_metric" additional="text"/>
 	<type tag="region_population" additional="text"/>
 
-
+	
 <!--	<type tag="description_tag" value="yes" minzoom="12" nameTags="description" order="128"/>-->
 	<entity_convert pattern="tag_transform" from_tag="contact:website" to_tag1="contact:website" to_tag2="website" map="no"/>
 	<entity_convert pattern="tag_transform" from_tag="website" if_not_tag1="contact:website" to_tag1="contact:website" to_tag2="website" map="no"/>
@@ -1092,7 +1091,7 @@
 	<entity_convert pattern="tag_transform" from_tag="ele" if_not_less_tag1="ele" if_not_less_value1="6501" if_less_tag1="ele" if_less_value1="7000" to_tag1="ele" to_tag2="ele_limit" to_value2="7000" notosm="true"/>
 	<entity_convert pattern="tag_transform" from_tag="ele" if_not_less_tag1="ele" if_not_less_value1="7001" if_less_tag1="ele" if_less_value1="7500" to_tag1="ele" to_tag2="ele_limit" to_value2="7500" notosm="true"/>
 	<entity_convert pattern="tag_transform" from_tag="ele" if_not_less_tag1="ele" if_not_less_value1="7501" to_tag1="ele" to_tag2="ele_limit" to_value2="9000" notosm="true"/>
-
+	
 
 	<category name="routes">
 		<type tag="route" value="segment" minzoom="3" nameTags="name,ref"/>
@@ -1112,7 +1111,7 @@
 
 
 		<type tag="route_id" additional="text" minzoom="3"/>
-
+		
 <!--		<type tag="gpx_icon" additional="true"/>
 
 		<type tag="thickness" value="bold" minzoom="3" additional="true"/>
@@ -1125,13 +1124,13 @@
 		<type tag="icon" minzoom="3" additional="true"/>-->
 
 	</category>
-
+	
 	<category name="highway">
-		<type tag="route" value="road" relationGroupNamePrefix="route_road_"
-			relationGroupNameTags="ref,network,modifier,us_state_network,us_county_network,name,ref:colour"
+		<type tag="route" value="road" relationGroupNamePrefix="route_road_" 
+			relationGroupNameTags="ref,network,modifier,us_state_network,us_county_network,name,ref:colour" 
 			relationGroupAdditionalTags="shield_color,shield_shape,shield_shape_mod,shield_order,shield_text_color,shield_bg_color"
 			order="256" notosm="true" relationGroup="true" />
-
+		
 		<!-- USA road shields -->
 		<entity_convert pattern="tag_transform" from_tag="route_road_*_ref" if_region_name="$us" if_not_region_name="$us_west-virginia" if_not_tag1="route_road_*_shield_shape" if_not_tag2="route_road_*_us_county_network" if_not_value2="yes" to_tag1="route_road_*_ref" to_tag2="route_road_*_shield_shape" to_value2="rounded_rectangle" to_tag3="route_road_*_shield_color" to_value3="white" seq="1:10" apply_to="way,relation" notosm="true"/>
 
@@ -1209,7 +1208,7 @@
 		<entity_convert pattern="tag_transform" from_tag="route_road_*_ref" if_region_name="$us" if_starts_with_tag1="route_road_*_ref" if_starts_with_value1="dc" seq="1:10" apply_to="way,relation" notosm="true"/>
 		<entity_convert pattern="tag_transform" from_tag="route_road_*_ref" if_region_name="$us" if_starts_with_tag1="route_road_*_ref" if_starts_with_value1="sr" seq="1:10" apply_to="way,relation" notosm="true"/>
 
-
+		
 		<!-- These suffixed tags used when converting from relation -->
 		<type tag="route_road_*_ref" seq="1:10" additional="text" minzoom="1" order="64"/>
 		<type tag="route_road_*_name" seq="1:10" additional="text" minzoom="1" order="64"/>
@@ -1848,7 +1847,7 @@
 		<entity_convert pattern="tag_transform" from_tag="route_road_*_ref:colour" from_value="green" to_tag1="route_road_*_shield_color" to_value1="green" seq="1:3" apply_to="way" notosm="true"/>
 		<entity_convert pattern="tag_transform" from_tag="route_road_*_ref:colour" from_value="#81bf48" to_tag1="route_road_*_shield_color" to_value1="green" seq="1:3" apply_to="way" notosm="true"/>
 		<entity_convert pattern="tag_transform" from_tag="route_road_*_ref:colour" from_value="#00ff00" to_tag1="route_road_*_shield_color" to_value1="green" seq="1:3" apply_to="way" notosm="true"/>
-
+ 
 		<!-- End road shields -->
 		<!-- 3.8: START Backward compatibility -->
 		<type tag="road_ref_*" seq="1:10" additional="text" minzoom="1" order="64"/>
@@ -2147,7 +2146,7 @@
 		<!-- Convert foot & walking into hiking for now-->
 		<entity_convert pattern="tag_transform" from_tag="route" from_value="foot" to_tag1="route" to_value1="hiking" apply_to="relation"/>
 		<entity_convert pattern="tag_transform" from_tag="route" from_value="walking" to_tag1="route" to_value1="hiking" apply_to="relation"/>
-
+		
 		<!-- Fix for routes without route but with network=*wn : add route_ =hiking(or foot) -->
 		<entity_convert pattern="tag_transform" from_tag="network" from_value="lwn" if_not_tag1="route" if_not_tag2="network:type" if_not_value2="node_network" to_tag1="network" to_value1="lwn" to_tag2="route" to_value2="hiking" apply_to="relation"/>
 		<entity_convert pattern="tag_transform" from_tag="network" from_value="iwn" if_not_tag1="route" if_not_tag2="network:type" if_not_value2="node_network" to_tag1="network" to_value1="iwn" to_tag2="route" to_value2="hiking" apply_to="relation"/>
@@ -2156,7 +2155,7 @@
 		<!-- Convert network=*wn to -> node_network_*wn=*wn (only node network) -->
 		<entity_convert pattern="tag_transform" from_tag="network" from_value="iwn" if_tag1="network:type" if_value1="node_network" to_tag1="node_network" apply_to="relation"/>
 		<entity_convert pattern="tag_transform" from_tag="network" from_value="nwn" if_tag1="network:type" if_value1="node_network" to_tag1="node_network" apply_to="relation"/>
-		<entity_convert pattern="tag_transform" from_tag="network" from_value="rwn" if_tag1="network:type" if_value1="node_network" to_tag1="node_network" apply_to="relation"/>
+		<entity_convert pattern="tag_transform" from_tag="network" from_value="rwn" if_tag1="network:type" if_value1="node_network" to_tag1="node_network" apply_to="relation"/>		
 		<entity_convert pattern="tag_transform" from_tag="network" from_value="lwn" if_tag1="network:type" if_value1="node_network" to_tag1="node_network" apply_to="relation"/>
 
 
@@ -2176,33 +2175,33 @@
 		<type tag="node_network_lwn" value="lwn" minzoom="11" additional="true" />
 		<type tag="node_network_nwn" value="nwn" minzoom="11" additional="true" />
 		<type tag="node_network_rwn" value="rwn" minzoom="11" additional="true" />
-
+		
 		<entity_convert pattern="tag_transform" from_tag="hiking_node_network" from_value="iwn" to_tag1="node_network_iwn" to_tag2="hiking_node_network"/>
 		<entity_convert pattern="tag_transform" from_tag="hiking_node_network" from_value="nwn" to_tag1="node_network_nwn" to_tag2="hiking_node_network"/>
 		<entity_convert pattern="tag_transform" from_tag="hiking_node_network" from_value="rwn" to_tag1="node_network_rwn" to_tag2="hiking_node_network"/>
 		<entity_convert pattern="tag_transform" from_tag="hiking_node_network" from_value="lwn" to_tag1="node_network_lwn" to_tag2="hiking_node_network"/>
 		<!-- 3.8: END Backward compatibility -->
+	
 
-
-		<type tag="route" value="hiking" relationGroupSort="network=iwn,nwn,rwn,lwn"
+		<type tag="route" value="hiking" relationGroupSort="network=iwn,nwn,rwn,lwn" 
 				nameTags="ref,name,osmc_text,osmc_textcolor,operator,symbol,survey:date,website,wikipedia" namePrefix="hiking_route_"
 				additionalTags="node_network,network,historic,educational,signed_direction,osmc_foreground,osmc_foreground2,osmc_background,osmc_waycolor"
 				additionalPrefix="hiking_"
 				relationGroupAdditionalTags="node_network,network,historic,educational,osmc_foreground,osmc_foreground2,osmc_background,osmc_waycolor"
 				relationGroupNameTags="osmc_stub_name,ref,name,osmc_text,osmc_textcolor,operator,symbol,sac_scale,cai_scale,survey:date,website,wikipedia"
 				minzoom="11" relationGroup="true" notosm="true"/>
-
-		<type tag="route" value="horse"
+				
+		<type tag="route" value="horse" 
 				nameTags="ref,name,osmc_text,osmc_textcolor,operator,symbol,survey:date,website,wikipedia" namePrefix="horse_route_"
-				additionalTags="network,historic,educational,osmc_foreground,osmc_foreground2,osmc_background,osmc_waycolor"
-				relationGroupAdditionalTags="network,historic,educational,signed_direction,osmc_foreground,osmc_background,osmc_foreground2,osmc_waycolor"
+				additionalTags="network,historic,educational,osmc_foreground,osmc_foreground2,osmc_background,osmc_waycolor" 
+				relationGroupAdditionalTags="network,historic,educational,signed_direction,osmc_foreground,osmc_background,osmc_foreground2,osmc_waycolor" 
 				relationGroupNameTags="osmc_stub_name,ref,name,osmc_text,osmc_textcolor,operator,symbol,survey:date,website,wikipedia"
 				minzoom="11" relationGroup="true" notosm="true"/>
 
-		<type tag="route" value="running"
+		<type tag="route" value="running" 
 				nameTags="ref,name,osmc_text,osmc_textcolor,operator" namePrefix="running_route_"
-				additionalTags="network,osmc_foreground,osmc_foreground2,osmc_background,osmc_waycolor"
-				relationGroupAdditionalTags="network,osmc_foreground,osmc_background,osmc_foreground2,osmc_waycolor"
+				additionalTags="network,osmc_foreground,osmc_foreground2,osmc_background,osmc_waycolor" 
+				relationGroupAdditionalTags="network,osmc_foreground,osmc_background,osmc_foreground2,osmc_waycolor" 
 				relationGroupNameTags="osmc_stub_name,ref,name,osmc_text,osmc_textcolor,operator"
 				minzoom="11" relationGroup="true" notosm="true"/>
 
@@ -2313,7 +2312,7 @@
 			-->
 		<!-- Convert from *cn-yes to (applies on ways, so we need to use prefix) -->
 		<!-- this is deprecated way cause it doesn't convert bicycle_ref, bicycle_name, route_bicycle_1_ref, route_bicycle_1_name..-->
-		<!--
+		<!-- 
 		<entity_convert pattern="tag_transform" from_tag="lcn" from_value="yes" if_not_tag1="route_bicycle" if_not_tag2="mtb:scale" to_tag1="route_bicycle" to_value1="" to_tag2="network" to_value2="lcn" apply_to="way"/>
 		<entity_convert pattern="tag_transform" from_tag="lcn" from_value="yes" if_not_tag1="route_mtb" if_tag1="mtb:scale" to_tag1="route_mtb" to_value1="" to_tag2="network" to_value2="lcn" apply_to="way"/>
 		<entity_convert pattern="tag_transform" from_tag="rcn" from_value="yes" if_not_tag1="route_bicycle" if_not_tag2="mtb:scale" to_tag1="route_bicycle" to_value1="" to_tag2="network" to_value2="rcn" apply_to="way"/>
@@ -2343,19 +2342,19 @@
 		<entity_convert pattern="tag_transform" from_tag="mtb:name" if_not_tag1="route" to_tag1="mtb:name" to_tag2="route" to_value2="mtb" apply_to="way"/>
 
 		<type tag="route" value="bicycle" relationGroupSort="network=icn,ncn,rcn,lcn"
-					additionalTags="node_network,network,osmc_foreground,osmc_background,osmc_waycolor,mtb:type,mtb:scale,mtb:scale:imba,mtb:scale:uphill,class:bicycle:mtb"
+					additionalTags="node_network,network,osmc_foreground,osmc_background,osmc_waycolor,mtb:type,mtb:scale,mtb:scale:imba,mtb:scale:uphill,class:bicycle:mtb" 
 					nameTags="name,ref,osmc_text,osmc_textcolor,operator,symbol,survey:date,website,wikipedia" namePrefix="bicycle_"
-					relationGroupAdditionalTags="node_network,network,osmc_foreground,osmc_background,osmc_waycolor,mtb:scale:imba,mtb:scale:uphill,class:bicycle:mtb"
+					relationGroupAdditionalTags="node_network,network,osmc_foreground,osmc_background,osmc_waycolor,mtb:scale:imba,mtb:scale:uphill,class:bicycle:mtb" 
 					relationGroupNameTags="name,mtb:name,ref,osmc_text,osmc_textcolor,osmc_stub_name,operator,symbol,survey:date,website,wikipedia"
 					minzoom="11" relationGroup="true" notosm="true"/>
 		<entity_convert pattern="tag_transform" from_tag="name" if_tag1="route" if_value1="mtb" if_not_tag1="mtb:name" to_tag1="name" to_tag2="mtb:name" apply_to="relation"/>
 		<type tag="route" value="mtb" relationGroupSort="network=icn,ncn,rcn,lcn"
-					additionalTags="node_network,network,osmc_foreground,osmc_background,osmc_waycolor,mtb:type,mtb:scale,mtb:scale:imba,mtb:scale:uphill,class:bicycle:mtb"
+					additionalTags="node_network,network,osmc_foreground,osmc_background,osmc_waycolor,mtb:type,mtb:scale,mtb:scale:imba,mtb:scale:uphill,class:bicycle:mtb" 
 					nameTags="mtb:name,ref,osmc_text,osmc_textcolor,operator,symbol,survey:date,website,wikipedia" namePrefix="bicycle_"
-					relationGroupAdditionalTags="node_network,network,osmc_foreground,osmc_background,osmc_waycolor,mtb:scale:imba,mtb:scale:uphill,class:bicycle:mtb"
+					relationGroupAdditionalTags="node_network,network,osmc_foreground,osmc_background,osmc_waycolor,mtb:scale:imba,mtb:scale:uphill,class:bicycle:mtb" 
 					relationGroupNameTags="name,mtb:name,ref,osmc_text,osmc_textcolor,osmc_stub_name,operator,symbol,survey:date,website,wikipedia"
 					minzoom="11" relationGroup="true" notosm="true"/>
-
+		
 		<type tag="mtb:type" value="crosscountry" minzoom="11" additional="true" />
 		<type tag="mtb:type" value="allmountain" minzoom="11" additional="true" />
 		<type tag="mtb:type" value="freeride" minzoom="11" additional="true" />
@@ -2442,11 +2441,11 @@
 		<type tag="rcn_ref" value="" additional="text" minzoom="11" />
 		<type tag="lcn_ref" value="" additional="text" minzoom="11" />
 
-
+	
 		<!-- These tags are used for nodes with multiple networks (rwn_ref + rcn_ref etc.) only -->
 		<!-- 3.8 Start: Backward compatibility-->
 		<type tag="multiple_node_networks" value="true" minzoom="11" order="5"/> <!-- This tag is used for nodes with multiple networks (rwn_ref + rcn_ref etc.) only -->
-		<type tag="icn_ref_value" minzoom="11" additional="text"/>
+		<type tag="icn_ref_value" minzoom="11" additional="text"/> 
 		<type tag="rcn_ref_value" minzoom="11" additional="text"/>
 		<type tag="ncn_ref_value" minzoom="11" additional="text"/>
 		<type tag="lcn_ref_value" minzoom="11" additional="text"/>
@@ -2464,7 +2463,7 @@
 		<entity_convert pattern="tag_transform" from_tag="nwn_ref" to_tag1="nwn_ref" to_tag3="nwn_ref_value" to_tag2="multiple_node_networks" to_value2="true" />
 		<entity_convert pattern="tag_transform" from_tag="lwn_ref" to_tag1="lwn_ref" to_tag3="lwn_ref_value" to_tag2="multiple_node_networks" to_value2="true" />
 		<!-- 3.8 End: Backward compatibility -->
-
+		
 
 		<!-- POI conversion -->
 		<entity_convert pattern="tag_transform" from_tag="iwn_ref" to_tag1="iwn_ref_name" to_tag2="iwn_ref" to_value2="yes" map="false"/>
@@ -2490,11 +2489,11 @@
 	<category name="piste">
 		<!-- ROUTE SECTION: ski/ piste -->
 		<entity_convert pattern="tag_transform" from_tag="route" from_value="ski" to_tag1="route" to_value1="piste"/>
-		<type tag="route" value="piste"
+		<type tag="route" value="piste" 
 			nameTags="piste:name,piste:ref,osmc_text,osmc_textcolor"
 			relationGroupNameTags="piste:name,piste:ref,osmc_text,osmc_textcolor,osmc_stub_name"
-			additionalTags="piste:type,piste:difficulty,piste:grooming,piste:abandoned,piste:oneway,piste_region,osmc_foreground,osmc_background"
-			relationGroupAdditionalTags="piste:type,piste:difficulty,piste:grooming,piste:abandoned,piste:oneway,piste_region,osmc_foreground,osmc_background"
+			additionalTags="piste:type,piste:difficulty,piste:grooming,piste:abandoned,piste:oneway,piste_region,osmc_foreground,osmc_background" 
+			relationGroupAdditionalTags="piste:type,piste:difficulty,piste:grooming,piste:abandoned,piste:oneway,piste_region,osmc_foreground,osmc_background" 
 			minzoom="11" relationGroup="true"/>
 
 		<entity_convert pattern="tag_transform" from_tag="name" if_tag1="piste:type" if_not_tag1="piste:name" to_tag1="piste:name" to_tag2="name" apply_to="way,relation" poi="no"/>
@@ -5363,7 +5362,7 @@
 		<type tag="amenity" value="avalanche_transceiver" minzoom="15" />
 		<type tag="avalanche_transceiver" value="training" minzoom="15" additional="true"/>
 		<type tag="avalanche_transceiver" value="checkpoint" minzoom="15" additional="true"/>
-
+		
 	</category>
 
 
@@ -5852,20 +5851,9 @@
 		<type tag="natural" value="wood" minzoom="6" order="61"/>
 		<entity_convert pattern="tag_transform" from_tag="landuse" from_value="wood" to_tag1="natural" />
 		<type tag="contour" value="elevation" minzoom="11" notosm="true"/>
-		<type tag="point" value="depth" minzoom="12" notosm="true"/>
-		<type tag="contour" value="depth" minzoom="6" notosm="true"/>
-		<type tag="contourarea" value="depth" minzoom="10" notosm="true"/>
-    <category name="lightsector">
-      <type tag="lightsector" value="limit"  minzoom="10" notosm="true"/>
-      <type tag="lightsector" value="orientation"  minzoom="10" notosm="true"/>
-      <type tag="lightsector" value="arc"  minzoom="10" notosm="true"/>
-      <type tag="lightsector" value="source" additional="true"  minzoom="8" notosm="true"/>
-      <type tag="lightsector:low" additional="true"  minzoom="10" notosm="true"/>
-    </category>
-    <type tag="seamark:navigation_line:orientation" additional="text"  minzoom="10" notosm="true"/>
-    <type tag="seamark:recommended_track:orientation" additional="text"  minzoom="10" notosm="true"/>
-    <type tag="colour" additional="true" minzoom="10" notosm="true"/>
+		<type tag="contour" value="depth" minzoom="3" notosm="true"/>
 		<type tag="contour" value="temperature" minzoom="3" notosm="true"/>
+		<type tag="point" value="depth" minzoom="6" notosm="true"/>
 		<type tag="elevation" additional="text" minzoom="13" notosm="true"/>
 		<type tag="temperature" additional="text" minzoom="3" notosm="true"/>
 		<type tag="leisure" value="nature_reserve" minzoom="6" order="49"/>
@@ -5934,9 +5922,28 @@
 		<type tag="wood:age" value="young" minzoom="10" additional="true"/>
 	</category>
 
-  <type tag="contourtype" minzoom="10" additional="true" notosm="true"/>
-	<type tag="areatype"    minzoom="6" additional="true" notosm="true"/>
-
+	<category name="contourtype">
+		<type tag="contourtype" value="5m" minzoom="14" additional="true" notosm="true"/>
+		<type tag="contourtype" value="10m" minzoom="11" additional="true" notosm="true"/>
+		<type tag="contourtype" value="20m" minzoom="11" additional="true" notosm="true"/>
+		<type tag="contourtype" value="50m" minzoom="11" additional="true" notosm="true"/>
+		<type tag="contourtype" value="100m" minzoom="5" additional="true" notosm="true"/>
+		<type tag="contourtype" value="200m" minzoom="4" additional="true" notosm="true"/>
+		<type tag="contourtype" value="1000m" minzoom="3" additional="true" notosm="true"/>
+		<type tag="contourtype" value="20f" minzoom="13" additional="true" notosm="true"/>
+		<type tag="contourtype" value="40f" minzoom="10" additional="true" notosm="true"/>
+		<type tag="contourtype" value="200f" minzoom="4" additional="true" notosm="true"/>
+		<type tag="contourtype" value="1000f" minzoom="3" additional="true" notosm="true"/>
+		<type tag="contourtype" value="-30c" minzoom="3" additional="true" notosm="true"/>
+		<type tag="contourtype" value="-20c" minzoom="3" additional="true" notosm="true"/>
+		<type tag="contourtype" value="-10c" minzoom="3" additional="true" notosm="true"/>
+		<type tag="contourtype" value="0c" minzoom="3" additional="true" notosm="true"/>
+		<type tag="contourtype" value="10c" minzoom="3" additional="true" notosm="true"/>
+		<type tag="contourtype" value="20c" minzoom="3" additional="true" notosm="true"/>
+		<type tag="contourtype" value="30c" minzoom="3" additional="true" notosm="true"/>
+		<type tag="contourtype" value="40c" minzoom="3" additional="true" notosm="true"/>
+		<type tag="contourtype" value="50c" minzoom="3" additional="true" notosm="true"/>
+	</category>
 	<category name="geocache">
 		<type tag="geocache" value="found" minzoom="15" notosm="true"/>
 		<type tag="geocache" value="not found" minzoom="15" notosm="true"/>
@@ -6082,7 +6089,7 @@
 		<entity_convert pattern="tag_transform" from_tag="fuel:alcohol" from_value="yes" to_tag1="fuel:ethanol" to_value1="yes"/>
 		<entity_convert pattern="tag_transform" from_tag="fuel" from_value="electric" to_tag1="fuel:electricity" to_value1="yes"/>
 		<type tag="amenity" value="charging_station" minzoom="13" />
-
+	
 		<entity_convert pattern="tag_transform" from_tag="amenity" from_value="charging_station" to_tag1="amenity" to_value1="charging_station" to_tag2="amenity_charging_station" to_value2="charging" map="no"/>
 		<entity_convert pattern="tag_transform" from_tag="fuel:electricity" from_value="yes" if_tag1="amenity" if_value1="fuel" to_tag1="fuel:electricity" to_value1="yes" to_tag2="amenity_charging_station" to_value2="charging" map="no"/>
 
@@ -6872,7 +6879,7 @@
 		<!-- Here user defined categories could be added -->
 		<!-- <type tag="user_defined" value="wsl" minzoom="10" /> -->
 	</category>
-
+	
 	<!-- Seamarks -->
 	<!-- example of definition openseamaps needs to be enabled later -->
 	<!-- preprocess rules
@@ -6886,16 +6893,15 @@
 		3. seamark:*:VAR -> seamark:VAR
 		   Example : seamark:buoy_lateral:category -> seamark:category (additional)
 	 -->
-
+	 
 	<!-- TODO define in additional file? -->
 	<type tag="seamark:category" minzoom="11" additional="true" notosm="true"/>
 	<type tag="seamark:character" minzoom="11" additional="text" notosm="true"/>
-	<type tag="seamark:group" minzoom="11" additional="text" notosm="true"/>
+	<type tag="seamark:group" minzoom="11" additional="text" notosm="true"/>																				 
 	<type tag="seamark:colour" minzoom="11" additional="true" notosm="true"/>
 	<type tag="seamark:height" minzoom="11" additional="text" notosm="true"/>
 	<type tag="seamark:clearance_height" minzoom="11" additional="text" notosm="true"/>
 	<!-- <type tag="seamark:name" minzoom="11" additional="text"/> -->
-  <type tag="seamark:lnam" minzoom="10" additional="true" notosm="true"/>
 	<type tag="seamark:period" minzoom="11" additional="true" notosm="true"/>
 	<type tag="seamark:range" minzoom="11" additional="true" notosm="true"/>
 	<type tag="seamark:reference" minzoom="11" additional="text" notosm="true"/>
@@ -6905,17 +6911,17 @@
 	<type tag="seamark:topmark" minzoom="11" additional="true" notosm="true"/>
 	<type tag="seamark:attached" minzoom="11" additional="true" notosm="true"/>
 	<type tag="seamark:surface" minzoom="11" additional="text" notosm="true"/>
-
+	
 	<!-- INT-1 P, R, S Sections: Lights, Fog Signals, Radar. Composition of lightDetail for nameTag2, finally selected in nautical.render.xml renderingProperty attr="lightDetail" -->
 	<!-- seamark:name and seamark:light tags as nameTag2 (as far as possible today). The OSMAND display was validated at Texel, Den Helder, Helgoland, Elbe and Weser Approaches, Rotterdam, Cherbourg.
-	default: 		name (light:character.group.period[in seconds].fog_signal:category.group.period[in seconds].radar_transponder:category.group)
+	default: 		name (light:character.group.period[in seconds].fog_signal:category.group.period[in seconds].radar_transponder:category.group) 
 					e.g. T6-VH 1 (Fl.2+1.10)= Buoy T6-VH 1 with light flashes in groups of 2 and 1. This is repeated after 10 seconds.
-					name (light:character.period[in seconds]) or name (light:character.group), with only one number element.
+					name (light:character.period[in seconds]) or name (light:character.group), with only one number element. 
 	sectors: 		name (sector1start[bearing in degree]-end[bearing in degree]-colour-sector2 ... -sector3 ... -lightcategory)
 	sector1...5:	name (sector1character.group.colour.period[in seconds].start[bearing in degree].end[bearing in degree].category[dircetional,upper,etc.].exhibition[night,fog,etc.].visibilitydistance[in nautical miles])
-	Note1: In the default, a single number remains ambiguous, because the group brackets and the unit cannot be added to the nameTag2, so far.
+	Note1: In the default, a single number remains ambiguous, because the group brackets and the unit cannot be added to the nameTag2, so far. 
 	Note2: The group tag is/cannot? be attributed correctly, e.g. for seamarks cardinal south.
-	More specific formatting, inclusion of colours and combination of text elements in the nameTags in OSMAND will require amendments for parsing of commands from rendering_types.xml and rendering styles (nautical.render.xml)
+	More specific formatting, inclusion of colours and combination of text elements in the nameTags in OSMAND will require amendments for parsing of commands from rendering_types.xml and rendering styles (nautical.render.xml) 
 	aiming at OSMAND text display according to IHO Chart INT-1 Section P: Lights and Section R Fog Signals, e.g. https://map.openseamap.org/?zoom=15&lon=4.79&lat=53.00 .
 	An appropriate graphical display of sector lights with coloured circle sections requires further development of code in OSMAND. Feedback welcome: josail @ gmx.de  -->
 	<type tag="seamark:light:add_sectors" minzoom="11" additional="text" notosm="true"/>
@@ -6932,14 +6938,14 @@
 	<entity_convert pattern="tag_transform" from_tag="seamark:light:1:group" to_tag1="seamark:light:group"/>
 	<entity_convert pattern="tag_transform" from_tag="seamark:light:1:period" to_tag1="seamark:light:period"/>
 	<!-- <apply_if lightDetail="" (default) nameTag2="seamark:light:character" (incl. light:group, light:period, fog_signal:category, fog_signal:group, fog_signal:period)/>, if-conditions assure nameTag2 display in case only seamark:light:character exists -->
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:group" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:period" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:range" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:fog_signalx:category" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:group" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:period" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:range" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:fog_signalx:category" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:group" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signal:category" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:category" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:period" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signal:category" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:category" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:range" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signal:category" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:category" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:fog_signal:category" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signal:category" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:category" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:group" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signal:category" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:category" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:period" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signal:category" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:category" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:range" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signal:category" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:category" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:fog_signal:category" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signal:category" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:category" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
 <!--	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:fog_signal:category" if_not_tag1="seamark:light:character" if_not_tag2="seamark:light:1:character" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:category" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
 	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:radar_transponder:category" if_not_tag1="seamark:light:character" if_not_tag2="seamark:light:1:character" if_not_tag3="seamark:fog_signal" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>-->
 	<!-- <apply_if lightDetail="sectors" nameTag2="seamark:light:add_sectors"/> -->
@@ -7098,14 +7104,13 @@
 		<entity_convert pattern="tag_transform" from_tag="seamark:daymark:colour_pattern" to_tag1="seamark:topmark:colour_pattern"/>
 		<type tag="seamark:light_float:colour" minzoom="11" additional="true"/>
 		<type tag="seamark:light_float:colour_pattern" minzoom="11" additional="true"/>
-
+		
 		<!-- INT-1 P Section: Lights, colours-->
 		<type tag="seamark:light:colour" minzoom="11" additional="true"/>
 		<entity_convert pattern="tag_transform" from_tag="seamark:light:1:colour" to_tag1="seamark:light:colour"/>
 		<type tag="seamark:light:2:colour" minzoom="11" additional="true"/>
 		<type tag="seamark:light:3:colour" minzoom="11" additional="true"/>
-
-		<type tag="seamark:fog_signal" minzoom="11" additional="true"/>
+		
 		<type tag="seamark:fog_signal:category" minzoom="11" additional="true"/>
 		<type tag="seamark:platform:category" minzoom="11" additional="true"/>
 		<type tag="seamark:radar_reflector" minzoom="11" additional="true"/>
@@ -7195,8 +7200,8 @@
 		<entity_convert pattern="tag_transform" from_tag="seamark:signal_station_traffic:category" from_value="port_control" to_tag1="seamark:signal_station_traffic:category_name" to_value1="Port control"/>
 		<type tag="seamark:rock:water_level" minzoom="13" additional="true"/>
 		<type tag="seamark:wreck:category" minzoom="13" additional="true"/>
-
-		<!-- INT-1 J Section: Nature of the Seabed, https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J  -->
+		
+		<!-- INT-1 J Section: Nature of the Seabed, https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_J  --> 
 		<!-- Tested 2021-12-18 together with version 1.1 of nautical.renderer.xml, e.g. http://osmand.net/go.html?lat=36.65161&lon=25.37019&z=16, feedback welcome: josail @ gmx.de -->
 		<type tag="seamark:seabed_area:surface" minzoom="13" additional="true"/>
 		<type tag="seabed_surface_1" minzoom="11" additional="text" notosm="true"/>
@@ -7210,10 +7215,10 @@
 		<type tag="seabed_letters" minzoom="11" additional="text" notosm="true"/>
 		<type tag="seamark_category" minzoom="11" additional="text" notosm="true"/>
 		<type tag="seabed_taxon_all" minzoom="11" additional="text" notosm="true"/>
-
-		<!-- INT-1 J1 to J12 Types of Seabed, OsmAnd nautical.render.xml renderingProperty options for seabedDetail as nameTag2: simple=1st surface type as letters according to INT-1 J1-J13, category=surface tag in seamark_category, all=surface qualification and type included in seabed_surface_all, seagrass and weed in seabed_taxon_all including category, genus and taxon, omit=no display-->
-		<type tag="seamark:type" value="seabed_area" minzoom="11"
-		      nameTags="seabed_surface_1,seamark_category,seabed_surface_all,seamark:seabed_area:surface"/>
+		
+		<!-- INT-1 J1 to J12 Types of Seabed, OsmAnd nautical.render.xml renderingProperty options for seabedDetail as nameTag2: simple=1st surface type as letters according to INT-1 J1-J13, category=surface tag in seamark_category, all=surface qualification and type included in seabed_surface_all, seagrass and weed in seabed_taxon_all including category, genus and taxon, omit=no display-->	
+		<type tag="seamark:type" value="seabed_area" minzoom="11" 
+		      nameTags="seabed_surface_1,seamark_category,seabed_surface_all,seamark:seabed_area:surface"/> 
 		<!-- INT-1 J1-J11 assigning letters of 1st surface type -->
 		<entity_convert pattern="tag_transform" from_tag="seamark:seabed_area:surface" if_starts_with_tag1="seamark:seabed_area:surface" if_starts_with_value1="sand" to_tag1="seamark:seabed_area:surface" to_tag2="seabed_surface_1" to_value2="S" to_tag3="seabed_surface_all" to_tag4="seamark_category"/>
 		<entity_convert pattern="tag_transform" from_tag="seamark:seabed_area:surface" if_starts_with_tag1="seamark:seabed_area:surface" if_starts_with_value1="mud" to_tag1="seamark:seabed_area:surface" to_tag2="seabed_surface_1" to_value2="M" to_tag3="seabed_surface_all" to_tag4="seamark_category"/>
@@ -7231,26 +7236,26 @@
 
 		<!-- INT-1 J12.2 backup for additional display of all qualifications and surface types in nameTag2 -->
 		<entity_convert pattern="tag_combine" separator=";" from_tag="seamark:seabed_area:surface_qualification" from_tag1="seamark:seabed_area:surface" to_tag1="seabed_surface_all" map="yes"/>
-
-		<!-- INT-1 J13.1, J13.2 weed/kelp -->
-		<type tag="seamark:type" value="weed" minzoom="11"
+			
+		<!-- INT-1 J13.1, J13.2 weed/kelp -->		
+		<type tag="seamark:type" value="weed" minzoom="11" 
 		      nameTags="seabed_letters,seamark_category,seabed_taxon_all,seamark:weed:category"/>
 		<type tag="seamark:weed:category" minzoom="11"/>
 		<entity_convert pattern="tag_transform" from_tag="seamark:weed:category" to_tag1="seamark:weed:category" to_tag2="seabed_letters" to_value2="Wd" to_tag3="seabed_taxon_all" to_tag4="seamark_category"/>
-
+		
 		<!-- INT-1 J13.3, J13.4 seagrass -->
-		<type tag="seamark:type" value="seagrass" minzoom="11"
-		      nameTags="seabed_letters,seamark_category,seabed_taxon_all,seamark:seagrass:category"/>
+		<type tag="seamark:type" value="seagrass" minzoom="11" 
+		      nameTags="seabed_letters,seamark_category,seabed_taxon_all,seamark:seagrass:category"/> 
 		<type tag="seamark:seagrass:category" minzoom="11"/>
 		<entity_convert pattern="tag_transform" from_tag="seamark:seagrass:category" to_tag1="seamark:seagrass:category" to_tag2="seabed_letters" to_value2="Sg" to_tag3="seabed_taxon_all" to_tag4="seamark_category"/>
-
-		<!-- INT-1 J13 compile seaweed or seagrass tags for additional display of all taxon information in nameTag2 -->
+		
+		<!-- INT-1 J13 compile seaweed or seagrass tags for additional display of all taxon information in nameTag2 -->		
 		<!-- TODO: add missing seagrass and weed where genus and taxon tags are missing -->
-		<entity_convert pattern="tag_combine" separator=";" from_tag="seamark:weed:category" from_tag1="genus" from_tag2="taxon" to_tag1="seabed_taxon_all" map="yes"/>
-		<entity_convert pattern="tag_combine" separator=";" from_tag="seamark:seagrass:category" from_tag1="genus" from_tag2="taxon" to_tag1="seabed_taxon_all" map="yes"/>
-
+		<entity_convert pattern="tag_combine" separator=";" from_tag="seamark:weed:category" from_tag1="genus" from_tag2="taxon" to_tag1="seabed_taxon_all" map="yes"/> 
+		<entity_convert pattern="tag_combine" separator=";" from_tag="seamark:seagrass:category" from_tag1="genus" from_tag2="taxon" to_tag1="seabed_taxon_all" map="yes"/> 
+		
 		<!-- INT-1 J14, J15 sand_waves, spring -->
-		<type tag="seamark:type" value="sand_waves" minzoom="11" />
+		<type tag="seamark:type" value="sand_waves" minzoom="11" /> 
 		<type tag="seamark:type" value="spring" minzoom="11" />
 	</category>
 
@@ -7528,7 +7533,7 @@
 		<routing_type tag="bicycle_road" mode="amend"/>
 		<routing_type tag="cyclestreet" value="yes" mode="amend"/>
 		<routing_type tag="path_bicycle_designated" mode="amend"/>
-
+		
 		<routing_type tag="bridge" mode="amend"/>
 		<routing_type tag="bus" mode="amend"/>
 		<routing_type tag="segregated" mode="amend"/>
@@ -7564,7 +7569,7 @@
 		<routing_type tag="maxheight" mode="amend" base="true" type="length"/>
 		<routing_type tag="maxlength" mode="amend" base="true" type="length"/>
 		<routing_type tag="maxweight" mode="amend" base="true" type="weight"/>
-		<routing_type tag="maxweightrating" mode="amend" base="true" type="weight"/>
+		<routing_type tag="maxweightrating" mode="amend" base="true" type="weight"/>																	  
 		<routing_type tag="maxwidth" mode="amend" base="true" type="length"/>
 		<routing_type tag="maxaxleload" mode="amend" base="true" type="weight"/>
 		<routing_type tag="width" mode="amend" base="true" type="length"/>
