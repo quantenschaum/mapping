@@ -794,7 +794,7 @@ def update_osm(
             for i, m in enumerate(modifications, 1):
                 for j, l in enumerate(m):
                     print(f"{'  'if j>1 else ''}{l}", end=" " if j == 0 else "\n")
-                if len(m) <= 4 and "seamark:lnam" in str(m[3]):
+                if len(m) <= 4 and "seamark:lnam" in str(m):
                     continue
                 requests.get(m[2])
                 input(f"  {i}/{len(modifications)}")
