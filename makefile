@@ -155,7 +155,7 @@ omc: data/omc
 obf: data/omc
 	mkdir -p $@
 	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch.xml
-	for F in $@/*.obf; do mv -v $$F $${F/_2./.}; done
+	for F in $@/*_2.obf; do mv -v $$F $${F/_2./.}; done
 	ls -lh $@/*.obf
 	cp -v $@/*.obf data/obf/
 
