@@ -16,7 +16,10 @@
 		?relation - propogate tag from relation objects to
 		?namePrefix - add prefix to all text tags
 		?order - order to store sequentially as tag in object (default 50)
-		?propagateToNodes - propagate this tag from way to their node
+		?propagateToNodes - propagate this tag from way to their node, "all" (equals to "true", "yes"), "start", "center", "end", "border"
+		?propagateToNodesPrefix - add prefix to propagated tags
+		?propagateIfTag1 - propagate if way contains tag
+		?propagateIfValue1 - propagate if way contains propagateIfTag1 with value
 		/>
 
 		Entity convert used to convert tags.
@@ -132,9 +135,38 @@
 	<type tag="service" value="driveway" minzoom="13" additional="true"/>
 	<type tag="service" value="parking_aisle" minzoom="13" additional="true"/>
 	<type tag="service" value="alley" minzoom="13" additional="true"/>
-	<type tag="access" value="no" minzoom="13" additional="true"/>
+
+	<type tag="osmand_access" value="no" minzoom="13" order="150"/>
+	<type tag="osmand_access" value="private" minzoom="13" order="150"/>
+	<type tag="osmand_vehicle" value="no" minzoom="13" order="150"/>
+	<type tag="osmand_vehicle" value="private" minzoom="13" order="150"/>
+	<type tag="osmand_motor_vehicle" value="no" minzoom="13" order="150"/>
+	<type tag="osmand_motor_vehicle" value="private" minzoom="13" order="150"/>
+	<type tag="osmand_motorcar" value="no" minzoom="13" order="150"/>
+	<type tag="osmand_motorcar" value="private" minzoom="13" order="150"/>
+	<type tag="osmand_motorcycle" value="no" minzoom="13" order="150"/>
+	<type tag="osmand_motorcycle" value="private" minzoom="13" order="150"/>
+	<type tag="osmand_foot" value="no" minzoom="13" order="150"/>
+	<type tag="osmand_foot" value="private" minzoom="13" order="150"/>
+	<type tag="osmand_bicycle" value="no" minzoom="13" order="150"/>
+	<type tag="osmand_bicycle" value="private" minzoom="13" order="150"/>
+
+	<type tag="access" value="no" minzoom="13" additional="true" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="access" value="private" minzoom="13" additional="true" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="vehicle" value="no" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="vehicle" value="private" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="motor_vehicle" value="no" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="motor_vehicle" value="private" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="motorcar" value="no" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="motorcar" value="private" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="motorcycle" value="no" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="motorcycle" value="private" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="foot" value="no" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="foot" value="private" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="bicycle" value="no" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+	<type tag="bicycle" value="private" minzoom="13" additional="true" poi="false" propagateToNodes="border" propagateIfTag1="highway" propagateToNodesPrefix="osmand_"/>
+
 	<entity_convert pattern="tag_transform" from_tag="access" from_value="false" to_tag1="access" to_value1="no" notosm="true"/>
-	<type tag="access" value="private" minzoom="13" additional="true"/>
 	<type tag="access" value="permit" minzoom="13" additional="true"/>
 	<type tag="access" value="yes" minzoom="13" additional="true" poi="false"/>
 	<entity_convert pattern="tag_transform" from_tag="access" from_value="true" to_tag1="access" to_value1="yes"/>
@@ -146,10 +178,8 @@
 	<type tag="access" value="delivery" minzoom="13" additional="true"/>
 	<type tag="access" value="emergency" minzoom="13" additional="true"/>
 	<entity_convert pattern="tag_transform" from_tag="access" from_value="restricted" to_tag1="access" to_value1="private"/>
-	<type tag="vehicle" value="no" minzoom="13" additional="true" poi="false"/>
 	<type tag="vehicle" value="yes" minzoom="13" additional="true" poi="false"/>
 	<type tag="vehicle" value="destination" minzoom="13" additional="true" poi="false"/>
-	<type tag="vehicle" value="private" minzoom="13" additional="true" poi="false"/>
 	<entity_convert pattern="tag_transform" from_tag="vehicle" from_value="permit" to_tag1="vehicle" to_value1="private"/>
 	<type tag="vehicle" value="agricultural" minzoom="13" additional="true" poi="false"/>
 	<type tag="vehicle" value="forestry" minzoom="13" additional="true" poi="false"/>
@@ -159,9 +189,7 @@
 	<entity_convert pattern="tag_transform" from_tag="vehicle" from_value="forestry; agricultural" to_tag1="vehicle" to_value1="agricultural;forestry"/>
 	<type tag="vehicle" value="delivery" minzoom="13" additional="true" poi="false"/>
 	<type tag="vehicle" value="customers" minzoom="13" additional="true" poi="false"/>
-	<type tag="motor_vehicle" value="no" minzoom="13" additional="true" poi="false"/>
 	<type tag="motor_vehicle" value="yes" minzoom="13" additional="true" poi="false"/>
-	<type tag="motor_vehicle" value="private" minzoom="13" additional="true" poi="false"/>
 	<entity_convert pattern="tag_transform" from_tag="motor_vehicle" from_value="permit" to_tag1="motor_vehicle" to_value1="private"/>
 	<type tag="motor_vehicle" value="destination" minzoom="13" additional="true" poi="false"/>
 	<type tag="motor_vehicle" value="permissive" minzoom="13" additional="true" poi="false"/>
@@ -169,10 +197,8 @@
 	<type tag="motor_vehicle" value="agricultural;forestry" minzoom="13" additional="true" poi="false"/>
 	<type tag="motor_vehicle" value="forestry" minzoom="13" additional="true" poi="false"/>
 	<type tag="motor_vehicle" value="delivery" minzoom="13" additional="true" poi="false"/>
-	<type tag="motorcar" value="no" minzoom="13" additional="true" poi="false"/>
 	<entity_convert pattern="tag_transform" from_tag="motorcar" from_value="restricted" to_tag1="motorcar" to_value1="no"/>
 	<type tag="motorcar" value="yes" minzoom="13" additional="true" poi="false"/>
-	<type tag="motorcar" value="private" minzoom="13" additional="true" poi="false"/>
 	<entity_convert pattern="tag_transform" from_tag="motorcar" from_value="permit" to_tag1="motorcar" to_value1="private"/>
 	<type tag="motorcar" value="destination" minzoom="13" additional="true" poi="false"/>
 	<type tag="motorcar" value="permissive" minzoom="13" additional="true" poi="false"/>
@@ -184,7 +210,6 @@
 	<type tag="motorcar" value="delivery" minzoom="13" additional="true" poi="false"/>
 	<type tag="motorcar" value="customers" minzoom="13" additional="true" poi="false"/>
 	<type tag="motorcycle" value="yes" minzoom="13" additional="true" poi="false"/>
-	<type tag="motorcycle" value="private" minzoom="13" additional="true" poi="false"/>
 	<entity_convert pattern="tag_transform" from_tag="motorcycle" from_value="permit" to_tag1="motorcycle" to_value1="private"/>
 	<type tag="motorcycle" value="destination" minzoom="13" additional="true" poi="false"/>
 	<type tag="motorcycle" value="permissive" minzoom="13" additional="true" poi="false"/>
@@ -195,17 +220,13 @@
 	<type tag="motorcycle" value="forestry" minzoom="13" additional="true" poi="false"/>
 	<type tag="motorcycle" value="delivery" minzoom="13" additional="true" poi="false"/>
 	<type tag="motorcycle" value="customers" minzoom="13" additional="true" poi="false"/>
-	<type tag="foot" value="no" minzoom="13" additional="true" poi="false"/>
-	<type tag="foot" value="private" minzoom="13" additional="true" poi="false"/>
 	<entity_convert pattern="tag_transform" from_tag="foot" from_value="permit" to_tag1="foot" to_value1="private"/>
 	<type tag="foot" value="yes" minzoom="13" additional="true" poi="false"/>
 	<type tag="foot" value="permissive" minzoom="13" additional="true" poi="false"/>
 	<type tag="foot" value="destination" minzoom="13" additional="true" poi="false"/>
 	<entity_convert pattern="tag_transform" from_tag="highway" from_value="path" if_tag1="foot" if_value1="designated" if_not_region_name="$france" to_tag1="highway" to_value1="footway"/>
 	<type tag="foot" value="customers" minzoom="13" additional="true" poi="false"/>
-	<type tag="bicycle" value="no" minzoom="13" additional="true" poi="false"/>
 	<type tag="bicycle" value="yes" minzoom="13" additional="true" poi="false"/>
-	<type tag="bicycle" value="private" minzoom="13" additional="true" poi="false"/>
 	<entity_convert pattern="tag_transform" from_tag="bicycle" from_value="permit" to_tag1="bicycle" to_value1="private"/>
 	<type tag="bicycle" value="permissive" minzoom="13" additional="true" poi="false"/>
 	<type tag="bicycle" value="destination" minzoom="13" additional="true" poi="false"/>
@@ -290,8 +311,8 @@
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:backward" from_value="RS:rural" to_tag1="maxspeed:backward" to_value1="80" map="no" poi="no"/>
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:backward" from_value="RU:rural" to_tag1="maxspeed:backward" to_value1="90" map="no" poi="no"/>
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:backward" from_value="RU:urban" to_tag1="maxspeed:backward" to_value1="60" map="no" poi="no"/>
-	<entity_convert pattern="tag_transform" from_tag="maxspeed:backward" from_value="UA:living_street" to_tag1="maxspeed" to_value1="20" map="no" poi="no"/>
-	<entity_convert pattern="tag_transform" from_tag="maxspeed:backward" from_value="UA:motorway" to_tag1="maxspeed" to_value1="130" map="no" poi="no"/>
+	<entity_convert pattern="tag_transform" from_tag="maxspeed:backward" from_value="UA:living_street" to_tag1="maxspeed:backward" to_value1="20" map="no" poi="no"/>
+	<entity_convert pattern="tag_transform" from_tag="maxspeed:backward" from_value="UA:motorway" to_tag1="maxspeed:backward" to_value1="130" map="no" poi="no"/>
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:backward" from_value="UA:rural" to_tag1="maxspeed:backward" to_value1="90" map="no" poi="no"/>
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:backward" from_value="UA:trunk" to_tag1="maxspeed:backward" to_value1="110" map="no" poi="no"/>
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:backward" from_value="UA:urban" to_tag1="maxspeed:backward" to_value1="50" map="no" poi="no"/>
@@ -304,8 +325,8 @@
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:forward" from_value="RS:rural" to_tag1="maxspeed:forward" to_value1="80" map="no" poi="no"/>
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:forward" from_value="RU:rural" to_tag1="maxspeed:forward" to_value1="90" map="no" poi="no"/>
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:forward" from_value="RU:urban" to_tag1="maxspeed:forward" to_value1="60" map="no" poi="no"/>
-	<entity_convert pattern="tag_transform" from_tag="maxspeed:forward" from_value="UA:living_street" to_tag1="maxspeed" to_value1="20" map="no" poi="no"/>
-	<entity_convert pattern="tag_transform" from_tag="maxspeed:forward" from_value="UA:motorway" to_tag1="maxspeed" to_value1="130" map="no" poi="no"/>
+	<entity_convert pattern="tag_transform" from_tag="maxspeed:forward" from_value="UA:living_street" to_tag1="maxspeed:forward" to_value1="20" map="no" poi="no"/>
+	<entity_convert pattern="tag_transform" from_tag="maxspeed:forward" from_value="UA:motorway" to_tag1="maxspeed:forward" to_value1="130" map="no" poi="no"/>
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:forward" from_value="UA:rural" to_tag1="maxspeed:forward" to_value1="90" map="no" poi="no"/>
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:forward" from_value="UA:trunk" to_tag1="maxspeed:forward" to_value1="110" map="no" poi="no"/>
 	<entity_convert pattern="tag_transform" from_tag="maxspeed:forward" from_value="UA:urban" to_tag1="maxspeed:forward" to_value1="50" map="no" poi="no"/>
@@ -2539,7 +2560,7 @@
 		-->
 
 		<type tag="piste:type" value="downhill" minzoom="9"/>
-		<entity_convert pattern="tag_transform" from_tag="piste:type" from_value="downhill" if_not_tag1="piste:oneway" if_not_tag2="oneway" if_not_value2="no" to_tag1="piste:type" to_value1="downhill" to_tag2="piste:oneway" to_value2="yes"/>
+		<entity_convert pattern="tag_transform" from_tag="piste:type" from_value="downhill" if_not_tag1="piste:oneway" if_not_tag2="oneway" if_not_value2="no" if_not_tag3="aerialway" to_tag1="piste:type" to_value1="downhill" to_tag2="piste:oneway" to_value2="yes" apply_to="way"/>
 		<type tag="piste:type" value="nordic" minzoom="9" />
 		<type tag="piste:type" value="skitour" minzoom="9" relation="true"/>
 		<entity_convert pattern="tag_transform" from_tag="piste:type" from_value="skitour" if_not_tag1="piste:grooming" to_tag1="piste:type" to_value1="skitour" to_tag2="piste:grooming" to_value2="backcountry"/>
@@ -5396,6 +5417,11 @@
 		<entity_convert pattern="tag_transform" from_tag="tourism" from_value="artwork" if_tag1="historic" if_value1="memorial"/>
 		<entity_convert pattern="tag_transform" from_tag="tourism" from_value="artwork" if_tag1="historic" if_value1="monument"/>
 		<type tag="artwork_type" value="statue" minzoom="15" additional="true"/>
+
+		<type tag="roller_coaster" value="track" minzoom="15"/>
+		<entity_convert pattern="tag_transform" from_tag="railway" if_tag1="roller_coaster" if_value1="track" apply_to="way"/>
+		<entity_convert pattern="tag_transform" from_tag="attraction" from_value="roller_coaster" if_tag1="roller_coaster" if_value1="track" apply_to="way" poi="no"/>
+
 		<type tag="tourism" value="aquarium" minzoom="15" />
 		<type tag="tourism" value="cabin" minzoom="15" />
 		<entity_convert pattern="tag_transform" from_tag="tourism" from_value="hut" to_tag1="tourism" to_value1="cabin"/>
@@ -5852,7 +5878,6 @@
 		<type tag="natural" value="wood" minzoom="6" order="61"/>
 		<entity_convert pattern="tag_transform" from_tag="landuse" from_value="wood" to_tag1="natural" />
 		<type tag="contour" value="elevation" minzoom="11" notosm="true"/>
-		<type tag="point" value="depth" minzoom="12" notosm="true"/>
 		<type tag="contour" value="depth" minzoom="6" notosm="true"/>
 		<type tag="contourarea" value="depth" minzoom="10" notosm="true"/>
     <category name="lightsector">
@@ -5866,6 +5891,7 @@
     <type tag="seamark:recommended_track:orientation" additional="text"  minzoom="10" notosm="true"/>
     <type tag="colour" additional="true" minzoom="10" notosm="true"/>
 		<type tag="contour" value="temperature" minzoom="3" notosm="true"/>
+		<type tag="point" value="depth" minzoom="6" notosm="true"/>
 		<type tag="elevation" additional="text" minzoom="13" notosm="true"/>
 		<type tag="temperature" additional="text" minzoom="3" notosm="true"/>
 		<type tag="leisure" value="nature_reserve" minzoom="6" order="49"/>
@@ -6235,57 +6261,64 @@
 		<entity_convert pattern="tag_transform" from_tag="amenity" from_value="retirement_home" to_tag1="amenity" to_value1="social_facility" to_tag2="social_facility" to_value2="group_home" to_tag3="social_facility:for" to_value3="senior"/>
 		<entity_convert pattern="tag_transform" from_tag="social_facility:for" from_value="elderly" to_tag1="social_facility:for" to_value1="senior"/>
 
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality" to_tag_prefix1="health_specialty:" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:acupuncture" from_value="additional" to_tag1="health_specialty:acupuncture" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:acupuncture" from_value="trained" to_tag1="health_specialty:acupuncture" to_value1="yes"/>
+<!--		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality" to_tag_prefix1="health_specialty:" to_value1="yes"/>-->
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:acupuncture" from_value="additional" to_tag1="healthcare:speciality" to_value1="acupuncture"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:acupuncture" from_value="trained" to_tag1="healthcare:speciality" to_value1="acupuncture"/>
 		<entity_convert pattern="tag_transform" from_tag="health_specialty:alternative_medicine" from_value="yes" to_tag1="healthcare" to_value1="alternative"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:chiropractic" from_value="main" to_tag1="health_specialty:chiropractic" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:dentistry" from_value="main" to_tag1="health_specialty:dentistry" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:dermatology" from_value="main" to_tag1="health_specialty:dermatology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:dermatology" from_value="partial" to_tag1="health_specialty:dermatology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:ear_nose_throat" from_value="yes" to_tag1="health_specialty:otolaryngology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:family_medicine" from_value="main" to_tag1="health_specialty:general" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:family_medicine" from_value="yes" to_tag1="health_specialty:general" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:gynaecology" from_value="main" to_tag1="health_specialty:gynaecology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:manual_therapy" from_value="partial" to_tag1="health_specialty:manual_therapy" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:nuclear" from_value="yes" to_tag1="health_specialty:nuclear_medicine" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:ophthalmology" from_value="main" to_tag1="health_specialty:ophthalmology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:orthodontics" from_value="main" to_tag1="health_specialty:orthodontics" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:orthodontics" from_value="trained" to_tag1="health_specialty:orthodontics" to_value1="yes"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:chiropractic" from_value="main" to_tag1="healthcare:speciality" to_value1="chiropractic"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:dentistry" from_value="main" to_tag1="healthcare:speciality" to_value1="stomatology"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:dermatology" from_value="main" to_tag1="healthcare:speciality" to_value1="dermatology"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:dermatology" from_value="partial" to_tag1="healthcare:speciality" to_value1="dermatology"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:ear_nose_throat" from_value="yes" to_tag1="healthcare:speciality" to_value1="otorhinolaryngology"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:gynaecology" from_value="main" to_tag1="healthcare:speciality" to_value1="gynaecology"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:manual_therapy" from_value="partial" to_tag1="healthcare:speciality" to_value1="manual_therapy"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:nuclear" from_value="yes" to_tag1="healthcare:speciality" to_value1="nuclear_medicine"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:ophthalmology" from_value="main" to_tag1="healthcare:speciality" to_value1="ophthalmology"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:orthodontics" from_value="main" to_tag1="healthcare:speciality" to_value1="orthodontics"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:orthodontics" from_value="trained" to_tag1="healthcare:speciality" to_value1="orthodontics"/>
 		<entity_convert pattern="tag_transform" from_tag="health_specialty:psychotherapy" from_value="yes" to_tag1="healthcare" to_value1="psychotherapist"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:sports_medicine" from_value="main" to_tag1="health_specialty:sports_medicine" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:dentist" from_value="yes" to_tag1="health_specialty:stomatology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:dentistry" from_value="yes" to_tag1="health_specialty:stomatology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:surgery" from_value="main" to_tag1="health_specialty:surgery" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:surgery" from_value="partial" to_tag1="health_specialty:surgery" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:surgery" from_value="trained" to_tag1="health_specialty:surgery" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="health_specialty:tropical_medicine" from_value="partial" to_tag1="health_specialty:tropical_medicine" to_value1="yes"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:sports_medicine" from_value="main" to_tag1="healthcare:speciality" to_value1="sports_medicine"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:dentist" from_value="yes" to_tag1="healthcare:speciality" to_value1="stomatology"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:dentistry" from_value="yes" to_tag1="healthcare:speciality" to_value1="stomatology"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:surgery" from_value="main" to_tag1="healthcare:speciality" to_value1="surgery"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:surgery" from_value="partial" to_tag1="healthcare:speciality" to_value1="surgery"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:surgery" from_value="trained" to_tag1="healthcare:speciality" to_value1="surgery"/>
+		<entity_convert pattern="tag_transform" from_tag="health_specialty:tropical_medicine" from_value="partial" to_tag1="healthcare_speciality" to_value1="tropical_medicine"/>
 		<entity_convert pattern="tag_transform" from_tag="health_specialty:yoga" from_value="main" to_tag1="amenity" to_value1="training" to_tag2="training" to_value2="yoga"/>
 		<entity_convert pattern="tag_transform" from_tag="health_specialty:yoga" from_value="yes" to_tag1="amenity" to_value1="training" to_tag2="training" to_value2="yoga"/>
 
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:acupuncture" from_value="yes" to_tag1="health_specialty:acupuncture" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:chiropractic" from_value="yes" to_tag1="health_specialty:chiropractic" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:dermatology" from_value="yes" to_tag1="health_specialty:dermatology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:general" from_value="yes" to_tag1="health_specialty:general" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:gynaecology" from_value="yes" to_tag1="health_specialty:gynaecology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:internal" from_value="yes" to_tag1="health_specialty:internal_medicine" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:naturopathy" from_value="yes" to_tag1="health_specialty:naturopathy" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:neurology" from_value="yes" to_tag1="health_specialty:neurology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:orthopaedics" from_value="yes" to_tag1="health_specialty:orthopaedics" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:osteopathy" from_value="yes" to_tag1="health_specialty:osteopathy" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:paediatrics" from_value="yes" to_tag1="health_specialty:paediatrics" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:physiotherapy" from_value="yes" to_tag1="health_specialty:physiotherapy" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:psychiatry" from_value="yes" to_tag1="health_specialty:psychiatry" to_value1="yes"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality" from_value="addiction_medicine" to_tag1="healthcare:speciality" to_value1="addiction"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality" from_value="narcology" to_tag1="healthcare:speciality" to_value1="addiction"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality" from_value="urgent" to_tag1="healthcare:speciality" to_value1="emergency"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality" from_value="orthophonist" to_tag1="healthcare:speciality" to_value1="speech_therapy"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality" from_value="specialist_pediatrician" to_tag1="healthcare:speciality" to_value1="pediatric"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality" from_value="urgent_care" to_tag1="healthcare:speciality" to_value1="urgent"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality" from_value="general_practice" to_tag1="healthcare:speciality" to_value1="general"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality" from_value="pain_management" to_tag1="healthcare:speciality" to_value1="pain_control"/>
+
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:acupuncture" from_value="yes" to_tag1="healthcare:speciality" to_value1="acupuncture"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:chiropractic" from_value="yes" to_tag1="healthcare:speciality" to_value1="chiropractic"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:dermatology" from_value="yes" to_tag1="healthcare:speciality" to_value1="dermatology"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:general" from_value="yes" to_tag1="healthcare:speciality" to_value1="general"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:gynaecology" from_value="yes" to_tag1="healthcare:speciality" to_value1="gynaecology"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:internal" from_value="yes" to_tag1="healthcare:speciality" to_value1="internal_medicine"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:naturopathy" from_value="yes" to_tag1="healthcare:speciality" to_value1="naturopathy"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:neurology" from_value="yes" to_tag1="healthcare:speciality" to_value1="neurology"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:orthopaedics" from_value="yes" to_tag1="healthcare:speciality" to_value1="orthopaedics"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:osteopathy" from_value="yes" to_tag1="healthcare:speciality" to_value1="osteopathy"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:paediatrics" from_value="yes" to_tag1="healthcare:speciality" to_value1="paediatrics"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:physiotherapy" from_value="yes" to_tag1="healthcare:speciality" to_value1="physiotherapy"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:psychiatry" from_value="yes" to_tag1="healthcare:speciality" to_value1="psychiatry"/>
 		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:psychotherapy" from_value="yes" to_tag1="healthcare" to_value1="psychotherapist"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:dentistry" from_value="yes" to_tag1="health_specialty:stomatology" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:surgery" from_value="yes" to_tag1="health_specialty:surgery" to_value1="yes"/>
-		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:trauma" from_value="yes" to_tag1="health_specialty:traumatology" to_value1="yes"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:dentistry" from_value="yes" to_tag1="healthcare:speciality" to_value1="stomatology"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:surgery" from_value="yes" to_tag1="healthcare:speciality" to_value1="surgery"/>
+		<entity_convert pattern="tag_transform" from_tag="healthcare:speciality:trauma" from_value="yes" to_tag1="healthcare:speciality" to_value1="traumatology"/>
 
-		<entity_convert pattern="tag_transform" from_tag="health_service:prevention:vaccination" from_value="yes" to_tag1="health_specialty:vaccination" to_value1="yes"/>
+		<entity_convert pattern="tag_transform" from_tag="health_service:prevention:vaccination" from_value="yes" to_tag1="healthcare:speciality" to_value1="vaccination"/>
 
-		<entity_convert pattern="tag_transform" from_tag="health_facility:type" from_value="health_center" to_tag1="healthcare" to_value1="centre"/>
-		<entity_convert pattern="tag_transform" from_tag="health_facility:type" from_value="health_centre" to_tag1="healthcare" to_value1="centre"/>
-		<entity_convert pattern="tag_transform" from_tag="health_facility:type" from_value="medical_clinic" to_tag1="health_facility:type" to_value1="clinic"/>
+		<entity_convert pattern="tag_transform" from_tag="health_facility:type" from_value="health_center" to_tag1="amenity" to_value1="clinic"/>
+		<entity_convert pattern="tag_transform" from_tag="health_facility:type" from_value="health_centre" to_tag1="amenity" to_value1="clinic"/>
+		<entity_convert pattern="tag_transform" from_tag="health_facility:type" from_value="medical_clinic" to_tag1="amenity" to_value1="clinic"/>
 		<entity_convert pattern="tag_transform" from_tag="health_facility:type" if_not_tag1="amenity" if_not_tag2="emergency" if_not_tag3="healthcare" if_not_tag4="health_facility:type" if_not_value4="office" to_tag1="health_facility:type" to_tag2="healthcare" to_value2="yes"/>
 		<entity_convert pattern="tag_transform" from_tag="health_amenity:type" from_value="baby_hatch" to_tag1="amenity" to_value1="baby_hatch"/>
 		<entity_convert pattern="tag_transform" from_tag="health_facility:type" from_value="rehabilitation" to_tag1="healthcare" to_value1="rehabilitation"/>
@@ -6295,7 +6328,6 @@
 
 		<entity_convert pattern="tag_transform" from_tag="provided_for:female" to_tag1="provided_for:woman"/>
 
-		<entity_convert pattern="tag_transform" from_tag="office" from_value="physician" if_not_tag1="amenity" if_not_tag2="emergency" if_not_tag3="healthcare" to_tag1="office" to_value1="physician" to_tag2="health_facility:type" to_value2="office"/>
 		<entity_convert pattern="tag_transform" from_tag="office" from_value="podologist" if_not_tag1="amenity" if_not_tag2="emergency" if_not_tag3="healthcare" to_tag1="office" to_value1="podologist" to_tag2="health_facility:type" to_value2="office"/>
 		<entity_convert pattern="tag_transform" from_tag="office" from_value="healer" if_not_tag1="amenity" if_not_tag2="emergency" if_not_tag3="healthcare" to_tag1="office" to_value1="healer" to_tag2="health_facility:type" to_value2="office"/>
 		<entity_convert pattern="tag_transform" from_tag="office" from_value="psychologist" if_not_tag1="amenity" if_not_tag2="emergency" if_not_tag3="healthcare" to_tag1="office" to_value1="psychologist" to_tag2="health_facility:type" to_value2="office"/>
@@ -6932,14 +6964,14 @@
 	<entity_convert pattern="tag_transform" from_tag="seamark:light:1:group" to_tag1="seamark:light:group"/>
 	<entity_convert pattern="tag_transform" from_tag="seamark:light:1:period" to_tag1="seamark:light:period"/>
 	<!-- <apply_if lightDetail="" (default) nameTag2="seamark:light:character" (incl. light:group, light:period, fog_signal:category, fog_signal:group, fog_signal:period)/>, if-conditions assure nameTag2 display in case only seamark:light:character exists -->
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:group" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:period" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:range" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:fog_signalx:category" from_tag1="seamark:light:group" from_tag2="seamark:light:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:group" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:period" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:range" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
-	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:fog_signalx:category" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" from_tag3="seamark:fog_signalx:category" from_tag4="seamark:fog_signalx:group" from_tag5="seamark:fog_signalx:period" from_tag6="seamark:radar_transponderx:category" from_tag7="seamark:radar_transponderx:group" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:group" from_tag1="seamark:light:group" from_tag2="seamark:light:period" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:period" from_tag1="seamark:light:group" from_tag2="seamark:light:period" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:light:range" from_tag1="seamark:light:group" from_tag2="seamark:light:period" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:character" if_tag1="seamark:fog_signal:category" from_tag1="seamark:light:group" from_tag2="seamark:light:period" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:group" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:period" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:light:1:range" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" to_tag1="seamark:light:character"/>
+	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:light:1:character" if_tag1="seamark:fog_signal:category" from_tag1="seamark:light:1:group" from_tag2="seamark:light:1:period" to_tag1="seamark:light:character"/>
 <!--	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:fog_signal:category" if_not_tag1="seamark:light:character" if_not_tag2="seamark:light:1:character" from_tag4="seamark:fog_signal:group" from_tag5="seamark:fog_signal:period" from_tag6="seamark:radar_transponder:category" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>
 	<entity_convert pattern="tag_combine" separator="." from_tag="seamark:radar_transponder:category" if_not_tag1="seamark:light:character" if_not_tag2="seamark:light:1:character" if_not_tag3="seamark:fog_signal" from_tag7="seamark:radar_transponder:group" to_tag1="seamark:light:character"/>-->
 	<!-- <apply_if lightDetail="sectors" nameTag2="seamark:light:add_sectors"/> -->
