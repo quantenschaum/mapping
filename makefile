@@ -159,7 +159,7 @@ obf: data/omc
 	mkdir -p $@
 	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch.xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
-	rm -f obf/*.log
+	rm -f $@/*.log
 	mv -v $@/*.obf data/obf
 
 icons:
