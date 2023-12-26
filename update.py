@@ -450,21 +450,25 @@ def load_rws_buoys(filename):
     data = load_json(filename)
     points = []
     for f in data["features"]:
-        ll = latlon(f)
-        tags = {"ll": ll}
-        # print(json.dumps(f["properties"], indent=2))
+        try:
+            ll = latlon(f)
+            tags = {"ll": ll}
+            # print(json.dumps(f["properties"], indent=2))
 
-        for i, l in enumerate((rws_buoy, rws_topmark, rws_light)):
-            p = f["properties"]
-            p = {b: p[a] for a, b in l.items() if p.get(a) and p[a] != "#"}
-            if i == 0:
-                p["buoy_type"] = 1
-            if p:
-                add_tags(tags, p)
-                fix_tags(tags)
-        # add_generic_topmark(tags)
+            for i, l in enumerate((rws_buoy, rws_topmark, rws_light)):
+                p = f["properties"]
+                p = {b: p[a] for a, b in l.items() if p.get(a) and p[a] != "#"}
+                if i == 0:
+                    p["buoy_type"] = 1
+                if p:
+                    add_tags(tags, p)
+                    fix_tags(tags)
+            # add_generic_topmark(tags)
 
-        points.append(tags)
+            points.append(tags)
+        except Exception as x:
+            print(x)
+            assert 0, x
 
     print("buoys", len(points))
 
@@ -786,9 +790,12 @@ def update_osm(
             s = etree.tostring(x.root, pretty_print=True, encoding="utf-8")
             f.write(s)
 
-        requests.get(
-            f"http://localhost:8111/open_file?filename={os.path.abspath(outfile)}"
-        )
+        try:
+            requests.get(
+                f"http://localhost:8111/open_file?filename={os.path.abspath(outfile)}"
+            )
+        except:
+            pass
 
         if review:
             for i, m in enumerate(modifications, 1):

@@ -10,7 +10,7 @@ OGR_OPTS=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,S
 help:
 	cat README.md
 
-vwm: data/vwm data/vwm.sqlite
+vwm: data/vwm #data/vwm.sqlite
 
 data/vwm:
 	mkdir -p $@
@@ -24,7 +24,7 @@ data/vwm.sqlite: data/vwm
 
 BSHWMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 
-bsh: data/bsh data/bsh.sqlite
+bsh: data/bsh #data/bsh.sqlite
 
 data/bsh:
 	rm -rf $@
@@ -88,10 +88,13 @@ tides:
 
 bsh.osm:
 	mkdir -p bsh
-	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none bsh/$$L.osm -a; done
-	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none bsh/$$L.osm -a; done
-	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none bsh/$$L.osm -a; done
-	for L in beacons facilities lights; do ./lightsectors.py bsh/$$L.osm bsh/$$L-sectors.osm -j; done
+	#for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none bsh/$$L.osm -a; done
+	#for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none bsh/$$L.osm -a; done
+	#for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none bsh/$$L.osm -a; done
+	#for L in beacons facilities lights; do ./lightsectors.py bsh/$$L.osm bsh/$$L-sectors.osm; done
+	for F in bsh/*.osm; do echo $$F; osmium sort $$F -o bsh/x.osm && mv bsh/x.osm $$F; done
+	for F in bsh/*.osm; do echo $$F; osmium renumber $$F -o bsh/x.osm && mv bsh/x.osm $$F; done
+	osmium merge bsh/*.osm -o osm/bsh.osm -O
 
 
 
@@ -155,9 +158,8 @@ omc: data/omc
 obf: data/omc
 	mkdir -p $@
 	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch.xml
-	for F in $@/*_2.obf; do mv -v $$F $${F/_2./.}; done
-	ls -lh $@/*.obf
-	cp -v $@/*.obf data/obf/
+	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
+	rm -f obf/*.log
 
 icons:
 	cd icons && ./genicons.py
