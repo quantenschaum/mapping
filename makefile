@@ -160,6 +160,7 @@ obf: data/omc
 	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch.xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
 	rm -f obf/*.log
+	mv -v $@/*.obf data/obf
 
 icons:
 	cd icons && ./genicons.py
