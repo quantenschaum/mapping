@@ -171,4 +171,4 @@ lights:
 	./lightsectors.py $@.osm lightsectors.osm
 	mkdir -p osm
 	cp lightsectors.osm osm
-	$(MAKE) obf
+
