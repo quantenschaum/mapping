@@ -88,10 +88,10 @@ tides:
 
 bsh.osm:
 	mkdir -p bsh
-	#for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none bsh/$$L.osm -a; done
-	#for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none bsh/$$L.osm -a; done
-	#for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none bsh/$$L.osm -a; done
-	#for L in beacons facilities lights; do ./lightsectors.py bsh/$$L.osm bsh/$$L-sectors.osm; done
+	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none bsh/$$L.osm -a; done
+	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none bsh/$$L.osm -a; done
+	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none bsh/$$L.osm -a; done
+	for L in beacons facilities lights; do ./lightsectors.py bsh/$$L.osm bsh/$$L-sectors.osm; done
 	for F in bsh/*.osm; do echo $$F; osmium sort $$F -o bsh/x.osm && mv bsh/x.osm $$F; done
 	for F in bsh/*.osm; do echo $$F; osmium renumber $$F -o bsh/x.osm && mv bsh/x.osm $$F; done
 	osmium merge bsh/*.osm -o osm/bsh.osm -O
