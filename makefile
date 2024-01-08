@@ -86,17 +86,6 @@ tides:
 	wget https://data.bsh.de/OpenData/Main/Gezeitenstrom_Kueste/Gezeitenstrom_Kueste.zip   -O data/$@/Kueste.zip
 
 
-bsh.osm:
-	mkdir -p bsh
-	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none bsh/$$L.osm -a; done
-	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none bsh/$$L.osm -a; done
-	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none bsh/$$L.osm -a; done
-	for L in beacons facilities lights; do ./lightsectors.py bsh/$$L.osm bsh/$$L-sectors.osm; done
-	for F in bsh/*.osm; do echo $$F; osmium sort $$F -o bsh/x.osm && mv bsh/x.osm $$F; done
-	for F in bsh/*.osm; do echo $$F; osmium renumber $$F -o bsh/x.osm && mv bsh/x.osm $$F; done
-	osmium merge bsh/*.osm -o osm/bsh.osm -O
-
-
 
 
 
@@ -160,7 +149,7 @@ obf: data/omc
 	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch.xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
 	rm -f $@/*.log
-	cp -v $@/*.obf data/obf
+	#cp -v $@/*.obf data/obf
 
 icons:
 	cd icons && ./genicons.py
@@ -169,6 +158,25 @@ icons:
 lights:
 	wget -O $@.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];(  nwr[~"seamark:type"~"light"];  nwr["seamark:light:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:range"][~"seamark:type"~"beacon"];  nwr["seamark:light:1:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:1:range"][~"seamark:type"~"beacon"];);(._;>;);out meta;'
 	./lightsectors.py $@.osm lightsectors.osm
+	rm -rf osm
 	mkdir -p osm
 	cp lightsectors.osm osm
+	$(MAKE) obf
+	cp obf/lightsectors.obf data/obf/
+
+bsh.osm:
+	mkdir -p bsh
+	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none bsh/$$L.osm -a; done
+	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none bsh/$$L.osm -a; done
+	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none bsh/$$L.osm -a; done
+	for L in beacons facilities lights; do ./lightsectors.py bsh/$$L.osm bsh/$$L-sectors.osm; done
+
+bsh.obf: bsh.osm
+	rm -rf obf osm
+	mkdir -p osm
+	cp bsh/*.osm osm/
+	$(MAKE) obf
+	data/omc/inspector.sh -c obf/bsh.obf obf/*.obf
+	cp obf/bsh.obf data/obf/
+	rm -rf osm
 
