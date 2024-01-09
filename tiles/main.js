@@ -68,14 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
       attribution: '<a href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">ArcGIS ESRI World Imagery</a>'
     }),
     'Luchtfoto 2023 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2023_quick_orthoLR',
+      layers:'2023_ortho25',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
       attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2023 8cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2023_quick_orthoHR',
+      layers:'2023_orthoHR',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
