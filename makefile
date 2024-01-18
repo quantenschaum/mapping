@@ -116,6 +116,9 @@ serve:
 qgis: replace
 	QGIS_SERVER_ADDRESS=0.0.0.0 qgis_mapserver map.qgs & mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001 & $(MAKE) serve
 
+docker:
+	docker-compose up -d
+
 wait:
 	sleep 60
 
@@ -126,7 +129,6 @@ upload:
 sync: replace
 	#rsync -hav --del --exclude tiles --exclude cache_data --exclude .git --delete-excluded ./ nas:docker/qgis $(O)
 	rsync -hav --del map.qgs mapproxy.yaml marrekrite.gpx Dockerfile shapes bsh vwm icons nas:docker/qgis $(O)
-
 
 data/josm.jar:
 	wget -O $@ https://josm.openstreetmap.de/josm-tested.jar
@@ -143,6 +145,9 @@ data/omc:
 omc: data/omc
 	$</OsmAndMapCreator.sh
 	mv -v data/omc/*obf data/obf/
+
+mobac:
+	java -Xms64m -Xmx1200M -jar data/mobac/Mobile_Atlas_Creator.jar
 
 obf: data/omc
 	mkdir -p $@

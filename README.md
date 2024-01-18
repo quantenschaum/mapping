@@ -25,9 +25,8 @@ This is based on a [post](https://www.sigterritoires.fr/index.php/affichage-des-
 
 I will describe my procedure to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile` and I use Linux.
 
-1. download ENC from URL above
-2. extract the ZIP `make unzip`
-3. convert the ENC to shape files with `make shapes` (It uses the mapping CSVs from OpenCPN.)
+1. download ENC from URL above and place the ZIP in a `data` subdir
+2. extract the ZIP and convert the ENCs `make waddenzee`
 4. download vaarwegmarkeringen `make vwm`
 5. open `map.qgs` with QGIS (You may want to add the `icons` path to QGIS: settings, options, system, SVG path)
 6. export map tiles
