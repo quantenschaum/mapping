@@ -137,6 +137,41 @@ document.addEventListener("DOMContentLoaded", () => {
     'ENC':L.tileLayer('enc/{z}/{x}/{y}.png', {
       attribution: '<a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS ENC</a>, <a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
     }),
+    'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      layers: 'Coastal_Depth_area,Approach_Depth_area,Harbour_Depth_area',
+      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+    }),
+    'BSH Hydro':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Hydrography/ows', {
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      layers: '4_Approach',
+      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+    }),
+    'BSH NavAids':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows', {
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      layers: 'Coastal_Lights,Coastal_Lateral_Buoys,Coastal_Cardinal_Buoys,Coastal_All_Other_Buoys,Coastal_Lateral_Beacons,Coastal_Cardinal_Beacons,Coastal_All_Other_Beacons,Approach_Lights,Approach_Lateral_Buoys,Approach_Cardinal_Buoys,Approach_All_Other_Buoys,Approach_Lateral_Beacons,Approach_Cardinal_Beacons,Approach_All_Other_Beacons,Harbour_Lights,Harbour_Lateral_Buoys,Harbour_Cardinal_Buoys,Harbour_All_Other_Buoys,Harbour_Lateral_Beacons,Harbour_Cardinal_Beacons,Harbour_All_Other_Beacons,Berthing_Lights,Berthing_Lateral_Buoys,Berthing_Cardinal_Buoys,Berthing_All_Other_Buoys,Berthing_Lateral_Beacons,Berthing_Cardinal_Beacons,Berthing_All_Other_Beacons',
+      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+    }),
+    'BSH Topo':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Topography/ows', {
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      layers: '4_Approach,5_Harbour',
+      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+    }),
+    'BSH Obstr':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_RocksWrecksObstructions/ows', {
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      layers: '4_Approach,5_Harbour',
+      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+    }),
     'Depth Contours':L.tileLayer('contours/{z}/{x}/{y}.png', {
       attribution: '<a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS ENC</a>, <a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
     }),
@@ -167,16 +202,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var layers = [basemaps['OpenStreetMap ORG'], overlays['Grid'], overlays['ENC']];
 
-  if(document.URL.startsWith('file') || document.URL.includes('localhost')) {
-    overlays['QGIS ENC'] = L.tileLayer('http://localhost:8001/tiles/enc/EPSG3857/{z}/{x}/{y}.png');
+  var isLocal=document.URL.startsWith('file') || document.URL.includes('localhost');
+
+  if(isLocal) {
+    var enc=overlays['QGIS ENC'] = L.tileLayer('http://localhost:8001/tiles/enc/EPSG3857/{z}/{x}/{y}.png');
     overlays['QGIS Buoys and Beacons'] = L.tileLayer('http://localhost:8001/tiles/bnb/EPSG3857/{z}/{x}/{y}.png');
   }
 
   var map = L.map('map', {
-    center: [52.8907,5.4128],
-    zoom: 10,
+    center: [54.264,9.196],
+    zoom: 8,
     layers: layers,
-    minZoom: 8,
+    minZoom: 6,
     maxZoom: 16,
   });
 
