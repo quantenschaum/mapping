@@ -114,7 +114,7 @@ serve:
 	cd tiles && python -m http.server 8080
 
 qgis: replace
-	QGIS_SERVER_ADDRESS=0.0.0.0 qgis_mapserver map.qgs & mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001 & $(MAKE) serve
+	qgis_mapserver -p map.qgs & mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001 & $(MAKE) serve
 
 docker:
 	docker-compose up -d
