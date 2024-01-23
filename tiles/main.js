@@ -205,8 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
   var isLocal=document.URL.startsWith('file') || document.URL.includes('localhost');
 
   if(isLocal) {
-    var enc=overlays['QGIS ENC'] = L.tileLayer('http://localhost:8001/tiles/enc/EPSG3857/{z}/{x}/{y}.png');
-    overlays['QGIS Buoys and Beacons'] = L.tileLayer('http://localhost:8001/tiles/bnb/EPSG3857/{z}/{x}/{y}.png');
+    overlays['QGIS BSH'] = L.tileLayer('http://localhost:8001/tiles/bsh/EPSG3857/{z}/{x}/{y}.png');
   }
 
   var map = L.map('map', {
@@ -214,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
     zoom: 8,
     layers: layers,
     minZoom: 6,
-    maxZoom: 16,
+    maxZoom: 18,
   });
 
   var layers=L.control.layers(basemaps, overlays, {collapsed: true}).addTo(map);

@@ -1,13 +1,15 @@
 globals:
   cache:
     link_single_color_images: true
-    meta_size: [ 6,6 ]
+    #meta_size: [ 6,6 ]
     meta_buffer: 160
   tiles:
     expires_hours: 24
 
 services:
   tms:
+  wms:
+  demo:
 
 sources:
   qgis:
@@ -18,23 +20,14 @@ sources:
       transparent: True
 
 caches:
-  bnb:
-    sources: [ 'qgis:vwm,navaids' ]
+  bsh:
+    sources: [ 'qgis:bsh' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
-      type: mbtiles
-      filename: navaids.mbtiles
-  enc:
-    sources: [ 'qgis:Nederland,Deutschland' ]
-    grids: [ GLOBAL_WEBMERCATOR ]
-    cache:
-      type: mbtiles
-      filename: enc.mbtiles
+      type: file
+      directory_layout: tms
 
 layers:
-  - name: bnb
-    title: Buoys and Beacons
-    sources: [ bnb ]
-  - name: enc
-    title: ENC
-    sources: [ enc ]
+  - name: bsh
+    title: BSH
+    sources: [ bsh ]
