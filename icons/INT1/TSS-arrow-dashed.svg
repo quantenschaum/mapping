@@ -4,7 +4,7 @@
    width="32"
    height="32"
    id="svg2"
-   sodipodi:docname="TSS-arrow.svg"
+   sodipodi:docname="TSS-arrow-dashed.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -2973,5 +2973,25 @@
        style="fill:none;stroke:#ec008c;stroke-width:0.57773779;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
        id="path2644"
        sodipodi:nodetypes="cccccccc" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.92578px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 3.5764983,4.4606346 V 1.7753641"
+       id="path3069" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.92578px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M -1.209672,4.4606346 V 1.7753641"
+       id="path3071" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.92578px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M -5.9958424,4.4606346 V 1.7753641"
+       id="path3073" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.92578px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M -10.782013,4.4606346 V 1.7753641"
+       id="path3075" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.92578px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M -15.568183,4.4606346 V 1.7753641"
+       id="path3077" />
   </g>
 </svg>

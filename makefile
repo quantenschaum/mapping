@@ -16,28 +16,26 @@ data/vwm:
 	mkdir -p $@
 	wget -O $@/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
 	wget -O $@/vast.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
-	for F in $@/*.json; do echo $$F; jq . $$F>$@/tmp; mv $@/tmp $$F; done
+	for F in $@/*.json; do jq . $$F>$@/tmp; mv $@/tmp $$F; done
+	for F in $$(find $@ -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 
-data/vwm.sqlite: data/vwm
-	rm -f $@
-	for F in $$(find $</ -name "*.json"); do $(OGR_OPTS) ogr2ogr $@ $$F -skipfailures -append $(OGR_OPTS2); done
-
-BSHWMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
+BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
+BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
+BSH_LAYERS_2=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing
+BSH_LAYERS_3=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
+#BSH_BBOX=53,5.5,55.5,14.3333
+BSH_BBOX=53,3.3,56,14.4
 
 bsh: data/bsh #data/bsh.sqlite
 
 data/bsh:
 	rm -rf $@
 	mkdir -p $@
-	for L in AidsAndServices SkinOfTheEarth; do wget -O $@/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
-	for L in RocksWrecksObstructions; do wget -O $@/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
-	for L in Hydrography Topography; do wget -O $@/$$L.json "$(BSHWMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=53,5.5,55.5,14.3333"; done
-
-	for F in $@/*.json; do echo $$F; jq . $$F>$@/tmp; mv $@/tmp $$F; done
-
-data/bsh.sqlite: data/bsh
-	rm -f $@
-	for F in $$(find $</ -name "*.json"); do $(OGR_OPTS) ogr2ogr $@ $$F -skipfailures -append $(OGR_OPTS2); done
+	for L in AidsAndServices SkinOfTheEarth; do wget -O $@/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_1)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
+	for L in RocksWrecksObstructions; do wget -O $@/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_3)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
+	for L in Hydrography Topography; do wget -O $@/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_2)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
+	for F in $@/*.json; do jq . $$F>$@/tmp; mv $@/tmp $$F; done
+	for F in $$(find $@ -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 
 CGDS=01 05 07 08 09 11 13 14 17
 CGDS=01
@@ -147,7 +145,8 @@ omc: data/omc
 	mv -v data/omc/*obf data/obf/
 
 mobac:
-	java -Xms64m -Xmx1200M -jar data/mobac/Mobile_Atlas_Creator.jar
+	#java -Xms64m -Xmx1200M -jar data/mobac/Mobile_Atlas_Creator.jar
+	java -jar data/mobac/Mobile_Atlas_Creator.jar
 
 obf: data/omc
 	mkdir -p $@
