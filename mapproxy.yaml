@@ -1,8 +1,12 @@
 globals:
+  image:
+    paletted: false
+    resampling_method: bilinear
   cache:
     link_single_color_images: true
-    #meta_size: [ 6,6 ]
+    meta_size: [ 6,6 ]
     meta_buffer: 160
+    bulk_meta_tiles: true
   tiles:
     expires_hours: 24
 
@@ -17,14 +21,14 @@ sources:
     #supported_srs: ['EPSG:3857']
     req:
       url: http://localhost:8000/
-      transparent: True
+      transparent: true
 
 caches:
   bsh:
     sources: [ 'qgis:bsh' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
-      type: file
+      type: mbtiles
       directory_layout: tms
 
 layers:
