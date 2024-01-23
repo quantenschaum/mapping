@@ -45,7 +45,7 @@ def main():
         "-m", "--mozilla", action="store_true", help="set user-agent to mozilla"
     )
     parser.add_argument(
-        "-i", "--inverted-y", action="store_true", help="inverted y tile number"
+        "-y", "--inverted-y", action="store_true", help="inverted y tile number"
     )
     parser.add_argument(
         "-e",
