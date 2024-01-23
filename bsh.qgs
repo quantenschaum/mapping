@@ -583,7 +583,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/radar-reflector.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/radar-reflector.svg" name="name" type="QString"/>
                 <Option value="0,-1.5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -621,7 +621,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/wind-turbine.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/wind-turbine.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -659,7 +659,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/sphere-w.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/sphere-w.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -697,7 +697,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/sphere-h.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/sphere-h.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -735,7 +735,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/pillar-w.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/pillar-w.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -773,7 +773,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/pillar-b.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/pillar-b.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -811,7 +811,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/pillar-h.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/pillar-h.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -849,7 +849,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/spar.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/spar.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -887,7 +887,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/barrel-w.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/barrel-w.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -925,7 +925,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/barrel-b.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/barrel-b.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -963,7 +963,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/superbuoy.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/superbuoy.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1001,7 +1001,7 @@
                 <Option value="239,8,204,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/beacon.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/beacon.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1039,7 +1039,7 @@
                 <Option value="190,207,80,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/light-ma.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/light-ma.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1077,7 +1077,7 @@
                 <Option value="239,8,204,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/stake.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/stake.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1115,7 +1115,7 @@
                 <Option value="239,8,204,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/perch-down.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/perch-down.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1153,7 +1153,7 @@
                 <Option value="239,8,204,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/perch-up.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/perch-up.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1191,7 +1191,7 @@
                 <Option value="190,207,80,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/light.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/light.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1229,7 +1229,7 @@
                 <Option value="190,207,80,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/light-w.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/light-w.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1267,7 +1267,7 @@
                 <Option value="190,207,80,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/light-r.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/light-r.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1305,7 +1305,7 @@
                 <Option value="190,207,80,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/light-g.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/light-g.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1343,7 +1343,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-n.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-n.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1392,7 +1392,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-s.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-s.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1441,7 +1441,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-e.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-e.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1490,7 +1490,7 @@
                 <Option value="190,207,80,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/light-mi.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/light-mi.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1528,7 +1528,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-w.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-w.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1577,7 +1577,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-circle.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-circle.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1626,7 +1626,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-x.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-x.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1675,7 +1675,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-cone-up.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-cone-up.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1719,7 +1719,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-cyl.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-cyl.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1763,7 +1763,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-rec.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-rec.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1807,7 +1807,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-ball.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-ball.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1847,7 +1847,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-ball.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-ball.svg" name="name" type="QString"/>
                 <Option value="0,-7.20000000000000195" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1896,7 +1896,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-rhomb.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-rhomb.svg" name="name" type="QString"/>
                 <Option value="0,-7.20000000000000107" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1931,7 +1931,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-circle.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-circle.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -1975,7 +1975,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-tri-up.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-tri-up.svg" name="name" type="QString"/>
                 <Option value="0,-7.20000000000000195" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2010,7 +2010,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-circle.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-circle.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2054,7 +2054,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-cone-down.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-cone-down.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2235,7 +2235,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-rhomb.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-rhomb.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2273,7 +2273,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-cyl.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-cyl.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2317,7 +2317,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-rec.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-rec.svg" name="name" type="QString"/>
                 <Option value="0,-5" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2355,7 +2355,7 @@
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/top-tri-up.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/top-tri-up.svg" name="name" type="QString"/>
                 <Option value="0,-3.19999999999999973" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2404,7 +2404,7 @@
                 <Option value="225,89,137,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/VHF.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/VHF.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2448,7 +2448,7 @@
                 <Option value="225,89,137,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/pilot-boarding.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/pilot-boarding.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2492,7 +2492,7 @@
                 <Option value="225,89,137,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/fishingharbour.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/fishingharbour.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2536,7 +2536,7 @@
                 <Option value="225,89,137,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/marina.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/marina.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2580,7 +2580,7 @@
                 <Option value="225,89,137,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/chimney.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/chimney.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2624,7 +2624,7 @@
                 <Option value="225,89,137,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/tower.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/tower.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2718,7 +2718,7 @@
                 <Option value="225,89,137,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/mast.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/mast.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2762,7 +2762,7 @@
                 <Option value="225,89,137,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/church.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/church.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2806,7 +2806,7 @@
                 <Option value="225,89,137,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/fogsignal.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/fogsignal.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2928,7 +2928,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/platform.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/platform.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -2966,7 +2966,7 @@
                 <Option value="239,8,204,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/beacon.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/beacon.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -3211,7 +3211,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/cone-w.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/cone-w.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -3405,7 +3405,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/cone-b.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/cone-b.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -3443,7 +3443,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/can-w.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/can-w.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -3481,7 +3481,7 @@
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/can-b.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/can-b.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -7480,7 +7480,7 @@
                 <Option value="225,89,137,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/VHF.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/VHF.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -7524,7 +7524,7 @@
                 <Option value="84,176,74,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/kelp.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/kelp.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -9339,7 +9339,7 @@
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/cable.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/cable.svg" name="name" type="QString"/>
                     <Option value="0,0" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -11371,7 +11371,7 @@ def my_form_open(dialog, layer, feature):
                 <Option name="parameters"/>
                 <Option value="3x:0,0,0,0,0,0" name="pattern_width_map_unit_scale" type="QString"/>
                 <Option value="MM" name="pattern_width_unit" type="QString"/>
-                <Option value="INT1/TSS-arrow.svg" name="svgFile" type="QString"/>
+                <Option value="./icons/INT1/TSS-arrow.svg" name="svgFile" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="svg_outline_width_map_unit_scale" type="QString"/>
                 <Option value="MM" name="svg_outline_width_unit" type="QString"/>
                 <Option value="30" name="width" type="QString"/>
@@ -11439,7 +11439,7 @@ def my_form_open(dialog, layer, feature):
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/no-anchor.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/no-anchor.svg" name="name" type="QString"/>
                     <Option value="0,0" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -11513,7 +11513,7 @@ def my_form_open(dialog, layer, feature):
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/no-fishing.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/no-fishing.svg" name="name" type="QString"/>
                     <Option value="0,0" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -11587,7 +11587,7 @@ def my_form_open(dialog, layer, feature):
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/flash.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/flash.svg" name="name" type="QString"/>
                     <Option value="0,0" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -11661,7 +11661,7 @@ def my_form_open(dialog, layer, feature):
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/military.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/military.svg" name="name" type="QString"/>
                     <Option value="0,2" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -11804,7 +11804,7 @@ def my_form_open(dialog, layer, feature):
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/shellfish.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/shellfish.svg" name="name" type="QString"/>
                     <Option value="0,0" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -11916,7 +11916,7 @@ def my_form_open(dialog, layer, feature):
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/marine-farm.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/marine-farm.svg" name="name" type="QString"/>
                     <Option value="0,0" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -12028,7 +12028,7 @@ def my_form_open(dialog, layer, feature):
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/anchor.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/anchor.svg" name="name" type="QString"/>
                     <Option value="0,0" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -12104,7 +12104,7 @@ def my_form_open(dialog, layer, feature):
                 <Option name="parameters"/>
                 <Option value="3x:0,0,0,0,0,0" name="pattern_width_map_unit_scale" type="QString"/>
                 <Option value="MM" name="pattern_width_unit" type="QString"/>
-                <Option value="INT1/TSS-arrow-dashed.svg" name="svgFile" type="QString"/>
+                <Option value="./icons/INT1/TSS-arrow-dashed.svg" name="svgFile" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="svg_outline_width_map_unit_scale" type="QString"/>
                 <Option value="MM" name="svg_outline_width_unit" type="QString"/>
                 <Option value="30" name="width" type="QString"/>
@@ -12296,7 +12296,7 @@ def my_form_open(dialog, layer, feature):
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/area-m.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/area-m.svg" name="name" type="QString"/>
                     <Option value="0,0" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -12370,7 +12370,7 @@ def my_form_open(dialog, layer, feature):
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/nature-reserve.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/nature-reserve.svg" name="name" type="QString"/>
                     <Option value="0,0" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -12444,7 +12444,7 @@ def my_form_open(dialog, layer, feature):
                     <Option value="255,0,0,255" name="color" type="QString"/>
                     <Option value="0" name="fixedAspectRatio" type="QString"/>
                     <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                    <Option value="INT1/no-entry.svg" name="name" type="QString"/>
+                    <Option value="./icons/INT1/no-entry.svg" name="name" type="QString"/>
                     <Option value="0,0" name="offset" type="QString"/>
                     <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                     <Option value="MM" name="offset_unit" type="QString"/>
@@ -15381,7 +15381,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/wreck-non-dangerous.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/wreck-non-dangerous.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -15419,7 +15419,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/wreck-dangerous.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/wreck-dangerous.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -15457,7 +15457,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/wreck-hull.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/wreck-hull.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -15495,7 +15495,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/obstruction.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/obstruction.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -15533,7 +15533,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/foul.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/foul.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -15571,7 +15571,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/rock-submerged.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/rock-submerged.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -15609,7 +15609,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/rock-uncover.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/rock-uncover.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -15647,7 +15647,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/rock-awash.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/rock-awash.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -15685,7 +15685,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/rock-submerged.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/rock-submerged.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -19553,7 +19553,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/compass-inner.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/compass-inner.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -19588,7 +19588,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="255,0,0,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/compass-outer.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/compass-outer.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
@@ -19782,7 +19782,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="62,62,62,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="INT1/pylon.svg" name="name" type="QString"/>
+                <Option value="./icons/INT1/pylon.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_unit" type="QString"/>
