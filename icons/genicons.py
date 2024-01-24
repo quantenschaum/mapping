@@ -155,7 +155,7 @@ def param(line):
     if "uniform" in line:
         p = "base"
     for a, b in product(("horizontal", "vertical"), ("12", "13", "23")):
-        #print(a, b, a[0] + b)
+        # print(a, b, a[0] + b)
         if a + b in line:
             p = a[0] + b
             break
