@@ -120,7 +120,6 @@ mapproxy:
 seed:
 	mapproxy-seed -f mapproxy.yaml -s seed.yaml
 
-
 clean-cache:
 	rm -rf cache_data
 

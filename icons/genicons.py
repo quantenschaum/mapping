@@ -16,12 +16,12 @@ object_colors = {
     "blue": "#002EF5",
     "yellow": "#FCD345",
     "grey": "#808080",
-    # "brown":"brown",
-    # "amber":"amber",
+    "brown": "brown",
+    "amber": "amber",
     "violet": "violet",
     "orange": "#F7A837",
-    # "magenta":"#DE44E8",
-    # "pink":"pink",
+    "magenta": "#DE44E8",
+    "pink": "pink",
 }
 lights = {
     "light",
