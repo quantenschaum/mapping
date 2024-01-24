@@ -108,17 +108,24 @@ replace:
 	for F in *.qgs; do echo $$F; sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
 
 serve:
-	xdg-open "http://localhost:8080/index.html#ondemand"
+	xdg-open "http://localhost:8080/index.html"
 	cd tiles && python -m http.server 8080
 
 qgis: replace
-	qgis_mapserver -p bsh.qgs & mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001 & $(MAKE) serve # & xdg-open "http://localhost:8001/demo"
+	qgis_mapserver #-p bsh.qgs
+
+mapproxy:
+	mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001
+
+seed:
+	mapproxy-seed -f mapproxy.yaml -s seed.yaml
+
+
+clean-cache:
+	rm -rf cache_data
 
 docker:
 	docker-compose up -d
-
-wait:
-	sleep 60
 
 upload:
 	touch tiles/.nobackup

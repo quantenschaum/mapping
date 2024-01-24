@@ -14,5 +14,5 @@ services:
     working_dir: /data
     environment:
       QGIS_SERVER_PARALLEL_RENDERING: "1"
-      QGIS_SERVER_LANDING_PAGE_PROJECTS_DIRECTORIES: "/data/tiles"
-    command: "sh -c 'qgis_mapserver -p bsh.qgs & mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001'"
+      QGIS_SERVER_LANDING_PAGE_PROJECTS_DIRECTORIES: "."
+    command: "make -j qgis mapproxy"

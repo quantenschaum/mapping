@@ -139,7 +139,7 @@ def main():
                                 style = f"fill:none; stroke:{color_base_out}; stroke-width:{width_base};"
                             elif "basepoint" in l:
                                 style = f"fill:{color_base_fill}; stroke:{color_base_out}; stroke-width:{width_base};"
-                            l += f' style="{style}"'
+                            l += f' style="{style}" {param(l) if not cs[0] else ""}'
                         lines.append(l)
                     svgout = "\n".join(lines)
 
@@ -148,6 +148,18 @@ def main():
 
                     makedirs(dirname(out), exist_ok=True)
                     write(out, svgout)
+
+
+def param(line):
+    p = None
+    if "uniform" in line:
+        p = "base"
+    for a, b in product(("horizontal", "vertical"), ("12", "13", "23")):
+        print(a, b, a[0] + b)
+        if a + b in line:
+            p = a[0] + b
+            break
+    return f'\n  fill="param({p})"' if p else ""
 
 
 main()

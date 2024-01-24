@@ -18,24 +18,20 @@ services:
 sources:
   qgis:
     type: wms
-    #supported_srs: ['EPSG:3857']
     req:
       url: http://localhost:8000/
       transparent: true
     coverage:
-      srs: EPSG:4326
-      bbox:
-        - 3.3
-        - 53
-        - 14.4
-        - 56
+      datasource: data/bsh/AidsAndServices.gpkg
+      where: marsys=1
+      srs: 'EPSG:4326'
 
 caches:
   bsh:
     sources: [ 'qgis:bsh' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
-      type: mbtiles
+      type: file
       directory_layout: tms
 
 layers:
