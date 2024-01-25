@@ -30,12 +30,13 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 1. download ENC from URL above and place the ZIP in a `data` subdir
 2. extract the ZIP and convert the ENCs `make waddenzee` (`make bsh` to download map data from the german BSH)
 4. download vaarwegmarkeringen from RWS `make vwm`
-5. open `map.qgs` with QGIS (`bsh.qgs` for BSH map) to view the map
-6. start a local map server with caching proxy `make -j qgis mapproxy serve`
+5. generate svg icons `make icons`
+6. open `map.qgs` with QGIS (`bsh.qgs` for BSH map) to view the map
+7. start a local map server with caching proxy `make -j qgis mapproxy serve`
    - QGIS WMS at http://localhost:8000 
    - MapProxy at http://localhost:8001 
    - simple websever with LeafLet at http://localhost:8003
-7. (run `make -j qgis seed` to precompute map tiles)
+8. (run `make -j qgis seed` to precompute map tiles)
 
 To run QGIS and MapProxy in Docker do `make docker`.
 
