@@ -31,16 +31,12 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 2. extract the ZIP and convert the ENCs `make waddenzee` (`make bsh` to download map data from the german BSH)
 4. download vaarwegmarkeringen from RWS `make vwm`
 5. open `map.qgs` with QGIS (`bsh.qgs` for BSH map) to view the map
-6. start a local map server with caching proxy `make -j qgis mapproxy`
-6. generate map tiles
-   - processing, toolbox, raster tools, generate XYZ tiles (dir)
-   - extent: draw on canvas and select the region you want to get rendered
-   - max zoom: 16
-   - set output dir to `tiles` subdir
-   - html file: skip
-   - run - this takes a while :coffee:
+6. start a local map server with caching proxy `make -j qgis mapproxy serve`
+   - QGIS WMS at http://localhost:8000 
+   - MapProxy at http://localhost:8001 
+   - simple websever with LeafLet at http://localhost:8003
 
-Now you can open `tiles/index.html` and view the tiles in your browser, you will get a pretty up to date and accurate navigational chart.
+To run QGIS and MapProxy in Docker do `make docker`.
 
 There is a public server with the tiles I have created. By enabling the OpenSeaMap overlay you can directly compare the positions of buoys and beacons in OSM to those given in the dataset by RWS. You can use these map tiles in JOSM an OsmAnd if you like (see below and [USAGE.md](USAGE.md)).
 
