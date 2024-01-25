@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="BSH nautical chart" saveUser="al" saveDateTime="2024-01-25T17:41:27" version="3.28.10-Firenze" saveUserFull="Adam">
+<qgis projectname="BSH nautical chart" saveUser="al" saveDateTime="2024-01-25T18:07:38" version="3.28.10-Firenze" saveUserFull="Adam">
   <homePath path="/home/al/Projekte/mapping/"/>
   <title>BSH nautical chart</title>
   <transaction mode="Disabled"/>
@@ -138,10 +138,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>1112975.41500743944197893</xmin>
-      <ymin>7229615.6719044353812933</ymin>
-      <xmax>1145766.90014177281409502</xmax>
-      <ymax>7244954.36377285979688168</ymax>
+      <xmin>860111.27506512519903481</xmin>
+      <ymin>7192602.53386805765330791</ymin>
+      <xmax>892902.7601994660217315</xmax>
+      <ymax>7207941.22573648206889629</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -22007,8 +22007,8 @@ def my_form_open(dialog, layer, feature):
         </symbols>
       </renderer-v2>
       <labeling type="rule-based">
-        <rules key="{a4c34eb2-dd7c-4386-ac88-97243f935ae9}">
-          <rule key="{8ea1fbbe-5043-4e08-b58c-84c34c45e0a5}" filter="objnam">
+        <rules key="{8be921bc-e38e-41ba-9369-a4842c737937}">
+          <rule key="{29758028-f45d-4d9d-a86e-4f989726e073}" filter="objnam">
             <settings calloutType="simple">
               <text-style fontItalic="0" fontWeight="50" fontUnderline="0" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" fontStrikeout="0" fontLetterSpacing="0" fieldName="objnam" allowHtml="0" useSubstitutions="0" namedStyle="Regular" textOpacity="1" multilineHeight="1" fontFamily="Open Sans" fontWordSpacing="0" forcedBold="0" forcedItalic="0" legendString="Aa" multilineHeightUnit="Percentage" textColor="93,93,93,255" textOrientation="horizontal" fontKerning="1" fontSizeUnit="Point" capitalization="0" previewBkgrdColor="255,255,255,255" fontSize="10">
                 <families/>
@@ -22132,13 +22132,13 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{fce6f1e6-1116-47d4-8839-e7e5963b1420}" filter="vercsa">
+          <rule key="{42231b81-0761-4622-af2e-e4d4ebb4b570}" filter="verclr">
             <settings calloutType="simple">
-              <text-style fontItalic="0" fontWeight="50" fontUnderline="1" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" fontStrikeout="0" fontLetterSpacing="0" fieldName="vercsa" allowHtml="0" useSubstitutions="0" namedStyle="Regular" textOpacity="1" multilineHeight="1" fontFamily="Open Sans" fontWordSpacing="0" forcedBold="0" forcedItalic="0" legendString="Aa" multilineHeightUnit="Percentage" textColor="236,0,140,255" textOrientation="horizontal" fontKerning="1" fontSizeUnit="Point" capitalization="0" previewBkgrdColor="255,255,255,255" fontSize="10">
+              <text-style fontItalic="0" fontWeight="50" fontUnderline="0" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" fontStrikeout="0" fontLetterSpacing="0" fieldName="verclr" allowHtml="0" useSubstitutions="0" namedStyle="Regular" textOpacity="1" multilineHeight="1" fontFamily="Open Sans" fontWordSpacing="0" forcedBold="0" forcedItalic="0" legendString="Aa" multilineHeightUnit="Percentage" textColor="92,92,92,255" textOrientation="horizontal" fontKerning="1" fontSizeUnit="Point" capitalization="0" previewBkgrdColor="255,255,255,255" fontSize="10">
                 <families/>
                 <text-buffer bufferNoFill="1" bufferSizeUnits="MM" bufferOpacity="1" bufferJoinStyle="128" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferDraw="0" bufferSize="1" bufferColor="250,250,250,255"/>
                 <text-mask maskedSymbolLayers="" maskType="0" maskSizeMapUnitScale="3x:0,0,0,0,0,0" maskEnabled="0" maskSizeUnits="MM" maskJoinStyle="128" maskSize="0" maskOpacity="1"/>
-                <background shapeRotation="0" shapeJoinStyle="64" shapeOffsetUnit="Point" shapeSizeType="0" shapeFillColor="255,255,255,255" shapeRadiiX="0" shapeDraw="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSizeUnit="Point" shapeSVGFile="" shapeRadiiUnit="Point" shapeOffsetX="0" shapeBorderWidthUnit="Point" shapeBorderWidth="0" shapeSizeY="0" shapeOpacity="1" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRotationType="0" shapeRadiiY="0" shapeType="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="0" shapeBorderColor="128,128,128,255">
+                <background shapeRotation="0" shapeJoinStyle="64" shapeOffsetUnit="Point" shapeSizeType="0" shapeFillColor="255,255,255,255" shapeRadiiX="0" shapeDraw="1" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSizeUnit="Point" shapeSVGFile="" shapeRadiiUnit="Point" shapeOffsetX="0" shapeBorderWidthUnit="Point" shapeBorderWidth="0" shapeSizeY="0" shapeOpacity="1" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRotationType="0" shapeRadiiY="0" shapeType="5" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="-0.59999999999999998" shapeBorderColor="128,128,128,255">
                   <symbol type="marker" frame_rate="10" name="markerSymbol" clip_to_extent="1" force_rhr="0" is_animated="0" alpha="1">
                     <data_defined_properties>
                       <Option type="Map">
@@ -22147,24 +22147,23 @@ def my_form_open(dialog, layer, feature):
                         <Option type="QString" value="collection" name="type"/>
                       </Option>
                     </data_defined_properties>
-                    <layer pass="0" enabled="1" locked="0" class="SimpleMarker">
+                    <layer pass="0" enabled="1" locked="0" class="SvgMarker">
                       <Option type="Map">
                         <Option type="QString" value="0" name="angle"/>
-                        <Option type="QString" value="square" name="cap_style"/>
                         <Option type="QString" value="125,139,143,255" name="color"/>
+                        <Option type="QString" value="0" name="fixedAspectRatio"/>
                         <Option type="QString" value="1" name="horizontal_anchor_point"/>
-                        <Option type="QString" value="bevel" name="joinstyle"/>
-                        <Option type="QString" value="circle" name="name"/>
-                        <Option type="QString" value="0,0" name="offset"/>
+                        <Option type="QString" value="./icons/clearance.svg" name="name"/>
+                        <Option type="QString" value="0,0.10000000000000001" name="offset"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="offset_map_unit_scale"/>
                         <Option type="QString" value="MM" name="offset_unit"/>
                         <Option type="QString" value="35,35,35,255" name="outline_color"/>
-                        <Option type="QString" value="solid" name="outline_style"/>
                         <Option type="QString" value="0" name="outline_width"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="outline_width_map_unit_scale"/>
                         <Option type="QString" value="MM" name="outline_width_unit"/>
+                        <Option name="parameters"/>
                         <Option type="QString" value="diameter" name="scale_method"/>
-                        <Option type="QString" value="2" name="size"/>
+                        <Option type="QString" value="11.7788" name="size"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="size_map_unit_scale"/>
                         <Option type="QString" value="MM" name="size_unit"/>
                         <Option type="QString" value="1" name="vertical_anchor_point"/>
@@ -22256,13 +22255,13 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{1e934b24-af25-4dc0-9257-737e8cc4cd4a}" filter="verclr">
+          <rule key="{9a9d9ddf-5e80-4da9-a6fa-9b3b642fce20}" filter="vercsa">
             <settings calloutType="simple">
-              <text-style fontItalic="0" fontWeight="50" fontUnderline="1" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" fontStrikeout="0" fontLetterSpacing="0" fieldName="verclr" allowHtml="0" useSubstitutions="0" namedStyle="Regular" textOpacity="1" multilineHeight="1" fontFamily="Open Sans" fontWordSpacing="0" forcedBold="0" forcedItalic="0" legendString="Aa" multilineHeightUnit="Percentage" textColor="92,92,92,255" textOrientation="horizontal" fontKerning="1" fontSizeUnit="Point" capitalization="0" previewBkgrdColor="255,255,255,255" fontSize="10">
+              <text-style fontItalic="0" fontWeight="50" fontUnderline="0" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" fontStrikeout="0" fontLetterSpacing="0" fieldName="vercsa" allowHtml="0" useSubstitutions="0" namedStyle="Regular" textOpacity="1" multilineHeight="1" fontFamily="Open Sans" fontWordSpacing="0" forcedBold="0" forcedItalic="0" legendString="Aa" multilineHeightUnit="Percentage" textColor="236,0,140,255" textOrientation="horizontal" fontKerning="1" fontSizeUnit="Point" capitalization="0" previewBkgrdColor="255,255,255,255" fontSize="10">
                 <families/>
                 <text-buffer bufferNoFill="1" bufferSizeUnits="MM" bufferOpacity="1" bufferJoinStyle="128" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferDraw="0" bufferSize="1" bufferColor="250,250,250,255"/>
                 <text-mask maskedSymbolLayers="" maskType="0" maskSizeMapUnitScale="3x:0,0,0,0,0,0" maskEnabled="0" maskSizeUnits="MM" maskJoinStyle="128" maskSize="0" maskOpacity="1"/>
-                <background shapeRotation="0" shapeJoinStyle="64" shapeOffsetUnit="Point" shapeSizeType="0" shapeFillColor="255,255,255,255" shapeRadiiX="0" shapeDraw="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSizeUnit="Point" shapeSVGFile="" shapeRadiiUnit="Point" shapeOffsetX="0" shapeBorderWidthUnit="Point" shapeBorderWidth="0" shapeSizeY="0" shapeOpacity="1" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRotationType="0" shapeRadiiY="0" shapeType="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="0" shapeBorderColor="128,128,128,255">
+                <background shapeRotation="0" shapeJoinStyle="64" shapeOffsetUnit="Point" shapeSizeType="0" shapeFillColor="255,255,255,255" shapeRadiiX="0" shapeDraw="1" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSizeUnit="Point" shapeSVGFile="" shapeRadiiUnit="Point" shapeOffsetX="0" shapeBorderWidthUnit="Point" shapeBorderWidth="0" shapeSizeY="0" shapeOpacity="1" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRotationType="0" shapeRadiiY="0" shapeType="5" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="-0.59999999999999998" shapeBorderColor="128,128,128,255">
                   <symbol type="marker" frame_rate="10" name="markerSymbol" clip_to_extent="1" force_rhr="0" is_animated="0" alpha="1">
                     <data_defined_properties>
                       <Option type="Map">
@@ -22271,24 +22270,23 @@ def my_form_open(dialog, layer, feature):
                         <Option type="QString" value="collection" name="type"/>
                       </Option>
                     </data_defined_properties>
-                    <layer pass="0" enabled="1" locked="0" class="SimpleMarker">
+                    <layer pass="0" enabled="1" locked="0" class="SvgMarker">
                       <Option type="Map">
                         <Option type="QString" value="0" name="angle"/>
-                        <Option type="QString" value="square" name="cap_style"/>
                         <Option type="QString" value="125,139,143,255" name="color"/>
+                        <Option type="QString" value="0" name="fixedAspectRatio"/>
                         <Option type="QString" value="1" name="horizontal_anchor_point"/>
-                        <Option type="QString" value="bevel" name="joinstyle"/>
-                        <Option type="QString" value="circle" name="name"/>
-                        <Option type="QString" value="0,0" name="offset"/>
+                        <Option type="QString" value="./icons/clearance-safe.svg" name="name"/>
+                        <Option type="QString" value="0,0.10000000000000001" name="offset"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="offset_map_unit_scale"/>
                         <Option type="QString" value="MM" name="offset_unit"/>
                         <Option type="QString" value="35,35,35,255" name="outline_color"/>
-                        <Option type="QString" value="solid" name="outline_style"/>
                         <Option type="QString" value="0" name="outline_width"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="outline_width_map_unit_scale"/>
                         <Option type="QString" value="MM" name="outline_width_unit"/>
+                        <Option name="parameters"/>
                         <Option type="QString" value="diameter" name="scale_method"/>
-                        <Option type="QString" value="2" name="size"/>
+                        <Option type="QString" value="11.7788" name="size"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="size_map_unit_scale"/>
                         <Option type="QString" value="MM" name="size_unit"/>
                         <Option type="QString" value="1" name="vertical_anchor_point"/>
@@ -22345,7 +22343,7 @@ def my_form_open(dialog, layer, feature):
                 <substitutions/>
               </text-style>
               <text-format formatNumbers="0" multilineAlign="0" autoWrapLength="0" wrapChar="" addDirectionSymbol="0" plussign="0" decimals="3" leftDirectionSymbol="&lt;" useMaxLineLengthForAutoWrap="1" placeDirectionSymbol="0" rightDirectionSymbol=">" reverseDirectionSymbol="0"/>
-              <placement priority="5" quadOffset="4" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0" overlapHandling="PreventOverlap" dist="5" offsetUnits="MM" overrunDistanceUnit="MM" xOffset="0" rotationUnit="AngleDegrees" allowDegraded="0" preserveRotation="1" geometryGeneratorEnabled="0" maxCurvedCharAngleIn="25" yOffset="0" centroidInside="0" repeatDistance="0" centroidWhole="1" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" layerType="PolygonGeometry" placement="0" fitInPolygonOnly="0" overrunDistanceMapUnitScale="3x:0,0,0,0,0,0" geometryGenerator="" lineAnchorClipping="0" offsetType="0" polygonPlacementFlags="2" lineAnchorType="0" placementFlags="10" lineAnchorPercent="0.5" maxCurvedCharAngleOut="-25" geometryGeneratorType="PointGeometry" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" lineAnchorTextPoint="FollowPlacement" overrunDistance="0" repeatDistanceUnits="MM"/>
+              <placement priority="5" quadOffset="4" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0" overlapHandling="PreventOverlap" dist="5" offsetUnits="MM" overrunDistanceUnit="MM" xOffset="0" rotationUnit="AngleDegrees" allowDegraded="0" preserveRotation="1" geometryGeneratorEnabled="0" maxCurvedCharAngleIn="25" yOffset="0" centroidInside="0" repeatDistance="0" centroidWhole="1" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" layerType="PolygonGeometry" placement="2" fitInPolygonOnly="0" overrunDistanceMapUnitScale="3x:0,0,0,0,0,0" geometryGenerator="" lineAnchorClipping="0" offsetType="0" polygonPlacementFlags="2" lineAnchorType="0" placementFlags="10" lineAnchorPercent="0.5" maxCurvedCharAngleOut="-25" geometryGeneratorType="PointGeometry" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" lineAnchorTextPoint="FollowPlacement" overrunDistance="0" repeatDistanceUnits="MM"/>
               <rendering labelPerPart="0" limitNumLabels="0" fontLimitPixelSize="0" fontMinPixelSize="3" zIndex="0" maxNumLabels="2000" upsidedownLabels="0" fontMaxPixelSize="10000" drawLabels="1" scaleMax="0" mergeLines="0" scaleVisibility="0" unplacedVisibility="0" scaleMin="0" obstacleType="1" obstacle="1" obstacleFactor="1" minFeatureSize="0"/>
               <dd_properties>
                 <Option type="Map">
@@ -27789,8 +27787,8 @@ def my_form_open(dialog, layer, feature):
         </symbols>
       </renderer-v2>
       <labeling type="rule-based">
-        <rules key="{e216ee3a-d0e5-43bb-bc93-909eb616d6bd}">
-          <rule key="{7dbc3b73-3a0b-44e6-9ff3-def62b7fa751}" filter="objnam">
+        <rules key="{ca34207d-47a1-416b-beb4-4f0102fc473e}">
+          <rule key="{42085a11-f291-49cd-8198-6ff04edd034a}" filter="objnam">
             <settings calloutType="simple">
               <text-style fontItalic="0" fontWeight="50" fontUnderline="0" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" fontStrikeout="0" fontLetterSpacing="0" fieldName="objnam" allowHtml="0" useSubstitutions="0" namedStyle="Regular" textOpacity="1" multilineHeight="1" fontFamily="Open Sans" fontWordSpacing="0" forcedBold="0" forcedItalic="0" legendString="Aa" multilineHeightUnit="Percentage" textColor="50,50,50,255" textOrientation="horizontal" fontKerning="1" fontSizeUnit="Point" capitalization="0" previewBkgrdColor="255,255,255,255" fontSize="10">
                 <families/>
@@ -27914,13 +27912,13 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{851b65ef-78d5-4d18-b3e7-313312ed47d0}" filter="verclr">
+          <rule key="{e19ef45c-18dd-4d3c-8aeb-ca78b434139d}" filter="verclr">
             <settings calloutType="simple">
-              <text-style fontItalic="0" fontWeight="50" fontUnderline="1" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" fontStrikeout="0" fontLetterSpacing="0" fieldName="verclr" allowHtml="0" useSubstitutions="0" namedStyle="Regular" textOpacity="1" multilineHeight="1" fontFamily="Open Sans" fontWordSpacing="0" forcedBold="0" forcedItalic="0" legendString="Aa" multilineHeightUnit="Percentage" textColor="92,92,92,255" textOrientation="horizontal" fontKerning="1" fontSizeUnit="Point" capitalization="0" previewBkgrdColor="255,255,255,255" fontSize="10">
+              <text-style fontItalic="0" fontWeight="50" fontUnderline="0" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" fontStrikeout="0" fontLetterSpacing="0" fieldName="verclr" allowHtml="0" useSubstitutions="0" namedStyle="Regular" textOpacity="1" multilineHeight="1" fontFamily="Open Sans" fontWordSpacing="0" forcedBold="0" forcedItalic="0" legendString="Aa" multilineHeightUnit="Percentage" textColor="92,92,92,255" textOrientation="horizontal" fontKerning="1" fontSizeUnit="Point" capitalization="0" previewBkgrdColor="255,255,255,255" fontSize="10">
                 <families/>
                 <text-buffer bufferNoFill="1" bufferSizeUnits="MM" bufferOpacity="1" bufferJoinStyle="128" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferDraw="0" bufferSize="1" bufferColor="250,250,250,255"/>
                 <text-mask maskedSymbolLayers="" maskType="0" maskSizeMapUnitScale="3x:0,0,0,0,0,0" maskEnabled="0" maskSizeUnits="MM" maskJoinStyle="128" maskSize="0" maskOpacity="1"/>
-                <background shapeRotation="0" shapeJoinStyle="64" shapeOffsetUnit="Point" shapeSizeType="0" shapeFillColor="255,255,255,255" shapeRadiiX="0" shapeDraw="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSizeUnit="Point" shapeSVGFile="" shapeRadiiUnit="Point" shapeOffsetX="0" shapeBorderWidthUnit="Point" shapeBorderWidth="0" shapeSizeY="0" shapeOpacity="1" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRotationType="0" shapeRadiiY="0" shapeType="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="0" shapeBorderColor="128,128,128,255">
+                <background shapeRotation="0" shapeJoinStyle="64" shapeOffsetUnit="Point" shapeSizeType="0" shapeFillColor="255,255,255,255" shapeRadiiX="0" shapeDraw="1" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSizeUnit="Point" shapeSVGFile="" shapeRadiiUnit="Point" shapeOffsetX="0" shapeBorderWidthUnit="Point" shapeBorderWidth="0" shapeSizeY="0" shapeOpacity="1" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRotationType="0" shapeRadiiY="0" shapeType="5" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="-0.59999999999999998" shapeBorderColor="128,128,128,255">
                   <symbol type="marker" frame_rate="10" name="markerSymbol" clip_to_extent="1" force_rhr="0" is_animated="0" alpha="1">
                     <data_defined_properties>
                       <Option type="Map">
@@ -27929,24 +27927,23 @@ def my_form_open(dialog, layer, feature):
                         <Option type="QString" value="collection" name="type"/>
                       </Option>
                     </data_defined_properties>
-                    <layer pass="0" enabled="1" locked="0" class="SimpleMarker">
+                    <layer pass="0" enabled="1" locked="0" class="SvgMarker">
                       <Option type="Map">
                         <Option type="QString" value="0" name="angle"/>
-                        <Option type="QString" value="square" name="cap_style"/>
                         <Option type="QString" value="125,139,143,255" name="color"/>
+                        <Option type="QString" value="0" name="fixedAspectRatio"/>
                         <Option type="QString" value="1" name="horizontal_anchor_point"/>
-                        <Option type="QString" value="bevel" name="joinstyle"/>
-                        <Option type="QString" value="circle" name="name"/>
-                        <Option type="QString" value="0,0" name="offset"/>
+                        <Option type="QString" value="./icons/clearance.svg" name="name"/>
+                        <Option type="QString" value="0,0.10000000000000001" name="offset"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="offset_map_unit_scale"/>
                         <Option type="QString" value="MM" name="offset_unit"/>
                         <Option type="QString" value="35,35,35,255" name="outline_color"/>
-                        <Option type="QString" value="solid" name="outline_style"/>
                         <Option type="QString" value="0" name="outline_width"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="outline_width_map_unit_scale"/>
                         <Option type="QString" value="MM" name="outline_width_unit"/>
+                        <Option name="parameters"/>
                         <Option type="QString" value="diameter" name="scale_method"/>
-                        <Option type="QString" value="2" name="size"/>
+                        <Option type="QString" value="11.7788" name="size"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="size_map_unit_scale"/>
                         <Option type="QString" value="MM" name="size_unit"/>
                         <Option type="QString" value="1" name="vertical_anchor_point"/>
@@ -28003,7 +28000,7 @@ def my_form_open(dialog, layer, feature):
                 <substitutions/>
               </text-style>
               <text-format formatNumbers="0" multilineAlign="0" autoWrapLength="0" wrapChar="" addDirectionSymbol="0" plussign="0" decimals="3" leftDirectionSymbol="&lt;" useMaxLineLengthForAutoWrap="1" placeDirectionSymbol="0" rightDirectionSymbol=">" reverseDirectionSymbol="0"/>
-              <placement priority="5" quadOffset="4" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0" overlapHandling="PreventOverlap" dist="0" offsetUnits="MM" overrunDistanceUnit="MM" xOffset="0" rotationUnit="AngleDegrees" allowDegraded="0" preserveRotation="1" geometryGeneratorEnabled="0" maxCurvedCharAngleIn="25" yOffset="0" centroidInside="0" repeatDistance="0" centroidWhole="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" layerType="LineGeometry" placement="3" fitInPolygonOnly="0" overrunDistanceMapUnitScale="3x:0,0,0,0,0,0" geometryGenerator="" lineAnchorClipping="0" offsetType="0" polygonPlacementFlags="2" lineAnchorType="0" placementFlags="10" lineAnchorPercent="0.5" maxCurvedCharAngleOut="-25" geometryGeneratorType="PointGeometry" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" lineAnchorTextPoint="FollowPlacement" overrunDistance="0" repeatDistanceUnits="MM"/>
+              <placement priority="5" quadOffset="4" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0" overlapHandling="PreventOverlap" dist="0" offsetUnits="MM" overrunDistanceUnit="MM" xOffset="0" rotationUnit="AngleDegrees" allowDegraded="0" preserveRotation="1" geometryGeneratorEnabled="0" maxCurvedCharAngleIn="25" yOffset="0" centroidInside="0" repeatDistance="0" centroidWhole="1" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" layerType="LineGeometry" placement="2" fitInPolygonOnly="0" overrunDistanceMapUnitScale="3x:0,0,0,0,0,0" geometryGenerator="" lineAnchorClipping="0" offsetType="0" polygonPlacementFlags="2" lineAnchorType="0" placementFlags="10" lineAnchorPercent="0.5" maxCurvedCharAngleOut="-25" geometryGeneratorType="PointGeometry" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" lineAnchorTextPoint="FollowPlacement" overrunDistance="0" repeatDistanceUnits="MM"/>
               <rendering labelPerPart="0" limitNumLabels="0" fontLimitPixelSize="0" fontMinPixelSize="3" zIndex="0" maxNumLabels="2000" upsidedownLabels="0" fontMaxPixelSize="10000" drawLabels="1" scaleMax="0" mergeLines="0" scaleVisibility="0" unplacedVisibility="0" scaleMin="0" obstacleType="1" obstacle="1" obstacleFactor="1" minFeatureSize="0"/>
               <dd_properties>
                 <Option type="Map">
@@ -28038,13 +28035,13 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{4081c1f1-6892-4737-a9c1-45fe2618f1b4}" filter="vercsa">
+          <rule key="{697b8c21-be08-4927-8720-3af750dacb76}" filter="vercsa">
             <settings calloutType="simple">
-              <text-style fontItalic="0" fontWeight="50" fontUnderline="1" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" fontStrikeout="0" fontLetterSpacing="0" fieldName="vercsa" allowHtml="0" useSubstitutions="0" namedStyle="Regular" textOpacity="1" multilineHeight="1" fontFamily="Open Sans" fontWordSpacing="0" forcedBold="0" forcedItalic="0" legendString="Aa" multilineHeightUnit="Percentage" textColor="236,0,140,255" textOrientation="horizontal" fontKerning="1" fontSizeUnit="Point" capitalization="0" previewBkgrdColor="255,255,255,255" fontSize="10">
+              <text-style fontItalic="0" fontWeight="50" fontUnderline="0" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" fontStrikeout="0" fontLetterSpacing="0" fieldName="vercsa" allowHtml="0" useSubstitutions="0" namedStyle="Regular" textOpacity="1" multilineHeight="1" fontFamily="Open Sans" fontWordSpacing="0" forcedBold="0" forcedItalic="0" legendString="Aa" multilineHeightUnit="Percentage" textColor="236,0,140,255" textOrientation="horizontal" fontKerning="1" fontSizeUnit="Point" capitalization="0" previewBkgrdColor="255,255,255,255" fontSize="10">
                 <families/>
                 <text-buffer bufferNoFill="1" bufferSizeUnits="MM" bufferOpacity="1" bufferJoinStyle="128" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferDraw="0" bufferSize="1" bufferColor="250,250,250,255"/>
                 <text-mask maskedSymbolLayers="" maskType="0" maskSizeMapUnitScale="3x:0,0,0,0,0,0" maskEnabled="0" maskSizeUnits="MM" maskJoinStyle="128" maskSize="0" maskOpacity="1"/>
-                <background shapeRotation="0" shapeJoinStyle="64" shapeOffsetUnit="Point" shapeSizeType="0" shapeFillColor="255,255,255,255" shapeRadiiX="0" shapeDraw="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSizeUnit="Point" shapeSVGFile="" shapeRadiiUnit="Point" shapeOffsetX="0" shapeBorderWidthUnit="Point" shapeBorderWidth="0" shapeSizeY="0" shapeOpacity="1" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRotationType="0" shapeRadiiY="0" shapeType="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="0" shapeBorderColor="128,128,128,255">
+                <background shapeRotation="0" shapeJoinStyle="64" shapeOffsetUnit="Point" shapeSizeType="0" shapeFillColor="255,255,255,255" shapeRadiiX="0" shapeDraw="1" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSizeUnit="Point" shapeSVGFile="" shapeRadiiUnit="Point" shapeOffsetX="0" shapeBorderWidthUnit="Point" shapeBorderWidth="0" shapeSizeY="0" shapeOpacity="1" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRotationType="0" shapeRadiiY="0" shapeType="5" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="-0.59999999999999998" shapeBorderColor="128,128,128,255">
                   <symbol type="marker" frame_rate="10" name="markerSymbol" clip_to_extent="1" force_rhr="0" is_animated="0" alpha="1">
                     <data_defined_properties>
                       <Option type="Map">
@@ -28053,24 +28050,23 @@ def my_form_open(dialog, layer, feature):
                         <Option type="QString" value="collection" name="type"/>
                       </Option>
                     </data_defined_properties>
-                    <layer pass="0" enabled="1" locked="0" class="SimpleMarker">
+                    <layer pass="0" enabled="1" locked="0" class="SvgMarker">
                       <Option type="Map">
                         <Option type="QString" value="0" name="angle"/>
-                        <Option type="QString" value="square" name="cap_style"/>
                         <Option type="QString" value="125,139,143,255" name="color"/>
+                        <Option type="QString" value="0" name="fixedAspectRatio"/>
                         <Option type="QString" value="1" name="horizontal_anchor_point"/>
-                        <Option type="QString" value="bevel" name="joinstyle"/>
-                        <Option type="QString" value="circle" name="name"/>
-                        <Option type="QString" value="0,0" name="offset"/>
+                        <Option type="QString" value="./icons/clearance-safe.svg" name="name"/>
+                        <Option type="QString" value="0,0.10000000000000001" name="offset"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="offset_map_unit_scale"/>
                         <Option type="QString" value="MM" name="offset_unit"/>
                         <Option type="QString" value="35,35,35,255" name="outline_color"/>
-                        <Option type="QString" value="solid" name="outline_style"/>
                         <Option type="QString" value="0" name="outline_width"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="outline_width_map_unit_scale"/>
                         <Option type="QString" value="MM" name="outline_width_unit"/>
+                        <Option name="parameters"/>
                         <Option type="QString" value="diameter" name="scale_method"/>
-                        <Option type="QString" value="2" name="size"/>
+                        <Option type="QString" value="11.7788" name="size"/>
                         <Option type="QString" value="3x:0,0,0,0,0,0" name="size_map_unit_scale"/>
                         <Option type="QString" value="MM" name="size_unit"/>
                         <Option type="QString" value="1" name="vertical_anchor_point"/>
@@ -28127,7 +28123,7 @@ def my_form_open(dialog, layer, feature):
                 <substitutions/>
               </text-style>
               <text-format formatNumbers="0" multilineAlign="0" autoWrapLength="0" wrapChar="" addDirectionSymbol="0" plussign="0" decimals="3" leftDirectionSymbol="&lt;" useMaxLineLengthForAutoWrap="1" placeDirectionSymbol="0" rightDirectionSymbol=">" reverseDirectionSymbol="0"/>
-              <placement priority="5" quadOffset="4" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0" overlapHandling="PreventOverlap" dist="0" offsetUnits="MM" overrunDistanceUnit="MM" xOffset="0" rotationUnit="AngleDegrees" allowDegraded="0" preserveRotation="1" geometryGeneratorEnabled="0" maxCurvedCharAngleIn="25" yOffset="0" centroidInside="0" repeatDistance="0" centroidWhole="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" layerType="LineGeometry" placement="3" fitInPolygonOnly="0" overrunDistanceMapUnitScale="3x:0,0,0,0,0,0" geometryGenerator="" lineAnchorClipping="0" offsetType="0" polygonPlacementFlags="2" lineAnchorType="0" placementFlags="10" lineAnchorPercent="0.5" maxCurvedCharAngleOut="-25" geometryGeneratorType="PointGeometry" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" lineAnchorTextPoint="FollowPlacement" overrunDistance="0" repeatDistanceUnits="MM"/>
+              <placement priority="5" quadOffset="4" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0" overlapHandling="PreventOverlap" dist="0" offsetUnits="MM" overrunDistanceUnit="MM" xOffset="0" rotationUnit="AngleDegrees" allowDegraded="0" preserveRotation="1" geometryGeneratorEnabled="0" maxCurvedCharAngleIn="25" yOffset="0" centroidInside="0" repeatDistance="0" centroidWhole="1" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" layerType="LineGeometry" placement="2" fitInPolygonOnly="0" overrunDistanceMapUnitScale="3x:0,0,0,0,0,0" geometryGenerator="" lineAnchorClipping="0" offsetType="0" polygonPlacementFlags="2" lineAnchorType="0" placementFlags="10" lineAnchorPercent="0.5" maxCurvedCharAngleOut="-25" geometryGeneratorType="PointGeometry" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" lineAnchorTextPoint="FollowPlacement" overrunDistance="0" repeatDistanceUnits="MM"/>
               <rendering labelPerPart="0" limitNumLabels="0" fontLimitPixelSize="0" fontMinPixelSize="3" zIndex="0" maxNumLabels="2000" upsidedownLabels="0" fontMaxPixelSize="10000" drawLabels="1" scaleMax="0" mergeLines="0" scaleVisibility="0" unplacedVisibility="0" scaleMin="0" obstacleType="1" obstacle="1" obstacleFactor="1" minFeatureSize="0"/>
               <dd_properties>
                 <Option type="Map">
@@ -30051,7 +30047,7 @@ def my_form_open(dialog, layer, feature):
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0" rotation="0">
     <Scales/>
-    <DefaultViewExtent xmin="1112975.41500743944197893" ymin="7218930.57642167340964079" ymax="7255639.45925562176853418" xmax="1145766.90014177281409502">
+    <DefaultViewExtent xmin="860111.27506512519903481" ymin="7181917.43838529195636511" ymax="7218626.3212192477658391" xmax="892902.7601994660217315">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
