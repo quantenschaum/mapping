@@ -206,12 +206,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if(isLocal) {
     overlays['QGIS BSH'] = L.tileLayer('http://localhost:8001/tiles/bsh/EPSG3857/{z}/{x}/{y}.png');
-    overlays['QGIS BSH WMS'] = L.tileLayer.wms('http://localhost:8000/', {
-            layers:'bsh',
-            transparent:true,
-            format:'image/png',
-            version:'1.3.0'});
+    layers = [basemaps['OpenStreetMap ORG'], overlays['Grid'], overlays['QGIS BSH']];
   }
+
 
   var map = L.map('map', {
     center: [54.264,9.196],

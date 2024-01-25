@@ -16,14 +16,15 @@ data/vwm:
 	mkdir -p $@
 	wget -O $@/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
 	wget -O $@/vast.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
-	for F in $@/*.json; do jq . $$F>$@/tmp; mv $@/tmp $$F; done
+	#for F in $@/*.json; do jq . $$F>$@/tmp; mv $@/tmp $$F; done
 	for F in $$(find $@ -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
+# need this because there is a typo in the WMS layer name (coastel)
 BSH_LAYERS_2=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing
+# no overview layer for obstructions
 BSH_LAYERS_3=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
-#BSH_BBOX=53,5.5,55.5,14.3333
 BSH_BBOX=53,3.3,56,14.4
 
 bsh: data/bsh #data/bsh.sqlite
@@ -34,7 +35,7 @@ data/bsh:
 	for L in AidsAndServices SkinOfTheEarth; do wget -O $@/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_1)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
 	for L in RocksWrecksObstructions; do wget -O $@/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_3)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
 	for L in Hydrography Topography; do wget -O $@/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_2)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
-	for F in $@/*.json; do jq . $$F>$@/tmp; mv $@/tmp $$F; done
+	#for F in $@/*.json; do jq . $$F>$@/tmp; mv $@/tmp $$F; done
 	for F in $$(find $@ -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 
 CGDS=01 05 07 08 09 11 13 14 17
@@ -53,21 +54,21 @@ us: data/us
 %.csv:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
 
-LAYERS1=BOYLAT BOYCAR BOYISD BOYSAW BOYSPP BOYINB BCNLAT BCNCAR BCNISD BCNSAW BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN OFSPLF SBDARE HRBFAC SMCFAC
-LAYERS2=DEPARE DEPCNT SOUNDG M_COVR
+ENC_LAYERS1=BOYLAT BOYCAR BOYISD BOYSAW BOYSPP BOYINB BCNLAT BCNCAR BCNISD BCNSAW BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN OFSPLF SBDARE HRBFAC SMCFAC
+ENC_LAYERS2=DEPARE DEPCNT SOUNDG M_COVR
 
 %.sqlite: s57attributes.csv s57objectclasses.csv
 	rm -f $@*
-	for F in $$(find $(basename $@) -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr $@ $$F $(LAYERS1) $(LAYERS2) -skipfailures -append $(OGR_OPTS2); done
+	for F in $$(find $(basename $@) -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr $@ $$F $(ENC_LAYERS1) $(ENC_LAYERS2) -skipfailures -append $(OGR_OPTS2); done
 
 %.json: %.sqlite
-	for L in $(LAYERS1); do rm -f $(basename $@)/$$L.json; echo $$L; ogr2ogr $(basename $@)/$$L.json $< $$L; done
+	for L in $(ENC_LAYERS1); do rm -f $(basename $@)/$$L.json; echo $$L; ogr2ogr $(basename $@)/$$L.json $< $$L; done
 	#for F in $(basename $@)/*.json; do echo $$F; jq . $$F>tmp; mv tmp $$F; done
 
 %/shapes: %/
 	rm -f $@/*
-	for F in $$(find $< -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr $@ $$F $(LAYERS1) $(LAYERS2) -skipfailures -append $(OGR_OPTS2); done
-	#for L in $(LAYERS1); do rm -f $</$$L.json; echo $$L; ogr2ogr $</$$L.json $@/$$L.shp $$L; done
+	for F in $$(find $< -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr $@ $$F $(ENC_LAYERS1) $(ENC_LAYERS2) -skipfailures -append $(OGR_OPTS2); done
+	#for L in $(ENC_LAYERS1); do rm -f $</$$L.json; echo $$L; ogr2ogr $</$$L.json $@/$$L.shp $$L; done
 
 waddenzee:
 	rm -rf data/$@
@@ -104,14 +105,10 @@ marine.render.xml:
 	cp nautical.render.xml $@
 	patch $@ render.diff
 
-replace:
-	for F in *.qgs; do echo $$F; sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
-
 serve:
-	xdg-open "http://localhost:8080/index.html"
-	cd tiles && python -m http.server 8080
+	cd tiles && python -m http.server 8002
 
-qgis: replace
+qgis: icons
 	qgis_mapserver #-p bsh.qgs
 
 mapproxy:
@@ -129,10 +126,6 @@ docker:
 upload:
 	touch tiles/.nobackup
 	rsync -hav tiles/ nas:docker/maps/tiles/qgis/ $(O)
-
-sync: replace
-	#rsync -hav --del --exclude tiles --exclude cache_data --exclude .git --delete-excluded ./ nas:docker/qgis $(O)
-	rsync -hav --del map.qgs mapproxy.yaml marrekrite.gpx Dockerfile shapes bsh vwm icons nas:docker/qgis $(O)
 
 data/josm.jar:
 	wget -O $@ https://josm.openstreetmap.de/josm-tested.jar
@@ -161,7 +154,9 @@ obf: data/omc
 	rm -f $@/*.log
 	#cp -v $@/*.obf data/obf
 
-icons:
+icons: icons/gen
+
+icons/gen:
 	cd icons && ./genicons.py
 	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
 

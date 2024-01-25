@@ -13,6 +13,8 @@ services:
       - .:/data
     working_dir: /data
     environment:
+      # https://docs.qgis.org/3.10/en/docs/user_manual/working_with_ogc/server/config.html?highlight=qgis_server_parallel_rendering
       QGIS_SERVER_PARALLEL_RENDERING: "1"
-      QGIS_SERVER_LANDING_PAGE_PROJECTS_DIRECTORIES: "."
+      QGIS_SERVER_MAX_THREADS: "-1"
+      #QGIS_SERVER_LANDING_PAGE_PROJECTS_DIRECTORIES: "."
     command: "make -j qgis mapproxy"

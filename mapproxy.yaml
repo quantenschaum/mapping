@@ -28,7 +28,7 @@ sources:
 
 caches:
   bsh:
-    sources: [ 'qgis:bsh' ]
+    sources: [ 'qgis:BSH' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: file

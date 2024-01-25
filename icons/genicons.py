@@ -7,6 +7,7 @@ from itertools import product
 from re import findall
 
 patterns = (None, "vertical", "horizontal", "cross", "saltire", "border", "squared")
+
 object_colors = {
     "": None,
     "white": "white",
@@ -23,10 +24,12 @@ object_colors = {
     "magenta": "#DE44E8",
     "pink": "pink",
 }
+
 lights = {
     "light",
     "floodlight",
 }
+
 light_colors = {
     "generic": "#800080",
     "white": "yellow",
@@ -139,7 +142,8 @@ def main():
                                 style = f"fill:none; stroke:{color_base_out}; stroke-width:{width_base};"
                             elif "basepoint" in l:
                                 style = f"fill:{color_base_fill}; stroke:{color_base_out}; stroke-width:{width_base};"
-                            l += f' style="{style}" {param(l) if not cs[0] else ""}'
+                            l += f' style="{style}"'
+                            # l += f' style="{style}" {param(l) if not cs[0] else ""}'
                         lines.append(l)
                     svgout = "\n".join(lines)
 
