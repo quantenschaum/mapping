@@ -23,7 +23,7 @@ sources:
       transparent: true
     coverage:
       datasource: data/bsh/AidsAndServices.gpkg
-      where: marsys=1
+      where: recind="Overview"
       srs: 'EPSG:4326'
 
 caches:
@@ -31,7 +31,7 @@ caches:
     sources: [ 'qgis:BSH' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
-      type: file
+      type: mbtiles
       directory_layout: tms
 
 layers:

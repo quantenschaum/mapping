@@ -35,7 +35,7 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 7. start a local map server with caching proxy `make -j qgis mapproxy serve`
    - QGIS WMS at http://localhost:8000 
    - MapProxy at http://localhost:8001 
-   - simple websever with LeafLet at http://localhost:8003
+   - simple websever with LeafLet at http://localhost:8002
 8. (run `make -j qgis seed` to precompute map tiles)
 
 To run QGIS and MapProxy in Docker do `make docker`.
