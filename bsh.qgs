@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUser="al" version="3.28.10-Firenze" saveUserFull="Adam" saveDateTime="2024-01-25T23:46:14" projectname="BSH nautical chart">
+<qgis saveUser="al" version="3.28.10-Firenze" saveUserFull="Adam" saveDateTime="2024-01-26T00:07:10" projectname="BSH nautical chart">
   <homePath path="/home/al/Projekte/mapping/"/>
   <title>BSH nautical chart</title>
   <transaction mode="Disabled"/>
@@ -142,10 +142,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>1512514.96186813921667635</xmin>
-      <ymin>7261674.76819560024887323</ymin>
-      <xmax>1523457.79908566013909876</xmax>
-      <ymax>7266793.43871504161506891</ymax>
+      <xmin>1227954.76141924131661654</xmin>
+      <ymin>7240779.93313464988023043</ymin>
+      <xmax>1232597.45210226159542799</xmax>
+      <ymax>7255036.95915771741420031</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -18555,18 +18555,22 @@ def my_form_open(dialog, layer, feature):
       </elevation>
       <renderer-v2 forceraster="0" symbollevels="0" referencescale="-1" type="RuleRenderer" enableorderby="0">
         <rules key="{30fd1670-c87a-42e9-8df7-b8ccaf007112}">
-          <rule filter="floor((@zoom_level+@zshift-6)/2)=uband" key="{180341d0-c7fd-456f-81c3-f4706aa856f0}">
-            <rule filter="catwrk=1 or catwrk=3" symbol="0" key="{275125d4-1937-4ab8-bbc8-eb097de30b7b}"/>
-            <rule filter="catwrk=2" symbol="1" key="{da061e62-f18f-4706-8c75-d070e2770ca4}"/>
-            <rule filter="catwrk>3" symbol="2" key="{a1ef7e0c-b709-4d6e-81dc-8d5fc322b3dc}"/>
-            <rule filter="ELSE" symbol="3" key="{5f37d3ae-5f85-4d09-86ee-508ae2458e06}"/>
-            <rule filter="catobs=7" symbol="4" key="{1680f38b-18e5-42fb-aee6-6ddb0cefdc5c}"/>
-            <rule filter="id ILIKE '%rock%'" symbol="5" key="{b668ddf9-be83-4a12-a5e5-f0621bdfd301}">
-              <rule filter="expsou=2 and watlev=3" symbol="6" key="{981045c6-4d09-477a-ac52-b1d4ff69a4da}"/>
-              <rule filter="watlev=4" symbol="7" key="{b06afb1a-86e3-4767-84a2-e07b05281e44}"/>
-              <rule filter="watlev=5" symbol="8" key="{3ceafb7f-2978-491f-b112-9c6efef42519}"/>
-              <rule filter="watlev=3" symbol="9" key="{a659cf92-36a0-43bd-b940-dea485da45c9}"/>
+          <rule filter="floor((@zoom_level+@zshift-6)/2)=uband" key="{f0d2b6ff-4124-463f-a4cb-46691a5ae1fc}">
+            <rule filter="catwrk=1 or catwrk=3" symbol="0" label="wreck" key="{61f160ae-b8d2-4e32-af57-f4c0a21bc4bc}"/>
+            <rule filter="catwrk=2" symbol="1" label="dangerous wreck" key="{54f28120-25ba-4671-84fb-ee617b18200f}"/>
+            <rule filter="catwrk>3" symbol="2" label="wreck hull showing" key="{27a50b80-75d2-444d-a312-e635ee389a9a}"/>
+            <rule filter="ELSE" symbol="3" label="obstruction" key="{3a9966ea-6267-4592-ba33-bf5e343dc6cd}"/>
+            <rule filter="catobs=7" symbol="4" label="foul" key="{0596ff47-6f73-4f95-b112-a653ffe55441}"/>
+            <rule filter="id ILIKE '%rock%'" label="rock" key="{73777a2f-7035-4dfe-bea4-2ca21067e5e4}">
+              <rule filter="expsou=2 and watlev=3" symbol="5" label="out of depth area" key="{044716ce-ada5-487c-ad58-89713056c353}"/>
+              <rule filter="watlev=4" symbol="6" label="uncovers" key="{170e3261-bea1-4d2b-89f5-8ca547ffe7f4}"/>
+              <rule filter="watlev=5" symbol="7" label="awash" key="{fc465c0a-8197-4e8c-aa52-093c40f7f4b0}"/>
+              <rule filter="watlev=3" symbol="8" label="submerged" key="{4b4849e2-fa80-4a1a-99d3-030c208cd561}"/>
             </rule>
+          </rule>
+          <rule filter="floor((@zoom_level+@zshift-6)/2)=uband" key="{180341d0-c7fd-456f-81c3-f4706aa856f0}">
+            <rule filter="quasou in (6,7)" symbol="9" label="least depth known" key="{3c8bd9f7-62a5-48bc-9820-ad4f93b5fce5}"/>
+            <rule filter="array_intersect(string_to_array(tecsou),array(4,6))" symbol="10" label="wire drag/diver" checkstate="0" key="{3f5f0233-0cd5-41f0-8c3d-4b63841883fb}"/>
           </rule>
         </rules>
         <symbols>
@@ -18633,6 +18637,45 @@ def my_form_open(dialog, layer, feature):
                 <Option name="parameters"/>
                 <Option value="diameter" name="scale_method" type="QString"/>
                 <Option value="15" name="size" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="size_map_unit_scale" type="QString"/>
+                <Option value="MM" name="size_unit" type="QString"/>
+                <Option value="1" name="vertical_anchor_point" type="QString"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="10" type="marker" is_animated="0" force_rhr="0">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option value="" name="name" type="QString"/>
+                <Option name="properties"/>
+                <Option value="collection" name="type" type="QString"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" class="SimpleMarker" enabled="1" pass="0">
+              <Option type="Map">
+                <Option value="90" name="angle" type="QString"/>
+                <Option value="square" name="cap_style" type="QString"/>
+                <Option value="183,72,75,255" name="color" type="QString"/>
+                <Option value="1" name="horizontal_anchor_point" type="QString"/>
+                <Option value="bevel" name="joinstyle" type="QString"/>
+                <Option value="line" name="name" type="QString"/>
+                <Option value="2.60000000000000098,0" name="offset" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
+                <Option value="MM" name="offset_unit" type="QString"/>
+                <Option value="35,35,35,255" name="outline_color" type="QString"/>
+                <Option value="solid" name="outline_style" type="QString"/>
+                <Option value="0.2" name="outline_width" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="outline_width_map_unit_scale" type="QString"/>
+                <Option value="MM" name="outline_width_unit" type="QString"/>
+                <Option value="diameter" name="scale_method" type="QString"/>
+                <Option value="4.7" name="size" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="size_map_unit_scale" type="QString"/>
                 <Option value="MM" name="size_unit" type="QString"/>
                 <Option value="1" name="vertical_anchor_point" type="QString"/>
@@ -18774,44 +18817,6 @@ def my_form_open(dialog, layer, feature):
                 <Option value="231,113,72,255" name="color" type="QString"/>
                 <Option value="0" name="fixedAspectRatio" type="QString"/>
                 <Option value="1" name="horizontal_anchor_point" type="QString"/>
-                <Option value="./icons/INT1/rock-submerged.svg" name="name" type="QString"/>
-                <Option value="0,0" name="offset" type="QString"/>
-                <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
-                <Option value="MM" name="offset_unit" type="QString"/>
-                <Option value="35,35,35,255" name="outline_color" type="QString"/>
-                <Option value="0" name="outline_width" type="QString"/>
-                <Option value="3x:0,0,0,0,0,0" name="outline_width_map_unit_scale" type="QString"/>
-                <Option value="MM" name="outline_width_unit" type="QString"/>
-                <Option name="parameters"/>
-                <Option value="diameter" name="scale_method" type="QString"/>
-                <Option value="15" name="size" type="QString"/>
-                <Option value="3x:0,0,0,0,0,0" name="size_map_unit_scale" type="QString"/>
-                <Option value="MM" name="size_unit" type="QString"/>
-                <Option value="1" name="vertical_anchor_point" type="QString"/>
-              </Option>
-              <data_defined_properties>
-                <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
-                  <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
-                </Option>
-              </data_defined_properties>
-            </layer>
-          </symbol>
-          <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="6" type="marker" is_animated="0" force_rhr="0">
-            <data_defined_properties>
-              <Option type="Map">
-                <Option value="" name="name" type="QString"/>
-                <Option name="properties"/>
-                <Option value="collection" name="type" type="QString"/>
-              </Option>
-            </data_defined_properties>
-            <layer locked="0" class="SvgMarker" enabled="1" pass="0">
-              <Option type="Map">
-                <Option value="0" name="angle" type="QString"/>
-                <Option value="231,113,72,255" name="color" type="QString"/>
-                <Option value="0" name="fixedAspectRatio" type="QString"/>
-                <Option value="1" name="horizontal_anchor_point" type="QString"/>
                 <Option value="./icons/INT1/obstruction.svg" name="name" type="QString"/>
                 <Option value="0,0" name="offset" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
@@ -18836,7 +18841,7 @@ def my_form_open(dialog, layer, feature):
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="7" type="marker" is_animated="0" force_rhr="0">
+          <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="6" type="marker" is_animated="0" force_rhr="0">
             <data_defined_properties>
               <Option type="Map">
                 <Option value="" name="name" type="QString"/>
@@ -18874,7 +18879,7 @@ def my_form_open(dialog, layer, feature):
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="8" type="marker" is_animated="0" force_rhr="0">
+          <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="7" type="marker" is_animated="0" force_rhr="0">
             <data_defined_properties>
               <Option type="Map">
                 <Option value="" name="name" type="QString"/>
@@ -18912,7 +18917,7 @@ def my_form_open(dialog, layer, feature):
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="9" type="marker" is_animated="0" force_rhr="0">
+          <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="8" type="marker" is_animated="0" force_rhr="0">
             <data_defined_properties>
               <Option type="Map">
                 <Option value="" name="name" type="QString"/>
@@ -18937,6 +18942,45 @@ def my_form_open(dialog, layer, feature):
                 <Option name="parameters"/>
                 <Option value="diameter" name="scale_method" type="QString"/>
                 <Option value="15" name="size" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="size_map_unit_scale" type="QString"/>
+                <Option value="MM" name="size_unit" type="QString"/>
+                <Option value="1" name="vertical_anchor_point" type="QString"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="9" type="marker" is_animated="0" force_rhr="0">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option value="" name="name" type="QString"/>
+                <Option name="properties"/>
+                <Option value="collection" name="type" type="QString"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" class="SimpleMarker" enabled="1" pass="0">
+              <Option type="Map">
+                <Option value="90" name="angle" type="QString"/>
+                <Option value="square" name="cap_style" type="QString"/>
+                <Option value="183,72,75,255" name="color" type="QString"/>
+                <Option value="1" name="horizontal_anchor_point" type="QString"/>
+                <Option value="bevel" name="joinstyle" type="QString"/>
+                <Option value="line" name="name" type="QString"/>
+                <Option value="-2.59999999999999787,0" name="offset" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
+                <Option value="MM" name="offset_unit" type="QString"/>
+                <Option value="35,35,35,255" name="outline_color" type="QString"/>
+                <Option value="solid" name="outline_style" type="QString"/>
+                <Option value="0.2" name="outline_width" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="outline_width_map_unit_scale" type="QString"/>
+                <Option value="MM" name="outline_width_unit" type="QString"/>
+                <Option value="diameter" name="scale_method" type="QString"/>
+                <Option value="4.7" name="size" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="size_map_unit_scale" type="QString"/>
                 <Option value="MM" name="size_unit" type="QString"/>
                 <Option value="1" name="vertical_anchor_point" type="QString"/>
@@ -19644,7 +19688,7 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
       </attributeactions>
-      <attributetableconfig sortExpression="&quot;scamin&quot;" actionWidgetStyle="dropDown" sortOrder="1">
+      <attributetableconfig sortExpression="&quot;tecsou&quot;" actionWidgetStyle="dropDown" sortOrder="1">
         <columns>
           <column hidden="0" width="155" name="id" type="field"/>
           <column hidden="0" width="-1" name="catobs" type="field"/>
@@ -30043,7 +30087,7 @@ def my_form_open(dialog, layer, feature):
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0" rotation="0">
     <Scales/>
-    <DefaultViewExtent xmin="1512514.96186813921667635" xmax="1523457.79908566013909876" ymax="7269921.65494202449917793" ymin="7258546.55196861736476421">
+    <DefaultViewExtent xmin="1223418.48466532491147518" xmax="1237133.72885617800056934" ymax="7255036.95915771741420031" ymin="7240779.93313464988023043">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
