@@ -105,10 +105,13 @@ marine.render.xml:
 	cp nautical.render.xml $@
 	patch $@ render.diff
 
+replace:
+	for F in *.qgs; do echo $$F; sed 's#"INT1/#"./icons/INT1/#g' $$F -i; done
+
 serve:
 	cd tiles && python -m http.server 8002
 
-qgis: icons
+qgis: replace icons
 	qgis_mapserver #-p bsh.qgs
 
 mapproxy:
