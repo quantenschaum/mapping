@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUser="al" version="3.28.10-Firenze" saveUserFull="Adam" saveDateTime="2024-01-25T23:32:25" projectname="BSH nautical chart">
+<qgis saveUser="al" version="3.28.10-Firenze" saveUserFull="Adam" saveDateTime="2024-01-25T23:46:14" projectname="BSH nautical chart">
   <homePath path="/home/al/Projekte/mapping/"/>
   <title>BSH nautical chart</title>
   <transaction mode="Disabled"/>
@@ -142,10 +142,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>1441578.47358328429982066</xmin>
-      <ymin>7229587.28266180399805307</ymin>
-      <xmax>1470759.37283002538606524</xmax>
-      <ymax>7243237.07071364764124155</ymax>
+      <xmin>1512514.96186813921667635</xmin>
+      <ymin>7261674.76819560024887323</ymin>
+      <xmax>1523457.79908566013909876</xmax>
+      <ymax>7266793.43871504161506891</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -10849,7 +10849,8 @@ def my_form_open(dialog, layer, feature):
               <rule filter="else" symbol="8" key="{231e1761-49f8-4ddf-a6ee-a9b3864d93c1}"/>
               <rule filter="zone_type=6" symbol="9" key="{126eb3df-342c-4a06-b5e8-335de19e37c1}"/>
             </rule>
-            <rule filter="ELSE" symbol="10" key="{6a2582fd-6ef1-4f51-b012-3ad02815d8af}"/>
+            <rule filter="catfry" symbol="10" label="ferry" key="{a960bb58-6af3-443a-ad65-964f3aca6ceb}"/>
+            <rule filter="ELSE" symbol="11" key="{6a2582fd-6ef1-4f51-b012-3ad02815d8af}"/>
           </rule>
         </rules>
         <symbols>
@@ -11080,6 +11081,118 @@ def my_form_open(dialog, layer, feature):
             </layer>
           </symbol>
           <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="10" type="line" is_animated="0" force_rhr="0">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option value="" name="name" type="QString"/>
+                <Option name="properties"/>
+                <Option value="collection" name="type" type="QString"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" class="SimpleLine" enabled="1" pass="0">
+              <Option type="Map">
+                <Option value="0" name="align_dash_pattern" type="QString"/>
+                <Option value="square" name="capstyle" type="QString"/>
+                <Option value="2;1" name="customdash" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="customdash_map_unit_scale" type="QString"/>
+                <Option value="MM" name="customdash_unit" type="QString"/>
+                <Option value="0" name="dash_pattern_offset" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="dash_pattern_offset_map_unit_scale" type="QString"/>
+                <Option value="MM" name="dash_pattern_offset_unit" type="QString"/>
+                <Option value="0" name="draw_inside_polygon" type="QString"/>
+                <Option value="bevel" name="joinstyle" type="QString"/>
+                <Option value="75,75,75,255" name="line_color" type="QString"/>
+                <Option value="dash" name="line_style" type="QString"/>
+                <Option value="0.2" name="line_width" type="QString"/>
+                <Option value="MM" name="line_width_unit" type="QString"/>
+                <Option value="0" name="offset" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
+                <Option value="MM" name="offset_unit" type="QString"/>
+                <Option value="0" name="ring_filter" type="QString"/>
+                <Option value="0" name="trim_distance_end" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="trim_distance_end_map_unit_scale" type="QString"/>
+                <Option value="MM" name="trim_distance_end_unit" type="QString"/>
+                <Option value="0" name="trim_distance_start" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="trim_distance_start_map_unit_scale" type="QString"/>
+                <Option value="MM" name="trim_distance_start_unit" type="QString"/>
+                <Option value="0" name="tweak_dash_pattern_on_corners" type="QString"/>
+                <Option value="1" name="use_custom_dash" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="width_map_unit_scale" type="QString"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+            <layer locked="0" class="MarkerLine" enabled="1" pass="0">
+              <Option type="Map">
+                <Option value="4" name="average_angle_length" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="average_angle_map_unit_scale" type="QString"/>
+                <Option value="MM" name="average_angle_unit" type="QString"/>
+                <Option value="50" name="interval" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="interval_map_unit_scale" type="QString"/>
+                <Option value="MM" name="interval_unit" type="QString"/>
+                <Option value="0" name="offset" type="QString"/>
+                <Option value="5" name="offset_along_line" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="offset_along_line_map_unit_scale" type="QString"/>
+                <Option value="MM" name="offset_along_line_unit" type="QString"/>
+                <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
+                <Option value="MM" name="offset_unit" type="QString"/>
+                <Option value="true" name="place_on_every_part" type="bool"/>
+                <Option value="Interval" name="placements" type="QString"/>
+                <Option value="0" name="ring_filter" type="QString"/>
+                <Option value="1" name="rotate" type="QString"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+              <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="@10@1" type="marker" is_animated="0" force_rhr="0">
+                <data_defined_properties>
+                  <Option type="Map">
+                    <Option value="" name="name" type="QString"/>
+                    <Option name="properties"/>
+                    <Option value="collection" name="type" type="QString"/>
+                  </Option>
+                </data_defined_properties>
+                <layer locked="0" class="SvgMarker" enabled="1" pass="0">
+                  <Option type="Map">
+                    <Option value="0" name="angle" type="QString"/>
+                    <Option value="255,0,0,255" name="color" type="QString"/>
+                    <Option value="0" name="fixedAspectRatio" type="QString"/>
+                    <Option value="1" name="horizontal_anchor_point" type="QString"/>
+                    <Option value="./icons/ferry.svg" name="name" type="QString"/>
+                    <Option value="0,0" name="offset" type="QString"/>
+                    <Option value="3x:0,0,0,0,0,0" name="offset_map_unit_scale" type="QString"/>
+                    <Option value="MM" name="offset_unit" type="QString"/>
+                    <Option value="35,35,35,255" name="outline_color" type="QString"/>
+                    <Option value="0" name="outline_width" type="QString"/>
+                    <Option value="3x:0,0,0,0,0,0" name="outline_width_map_unit_scale" type="QString"/>
+                    <Option value="MM" name="outline_width_unit" type="QString"/>
+                    <Option name="parameters"/>
+                    <Option value="diameter" name="scale_method" type="QString"/>
+                    <Option value="15" name="size" type="QString"/>
+                    <Option value="3x:0,0,0,0,0,0" name="size_map_unit_scale" type="QString"/>
+                    <Option value="MM" name="size_unit" type="QString"/>
+                    <Option value="1" name="vertical_anchor_point" type="QString"/>
+                  </Option>
+                  <data_defined_properties>
+                    <Option type="Map">
+                      <Option value="" name="name" type="QString"/>
+                      <Option name="properties"/>
+                      <Option value="collection" name="type" type="QString"/>
+                    </Option>
+                  </data_defined_properties>
+                </layer>
+              </symbol>
+            </layer>
+          </symbol>
+          <symbol frame_rate="10" clip_to_extent="1" alpha="1" name="11" type="line" is_animated="0" force_rhr="0">
             <data_defined_properties>
               <Option type="Map">
                 <Option value="" name="name" type="QString"/>
@@ -29930,7 +30043,7 @@ def my_form_open(dialog, layer, feature):
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0" rotation="0">
     <Scales/>
-    <DefaultViewExtent xmin="1441578.47358328429982066" xmax="1470759.37283002538606524" ymax="7251578.98065227922052145" ymin="7221245.37272317241877317">
+    <DefaultViewExtent xmin="1512514.96186813921667635" xmax="1523457.79908566013909876" ymax="7269921.65494202449917793" ymin="7258546.55196861736476421">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
