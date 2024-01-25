@@ -109,7 +109,8 @@ serve:
 	cd tiles && python -m http.server 8002
 
 qgis: icons
-	qgis_mapserver #-p bsh.qgs
+	# https://docs.qgis.org/3.10/en/docs/user_manual/working_with_ogc/server/config.html?highlight=qgis_server_parallel_rendering
+	QGIS_SERVER_PARALLEL_RENDERING=1 qgis_mapserver
 
 mapproxy:
 	mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001
