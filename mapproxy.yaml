@@ -21,6 +21,19 @@ sources:
     req:
       url: http://localhost:8000/
       transparent: true
+      map: bsh.qgs
+      #tiled: true
+    coverage:
+      datasource: data/bsh/AidsAndServices.gpkg
+      where: recind="Overview"
+      srs: 'EPSG:4326'
+  qgis1:
+    # shifted usage band as underlay
+    type: wms
+    req:
+      url: http://localhost:8000/
+      transparent: true
+      map: bsh1.qgs
       #tiled: true
     coverage:
       datasource: data/bsh/AidsAndServices.gpkg
@@ -29,7 +42,7 @@ sources:
 
 caches:
   bsh:
-    sources: [ 'qgis:BSH' ]
+    sources: [ 'qgis1:BSH','qgis:BSH' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles

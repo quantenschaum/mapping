@@ -105,11 +105,13 @@ marine.render.xml:
 	cp nautical.render.xml $@
 	patch $@ render.diff
 
+bsh1.qgs: bsh.qgs
+	sed 's#<value>000000</value>#<value>1</value>#g' $< >$@
+
 serve:
 	cd tiles && python -m http.server 8002
 
-qgis: icons
-	# https://docs.qgis.org/3.10/en/docs/user_manual/working_with_ogc/server/config.html?highlight=qgis_server_parallel_rendering
+qgis: icons bsh1.qgs
 	QGIS_SERVER_PARALLEL_RENDERING=1 qgis_mapserver
 
 mapproxy:
