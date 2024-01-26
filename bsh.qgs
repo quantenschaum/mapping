@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="3.28.10-Firenze" saveUserFull="Adam" saveDateTime="2024-01-26T09:14:14" projectname="BSH nautical chart" saveUser="al">
+<qgis version="3.28.10-Firenze" saveUserFull="Adam" saveDateTime="2024-01-26T09:26:09" projectname="BSH nautical chart" saveUser="al">
   <homePath path="/home/al/Projekte/mapping/"/>
   <title>BSH nautical chart</title>
   <transaction mode="Disabled"/>
@@ -144,10 +144,10 @@
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>911667.50940400175750256</xmin>
-      <ymin>6754991.80990499630570412</ymin>
-      <xmax>1208799.71311741881072521</xmax>
-      <ymax>7667441.47538084164261818</ymax>
+      <xmin>1229650.77655746578238904</xmin>
+      <ymin>7252337.79093711171299219</ymin>
+      <xmax>1230811.4492282213177532</xmax>
+      <ymax>7255902.04744287673383951</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -529,7 +529,7 @@
       </elevation>
       <renderer-v2 type="RuleRenderer" enableorderby="0" symbollevels="0" forceraster="0" referencescale="-1">
         <rules key="{664b73fb-6218-4e63-a1f9-f2054f4c3a50}">
-          <rule key="{09bbf951-23da-4b79-aa27-f215a7a1dc04}" filter="floor((@zoom_level+@zshift-6)/2)=uband">
+          <rule key="{09bbf951-23da-4b79-aa27-f215a7a1dc04}" filter="floor((@zoom_level+@zshift-6)/2)=uband&#xa;--scamax&lt;=@map_scale and (@map_scale&lt;scamin or scamin is null)">
             <rule label="radar" symbol="0" key="{1100dfec-a24b-412c-8515-c634da80b791}" filter="conrad=3"/>
             <rule label="wind" symbol="1" key="{f857aff2-298d-4faa-a6cf-14e8b5f37c3e}" filter="catlmk=19"/>
             <rule symbol="2" key="{b8be8d05-9b7c-4d04-91e0-d3e9e60e6ac3}" filter="valnmr>5 or facility_type=9"/>
@@ -4225,7 +4225,7 @@
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;topshape&quot;" sortOrder="0">
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;scamax&quot;" sortOrder="1">
         <columns>
           <column name="id" hidden="0" width="294" type="field"/>
           <column name="bcnshp" hidden="0" width="-1" type="field"/>
@@ -19697,7 +19697,7 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;tecsou&quot;" sortOrder="1">
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;scamax&quot;" sortOrder="0">
         <columns>
           <column name="id" hidden="0" width="155" type="field"/>
           <column name="catobs" hidden="0" width="-1" type="field"/>
@@ -21255,7 +21255,7 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;scamax&quot;" sortOrder="1">
         <columns>
           <column name="id" hidden="0" width="-1" type="field"/>
           <column name="agen" hidden="0" width="-1" type="field"/>
@@ -30096,7 +30096,7 @@ def my_form_open(dialog, layer, feature):
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0" rotation="0">
     <Scales/>
-    <DefaultViewExtent ymin="6754991.80990499630570412" xmax="1423836.01569681614637375" xmin="696631.2068246043054387" ymax="7667441.47538084164261818">
+    <DefaultViewExtent ymin="7252337.79093711171299219" xmax="1231651.43478517211042345" xmin="1228810.79100051498971879" ymax="7255902.04744287673383951">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
