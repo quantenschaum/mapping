@@ -3,8 +3,9 @@
 import sqlite3
 import argparse
 from datetime import datetime
-from os.path import isfile
-from os import remove
+from os.path import isfile, exists
+from os import remove, makedirs
+from shutil import rmtree
 
 
 def main():
@@ -17,6 +18,7 @@ def main():
     )
     parser.add_argument("output", help="output file", metavar="sqlitedb")
     parser.add_argument("-f", "--force", action="store_true", help="overwrite output")
+    parser.add_argument("-a", "--append", action="store_true", help="append to output")
     # parser.add_argument("-t", "--time", action="store_true", help="add time column")
     parser.add_argument("-z", "--min-zoom", type=int, help="min zoom level", default=5)
     parser.add_argument("-Z", "--max-zoom", type=int, help="max zoom level", default=18)
@@ -39,7 +41,7 @@ def main():
         "-R", "--referer", help="referer header to send with requests to URL"
     )
     parser.add_argument(
-        "-a", "--agent", help="user-agent header to send with requests to URL"
+        "-A", "--agent", help="user-agent header to send with requests to URL"
     )
     parser.add_argument(
         "-m", "--mozilla", action="store_true", help="set user-agent to mozilla"
@@ -64,50 +66,59 @@ def main():
         assert isfile(f), f"{f} not found"
 
     output = args.output
+    is_dir = output.endswith("/")
     ext = ".sqlitedb"
-    if not output.endswith(ext):
+    if not is_dir and not output.endswith(ext):
         output += ext
 
-    if isfile(output) and args.force:
-        remove(output)
+    if exists(output) and args.force:
+        print("deleting", output)
+        if is_dir:
+            rmtree(output)
+        else:
+            remove(output)
 
-    assert not isfile(output), f"{output} exists, overwrite with -f"
+    assert (
+        not exists(output) or args.append
+    ), f"{output} exists, overwrite with -f or append with -a"
 
-    dest = sqlite3.connect(output)
-
-    dcur = dest.cursor()
-
-    # dcur.execute("CREATE TABLE android_metadata (locale TEXT);")
-    # dcur.execute("INSERT INTO android_metadata VALUES ('en_US');")
+    print("writing to", output)
+    dest = sqlite3.connect(output) if not is_dir else None
 
     timecol = args.timecol or args.expire
 
-    dcur.execute(
-        "CREATE TABLE info (tilenumbering, minzoom, maxzoom, title TEXT, url TEXT, randoms TEXT, ellipsoid TEXT, inverted_y TEXT, referer TEXT, useragent TEXT, timecolumn TEXT, expireminutes TEXT);"
-    )
-    dcur.execute(
-        "INSERT INTO info (tilenumbering, minzoom, maxzoom, title, url, randoms, ellipsoid, inverted_y, referer, useragent, timecolumn, expireminutes) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
-        [
-            "simple",
-            args.min_zoom,
-            args.max_zoom,
-            args.title,
-            args.url,
-            args.randoms,
-            1 if args.elliptic else 0,
-            1 if args.inverted_y else 0,
-            args.referer,
-            "Mozilla/5.0 AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
-            if args.mozilla
-            else args.agent,
-            "yes" if timecol else "no",
-            args.expire or -1,
-        ],
-    )
-    dcur.execute(
-        f"CREATE TABLE tiles (x int, y int, z int, s int, image blob, {'time long,' if timecol else ''} PRIMARY KEY (x,y,z,s));"
-    )
-    dcur.execute("CREATE INDEX IND on tiles (x,y,z,s);")
+    if dest:
+        dcur = dest.cursor()
+
+        # dcur.execute("CREATE TABLE android_metadata (locale TEXT);")
+        # dcur.execute("INSERT INTO android_metadata VALUES ('en_US');")
+
+        dcur.execute(
+            "CREATE TABLE IF NOT EXISTS info (tilenumbering, minzoom, maxzoom, title TEXT, url TEXT, randoms TEXT, ellipsoid TEXT, inverted_y TEXT, referer TEXT, useragent TEXT, timecolumn TEXT, expireminutes TEXT);"
+        )
+        dcur.execute(
+            "INSERT INTO info (tilenumbering, minzoom, maxzoom, title, url, randoms, ellipsoid, inverted_y, referer, useragent, timecolumn, expireminutes) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+            [
+                "simple",
+                args.min_zoom,
+                args.max_zoom,
+                args.title,
+                args.url,
+                args.randoms,
+                1 if args.elliptic else 0,
+                1 if args.inverted_y else 0,
+                args.referer,
+                "Mozilla/5.0 AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
+                if args.mozilla
+                else args.agent,
+                "yes" if timecol else "no",
+                args.expire or -1,
+            ],
+        )
+        dcur.execute(
+            f"CREATE TABLE IF NOT EXISTS tiles (x int, y int, z int, s int, image blob, {'time long,' if timecol else ''} PRIMARY KEY (x,y,z,s));"
+        )
+        dcur.execute("CREATE INDEX IF NOT EXISTS IND on tiles (x,y,z,s);")
 
     now = int((datetime.utcnow() - datetime(1970, 1, 1)).total_seconds() * 1000)
 
@@ -115,7 +126,6 @@ def main():
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
-        insert = f"INSERT OR REPLACE INTO tiles (x,y,z,s,image{',time' if timecol else ''}) VALUES (?,?,?,?,?{',?' if timecol else ''})"
         for row in source.execute(
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
@@ -126,13 +136,25 @@ def main():
             if timecol:
                 data.append(now)
             i += 1
-            dcur.execute(insert, data)
+            if dest:
+                insert = f"INSERT OR REPLACE INTO tiles (x,y,z,s,image{',time' if timecol else ''}) VALUES (?,?,?,?,?{',?' if timecol else ''})"
+                dcur.execute(insert, data)
+            if is_dir:
+                dir = f"{output}/{z}/{x}"
+                makedirs(dir, exist_ok=1)
+                write(f"{dir}/{y}.png", row[3])
         source.close()
     if i:
         print("copied", i, "tiles")
 
-    dest.commit()
-    dest.close()
+    if dest:
+        dest.commit()
+        dest.close()
+
+
+def write(filename, data):
+    with open(filename, "wb") as f:
+        f.write(data)
 
 
 if __name__ == "__main__":
