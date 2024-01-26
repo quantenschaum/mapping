@@ -13,7 +13,7 @@ def main():
     )
 
     parser.add_argument(
-        "input", help="input file (omit for empty file)", metavar="mbtiles", nargs="?"
+        "input", help="input file (omit for empty file)", metavar="mbtiles", nargs="*"
     )
     parser.add_argument("output", help="output file", metavar="sqlitedb")
     parser.add_argument("-f", "--force", action="store_true", help="overwrite output")
@@ -59,8 +59,9 @@ def main():
     parser.add_argument("-T", "--timecol", action="store_true", help="add time column")
     args = parser.parse_args()
 
-    input = args.input
-    assert not input or isfile(input), f"{input} not found"
+    inputs = args.input
+    for f in inputs:
+        assert isfile(f), f"{f} not found"
 
     output = args.output
     ext = ".sqlitedb"
@@ -72,7 +73,6 @@ def main():
 
     assert not isfile(output), f"{output} exists, overwrite with -f"
 
-    source = sqlite3.connect(input) if input else None
     dest = sqlite3.connect(output)
 
     dcur = dest.cursor()
@@ -111,8 +111,11 @@ def main():
 
     now = int((datetime.utcnow() - datetime(1970, 1, 1)).total_seconds() * 1000)
 
-    if source:
-        insert = f"INSERT INTO tiles (x,y,z,s,image{',time' if timecol else ''}) VALUES (?,?,?,?,?{',?' if timecol else ''})"
+    i = 0
+    for input in inputs:
+        print("reading", input)
+        source = sqlite3.connect(input)
+        insert = f"INSERT OR REPLACE INTO tiles (x,y,z,s,image{',time' if timecol else ''}) VALUES (?,?,?,?,?{',?' if timecol else ''})"
         for row in source.execute(
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
@@ -122,8 +125,11 @@ def main():
             data = [x, y, z, s, sqlite3.Binary(row[3])]
             if timecol:
                 data.append(now)
+            i += 1
             dcur.execute(insert, data)
         source.close()
+    if i:
+        print("copied", i, "tiles")
 
     dest.commit()
     dest.close()
