@@ -17,11 +17,11 @@ seeds:
     coverages: [ bsh-approach ]
   bsh-harbour:
     caches: [ bsh ]
-    levels: [ 16,17 ]
+    levels: [ 13,14,15,16,17 ]
     coverages: [ bsh-harbour ]
   bsh-berthing:
     caches: [ bsh ]
-    levels: [ 18 ]
+    levels: [ 13,14,15,16,17,18 ]
     coverages: [ bsh-berthing ]
 
 coverages:
