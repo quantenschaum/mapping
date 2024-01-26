@@ -10,7 +10,7 @@ from shutil import rmtree
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Converts mbtiles format to sqlitedb format suitable for OsmAnd"
+        description="Converts mbtiles to sqlitedb for use with OsmAnd"
     )
 
     parser.add_argument(
