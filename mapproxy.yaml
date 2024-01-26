@@ -46,7 +46,6 @@ caches:
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
-      directory_layout: tms
 
 layers:
   - name: bsh
