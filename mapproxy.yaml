@@ -5,7 +5,7 @@ globals:
   cache:
     link_single_color_images: true
     meta_size: [ 6,6 ]
-    meta_buffer: 160
+    meta_buffer: 300
     bulk_meta_tiles: true
   tiles:
     expires_hours: 24
@@ -21,6 +21,7 @@ sources:
     req:
       url: http://localhost:8000/
       transparent: true
+      #tiled: true
     coverage:
       datasource: data/bsh/AidsAndServices.gpkg
       where: recind="Overview"
