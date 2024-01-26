@@ -1,11 +1,11 @@
 seeds:
   bsh-overview:
     caches: [ bsh ]
-    levels: [ 7,8 ]
+    levels: [ 7,8,9 ]
     coverages: [ bsh-overview ]
   bsh-general:
     caches: [ bsh ]
-    levels: [ 9,10 ]
+    levels: [ 10 ]
     coverages: [ bsh-general ]
   bsh-coastal:
     caches: [ bsh ]
@@ -13,15 +13,15 @@ seeds:
     coverages: [ bsh-coastal ]
   bsh-approach:
     caches: [ bsh ]
-    levels: [ 13,14 ]
+    levels: [ 13,14,15 ]
     coverages: [ bsh-approach ]
   bsh-harbour:
     caches: [ bsh ]
-    levels: [ 15,16 ]
+    levels: [ 16,17 ]
     coverages: [ bsh-harbour ]
   bsh-berthing:
     caches: [ bsh ]
-    levels: [ 17,18 ]
+    levels: [ 18 ]
     coverages: [ bsh-berthing ]
 
 coverages:
