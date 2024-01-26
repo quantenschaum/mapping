@@ -118,7 +118,7 @@ mapproxy:
 	mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001
 
 seed:
-	mapproxy-seed -f mapproxy.yaml -s seed.yaml
+	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
 
 clean-cache:
 	rm -rf cache_data
