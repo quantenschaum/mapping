@@ -12,16 +12,16 @@ object_colors = {
     "": None,
     "white": "white",
     "black": "black",
-    "red": "#C72C14",
-    "green": "#5BCE3E",
-    "blue": "#002EF5",
-    "yellow": "#FCD345",
+    "red": "#ed1c24",
+    "green": "#00a650",
+    "blue": "#10508c",
+    "yellow": "#fab20b",
     "grey": "#808080",
     "brown": "brown",
     "amber": "amber",
     "violet": "violet",
     "orange": "#F7A837",
-    "magenta": "#DE44E8",
+    "magenta": "#ec008c",  # ec008c DE44E8
     "pink": "pink",
 }
 
@@ -32,12 +32,12 @@ lights = {
 
 light_colors = {
     "generic": "#800080",
-    "white": "yellow",
-    "red": "red",
-    "green": "green",
-    "blue": "blue",
-    "yellow": "yellow",
-    "orange": "orange",
+    "white": "#fab20b",
+    "red": "#ed1c24",
+    "green": "#00a650",
+    "blue": "#10508c",
+    "yellow": "#fab20b",
+    "orange": "#fa870b",
 }
 
 
