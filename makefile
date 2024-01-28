@@ -5,19 +5,28 @@
 SHELL=/bin/bash
 OGR_OPTS=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON,UPDATES=APPLY" S57_CSV="$(PWD)"
 
-.PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm data/vwm data/bsh icons obf
+.PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm icons obf vwm bsh
 
 help:
 	cat README.md
 
-vwm: data/vwm #data/vwm.sqlite
+vwm:
+	rm -rf data/vwm
+	mkdir -p data/vwm
+	wget -O data/vwm/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
+	wget -O data/vwm/vast.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
+	#for F in data/vwm/*.json; do jq . $$F>data/vwm/tmp; mv data/vwm/tmp $$F; done
+	for F in $$(find data/vwm -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 
-data/vwm:
-	mkdir -p $@
-	wget -O $@/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
-	wget -O $@/vast.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
-	#for F in $@/*.json; do jq . $$F>$@/tmp; mv $@/tmp $$F; done
-	for F in $$(find $@ -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
+%.csv:
+	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
+
+ENC_LAYERS=BOYLAT BOYCAR BOYISD BOYSAW BOYSPP BOYINB BCNLAT BCNCAR BCNISD BCNSAW BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN OFSPLF SBDARE HRBFAC SMCFAC DEPARE DEPCNT SOUNDG M_COVR
+
+waddenzee: s57attributes.csv s57objectclasses.csv
+	rm -rf data/waddenzee data/waddenzee.gpkg
+	cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
+	for F in $$(find data/waddenzee -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/waddenzee.gpkg $$F $(ENC_LAYERS) -skipfailures -append; done
 
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
@@ -27,16 +36,15 @@ BSH_LAYERS_2=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing
 BSH_LAYERS_3=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
 BSH_BBOX=53,3.3,56,14.4
 
-bsh: data/bsh #data/bsh.sqlite
-
-data/bsh:
-	rm -rf $@
-	mkdir -p $@
-	for L in AidsAndServices SkinOfTheEarth; do wget -O $@/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_1)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
-	for L in RocksWrecksObstructions; do wget -O $@/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_3)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
-	for L in Hydrography Topography; do wget -O $@/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_2)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
-	#for F in $@/*.json; do jq . $$F>$@/tmp; mv $@/tmp $$F; done
-	for F in $$(find $@ -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
+bsh:
+	rm -rf data/bsh data/bsh.gpkg
+	mkdir -p data/bsh
+	for L in AidsAndServices SkinOfTheEarth; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_1)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
+	for L in RocksWrecksObstructions; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_3)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
+	for L in Hydrography Topography; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_2)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
+	#for F in data/bsh/*.json; do jq . $$F>data/bsh/tmp; mv data/bsh/tmp $$F; done
+	for F in $$(find data/bsh -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
+	#for F in $$(find data/bsh -name "*.json"); do ogr2ogr data/bsh.gpkg $$F -append; done
 
 CGDS=01 05 07 08 09 11 13 14 17
 CGDS=01
@@ -51,30 +59,7 @@ us: data/us
 	$(MAKE) data/$@.sqlite
 	$(MAKE) data/$@.json
 
-%.csv:
-	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
 
-ENC_LAYERS1=BOYLAT BOYCAR BOYISD BOYSAW BOYSPP BOYINB BCNLAT BCNCAR BCNISD BCNSAW BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN OFSPLF SBDARE HRBFAC SMCFAC
-ENC_LAYERS2=DEPARE DEPCNT SOUNDG M_COVR
-
-%.sqlite: s57attributes.csv s57objectclasses.csv
-	rm -f $@*
-	for F in $$(find $(basename $@) -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr $@ $$F $(ENC_LAYERS1) $(ENC_LAYERS2) -skipfailures -append $(OGR_OPTS2); done
-
-%.json: %.sqlite
-	for L in $(ENC_LAYERS1); do rm -f $(basename $@)/$$L.json; echo $$L; ogr2ogr $(basename $@)/$$L.json $< $$L; done
-	#for F in $(basename $@)/*.json; do echo $$F; jq . $$F>tmp; mv tmp $$F; done
-
-%/shapes: %/
-	rm -f $@/*
-	for F in $$(find $< -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr $@ $$F $(ENC_LAYERS1) $(ENC_LAYERS2) -skipfailures -append $(OGR_OPTS2); done
-	#for L in $(ENC_LAYERS1); do rm -f $</$$L.json; echo $$L; ogr2ogr $</$$L.json $@/$$L.shp $$L; done
-
-waddenzee:
-	rm -rf data/$@
-	cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
-	$(MAKE) data/$@.sqlite
-	$(MAKE) data/$@.json
 
 marrekrite.gpx:
 	wget -O data/$@ "https://github.com/marcelrv/OpenCPN-Waypoints/raw/main/Marrekrite-Aanlegplaatsen.gpx"
@@ -105,13 +90,20 @@ marine.render.xml:
 	cp nautical.render.xml $@
 	patch $@ render.diff
 
+icons:
+	cd icons && ./genicons.py
+	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
+
 bsh1.qgs: bsh.qgs
 	sed 's#<value>000000</value>#<value>1</value>#g' $< >$@
+
+bsh2.qgs: bsh.qgs
+	sed 's#<value>000000</value>#<value>-1</value>#g' $< >$@
 
 serve:
 	cd tiles && python -m http.server 8002
 
-qgis: icons bsh1.qgs
+qgis: icons bsh1.qgs bsh2.qgs
 	QGIS_SERVER_PARALLEL_RENDERING=1 qgis_mapserver
 
 mapproxy:
@@ -156,12 +148,6 @@ obf: data/omc
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
 	rm -f $@/*.log
 	#cp -v $@/*.obf data/obf
-
-icons: icons/gen
-
-icons/gen:
-	cd icons && ./genicons.py
-	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
 
 lights:
 	wget -O $@.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];(  nwr[~"seamark:type"~"light"];  nwr["seamark:light:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:range"][~"seamark:type"~"beacon"];  nwr["seamark:light:1:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:1:range"][~"seamark:type"~"beacon"];);(._;>;);out meta;'
