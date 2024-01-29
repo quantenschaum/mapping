@@ -54,7 +54,7 @@ sources:
 
 caches:
   bsh:
-    sources: [ 'qgis2:BSH','qgis1:BSH','qgis:BSH' ]
+    sources: [ 'qgis1:BSH','qgis:BSH' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
