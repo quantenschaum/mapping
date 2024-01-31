@@ -28,7 +28,7 @@ def main():
     parser.add_argument(
         "-C", "--max-convert", type=int, help="max zoom level to convert", default=18
     )
-    parser.add_argument("-t", "--title", help="map title")
+    parser.add_argument("-t", "--title", help="map name or title")
     parser.add_argument(
         "-u",
         "--url",
@@ -47,8 +47,15 @@ def main():
         "-m", "--mozilla", action="store_true", help="set user-agent to mozilla"
     )
     parser.add_argument(
-        "-y", "--inverted-y", action="store_true", help="inverted y tile number"
+        "-y", "--invert-y", action="store_true", help="invert the y tile number"
     )
+    parser.add_argument(
+        "-Y",
+        "--inverted-y",
+        action="store_true",
+        help="set inverted y flag for sqlitedb",
+    )
+    parser.add_argument("--format", help="tile format for mbtiles", default="png")
     parser.add_argument(
         "-e",
         "--elliptic",
@@ -67,9 +74,6 @@ def main():
 
     output = args.output
     is_dir = output.endswith("/")
-    ext = ".sqlitedb"
-    if not is_dir and not output.endswith(ext):
-        output += ext
 
     if exists(output) and args.force:
         print("deleting", output)
@@ -80,45 +84,62 @@ def main():
 
     assert (
         not exists(output) or args.append
-    ), f"{output} exists, overwrite with -f or append with -a"
+    ), f"{output} exists, overwrite with -f or append with -a (directory only)"
 
+    if args.invert_y:
+        print("invert y")
+
+    if is_dir:
+        mbtiles2dir(inputs, output, args)
+    elif output.endswith(".mbtiles"):
+        mbtiles2mbtiles(inputs, output, args)
+    elif output.endswith(".sqlitedb"):
+        mbtiles2sqlitedb(inputs, output, args)
+    else:
+        assert 0, f"cannot handle {output}"
+
+
+def write(filename, data):
+    with open(filename, "wb") as f:
+        f.write(data)
+
+
+MOZILLA = "Mozilla/5.0 AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
+
+
+def mbtiles2sqlitedb(inputs, output, args):
+    assert not output.endswith("/")
     print("writing to", output)
-    dest = sqlite3.connect(output) if not is_dir else None
+    dest = sqlite3.connect(output)
 
     timecol = args.timecol or args.expire
 
-    if dest:
-        dcur = dest.cursor()
+    dcur = dest.cursor()
 
-        # dcur.execute("CREATE TABLE android_metadata (locale TEXT);")
-        # dcur.execute("INSERT INTO android_metadata VALUES ('en_US');")
-
-        dcur.execute(
-            "CREATE TABLE IF NOT EXISTS info (tilenumbering, minzoom, maxzoom, title TEXT, url TEXT, randoms TEXT, ellipsoid TEXT, inverted_y TEXT, referer TEXT, useragent TEXT, timecolumn TEXT, expireminutes TEXT);"
-        )
-        dcur.execute(
-            "INSERT INTO info (tilenumbering, minzoom, maxzoom, title, url, randoms, ellipsoid, inverted_y, referer, useragent, timecolumn, expireminutes) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
-            [
-                "simple",
-                args.min_zoom,
-                args.max_zoom,
-                args.title,
-                args.url,
-                args.randoms,
-                1 if args.elliptic else 0,
-                1 if args.inverted_y else 0,
-                args.referer,
-                "Mozilla/5.0 AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
-                if args.mozilla
-                else args.agent,
-                "yes" if timecol else "no",
-                args.expire or -1,
-            ],
-        )
-        dcur.execute(
-            f"CREATE TABLE IF NOT EXISTS tiles (x int, y int, z int, s int, image blob, {'time long,' if timecol else ''} PRIMARY KEY (x,y,z,s));"
-        )
-        dcur.execute("CREATE INDEX IF NOT EXISTS IND on tiles (x,y,z,s);")
+    dcur.execute(
+        "CREATE TABLE info (tilenumbering, minzoom, maxzoom, title TEXT, url TEXT, randoms TEXT, ellipsoid TEXT, inverted_y TEXT, referer TEXT, useragent TEXT, timecolumn TEXT, expireminutes TEXT);"
+    )
+    dcur.execute(
+        "INSERT INTO info VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+        [
+            "simple",
+            args.min_zoom,
+            args.max_zoom,
+            args.title,
+            args.url,
+            args.randoms,
+            1 if args.elliptic else 0,
+            1 if args.inverted_y else 0,
+            args.referer,
+            MOZILLA if args.mozilla else args.agent,
+            "yes" if timecol else "no",
+            args.expire or -1,
+        ],
+    )
+    dcur.execute(
+        f"CREATE TABLE tiles (x int, y int, z int, s int, image blob, {'time long,' if timecol else ''} PRIMARY KEY (x,y,z,s));"
+    )
+    dcur.execute("CREATE UNIQUE INDEX IND on tiles (x,y,z,s);")
 
     now = int((datetime.utcnow() - datetime(1970, 1, 1)).total_seconds() * 1000)
 
@@ -129,32 +150,88 @@ def main():
         for row in source.execute(
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
-            z, x, y, s = int(row[0]), int(row[1]), int(row[2]), 0
+            z, x, y = int(row[0]), int(row[1]), int(row[2])
+            if args.invert_y:
+                y = 2**z - 1 - y
             if z < args.min_convert or z > args.max_convert:
                 continue
-            data = [x, y, z, s, sqlite3.Binary(row[3])]
+            data = [x, y, z, 0, sqlite3.Binary(row[3])]
             if timecol:
                 data.append(now)
             i += 1
-            if dest:
-                insert = f"INSERT OR REPLACE INTO tiles (x,y,z,s,image{',time' if timecol else ''}) VALUES (?,?,?,?,?{',?' if timecol else ''})"
-                dcur.execute(insert, data)
-            if is_dir:
-                dir = f"{output}/{z}/{x}"
-                makedirs(dir, exist_ok=1)
-                write(f"{dir}/{y}.png", row[3])
+            insert = f"INSERT OR REPLACE INTO tiles VALUES (?,?,?,?,?{',?' if timecol else ''})"
+            dcur.execute(insert, data)
         source.close()
     if i:
         print("copied", i, "tiles")
 
-    if dest:
-        dest.commit()
-        dest.close()
+    dest.commit()
+    dest.close()
 
 
-def write(filename, data):
-    with open(filename, "wb") as f:
-        f.write(data)
+def mbtiles2dir(inputs, output, args):
+    assert output.endswith("/")
+    print("writing to", output)
+
+    i = 0
+    for input in inputs:
+        print("reading", input)
+        source = sqlite3.connect(input)
+        for row in source.execute(
+            "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
+        ):
+            z, x, y = int(row[0]), int(row[1]), int(row[2])
+            if args.invert_y:
+                y = 2**z - 1 - y
+            if z < args.min_convert or z > args.max_convert:
+                continue
+            dir = f"{output}/{z}/{x}"
+            makedirs(dir, exist_ok=1)
+            write(f"{dir}/{y}.png", row[3])
+        source.close()
+    if i:
+        print("copied", i, "tiles")
+
+
+def mbtiles2mbtiles(inputs, output, args):
+    assert not output.endswith("/")
+    print("writing to", output)
+    dest = sqlite3.connect(output)
+    dcur = dest.cursor()
+    dcur.execute("CREATE TABLE metadata (name text, value text);")
+    dcur.execute(
+        "CREATE TABLE tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
+    )
+    dcur.execute(
+        "CREATE UNIQUE INDEX tile_index on tiles (zoom_level, tile_column, tile_row);"
+    )
+    dcur.execute(f"INSERT INTO metadata VALUES ('name','{args.title}')")
+    dcur.execute(f"INSERT INTO metadata VALUES ('format','{args.format}')")
+
+    i = 0
+    for input in inputs:
+        print("reading", input)
+        source = sqlite3.connect(input)
+        for row in source.execute(
+            "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
+        ):
+            z, x, y = int(row[0]), int(row[1]), int(row[2])
+            if args.invert_y:
+                y = 2**z - 1 - y
+            if z < args.min_convert or z > args.max_convert:
+                continue
+
+            dcur.execute(
+                "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
+                [z, x, y, sqlite3.Binary(row[3])],
+            )
+
+        source.close()
+    if i:
+        print("copied", i, "tiles")
+
+    dest.commit()
+    dest.close()
 
 
 if __name__ == "__main__":
