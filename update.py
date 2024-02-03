@@ -446,7 +446,7 @@ rws_light = {
 }
 
 
-def load_rws_buoys(filename):
+def load_rws_buoys(filename, skip_errors=0):
     data = load_json(filename)
     points = []
     for f in data["features"]:
@@ -468,7 +468,7 @@ def load_rws_buoys(filename):
             points.append(tags)
         except Exception as x:
             print(x)
-            assert 0, x
+            assert skip_errors, x
 
     print("buoys", len(points))
 
@@ -811,7 +811,6 @@ def main():
     from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
     parser = ArgumentParser(
-        prog="buoy updater",
         description="update buoys by manipulating OSM xml from geojson",
         epilog="https://github.com/quantenschaum/mapping/",
         formatter_class=ArgumentDefaultsHelpFormatter,
@@ -896,6 +895,11 @@ def main():
         "--user",
         help="user of previous change",
     )
+    parser.add_argument(
+        "--skip-errors",
+        action="store_true",
+        help="skip errors when reading source file",
+    )
 
     args = parser.parse_args()
 
@@ -907,10 +911,10 @@ def main():
     seamark_type = "xxx"
     if all(s in mode for s in ("rws", "buoy")):
         seamark_type = "buoy_.*"
-        data = load_rws_buoys(datafile)
+        data = load_rws_buoys(datafile, args.skip_errors)
     if all(s in mode for s in ("rws", "beac")):
         seamark_type = "beacon_.*"
-        data = load_rws_beacons(datafile)
+        data = load_rws_beacons(datafile, args.skip_errors)
     elif all(s in mode for s in ("marre",)):
         seamark_type = "buoy_.*"
         data = load_marrekrite(datafile)

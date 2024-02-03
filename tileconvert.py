@@ -6,11 +6,13 @@ from datetime import datetime
 from os.path import isfile, exists
 from os import remove, makedirs
 from shutil import rmtree
+from argparse import ArgumentDefaultsHelpFormatter
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Converts mbtiles to sqlitedb for use with OsmAnd"
+        description="Converts mbtiles to sqlitedb for use with OsmAnd",
+        formatter_class=ArgumentDefaultsHelpFormatter,
     )
 
     parser.add_argument(
@@ -66,6 +68,12 @@ def main():
         "-x", "--expire", type=int, help="expire tiles this many minutes (implies -T)"
     )
     parser.add_argument("-T", "--timecol", action="store_true", help="add time column")
+    parser.add_argument(
+        "-M",
+        "--meta",
+        help="additional metadata for mbtiles (key=value)",
+        action="append",
+    )
     args = parser.parse_args()
 
     inputs = args.input
@@ -74,6 +82,8 @@ def main():
 
     output = args.output
     is_dir = output.endswith("/")
+
+    assert output not in inputs, "output=input"
 
     if exists(output) and args.force:
         print("deleting", output)
@@ -205,8 +215,12 @@ def mbtiles2mbtiles(inputs, output, args):
     dcur.execute(
         "CREATE UNIQUE INDEX tile_index on tiles (zoom_level, tile_column, tile_row);"
     )
-    dcur.execute(f"INSERT INTO metadata VALUES ('name','{args.title}')")
+    name = args.title or inputs[0]
+    dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
     dcur.execute(f"INSERT INTO metadata VALUES ('format','{args.format}')")
+    for m in args.meta or []:
+        k, v = m.split("=", 1)
+        dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
 
     i = 0
     for input in inputs:
