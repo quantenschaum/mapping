@@ -210,12 +210,12 @@ class Ship:
             # f"SDDBT,,,{depth:.1f},M,,",  # below transducer
             # f"SDDBS,,,{depth:.1f},M,,",# below surface
             # f"WIMWD,{wind_dir_water:.1f},T,,,{wind_speed_water:.1f},N,,",
-            f"WIMWV,{wind_angle_water:.1f},T,{wind_speed_water:.1f},N,A",
+            # f"WIMWV,{wind_angle_water:.1f},T,{wind_speed_water:.1f},N,A",
             f"WIMWV,{wind_angle_app:.1f},R,{wind_speed_app:.1f},N,A",
             # f"HCROT,{rot:.1f},A",
             # f"RIRSA,{self.rudder_angle:.1f},A,,",
             # f"ERRPM,E,1,{noisy(self.rpm):.1f},,A",
-            # f"CCVDR,{self.set:.1f},T,,,{self.drift:.1f},N",
+            # f"CCVDR,{self.current_set:.1f},T,,,{self.current_drift:.1f},N",
             # "APAPB,A,A,0,R,N,,,000,T,XXXX,000,T,123,M",
         ]
         return [f"${s}*{nmea_crc(s):02x}" for s in sentences]
@@ -230,7 +230,7 @@ def main():
 
     # ship's properties
     s.position = [54.625, 13.18]
-    s.heading_true = 300
+    s.heading_true = 0
     # s.position,s.heading_true = read("pos.json")
     s.speed_thr_water = 0
     s.sailing = 1  # calc speed from wind if 1
@@ -238,8 +238,8 @@ def main():
     s.leeway_factor = 8
     s.mag_variation = 0  # 4.7
     s.depth = 8
+    s.wind_dir_ground = 50
     s.wind_speed_ground = 15
-    s.wind_dir_ground = 20
     s.current_set = 90
     s.current_drift = 0
 
