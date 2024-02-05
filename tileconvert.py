@@ -208,6 +208,7 @@ def mbtiles2mbtiles(inputs, output, args):
     print("writing to", output)
     dest = sqlite3.connect(output)
     dcur = dest.cursor()
+    # https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
     dcur.execute("CREATE TABLE metadata (name text, value text);")
     dcur.execute(
         "CREATE TABLE tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
