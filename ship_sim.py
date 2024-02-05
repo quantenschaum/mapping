@@ -90,12 +90,10 @@ class Ship:
         self.time = self.time + timedelta(seconds=delta_t)
 
         if isfinite(self.rudder_angle):
-            b = 0.2  # rudder angle causes ROT with delay, scaled with STW
-            self.rate_of_turn = (
-                1 - b
-            ) * self.rate_of_turn + b * self.rudder_angle * min(
-                2, self.speed_thr_water / 2
-            ) / 4
+            # rudder angle causes rate of turn, but proportional to speed
+            rot = self.rudder_angle * min(2, self.speed_thr_water / 2) / 4
+            b = 0.2  # change with delay
+            self.rate_of_turn += b * (rot - self.rate_of_turn)
 
         # update heading
         self.heading_true = to360(self.heading_true + self.rate_of_turn * delta_t)
@@ -116,11 +114,11 @@ class Ship:
 
         if self.sailing:
             # boat speed from true wind via simple polar
-            s, a = self.wind_speed_water, abs(self.wind_angle_water)
-            speed = self.max_speed / (1 + exp((8 - s) / 3))
-            speed *= sin(0.8 * radians(a)) ** (1 + (90 - a) / 300)
+            tws, twa = self.wind_speed_water, abs(self.wind_angle_water)
+            stw = self.max_speed / (1 + exp((8 - tws) / 3))
+            stw *= sin(0.8 * radians(twa)) ** (1 + (90 - twa) / 300)
             b = 0.05  # speed changes delayed
-            self.speed_thr_water = (1 - b) * self.speed_thr_water + b * speed
+            self.speed_thr_water += b * (stw - self.speed_thr_water)
 
         # leeway due to wind
         self.leeway = -self.leeway_factor * copysign(
@@ -216,13 +214,13 @@ class Ship:
             # f"RIRSA,{self.rudder_angle:.1f},A,,",
             # f"ERRPM,E,1,{noisy(self.rpm):.1f},,A",
             # f"CCVDR,{self.current_set:.1f},T,,,{self.current_drift:.1f},N",
-            # "APAPB,A,A,0,R,N,,,000,T,XXXX,000,T,123,M",
         ]
         return [f"${s}*{nmea_crc(s):02x}" for s in sentences]
 
 
 noise_factor = 0
 time_factor = 1
+auto_pilot = 0  # enable primitive auto pilot to sail to RMB
 
 
 def main():
@@ -231,14 +229,14 @@ def main():
     # ship's properties
     s.position = [54.625, 13.18]
     s.heading_true = 0
-    # s.position,s.heading_true = read("pos.json")
+    # s.position, s.heading_true = read("pos.json")
     s.speed_thr_water = 0
     s.sailing = 1  # calc speed from wind if 1
     s.rudder_angle = 0
     s.leeway_factor = 8
     s.mag_variation = 0  # 4.7
     s.depth = 8
-    s.wind_dir_ground = 50
+    s.wind_dir_ground = 60
     s.wind_speed_ground = 15
     s.current_set = 90
     s.current_drift = 0
@@ -246,15 +244,41 @@ def main():
     s.update()
 
     dest = "openplotter", 10110
+    dest = "localhost", 34667
     sock = socket(AF_INET, SOCK_DGRAM)
 
     def transmit():
-        print(s, end="\n\n")
+        # print(s, end="\n\n")
         n = "\n"
         data = f"{n.join(s.nmea())}{n}"
-        print(data)
+        # print(data)
         sock.sendto(data.encode("utf8"), dest)
         write("pos.json", [s.position, s.heading_true])
+
+    sock = socket(AF_INET, SOCK_DGRAM)
+    sock.bind(("0.0.0.0", 2000))
+
+    def receive():
+        while True:
+            data, addr = sock.recvfrom(10000)
+            # print(">", data)
+            for l in data.decode("utf8").splitlines():
+                # $GPRMB,A,0.00,R,2,3,5438.68,N,01310.22,E,1.2,343.9,3.4,V,A*4A
+                # print(l)
+                if l.startswith("$GPRMB"):
+                    parts = l.split(",")
+                    # print(parts)
+            active = parts[1] == "A"
+            xte = float(parts[2]) * (-1 if parts[3] == "L" else +1)
+            brg = float(parts[11])
+            if active and auto_pilot:
+                # s.heading_true = brg
+                d = round(to180(brg - s.heading_true))
+                s.rudder_angle = round(copysign(min(10, 0.3 * abs(d)), d))
+                print("STEER", d, "RUDDER", s.rudder_angle)
+
+    if auto_pilot:
+        Thread(target=receive, daemon=True).start()
 
     t0 = monotonic()
     while 1:
