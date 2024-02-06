@@ -26,7 +26,7 @@ class CourseData:
     SET = set, direction of tide/current, cannot be measured directly
     DFT = drift, rate of tide/current, cannot be measured directly
     STW = speed through water, usually from paddle wheel, water speed vector projected onto HDT (long axis of boat)
-    LEE = leeway angle, angle between HDT direction of water speed vector, usually estimated form wind and/or heel and STW
+    LEE = leeway angle, angle between HDT and direction of water speed vector, usually estimated from wind and/or heel and STW
     AWA = apparent wind angle, measured by wind direction sensor
     AWD = apparent wind direction, relative to true north
     AWS = apparent wind speed, measured by anemometer
