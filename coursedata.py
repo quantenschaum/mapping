@@ -83,6 +83,8 @@ class CourseData:
     - [TWA,TWS] = [AWA,AWS] (+) [LEE,-STW]
 
     - [GWD,GWS] = [AWD,AWS] (+) [COG,-SOG]
+
+    In the vector equations angle and radius must be transformed together, always!
     """
 
     def compute_missing(self):
