@@ -10,30 +10,7 @@ from threading import Lock, Thread
 import json
 
 
-def to360(a):
-    "limit a to [0,360)"
-    while a < 0:
-        a += 360
-    return a % 360
-
-
-def to180(a):
-    "limit a to [-180,+180)"
-    a = to360(a)
-    return a if a < 180 else a - 360
-
-
-def add_polar(a, b):
-    "sum of polar vectors (phi,r)"
-    # to cartesian with phi going clock-wise from north
-    a = a[1] * sin(radians(a[0])), a[1] * cos(radians(a[0]))
-    b = b[1] * sin(radians(b[0])), b[1] * cos(radians(b[0]))
-    # sum of cartesian vectors
-    s = a[0] + b[0], a[1] + b[1]
-    # back to polar with phi going clock-wise from north
-    r = sqrt(s[0] ** 2 + s[1] ** 2)
-    phi = to360(90 - degrees(atan2(s[1], s[0])))
-    return phi, r
+from coursedata import *
 
 
 def nmea_crc(senctence):
@@ -151,7 +128,7 @@ class Ship:
                 f"MAG {self.mag_deviation}D {self.mag_variation}V",
                 f"HDG {self.heading_true}T {self.heading_mag}M {self.heading_cmp}C  ROT {self.rate_of_turn}",
                 f"STW {self.speed_thr_water}  LEE {self.leeway}",
-                f"SOG {self.sog}  COG {self.cog}",
+                f"COG {self.cog}  SOG {self.sog}",
                 f"SET {self.current_set}  DRF {self.current_drift}",
                 f"GWD {self.wind_dir_ground}  GWA {self.wind_angle_ground}  GWS {self.wind_speed_ground}",
                 f"TWD {self.wind_dir_water}  TWA {self.wind_angle_water}  TWS {self.wind_speed_water}",
@@ -215,12 +192,14 @@ class Ship:
             # f"ERRPM,E,1,{noisy(self.rpm):.1f},,A",
             # f"CCVDR,{self.current_set:.1f},T,,,{self.current_drift:.1f},N",
         ]
+
         return [f"${s}*{nmea_crc(s):02x}" for s in sentences]
 
 
-noise_factor = 0
+noise_factor = 1
 time_factor = 1
-auto_pilot = 0  # enable primitive auto pilot to sail to RMB
+
+auto_pilot = 1  # enable primitive auto pilot to sail to RMB
 
 
 def main():
@@ -228,30 +207,33 @@ def main():
 
     # ship's properties
     s.position = [54.625, 13.18]
-    s.heading_true = 0
+    s.heading_true = 20
     # s.position, s.heading_true = read("pos.json")
-    s.speed_thr_water = 0
-    s.sailing = 1  # calc speed from wind if 1
+
+    s.speed_thr_water = 5
+    s.sailing = 0
     s.rudder_angle = 0
     s.leeway_factor = 8
-    s.mag_variation = 0  # 4.7
+    s.mag_variation = 4.7
     s.depth = 8
-    s.wind_dir_ground = 60
+
+    s.wind_dir_ground = 90
     s.wind_speed_ground = 15
-    s.current_set = 90
-    s.current_drift = 0
+
+    s.current_set = 270
+    s.current_drift = 3
 
     s.update()
 
     dest = "openplotter", 10110
-    dest = "localhost", 34667
+    # dest = "localhost", 34667
     sock = socket(AF_INET, SOCK_DGRAM)
 
     def transmit():
-        # print(s, end="\n\n")
+        print(s, "" "\n")
         n = "\n"
         data = f"{n.join(s.nmea())}{n}"
-        # print(data)
+        print(data)
         sock.sendto(data.encode("utf8"), dest)
         write("pos.json", [s.position, s.heading_true])
 
@@ -272,10 +254,11 @@ def main():
             xte = float(parts[2]) * (-1 if parts[3] == "L" else +1)
             brg = float(parts[11])
             if active and auto_pilot:
-                # s.heading_true = brg
-                d = round(to180(brg - s.heading_true))
+                x = abs(to180(s.heading_true - s.cog))
+                course = s.heading_true if x > 60 else s.cog
+                d = round(to180(brg - course))
                 s.rudder_angle = round(copysign(min(10, 0.3 * abs(d)), d))
-                print("STEER", d, "RUDDER", s.rudder_angle)
+                print("AP", "STEER", d, "RUDDER", s.rudder_angle, "\n")
 
     if auto_pilot:
         Thread(target=receive, daemon=True).start()
