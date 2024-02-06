@@ -85,46 +85,6 @@ class CourseData:
     - [GWD,GWS] = [AWD,AWS] (+) [COG,-SOG]
     """
 
-    def __init__(self, **kwargs):
-        self._data = kwargs
-        self.angles360 = kwargs.get("angles360", False)
-        self.compute_missing()
-
-    def __getattribute__(self, item):
-        if re.match("[A-Z]{3}", item):
-            return self._data.get(item)
-        return super(CourseData, self).__getattribute__(item)
-
-    def __setattr__(self, key, value):
-        if re.match("[A-Z]{3}", key):
-            self._data[key] = value
-        else:
-            self.__dict__[key] = value
-
-    def __getitem__(self, item):
-        return self._data.get(item)
-
-    def __setitem__(self, key, value):
-        self._data[key] = value
-
-    def __contains__(self, item):
-        return self[item] is not None
-
-    def __len__(self):
-        return len(self._data)
-
-    def __str__(self):
-        return "\n".join(f"{k}={self[k]}" for k in sorted(self._data.keys()))
-
-    def has(self, *args):
-        return all(x in self for x in args)
-
-    def misses(self, *args):
-        return any(x not in self for x in args)
-
-    def angle(self, a):
-        return to360(a) if self.angles360 else to180(a)
-
     def compute_missing(self):
         if self.misses("HDM") and self.has("HDC", "DEV"):
             self.HDM = to360(self.HDC + self.DEV)
@@ -172,6 +132,46 @@ class CourseData:
 
         if self.misses("AWD") and self.has("AWA", "HDT"):
             self.AWD = to360(self.AWA + self.HDT)
+
+    def __init__(self, **kwargs):
+        self._data = kwargs
+        self.angles360 = kwargs.get("angles360", False)
+        self.compute_missing()
+
+    def __getattribute__(self, item):
+        if re.match("[A-Z]{3}", item):
+            return self._data.get(item)
+        return super(CourseData, self).__getattribute__(item)
+
+    def __setattr__(self, key, value):
+        if re.match("[A-Z]{3}", key):
+            self._data[key] = value
+        else:
+            self.__dict__[key] = value
+
+    def __getitem__(self, item):
+        return self._data.get(item)
+
+    def __setitem__(self, key, value):
+        self._data[key] = value
+
+    def __contains__(self, item):
+        return self[item] is not None
+
+    def __len__(self):
+        return len(self._data)
+
+    def __str__(self):
+        return "\n".join(f"{k}={self[k]}" for k in sorted(self._data.keys()))
+
+    def has(self, *args):
+        return all(x in self for x in args)
+
+    def misses(self, *args):
+        return any(x not in self for x in args)
+
+    def angle(self, a):
+        return to360(a) if self.angles360 else to180(a)
 
 
 def test():
