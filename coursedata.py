@@ -86,6 +86,12 @@ class CourseData:
     - [GWD,GWS] = [AWD,AWS] (+) [COG,-SOG]
 
     In the vector equations angle and radius must be transformed together, always!
+
+    ## How to use it
+
+    Create CourseData() with the known quantities supplied in the constructor. Then access the calculated
+    quantities as d.TWA or d.["TWA"]. Ask with "TWD" in d if they exist. Just print(d) to see what's inside.
+    See test() for examples.
     """
 
     def compute_missing(self):
