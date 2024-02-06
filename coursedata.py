@@ -70,10 +70,7 @@ class CourseData:
 
     ### Wind
 
-    angles and directions are always converted like
-
-    - xWD = xWA + HDT
-    - xWA = xWD - HDT
+    angles and directions are always converted like xWD = xWA + HDT and xWA = xWD - HDT
 
     - [AWD,AWS] = [GWD,GWS] (+) [COG,SOG]
     - [AWD,AWS] = [TWD,TWS] (+) [HDT+LEE,STW]
