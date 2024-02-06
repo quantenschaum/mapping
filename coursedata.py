@@ -11,7 +11,8 @@ class CourseData:
 
     - direction - given in degrees within [0,360), relative to north, measured clockwise
     - angles - as directions, but given in degrees within [-180,+180), relative to HDG
-    - speeds - given in any speed unit (all the same), usually knots
+      If you want angles in the range [0,360), set anlges360=True in the constructor.
+    - speeds - given in any speed unit (but all the same), usually knots
 
     ## Definitions
 
