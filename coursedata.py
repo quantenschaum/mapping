@@ -91,6 +91,11 @@ class CourseData:
     See test() for examples.
     """
 
+    def __init__(self, **kwargs):
+        self._data = kwargs
+        self.angles360 = kwargs.get("angles360", False)
+        self.compute_missing()
+
     def compute_missing(self):
         if self.misses("HDM") and self.has("HDC", "DEV"):
             self.HDM = to360(self.HDC + self.DEV)
@@ -138,11 +143,6 @@ class CourseData:
 
         if self.misses("AWD") and self.has("AWA", "HDT"):
             self.AWD = to360(self.AWA + self.HDT)
-
-    def __init__(self, **kwargs):
-        self._data = kwargs
-        self.angles360 = kwargs.get("angles360", False)
-        self.compute_missing()
 
     def __getattribute__(self, item):
         if re.match("[A-Z]{3}", item):
