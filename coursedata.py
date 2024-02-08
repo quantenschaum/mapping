@@ -164,11 +164,11 @@ class CourseData:
     def __contains__(self, item):
         return self[item] is not None
 
-    def __len__(self):
-        return len(self._data)
-
     def __str__(self):
-        return "\n".join(f"{k}={self[k]}" for k in sorted(self._data.keys()))
+        return "\n".join(f"{k}={self[k]}" for k in self.keys())
+
+    def keys(self):
+        return sorted(filter(self.__contains__, self._data.keys()))
 
     def has(self, *args):
         return all(x in self for x in args)

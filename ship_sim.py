@@ -62,13 +62,20 @@ class Ship:
         self.current_set = 0  # water current
         self.current_drift = 0
         self.leeway_factor = 8
+        self.polar = read_polar("polare.xml")
+
+    def waterspeed(self, twa, tws):
+        return polar_speed(self.polar, twa, tws)
+        stw = self.max_speed / (1 + exp((8 - tws) / 3))
+        stw *= sin(0.8 * radians(twa)) ** (1 + (90 - twa) / 300)
+        return stw
 
     def update(self, delta_t=1):
         self.time = self.time + timedelta(seconds=delta_t)
 
         if isfinite(self.rudder_angle):
             # rudder angle causes rate of turn, but proportional to speed
-            rot = self.rudder_angle * min(2, self.speed_thr_water / 2) / 4
+            rot = self.rudder_angle * max(0.2, min(2, self.speed_thr_water / 2)) / 4
             b = 0.2  # change with delay
             self.rate_of_turn += b * (rot - self.rate_of_turn)
 
@@ -92,8 +99,7 @@ class Ship:
         if self.sailing:
             # boat speed from true wind via simple polar
             tws, twa = self.wind_speed_water, abs(self.wind_angle_water)
-            stw = self.max_speed / (1 + exp((8 - tws) / 3))
-            stw *= sin(0.8 * radians(twa)) ** (1 + (90 - twa) / 300)
+            stw = self.waterspeed(twa, tws)
             b = 0.05  # speed changes delayed
             self.speed_thr_water += b * (stw - self.speed_thr_water)
 
@@ -188,7 +194,7 @@ class Ship:
             # f"WIMWV,{wind_angle_water:.1f},T,{wind_speed_water:.1f},N,A",
             f"WIMWV,{wind_angle_app:.1f},R,{wind_speed_app:.1f},N,A",
             # f"HCROT,{rot:.1f},A",
-            # f"RIRSA,{self.rudder_angle:.1f},A,,",
+            f"RIRSA,{self.rudder_angle:.1f},A,,",
             # f"ERRPM,E,1,{noisy(self.rpm):.1f},,A",
             # f"CCVDR,{self.current_set:.1f},T,,,{self.current_drift:.1f},N",
         ]
@@ -198,8 +204,7 @@ class Ship:
 
 noise_factor = 1
 time_factor = 1
-
-auto_pilot = 1  # enable primitive auto pilot to sail to RMB
+auto_pilot = 1
 
 
 def main():
@@ -208,20 +213,20 @@ def main():
     # ship's properties
     s.position = [54.625, 13.18]
     s.heading_true = 20
-    # s.position, s.heading_true = read("pos.json")
+    s.position, s.heading_true = read("pos.json")
 
-    s.speed_thr_water = 5
-    s.sailing = 0
+    s.sailing = 1
+    s.speed_thr_water = 0
     s.rudder_angle = 0
     s.leeway_factor = 8
     s.mag_variation = 4.7
     s.depth = 8
 
-    s.wind_dir_ground = 90
+    s.wind_dir_ground = 300
     s.wind_speed_ground = 15
 
-    s.current_set = 270
-    s.current_drift = 3
+    s.current_set = 50
+    s.current_drift = 0
 
     s.update()
 
@@ -234,13 +239,17 @@ def main():
         n = "\n"
         data = f"{n.join(s.nmea())}{n}"
         print(data)
-        sock.sendto(data.encode("utf8"), dest)
-        write("pos.json", [s.position, s.heading_true])
+        try:
+            sock.sendto(data.encode("utf8"), dest)
+            write("pos.json", [s.position, s.heading_true])
+        except Exception as x:
+            print(x)
 
     sock = socket(AF_INET, SOCK_DGRAM)
     sock.bind(("0.0.0.0", 2000))
 
     def receive():
+        sign = 0
         while True:
             data, addr = sock.recvfrom(10000)
             # print(">", data)
@@ -253,12 +262,28 @@ def main():
             active = parts[1] == "A"
             xte = float(parts[2]) * (-1 if parts[3] == "L" else +1)
             brg = float(parts[11])
+            x = to180(brg - s.wind_dir_water)
+            min_twa = polar_angle(s.polar, s.wind_speed_water, True)
+            max_twa = polar_angle(s.polar, s.wind_speed_water, False)
+            max_xte = 1
+            if abs(x) < min_twa:  # tack
+                if not sign or abs(xte) > max_xte:
+                    sign = copysign(1, xte if abs(xte) > max_xte else x)
+                brg = to360(s.wind_dir_water + sign * min_twa)
+            elif abs(x) > max_twa:  # gybe
+                if not sign or abs(xte) > max_xte:
+                    sign = copysign(1, xte if abs(xte) > max_xte else x)
+                brg = to360(s.wind_dir_water + sign * max_twa)
+            else:
+                sign = 0
+            print("BWA", x, "XTE", xte, "SIGN", sign)
+
             if active and auto_pilot:
                 x = abs(to180(s.heading_true - s.cog))
-                course = s.heading_true if x > 60 else s.cog
+                course = s.heading_true if sign or x > 60 else s.cog
                 d = round(to180(brg - course))
                 s.rudder_angle = round(copysign(min(10, 0.3 * abs(d)), d))
-                print("AP", "STEER", d, "RUDDER", s.rudder_angle, "\n")
+                print("COURSE", brg, "STEER", d, "RUDDER", s.rudder_angle, "\n")
 
     if auto_pilot:
         Thread(target=receive, daemon=True).start()
@@ -271,6 +296,135 @@ def main():
             transmit()
             t0 = t1
         sleep(1 / time_factor)
+
+
+import xml.etree.ElementTree as ET
+import numpy, scipy
+
+
+def read_polar(f_name):
+    tree = ET.parse(f_name)
+    polare = {}
+    if not "tree" in locals():
+        return False
+    root = tree.getroot()
+    x = ET.tostring(root, encoding="utf8").decode("utf8")
+    e_str = "windspeedvector"
+    x = root.find("windspeedvector").text
+    # whitespaces entfernen
+    x = "".join(x.split())
+    polare["windspeedvector"] = list(map(float, x.strip("][").split(",")))
+    if not strictly_increasing(polare["windspeedvector"]):
+        raise Exception("windspeedvector in polare.xml IS NOT STRICTLY INCREASING!")
+
+    e_str = "windanglevector"
+    x = root.find("windanglevector").text
+    # whitespaces entfernen
+    x = "".join(x.split())
+    polare["windanglevector"] = list(map(float, x.strip("][").split(",")))
+    if not strictly_increasing(polare["windanglevector"]):
+        raise Exception("windanglevector in polare.xml IS NOT STRICTLY INCREASING!")
+
+    e_str = "boatspeed"
+    x = root.find("boatspeed").text
+    # whitespaces entfernen
+    z = "".join(x.split())
+
+    z = z.split("],[")
+    boatspeed = []
+    for elem in z:
+        zz = elem.strip("][").split(",")
+        boatspeed.append(list(map(float, zz)))
+    polare["boatspeed"] = boatspeed
+
+    e_str = "wendewinkel"
+    x = root.find("wendewinkel")
+
+    e_str = "upwind"
+    y = x.find("upwind").text
+    # whitespaces entfernen
+    y = "".join(y.split())
+    polare["ww_upwind"] = list(map(float, y.strip("][").split(",")))
+
+    e_str = "downwind"
+    y = x.find("downwind").text
+    # whitespaces entfernen
+    y = "".join(y.split())
+    polare["ww_downwind"] = list(map(float, y.strip("][").split(",")))
+    return polare
+
+
+def strictly_increasing(L):
+    return all(x < y for x, y in zip(L, L[1:]))
+
+
+def bilinear(xv, yv, zv, x, y):
+    angle = yv
+    speed = zv
+    # var x2i = ws.findIndex(this.checkfunc, x)
+    x2i = list(filter(lambda lx: xv[lx] >= x, range(len(xv))))
+    if len(x2i) > 0:
+        x2i = 1 if x2i[0] < 1 else x2i[0]
+        x2 = xv[x2i]
+        x1i = x2i - 1
+        x1 = xv[x1i]
+    else:
+        x1 = x2 = xv[len(xv) - 1]
+        x1i = x2i = len(xv) - 1
+
+    # var y2i = angle.findIndex(this.checkfunc, y)
+    y2i = list(filter(lambda lx: angle[lx] >= y, range(len(angle))))
+    if len(y2i) > 0:
+        y2i = 1 if y2i[0] < 1 else y2i[0]
+        # y2i = y2i < 1 ? 1 : y2i
+        y2 = angle[y2i]
+        y1i = y2i - 1
+        y1 = angle[y2i - 1]
+    else:
+        y1 = y2 = angle[len(angle) - 1]
+        y1i = y2i = len(angle) - 1
+
+    ret = ((y2 - y) / (y2 - y1)) * (
+        ((x2 - x) / (x2 - x1)) * speed[y1i][x1i]
+        + ((x - x1) / (x2 - x1)) * speed[y1i][x2i]
+    ) + ((y - y1) / (y2 - y1)) * (
+        ((x2 - x) / (x2 - x1)) * speed[y2i][x1i]
+        + ((x - x1) / (x2 - x1)) * speed[y2i][x2i]
+    )
+    return ret
+
+
+def polar_angle(polare, tws, upwind):
+    speeds = polare["windspeedvector"]
+    angles = polare["ww_upwind" if upwind else "ww_downwind"]
+    return numpy.interp(tws, speeds, angles)
+
+
+def polar_speed(polare, twa, tws):
+    wspeeds = polare["windspeedvector"]
+    wangles = polare["windanglevector"]
+    bspeeds = polare["boatspeed"]
+    return bilinear(wspeeds, wangles, bspeeds, tws, abs(twa))
+
+
+def optimum_vmc(polar, twd, tws, brg):
+    brgw = to180(brg - twd)  # BRG from wind
+
+    def vmc(twa):
+        # unit vector to WP
+        e = toCart((abs(brgw), 1))
+        # boat speed vector from polar
+        b = toCart((twa, polar_speed(polar, twa, tws)))
+        # project boat speed vector onto bearing to get VMC
+        # negative sign, optimizer finds minimum
+        return -(e[0] * b[0] + e[1] * b[1])
+
+    # for a in range(0, 181, 10): self.api.log(f"{a} {vmc(a)*KNOTS}")
+
+    res = scipy.optimize.minimize_scalar(vmc, bounds=(0, 180))
+    # self.api.log(f"{res}")
+    if res.success:
+        return to360(twd + copysign(res.x, brgw)), -res.fun
 
 
 if __name__ == "__main__":
