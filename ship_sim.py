@@ -4,54 +4,159 @@ from datetime import datetime, timedelta
 from time import monotonic, sleep
 import socket, select
 from random import gauss
-from math import (
-    sin,
-    cos,
-    radians,
-    degrees,
-    nan,
-    atan2,
-    sqrt,
-    copysign,
-    exp,
-    isfinite,
-    asin,
-)
+from math import sin, cos, radians, degrees, atan2, sqrt, copysign, isfinite, asin
 import json
 from os.path import isfile
 from time import monotonic
 import numpy, scipy
 import sys, re
 
-
-def nmea_crc(senctence):
-    crc = 0
-    for c in senctence:
-        crc = crc ^ ord(c)
-    return crc & 0xFF
-
-
-def write(filename, data):
-    with open(filename, "w") as f:
-        # f.write(data)
-        json.dump(data, f)
+TIME_FACTOR = 10  # speedup time
+NOISE_FACTOR = 1  # scale measurement noise
+AUTO_PILOT = 2  # enable autopilot
+POS_JSON = None  # if set store/restore position
+# POS_JSON = "position.json"
+TCP_PORT = 6000  # port to listen on
 
 
-def read(filename):
-    with open(filename) as f:
-        return json.load(f)
+def main():
+    s = Ship()
+
+    # environment
+    s.wind_dir_ground = 30
+    s.wind_speed_ground = 10
+
+    s.current_set = 300
+    s.current_drift = 1
+
+    # ship's properties
+    s.position = [54.7, 13.1]
+    s.heading_true = 90
+    if POS_JSON and isfile(POS_JSON):
+        s.position, s.heading_true = read(POS_JSON)
+
+    s.sailing = 1
+    s.speed_thr_water = 0
+    s.rudder_angle = 0
+    s.leeway_factor = 8
+    s.mag_variation = 4.7
+
+    s.update()
+
+    server = Server("", TCP_PORT)
+
+    t0 = monotonic()
+    while True:
+        t1 = monotonic()
+        s.update()
+        if t1 - t0 > 1:
+            print(s)
+            if POS_JSON:
+                write(POS_JSON, [s.position, s.heading_true])
+            server.serve(s)
+            t0 = t1
+        sleep(1 / TIME_FACTOR)
 
 
-def noisy(value, absolute=0, relative=1):
-    "add gaussian random to simulate measurement noise"
-    return (
-        gauss(
-            value,
-            noise_factor * (absolute if absolute else abs(value * relative / 100)),
-        )
-        if noise_factor
-        else value
-    )
+class Server:
+    def __init__(self, addr, port):
+        if socket.has_dualstack_ipv6():
+            self.server = socket.create_server(
+                (addr, port), family=socket.AF_INET6, dualstack_ipv6=True
+            )
+        else:
+            self.server = socket.create_server((addr, port))
+
+        self.conns = []
+
+    def serve(self, ship):
+        try:
+            rx, tx, er = select.select([self.server], [], [self.server], 0)
+            # print("server", rx, tx, er)
+            for so in rx:
+                conn, addr = so.accept()
+                print("accepted", conn, file=sys.stderr)
+                conn.setblocking(False)
+                self.conns.append(conn)
+
+            if not self.conns:
+                return
+
+            rx, tx, er = select.select(self.conns, self.conns, self.conns, 0)
+            # print("connections", rx, tx, er)
+
+            data = "\n".join(ship.nmea()) + "\n" if tx else None
+            for co in tx:
+                try:
+                    # print("TX", co)
+                    co.send(data.encode())
+                    # print(data, file=sys.stderr)
+                except Exception as x:
+                    print(x, co, file=sys.stderr)
+                    self.conns.remove(co)
+
+            data = ""
+            for co in rx:
+                try:
+                    # print("RX", co)
+                    data += co.recv(4096).decode() + "\n"
+                    # print(data, file=sys.stderr)
+                except Exception as x:
+                    print(x, co, file=sys.stderr)
+                    self.conns.remove(co)
+
+            for co in er:
+                print("ERROR", co, file=sys.stderr)
+                self.conns.remove(co)
+
+            self.autopilot(data, ship)
+
+        except Exception as x:
+            print(x)
+
+    def autopilot(self, data, ship):
+        # receive waypoint to steer to
+        if not data or not AUTO_PILOT:
+            return
+        nmea = decode_nmea(data)
+        if not nmea:
+            return
+        brg, xte = nmea
+        cts = brg  # course to steer
+        brg_twd = to180(brg - ship.wind_dir_water)  # BRG from TWD
+        msg = ""
+        if ship.sailing:
+            max_xte = 1
+            big_xte = abs(xte) > max_xte
+            if AUTO_PILOT == 2 and 15 < abs(brg_twd) < 170 and not big_xte:
+                cts = ship.polar.vmc_angle(
+                    ship.wind_dir_water, ship.wind_speed_water, brg
+                )
+                ship.sign = 0
+                msg = "OPTVMC"
+            else:
+                min_twa = ship.polar.angle(ship.wind_speed_water, True)
+                max_twa = ship.polar.angle(ship.wind_speed_water, False)
+                if abs(brg_twd) < min_twa:  # too high upwind
+                    if not ship.sign or big_xte:
+                        ship.sign = copysign(1, xte if big_xte else brg_twd)
+                    cts = to360(ship.wind_dir_water + ship.sign * min_twa)
+                    msg = "upwind layline"
+                elif abs(brg_twd) > max_twa:  # too low downwind
+                    if not ship.sign or big_xte:
+                        ship.sign = copysign(1, xte if big_xte else brg_twd)
+                    cts = to360(ship.wind_dir_water + ship.sign * max_twa)
+                    msg = "downwind layline"
+                else:
+                    ship.sign = 0
+        crs = ship.heading_true  # if s.sign or hdt_cog > 60 else s.cog
+        err = to180(cts - crs)
+        if TIME_FACTOR > 2:
+            ship.rudder_angle = 0
+            ship.heading_true = to360(ship.heading_true + err)
+        else:
+            ship.rudder_angle = round(copysign(min(10, 0.2 * abs(err)), err))
+        print(">>>", "CTS", cts, "XTE", xte, "ERR", err, "RUD", ship.rudder_angle, msg)
 
 
 class Ship:
@@ -74,6 +179,7 @@ class Ship:
         self.leeway_factor = 8
         self.polar = Polar("polar.json")
         self.pheel = Polar("heel.json")
+        self.sign = 0
 
     def update(self, delta_t=1):
         "update state, simple forward integration of motion to new position"
@@ -211,167 +317,6 @@ class Ship:
         return [f"${s}*{nmea_crc(s):02x}" for s in sentences]
 
 
-noise_factor = 1
-
-POS_JSON = None
-# POS_JSON = "position.json"
-
-
-def main():
-    time_factor = 2
-    auto_pilot = 2
-
-    s = Ship()
-
-    # environment
-    s.wind_dir_ground = 30
-    s.wind_speed_ground = 10
-
-    s.current_set = 300
-    s.current_drift = 1
-
-    # ship's properties
-    s.position = [54.7, 13.1]
-    s.heading_true = 90
-    if POS_JSON and isfile(POS_JSON):
-        s.position, s.heading_true = read(POS_JSON)
-
-    s.sailing = 1
-    s.speed_thr_water = 0
-    s.rudder_angle = 0
-    s.leeway_factor = 8
-    s.mag_variation = 4.7
-
-    s.update()
-
-    addr = ("", 6000)
-    if socket.has_dualstack_ipv6():
-        server = socket.create_server(addr, family=socket.AF_INET6, dualstack_ipv6=True)
-    else:
-        server = socket.create_server(addr)
-
-    connections = []
-
-    def serve(data):
-        try:
-            rx, tx, er = select.select([server], [], [server], 0)
-            # print("server", rx, tx, er)
-            for so in rx:
-                conn, addr = so.accept()
-                print("accepted", conn, file=sys.stderr)
-                conn.setblocking(False)
-                connections.append(conn)
-
-            rx, tx, er = select.select(connections, connections, connections, 0)
-            # print("connections", rx, tx, er)
-            for co in tx:
-                try:
-                    # print("TX", co)
-                    co.send(data.encode())
-                    # print(data, file=sys.stderr)
-                except Exception as x:
-                    print(x, co, file=sys.stderr)
-                    connections.remove(co)
-
-            data = ""
-            for co in rx:
-                try:
-                    # print("RX", co)
-                    data += co.recv(4096).decode() + "\n"
-                    # print(data, file=sys.stderr)
-                except Exception as x:
-                    print(x, co, file=sys.stderr)
-                    connections.remove(co)
-
-            for co in er:
-                print("ERROR", co, file=sys.stderr)
-                connections.remove(co)
-
-            return data
-
-        except Exception as x:
-            print(x)
-
-    s.sign = 0
-
-    def decode_nmea(data):
-        if __name__ == "__main__":
-            for l in data.splitlines():
-                try:
-                    # print(l)
-                    # $GPRMB,A,1.70,L,8,9,5509.36,N,01335.04,E,7.8,261.9,5.7,V,A*51
-                    # $GPAPB,A,A,1.70,L,N,V,,274.5,T,9,261.9,T,261.9,T*4F
-                    m = re.match(
-                        "\$..(APB|RMB)" + ",([^,]*)" * 14 + "\*..",
-                        l,
-                    )
-                    if m:
-                        # print(m, m.groups())
-                        o = 0 if m.group(1) == "RMB" else 1
-                        return (
-                            float(m.group(12)),  # BRG
-                            float(m.group(3 + o))  # XTE
-                            * (-1 if m.group(4 + o) == "L" else 1),
-                        )
-
-                except Exception as x:
-                    print(x)
-
-    def receive(data):
-        # receive waypoint to steer to
-        if not data or not auto_pilot:
-            return
-        nmea = decode_nmea(data)
-        if not nmea:
-            return
-        brg, xte = nmea
-        cts = brg  # course to steer
-        brg_twd = to180(brg - s.wind_dir_water)  # BRG from TWD
-        msg = ""
-        if s.sailing:
-            max_xte = 1
-            big_xte = abs(xte) > max_xte
-            if auto_pilot == 2 and 15 < abs(brg_twd) < 170 and not big_xte:
-                cts = s.polar.vmc_angle(s.wind_dir_water, s.wind_speed_water, brg)
-                s.sign = 0
-                msg = "OPTVMC"
-            else:
-                min_twa = s.polar.angle(s.wind_speed_water, True)
-                max_twa = s.polar.angle(s.wind_speed_water, False)
-                if abs(brg_twd) < min_twa:  # too high upwind
-                    if not s.sign or big_xte:
-                        s.sign = copysign(1, xte if big_xte else brg_twd)
-                    cts = to360(s.wind_dir_water + s.sign * min_twa)
-                    msg = "upwind layline"
-                elif abs(brg_twd) > max_twa:  # too low downwind
-                    if not s.sign or big_xte:
-                        s.sign = copysign(1, xte if big_xte else brg_twd)
-                    cts = to360(s.wind_dir_water + s.sign * max_twa)
-                    msg = "downwind layline"
-                else:
-                    s.sign = 0
-        crs = s.heading_true  # if s.sign or hdt_cog > 60 else s.cog
-        err = to180(cts - crs)
-        # s.heading_true = to360(s.heading_true + err)
-        s.rudder_angle = round(copysign(min(10, 0.2 * abs(err)), err))
-        print("CTS", cts, "XTE", xte, "ERR", err, "RUD", s.rudder_angle, msg)
-
-    t0 = monotonic()
-    while True:
-        t1 = monotonic()
-        s.update()
-        if t1 - t0 > 1:
-            n = "\n"
-            print(s)
-            data = f"{n.join(s.nmea())}{n}"
-            print(data)
-            if POS_JSON:
-                write(POS_JSON, [s.position, s.heading_true])
-            receive(serve(data))
-            t0 = t1
-        sleep(1 / time_factor)
-
-
 class Polar:
     def __init__(self, filename):
         with open(filename) as f:
@@ -451,6 +396,60 @@ def project(point, bearing, distance):
     lon2 = lon1 + atan2(y, x)
 
     return [to180(degrees(a)) for a in (lat2, lon2)]
+
+
+def nmea_crc(senctence):
+    crc = 0
+    for c in senctence:
+        crc = crc ^ ord(c)
+    return crc & 0xFF
+
+
+def write(filename, data):
+    with open(filename, "w") as f:
+        # f.write(data)
+        json.dump(data, f)
+
+
+def read(filename):
+    with open(filename) as f:
+        return json.load(f)
+
+
+def noisy(value, absolute=0, relative=1):
+    "add gaussian random to simulate measurement noise"
+    return (
+        gauss(
+            value,
+            NOISE_FACTOR * (absolute if absolute else abs(value * relative / 100)),
+        )
+        if NOISE_FACTOR
+        else value
+    )
+
+
+def decode_nmea(data):
+    if __name__ == "__main__":
+        for l in data.splitlines():
+            try:
+                # print(l)
+                # $GPRMB,A,1.70,L,8,9,5509.36,N,01335.04,E,7.8,261.9,5.7,V,A*51
+                # $GPAPB,A,A,1.70,L,N,V,,274.5,T,9,261.9,T,261.9,T*4F
+                m = re.match(
+                    "\$..(APB|RMB)" + ",([^,]*)" * 14 + "\*..",
+                    l,
+                )
+                if m:
+                    # print(m, m.groups())
+                    o = 0 if m.group(1) == "RMB" else 1
+                    return (
+                        float(m.group(12)),  # BRG
+                        float(m.group(3 + o))  # XTE
+                        * (-1 if m.group(4 + o) == "L" else 1),
+                    )
+
+            except Exception as x:
+                print(x)
 
 
 if __name__ == "__main__":
