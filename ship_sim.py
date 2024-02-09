@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
 
+"""
+This is a simple NMEA based ship simulator for AvNav or SignalK.
+It can be used for testing or showcasing these applications.
+
+It simulates a ship by keeping its state (position, heading, speed, ...) and integrating its motion
+over time. The state also includes the environment (wind, current, depth). The speed of the ship is calculated
+from polar data and wind if sailing mode is enabled. The speed of the simulation can be increased using the time factor.
+
+The script listens on port 6000/TCP and serves NMEA sentences containing data as they would have been
+acquired by the ship's sensors. There is some noise added to the data to make it look realistic.
+
+It also accepts RMB/APB sentences at will steer to the supplied waypoint.
+"""
+
 from datetime import datetime, timedelta
 from time import monotonic, sleep
 import socket, select
@@ -11,7 +25,7 @@ from time import monotonic
 import numpy, scipy
 import sys, re
 
-TIME_FACTOR = 10  # speedup time
+TIME_FACTOR = 2  # speedup time
 NOISE_FACTOR = 1  # scale measurement noise
 AUTO_PILOT = 2  # enable autopilot
 POS_JSON = None  # if set store/restore position
