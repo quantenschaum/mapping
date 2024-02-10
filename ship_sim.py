@@ -30,7 +30,7 @@ TIME_FACTOR = 2  # speedup time
 NOISE_FACTOR = 1  # scale measurement noise
 AUTO_PILOT = 1  # enable autopilot, set to 2 to steer to optimal VMC
 POS_JSON = None  # if set store/restore position
-#POS_JSON = "position.json"
+# POS_JSON = "position.json"
 TCP_PORT = 6000  # port to listen on
 # NMEA sentences with are sent to clients
 NMEA_FILTER = [
@@ -139,11 +139,11 @@ class Ship:
 
         if self.sailing:
             # boat speed from true wind from polar data
-            stw = self.polar.speed(self.wind_angle_true, self.wind_speed_true)
+            stw = self.polar.value(self.wind_angle_true, self.wind_speed_true)
             b = 0.05  # delayed change
             self.speed_thr_water += b * (stw - self.speed_thr_water)
 
-            self.heel_angle = self.pheel.heel(
+            self.heel_angle = self.pheel.value(
                 self.wind_angle_true, self.wind_speed_true
             )
             self.leeway = (
@@ -300,6 +300,7 @@ class Polar:
     def __init__(self, filename):
         with open(filename) as f:
             self.data = json.load(f)
+        self.spl = None
 
     def has_angle(self, upwind):
         return ("beat_angle" if upwind else "run_angle") in self.data
@@ -308,17 +309,13 @@ class Polar:
         angle = self.data["beat_angle" if upwind else "run_angle"]
         return numpy.interp(tws, self.data["TWS"], angle)
 
-    def speed(self, twa, tws):
-        spl = scipy.interpolate.RectBivariateSpline(
-            self.data["TWA"], self.data["TWS"], self.data["STW"]
-        )
-        return max(0.0, float(spl(abs(twa), tws)))
-
-    def heel(self, twa, tws):
-        spl = scipy.interpolate.RectBivariateSpline(
-            self.data["TWA"], self.data["TWS"], self.data["heel"]
-        )
-        return copysign(max(0.0, float(spl(abs(twa), tws))), -twa)
+    def value(self, twa, tws):
+        if not self.spl:
+            val = "STW" if "STW" in self.data else "heel"
+            self.spl = scipy.interpolate.RectBivariateSpline(
+                self.data["TWA"], self.data["TWS"], self.data[val]
+            )
+        return max(0.0, float(self.spl(abs(twa), tws)))
 
     def vmc_angle(self, twd, tws, brg, s=1):
         brg_twd = to180(brg - twd)  # BRG from wind
