@@ -29,8 +29,7 @@ import sys, re
 TIME_FACTOR = 2  # speedup time
 NOISE_FACTOR = 1  # scale measurement noise
 AUTO_PILOT = 1  # enable autopilot, set to 2 to steer to optimal VMC
-POS_JSON = None  # if set store/restore position
-# POS_JSON = "position.json"
+POS_JSON = "position.json"  # read+write position and heading to this file if it exists
 TCP_PORT = 6000  # port to listen on
 # NMEA sentences with are sent to clients
 NMEA_FILTER = [
@@ -65,7 +64,7 @@ def main():
     # ship's properties
     s.position = [54.7, 13.1]
     s.heading_true = 90
-    if POS_JSON and isfile(POS_JSON):
+    if isfile(POS_JSON):
         s.position, s.heading_true = read(POS_JSON)
 
     s.sailing = 1
@@ -84,7 +83,7 @@ def main():
         s.update()
         if t1 - t0 > 1:
             print(s)
-            if POS_JSON:
+            if isfile(POS_JSON):
                 write(POS_JSON, [s.position, s.heading_true])
             server.serve(s)
             t0 = t1
@@ -322,7 +321,7 @@ class Polar:
 
         def vmc(twa):
             # negative sign for minimizer
-            return -self.speed(twa, tws) * cos(radians(s * twa - abs(brg_twd)))
+            return -self.value(twa, tws) * cos(radians(s * twa - abs(brg_twd)))
 
         res = scipy.optimize.minimize_scalar(vmc, bounds=(0, 180))
 
