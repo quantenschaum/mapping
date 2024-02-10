@@ -57,7 +57,7 @@ def main():
 
     s.update()
 
-    server = Server("", TCP_PORT)
+    server = Server("", TCP_PORT, s.nmea, s.autopilot)
 
     t0 = monotonic()
     while True:
@@ -73,7 +73,9 @@ def main():
 
 
 class Server:
-    def __init__(self, addr, port):
+    def __init__(self, addr, port, send, receive):
+        self.send = send
+        self.receive = receive
         if socket.has_dualstack_ipv6():
             self.server = socket.create_server(
                 (addr, port), family=socket.AF_INET6, dualstack_ipv6=True
@@ -99,22 +101,25 @@ class Server:
             rx, tx, er = select.select(self.conns, self.conns, self.conns, 0)
             # print("connections", rx, tx, er)
 
-            data = "\n".join(ship.nmea()) + "\n" if tx else None
-            for co in tx:
-                try:
-                    # print("TX", co)
-                    co.send(data.encode())
-                    # print(data, file=sys.stderr)
-                except Exception as x:
-                    print(x, co, file=sys.stderr)
-                    self.conns.remove(co)
+            if tx:
+                data = self.send()
+                print(data, file=sys.stderr)
+                for co in tx:
+                    try:
+                        # print("TX", co)
+                        co.send(data.encode())
+                        # print(data, file=sys.stderr)
+                    except Exception as x:
+                        print(x, co, file=sys.stderr)
+                        self.conns.remove(co)
 
-            data = ""
             for co in rx:
                 try:
                     # print("RX", co)
-                    data += co.recv(4096).decode() + "\n"
-                    # print(data, file=sys.stderr)
+                    data = co.recv(4096).decode()
+                    if data:
+                        print(data, file=sys.stderr)
+                        self.receive(data)
                 except Exception as x:
                     print(x, co, file=sys.stderr)
                     self.conns.remove(co)
@@ -123,54 +128,8 @@ class Server:
                 print("ERROR", co, file=sys.stderr)
                 self.conns.remove(co)
 
-            self.autopilot(data, ship)
-
         except Exception as x:
             print(x)
-
-    def autopilot(self, data, ship):
-        # receive waypoint to steer to
-        if not data or not AUTO_PILOT:
-            return
-        nmea = decode_nmea(data)
-        if not nmea:
-            return
-        brg, xte = nmea
-        cts = brg  # course to steer
-        brg_twd = to180(brg - ship.wind_dir_water)  # BRG from TWD
-        msg = ""
-        if ship.sailing:
-            max_xte = 1
-            big_xte = abs(xte) > max_xte
-            if AUTO_PILOT == 2 and 15 < abs(brg_twd) < 170 and not big_xte:
-                cts = ship.polar.vmc_angle(
-                    ship.wind_dir_water, ship.wind_speed_water, brg
-                )
-                ship.sign = 0
-                msg = "OPTVMC"
-            else:
-                min_twa = ship.polar.angle(ship.wind_speed_water, True)
-                max_twa = ship.polar.angle(ship.wind_speed_water, False)
-                if abs(brg_twd) < min_twa:  # too high upwind
-                    if not ship.sign or big_xte:
-                        ship.sign = copysign(1, xte if big_xte else brg_twd)
-                    cts = to360(ship.wind_dir_water + ship.sign * min_twa)
-                    msg = "upwind layline"
-                elif abs(brg_twd) > max_twa:  # too low downwind
-                    if not ship.sign or big_xte:
-                        ship.sign = copysign(1, xte if big_xte else brg_twd)
-                    cts = to360(ship.wind_dir_water + ship.sign * max_twa)
-                    msg = "downwind layline"
-                else:
-                    ship.sign = 0
-        crs = ship.heading_true  # if s.sign or hdt_cog > 60 else s.cog
-        err = to180(cts - crs)
-        if TIME_FACTOR > 2:
-            ship.rudder_angle = 0
-            ship.heading_true = to360(ship.heading_true + err)
-        else:
-            ship.rudder_angle = round(copysign(min(10, 0.2 * abs(err)), err))
-        print(">>>", "CTS", cts, "XTE", xte, "ERR", err, "RUD", ship.rudder_angle, msg)
 
 
 class Ship:
@@ -328,7 +287,51 @@ class Ship:
             # f"CCVDR,{self.current_set:.1f},T,,,{self.current_drift:.1f},N",
         ]
 
-        return [f"${s}*{nmea_crc(s):02x}" for s in sentences]
+        return "".join([f"${s}*{nmea_crc(s):02x}\n" for s in sentences])
+
+    def autopilot(self, data):
+        # receive waypoint to steer to
+        if not data or not AUTO_PILOT:
+            return
+        nmea = decode_nmea(data)
+        if not nmea:
+            return
+        brg, xte = nmea
+        cts = brg  # course to steer
+        brg_twd = to180(brg - self.wind_dir_water)  # BRG from TWD
+        msg = ""
+        if self.sailing:
+            max_xte = 1
+            big_xte = abs(xte) > max_xte
+            if AUTO_PILOT == 2 and 15 < abs(brg_twd) < 170 and not big_xte:
+                cts = self.polar.vmc_angle(
+                    self.wind_dir_water, self.wind_speed_water, brg
+                )
+                self.sign = 0
+                msg = "OPTVMC"
+            else:
+                min_twa = self.polar.angle(self.wind_speed_water, True)
+                max_twa = self.polar.angle(self.wind_speed_water, False)
+                if abs(brg_twd) < min_twa:  # too high upwind
+                    if not self.sign or big_xte:
+                        self.sign = copysign(1, xte if big_xte else brg_twd)
+                    cts = to360(self.wind_dir_water + self.sign * min_twa)
+                    msg = "upwind layline"
+                elif abs(brg_twd) > max_twa:  # too low downwind
+                    if not self.sign or big_xte:
+                        self.sign = copysign(1, xte if big_xte else brg_twd)
+                    cts = to360(self.wind_dir_water + self.sign * max_twa)
+                    msg = "downwind layline"
+                else:
+                    self.sign = 0
+        crs = self.heading_true  # if s.sign or hdt_cog > 60 else s.cog
+        cer = to180(cts - crs)  # course error
+        if TIME_FACTOR > 2:
+            self.rudder_angle = 0
+            self.heading_true = to360(self.heading_true + cer)
+        else:
+            self.rudder_angle = round(copysign(min(10, 0.2 * abs(cer)), cer))
+            print("CTS", cts, "XTE", xte, "CER", cer, "RUD", self.rudder_angle, msg)
 
 
 class Polar:
