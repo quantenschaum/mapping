@@ -4,14 +4,15 @@
 This is a simple NMEA based ship simulator for AvNav or SignalK.
 It can be used for testing or showcasing these applications.
 
-It simulates a ship by keeping its state (position, heading, speed, ...) and integrating its motion
-over time. The state also includes the environment (wind, current, depth). The speed of the ship is calculated
-from polar data and wind if sailing mode is enabled. The speed of the simulation can be increased using the time factor.
+It simulates a ship by tracking its state (position, heading, speed, ...)
+and the state of the environment (wind, current, depth) and integrating its motion over time.
+The speed of the ship is calculated from polar data and wind, if sailing mode is enabled.
+The speed of the simulation can be increased using the time factor.
 
 The script listens on port 6000/TCP and serves NMEA sentences containing data as they would have been
-acquired by the ship's sensors. There is some noise added to the data to make it look realistic.
+acquired by the ship's sensors. There is some noise added to the data to make it look more realistic.
 
-It also accepts RMB/APB sentences at will steer to the supplied waypoint.
+It also accepts RMB/APB sentences on the same TCP connection and will steer the supplied bearing.
 """
 
 from datetime import datetime, timedelta
@@ -27,10 +28,28 @@ import sys, re
 
 TIME_FACTOR = 2  # speedup time
 NOISE_FACTOR = 1  # scale measurement noise
-AUTO_PILOT = 2  # enable autopilot
+AUTO_PILOT = 1  # enable autopilot, set to 2 to steer to optimal VMC
 POS_JSON = None  # if set store/restore position
-# POS_JSON = "position.json"
+POS_JSON = "position.json"
 TCP_PORT = 6000  # port to listen on
+# NMEA sentences with are sent to clients
+NMEA_FILTER = [
+    "RMC",
+    # "GGA",
+    # "ZDA",
+    # "GLL",
+    # "VTG",
+    "HDG",
+    # "VHW",
+    "DBT",
+    # "DBS",
+    # "MWD",
+    "MWV",
+    # "ROT",
+    # "RSA",
+    # "RPM",
+    # "VDR",
+]
 
 
 def main():
@@ -112,20 +131,20 @@ class Ship:
 
         self.wind_angle_ground = to180(self.wind_dir_ground - self.heading_true)
 
-        self.wind_dir_water, self.wind_speed_water = add_polar(
+        self.wind_dir_true, self.wind_speed_true = add_polar(
             (self.current_set, self.current_drift),
             (self.wind_dir_ground, self.wind_speed_ground),
         )
-        self.wind_angle_water = to180(self.wind_dir_water - self.heading_true)
+        self.wind_angle_true = to180(self.wind_dir_true - self.heading_true)
 
         if self.sailing:
             # boat speed from true wind from polar data
-            stw = self.polar.speed(self.wind_angle_water, self.wind_speed_water)
+            stw = self.polar.speed(self.wind_angle_true, self.wind_speed_true)
             b = 0.05  # delayed change
             self.speed_thr_water += b * (stw - self.speed_thr_water)
 
             self.heel_angle = self.pheel.heel(
-                self.wind_angle_water, self.wind_speed_water
+                self.wind_angle_true, self.wind_speed_true
             )
             self.leeway = (
                 clamp(
@@ -166,7 +185,7 @@ class Ship:
                 f"SET {self.current_set}  DRF {self.current_drift}",
                 f"COG {self.course_over_ground}  SOG {self.speed_over_ground}",
                 f"GWD {self.wind_dir_ground}  GWA {self.wind_angle_ground}  GWS {self.wind_speed_ground}",
-                f"TWD {self.wind_dir_water}  TWA {self.wind_angle_water}  TWS {self.wind_speed_water}",
+                f"TWD {self.wind_dir_true}  TWA {self.wind_angle_true}  TWS {self.wind_speed_true}",
                 f"AWD {self.wind_dir_app}  AWA {self.wind_angle_app}  AWS {self.wind_speed_app}",
                 f"DPT {self.depth}  RUD {self.rudder_angle}  RPM {self.engine_rpm}",
             ]
@@ -203,32 +222,34 @@ class Ship:
         heading_mag = noisy(self.heading_mag, absolute=1)
         heading_cmp = noisy(self.heading_cmp, absolute=1)
 
-        wind_speed_water = noisy(self.wind_speed_water)
-        wind_dir_water = noisy(to360(self.wind_dir_water), absolute=1)
-        wind_angle_water = noisy(to360(self.wind_angle_water), absolute=1)
+        wind_speed_true = noisy(self.wind_speed_true)
+        wind_dir_true = noisy(to360(self.wind_dir_true), absolute=1)
+        wind_angle_true = noisy(to360(self.wind_angle_true), absolute=1)
         wind_speed_app = noisy(self.wind_speed_app)
         wind_angle_app = noisy(to360(self.wind_angle_app), absolute=1)
 
         sentences = [
             f"GPRMC,{hhmmssss},A,{latdeg:02.0f}{latmin:06.3f},{latsgn},{londeg:03.0f}{lonmin:06.3f},{lonsgn},{sog:05.1f},{cog:05.1f},{ddmmyy},{abs(magvar):.1f},{magvardir}",
-            # f"GPGGA,{hhmmssss},{latdeg:02.0f}{latmin:05.2f},{latsgn},{londeg:03.0f}{lonmin:05.2f},{lonsgn},{fix_quality},{sats:02d},{hdop:03.1f},{altitude:.1f},M,{0:.1f},M,,",
-            # f"GPZDA,{hhmmssss},{t.day:02d},{t.month:02d},{t.year:04d},{1:02d},{0:02d}",
-            # f"GPGLL,{latdeg:02.0f}{latmin:07.04f},{latsgn},{londeg:03.0f}{lonmin:07.04f},{lonsgn},{hhmmssss},A",
-            # f"GPVTG,{cog:.1f},T,,,{sog:.1f},N,,",
-            # f"HCHDG,{heading_cmp:.1f},{abs(magdev):.1f},{magdevdir},{abs(magvar):.1f},{magvardir}",
+            f"GPGGA,{hhmmssss},{latdeg:02.0f}{latmin:05.2f},{latsgn},{londeg:03.0f}{lonmin:05.2f},{lonsgn},{fix_quality},{sats:02d},{hdop:03.1f},{altitude:.1f},M,{0:.1f},M,,",
+            f"GPZDA,{hhmmssss},{t.day:02d},{t.month:02d},{t.year:04d},{1:02d},{0:02d}",
+            f"GPGLL,{latdeg:02.0f}{latmin:07.04f},{latsgn},{londeg:03.0f}{lonmin:07.04f},{lonsgn},{hhmmssss},A",
+            f"GPVTG,{cog:.1f},T,,,{sog:.1f},N,,",
+            f"HCHDG,{heading_cmp:.1f},{abs(magdev):.1f},{magdevdir},{abs(magvar):.1f},{magvardir}",
             f"VWVHW,{heading:.1f},T,{heading_mag:.1f},M,{stw:.1f},N,,",
             f"SDDBT,,,{depth:.1f},M,,",  # below transducer
-            # f"SDDBS,,,{depth:.1f},M,,",# below surface
-            # f"WIMWD,{wind_dir_water:.1f},T,,,{wind_speed_water:.1f},N,,",
-            # f"WIMWV,{wind_angle_water:.1f},T,{wind_speed_water:.1f},N,A",
+            f"SDDBS,,,{depth:.1f},M,,",  # below surface
+            f"WIMWD,{wind_dir_true:.1f},T,,,{wind_speed_true:.1f},N,,",
+            f"WIMWV,{wind_angle_true:.1f},T,{wind_speed_true:.1f},N,A",
             f"WIMWV,{wind_angle_app:.1f},R,{wind_speed_app:.1f},N,A",
-            # f"HCROT,{rot:.1f},A",
-            # f"RIRSA,{self.rudder_angle:.1f},A,,",
-            # f"ERRPM,E,1,{noisy(self.rpm):.1f},,A",
-            # f"CCVDR,{self.current_set:.1f},T,,,{self.current_drift:.1f},N",
+            f"HCROT,{rot:.1f},A",
+            f"RIRSA,{self.rudder_angle:.1f},A,,",
+            f"ERRPM,E,1,{noisy(self.engine_rpm):.1f},,A",
+            f"CCVDR,{self.current_set:.1f},T,,,{self.current_drift:.1f},N",
         ]
 
-        return "".join([f"${s}*{nmea_crc(s):02x}\n" for s in sentences])
+        return "".join(
+            [f"${s}*{nmea_crc(s):02x}\n" for s in sentences if s[2:5] in NMEA_FILTER]
+        )
 
     def autopilot(self, data):
         # receive waypoint to steer to
@@ -239,29 +260,29 @@ class Ship:
             return
         brg, xte = nmea
         cts = brg  # course to steer
-        brg_twd = to180(brg - self.wind_dir_water)  # BRG from TWD
+        brg_twd = to180(brg - self.wind_dir_true)  # BRG from TWD
         msg = ""
         if self.sailing:
             max_xte = 1
             big_xte = abs(xte) > max_xte
             if AUTO_PILOT == 2 and 15 < abs(brg_twd) < 170 and not big_xte:
                 cts = self.polar.vmc_angle(
-                    self.wind_dir_water, self.wind_speed_water, brg
+                    self.wind_dir_true, self.wind_speed_true, brg
                 )
                 self.sign = 0
                 msg = "OPTVMC"
             else:
-                min_twa = self.polar.angle(self.wind_speed_water, True)
-                max_twa = self.polar.angle(self.wind_speed_water, False)
+                min_twa = self.polar.angle(self.wind_speed_true, True)
+                max_twa = self.polar.angle(self.wind_speed_true, False)
                 if abs(brg_twd) < min_twa:  # too high upwind
                     if not self.sign or big_xte:
                         self.sign = copysign(1, xte if big_xte else brg_twd)
-                    cts = to360(self.wind_dir_water + self.sign * min_twa)
+                    cts = to360(self.wind_dir_true + self.sign * min_twa)
                     msg = "upwind layline"
                 elif abs(brg_twd) > max_twa:  # too low downwind
                     if not self.sign or big_xte:
                         self.sign = copysign(1, xte if big_xte else brg_twd)
-                    cts = to360(self.wind_dir_water + self.sign * max_twa)
+                    cts = to360(self.wind_dir_true + self.sign * max_twa)
                     msg = "downwind layline"
                 else:
                     self.sign = 0
