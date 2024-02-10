@@ -38,8 +38,8 @@ NMEA_FILTER = [
     # "ZDA",
     # "GLL",
     # "VTG",
-    "HDG",
-    # "VHW",
+    # "HDG",
+    "VHW",
     "DBT",
     # "DBS",
     # "MWD",
@@ -280,7 +280,7 @@ class Ship:
                     msg = "upwind layline"
                 elif abs(brg_twd) > max_twa:  # too low downwind
                     if not self.sign or big_xte:
-                        self.sign = copysign(1, xte if big_xte else brg_twd)
+                        self.sign = copysign(1, -xte if big_xte else brg_twd)
                     cts = to360(self.wind_dir_true + self.sign * max_twa)
                     msg = "downwind layline"
                 else:
