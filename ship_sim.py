@@ -29,7 +29,7 @@ TIME_FACTOR = 2  # speedup time
 NOISE_FACTOR = 1  # scale measurement noise
 AUTO_PILOT = 2  # enable autopilot
 POS_JSON = None  # if set store/restore position
-POS_JSON = "position.json"
+#POS_JSON = "position.json"
 TCP_PORT = 6000  # port to listen on
 
 
