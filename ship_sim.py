@@ -29,7 +29,7 @@ TIME_FACTOR = 2  # speedup time
 NOISE_FACTOR = 1  # scale measurement noise
 AUTO_PILOT = 2  # enable autopilot
 POS_JSON = None  # if set store/restore position
-# POS_JSON = "position.json"
+POS_JSON = "position.json"
 TCP_PORT = 6000  # port to listen on
 
 
@@ -276,7 +276,7 @@ class Ship:
             # f"GPVTG,{cog:.1f},T,,,{sog:.1f},N,,",
             # f"HCHDG,{heading_cmp:.1f},{abs(magdev):.1f},{magdevdir},{abs(magvar):.1f},{magvardir}",
             f"VWVHW,{heading:.1f},T,{heading_mag:.1f},M,{stw:.1f},N,,",
-            # f"SDDBT,,,{depth:.1f},M,,",  # below transducer
+            f"SDDBT,,,{depth:.1f},M,,",  # below transducer
             # f"SDDBS,,,{depth:.1f},M,,",# below surface
             # f"WIMWD,{wind_dir_water:.1f},T,,,{wind_speed_water:.1f},N,,",
             # f"WIMWV,{wind_angle_water:.1f},T,{wind_speed_water:.1f},N,A",
