@@ -29,7 +29,7 @@ TIME_FACTOR = 2  # speedup time
 NOISE_FACTOR = 1  # scale measurement noise
 AUTO_PILOT = 2  # enable autopilot
 POS_JSON = None  # if set store/restore position
-#POS_JSON = "position.json"
+# POS_JSON = "position.json"
 TCP_PORT = 6000  # port to listen on
 
 
@@ -70,66 +70,6 @@ def main():
             server.serve(s)
             t0 = t1
         sleep(1 / TIME_FACTOR)
-
-
-class Server:
-    def __init__(self, addr, port, send, receive):
-        self.send = send
-        self.receive = receive
-        if socket.has_dualstack_ipv6():
-            self.server = socket.create_server(
-                (addr, port), family=socket.AF_INET6, dualstack_ipv6=True
-            )
-        else:
-            self.server = socket.create_server((addr, port))
-
-        self.conns = []
-
-    def serve(self, ship):
-        try:
-            rx, tx, er = select.select([self.server], [], [self.server], 0)
-            # print("server", rx, tx, er)
-            for so in rx:
-                conn, addr = so.accept()
-                print("accepted", conn, file=sys.stderr)
-                conn.setblocking(False)
-                self.conns.append(conn)
-
-            if not self.conns:
-                return
-
-            rx, tx, er = select.select(self.conns, self.conns, self.conns, 0)
-            # print("connections", rx, tx, er)
-
-            if tx:
-                data = self.send()
-                print(data, file=sys.stderr)
-                for co in tx:
-                    try:
-                        # print("TX", co)
-                        co.send(data.encode())
-                        # print(data, file=sys.stderr)
-                    except Exception as x:
-                        print(x, co, file=sys.stderr)
-                        self.conns.remove(co)
-
-            for co in rx:
-                try:
-                    # print("RX", co)
-                    data = co.recv(4096).decode()
-                    if data:
-                        print(data, file=sys.stderr)
-                        self.receive(data)
-                except Exception as x:
-                    print(x, co, file=sys.stderr)
-                    self.conns.remove(co)
-
-            for co in er:
-                print("ERROR", co, file=sys.stderr)
-                self.conns.remove(co)
-
-        except Exception as x:
-            print(x)
 
 
 class Ship:
@@ -184,18 +124,19 @@ class Ship:
             b = 0.05  # delayed change
             self.speed_thr_water += b * (stw - self.speed_thr_water)
 
-        self.heel_angle = self.pheel.heel(self.wind_angle_water, self.wind_speed_water)
-        self.leeway = (
-            min(
-                30,
-                max(
-                    -30,
-                    self.leeway_factor * self.heel_angle / self.speed_thr_water**2,
-                ),
+            self.heel_angle = self.pheel.heel(
+                self.wind_angle_water, self.wind_speed_water
             )
-            if self.speed_thr_water
-            else 0
-        )
+            self.leeway = (
+                clamp(
+                    self.leeway_factor * self.heel_angle / self.speed_thr_water**2,
+                    (-30, +30),
+                )
+                if self.speed_thr_water
+                else 0
+            )
+        else:
+            self.heel_angle, self.leeway = 0, 0
 
         self.course_thr_water = self.heading_true + self.leeway
 
@@ -371,6 +312,66 @@ class Polar:
             return to360(twd + s * copysign(res.x, brg_twd))
 
 
+class Server:
+    def __init__(self, addr, port, send, receive):
+        self.send = send
+        self.receive = receive
+        if socket.has_dualstack_ipv6():
+            self.server = socket.create_server(
+                (addr, port), family=socket.AF_INET6, dualstack_ipv6=True
+            )
+        else:
+            self.server = socket.create_server((addr, port))
+
+        self.conns = []
+
+    def serve(self, ship):
+        try:
+            rx, tx, er = select.select([self.server], [], [self.server], 0)
+            # print("server", rx, tx, er)
+            for so in rx:
+                conn, addr = so.accept()
+                print("accepted", conn, file=sys.stderr)
+                conn.setblocking(False)
+                self.conns.append(conn)
+
+            if not self.conns:
+                return
+
+            rx, tx, er = select.select(self.conns, self.conns, self.conns, 0)
+            # print("connections", rx, tx, er)
+
+            if tx:
+                data = self.send()
+                print(data, file=sys.stderr)
+                for co in tx:
+                    try:
+                        # print("TX", co)
+                        co.send(data.encode())
+                        # print(data, file=sys.stderr)
+                    except Exception as x:
+                        print(x, co, file=sys.stderr)
+                        self.conns.remove(co)
+
+            for co in rx:
+                try:
+                    # print("RX", co)
+                    data = co.recv(4096).decode()
+                    if data:
+                        print(data, file=sys.stderr)
+                        self.receive(data)
+                except Exception as x:
+                    print(x, co, file=sys.stderr)
+                    self.conns.remove(co)
+
+            for co in er:
+                print("ERROR", co, file=sys.stderr)
+                self.conns.remove(co)
+
+        except Exception as x:
+            print(x)
+
+
 def to360(a):
     "limit a to [0,360)"
     while a < 0:
@@ -467,6 +468,13 @@ def decode_nmea(data):
 
             except Exception as x:
                 print(x)
+
+
+def clamp(x, limits):
+    "limit x to limits [a,b]"
+    a, b = limits
+    assert a < b, limits
+    return max(a, min(b, x))
 
 
 if __name__ == "__main__":
