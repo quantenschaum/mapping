@@ -74,8 +74,8 @@ seed:
 	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
 
 convert: cache_data/bsh.mbtiles
-	./tileconvert.py -yf $< tiles/download/bsh.mbtiles
-	./tileconvert.py -yf $< tiles/download/bsh.sqlitedb
+	./tileconvert.py -yf $< tiles/download/bsh.mbtiles -t "BSH `date +%F`"
+	./tileconvert.py -yf $< tiles/download/bsh.sqlitedb -t "BSH `date +%F`"
 	./tileconvert.py -ya $< tiles/enc/
 
 clean-cache:
