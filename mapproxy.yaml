@@ -34,7 +34,6 @@ sources:
       url: http://localhost:8000/
       transparent: true
       map: bsh1.qgs
-      #tiled: true
     coverage:
       datasource: data/bsh/AidsAndServices.gpkg
       where: recind="Overview"
@@ -46,15 +45,29 @@ sources:
       url: http://localhost:8000/
       transparent: true
       map: bsh2.qgs
-      #tiled: true
     coverage:
       datasource: data/bsh/AidsAndServices.gpkg
       where: recind="Overview"
       srs: 'EPSG:4326'
+  rws:
+    type: wms
+    req:
+      url: http://localhost:8000/
+      transparent: true
+      map: rws.qgs
+    coverage:
+      bbox: [ 4.177551,52.598043,7.344360,54.165650 ] # http://bboxfinder.com/
+      srs: 'EPSG:4326'
 
 caches:
   bsh:
-    sources: [ 'qgis1:BSH','qgis:BSH' ]
+    sources: [ 'qgis2:BSH','qgis1:BSH','qgis:BSH' ]
+    #sources: [ 'qgis:BSH' ]
+    grids: [ GLOBAL_WEBMERCATOR ]
+    cache:
+      type: mbtiles
+  wad:
+    sources: [ 'rws:waddenzee' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
@@ -63,3 +76,6 @@ layers:
   - name: bsh
     title: BSH
     sources: [ bsh ]
+  - name: wad
+    title: Waddenzee
+    sources: [ wad ]

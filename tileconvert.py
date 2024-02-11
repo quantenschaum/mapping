@@ -49,13 +49,16 @@ def main():
         "-m", "--mozilla", action="store_true", help="set user-agent to mozilla"
     )
     parser.add_argument(
-        "-y", "--invert-y", action="store_true", help="invert the y tile number"
+        "-y",
+        "--invert-y",
+        action="store_true",
+        help="invert the y tile number to convert XYZ<-->TMS, see https://t1p.de/u4nvc, use for mbtiles from mapproxy",
     )
     parser.add_argument(
         "-Y",
         "--inverted-y",
         action="store_true",
-        help="set inverted y flag for sqlitedb",
+        help="set inverted y flag for sqlitedb (sets flag only -y causes actual inversion)",
     )
     parser.add_argument("--format", help="tile format for mbtiles", default="png")
     parser.add_argument(
@@ -161,7 +164,8 @@ def mbtiles2sqlitedb(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             z, x, y = int(row[0]), int(row[1]), int(row[2])
-            if args.invert_y:
+            # negate invert because mbtiles uses TMS scheme https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
+            if not args.invert_y:
                 y = 2**z - 1 - y
             if z < args.min_convert or z > args.max_convert:
                 continue
@@ -191,7 +195,7 @@ def mbtiles2dir(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             z, x, y = int(row[0]), int(row[1]), int(row[2])
-            if args.invert_y:
+            if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
             if z < args.min_convert or z > args.max_convert:
                 continue

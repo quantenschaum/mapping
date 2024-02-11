@@ -22,10 +22,11 @@ vwm:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
 
 ENC_LAYERS=BOYLAT BOYCAR BOYISD BOYSAW BOYSPP BOYINB BCNLAT BCNCAR BCNISD BCNSAW BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN OFSPLF SBDARE HRBFAC SMCFAC DEPARE DEPCNT SOUNDG M_COVR
+ENC_LAYERS=NAVLNE RECTRC OFSPLF FERYRT FAIRWAY PIPSOL PIPARE CBLSUB CBLARE SLCONS
 
 waddenzee: s57attributes.csv s57objectclasses.csv
-	rm -rf data/waddenzee data/waddenzee.gpkg
-	cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
+	#rm -rf data/waddenzee data/waddenzee.gpkg
+	#cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
 	for F in $$(find data/waddenzee -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/waddenzee.gpkg $$F $(ENC_LAYERS) -skipfailures -append; done
 
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
@@ -44,7 +45,64 @@ bsh:
 	for L in Hydrography Topography; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_2)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
 	#for F in data/bsh/*.json; do jq . $$F>data/bsh/tmp; mv data/bsh/tmp $$F; done
 	for F in $$(find data/bsh -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
-	#for F in $$(find data/bsh -name "*.json"); do ogr2ogr data/bsh.gpkg $$F -append; done
+	for F in $$(find data/bsh -name "*.json"); do ogr2ogr data/bsh.gpkg $$F -append; done
+
+waypoints:
+	mkdir -p data
+	wget https://faq.nvdev.de/api/assets/9attdq0jedc0w08w -O data/waypoints.gpx
+
+icons:
+	cd icons && ./genicons.py
+	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
+
+bsh1.qgs: bsh.qgs
+	sed 's#<value>000000</value>#<value>1</value>#g' $< >$@
+
+bsh2.qgs: bsh.qgs
+	sed 's#<value>000000</value>#<value>2</value>#g' $< >$@
+
+serve:
+	cd tiles && python -m http.server 8002
+
+qgis: icons bsh1.qgs bsh2.qgs
+	QGIS_SERVER_PARALLEL_RENDERING=1 qgis_mapserver
+
+mapproxy:
+	mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001
+
+seed:
+	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
+
+convert: cache_data/bsh.mbtiles
+	./tileconvert.py -yf $< bsh.mbtiles
+	./tileconvert.py -yf $< bsh.sqlitedb
+	./tileconvert.py -ya $< tiles/enc/
+
+clean-cache:
+	rm -rf cache_data
+
+docker:
+	docker-compose up -d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########################################################################################################################
+
 
 CGDS=01 05 07 08 09 11 13 14 17
 CGDS=01
@@ -89,34 +147,6 @@ render.diff:
 marine.render.xml:
 	cp nautical.render.xml $@
 	patch $@ render.diff
-
-icons:
-	cd icons && ./genicons.py
-	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
-
-bsh1.qgs: bsh.qgs
-	sed 's#<value>000000</value>#<value>1</value>#g' $< >$@
-
-bsh2.qgs: bsh.qgs
-	sed 's#<value>000000</value>#<value>-1</value>#g' $< >$@
-
-serve:
-	cd tiles && python -m http.server 8002
-
-qgis: icons bsh1.qgs bsh2.qgs
-	QGIS_SERVER_PARALLEL_RENDERING=1 qgis_mapserver
-
-mapproxy:
-	mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001
-
-seed:
-	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
-
-clean-cache:
-	rm -rf cache_data
-
-docker:
-	docker-compose up -d
 
 upload:
 	touch tiles/.nobackup
