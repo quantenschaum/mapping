@@ -48,11 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   var basemaps = {
-    'OpenStreetMap ORG':L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
-    }),
-    'OpenStreetMap DE':L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://openstreetmap.de/">OpenStreetMap</a>'
+    'OpenStreetMap':L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    //'OpenStreetMap':L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
+      attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+      class:'grayscale'
     }),
     'OsmAnd Nautical':L.tileLayer('https://maptile.osmand.net/tile/nautical/{z}/{x}/{y}.png', {
       attribution: '<a href="https://osmand.net/map">OsmAnd</a>'
@@ -200,13 +199,13 @@ document.addEventListener("DOMContentLoaded", () => {
     attribution: '<a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
   });
 
-  var layers = [basemaps['OpenStreetMap ORG'], overlays['Grid'], overlays['ENC']];
+  var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['ENC']];
 
   var isLocal=document.URL.startsWith('file') || document.URL.includes('localhost');
 
   if(isLocal) {
     overlays['QGIS BSH'] = L.tileLayer('http://localhost:8001/tiles/bsh/EPSG3857/{z}/{x}/{y}.png');
-    layers = [basemaps['OpenStreetMap ORG'], overlays['Grid'], overlays['QGIS BSH']];
+    //layers = [basemaps['OpenStreetMap ORG'], overlays['Grid'], overlays['QGIS BSH']];
     overlays['QGIS BSH WMS'] = L.tileLayer.wms('http://localhost:8000', {
       layers:'BSH',
       version:'1.3.0',
@@ -226,6 +225,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   var layers=L.control.layers(basemaps, overlays, {collapsed: true}).addTo(map);
+
+  basemaps['OpenStreetMap'].getContainer().classList.add('grayscale');
+
+  map.on('baselayerchange', function(evt) {
+    //console.log(evt);
+    if(evt.layer.options.class) {
+      evt.layer.getContainer().classList.add(evt.layer.options.class);
+    }
+  });
 
   function restoreActiveLayers(){
     var active=sessionStorage.getItem("activeLayers");
