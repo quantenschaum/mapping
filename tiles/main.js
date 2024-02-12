@@ -133,8 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var overlays = {
     'Grid': grid,
-    'ENC':L.tileLayer('enc/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS ENC</a>, <a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
+    'ENC':L.tileLayer.fallback('enc/{z}/{x}/{y}.png', {
+      attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
     }),
     'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
       version:'1.3.0',
