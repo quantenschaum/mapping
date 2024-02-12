@@ -35,7 +35,7 @@ BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
 BSH_LAYERS_2=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing
 # no overview layer for obstructions
 BSH_LAYERS_3=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
-BSH_BBOX=53,3.3,56,14.4
+BSH_BBOX=53.0,3.3,56.0,14.4
 
 bsh:
 	rm -rf data/bsh data/bsh.gpkg
@@ -74,8 +74,8 @@ seed:
 	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
 
 convert: cache_data/bsh.mbtiles
-	./tileconvert.py -yf $< tiles/download/bsh.mbtiles -t "BSH `date +%F`"
-	./tileconvert.py -yf $< tiles/download/bsh.sqlitedb -t "BSH `date +%F`"
+	./tileconvert.py -yf $< qmap-de.mbtiles -t "QMAP DE `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="navigational chart of german waters, north sea and baltic sea"
+	./tileconvert.py -yf $< qmap-de.sqlitedb -t "QMAP DE `date +%F`"
 	./tileconvert.py -ya $< tiles/enc/
 
 clean-cache:
@@ -84,6 +84,11 @@ clean-cache:
 docker:
 	docker-compose up -d
 
+upload:
+	touch tiles/.nobackup
+	cp -v marine.render.xml tiles/download/
+	cp -v qmap* tiles/download/ || true
+	rsync -hav tiles/ nas:mapping/tiles/ --stats $(O)
 
 
 
@@ -148,10 +153,6 @@ marine.render.xml:
 	cp nautical.render.xml $@
 	patch $@ render.diff
 
-upload:
-	touch tiles/.nobackup
-	rsync -hav tiles/ nas:docker/maps/tiles/qgis/ $(O)
-
 data/josm.jar:
 	wget -O $@ https://josm.openstreetmap.de/josm-tested.jar
 
@@ -177,30 +178,27 @@ obf: data/omc
 	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch.xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
 	rm -f $@/*.log
-	#cp -v $@/*.obf data/obf
-
-lights:
-	wget -O $@.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];(  nwr[~"seamark:type"~"light"];  nwr["seamark:light:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:range"][~"seamark:type"~"beacon"];  nwr["seamark:light:1:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:1:range"][~"seamark:type"~"beacon"];);(._;>;);out meta;'
-	./lightsectors.py $@.osm lightsectors.osm
-	rm -rf osm
-	mkdir -p osm
-	cp lightsectors.osm osm
-	$(MAKE) obf
-	cp obf/lightsectors.obf data/obf/
 
 bsh.osm:
-	mkdir -p bsh
-	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none bsh/$$L.osm -a; done
-	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none bsh/$$L.osm -a; done
-	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none bsh/$$L.osm -a; done
-	for L in beacons facilities lights; do ./lightsectors.py bsh/$$L.osm bsh/$$L-sectors.osm; done
+	rm -rf osm
+	mkdir -p osm
+	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none osm/$$L.osm -a; done
+	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none osm/$$L.osm -a; done
+	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none osm/$$L.osm -a; done
+	for L in beacons facilities lights; do ./lightsectors.py osm/$$L.osm osm/$$L-sectors.osm; done
 
 bsh.obf: bsh.osm
-	rm -rf obf osm
-	mkdir -p osm
-	cp bsh/*.osm osm/
+	rm -rf obf
 	$(MAKE) obf
 	data/omc/inspector.sh -c obf/bsh.obf obf/*.obf
-	cp obf/bsh.obf data/obf/
+
+lightsectors.osm:
 	rm -rf osm
+	mkdir -p osm
+	wget -O osm/lights.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];(  nwr[~"seamark:type"~"light"];  nwr["seamark:light:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:range"][~"seamark:type"~"beacon"];  nwr["seamark:light:1:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:1:range"][~"seamark:type"~"beacon"];);(._;>;);out meta;'
+	./lightsectors.py osm/lights.osm osm/$@
+
+lightsectors.obf: lightsectors.osm
+	$(MAKE) obf
+
 
