@@ -26,9 +26,10 @@ from time import monotonic
 import numpy, scipy
 import sys, re
 
-TIME_FACTOR = 2  # speedup time
+TIME_FACTOR = 1  # speedup time
 NOISE_FACTOR = 1  # scale measurement noise
 AUTO_PILOT = 1  # enable autopilot, set to 2 to steer to optimal VMC
+AIS_INTERVAL = 10  # interval (s) for emitting AIS sentences
 POS_JSON = "position.json"  # read+write position and heading to this file if it exists
 TCP_PORT = 6000  # port to listen on
 # NMEA sentences with are sent to clients
@@ -48,6 +49,7 @@ NMEA_FILTER = [
     # "RSA",
     # "RPM",
     # "VDR",
+    "VDM",
 ]
 
 
@@ -73,7 +75,94 @@ def main():
     s.leeway_factor = 8
     s.mag_variation = 4.7
 
-    s.update()
+    s.ais_targets = [
+        Ship(
+            name="SALINA",
+            mmsi=211318680,
+            position=[deg(54, 40), deg(13, 11)],
+            speed_thr_water=7,
+            heading_true=340,
+            sailing=1,
+            ais_class="B",
+        ),
+        Ship(
+            name="Queen Mary 2",
+            mmsi=235762000,
+            imo=9241061,
+            callsign="ZCEF6",
+            position=[54.75, 13.1],
+            speed_thr_water=10,
+            heading_true=150,
+            # sailing=1,
+        ),
+        Ship(
+            name="STEN PONTUS",
+            mmsi=255951000,
+            position=[54.81, 13.1],
+            speed_thr_water=11,
+            heading_true=72,
+            # sailing=1,
+        ),
+        Ship(
+            name="STI HAMMERSMITH",
+            mmsi=538005410,
+            position=[54.86, 13.1],
+            speed_thr_water=13,
+            heading_true=252,
+            # sailing=1,
+        ),
+        Ship(
+            name="INSEL HIDDENSEE",
+            mmsi=211537340,
+            position=[54.6, 13.17],
+            speed_thr_water=8,
+            heading_true=20,
+            # sailing=1,
+        ),
+        Ship(
+            name="BAMBERG",
+            mmsi=211815680,
+            position=[54.62, 12.95],
+            speed_thr_water=7,
+            heading_true=45,
+            # sailing=1,
+        ),
+        Ship(
+            name="LEILA",
+            mmsi=211650310,
+            position=[deg(54, 43), deg(13, 19)],
+            speed_thr_water=6,
+            heading_true=250,
+            sailing=1,
+            ais_class="B",
+        ),
+        Ship(
+            name="TIGER",
+            mmsi=253447000,
+            position=[deg(54, 43), deg(12, 57)],
+            speed_thr_water=15,
+            heading_true=90,
+            # sailing=1,
+        ),
+        Ship(
+            name="ARKONA",
+            mmsi=211130000,
+            imo=9285811,
+            position=[deg(54, 41), deg(13, 29)],
+            speed_thr_water=11,
+            heading_true=310,
+            # sailing=1,
+        ),
+        Ship(
+            name="MSC RENEE",
+            mmsi=477307300,
+            imo=9465306,
+            position=[deg(54, 48), deg(13, 0)],
+            speed_thr_water=20,
+            heading_true=72,
+            # sailing=1,
+        ),
+    ]
 
     server = Server("", TCP_PORT, s.nmea, s.autopilot)
 
@@ -91,7 +180,7 @@ def main():
 
 
 class Ship:
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.time = datetime.utcnow()
         self.position = [0, 0]  # LAT/LON degrees
         self.heading_true = 0  # degrees
@@ -110,7 +199,19 @@ class Ship:
         self.leeway_factor = 8
         self.polar = Polar("polar.json")
         self.pheel = Polar("heel.json")
-        self.sign = 0
+        self.sign = 0  # used by autopilot
+
+        self.mmsi = 0
+        self.imo = 0
+        self.callsign = ""
+        self.name = ""
+        self.destination = ""
+        self.ais_class = "A"
+        self.ais_targets = []
+        for k, v in kwargs.items():
+            self.__dict__[k] = v
+        self.ais_time = 0  # used for tracking AIS interval
+        self.update(0)
 
     def update(self, delta_t=1):
         "update state, simple forward integration of motion to new position"
@@ -171,6 +272,13 @@ class Ship:
             (self.wind_dir_ground, self.wind_speed_ground),
         )
         self.wind_angle_app = to180(self.wind_dir_app - self.heading_true)
+
+        for s in self.ais_targets:
+            s.current_set = self.current_set
+            s.current_drift = self.current_drift
+            s.wind_dir_ground = self.wind_dir_ground
+            s.wind_speed_ground = self.wind_speed_ground
+            s.update(delta_t)
 
     def __str__(self):
         return "\n".join(
@@ -246,8 +354,19 @@ class Ship:
             f"CCVDR,{self.current_set:.1f},T,,,{self.current_drift:.1f},N",
         ]
 
+        t = monotonic()
+        if (t - self.ais_time) * TIME_FACTOR > AIS_INTERVAL:
+            self.ais_time = t
+            for s in self.ais_targets:
+                sentences += ais(s)
+                s.ais_time = t
+
         return "".join(
-            [f"${s}*{nmea_crc(s):02x}\n" for s in sentences if s[2:5] in NMEA_FILTER]
+            [
+                f"{'!' if s.startswith('AIVDM') else '$'}{s}*{nmea_crc(s):02x}\n"
+                for s in sentences
+                if s[2:5] in NMEA_FILTER
+            ]
         )
 
     def autopilot(self, data):
@@ -386,7 +505,7 @@ class Server:
                 self.conns.remove(co)
 
         except Exception as x:
-            print(x)
+            print(x, file=sys.stderr)
 
 
 def to360(a):
@@ -484,7 +603,7 @@ def decode_nmea(data):
                     )
 
             except Exception as x:
-                print(x)
+                print(x, file=sys.stderr)
 
 
 def clamp(x, limits):
@@ -492,6 +611,204 @@ def clamp(x, limits):
     a, b = limits
     assert a < b, limits
     return max(a, min(b, x))
+
+
+def deg(d, m=0, s=0):
+    return d + m / 60 + s / 3600
+
+
+import struct
+
+AIS_CODE = "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVW`abcdefghijklmnopqrstuvw"
+AIS_ASCII = "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_ !\"#$%&'()*+,-./0123456789:;<=>?"
+
+
+def list_to_int(data):
+    i = 0
+    for v in data:
+        assert 0 <= v < 64
+        i = i << 6 | v
+    # print(f"{i} {i:x} {i:b}")
+    return i
+
+
+def int_to_list(i):
+    l = []
+    while i:
+        l.insert(0, i & 0b111111)
+        i = i >> 6
+    # print(l)
+    return l
+
+
+def ais_encode(data):
+    if type(data) == str:
+        assert "@" not in data
+        return list(AIS_ASCII.index(v) for v in data.upper() + "@")
+    else:
+        return "".join([AIS_CODE[v] for v in data])
+
+
+def ais_decode(data):
+    if type(data) == str:
+        return list(AIS_CODE.index(v) for v in data)
+    else:
+        s = "".join([AIS_ASCII[v] for v in data])
+        s = s.strip()
+        return s[0 : s.index("@")]
+
+
+type1 = 6, 2, 30, 4, 8, 10, 1, 28, 27, 12, 9, 6, 2, 3, 1, 19
+
+
+def ais_a(s):
+    data = (
+        1,  # type
+        0,  # repeat
+        s.mmsi,
+        5 if s.speed_over_ground < 0.2 else 8 if s.sailing else 0,  # navstat
+        0,  # rot
+        int(10 * s.speed_over_ground),
+        0,  # posacc
+        int(600000 * s.position[1]),  # lon
+        int(600000 * s.position[0]),  # lat
+        int(10 * s.course_over_ground),
+        int(s.heading_true),
+        60,  # time
+        0,  # maneuver
+        0,  # spare
+        0,  # raim
+        0,  # radiostat
+    )
+    return ais_nmea(type1, data)
+
+
+type5 = (6, 2, 30, 2, 30, 42, 120, 8, 9, 9, 6, 6, 4, 4, 5, 5, 6, 8, 120, 1, 1)
+
+
+def ais_a2(s):
+    data = (
+        5,  # type
+        0,  # repeat
+        s.mmsi,
+        0,  # ais version
+        s.imo,  # IMO number
+        ais_str(s.callsign, 7),  # callsign
+        ais_str(s.name, 20),
+        36 if s.sailing else 70,  # ship type 70=cargo 80=tanker 90=other
+        100,  # to bow
+        100,  # to stern
+        25,  # to port
+        25,  # to starboard
+        3,  # fix type 0=undef 1=gps 2=glonass 3=1+2
+        0,  # ETA month
+        0,  # ETA day
+        0,  # ETA hour
+        0,  # ETA minute
+        int(10 * 5),  # draught
+        ais_str(s.destination, 20),  # destination
+        0,  # dte
+        0,  # spare
+    )
+    return ais_nmea(type5, data)
+
+
+type18 = 6, 2, 30, 8, 10, 1, 28, 27, 12, 9, 6, 2, 1, 1, 1, 1, 1, 1, 1, 20
+
+
+def ais_b(s):
+    data = (
+        18,  # type
+        0,  # repeat
+        s.mmsi,
+        0,  # reserved
+        int(10 * s.speed_over_ground),
+        0,  # pos accuracy
+        int(600000 * s.position[1]),  # lon
+        int(600000 * s.position[0]),  # lat
+        int(10 * s.course_over_ground),
+        int(s.heading_true),
+        60,  # timestamp
+        0,  # reserved
+        0,  # cs unit
+        1,  # display
+        1,  # dsc
+        0,  # band flag
+        0,  # msg22 flag
+        0,  # assigned
+        0,  # raim
+        0,  # radio status
+    )
+    return ais_nmea(type18, data)
+
+
+type19 = 6, 2, 30, 8, 10, 1, 28, 27, 12, 9, 6, 4, 120, 8, 9, 9, 6, 6, 4, 1, 1, 1, 4
+
+
+def ais_b2(s):
+    data = (
+        19,  # type
+        0,  # repeat
+        s.mmsi,
+        0,  # reserved
+        int(10 * s.speed_over_ground),
+        0,  # pos accuracy
+        int(600000 * s.position[1]),  # lon
+        int(600000 * s.position[0]),  # lat
+        int(10 * s.course_over_ground),
+        int(s.heading_true),
+        60,  # timestamp
+        0,  # reserved
+        ais_str(s.name, 20),  # name
+        36 if s.sailing else 37,  # ship type
+        5,  # to bow
+        5,  # to stern
+        2,  # to port
+        2,  # to starboard
+        1,  # fix type
+        0,  # raim
+        0,  # dte
+        0,  # assigned
+        0,  # spare
+    )
+    return ais_nmea(type19, data)
+
+
+def ais_str(string, chars):
+    l = ais_encode(string)[:chars]
+    # print(l, len(l))
+    i = list_to_int(l)
+    n = 6 * len(l)
+    m = (1 << n) - 1
+    return (i & m) << (chars * 6 - n)
+
+
+def ais_nmea(atype, data):
+    assert sum(atype) % 8 == 0
+    assert len(atype) == len(data)
+    p = 0
+    n = sum(atype)
+    while (n + p) % 6 or (n + p) % 8:
+        p += 1
+    b = 0
+    for i, n in enumerate(atype):
+        m = (1 << n) - 1
+        b = b << n | (data[i] & m)
+    b = b << p
+    # print(f"{b:b}")
+    l = int_to_list(b)
+    # print(l)
+    # print(" ".join(f"{v:06b}" for v in l))
+    e = ais_encode(l)
+    # print(e)
+    return f"AIVDM,1,1,,B,{e},{p}"
+
+
+def ais(s):
+    if s.ais_class == "A":
+        return (ais_a(s), ais_a2(s))
+    else:
+        return (ais_b2(s),)
 
 
 if __name__ == "__main__":
