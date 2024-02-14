@@ -61,7 +61,7 @@ def main():
     s.wind_speed_ground = 10
 
     s.current_set = 300
-    s.current_drift = 1
+    s.current_drift = 0
 
     # ship's properties
     s.position = [54.7, 13.1]
@@ -69,10 +69,10 @@ def main():
     if isfile(POS_JSON):
         s.position, s.heading_true = read(POS_JSON)
 
-    s.sailing = 1
-    s.speed_thr_water = 0
+    s.sailing = 0
+    s.speed_thr_water = 5
     s.rudder_angle = 0
-    s.leeway_factor = 8
+    s.leeway_factor = 0
     s.mag_variation = 4.7
 
     s.ais_targets = [
@@ -93,6 +93,7 @@ def main():
             position=[54.75, 13.1],
             speed_thr_water=10,
             heading_true=150,
+            rudder_angle=-1
             # sailing=1,
         ),
         Ship(
@@ -363,7 +364,7 @@ class Ship:
 
         return "".join(
             [
-                f"{'!' if s.startswith('AIVDM') else '$'}{s}*{nmea_crc(s):02x}\n"
+                f"{'!' if s.startswith('AIVDM') else '$'}{s}*{nmea_crc(s):02X}\n"
                 for s in sentences
                 if s[2:5] in NMEA_FILTER
             ]
@@ -617,8 +618,6 @@ def deg(d, m=0, s=0):
     return d + m / 60 + s / 3600
 
 
-import struct
-
 AIS_CODE = "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVW`abcdefghijklmnopqrstuvw"
 AIS_ASCII = "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_ !\"#$%&'()*+,-./0123456789:;<=>?"
 
@@ -667,7 +666,7 @@ def ais_a(s):
         0,  # repeat
         s.mmsi,
         5 if s.speed_over_ground < 0.2 else 8 if s.sailing else 0,  # navstat
-        0,  # rot
+        ais_rot(s.rate_of_turn),  # rot
         int(10 * s.speed_over_ground),
         0,  # posacc
         int(600000 * s.position[1]),  # lon
@@ -774,6 +773,14 @@ def ais_b2(s):
     return ais_nmea(type19, data)
 
 
+def ais_rot(rot):
+    if not isfinite(rot):
+        return 128
+    # rot *= 60  # deg/min
+    rot = int(copysign(4.733 * sqrt(abs(rot)), rot))
+    return rot if abs(rot) < 127 else copysign(127, rot)
+
+
 def ais_str(string, chars):
     l = ais_encode(string)[:chars]
     # print(l, len(l))
@@ -786,14 +793,11 @@ def ais_str(string, chars):
 def ais_nmea(atype, data):
     assert sum(atype) % 8 == 0
     assert len(atype) == len(data)
-    p = 0
-    n = sum(atype)
-    while (n + p) % 6 or (n + p) % 8:
-        p += 1
     b = 0
     for i, n in enumerate(atype):
         m = (1 << n) - 1
         b = b << n | (data[i] & m)
+    p = (6 - sum(atype) % 6) % 6
     b = b << p
     # print(f"{b:b}")
     l = int_to_list(b)
