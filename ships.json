@@ -1,4 +1,9 @@
 {
+  "time_factor": 1,
+  "send_interval": 1,
+  "ais_interval": 10,
+  "noise_factor": 1,
+  "tcp_port": 6000,
   "ships": [
     {
       "position": [

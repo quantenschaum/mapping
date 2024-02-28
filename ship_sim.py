@@ -33,11 +33,10 @@ import scipy
 
 TIME_FACTOR = 1  # speedup time
 SEND_INTERVAL = 1  # interval for sending NMEA data
+AIS_INTERVAL = 10  # interval (s) for emitting AIS sentences
 NOISE_FACTOR = 1  # scale measurement noise
 AUTO_PILOT = 1  # enable autopilot, set to 2 to steer to optimal VMC
-AIS_INTERVAL = 10  # interval (s) for emitting AIS sentences
 POS_JSON = "position.json"  # read+write position and heading to this file if it exists
-TCP_PORT = 6000  # port to listen on
 # NMEA sentences with are sent to clients
 NMEA_FILTER = [
     "RMC",
@@ -62,7 +61,14 @@ start = monotonic()
 
 
 def main():
+    global TIME_FACTOR, SEND_INTERVAL, AIS_INTERVAL, NOISE_FACTOR
     config = read("ships.json")
+    TIME_FACTOR = config.get("time_factor", TIME_FACTOR)
+    SEND_INTERVAL = config.get("send_interval", SEND_INTERVAL)
+    AIS_INTERVAL = config.get("ais_interval", AIS_INTERVAL)
+    NOISE_FACTOR = config.get("noise_factor", NOISE_FACTOR)
+    tcp_port = config.get("tcp_port", 6000)
+
     polar = Polar(config["polar"])
     heel = Polar(config["heel"])
     atons = config.get("atons", [])
@@ -93,7 +99,7 @@ def main():
 
         return sentences
 
-    server = Server("", TCP_PORT, nmea, own.autopilot)
+    server = Server("", tcp_port, nmea, own.autopilot)
 
     t0 = monotonic()
     while True:
@@ -300,8 +306,6 @@ class Ship:
 
     def autopilot(self, data):
         # receive waypoint to steer to
-        if not data or not AUTO_PILOT:
-            return
         nmea = decode_nmea(data)
         if not nmea:
             return
