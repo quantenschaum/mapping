@@ -15,18 +15,24 @@ acquired by the ship's sensors. There is some noise added to the data to make it
 It also accepts RMB/APB sentences on the same TCP connection and will steer the supplied bearing.
 """
 
-from datetime import datetime, timedelta
-from time import monotonic, sleep
-import socket, select
-from random import gauss
-from math import sin, cos, radians, degrees, atan2, sqrt, copysign, isfinite, asin
 import json
+import re
+import select
+import socket
+import sys
+from datetime import datetime, timedelta
+from math import sin, cos, radians, degrees, atan2, sqrt, copysign, isfinite, asin, nan
 from os.path import isfile
+from random import gauss
 from time import monotonic
-import numpy, scipy
-import sys, re
+from time import sleep
+
+import numpy
+import pyais
+import scipy
 
 TIME_FACTOR = 1  # speedup time
+SEND_INTERVAL = 1 # interval for sending NMEA data
 NOISE_FACTOR = 1  # scale measurement noise
 AUTO_PILOT = 1  # enable autopilot, set to 2 to steer to optimal VMC
 AIS_INTERVAL = 10  # interval (s) for emitting AIS sentences
@@ -52,6 +58,7 @@ NMEA_FILTER = [
     "VDM",
 ]
 
+start=monotonic()
 
 def main():
     s = Ship()
@@ -60,12 +67,13 @@ def main():
     s.wind_dir_ground = 30
     s.wind_speed_ground = 10
 
-    s.current_set = 300
-    s.current_drift = 0
+    s.current_set = 280
+    s.current_drift = 1
+
 
     # ship's properties
     s.position = [54.7, 13.1]
-    s.heading_true = 90
+    s.heading_true = 355
     if isfile(POS_JSON):
         s.position, s.heading_true = read(POS_JSON)
 
@@ -75,34 +83,26 @@ def main():
     s.leeway_factor = 0
     s.mag_variation = 4.7
 
+    s.ais_class = "B"
+
     s.ais_targets = [
         Ship(
-            name="SALINA",
-            mmsi=211318680,
-            position=[deg(54, 40), deg(13, 11)],
-            speed_thr_water=7,
-            heading_true=340,
-            sailing=1,
-            ais_class="B",
-        ),
-        Ship(
-            name="Queen Mary 2",
-            mmsi=235762000,
-            imo=9241061,
-            callsign="ZCEF6",
-            position=[54.75, 13.1],
-            speed_thr_water=10,
-            heading_true=150,
-            rudder_angle=-1
-            # sailing=1,
+            name="MSC RENEE",
+            mmsi=477307300,
+            imo=9465306,
+            position=[deg(54, 48), deg(13, 0)],
+            speed_thr_water=20,
+            heading_true=72,
+            ais_navstat=4,
         ),
         Ship(
             name="STEN PONTUS",
             mmsi=255951000,
             position=[54.81, 13.1],
-            speed_thr_water=11,
+            speed_thr_water=12,
             heading_true=72,
-            # sailing=1,
+            rudder_angle=nan,
+            rate_of_turn=6/60
         ),
         Ship(
             name="STI HAMMERSMITH",
@@ -113,12 +113,36 @@ def main():
             # sailing=1,
         ),
         Ship(
+            name="SALINA",
+            mmsi=211318680,
+            position=[deg(54, 40), deg(13, 11)],
+            speed_thr_water=7,
+            heading_true=340,
+            sailing=1,
+            ais_class="B",
+        ),
+        Ship(
+            name="QUEEN MARY 2",
+            mmsi=235762000,
+            imo=9241061,
+            callsign="ZCEF6",
+            position=[54.75, 13.2],
+            speed_thr_water=3,
+            heading_true=100,
+            rudder_angle=nan,
+            rate_of_turn=-0.01,
+            ais_navstat=2,
+            destination="Kloster",
+        ),
+        Ship(
             name="INSEL HIDDENSEE",
             mmsi=211537340,
+            destination="kopenhagen",
             position=[54.6, 13.17],
             speed_thr_water=8,
             heading_true=20,
-            # sailing=1,
+            rudder_angle=nan,
+            rate_of_turn=-0.02,
         ),
         Ship(
             name="BAMBERG",
@@ -126,7 +150,7 @@ def main():
             position=[54.62, 12.95],
             speed_thr_water=7,
             heading_true=45,
-            # sailing=1,
+            ais_navstat=3,
         ),
         Ship(
             name="LEILA",
@@ -143,7 +167,9 @@ def main():
             position=[deg(54, 43), deg(12, 57)],
             speed_thr_water=15,
             heading_true=90,
-            # sailing=1,
+            ais_navstat=7,
+            rudder_angle=nan,
+            rate_of_turn=0.02,
         ),
         Ship(
             name="ARKONA",
@@ -152,17 +178,45 @@ def main():
             position=[deg(54, 41), deg(13, 29)],
             speed_thr_water=11,
             heading_true=310,
-            # sailing=1,
         ),
-        Ship(
-            name="MSC RENEE",
-            mmsi=477307300,
-            imo=9465306,
-            position=[deg(54, 48), deg(13, 0)],
-            speed_thr_water=20,
-            heading_true=72,
-            # sailing=1,
-        ),
+    ]
+    s.ais_atons = [
+        {
+            "mmsi": 111111111,
+            "name": "FOO-N",
+            "aid_type": 20,
+            "lat": deg(54, 39.93),
+            "lon": deg(13, 5.91),
+            "off_position": 1,
+            "virtual_aid": 0,
+        },
+        {
+            "mmsi": 111111114,
+            "name": "DANGER",
+            "aid_type": 28,
+            "lat": deg(54, 42.02),
+            "lon": deg(13, 9.82),
+            "off_position": 0,
+            "virtual_aid": 1,
+        },
+        {
+            "mmsi": 111111112,
+            "name": "DORNBUSCH",
+            "aid_type": 6,
+            "lat": deg(54, 35.95),
+            "lon": deg(13, 7.17),
+            "off_position": 0,
+            "virtual_aid": 0,
+        },
+        {
+            "mmsi": 111111113,
+            "name": "HIDDENSEE",
+            "aid_type": 29,
+            "lat": deg(54, 36.30),
+            "lon": deg(13, 11.08),
+            "off_position": 0,
+            "virtual_aid": 0,
+        },
     ]
 
     server = Server("", TCP_PORT, s.nmea, s.autopilot)
@@ -171,7 +225,7 @@ def main():
     while True:
         t1 = monotonic()
         s.update()
-        if t1 - t0 > 1:
+        if t1 - t0 > SEND_INTERVAL:
             print(s)
             if isfile(POS_JSON):
                 write(POS_JSON, [s.position, s.heading_true])
@@ -202,21 +256,26 @@ class Ship:
         self.pheel = Polar("heel.json")
         self.sign = 0  # used by autopilot
 
+        self.ais_targets = []
+        self.ais_atons = []
         self.mmsi = 0
         self.imo = 0
         self.callsign = ""
         self.name = ""
         self.destination = ""
         self.ais_class = "A"
-        self.ais_targets = []
+        self.ais_navstat = 0
         for k, v in kwargs.items():
             self.__dict__[k] = v
-        self.ais_time = 0  # used for tracking AIS interval
+        self.ais_time1 = 0  # used for tracking AIS interval
+        self.ais_time2 = 0  # for static data
+        self.nmea_count=0
         self.update(0)
 
     def update(self, delta_t=1):
         "update state, simple forward integration of motion to new position"
         self.time = self.time + timedelta(seconds=delta_t)
+        if TIME_FACTOR==1: self.time = datetime.utcnow()
 
         if isfinite(self.rudder_angle):
             # rudder angle causes rate of turn, but proportional to speed
@@ -347,7 +406,7 @@ class Ship:
             f"SDDBT,,,{depth:.1f},M,,",  # below transducer
             f"SDDBS,,,{depth:.1f},M,,",  # below surface
             f"WIMWD,{wind_dir_true:.1f},T,,,{wind_speed_true:.1f},N,,",
-            f"WIMWV,{wind_angle_true:.1f},T,{wind_speed_true:.1f},N,A",
+            #f"WIMWV,{wind_angle_true:.1f},T,{wind_speed_true:.1f},N,A",
             f"WIMWV,{wind_angle_app:.1f},R,{wind_speed_app:.1f},N,A",
             f"HCROT,{rot:.1f},A",
             f"RIRSA,{self.rudder_angle:.1f},A,,",
@@ -355,20 +414,29 @@ class Ship:
             f"CCVDR,{self.current_set:.1f},T,,,{self.current_drift:.1f},N",
         ]
 
-        t = monotonic()
-        if (t - self.ais_time) * TIME_FACTOR > AIS_INTERVAL:
-            self.ais_time = t
-            for s in self.ais_targets:
-                sentences += ais(s)
-                s.ais_time = t
+        sentences = [
+            f"${s}*{nmea_crc(s):02X}" for s in sentences if s[2:5] in NMEA_FILTER
+        ]
 
-        return "".join(
-            [
-                f"{'!' if s.startswith('AIVDM') else '$'}{s}*{nmea_crc(s):02X}\n"
-                for s in sentences
-                if s[2:5] in NMEA_FILTER
-            ]
-        )
+        t = monotonic()
+        if "VDM" in NMEA_FILTER:
+          if (t - self.ais_time1) * TIME_FACTOR > AIS_INTERVAL:
+            self.ais_time1 = t
+            for s in self.ais_targets:
+                sentences += ais_1(s) if s.ais_class=="A" else ais_19(s)
+            for s in self.ais_atons:
+                sentences += ais_21(s)
+
+          if (t - self.ais_time2) * TIME_FACTOR > 6*AIS_INTERVAL:
+            self.ais_time2 = t
+            for s in self.ais_targets:
+                sentences += ais_5(s) if s.ais_class=="A" else []
+
+
+        self.nmea_count+=len(sentences)
+
+
+        return "".join(f"{s}\n" for s in sentences)
 
     def autopilot(self, data):
         # receive waypoint to steer to
@@ -584,27 +652,24 @@ def noisy(value, absolute=0, relative=1):
 
 
 def decode_nmea(data):
-    if __name__ == "__main__":
-        for l in data.splitlines():
-            try:
-                # print(l)
-                # $GPRMB,A,1.70,L,8,9,5509.36,N,01335.04,E,7.8,261.9,5.7,V,A*51
-                # $GPAPB,A,A,1.70,L,N,V,,274.5,T,9,261.9,T,261.9,T*4F
-                m = re.match(
-                    "\$..(APB|RMB)" + ",([^,]*)" * 14 + "\*..",
-                    l,
-                )
-                if m:
-                    # print(m, m.groups())
-                    o = 0 if m.group(1) == "RMB" else 1
-                    return (
-                        float(m.group(12)),  # BRG
-                        float(m.group(3 + o))  # XTE
-                        * (-1 if m.group(4 + o) == "L" else 1),
-                    )
+    for l in data.splitlines():
+        try:
+            # print(l)
+            # $GPRMB,A,1.70,L,8,9,5509.36,N,01335.04,E,7.8,261.9,5.7,V,A*51
+            # $GPAPB,A,A,1.70,L,N,V,,274.5,T,9,261.9,T,261.9,T*4F
+            m = re.match(
+                "\$..(APB|RMB)" + ",([^,]*)" * 13 + "(,([^,]*))?\*..",
+                l,
+            )
+            if m:
+                # print(m, m.groups())
+                o = 0 if m.group(1) == "RMB" else 1
+                brg = float(m.group(12))
+                xte = float(m.group(3 + o)) * (-1 if m.group(4 + o) == "L" else 1)
+                return brg,xte
 
-            except Exception as x:
-                print(x, file=sys.stderr)
+        except Exception as x:
+            print(x, file=sys.stderr)
 
 
 def clamp(x, limits):
@@ -618,201 +683,75 @@ def deg(d, m=0, s=0):
     return d + m / 60 + s / 3600
 
 
-AIS_CODE = "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVW`abcdefghijklmnopqrstuvw"
-AIS_ASCII = "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_ !\"#$%&'()*+,-./0123456789:;<=>?"
+def ais_encode(**kwargs):
+    return pyais.encode_dict(kwargs, talker_id="AIVDM")
 
 
-def list_to_int(data):
-    i = 0
-    for v in data:
-        assert 0 <= v < 64
-        i = i << 6 | v
-    # print(f"{i} {i:x} {i:b}")
-    return i
-
-
-def int_to_list(i):
-    l = []
-    while i:
-        l.insert(0, i & 0b111111)
-        i = i >> 6
-    # print(l)
-    return l
-
-
-def ais_encode(data):
-    if type(data) == str:
-        assert "@" not in data
-        return list(AIS_ASCII.index(v) for v in data.upper() + "@")
-    else:
-        return "".join([AIS_CODE[v] for v in data])
-
-
-def ais_decode(data):
-    if type(data) == str:
-        return list(AIS_CODE.index(v) for v in data)
-    else:
-        s = "".join([AIS_ASCII[v] for v in data])
-        s = s.strip()
-        return s[0 : s.index("@")]
-
-
-type1 = 6, 2, 30, 4, 8, 10, 1, 28, 27, 12, 9, 6, 2, 3, 1, 19
-
-
-def ais_a(s):
-    data = (
-        1,  # type
-        0,  # repeat
-        s.mmsi,
-        5 if s.speed_over_ground < 0.2 else 8 if s.sailing else 0,  # navstat
-        ais_rot(s.rate_of_turn),  # rot
-        int(10 * s.speed_over_ground),
-        0,  # posacc
-        int(600000 * s.position[1]),  # lon
-        int(600000 * s.position[0]),  # lat
-        int(10 * s.course_over_ground),
-        int(s.heading_true),
-        60,  # time
-        0,  # maneuver
-        0,  # spare
-        0,  # raim
-        0,  # radiostat
+def ais_1(s):
+    return ais_encode(
+        msg_type=1,
+        mmsi=s.mmsi,
+        second=s.time.second if TIME_FACTOR==1 else 60,
+        lat=s.position[0],
+        lon=s.position[1],
+        course=s.course_over_ground,
+        speed=s.speed_over_ground,
+        status=1 if s.speed_over_ground < 0.2 else 8 if s.sailing else s.ais_navstat,
+        heading=s.heading_true,
+        turn=s.rate_of_turn * 60,
     )
-    return ais_nmea(type1, data)
 
 
-type5 = (6, 2, 30, 2, 30, 42, 120, 8, 9, 9, 6, 6, 4, 4, 5, 5, 6, 8, 120, 1, 1)
-
-
-def ais_a2(s):
-    data = (
-        5,  # type
-        0,  # repeat
-        s.mmsi,
-        0,  # ais version
-        s.imo,  # IMO number
-        ais_str(s.callsign, 7),  # callsign
-        ais_str(s.name, 20),
-        36 if s.sailing else 70,  # ship type 70=cargo 80=tanker 90=other
-        100,  # to bow
-        100,  # to stern
-        25,  # to port
-        25,  # to starboard
-        3,  # fix type 0=undef 1=gps 2=glonass 3=1+2
-        0,  # ETA month
-        0,  # ETA day
-        0,  # ETA hour
-        0,  # ETA minute
-        int(10 * 5),  # draught
-        ais_str(s.destination, 20),  # destination
-        0,  # dte
-        0,  # spare
+def ais_5(s):
+    return ais_encode(
+        msg_type=5,
+        mmsi=s.mmsi,
+        imo=s.imo,
+        callsign=s.callsign,
+        shipname=s.name,
+        ship_type=36 if s.sailing else 70,
+        draught=5,
+        to_bow=100,
+        to_stern=100,
+        to_port=20,
+        to_starboard=20,
+        destination=s.destination,
     )
-    return ais_nmea(type5, data)
 
 
-type18 = 6, 2, 30, 8, 10, 1, 28, 27, 12, 9, 6, 2, 1, 1, 1, 1, 1, 1, 1, 20
-
-
-def ais_b(s):
-    data = (
-        18,  # type
-        0,  # repeat
-        s.mmsi,
-        0,  # reserved
-        int(10 * s.speed_over_ground),
-        0,  # pos accuracy
-        int(600000 * s.position[1]),  # lon
-        int(600000 * s.position[0]),  # lat
-        int(10 * s.course_over_ground),
-        int(s.heading_true),
-        60,  # timestamp
-        0,  # reserved
-        0,  # cs unit
-        1,  # display
-        1,  # dsc
-        0,  # band flag
-        0,  # msg22 flag
-        0,  # assigned
-        0,  # raim
-        0,  # radio status
+def ais_19(s):
+    return ais_encode(
+        msg_type=19,
+        mmsi=s.mmsi,
+        second=s.time.second if TIME_FACTOR==1 else 60,
+        shipname=s.name,
+        lat=s.position[0],
+        lon=s.position[1],
+        course=s.course_over_ground,
+        speed=s.speed_over_ground,
+        heading=s.heading_true,
+        to_bow=6,
+        to_stern=6,
+        to_port=2,
+        to_starboard=2,
     )
-    return ais_nmea(type18, data)
 
 
-type19 = 6, 2, 30, 8, 10, 1, 28, 27, 12, 9, 6, 4, 120, 8, 9, 9, 6, 6, 4, 1, 1, 1, 4
-
-
-def ais_b2(s):
-    data = (
-        19,  # type
-        0,  # repeat
-        s.mmsi,
-        0,  # reserved
-        int(10 * s.speed_over_ground),
-        0,  # pos accuracy
-        int(600000 * s.position[1]),  # lon
-        int(600000 * s.position[0]),  # lat
-        int(10 * s.course_over_ground),
-        int(s.heading_true),
-        60,  # timestamp
-        0,  # reserved
-        ais_str(s.name, 20),  # name
-        36 if s.sailing else 37,  # ship type
-        5,  # to bow
-        5,  # to stern
-        2,  # to port
-        2,  # to starboard
-        1,  # fix type
-        0,  # raim
-        0,  # dte
-        0,  # assigned
-        0,  # spare
+def ais_21(data):
+    data["msg_type"] = 21
+    return ais_encode(**data)
+    return ais_encode(
+        msg_type=21,
+        mmsi=123456789,
+        name="",
+        lat=0,
+        lon=0,
+        off_position=False,
+        virtual_aid=False,
     )
-    return ais_nmea(type19, data)
 
 
-def ais_rot(rot):
-    if not isfinite(rot):
-        return 128
-    # rot *= 60  # deg/min
-    rot = int(copysign(4.733 * sqrt(abs(rot)), rot))
-    return rot if abs(rot) < 127 else copysign(127, rot)
 
-
-def ais_str(string, chars):
-    l = ais_encode(string)[:chars]
-    # print(l, len(l))
-    i = list_to_int(l)
-    n = 6 * len(l)
-    m = (1 << n) - 1
-    return (i & m) << (chars * 6 - n)
-
-
-def ais_nmea(atype, data):
-    assert sum(atype) % 8 == 0
-    assert len(atype) == len(data)
-    b = 0
-    for i, n in enumerate(atype):
-        m = (1 << n) - 1
-        b = b << n | (data[i] & m)
-    p = (6 - sum(atype) % 6) % 6
-    b = b << p
-    # print(f"{b:b}")
-    l = int_to_list(b)
-    # print(l)
-    # print(" ".join(f"{v:06b}" for v in l))
-    e = ais_encode(l)
-    # print(e)
-    return f"AIVDM,1,1,,B,{e},{p}"
-
-
-def ais(s):
-    if s.ais_class == "A":
-        return (ais_a(s), ais_a2(s))
-    else:
-        return (ais_b2(s),)
 
 
 if __name__ == "__main__":
