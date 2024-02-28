@@ -32,7 +32,7 @@ import pyais
 import scipy
 
 TIME_FACTOR = 1  # speedup time
-SEND_INTERVAL = 1 # interval for sending NMEA data
+SEND_INTERVAL = 1  # interval for sending NMEA data
 NOISE_FACTOR = 1  # scale measurement noise
 AUTO_PILOT = 1  # enable autopilot, set to 2 to steer to optimal VMC
 AIS_INTERVAL = 10  # interval (s) for emitting AIS sentences
@@ -58,224 +58,109 @@ NMEA_FILTER = [
     "VDM",
 ]
 
-start=monotonic()
+start = monotonic()
+
 
 def main():
-    s = Ship()
+    config = read("ships.json")
+    polar = Polar(config["polar"])
+    heel = Polar(config["heel"])
+    atons = config.get("atons", [])
+    ships = [Ship(**d, _polar=polar, _pheel=heel) for d in config["ships"]]
 
-    # environment
-    s.wind_dir_ground = 30
-    s.wind_speed_ground = 10
+    own = ships[0]
 
-    s.current_set = 280
-    s.current_drift = 1
+    def nmea():
+        sentences = own.nmea()
+        t = monotonic()
+        for s in ships[1:]:
+            if s.ais_class == "A":
+                if t - s.ais_time_dynamic > AIS_INTERVAL:
+                    sentences += "\n".join(ais_1(s)) + "\n"
+                    s.ais_time_dynamic = t
+                if t - s.ais_time_static > 5 * AIS_INTERVAL:
+                    sentences += "\n".join(ais_5(s)) + "\n"
+                    s.ais_time_static = t
+            else:
+                if t - s.ais_time_dynamic > AIS_INTERVAL:
+                    sentences += "\n".join(ais_19(s)) + "\n"
+                    s.ais_time_dynamic = t
 
+        for a in atons:
+            if t - a.get("ais_time", 0) > 3 * AIS_INTERVAL:
+                sentences += "\n".join(ais_21(a)) + "\n"
+                a["ais_time"] = t
 
-    # ship's properties
-    s.position = [54.7, 13.1]
-    s.heading_true = 355
-    if isfile(POS_JSON):
-        s.position, s.heading_true = read(POS_JSON)
+        return sentences
 
-    s.sailing = 0
-    s.speed_thr_water = 5
-    s.rudder_angle = 0
-    s.leeway_factor = 0
-    s.mag_variation = 4.7
-
-    s.ais_class = "B"
-
-    s.ais_targets = [
-        Ship(
-            name="MSC RENEE",
-            mmsi=477307300,
-            imo=9465306,
-            position=[deg(54, 48), deg(13, 0)],
-            speed_thr_water=20,
-            heading_true=72,
-            ais_navstat=4,
-        ),
-        Ship(
-            name="STEN PONTUS",
-            mmsi=255951000,
-            position=[54.81, 13.1],
-            speed_thr_water=12,
-            heading_true=72,
-            rudder_angle=nan,
-            rate_of_turn=6/60
-        ),
-        Ship(
-            name="STI HAMMERSMITH",
-            mmsi=538005410,
-            position=[54.86, 13.1],
-            speed_thr_water=13,
-            heading_true=252,
-            # sailing=1,
-        ),
-        Ship(
-            name="SALINA",
-            mmsi=211318680,
-            position=[deg(54, 40), deg(13, 11)],
-            speed_thr_water=7,
-            heading_true=340,
-            sailing=1,
-            ais_class="B",
-        ),
-        Ship(
-            name="QUEEN MARY 2",
-            mmsi=235762000,
-            imo=9241061,
-            callsign="ZCEF6",
-            position=[54.75, 13.2],
-            speed_thr_water=3,
-            heading_true=100,
-            rudder_angle=nan,
-            rate_of_turn=-0.01,
-            ais_navstat=2,
-            destination="Kloster",
-        ),
-        Ship(
-            name="INSEL HIDDENSEE",
-            mmsi=211537340,
-            destination="kopenhagen",
-            position=[54.6, 13.17],
-            speed_thr_water=8,
-            heading_true=20,
-            rudder_angle=nan,
-            rate_of_turn=-0.02,
-        ),
-        Ship(
-            name="BAMBERG",
-            mmsi=211815680,
-            position=[54.62, 12.95],
-            speed_thr_water=7,
-            heading_true=45,
-            ais_navstat=3,
-        ),
-        Ship(
-            name="LEILA",
-            mmsi=211650310,
-            position=[deg(54, 43), deg(13, 19)],
-            speed_thr_water=6,
-            heading_true=250,
-            sailing=1,
-            ais_class="B",
-        ),
-        Ship(
-            name="TIGER",
-            mmsi=253447000,
-            position=[deg(54, 43), deg(12, 57)],
-            speed_thr_water=15,
-            heading_true=90,
-            ais_navstat=7,
-            rudder_angle=nan,
-            rate_of_turn=0.02,
-        ),
-        Ship(
-            name="ARKONA",
-            mmsi=211130000,
-            imo=9285811,
-            position=[deg(54, 41), deg(13, 29)],
-            speed_thr_water=11,
-            heading_true=310,
-        ),
-    ]
-    s.ais_atons = [
-        {
-            "mmsi": 111111111,
-            "name": "FOO-N",
-            "aid_type": 20,
-            "lat": deg(54, 39.93),
-            "lon": deg(13, 5.91),
-            "off_position": 1,
-            "virtual_aid": 0,
-        },
-        {
-            "mmsi": 111111114,
-            "name": "DANGER",
-            "aid_type": 28,
-            "lat": deg(54, 42.02),
-            "lon": deg(13, 9.82),
-            "off_position": 0,
-            "virtual_aid": 1,
-        },
-        {
-            "mmsi": 111111112,
-            "name": "DORNBUSCH",
-            "aid_type": 6,
-            "lat": deg(54, 35.95),
-            "lon": deg(13, 7.17),
-            "off_position": 0,
-            "virtual_aid": 0,
-        },
-        {
-            "mmsi": 111111113,
-            "name": "HIDDENSEE",
-            "aid_type": 29,
-            "lat": deg(54, 36.30),
-            "lon": deg(13, 11.08),
-            "off_position": 0,
-            "virtual_aid": 0,
-        },
-    ]
-
-    server = Server("", TCP_PORT, s.nmea, s.autopilot)
+    server = Server("", TCP_PORT, nmea, own.autopilot)
 
     t0 = monotonic()
     while True:
         t1 = monotonic()
-        s.update()
+        for s in ships:
+            s.current_set = own.current_set
+            s.current_drift = own.current_drift
+            s.wind_dir_ground = own.wind_dir_ground
+            s.wind_speed_ground = own.wind_speed_ground
+            s.update()
         if t1 - t0 > SEND_INTERVAL:
-            print(s)
+            print(own)
             if isfile(POS_JSON):
-                write(POS_JSON, [s.position, s.heading_true])
-            server.serve(s)
+                write(POS_JSON, [own.position, own.heading_true])
+            server.serve()
             t0 = t1
         sleep(1 / TIME_FACTOR)
 
 
 class Ship:
-    def __init__(self, **kwargs):
-        self.time = datetime.utcnow()
-        self.position = [0, 0]  # LAT/LON degrees
-        self.heading_true = 0  # degrees
-        self.speed_thr_water = 0  # knots
-        self.sailing = False  # if to calculate boat speed from wind via polar
-        self.rate_of_turn = 0  # deg/sec
-        self.mag_deviation = 0
-        self.mag_variation = 0
-        self.rudder_angle = 0
-        self.engine_rpm = 0
-        self.depth = 10
-        self.wind_speed_ground = 0
-        self.wind_dir_ground = 0
-        self.current_set = 0
-        self.current_drift = 0
-        self.leeway_factor = 8
-        self.polar = Polar("polar.json")
-        self.pheel = Polar("heel.json")
-        self.sign = 0  # used by autopilot
+    props = {
+        "position": [0, 0],
+        "heading_true": 0,  # degrees
+        "speed_thr_water": 0,  # knots
+        "sailing": False,  # if to calculate boat speed from wind via polar
+        "rate_of_turn": 0,  # deg/sec
+        # "mag_deviation": 0,
+        "mag_variation": 0,
+        "rudder_angle": 0,
+        "engine_rpm": 0,
+        "depth": 10,
+        "wind_speed_ground": 0,
+        "wind_dir_ground": 0,
+        "current_set": 0,
+        "current_drift": 0,
+        "leeway_factor": 8,
+        "mmsi": 0,
+        "imo": 0,
+        "name": "",
+        "callsign": "",
+        "destination": "",
+        "ais_class": "A",
+        "ais_navstat": 0,
+    }
 
-        self.ais_targets = []
-        self.ais_atons = []
-        self.mmsi = 0
-        self.imo = 0
-        self.callsign = ""
-        self.name = ""
-        self.destination = ""
-        self.ais_class = "A"
-        self.ais_navstat = 0
-        for k, v in kwargs.items():
-            self.__dict__[k] = v
-        self.ais_time1 = 0  # used for tracking AIS interval
-        self.ais_time2 = 0  # for static data
-        self.nmea_count=0
+    def __init__(self, **kwargs):
+        self.load(kwargs)
+        self.time = datetime.utcnow()
+        self.sign = 0  # used by autopilot
+        self.ais_time_dynamic = 0  # used for tracking AIS interval
+        self.ais_time_static = 0  # for static data
         self.update(0)
+
+    def load(self, props):
+        self.__dict__.update(Ship.props)
+        self.__dict__.update(props)
+        if self.rate_of_turn:
+            self.rudder_angle = nan
+
+    def save(self):
+        return {k: self.__dict__[k] for k in Ship.props.keys() if k in self.__dict__}
 
     def update(self, delta_t=1):
         "update state, simple forward integration of motion to new position"
         self.time = self.time + timedelta(seconds=delta_t)
-        if TIME_FACTOR==1: self.time = datetime.utcnow()
+        if TIME_FACTOR == 1:
+            self.time = datetime.utcnow()
 
         if isfinite(self.rudder_angle):
             # rudder angle causes rate of turn, but proportional to speed
@@ -299,11 +184,11 @@ class Ship:
 
         if self.sailing:
             # boat speed from true wind from polar data
-            stw = self.polar.value(self.wind_angle_true, self.wind_speed_true)
+            stw = self._polar.value(self.wind_angle_true, self.wind_speed_true)
             b = 0.05  # delayed change
             self.speed_thr_water += b * (stw - self.speed_thr_water)
 
-            self.heel_angle = self.pheel.value(
+            self.heel_angle = self._pheel.value(
                 self.wind_angle_true, self.wind_speed_true
             )
             self.leeway = (
@@ -332,13 +217,6 @@ class Ship:
             (self.wind_dir_ground, self.wind_speed_ground),
         )
         self.wind_angle_app = to180(self.wind_dir_app - self.heading_true)
-
-        for s in self.ais_targets:
-            s.current_set = self.current_set
-            s.current_drift = self.current_drift
-            s.wind_dir_ground = self.wind_dir_ground
-            s.wind_speed_ground = self.wind_speed_ground
-            s.update(delta_t)
 
     def __str__(self):
         return "\n".join(
@@ -406,7 +284,7 @@ class Ship:
             f"SDDBT,,,{depth:.1f},M,,",  # below transducer
             f"SDDBS,,,{depth:.1f},M,,",  # below surface
             f"WIMWD,{wind_dir_true:.1f},T,,,{wind_speed_true:.1f},N,,",
-            #f"WIMWV,{wind_angle_true:.1f},T,{wind_speed_true:.1f},N,A",
+            # f"WIMWV,{wind_angle_true:.1f},T,{wind_speed_true:.1f},N,A",
             f"WIMWV,{wind_angle_app:.1f},R,{wind_speed_app:.1f},N,A",
             f"HCROT,{rot:.1f},A",
             f"RIRSA,{self.rudder_angle:.1f},A,,",
@@ -417,24 +295,6 @@ class Ship:
         sentences = [
             f"${s}*{nmea_crc(s):02X}" for s in sentences if s[2:5] in NMEA_FILTER
         ]
-
-        t = monotonic()
-        if "VDM" in NMEA_FILTER:
-          if (t - self.ais_time1) * TIME_FACTOR > AIS_INTERVAL:
-            self.ais_time1 = t
-            for s in self.ais_targets:
-                sentences += ais_1(s) if s.ais_class=="A" else ais_19(s)
-            for s in self.ais_atons:
-                sentences += ais_21(s)
-
-          if (t - self.ais_time2) * TIME_FACTOR > 6*AIS_INTERVAL:
-            self.ais_time2 = t
-            for s in self.ais_targets:
-                sentences += ais_5(s) if s.ais_class=="A" else []
-
-
-        self.nmea_count+=len(sentences)
-
 
         return "".join(f"{s}\n" for s in sentences)
 
@@ -484,10 +344,9 @@ class Ship:
 
 
 class Polar:
-    def __init__(self, filename):
-        with open(filename) as f:
-            self.data = json.load(f)
-        self.spl = None
+    def __init__(self, data):
+        self.data = data
+        self.spline = None
 
     def has_angle(self, upwind):
         return ("beat_angle" if upwind else "run_angle") in self.data
@@ -497,12 +356,12 @@ class Polar:
         return numpy.interp(tws, self.data["TWS"], angle)
 
     def value(self, twa, tws):
-        if not self.spl:
+        if not self.spline:
             val = "STW" if "STW" in self.data else "heel"
-            self.spl = scipy.interpolate.RectBivariateSpline(
+            self.spline = scipy.interpolate.RectBivariateSpline(
                 self.data["TWA"], self.data["TWS"], self.data[val]
             )
-        return max(0.0, float(self.spl(abs(twa), tws)))
+        return max(0.0, float(self.spline(abs(twa), tws)))
 
     def vmc_angle(self, twd, tws, brg, s=1):
         brg_twd = to180(brg - twd)  # BRG from wind
@@ -530,7 +389,7 @@ class Server:
 
         self.conns = []
 
-    def serve(self, ship):
+    def serve(self):
         try:
             rx, tx, er = select.select([self.server], [], [self.server], 0)
             # print("server", rx, tx, er)
@@ -631,7 +490,7 @@ def nmea_crc(senctence):
 def write(filename, data):
     with open(filename, "w") as f:
         # f.write(data)
-        json.dump(data, f)
+        json.dump(data, f, indent=2)
 
 
 def read(filename):
@@ -666,7 +525,7 @@ def decode_nmea(data):
                 o = 0 if m.group(1) == "RMB" else 1
                 brg = float(m.group(12))
                 xte = float(m.group(3 + o)) * (-1 if m.group(4 + o) == "L" else 1)
-                return brg,xte
+                return brg, xte
 
         except Exception as x:
             print(x, file=sys.stderr)
@@ -691,7 +550,7 @@ def ais_1(s):
     return ais_encode(
         msg_type=1,
         mmsi=s.mmsi,
-        second=s.time.second if TIME_FACTOR==1 else 60,
+        second=s.time.second if TIME_FACTOR == 1 else 60,
         lat=s.position[0],
         lon=s.position[1],
         course=s.course_over_ground,
@@ -723,7 +582,7 @@ def ais_19(s):
     return ais_encode(
         msg_type=19,
         mmsi=s.mmsi,
-        second=s.time.second if TIME_FACTOR==1 else 60,
+        second=s.time.second if TIME_FACTOR == 1 else 60,
         shipname=s.name,
         lat=s.position[0],
         lon=s.position[1],
@@ -749,9 +608,6 @@ def ais_21(data):
         off_position=False,
         virtual_aid=False,
     )
-
-
-
 
 
 if __name__ == "__main__":
