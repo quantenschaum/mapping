@@ -25,8 +25,8 @@ ENC_LAYERS=BOYLAT BOYCAR BOYISD BOYSAW BOYSPP BOYINB BCNLAT BCNCAR BCNISD BCNSAW
 ENC_LAYERS=NAVLNE RECTRC OFSPLF FERYRT FAIRWAY PIPSOL PIPARE CBLSUB CBLARE SLCONS
 
 waddenzee: s57attributes.csv s57objectclasses.csv
-	#rm -rf data/waddenzee data/waddenzee.gpkg
-	#cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
+	rm -rf data/waddenzee data/waddenzee.gpkg
+	cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
 	for F in $$(find data/waddenzee -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/waddenzee.gpkg $$F $(ENC_LAYERS) -skipfailures -append; done
 
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
