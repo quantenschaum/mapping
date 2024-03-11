@@ -4,7 +4,7 @@ globals:
     resampling_method: bilinear
   cache:
     link_single_color_images: true
-    meta_size: [ 4,4 ]
+    meta_size: [ 6,6 ]
     meta_buffer: 200
     bulk_meta_tiles: true
   tiles:
