@@ -62,7 +62,16 @@ sources:
 caches:
   bsh:
     sources: [ 'qgis2:BSH','qgis1:BSH','qgis:BSH' ]
-    #sources: [ 'qgis:BSH' ]
+    grids: [ GLOBAL_WEBMERCATOR ]
+    cache:
+      type: mbtiles
+  aton:
+    sources: [ 'qgis:nav0' ]
+    grids: [ GLOBAL_WEBMERCATOR ]
+    cache:
+      type: mbtiles
+  depth:
+    sources: [ 'qgis:hyd1,obs0' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles

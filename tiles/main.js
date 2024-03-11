@@ -171,11 +171,11 @@ document.addEventListener("DOMContentLoaded", () => {
       layers: '4_Approach,5_Harbour',
       attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
     }),
-    'Depth Contours':L.tileLayer('contours/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS ENC</a>, <a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
+    'Depth Contours':L.tileLayer('depth/{z}/{x}/{y}.png', {
+      attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
     }),
-    'Buoys and Beacons':L.tileLayer('seamarks/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979">RWS Buoys</a>, <a href="https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049">RWS Beacons</a>, <a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
+    'Buoys and Beacons':L.tileLayer('aton/{z}/{x}/{y}.png', {
+      attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
     }),
     'Vaarweg Markeringen':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
       layers:'vaarweg_markering_drijvend,vaarweg_markering_drijvend_detail,vaarweg_markering_vast,vaarweg_markering_vast_detail',

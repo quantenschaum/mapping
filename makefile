@@ -78,6 +78,16 @@ convert: cache_data/bsh.mbtiles
 	./tileconvert.py -yf $< qmap-de.sqlitedb -t "QMAP DE `date +%F`"
 	./tileconvert.py -ya $< tiles/enc/
 
+convert-aton: cache_data/aton.mbtiles
+	./tileconvert.py -yf $< aton-de.mbtiles -t "ATON DE `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="aids to navigation in german waters, north sea and baltic sea"
+	./tileconvert.py -yf $< aton-de.sqlitedb -t "ATON DE `date +%F`"
+	./tileconvert.py -ya $< tiles/aton/
+
+convert-depth: cache_data/depth.mbtiles
+	./tileconvert.py -yf $< depth-de.mbtiles -t "DEPTH DE `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="depth contours and obstructions in german waters, north sea and baltic sea"
+	./tileconvert.py -yf $< depth-de.sqlitedb -t "DEPTH DE `date +%F`"
+	./tileconvert.py -ya $< tiles/depth/
+
 clean-cache:
 	rm -rf cache_data
 
@@ -87,10 +97,12 @@ docker:
 upload:
 	touch tiles/.nobackup
 	cp -v marine.render.xml tiles/download/
-	cp -v qmap* tiles/download/ || true
+	cp -v qmap-de* aton-de* depth-de* tiles/download/ || true
 	rsync -hav tiles/ nas:mapping/tiles/ --stats $(O)
 
-
+vwm-update:
+	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
+	./update.py rws_buoys data/vwm/drijvend.json wad.osm
 
 
 
