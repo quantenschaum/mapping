@@ -1,14 +1,14 @@
 seeds:
   bsh-overview:
-    caches: [ bsh ]
+    caches: [ bsh,aton,depth ]
     levels: [ 7,8,9 ] # 7
     coverages: [ bsh-overview ]
   bsh-general:
-    caches: [ bsh ]
+    caches: [ bsh,aton,depth ]
     levels: [ 10 ] # 10
     coverages: [ bsh-general ]
   bsh-coastal:
-    caches: [ bsh ]
+    caches: [ bsh,aton,depth ]
     levels: [ 11,12 ] # 11
     coverages: [ bsh-coastal ]
   # for following levels also seed lower level because there are
@@ -16,15 +16,15 @@ seeds:
   # 2 zoom levels blow are underlayed in the mapproxy config
   # so, lower a lower level map is shown in the background
   bsh-approach:
-    caches: [ bsh ]
+    caches: [ bsh,aton,depth ]
     levels: [ 13,14,15 ] # 13
     coverages: [ bsh-approach ]
   bsh-harbour:
-    caches: [ bsh ]
+    caches: [ bsh,aton,depth ]
     levels: [ 13,14,15,16,17 ] # 15
     coverages: [ bsh-harbour ]
   bsh-berthing:
-    caches: [ bsh ]
+    caches: [ bsh,aton,depth ]
     levels: [ 13,14,15,16,17,18 ] # 16
     coverages: [ bsh-berthing ]
 
