@@ -88,6 +88,9 @@ convert-depth: cache_data/depth.mbtiles
 	./tileconvert.py -yf $< depth-de.sqlitedb -t "DEPTH DE `date +%F`"
 	./tileconvert.py -ya $< tiles/depth/
 
+%.gemf: %.mbtiles
+	data/chartconvert/convert_mbtiles.py tms $@ $<
+
 clean-cache:
 	rm -rf cache_data
 
