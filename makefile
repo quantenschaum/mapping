@@ -75,6 +75,16 @@ mapproxy:
 seed:
 	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
 
+clean-cache:
+	rm -rf cache_data
+
+docker:
+	docker-compose up -d
+
+docker-seed: docker
+	docker-compose exec qgis make seed
+	docker-compose down
+
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
 	./tileconvert.py -yf $< $@ -t "$(basename $@) de `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="german waters, north sea and baltic sea"
@@ -102,12 +112,6 @@ charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
          $(patsubst cache_data/%.mbtiles,tiles/%/,$(wildcard cache_data/*.mbtiles))
 	$(MAKE) gemf
 	touch charts/.nobackup
-
-clean-cache:
-	rm -rf cache_data
-
-docker:
-	docker-compose up -d
 
 upload:
 	touch tiles/.nobackup
