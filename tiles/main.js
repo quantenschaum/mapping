@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var overlays = {
     'Grid': grid,
-    'ENC':L.tileLayer.fallback('enc/{z}/{x}/{y}.png', {
+    'QMAP':L.tileLayer.fallback('qmap/{z}/{x}/{y}.png', {
       attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
     }),
     'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
     attribution: '<a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
   });
 
-  var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['ENC']];
+  var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP']];
 
   var isLocal=document.URL.startsWith('file') || document.URL.includes('localhost');
 

@@ -60,7 +60,7 @@ sources:
       srs: 'EPSG:4326'
 
 caches:
-  bsh:
+  qmap:
     sources: [ 'qgis2:BSH','qgis1:BSH','qgis:BSH' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
@@ -82,9 +82,9 @@ caches:
       type: mbtiles
 
 layers:
-  - name: bsh
-    title: BSH
-    sources: [ bsh ]
+  - name: qmap
+    title: QMap
+    sources: [ qmap ]
   - name: wad
     title: Waddenzee
     sources: [ wad ]

@@ -1,55 +1,55 @@
 seeds:
-  bsh-overview:
-    caches: [ bsh,aton,depth ]
+  overview:
+    caches: [ qmap,aton,depth ]
     levels: [ 7,8,9 ] # 7
-    coverages: [ bsh-overview ]
-  bsh-general:
-    caches: [ bsh,aton,depth ]
+    coverages: [ overview ]
+  general:
+    caches: [ qmap,aton,depth ]
     levels: [ 10 ] # 10
-    coverages: [ bsh-general ]
-  bsh-coastal:
-    caches: [ bsh,aton,depth ]
+    coverages: [ general ]
+  coastal:
+    caches: [ qmap,aton,depth ]
     levels: [ 11,12 ] # 11
-    coverages: [ bsh-coastal ]
+    coverages: [ coastal ]
   # for following levels also seed lower level because there are
   # "holes" in the coverage and allow 2 steps overzoom,
   # 2 zoom levels blow are underlayed in the mapproxy config
   # so, lower a lower level map is shown in the background
-  bsh-approach:
-    caches: [ bsh,aton,depth ]
+  approach:
+    caches: [ qmap,aton,depth ]
     levels: [ 13,14,15 ] # 13
-    coverages: [ bsh-approach ]
-  bsh-harbour:
-    caches: [ bsh,aton,depth ]
+    coverages: [ approach ]
+  harbour:
+    caches: [ qmap,aton,depth ]
     levels: [ 13,14,15,16,17 ] # 15
-    coverages: [ bsh-harbour ]
-  bsh-berthing:
-    caches: [ bsh,aton,depth ]
+    coverages: [ harbour ]
+  berthing:
+    caches: [ qmap,aton,depth ]
     levels: [ 13,14,15,16,17,18 ] # 16
-    coverages: [ bsh-berthing ]
+    coverages: [ berthing ]
 
 coverages:
-  bsh-overview:
+  overview:
     datasource: data/bsh/AidsAndServices.gpkg
     where: recind="Overview"
     srs: 'EPSG:4326'
-  bsh-general:
+  general:
     datasource: data/bsh/AidsAndServices.gpkg
     where: recind="General"
     srs: 'EPSG:4326'
-  bsh-coastal:
+  coastal:
     datasource: data/bsh/AidsAndServices.gpkg
     where: recind="Coastal"
     srs: 'EPSG:4326'
-  bsh-approach:
+  approach:
     datasource: data/bsh/AidsAndServices.gpkg
     where: recind="Approach"
     srs: 'EPSG:4326'
-  bsh-harbour:
+  harbour:
     datasource: data/bsh/AidsAndServices.gpkg
     where: recind="Harbour"
     srs: 'EPSG:4326'
-  bsh-berthing:
+  berthing:
     datasource: data/bsh/AidsAndServices.gpkg
     where: recind="Berthing"
     srs: 'EPSG:4326'

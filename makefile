@@ -5,7 +5,7 @@
 SHELL=/bin/bash
 OGR_OPTS=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON,UPDATES=APPLY" S57_CSV="$(PWD)"
 
-.PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm icons obf vwm bsh
+.PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm icons obf vwm bsh charts
 
 help:
 	cat README.md
@@ -21,13 +21,13 @@ vwm:
 %.csv:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
 
-ENC_LAYERS=BOYLAT BOYCAR BOYISD BOYSAW BOYSPP BOYINB BCNLAT BCNCAR BCNISD BCNSAW BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN OFSPLF SBDARE HRBFAC SMCFAC DEPARE DEPCNT SOUNDG M_COVR
-ENC_LAYERS=NAVLNE RECTRC OFSPLF FERYRT FAIRWAY PIPSOL PIPARE CBLSUB CBLARE SLCONS
+#ENC_LAYERS=BOYLAT BOYCAR BOYISD BOYSAW BOYSPP BOYINB BCNLAT BCNCAR BCNISD BCNSAW BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN OFSPLF SBDARE HRBFAC SMCFAC DEPARE DEPCNT SOUNDG M_COVR NAVLNE RECTRC OFSPLF FERYRT FAIRWAY PIPSOL PIPARE CBLSUB CBLARE SLCONS
 
 waddenzee: s57attributes.csv s57objectclasses.csv
-	rm -rf data/waddenzee data/waddenzee.gpkg
+	rm -rf data/waddenzee
 	cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
-	for F in $$(find data/waddenzee -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/waddenzee.gpkg $$F $(ENC_LAYERS) -skipfailures -append; done
+	for F in $$(find data/waddenzee -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/waddenzee_.gpkg $$F $(ENC_LAYERS) -skipfailures -append; done
+	mv data/waddenzee_.gpkg data/waddenzee.gpkg
 
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
@@ -51,7 +51,9 @@ waypoints:
 	mkdir -p data
 	wget https://faq.nvdev.de/api/assets/9attdq0jedc0w08w -O data/waypoints.gpx
 
-icons:
+icons: icons/gen
+
+icons/gen:
 	cd icons && ./genicons.py
 	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
 
@@ -73,23 +75,33 @@ mapproxy:
 seed:
 	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
 
-convert: cache_data/bsh.mbtiles
-	./tileconvert.py -yf $< qmap-de.mbtiles -t "QMAP DE `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="navigational chart of german waters, north sea and baltic sea"
-	./tileconvert.py -yf $< qmap-de.sqlitedb -t "QMAP DE `date +%F`"
-	./tileconvert.py -ya $< tiles/enc/
+charts/%.mbtiles: cache_data/%.mbtiles
+	mkdir -p charts
+	./tileconvert.py -yf $< $@ -t "$(basename $@) de `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="german waters, north sea and baltic sea"
 
-convert-aton: cache_data/aton.mbtiles
-	./tileconvert.py -yf $< aton-de.mbtiles -t "ATON DE `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="aids to navigation in german waters, north sea and baltic sea"
-	./tileconvert.py -yf $< aton-de.sqlitedb -t "ATON DE `date +%F`"
-	./tileconvert.py -ya $< tiles/aton/
+charts/%.sqlitedb: cache_data/%.mbtiles
+	mkdir -p charts
+	./tileconvert.py -yf $< $@ -t "$(basename $@) de `date +%F`"
 
-convert-depth: cache_data/depth.mbtiles
-	./tileconvert.py -yf $< depth-de.mbtiles -t "DEPTH DE `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="depth contours and obstructions in german waters, north sea and baltic sea"
-	./tileconvert.py -yf $< depth-de.sqlitedb -t "DEPTH DE `date +%F`"
-	./tileconvert.py -ya $< tiles/depth/
+tiles/%/: cache_data/%.mbtiles
+	./tileconvert.py -ya $< $@
 
-%.gemf: %.mbtiles
+data/chartconvert:
+	mkdir -p data
+	wget -O data/avnav.zip https://github.com/wellenvogel/avnav/archive/refs/heads/master.zip
+	cd data && unzip -n avnav.zip && mv avnav-master/chartconvert .
+	cd data && rm -r avnav.zip avnav-master
+
+%.gemf: %.mbtiles data/chartconvert
 	data/chartconvert/convert_mbtiles.py tms $@ $<
+
+gemf: $(patsubst %.mbtiles,%.gemf,$(wildcard charts/*.mbtiles))
+
+charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
+         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
+         $(patsubst cache_data/%.mbtiles,tiles/%/,$(wildcard cache_data/*.mbtiles))
+	$(MAKE) gemf
+	touch charts/.nobackup
 
 clean-cache:
 	rm -rf cache_data
@@ -99,9 +111,9 @@ docker:
 
 upload:
 	touch tiles/.nobackup
-	cp -v marine.render.xml tiles/download/
-	cp -v qmap-de* aton-de* depth-de* tiles/download/ || true
-	rsync -hav tiles/ nas:mapping/tiles/ --stats $(O)
+	rsync -htrlv tiles/ nas:mapping/tiles/ $(O)
+	cp -v marine.render.xml charts/
+	rsync -htrlP charts/ nas:mapping/tiles/download/ $(O)
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
