@@ -49,7 +49,9 @@ bsh:
 
 waypoints:
 	mkdir -p data
-	wget https://faq.nvdev.de/api/assets/9attdq0jedc0w08w -O data/waypoints.gpx
+	rm -rf data/Wegepunkte2024.gpx
+	wget -O data/waypoints.zip https://nvcharts.com/downloads/wegepunkte/2024/Wegepunkte2024_txt.zip
+	cd data && unzip -n waypoints.zip && rm waypoints.zip
 
 icons: icons/gen
 
