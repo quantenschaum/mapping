@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
       attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
     }),
     'Vaarweg Markeringen':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
-      layers:'vaarweg_markering_drijvend,vaarweg_markering_drijvend_detail,vaarweg_markering_vast,vaarweg_markering_vast_detail',
+      layers:'vaarweg_markering_drijvend,vaarweg_markering_vast',
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
