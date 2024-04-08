@@ -246,6 +246,12 @@ relation[contourarea=depth][areatype=999] {
   fill-color: white;
 }
 
+node["seamark:type"=pile] {
+	symbol-shape:	circle;
+	symbol-size: 6;
+	symbol-fill-color: black;
+}
+
 node["seamark:type"=light_float]::int1_buoy,
 node["seamark:type"=light_vessel]::int1_buoy,
 node["seamark:type"^=buoy]::int1_buoy,
@@ -504,8 +510,8 @@ node|z12-["seamark:radar_transponder:category"]::int1_radar_transponder {
   text-anchor-vertical: center;
   text-offset-x: 0;
   text-offset-y: 42;
-
 }
+
 node|z12-["seamark:radio_station:category"]::int1_radio_station {
 	symbol-shape:	circle;
 	symbol-size: 70;
