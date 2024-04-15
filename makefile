@@ -190,7 +190,7 @@ data/josm.jar:
 	wget -O $@ https://josm.openstreetmap.de/josm-tested.jar
 
 josm: data/josm.jar
-	java -jar $<
+	java --add-exports=java.base/sun.security.action=ALL-UNNAMED --add-exports=java.desktop/com.sun.imageio.plugins.jpeg=ALL-UNNAMED --add-exports=java.desktop/com.sun.imageio.spi=ALL-UNNAMED -jar $<
 
 
 data/omc:

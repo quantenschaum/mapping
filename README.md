@@ -1,4 +1,4 @@
-## TL;DR 
+## TL;DR
 
 :exclamation: This is still very work in progress!
 
@@ -23,6 +23,12 @@ This is based on a [post](https://www.sigterritoires.fr/index.php/affichage-des-
 - Buoys dataset: https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979
 - Beacons dataset: https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049
 
+There are several data sources by RWS, it's a bit confusing
+
+- https://nationaalgeoregister.nl/geonetwork/srv/dut/catalog.search#/metadata/be1b1514-8d1f-48e1-9624-fee9b784138c <-- most appropriate according to RWS
+- https://nationaalgeoregister.nl/geonetwork/srv/dut/catalog.search#/metadata/be1b1514-8d1f-48e1-9624-fee9b784138b
+-
+
 ## Map tiles
 
 I will describe my procedure to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile` and I use Linux.
@@ -33,9 +39,9 @@ I will describe my procedure to update the buoys in the Waddenzee. The necessary
 5. generate svg icons `make icons`
 6. open `map.qgs` with QGIS (`bsh.qgs` for BSH map) to view the map
 7. start a local map server with caching proxy `make -j qgis mapproxy serve`
-   - QGIS WMS at http://localhost:8000 
-   - MapProxy at http://localhost:8001 
-   - simple websever with LeafLet at http://localhost:8002
+    - QGIS WMS at http://localhost:8000
+    - MapProxy at http://localhost:8001
+    - simple websever with LeafLet at http://localhost:8002
 8. (run `make -j qgis seed` to precompute map tiles)
 
 To run QGIS and MapProxy in Docker do `make docker`.
@@ -49,8 +55,8 @@ This procedure should in principle work for other ENCs as well, you just have to
 QGIS comes with a [server component](https://docs.qgis.org/latest/en/docs/server_manual/), that provides among others a WMS server. So, you can run QGIS Server and create rendered tiles on demand as they are requested. Unfortunately this tile rendering is computationally expensive, so it would make much sense to cache the tiles. I use [MapProxy](https://mapproxy.org/) for tile caching, and it also provides [meta tiling](https://mapproxy.org/docs/latest/labeling.html#meta-tiles), which speeds up tile creation even more. To run QGIS server and MapProxy together, you can use the make and Docker files in this project.
 
 - `make serve` start Python based webserver to server generated tiles
-- `make qgis` starts QGIS server 
-- `make mapproxy` starts MapProxy for caching tiles from QGIS 
+- `make qgis` starts QGIS server
+- `make mapproxy` starts MapProxy for caching tiles from QGIS
 - `make docker` starts Docker container with QGIS and MapProxy
 - `make seed` seeds MapProxy cache
 
@@ -72,7 +78,8 @@ There are also differences in the positions of the objects. The ENC encodes the 
 
 The ENC provides much more information than the dedicated dataset (i.e. sector information for smaller lights like leading lights and light range data), but unfortunately it does contain some errors and the latter seems to be more reliable.
 
-I wrote a message to RWS and reported these differences. They answered that they currently do not have a system that transfers the data automatically from different data sources into the ENC. _The ENC is handmade!_
+I wrote a message to RWS and reported these differences. They answered that they currently do not have a system that transfers the data automatically from different data sources into the ENC.
+_The ENC is handmade!_
 
 ## Updating OSM data
 
@@ -93,7 +100,8 @@ To get the seamarks displayed correctly in JOSM and make it easier to edit them 
 - Plugin: SeaMapEditor
 - Tagging Preset: `https://github.com/OpenSeaMap/josm/raw/master/INT-1-preset.xml`
 
-For editing seamarks you may want to set a filter filtering on `seamark` and activate hide mode, such that _only_ seamarks are displayed to make it less confusing. Now you can update buoys and other seamarks by simply drawing them on top of the chart.
+For editing seamarks you may want to set a filter filtering on `seamark` and activate hide mode, such that
+_only_ seamarks are displayed to make it less confusing. Now you can update buoys and other seamarks by simply drawing them on top of the chart.
 
 ![JOSM](img/josm.png)
 
