@@ -76,7 +76,7 @@ caches:
     cache:
       type: mbtiles
   wad:
-    sources: [ 'rws:waddenzee' ]
+    sources: [ 'rws:enc,vwm' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles

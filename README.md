@@ -33,11 +33,11 @@ There are several data sources by RWS, it's a bit confusing
 
 I will describe my procedure to update the buoys in the Waddenzee. The necessary commands are stored in the `makefile` and I use Linux.
 
-1. download ENC from URL above and place the ZIP in a `data` subdir
-2. extract the ZIP and convert the ENCs `make waddenzee` (`make bsh` to download map data from the german BSH)
+1. download Waddenzee-ENC from URL above and place the ZIP in a `data` subdir
+2. extract the ZIP and convert the ENCs: `make waddenzee` (`make bsh` to download map data from the german BSH)
 4. download vaarwegmarkeringen from RWS `make vwm`
 5. generate svg icons `make icons`
-6. open `map.qgs` with QGIS (`bsh.qgs` for BSH map) to view the map
+6. open `rws.qgs` with QGIS (`bsh.qgs` for BSH map) to view the map
 7. start a local map server with caching proxy `make -j qgis mapproxy serve`
     - QGIS WMS at http://localhost:8000
     - MapProxy at http://localhost:8001

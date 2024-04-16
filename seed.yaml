@@ -27,6 +27,12 @@ seeds:
     caches: [ qmap,aton,depth ]
     levels: [ 13,14,15,16,17,18 ] # 16
     coverages: [ berthing ]
+  waddenzee:
+    caches: [ wad ]
+    levels:
+      from: 6
+      to: 16
+    coverages: [ waddenzee ]
 
 coverages:
   overview:
@@ -52,4 +58,8 @@ coverages:
   berthing:
     datasource: data/bsh/AidsAndServices.gpkg
     where: recind="Berthing"
+    srs: 'EPSG:4326'
+  waddenzee:
+    datasource: data/wad.gpkg
+    where: CATCOV=1
     srs: 'EPSG:4326'
