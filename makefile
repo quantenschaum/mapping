@@ -21,13 +21,14 @@ vwm:
 %.csv:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
 
-#ENC_LAYERS=BOYLAT BOYCAR BOYISD BOYSAW BOYSPP BOYINB BCNLAT BCNCAR BCNISD BCNSAW BCNSPP TOPMAR DAYMAR LIGHTS RTPBCN LNDMRK FOGSIG PILPNT UWTROC WRECKS OBSTRN OFSPLF SBDARE HRBFAC SMCFAC DEPARE DEPCNT SOUNDG M_COVR NAVLNE RECTRC OFSPLF FERYRT FAIRWAY PIPSOL PIPARE CBLSUB CBLARE SLCONS
-
 waddenzee: s57attributes.csv s57objectclasses.csv
 	rm -rf data/waddenzee
 	cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
-	for F in $$(find data/waddenzee -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/waddenzee_.gpkg $$F $(ENC_LAYERS) -skipfailures -append; done
+	for F in $$(find data/waddenzee -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/waddenzee_.gpkg $$F -skipfailures -append; done
 	mv data/waddenzee_.gpkg data/waddenzee.gpkg
+	rm -f data/wad.gpkg
+	for F in $$(find data/waddenzee -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/wad.gpkg $$F M_COVR -skipfailures -append; done
+
 
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
@@ -45,7 +46,7 @@ bsh:
 	for L in Hydrography Topography; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_2)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
 	#for F in data/bsh/*.json; do jq . $$F>data/bsh/tmp; mv data/bsh/tmp $$F; done
 	for F in $$(find data/bsh -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
-	for F in $$(find data/bsh -name "*.json"); do ogr2ogr data/bsh.gpkg $$F -append; done
+	#for F in $$(find data/bsh -name "*.json"); do ogr2ogr data/bsh.gpkg $$F -append; done
 
 waypoints:
 	mkdir -p data
@@ -117,9 +118,11 @@ charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
 
 upload:
 	touch tiles/.nobackup
-	rsync -htrlv tiles/ nas:mapping/tiles/ $(O)
+	chmod +rX -R tiles/
+	rsync -htrlpv tiles/ nas:mapping/tiles/ $(O)
 	cp -v marine.render.xml charts/
-	rsync -htrlP charts/ nas:mapping/tiles/download/ $(O)
+	chmod +rX -R charts/
+	rsync -htrlpP charts/ nas:mapping/tiles/download/ $(O)
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
