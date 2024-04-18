@@ -65,16 +65,6 @@ caches:
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
-  aton:
-    sources: [ 'qgis:nav0' ]
-    grids: [ GLOBAL_WEBMERCATOR ]
-    cache:
-      type: mbtiles
-  depth:
-    sources: [ 'qgis:hyd1,obs0' ]
-    grids: [ GLOBAL_WEBMERCATOR ]
-    cache:
-      type: mbtiles
   wad:
     sources: [ 'rws:enc,vwm' ]
     grids: [ GLOBAL_WEBMERCATOR ]

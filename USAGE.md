@@ -33,13 +33,16 @@ https://osmand.net/
 
 [OsmAnd](https://osmand.net/) is a very good map and navigation app for all kinds of activities. It features a boating profile where seamarks are displayed, and it is possible to include map tiles from other sources like sat imagery or custom tiles. It is pretty complex, you should [read the manual](https://osmand.net/docs/intro).
 
-_Consider paying for OsmAnd to support their amazing work!_ 
+_Consider paying for OsmAnd to support their amazing work!_
 
-You have to [download map data](https://osmand.net/docs/user/start-with/download-maps) for the regions you are interested it. These maps _already contain the seamarks_, but they are only displayed in the nav chart map style (boating profile). You may optionally download worldwide seamarks, too, which contains seamarks only, but worldwide, so the map shows seamarks also for regions where did not download the (detailed) map data for.
+You have to [download map data](https://osmand.net/docs/user/start-with/download-maps) for the regions you are interested it. These maps
+_already contain the
+seamarks_, but they are only displayed in the nav chart map style (boating profile). You may optionally download worldwide seamarks, too, which contains seamarks only, but worldwide, so the map shows seamarks also for regions where did not download the (detailed) map data for.
 
 Enable the boating [profile](https://osmand.net/docs/user/personal/profiles/) in the settings and also enable the [nautical charts](https://osmand.net/docs/user/plugins/nautical-charts) and [online maps](https://osmand.net/docs/user/plugins/online-map) extensions. When you switch to the boating profile the land areas are shown in sand colour and seamarks like buoys are displayed. You can [customize the map](https://osmand.net/docs/user/map/configure-map-menu) by tapping the boat icon in the top left corner.
 
-The map data is based on OSM and gets updated _monthly_, so the changes made to OSM data using JOSM will not show up immediately. You may enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live) to get the updates more quickly, but some features may show up multiple times (from map data, worldwide seamarks and the update).
+The map data is based on OSM and gets updated
+_monthly_, so the changes made to OSM data using JOSM will not show up immediately. You may enable [live updates](https://osmand.net/docs/user/personal/maps#osmand-live) to get the updates more quickly, but some features may show up multiple times (from map data, worldwide seamarks and the update).
 
 OSM contains two render engines, version 2 is OpenGL based, it's faster and not bound to fixed zoom levels, but it only shows all buoys if zoomed in very closely, and they are [off position](https://github.com/osmandapp/OsmAnd/issues/17413) as well (has been fixed but might not be available yet). I do prefer the old version 1 render engine.
 
@@ -47,8 +50,8 @@ OSM contains two render engines, version 2 is OpenGL based, it's faster and not 
 
 - enable [boating profile](https://osmand.net/docs/user/personal/profiles/)
 - enable [plugins](https://osmand.net/docs/user/plugins/)
-  - [nautical charts](https://osmand.net/docs/user/plugins/nautical-charts) 
-  - [online maps](https://osmand.net/docs/user/plugins/online-map) 
+    - [nautical charts](https://osmand.net/docs/user/plugins/nautical-charts)
+    - [online maps](https://osmand.net/docs/user/plugins/online-map)
 
 Now you should be able to see buoys and other seamarks on the chart depending on the zoom level.
 
@@ -61,15 +64,14 @@ Now you should be able to see buoys and other seamarks on the chart depending on
 
 To add the Waddenzee map as in the web service above to OsmAnd as [custom raster map](https://osmand.net/docs/user/map/raster-maps) just click these links below on your device with OsmAnd installed (SQLite storage recommended)
 
-- [Waddenzee with Depth Soundings](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/enc/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/enc/{0}/{1}/{2}.png`
-- [Waddenzee Buoys and Beacons only](http://osmand.net/add-tile-source?name=Waddenzee+Boeien&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/seamarks/{0}/{1}/{2}.png`
-- [Waddenzee Depth Contours only](http://osmand.net/add-tile-source?name=Waddenzee+Contours&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/contours/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/contours/{0}/{1}/{2}.png`
+- [Waddenzee](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/wad/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/wad/{0}/{1}/{2}.png`
+- [Germany](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/qmap/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/qmap/{0}/{1}/{2}.png`
 
 You may also want to use a satellite image overlay.
 
 - [World Imagery](http://osmand.net/add-tile-source?name=World+Imagery&min_zoom=2&max_zoom=20&url_template=https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{0}/{1}/{2}) (https://hub.arcgis.com/datasets/esri::world-imagery/about)
 - [LuchtfotoQuick23LR](http://osmand.net/add-tile-source?name=LuchtfotoQuick23LR&min_zoom=2&max_zoom=18&url_template=https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0?layer=2023_ortho25%26style=default%26tilematrixset=EPSG:3857%26Service=WMTS%26Request=GetTile%26Version=1.0.0%26Format=image%2Fjpg%26TileMatrix={0}%26TileCol={1}%26TileRow={2}) (https://www.pdok.nl/introductie/-/article/luchtfoto-pdok)
-- [LuchtfotoQuick23HR](http://osmand.net/add-tile-source?name=LuchtfotoQuick23HR&min_zoom=2&max_zoom=20&url_template=https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0?layer=2023_orthoHR%26style=default%26tilematrixset=EPSG:3857%26Service=WMTS%26Request=GetTile%26Version=1.0.0%26Format=image%2Fjpg%26TileMatrix={0}%26TileCol={1}%26TileRow={2}) 
+- [LuchtfotoQuick23HR](http://osmand.net/add-tile-source?name=LuchtfotoQuick23HR&min_zoom=2&max_zoom=20&url_template=https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0?layer=2023_orthoHR%26style=default%26tilematrixset=EPSG:3857%26Service=WMTS%26Request=GetTile%26Version=1.0.0%26Format=image%2Fjpg%26TileMatrix={0}%26TileCol={1}%26TileRow={2})
 
 Then you can use these maps as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer). You may want to [pre-download](https://osmand.net/docs/user/map/raster-maps#download--update-tiles) tiles for offline usage at sea. To get updated map tiles into OsmAnd you need to [clear the tile cache](https://osmand.net/docs/user/map/raster-maps/#clear-raster-map-cache) or set an expiration period, then new updated tiles are downloaded from the server (pre-download again for offline usage).
 
@@ -93,13 +95,13 @@ Below you seen an example of the nautical style that comes with OsmAnd, the mari
 
 #### Additional Settings
 
-The marine style has [additional settings](https://youtu.be/P7Xc7tvhwCw) available at the very bottom of the map configuration: 
+The marine style has [additional settings](https://youtu.be/P7Xc7tvhwCw) available at the very bottom of the map configuration:
 
-- fairway color 
+- fairway color
 - wetland color
-- shells style 
+- shells style
 
-You can choose different colorings to adjust the map to your liking, either light like a paper chart or with more contrast for situations in bright sunlight. 
+You can choose different colorings to adjust the map to your liking, either light like a paper chart or with more contrast for situations in bright sunlight.
 
 ![marine light](img/marine_light.png)
 ![marine dark](img/marine_dark.png)

@@ -174,12 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
       layers: '4_Approach,5_Harbour',
       attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
     }),
-    'Depth Contours':L.tileLayer('depth/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
-    }),
-    'Buoys and Beacons':L.tileLayer('aton/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
-    }),
     'Vaarweg Markeringen':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
       layers:'vaarweg_markering_drijvend,vaarweg_markering_vast',
       version:'1.3.0',
