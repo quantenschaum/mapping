@@ -3,19 +3,18 @@
 
 import json
 import os
-from os.path import isfile
-from datetime import datetime
+from functools import reduce
 from math import inf, isnan, log, pi, pow, sqrt, tan, isfinite
-import re
-import datetime
+from os.path import basename, splitext
+from os.path import isfile
+from sys import stderr
+
 import pendulum
 import requests
-from pyquery import PyQuery as pq
-from s57 import *
-from functools import reduce
-from os.path import basename, splitext
-from sys import stderr
 from lxml import etree
+from pyquery import PyQuery as pq
+
+from s57 import *
 
 dx = 0.01
 dy = dx
@@ -591,7 +590,7 @@ def update_node(n, tags, dmin=1):
     d = distance(ll, tags["ll"])
     if isnan(d) or d > dmin:
         n.attr["lat"], n.attr["lon"] = [str(x) for x in tags["ll"]]
-        modifications.append(("POS", tags["ll"], "" if isnan(d) else f"{round(d)}m"))
+        modifications.append(("POS", tags["ll"], 0 if isnan(d) else round(d)))
 
     fill_types(tags)
 
@@ -604,7 +603,7 @@ def update_node(n, tags, dmin=1):
                 if not v:
                     tag.remove()
                     modifications.append(("DEL", f"{k}={w}"))
-                elif w != v:
+                elif (not str_equals(w, v)) if k == "seamark:name" else w != v:
                     tag.attr["v"] = v
                     modifications.append(("MOD", f"{k}={v}", w))
             elif v:
@@ -803,6 +802,11 @@ def update_osm(
                     print(f"{'  'if j>1 else ''}{l}", end=" " if j == 0 else "\n")
                 if len(m) <= 4 and "seamark:lnam" in str(m):
                     continue
+                # if all(x not in str(m) for x in ("'POS'", "'MOD'")):
+                #     continue
+                # if all(x not in str(m) for x in ("'MOD'",)):
+                #     if m[3][0] == "POS" and m[3][2] < 30:
+                #         continue
                 requests.get(m[2])
                 input(f"  {i}/{len(modifications)}")
 

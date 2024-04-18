@@ -73,9 +73,11 @@ qgis: icons bsh1.qgs bsh2.qgs
 	QGIS_SERVER_PARALLEL_RENDERING=1 qgis_mapserver
 
 mapproxy:
+	mkdir -p cache_data && touch cache_data/.nobackup
 	mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001
 
 seed:
+	mkdir -p cache_data && touch cache_data/.nobackup
 	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
 
 clean-cache:
