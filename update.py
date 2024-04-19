@@ -38,7 +38,11 @@ def distance(a, b):
     return sqrt(sum([pow(a[i] - b[i], 2) for i in range(2)]))
 
 
-def in_usageband(f, bands=["Approach", "Harbour", "Berthing"]):
+ubands = ["Approach", "Harbour", "Berthing"]
+# ubands = ["Approach"]
+
+
+def in_usageband(f, bands=ubands):
     # https://www.nauticalcharts.noaa.gov/charts/rescheming-and-improving-electronic-navigational-charts.html
     if "id" in f:
         return any(b in f["id"] for b in bands)
