@@ -39,7 +39,7 @@ BSH_LAYERS_3=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
 BSH_BBOX=53.0,3.3,56.0,14.4
 
 bsh:
-	rm -rf data/bsh data/bsh.gpkg
+	rm -rf data/bsh #data/bsh.gpkg
 	mkdir -p data/bsh
 	for L in AidsAndServices SkinOfTheEarth; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_1)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
 	for L in RocksWrecksObstructions; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_3)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
