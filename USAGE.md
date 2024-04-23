@@ -64,8 +64,8 @@ Now you should be able to see buoys and other seamarks on the chart depending on
 
 To add the Waddenzee map as in the web service above to OsmAnd as [custom raster map](https://osmand.net/docs/user/map/raster-maps) just click these links below on your device with OsmAnd installed (SQLite storage recommended)
 
-- [Waddenzee](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/wad/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/wad/{0}/{1}/{2}.png`
-- [Germany](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/qmap/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/qmap/{0}/{1}/{2}.png`
+- [Waddenzee](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/wad/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/qmap-nl/{0}/{1}/{2}.png`
+- [Germany](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/qmap/{0}/{1}/{2}.png) `http://waddenzee.duckdns.org/qmap-de/{0}/{1}/{2}.png`
 
 You may also want to use a satellite image overlay.
 
