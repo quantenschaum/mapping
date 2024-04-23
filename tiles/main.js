@@ -48,10 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   var basemaps = {
-    'OpenStreetMap':L.tileLayer.grayscale('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    'OpenStreetMap':L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     //'OpenStreetMap':L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
       attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
-//      class:'grayscale'
+      class:'grayscale',
     }),
     'OsmAnd Nautical':L.tileLayer('https://maptile.osmand.net/tile/nautical/{z}/{x}/{y}.png', {
       attribution: '<a href="https://osmand.net/map">OsmAnd</a>'
@@ -215,13 +215,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var layers=L.control.layers(basemaps, overlays, {collapsed: true}).addTo(map);
 
-//  basemaps['OpenStreetMap'].getContainer().classList.add('grayscale');
-//  map.on('baselayerchange', function(evt) {
-//    //console.log(evt);
-//    if(evt.layer.options.class) {
-//      evt.layer.getContainer().classList.add(evt.layer.options.class);
-//    }
-//  });
+  basemaps['OpenStreetMap'].getContainer().classList.add('grayscale');
+  map.on('baselayerchange', function(evt) {
+    //console.log(evt);
+    if(evt.layer.options.class) {
+      evt.layer.getContainer().classList.add(evt.layer.options.class);
+    }
+  });
 
   function restoreActiveLayers(){
     var active=sessionStorage.getItem("activeLayers");
