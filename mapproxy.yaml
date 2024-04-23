@@ -60,21 +60,21 @@ sources:
       srs: 'EPSG:4326'
 
 caches:
-  qmap:
+  qmap-de:
     sources: [ 'qgis2:BSH','qgis1:BSH','qgis:BSH' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
-  wad:
+  qmap-nl:
     sources: [ 'rws:enc,vwm' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
 
 layers:
-  - name: qmap
-    title: QMap
-    sources: [ qmap ]
-  - name: wad
-    title: Waddenzee
-    sources: [ wad ]
+  - name: qmap-de
+    title: "QMap DE"
+    sources: [ qmap-de ]
+  - name: qmap-nl
+    title: "QMap NL"
+    sources: [ qmap-nl ]

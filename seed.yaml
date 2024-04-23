@@ -1,14 +1,14 @@
 seeds:
   overview:
-    caches: [ qmap ]
+    caches: [ qmap-de ]
     levels: [ 7,8,9 ] # 7
     coverages: [ overview ]
   general:
-    caches: [ qmap ]
+    caches: [ qmap-de ]
     levels: [ 10 ] # 10
     coverages: [ general ]
   coastal:
-    caches: [ qmap ]
+    caches: [ qmap-de ]
     levels: [ 11,12 ] # 11
     coverages: [ coastal ]
   # for following levels also seed lower level because there are
@@ -16,19 +16,19 @@ seeds:
   # 2 zoom levels blow are underlayed in the mapproxy config
   # so, lower a lower level map is shown in the background
   approach:
-    caches: [ qmap ]
+    caches: [ qmap-de ]
     levels: [ 13,14,15 ] # 13
     coverages: [ approach ]
   harbour:
-    caches: [ qmap ]
+    caches: [ qmap-de ]
     levels: [ 13,14,15,16,17 ] # 15
     coverages: [ harbour ]
   berthing:
-    caches: [ qmap ]
+    caches: [ qmap-de ]
     levels: [ 13,14,15,16,17,18 ] # 16
     coverages: [ berthing ]
   waddenzee:
-    caches: [ wad ]
+    caches: [ qmap-nl ]
     levels:
       from: 6
       to: 16

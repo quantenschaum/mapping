@@ -133,10 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var overlays = {
     'Grid': grid,
-    'QMAP DE':L.tileLayer.fallback('qmap/{z}/{x}/{y}.png', {
+    'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.png', {
       attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
     }),
-    'QMAP NL':L.tileLayer.fallback('wad/{z}/{x}/{y}.png', {
+    'QMAP NL':L.tileLayer.fallback('qmap-nl/{z}/{x}/{y}.png', {
       attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
     }),
     'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
@@ -201,15 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
   var isLocal=document.URL.startsWith('file') || document.URL.includes('localhost');
 
   if(isLocal) {
-    overlays['QGIS BSH'] = L.tileLayer('http://localhost:8001/tiles/bsh/EPSG3857/{z}/{x}/{y}.png');
-    //layers = [basemaps['OpenStreetMap ORG'], overlays['Grid'], overlays['QGIS BSH']];
-    overlays['QGIS BSH WMS'] = L.tileLayer.wms('http://localhost:8000', {
-      layers:'BSH',
-      version:'1.3.0',
-      transparent:'true',
-      tiled:'true',
-      format:'image/png',
-     });
+    overlays['QGIS'] = L.tileLayer('http://localhost:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png');
   }
 
 
