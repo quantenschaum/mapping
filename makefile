@@ -121,10 +121,10 @@ charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
 	chmod +rX -R $@
 
 upload:
-	touch tiles/.nobackup
-	rsync -htrlpv tiles/ nas:mapping/tiles/ $(O)
+	#rsync -htrlpv tiles/ nas:mapping/tiles/ $(O)
 	cp -v marine.render.xml charts/
-	rsync -htrlpP charts/ nas:mapping/tiles/download/ $(O)
+	cp -v charts/* tiles/download/
+	#rsync -htrlpP charts/ nas:mapping/tiles/download/ $(O)
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
