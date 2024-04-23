@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="BSH Germany" saveUser="al" saveDateTime="2024-04-23T12:23:09" version="3.28.10-Firenze" saveUserFull="Adam">
+<qgis projectname="BSH Germany" saveUser="al" saveDateTime="2024-04-23T12:32:18" version="3.28.10-Firenze" saveUserFull="Adam">
   <homePath path=""/>
   <title>BSH Germany</title>
   <transaction mode="Disabled"/>
@@ -157,10 +157,10 @@
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>908653.76141581730917096</xmin>
-      <ymin>7299491.53556420374661684</ymin>
-      <xmax>938328.94473682949319482</xmax>
-      <ymax>7330797.70199705380946398</ymax>
+      <xmin>956590.8194908972363919</xmin>
+      <ymin>7138878.35322221834212542</ymin>
+      <xmax>986266.00281190942041576</xmax>
+      <ymax>7170184.51965506840497255</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -13580,7 +13580,7 @@ def my_form_open(dialog, layer, feature):
                 <Option value="60" name="interval" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="interval_map_unit_scale" type="QString"/>
                 <Option value="MM" name="interval_unit" type="QString"/>
-                <Option value="0" name="offset" type="QString"/>
+                <Option value="2" name="offset" type="QString"/>
                 <Option value="20" name="offset_along_line" type="QString"/>
                 <Option value="3x:0,0,0,0,0,0" name="offset_along_line_map_unit_scale" type="QString"/>
                 <Option value="MM" name="offset_along_line_unit" type="QString"/>
@@ -32985,7 +32985,7 @@ concat(@ub,' ',@name,' [',@z0,'-',@z1,']')
   <Bookmarks/>
   <ProjectViewSettings rotation="0" UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent ymax="7330797.70199705380946398" ymin="7299491.53556420374661684" xmin="906762.68059151305351406" xmax="940220.02556113374885172">
+    <DefaultViewExtent ymax="7170184.51965506840497255" ymin="7138878.35322221834212542" xmin="954699.738666592980735" xmax="988157.08363621367607266">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
