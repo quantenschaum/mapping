@@ -92,14 +92,15 @@ docker-seed: docker
 
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	./tileconvert.py -yf $< $@ -t "$(basename $@) de `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="german waters, north sea and baltic sea"
+	./tileconvert.py -yf $< $@ -t "$(basename $(notdir $@)) de `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="german waters, north sea and baltic sea"
 
 charts/%.sqlitedb: cache_data/%.mbtiles
 	mkdir -p charts
-	./tileconvert.py -yf $< $@ -t "$(basename $@) de `date +%F`"
+	./tileconvert.py -yf $< $@ -t "$(basename $(notdir $@)) de `date +%F`"
 
 tiles/%/: cache_data/%.mbtiles
 	./tileconvert.py -ya $< $@
+	chmod +rX -R $@
 
 data/chartconvert:
 	mkdir -p data
@@ -117,13 +118,12 @@ charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
          $(patsubst cache_data/%.mbtiles,tiles/%/,$(wildcard cache_data/*.mbtiles))
 	$(MAKE) gemf
 	touch charts/.nobackup
+	chmod +rX -R $@
 
 upload:
 	touch tiles/.nobackup
-	chmod +rX -R tiles/
 	rsync -htrlpv tiles/ nas:mapping/tiles/ $(O)
 	cp -v marine.render.xml charts/
-	chmod +rX -R charts/
 	rsync -htrlpP charts/ nas:mapping/tiles/download/ $(O)
 
 vwm-update:
