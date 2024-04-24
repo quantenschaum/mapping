@@ -92,11 +92,11 @@ docker-seed: docker
 
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	./tileconvert.py -yf $< $@ -t "$(basename $(notdir $@)) de `date +%F`" -Mminzoom=7 -Mmaxzoom=18 -Mbounds=3.3,53.0,14.4,56.0 -Mversion=`date +%F` -Mattribution=https://github.com/quantenschaum/mapping -Mdescription="german waters, north sea and baltic sea"
+	./tileconvert.py -yf $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Mattribution=https://github.com/quantenschaum/mapping
 
 charts/%.sqlitedb: cache_data/%.mbtiles
 	mkdir -p charts
-	./tileconvert.py -yf $< $@ -t "$(basename $(notdir $@)) de `date +%F`"
+	./tileconvert.py -yf $< $@ -t "$(basename $(notdir $@)) `date +%F`"
 
 tiles/%/: cache_data/%.mbtiles
 	./tileconvert.py -ya $< $@
