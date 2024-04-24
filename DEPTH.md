@@ -1,6 +1,6 @@
 # Depth Data and Rendering
 
-see it in action: https://www.youtube.com/watch?v=TFhysaS7wj8 
+see it in action: https://www.youtube.com/watch?v=TFhysaS7wj8
 
 ## TL;DR - How to get good depth data in OsmAnd
 
@@ -20,12 +20,12 @@ The custom render styles offer some config option, which can be use to adjust th
 
 - [additional settings](USAGE.md#additional-settings)
 - hide
-  - spot soundings
-  - depth contours
-  - depth areas
+    - spot soundings
+    - depth contours
+    - depth areas
 - nautical depth
-  - line width
-  - line color scheme
+    - line width
+    - line color scheme
 - dashed depth contours
 - depth area color scheme
 - spot sounding size
@@ -49,7 +49,7 @@ The BSH provides access to nautical data in the [GeoSeaPortal](https://www.bsh.d
 - https://gdi.bsh.de/mapservice_gs/NAUTHIS_Hydrography/ows
 - https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows
 
- What is particularly nice is, that the data can be downloaded as `application/json;type=geojson`, so we can pull vector data from this server! You can download the entire dataset in one go.
+What is particularly nice is, that the data can be downloaded as `application/json;type=geojson`, so we can pull vector data from this server! You can download the entire dataset in one go.
 
 BTW: They also provide a [tidal current atlas](https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas) for free! In the webviewer you cannot select the time before/after HW, but if you use [QGIS](https://www.qgis.org/) as WMS client, you can explore the datasets and switch between different times.
 
@@ -78,16 +78,16 @@ I managed to create an OBF containing depth contours and spot soundings. The wor
 - filter the relevant rows
 - fix, dissolve, difference, merge as necessary
 - add fields (tags)
-  - spot soundings
-    - `point=depth`
-    - `depth=<DEPTH>`
-  - contour lines 
-    - `contour=depth`
-    - `depth=<DEPTH>`
-    - `contourtype=[5m,10m,20m,50m,100m,...]` (see below)
-  - contour areas 
-    - `contourarea=depth`
-    - `areatype=[0,2,5,10,999]` (see below)
+    - spot soundings
+        - `point=depth`
+        - `depth=<DEPTH>`
+    - contour lines
+        - `contour=depth`
+        - `depth=<DEPTH>`
+        - `contourtype=[5m,10m,20m,50m,100m,...]` (see below)
+    - contour areas
+        - `contourarea=depth`
+        - `areatype=[0,2,5,10,999]` (see below)
 - export layer as geopackage only containing the added columns
 - import into [JOSM](https://josm.openstreetmap.de/) via [OpenData](https://wiki.openstreetmap.org/wiki/JOSM/Plugins/OpenData) plugin
 - save as [OSM XML](https://wiki.openstreetmap.org/wiki/OSM_XML) file
@@ -107,32 +107,32 @@ There are 5 contour areas identified by tag `areatype`.
 
 ```
 areatype=
-if(drval2<=0,0,
-if(drval2<=2,2,
-if(drval2<=5.4,5,
-if(drval2<=10,10,
-999))))
+if(drval1>=10,10,
+if(drval1>=5,5,
+if(drval1>=2,2,
+if(drval1>=0,0,
+-1))))
 ```
 
 There are 15 types of contour lines identified by tag `contourtype`.
 
 - dedicated values (line of exactly this value)
-  - `0m` 
-  - `1m` 
-  - `2m` 
-  - `3m` 
-  - `4m` 
-  - `5m` 
-  - `10m`
-  - `20m`
-  - `50m`
+    - `0m`
+    - `1m`
+    - `2m`
+    - `3m`
+    - `4m`
+    - `5m`
+    - `10m`
+    - `20m`
+    - `50m`
 - intervals (value of line is multiple of this number)
-  - `-1` - drying heights
-  - `1` 
-  - `5`  
-  - `10` 
-  - `100m` - suffix `m` for compatibility with old rendering style 
-  - `1000m` - suffix `m` for compatibility with old rendering style 
+    - `-1` - drying heights
+    - `1`
+    - `5`
+    - `10`
+    - `100m` - suffix `m` for compatibility with old rendering style
+    - `1000m` - suffix `m` for compatibility with old rendering style
 
 ```
 contourtype=

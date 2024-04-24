@@ -207,19 +207,19 @@ way[contourarea=depth] {
   fill-opacity: 0.8;
   fill-color: lightblue;
 }
-way[contourarea=depth][areatype=0] {
+way[contourarea=depth][areatype=-1] {
   fill-color: #cceccd;
 }
-way[contourarea=depth][areatype=2] {
+way[contourarea=depth][areatype=0] {
   fill-color: #a8e6fd;
 }
-way[contourarea=depth][areatype=5] {
+way[contourarea=depth][areatype=2] {
   fill-color: #cceffc;
 }
-way[contourarea=depth][areatype=10] {
+way[contourarea=depth][areatype=5] {
   fill-color: #e6f7fd;
 }
-way[contourarea=depth][areatype=999] {
+way[contourarea=depth][areatype=10] {
   fill-color: white;
 }
 relation[contourarea=depth] {
@@ -230,19 +230,19 @@ relation[contourarea=depth] {
 relation[contourarea=depth] way {
   width: 0;
 }
-relation[contourarea=depth][areatype=0] {
+relation[contourarea=depth][areatype=-1] {
   fill-color: #cceccd;
 }
-relation[contourarea=depth][areatype=2] {
+relation[contourarea=depth][areatype=0] {
   fill-color: #a8e6fd;
 }
-relation[contourarea=depth][areatype=5] {
+relation[contourarea=depth][areatype=2] {
   fill-color: #cceffc;
 }
-relation[contourarea=depth][areatype=10] {
+relation[contourarea=depth][areatype=5] {
   fill-color: #e6f7fd;
 }
-relation[contourarea=depth][areatype=999] {
+relation[contourarea=depth][areatype=10] {
   fill-color: white;
 }
 
