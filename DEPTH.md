@@ -99,11 +99,11 @@ Terrible, no command line tools, but it works.
 
 There are 5 contour areas identified by tag `areatype`.
 
-- `0` - drying heights <0m (green)
-- `2` - shallow water <2m (dark blue)
-- `5` - shallow water <5m (blue)
-- `10` - water <10m (light blue)
-- `999` - deep water >10m (white)
+- `-1` - drying heights <0m (green)
+- `0` - shallow water >=0m (dark blue)
+- `2` - shallow water >=2m (blue)
+- `5` - water >=5m (light blue)
+- `10` - deep water >=10m (white)
 
 ```
 areatype=
