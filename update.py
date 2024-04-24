@@ -560,7 +560,6 @@ def load_marrekrite(gpx="marrekrite.gpx"):
         tags = {}
         tags["ll"] = wpt.latitude, wpt.longitude
         tags["seamark:name"] = wpt.name.split()[0]
-        # tags["seamark:source"] = "https://github.com/marcelrv/OpenCPN-Waypoints"
         tags["seamark:type"] = "mooring"
         if wpt.name.startswith("MB"):
             tags["seamark:mooring:category"] = "buoy"
@@ -619,7 +618,11 @@ def update_node(n, tags, dmin=1):
         for k in deprecated_tags:
             tag = n.find(f"tag[k='{k}']")
             if tag:
-                tag.remove()
+                if k == "seamark:source":
+                    if not tag.attr["v"].endswith("*"):
+                        tag.attr["v"] += " *"
+                else:
+                    tag.remove()
 
         ll = [float(n.attr[a]) for a in ("lat", "lon")]
         msg = (
