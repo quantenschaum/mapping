@@ -220,6 +220,8 @@ document.addEventListener("DOMContentLoaded", () => {
       showUnitControl: true,
   }).addTo(map);
 
+  L.control.opacity(overlays, {collapsed: true}).addTo(map);
+
   map.on('contextmenu',(e) => {
     var b=map.getBounds();
     L.popup()
