@@ -80,55 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
       format:'image/jpg',
       attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
-    'Luchtfoto 2022 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2022_ortho25',
-      version:'1.3.0',
-      transparent:'true',
-      format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
-    }),
-    'Luchtfoto 2021 8cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2021_orthoHR',
-      version:'1.3.0',
-      transparent:'true',
-      format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
-    }),
-    'Luchtfoto 2020 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2020_ortho25',
-      version:'1.3.0',
-      transparent:'true',
-      format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
-    }),
-    'Luchtfoto 2019 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2019_ortho25',
-      version:'1.3.0',
-      transparent:'true',
-      format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
-    }),
-    'Luchtfoto 2018 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2018_ortho25',
-      version:'1.3.0',
-      transparent:'true',
-      format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
-    }),
-    'Luchtfoto 2017 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2017_ortho25',
-      version:'1.3.0',
-      transparent:'true',
-      format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
-    }),
-    'Luchtfoto 2016 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2016_ortho25',
-      version:'1.3.0',
-      transparent:'true',
-      format:'image/jpg',
-      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
-    }),
   };
 
   var overlays = {
