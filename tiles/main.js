@@ -85,45 +85,45 @@ document.addEventListener("DOMContentLoaded", () => {
   var overlays = {
     'Grid': grid,
     'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
+      attribution: '<a href="https://github.com/quantenschaum/mapping">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
     }),
     'QMAP NL':L.tileLayer.fallback('qmap-nl/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://github.com/quantenschaum/mapping">quantenschaum</a>'
+      attribution: '<a href="https://github.com/quantenschaum/mapping">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
     }),
     'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
       layers: 'Coastal_Depth_area,Approach_Depth_area,Harbour_Depth_area',
-      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'BSH Hydro':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Hydrography/ows', {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
       layers: '4_Approach',
-      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'BSH NavAids':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows', {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
       layers: 'Coastal_Lights,Coastal_Lateral_Buoys,Coastal_Cardinal_Buoys,Coastal_All_Other_Buoys,Coastal_Lateral_Beacons,Coastal_Cardinal_Beacons,Coastal_All_Other_Beacons,Approach_Lights,Approach_Lateral_Buoys,Approach_Cardinal_Buoys,Approach_All_Other_Buoys,Approach_Lateral_Beacons,Approach_Cardinal_Beacons,Approach_All_Other_Beacons,Harbour_Lights,Harbour_Lateral_Buoys,Harbour_Cardinal_Buoys,Harbour_All_Other_Buoys,Harbour_Lateral_Beacons,Harbour_Cardinal_Beacons,Harbour_All_Other_Beacons,Berthing_Lights,Berthing_Lateral_Buoys,Berthing_Cardinal_Buoys,Berthing_All_Other_Buoys,Berthing_Lateral_Beacons,Berthing_Cardinal_Beacons,Berthing_All_Other_Beacons',
-      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'BSH Topo':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Topography/ows', {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
       layers: '4_Approach,5_Harbour',
-      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'BSH Obstr':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_RocksWrecksObstructions/ows', {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
       layers: '4_Approach,5_Harbour',
-      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'Vaarweg Markeringen':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
       layers:'vaarweg_markering_drijvend,vaarweg_markering_vast',
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var b=map.getBounds();
     L.popup()
     .setLatLng(e.latlng)
-    .setContent('<button id="b1" type="button">Edit in JOSM</button>')
+    .setContent('<button id="b1" type="button">Edit in JOSM</button><p>You need to have JOSM running and remote control enabled.</p>')
     .addTo(map)
     .openOn(map);
     $('#b1').click(function() {
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
       $.get('http://localhost:8111/imagery',{
         name:'Waddenzee',
         type:'tms',
-        url:'http://waddenzee.duckdns.org/{zoom}/{x}/{y}.png'
+        url:'http://waddenzee.duckdns.org/qmap-de/{zoom}/{x}/{y}.png'
       });
       $.get('http://localhost:8111/imagery',{
         name:'OpenStreetMap',
