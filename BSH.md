@@ -1,4 +1,4 @@
-# Nutzung von BSH-Daten 
+# Nutzung von BSH-Daten
 
 **Anfrage** 25.09.2023
 
@@ -45,7 +45,7 @@ genannten Bedingungen zustimmen.
 **Antwort** 28.09.2023
 
 vielen Dank für Ihre Anfrage und Ihr Interesse an unseren Daten! Wir freuen uns immer, offene Initiativen unterstützen zu können.
-Mit der von Ihnen gestellten Frage haben wir uns so explizit noch nicht beschäftigt. Mit Ihrem Anstoß werden wir uns nun beraten und eine Position für das BSH abstimmen. 
+Mit der von Ihnen gestellten Frage haben wir uns so explizit noch nicht beschäftigt. Mit Ihrem Anstoß werden wir uns nun beraten und eine Position für das BSH abstimmen.
 
 Hier bitte ich Sie um etwas Geduld, bis wir Ihnen das Ergebnis mitteilen können.
 
@@ -53,11 +53,11 @@ Vielen Dank für Ihr Verständnis!
 
 **Rückfrage** 06.12.2023
 
-Ich wolle noch einmal nachfragen, ob sie schon zu einem Ergebnis gekommen sind, das mir mitteilen können. 
+Ich wolle noch einmal nachfragen, ob sie schon zu einem Ergebnis gekommen sind, das mir mitteilen können.
 
 **Antwort** 06.12.2023
 
-wir beschäftigen uns mit dem Thema. Das Ergebnis wird voraussichtlich auch so sein wie beim DWD und der WSV. 
-Diese Entscheidung muss aber noch durch die Hausleitung bestätigt und dann öffentlich kommuniziert werden. Daran arbeiten wir, aber der Prozess braucht leider etwas Zeit. 
+wir beschäftigen uns mit dem Thema. **Das Ergebnis wird voraussichtlich auch so sein wie beim DWD und der WSV.**
+Diese Entscheidung muss aber noch durch die Hausleitung bestätigt und dann öffentlich kommuniziert werden. Daran arbeiten wir, aber der Prozess braucht leider etwas Zeit.
 
 Entschuldigen Sie bitte, dass wir Ihnen leider nicht schneller ein offizielles Ergebnis mitteilen können.
