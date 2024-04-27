@@ -3,7 +3,7 @@
 # https://www.teledynecaris.com/s-57/frames/S57catalog.htm
 
 SHELL=/bin/bash
-OGR_OPTS=OGR_S57_OPTIONS="RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON,UPDATES=APPLY" S57_CSV="$(PWD)"
+OGR_OPTS=OGR_S57_OPTIONS="LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON,UPDATES=APPLY" S57_CSV="$(PWD)"
 
 .PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm icons obf vwm bsh charts
 
@@ -21,13 +21,14 @@ vwm:
 %.csv:
 	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
 
-waddenzee: s57attributes.csv s57objectclasses.csv
-	rm -rf data/waddenzee
-	cd data && unzip *Waddenzee*.zip && mv *Waddenzee*/ waddenzee
-	for F in $$(find data/waddenzee -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/waddenzee_.gpkg $$F -skipfailures -append; done
-	mv data/waddenzee_.gpkg data/waddenzee.gpkg
-	rm -f data/wad.gpkg
-	for F in $$(find data/waddenzee -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/wad.gpkg $$F M_COVR -skipfailures -append; done
+%.zip:
+	wget -O data/$@ "`./rwsget.py $(basename $@)`"
+
+%.enc:
+	rm -rf data/$@ data/$(basename $@).gpkg data/$(basename $@)-covr.gpkg
+	unzip -j -n data/$(basename $@).zip -d data/$@
+	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@).gpkg $$F -skipfailures -append; done
+	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@)-covr.gpkg $$F M_COVR -skipfailures -append; done
 
 
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
@@ -121,23 +122,22 @@ charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
 	chmod +rX -R $@
 
 upload:
-	#rsync -htrlpv tiles/ nas:mapping/tiles/ $(O)
-	cp -v marine.render.xml charts/
+	cp -v marine.render.xml depthcontourlines.addon.render.xml charts/
 	cp -v charts/* tiles/download/
+	#rsync -htrlpv tiles/ nas:mapping/tiles/ $(O)
 	#rsync -htrlpP charts/ nas:mapping/tiles/download/ $(O)
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
 	./update.py rws_buoys data/vwm/drijvend.json wad.osm
 
-
-
-
-
-
-
-
-
+build:
+	git pull
+	$(MAKE) bsh
+	$(MAKE) bsh.obf && cp obf/bsh.obf tiles/download/qmap-de.obf
+	$(MAKE) lightsectors.obf && cp obf/lightsectors.obf tiles/download/
+	$(MAKE) vwm waddenzee.zip waddenzee.enc
+	$(MAKE) docker-seed charts upload
 
 
 
@@ -157,8 +157,7 @@ data/us:
 	for F in $@/*.zip; do unzip $$F -d $@; done
 
 us: data/us
-	$(MAKE) data/$@.sqlite
-	$(MAKE) data/$@.json
+	for F in $$(find $< -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/us.gpkg $$F -skipfailures -append; done
 
 
 
