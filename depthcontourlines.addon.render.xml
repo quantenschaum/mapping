@@ -109,7 +109,7 @@
             <case tag="contour" value="depth" order="15"/>
         </switch>
         <switch point="false" addPoint="true" objectType="3">
-            <case tag="contourarea" value="depth" order="5"/>
+            <case tag="contourarea" value="depth" order="4"/>
         </switch>
     </order>
 
