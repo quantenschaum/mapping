@@ -1,4 +1,5 @@
 index.html:
 
-%.html: %.md
-	pandoc -s $< -o $@ --metadata title="Download"
+%.html: %.md $(wildcard *)
+	./times.py $< >x$<
+	pandoc -s x$< -o $@ --metadata title="Download"
