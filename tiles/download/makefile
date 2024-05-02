@@ -1,4 +1,4 @@
 index.html:
 
 %.html: %.md
-	pandoc -s $< -o $@
+	pandoc -s $< -o $@ --metadata title="Download"
