@@ -19,7 +19,7 @@ def main():
       # filename="index.md"
       mtime=os.path.getmtime(filename)
       fsize=os.path.getsize(filename)
-      line=m.group(1)+f" ({datetime.datetime.fromtimestamp(mtime):%Y-%m-%d} {fsize/1e6:.1f}MB)"
+      line=m.group(1)+f" ({datetime.datetime.fromtimestamp(mtime):%Y-%m-%d}/{fsize/1e6:.1f}MB)"
     print(line)
 
 
