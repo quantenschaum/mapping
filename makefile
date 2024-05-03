@@ -49,6 +49,13 @@ bsh:
 	for F in $$(find data/bsh -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 	#for F in $$(find data/bsh -name "*.json"); do ogr2ogr data/bsh.gpkg $$F -append; done
 
+schutzzonen:
+	rm -rf data/$@
+	mkdir -p data/$@
+	cd data/$@ && ../../$@.py
+
+
+
 waypoints:
 	mkdir -p data
 	rm -rf data/Wegepunkte2024.gpx
@@ -80,6 +87,11 @@ mapproxy:
 seed:
 	mkdir -p cache_data && touch cache_data/.nobackup
 	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
+
+stop-all:
+	pkill qgis_mapserve || true
+	pkill mapproxy-util || true
+	pkill mapproxy-seed || true
 
 clean-cache:
 	rm -rf cache_data
@@ -175,20 +187,13 @@ tides:
 
 
 
+xmls: nautical.render.xml depthcontourlines.addon.render.xml rendering_types.xml
 
+%.render.xml:
+	wget -O $(subst .xml,.0.xml,$@) https://github.com/osmandapp/OsmAnd-resources/raw/master/rendering_styles/$@
 
-nautical.render.xml:
-	wget -O $@ https://github.com/osmandapp/OsmAnd-resources/raw/master/rendering_styles/$@
-
-rendering_types0.xml:
-	wget -O $@ https://github.com/osmandapp/OsmAnd-resources/raw/master/obf_creation/rendering_types.xml
-
-render.diff:
-	diff nautical.render.xml marine.render.xml -u >$@ || true
-
-marine.render.xml:
-	cp nautical.render.xml $@
-	patch $@ render.diff
+rendering_types.xml:
+	wget -O $(subst .xml,.0.xml,$@) https://github.com/osmandapp/OsmAnd-resources/raw/master/obf_creation/rendering_types.xml
 
 data/josm.jar:
 	wget -O $@ https://josm.openstreetmap.de/josm-tested.jar

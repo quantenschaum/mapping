@@ -559,3 +559,14 @@ way[natural=shoal][surface=sand]::shoal {
 	fill-color: orange;
 }
 
+way["seamark:type"=dumping_ground] {
+	color: black;
+    width: 2;
+    dashes: 6,3;
+}
+
+node["seamark:type"=anchor_berth] {
+	symbol-shape:	circle;
+	symbol-size: 8;
+	symbol-fill-color: #aa30b8;
+}
