@@ -50,11 +50,11 @@ bsh:
 	#for F in $$(find data/bsh -name "*.json"); do ogr2ogr data/bsh.gpkg $$F -append; done
 
 schutzzonen:
-	rm -rf data/$@
+	rm -rf data/$@ data/$@.gpkg
 	mkdir -p data/$@
 	cd data/$@ && ../../$@.py
-
-
+	cd data/ && for F in $@/*.zip; do unzip -n $$F -d $${F%.*}; ogr2ogr schutzzonen.gpkg $${F%.*} -append; rm -r $${F%.*}; done
+	cd data/ && for F in $@/*.json; do ogr2ogr schutzzonen.gpkg $$F -append; done
 
 waypoints:
 	mkdir -p data
