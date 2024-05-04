@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
-from pyquery import PyQuery as pq
-import requests, os
-from math import ceil
+import os
 from itertools import chain
-from sys import stderr
+from math import ceil
 from math import radians, degrees, sin, cos, tan, asin, atan2, atan, exp, log, pi
+from sys import stderr
+
+import requests
+from pyquery import PyQuery as pq
+
 from s57 import *
 
 
@@ -261,6 +264,7 @@ config_defaults = {
     "full": 19,
     "range0": 0,
     "leading": False,
+    "sector_data": False,
 }
 
 
@@ -278,6 +282,7 @@ def generate_sectors(infile, outfile, config={}):
     f_arc = config["f_arc"]
     range0 = config["range0"]
     leading = config["leading"]
+    add_sector_data = config["sector_data"]
 
     osm_objects = list(chain(osm("node"), osm("way")))
     N = len(osm_objects)
@@ -322,6 +327,14 @@ def generate_sectors(infile, outfile, config={}):
             set_tag("seamark:lnam", lnam, center)
         set_tag("seamark:light:character", merged_label, center)
         set_tag("seamark:light:colour", colors(sectors), center)
+
+        if add_sector_data:
+            for i,s in enumerate(sectors,0 if len(sectors)==1 else 1):
+                for k,v in s.items():
+                    # print(f"seamark:light:{i}:{k}","=",v)
+                    set_tag(f"seamark:light:{i}:{k}", v, center)
+
+
         out.append(center)
 
         lines = {}
@@ -399,7 +412,6 @@ def generate_sectors(infile, outfile, config={}):
 
 def main():
     from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
-    from types import MethodType
 
     parser = ArgumentParser(
         prog="light sector generator",
@@ -478,6 +490,12 @@ def main():
         "-l",
         "--leading",
         help="generate arcs and limits for single sector leading lights",
+        action="store_true",
+    )
+    parser.add_argument(
+        "-s",
+        "--sector-data",
+        help="add sector data to center node",
         action="store_true",
     )
 
