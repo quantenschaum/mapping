@@ -4,9 +4,13 @@
 
 Here you find precompiled charts for download in various formats usable in different applications.
 
+![qmap](qmap.png)
+
 ## [OsmAnd](https://osmand.net/)
 
 ### Vector Charts
+
+![OsmAnd](osmand.png)
 
 Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart".
 
