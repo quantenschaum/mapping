@@ -349,7 +349,9 @@ def load_bsh_lights(filename):
         if kind in f["id"].lower():
             ll = latlon(f)
             if str(ll) in other:
-                continue
+                # continue
+                if any(any(x in g["id"] for x in ("Buoy","Beac","Facil")) for g in other[str(ll)]):
+                    continue
             tags = {"ll": ll}
             add_tags(tags, f)
             assert smtype(tags).startswith(kind), (f, tags)
