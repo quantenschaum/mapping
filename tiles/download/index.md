@@ -1,6 +1,8 @@
 # Chart Files
 
-[Back to Chart](..)
+[<< Back to Chart](..)
+
+[This project on GitHub](https://github.com/quantenschaum/mapping)
 
 Here you find precompiled charts for download in various formats usable in different applications.
 
