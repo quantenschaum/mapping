@@ -28,7 +28,7 @@ To make full use of the data in these files in form of a [nautical chart](https:
 
 ![raster chart](raster.png)
 
-OsmAnd also allows the use of [raster charts](https://osmand.net/docs/user/map/raster-maps) via the [online maps plugin](https://osmand.net/docs/user/plugins/online-map/). The charts are imported by opening the `sqlitedb` files with the app. They can use them as base map or as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer).
+OsmAnd also allows the use of [raster charts](https://osmand.net/docs/user/map/raster-maps) via the [online maps plugin](https://osmand.net/docs/user/plugins/online-map/). The charts are imported by opening the `sqlitedb` files with the app. You can use them as base map or as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer).
 
 - [QMAP Germany](qmap-de.sqlitedb)
 - [QMAP Netherlands](qmap-nl.sqlitedb)
