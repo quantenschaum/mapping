@@ -565,8 +565,18 @@ way["seamark:type"=dumping_ground] {
     dashes: 6,3;
 }
 
-node["seamark:type"=anchor_berth] {
-	symbol-shape:	circle;
-	symbol-size: 8;
-	symbol-fill-color: #aa30b8;
+*["seamark:type"=restricted_area]:closed {
+	color: magenta;
+    width: 5;
+}
+*["seamark:restricted_area:category"*=reserve]:closed,
+*["seamark:restricted_area:category"*=sanctuary]:closed {
+	color: green;
+    width: 5;
+}
+*["seamark:restricted_area:restriction"*=no_entry]:closed {
+	fill-color: red;
+}
+*["seamark:restricted_area:restriction"*=restricted_entry]:closed {
+	fill-color: orange;
 }
