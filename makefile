@@ -134,8 +134,8 @@ charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
 	chmod +rX -R $@
 
 upload:
-	cp -v marine.render.xml depthcontourlines.addon.render.xml charts/
-	cp -v charts/* tiles/download/
+	cp -pv marine.render.xml depthcontourlines.addon.render.xml charts/
+	cp -pv charts/* tiles/download/
 	#rsync -htrlpv tiles/ nas:mapping/tiles/ $(O)
 	#rsync -htrlpP charts/ nas:mapping/tiles/download/ $(O)
 
@@ -146,10 +146,13 @@ vwm-update:
 build:
 	git pull
 	$(MAKE) bsh
-	$(MAKE) bsh.obf && cp obf/bsh.obf tiles/download/qmap-de.obf
-	$(MAKE) lightsectors.obf && cp obf/lightsectors.obf tiles/download/
+	$(MAKE) bsh.obf && cp -p obf/bsh.obf tiles/download/qmap-de.obf
+	$(MAKE) lightsectors.obf && cp -p obf/lightsectors.obf tiles/download/
 	$(MAKE) vwm waddenzee.zip waddenzee.enc
-	$(MAKE) docker-seed charts upload
+	$(MAKE) clean-cache
+	$(MAKE) docker-seed
+	$(MAKE) charts upload
+	cd tiles/download/ && $(MAKE)
 
 
 
