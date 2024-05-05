@@ -4,13 +4,11 @@
 
 Here you find precompiled charts for download in various formats usable in different applications.
 
-![qmap](qmap.png)
-
 ## [OsmAnd](https://osmand.net/)
 
 ### Vector Charts
 
-![OsmAnd](osmand.png)
+![vector chart](vector.png)
 
 Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart".
 
@@ -27,6 +25,8 @@ To make full use of the data in these files in form of a [nautical chart](https:
 - [Depth Data Rendering Style](depthcontourlines.addon.render.xml)
 
 ### Raster Charts
+
+![raster chart](raster.png)
 
 OsmAnd also allows the use of [raster charts](https://osmand.net/docs/user/map/raster-maps) via the [online maps plugin](https://osmand.net/docs/user/plugins/online-map/). The charts are imported by opening the `sqlitedb` files with the app. They can use them as base map or as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer).
 
