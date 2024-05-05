@@ -56,12 +56,18 @@ sources:
       transparent: true
       map: rws.qgs
     coverage:
-      bbox: [ 4.177551,52.598043,7.344360,54.165650 ] # http://bboxfinder.com/
+      datasource: data/waddenzee-covr.gpkg
+      where: CATCOV=1
       srs: 'EPSG:4326'
 
 caches:
   qmap-de:
     sources: [ 'qgis2:BSH','qgis1:BSH','qgis:BSH' ]
+    grids: [ GLOBAL_WEBMERCATOR ]
+    cache:
+      type: mbtiles
+  soundg-de:
+    sources: [ 'qgis:SOUNDG' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
@@ -75,6 +81,9 @@ layers:
   - name: qmap-de
     title: "QMap DE"
     sources: [ qmap-de ]
+  - name: soundg-de
+    title: "QMap Soundings DE"
+    sources: [ soundg-de ]
   - name: qmap-nl
     title: "QMap NL"
     sources: [ qmap-nl ]

@@ -60,6 +60,6 @@ coverages:
     where: recind="Berthing"
     srs: 'EPSG:4326'
   waddenzee:
-    datasource: data/wad.gpkg
+    datasource: data/waddenzee-covr.gpkg
     where: CATCOV=1
     srs: 'EPSG:4326'
