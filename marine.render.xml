@@ -3563,15 +3563,23 @@
                     <case additional="seamark:restricted_area:category=bird_sanctuary"/>
                     <case additional="seamark:restricted_area:category=fish_sanctuary"/>
                     <apply color_2="#99009933" shader="nr3"/>
-                    <apply_if additional="seamark:restricted_area:restriction=no_entry" shader="seamark_nr"/>
-                    <apply_if additional="seamark:restricted_area:restriction=restricted_entry" shader="nr2"/>
+                    <apply_if additional="seamark:restricted_area:restriction=no_entry" shader="seamark_nr">
+                        <apply_if nightMode="true" shader="seamark_nr_night"/>
+                    </apply_if>
+                    <apply_if additional="seamark:restricted_area:restriction=restricted_entry" shader="nr3">
+                        <apply_if nightMode="true" shader="nr3_night"/>
+                    </apply_if>
                 </switch>
                 <case additional="seamark:restricted_area:restriction=no_entry">
-                    <case additional="seamark:restricted_area:category=military" shader="hazard"/>
+                    <case additional="seamark:restricted_area:category=military" shader="hazard">
+                        <apply_if nightMode="true" shader="hazard_night"/>
+                    </case>
                     <case color="#15ff0000"/>
                 </case>
                 <case additional="seamark:restricted_area:restriction=restricted_entry">
-                    <case additional="seamark:restricted_area:category=military" shader="danger"/>
+                    <case additional="seamark:restricted_area:category=military" shader="danger">
+                        <apply_if nightMode="true" shader="danger_night"/>
+                    </case>
                     <case color="#15ffcc00"/>
                 </case>
                 <case color="#00ff00ff"/>
