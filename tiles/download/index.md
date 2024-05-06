@@ -55,15 +55,15 @@ The raster charts can be added to JOSM as [imagery layers](https://josm.openstre
 
 AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/avnav/docs/charts.html#chartformats) files. Simply drop the files into AvNav's `charts` folder.
 
-- [QMAP Germany](qmap-de.gemf)
-- [QMAP Netherlands](qmap-nl.gemf)
+- [QMAP DE](qmap-de.gemf)
+- [QMAP NL](qmap-nl.gemf)
 
 ## [OpenCPN](https://opencpn.org/)
 
 OpenCPN and other applications can display raster charts from `mbtiles`.
 
-- [QMAP Germany](qmap-de.mbtiles)
-- [QMAP Netherlands](qmap-nl.mbtiles)
+- [QMAP DE](qmap-de.mbtiles)
+- [QMAP NL](qmap-nl.mbtiles)
 
 ----
 
