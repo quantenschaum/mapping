@@ -41,8 +41,8 @@ OsmAnd also allows the use of [raster charts](https://osmand.net/docs/user/map/r
 
 The raster charts can also be added for [online usage](https://osmand.net/docs/user/plugins/online-map/), open the following [links](https://osmand.net/docs/user/map/raster-maps#magic-url-to-install-map-source) in OsmAnd to add them as map sources (`sqlitedb` format recommended) or [add them manually](https://osmand.net/docs/user/map/raster-maps#add-new-online-raster-map-source). This is useful for [downloading](https://osmand.net/docs/user/map/raster-maps/#download--update-tiles) only parts of the charts for offline usage.
 
-- QMAP DE online [`http://waddenzee.duckdns.org/qmap-de/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.png)
-- QMAP NL online [`http://waddenzee.duckdns.org/qmap-nl/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=Waddenzee&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.png)
+- QMAP DE online [`http://waddenzee.duckdns.org/qmap-de/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=QMAP DE&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.png)
+- QMAP NL online [`http://waddenzee.duckdns.org/qmap-nl/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=QMAP NL&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.png)
 
 ## [JOSM](https://josm.openstreetmap.de/)
 
