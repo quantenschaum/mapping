@@ -3725,7 +3725,7 @@
             </switch>
             <case tag="seamark:type" value="dumping_ground" color="00000000" color_2="#99000000"/>
             <case tag="seamark:type" value="restricted_area" color_2="#99ff0000">
-                <case color="#000000ff" minzoom="14"/>
+                <case color="#000000ff" minzoom="16"/>
                 <switch>
                     <case additional="seamark:restricted_area:category=nature_reserve"/>
                     <case additional="seamark:restricted_area:category=ecological_reserve"/>
