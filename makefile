@@ -219,18 +219,20 @@ mobac:
 	java -jar data/mobac/Mobile_Atlas_Creator.jar
 
 batch-0.xml: batch-all.xml
-	sed 's/mapZooms.*/mapZooms="6-9;10-11"/' batch-all.xml
+	sed 's/mapZooms.*/mapZooms="6-9;10-11"/' $< >$@
 
 batch-1.xml: batch-all.xml
-	sed 's/mapZooms.*/mapZooms="12-13"/' batch-all.xml
+	sed 's/mapZooms.*/mapZooms="12-13"/' $< >$@
 
 batch-2.xml: batch-all.xml
-	sed 's/mapZooms.*/mapZooms="14-15;16-"/' batch-all.xml
+	sed 's/mapZooms.*/mapZooms="14-15"/' $< >$@
 
+batch-3.xml: batch-all.xml
+	sed 's/mapZooms.*/mapZooms="16-"/' $< >$@
 
 BLEVEL=all
 
-obf: data/omc batch-0.xml batch-1.xml batch-2.xml
+obf: data/omc batch-$(BLEVEL).xml
 	mkdir -p $@
 	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch-$(BLEVEL).xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
@@ -249,7 +251,7 @@ qmap-de.obf: bsh.osm
 	data/omc/inspector.sh -c charts/qmap-de.obf obf/*.obf
 
 lightsectors.obf:
-	wget -O data/lights.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];( 	  nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:range"](if:t["seamark:light:range"]>=5); 	  nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:1:range"](if:t["seamark:light:1:range"]>=5);   	);(._;>;);out meta;'
+	wget -O data/lights.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];( 	  nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:range"]; 	  nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:1:range"];   	);(._;>;);out meta;'
 
 	rm -rf obf
 
@@ -258,16 +260,20 @@ lightsectors.obf:
 	#$(MAKE) obf
 
 	rm -rf osm && mkdir -p osm
-	./lightsectors.py data/lights.osm osm/lightsectors-0.osm -a 0.30 -f 1.6
+	./lightsectors.py data/lights.osm osm/lightsectors-0.osm -a 0.30 -f 1.6 -r 10
 	$(MAKE) obf BLEVEL=0
 
 	rm -rf osm && mkdir -p osm
-	./lightsectors.py data/lights.osm osm/lightsectors-1.osm -a 0.20 -f 0.8
+	./lightsectors.py data/lights.osm osm/lightsectors-1.osm -a 0.20 -f 0.8 -r 5
 	$(MAKE) obf BLEVEL=1
 
 	rm -rf osm && mkdir -p osm
-	./lightsectors.py data/lights.osm osm/lightsectors-2.osm -a 0.15 -f 0.4
+	./lightsectors.py data/lights.osm osm/lightsectors-2.osm -a 0.15 -f 0.4 -r 3
 	$(MAKE) obf BLEVEL=2
+
+	rm -rf osm && mkdir -p osm
+	./lightsectors.py data/lights.osm osm/lightsectors-3.osm -a 0.10 -f 0.2 -r 2
+	$(MAKE) obf BLEVEL=3
 
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/lightsectors.obf obf/*.obf
