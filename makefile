@@ -239,7 +239,7 @@ qmap-de.obf: bsh.osm
 	data/omc/inspector.sh -c charts/qmap-de.obf obf/*.obf
 
 lightsectors.obf:
-	wget -O data/lights.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];(  nwr[~"seamark:type"~"light"];  nwr["seamark:light:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:range"][~"seamark:type"~"beacon"];  nwr["seamark:light:1:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:1:range"][~"seamark:type"~"beacon"];);(._;>;);out meta;'
+	wget -O data/lights.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];( 	  nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:range"](if:t["seamark:light:range"]>=5); 	  nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:1:range"](if:t["seamark:light:1:range"]>=5);   	);(._;>;);out meta;'
 
 	rm -rf obf
 
