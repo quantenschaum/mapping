@@ -27,9 +27,9 @@ vwm:
 %.enc:
 	rm -rf data/$@ data/$(basename $@).gpkg data/$(basename $@)-covr.gpkg
 	unzip -j -n data/$(basename $@).zip -d data/$@
-	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@).gpkg $$F -skipfailures -append; done
+	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@).gpkg      $$F        -skipfailures -append; done
 	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@)-covr.gpkg $$F M_COVR -skipfailures -append; done
-
+	rm -rf data/$@
 
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
@@ -147,8 +147,8 @@ vwm-update:
 build:
 	git pull
 	$(MAKE) bsh
-	$(MAKE) bsh.obf && cp -p obf/bsh.obf tiles/download/qmap-de.obf
-	$(MAKE) lightsectors.obf && cp -p obf/lightsectors.obf tiles/download/
+	$(MAKE) bsh.obf
+	$(MAKE) lightsectors.obf
 	$(MAKE) vwm waddenzee.zip waddenzee.enc
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
@@ -218,32 +218,48 @@ mobac:
 	#java -Xms64m -Xmx1200M -jar data/mobac/Mobile_Atlas_Creator.jar
 	java -jar data/mobac/Mobile_Atlas_Creator.jar
 
+BLEVEL=all
+
 obf: data/omc
 	mkdir -p $@
-	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch.xml
+	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch-$(BLEVEL).xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
 	rm -f $@/*.log
 
-bsh.osm:
-	rm -rf osm
-	mkdir -p osm
+qmap-de.obf: bsh.osm
+	rm -rf osm && mkdir -p osm
 	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none osm/$$L.osm -a; done
 	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none osm/$$L.osm -a; done
 	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none osm/$$L.osm -a; done
 	for L in beacons facilities lights; do ./lightsectors.py osm/$$L.osm osm/$$L-sectors.osm; done
 
-bsh.obf: bsh.osm
 	rm -rf obf
 	$(MAKE) obf
-	data/omc/inspector.sh -c obf/bsh.obf obf/*.obf
+	mkdir -p charts
+	data/omc/inspector.sh -c charts/qmap-de.obf obf/*.obf
 
-lightsectors.osm:
-	rm -rf osm
-	mkdir -p osm
-	wget -O osm/lights.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];(  nwr[~"seamark:type"~"light"];  nwr["seamark:light:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:range"][~"seamark:type"~"beacon"];  nwr["seamark:light:1:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:1:range"][~"seamark:type"~"beacon"];);(._;>;);out meta;'
-	./lightsectors.py osm/lights.osm osm/$@
+lightsectors.obf:
+	wget -O data/lights.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];(  nwr[~"seamark:type"~"light"];  nwr["seamark:light:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:range"][~"seamark:type"~"beacon"];  nwr["seamark:light:1:range"][~"seamark:type"~"landmark"];  nwr["seamark:light:1:range"][~"seamark:type"~"beacon"];);(._;>;);out meta;'
 
-lightsectors.obf: lightsectors.osm
-	$(MAKE) obf
+	rm -rf obf
+
+	#rm -rf osm && mkdir -p osm
+	#./lightsectors.py data/lights.osm osm/$@
+	#$(MAKE) obf
+
+	rm -rf osm && mkdir -p osm
+	./lightsectors.py data/lights.osm osm/lightsectors-0.osm -a 0.30 -f 1.6
+	$(MAKE) obf BLEVEL=0
+
+	rm -rf osm && mkdir -p osm
+	./lightsectors.py data/lights.osm osm/lightsectors-1.osm -a 0.20 -f 0.8
+	$(MAKE) obf BLEVEL=1
+
+	rm -rf osm && mkdir -p osm
+	./lightsectors.py data/lights.osm osm/lightsectors-2.osm -a 0.15 -f 0.4
+	$(MAKE) obf BLEVEL=2
+
+	mkdir -p charts
+	data/omc/inspector.sh -c charts/lightsectors.obf obf/*.obf
 
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<batch_process>
+    <process_attributes
+            mapZooms="14-15;16-"
+            renderingTypesFile="rendering_types.xml"
+            zoomWaySmoothness="2"
+            osmDbDialect="sqlite"
+            mapDbDialect="sqlite"/>
+    <!-- https://wiki.openstreetmap.org/wiki/DE:OsmAndMapCreator -->
+    <process
+            directory_for_osm_files="osm"
+            directory_for_index_files="obf"
+            directory_for_generation="obf"
+            directory_for_srtm_files="obf"
+            skipExistingIndexesAt="obf"
+            indexMap="true"
+            indexRouting="false"
+            indexPOI="false"
+            indexAddress="false"
+            indexTransport="false"/>
+</batch_process>
