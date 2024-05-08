@@ -136,6 +136,7 @@ charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
 upload:
 	cp -pv marine.render.xml depthcontourlines.addon.render.xml charts/
 	cp -pv charts/* tiles/download/
+	cd tiles/download/ && $(MAKE)
 	#rsync -htrlpv tiles/ nas:mapping/tiles/ $(O)
 	#rsync -htrlpP charts/ nas:mapping/tiles/download/ $(O)
 
@@ -152,7 +153,6 @@ build:
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
 	$(MAKE) charts upload
-	cd tiles/download/ && $(MAKE)
 
 
 
