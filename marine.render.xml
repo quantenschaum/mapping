@@ -2,12 +2,10 @@
 <renderingStyle name="marine" depends="" defaultColor="#fddb8f" version="1.3">
     <!-- Version 1.3, 2023-05-07 adding nautical rendering for seamarks in INT-1 P, R, S sections Lights, Fog Signals, Radar -->
 
-    <!--	<renderingProperty attr="appMode" name="Rendering mode" description="Map optimization for respective User Profile"
-		type="string" possibleValues="browse map,car,bicycle,pedestrian"/>-->
+    <!--	<renderingProperty attr="appMode" name="Rendering mode" description="Map optimization for respective User Profile"	type="string" possibleValues="browse map,car,bicycle,pedestrian"/>-->
     <renderingProperty attr="noAdminboundaries" name="Hide boundaries" description="Suppress display of admin levels 5-9"
                        type="boolean" possibleValues="" category="hide"/>
-    <!--	<renderingProperty attr="noPolygons" name="Hide polygons" description="Make all areal land features on map transparent"
-		type="boolean" possibleValues="" category="hide"/>-->
+    <!--	<renderingProperty attr="noPolygons" name="Hide polygons" description="Make all areal land features on map transparent" type="boolean" possibleValues="" category="hide"/>-->
     <renderingProperty attr="whiteWaterSports" name="Whitewater sports" description="Whitewater sports"
                        type="boolean" possibleValues="" category="routes"/>
     <renderingProperty attr="lightDetail" name="Light detail"
@@ -232,6 +230,106 @@
         </switch>
         <case attrColorValue="#511db8"/>
     </renderingAttribute>
+
+    <!-- depthcontourslines -->
+    <renderingProperty attr="depthContours" name="Depth contours" description="Show depth contours and points" type="boolean" possibleValues="" category="details"/>
+    <renderingProperty attr="hideSpots" name="Spot Soundings" description="" type="boolean" possibleValues="" category="hide"/>
+    <renderingProperty attr="hideContours" name="Depth Contours" description="" type="boolean" possibleValues="" category="hide"/>
+    <renderingProperty attr="hideMinorContours" name="Minor Depth Contours" description="" type="boolean" possibleValues="" category="hide"/>
+    <renderingProperty attr="hideAreas" name="Depth Areas" description="" type="boolean" possibleValues="" category="hide"/>
+
+    <renderingProperty attr="depthContourWidth" name="Line Width" description="Depth contour lines width" type="string" possibleValues="thin,medium,thick" defaultValueDescription="default"/>
+
+    <renderingProperty attr="depthContoursDashed" name="Dashed Depth Contours" description="" type="boolean" possibleValues="" defaultValueDescription=""/>
+
+    <renderingProperty attr="depthContourColorScheme" name="Color Scheme" description="Depth contour lines color scheme" type="string" possibleValues="default,black,gray" defaultValueDescription="default"/>
+
+    <renderingProperty attr="depthAreaColorScheme" name="Depth Area Color Scheme" description="Depth area color scheme" type="string" possibleValues="ECDIS" defaultValueDescription="paper"/>
+
+    <renderingProperty attr="spotSize" name="Spot Sounding Size" description="" type="string" possibleValues="10,12,14,16" defaultValueDescription="default"/>
+
+    <renderingProperty attr="spotDistance" name="Spot Sounding Distance" description="" type="string" possibleValues="0,5,10,15,30,60,120" defaultValueDescription="default"/>
+
+    <renderingProperty attr="safetyContour" name="Safety Depth Contour" description="" type="string" possibleValues="0m,1m,2m,3m,4m,5m,10m" defaultValueDescription="off"/>
+
+    <renderingAttribute name="color0">
+        <case depthContourColorScheme="gray" attrColorValue="#aa888888"/>
+        <case attrColorValue="#cc000000">
+            <case nightMode="true" attrColorValue="#ccaaaaaa"/>
+        </case>
+    </renderingAttribute>
+
+    <renderingAttribute name="color1">
+        <case depthContourColorScheme="gray" attrColorValue="#aa888888"/>
+        <case depthContourColorScheme="black" attrColorValue="#cc000000">
+            <case nightMode="true" attrColorValue="#ccaaaaaa"/>
+        </case>
+        <case attrColorValue="#cc18992c"/>
+    </renderingAttribute>
+
+    <renderingAttribute name="color2a">
+        <case depthContourColorScheme="gray" attrColorValue="#aa888888"/>
+        <case depthContourColorScheme="black" attrColorValue="#cc000000">
+            <case nightMode="true" attrColorValue="#ccaaaaaa"/>
+        </case>
+        <case attrColorValue="#cc118ac2"/>
+    </renderingAttribute>
+
+    <renderingAttribute name="color2b">
+        <case depthContourColorScheme="gray" attrColorValue="#88888888"/>
+        <case depthContourColorScheme="black" attrColorValue="#88000000">
+            <case nightMode="true" attrColorValue="#88aaaaaa"/>
+        </case>
+        <case attrColorValue="#88118ac2"/>
+    </renderingAttribute>
+
+    <renderingAttribute name="depthTextColor">
+        <case nightMode="true" attrColorValue="#aaaaaaaa"/>
+        <case attrColorValue="#333333"/>
+    </renderingAttribute>
+
+    <renderingAttribute name="safetyLineType">
+        <case safetyContour="0m" attrStringValue="contourtype=0m"/>
+        <case safetyContour="1m" attrStringValue="contourtype=1m"/>
+        <case safetyContour="2m" attrStringValue="contourtype=2m"/>
+        <case safetyContour="3m" attrStringValue="contourtype=3m"/>
+        <case safetyContour="4m" attrStringValue="contourtype=4m"/>
+        <case safetyContour="5m" attrStringValue="contourtype=5m"/>
+        <case safetyContour="10m" attrStringValue="contourtype=10m"/>
+        <case attrStringValue="contourtype=x"/>
+    </renderingAttribute>
+
+    <renderingAttribute name="safetyAreaType0">
+        <case safetyContour="0m" attrStringValue="areatype=-1"/>
+        <case safetyContour="1m" attrStringValue="areatype=-1"/>
+        <case safetyContour="2m" attrStringValue="areatype=-1"/>
+        <case safetyContour="3m" attrStringValue="areatype=-1"/>
+        <case safetyContour="4m" attrStringValue="areatype=-1"/>
+        <case safetyContour="5m" attrStringValue="areatype=-1"/>
+        <case safetyContour="10m" attrStringValue="areatype=-1"/>
+        <case attrStringValue="areatype=x"/>
+    </renderingAttribute>
+
+    <renderingAttribute name="safetyAreaType2">
+        <case safetyContour="2m" attrStringValue="areatype=0"/>
+        <case safetyContour="3m" attrStringValue="areatype=0"/>
+        <case safetyContour="4m" attrStringValue="areatype=0"/>
+        <case safetyContour="5m" attrStringValue="areatype=0"/>
+        <case safetyContour="10m" attrStringValue="areatype=0"/>
+        <case attrStringValue="areatype=x"/>
+    </renderingAttribute>
+
+    <renderingAttribute name="safetyAreaType5">
+        <case safetyContour="5m" attrStringValue="areatype=2"/>
+        <case safetyContour="10m" attrStringValue="areatype=2"/>
+        <case attrStringValue="areatype=x"/>
+    </renderingAttribute>
+
+    <renderingAttribute name="safetyAreaType10">
+        <case safetyContour="10m" attrStringValue="areatype=5"/>
+        <case attrStringValue="areatype=x"/>
+    </renderingAttribute>
+    <!-- depthcontourslines -->
 
     <renderingAttribute name="boundaryColorInner">
         <case attrColorValue="#35ffffff">
@@ -541,6 +639,14 @@
     </renderingAttribute>
 
     <order>
+        <!-- depthcontourslines -->
+        <switch area="false" objectType="2" order="80">
+            <case tag="contour" value="depth" order="15"/>
+        </switch>
+        <switch point="false" addPoint="true" objectType="3">
+            <case tag="contourarea" value="depth" order="4"/>
+        </switch>
+        <!-- depthcontourslines -->
         <!-- Point -->
         <switch area="false" point="true" objectType="1" order="128">
             <case tag="" value=""/>
@@ -926,6 +1032,30 @@
 
 
     <text>
+        <!-- depthcontourslines -->
+        <!-- contour line labels -->
+        <case minzoom="6" depthContours="true" tag="contour" value="depth" textColor="$depthTextColor" textOnPath="true" textSize="14" textMinDistance="30">
+            <apply_if spotSize="10" textSize="10"/>
+            <apply_if spotSize="12" textSize="12"/>
+            <apply_if spotSize="14" textSize="14"/>
+            <apply_if spotSize="16" textSize="16"/>
+        </case>
+
+        <!-- spot soundings -->
+        <case minzoom="6" depthContours="true" hideSpots="false" tag="point" value="depth" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="30">
+            <apply_if spotSize="10" textSize="10"/>
+            <apply_if spotSize="12" textSize="12"/>
+            <apply_if spotSize="14" textSize="14"/>
+            <apply_if spotSize="16" textSize="16"/>
+            <apply_if spotDistance="0" intersectionMargin="0"/>
+            <apply_if spotDistance="5" intersectionMargin="5"/>
+            <apply_if spotDistance="10" intersectionMargin="10"/>
+            <apply_if spotDistance="15" intersectionMargin="15"/>
+            <apply_if spotDistance="30" intersectionMargin="30"/>
+            <apply_if spotDistance="60" intersectionMargin="60"/>
+            <apply_if spotDistance="120" intersectionMargin="120"/>
+        </case>
+        <!-- depthcontourslines -->
         <!--    <case minzoom="10" tag="seamark:type" value="sea_area" additional="seamark:sea_area:category=shoal" textColor="$depthTextColor" textOnPath="true" textSize="12" textMinDistance="100"/>-->
         <case minzoom="11" tag="osmand" value="file_waypoint"> <!-- for new OpenGL engine -->
             <case additional="file_has_waypoints=true" textWrapWidth="25" textHaloRadius=":1" textColor="#000000"
@@ -1522,12 +1652,12 @@
 				aiming at OSMAND text display according to IHO Chart INT-1 Section P: Lights and Section R Fog Signals, e.g. https://map.openseamap.org/?zoom=15&lon=4.79&lat=53.00 .
 				An appropriate graphical display of sector lights with coloured circle sections requires further development of code in OSMAND. Feedback welcome: josail @ gmx.de -->
 
-                <switch minzoom="12" additional="depth:exposition=shoaler" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth">
+                <switch minzoom="12" additional="depth:exposition=shoaler" textColor="$depthTextColor" textSize="14" textBold="true" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth">
                     <case tag="seamark:type" value="rock"/>
                     <case tag="seamark:type" value="wreck" textDy="-10"/>
                     <apply_if additional="seamark:lnam" textOrder="20"/>
                 </switch>
-                <switch minzoom="13" textColor="$depthTextColor" textSize="14" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth">
+                <switch minzoom="13" textColor="$depthTextColor" textSize="14" textItalic="true" textOrder="128" intersectionMargin="10" textDy="-12" nameTag2="depth">
                     <case tag="seamark:type" value="rock"/>
                     <case tag="seamark:type" value="wreck" textDy="-10"/>
                     <apply_if additional="seamark:lnam" textOrder="25"/>
@@ -3523,6 +3653,45 @@
 
 
     <polygon>
+        <!-- depthcontourslines -->
+        <switch minzoom="10" depthContours="true" hideAreas="false" tag="contourarea" value="depth">
+            <case depthAreaColorScheme="ECDIS">
+                <case nightMode="true">
+                    <case additional="areatype=-1" color="#456157"/>
+                    <case additional="areatype=0" color="#3D527C"/>
+                    <case additional="areatype=2" color="#364559"/>
+                    <case additional="areatype=5" color="#212B30"/>
+                    <case additional="areatype=10" color="#0A0A0A"/>
+                </case>
+                <case additional="areatype=-1" color="#709C90"/>
+                <case additional="areatype=0" color="#78A6F7"/>
+                <case additional="areatype=2" color="#90B8F5"/>
+                <case additional="areatype=5" color="#A8C7E6"/>
+                <case additional="areatype=10" color="#C2D9E8"/>
+            </case>
+            <case nightMode="true">
+                <case additional="areatype=-1" color="#285c29"/>
+                <case additional="areatype=0" color="#1a71c1"/>
+                <case additional="areatype=2" color="#1462ac"/>
+                <case additional="areatype=5" color="#0f5698"/>
+                <case additional="areatype=10" color="#0b4c8a"/>
+            </case>
+            <case additional="areatype=-1" color="#cceccd"/>
+            <case additional="areatype=0" color="#a8e6fd"/>
+            <case additional="areatype=2" color="#cceffc"/>
+            <case additional="areatype=5" color="#e6f7fd"/>
+            <case additional="areatype=10" color="#ffffff"/>
+            <apply>
+                <switch shader="hazard">
+                    <apply_if nightMode="true" shader="hazard_night"/>
+                    <case additional="$safetyAreaType0"/>
+                    <case additional="$safetyAreaType2"/>
+                    <case additional="$safetyAreaType5"/>
+                    <case additional="$safetyAreaType10"/>
+                </switch>
+            </apply>
+        </switch>
+        <!-- depthcontourslines -->
         <switch minzoom="10">
             <case tag="seamark:type" value="separation_zone"/>
             <case tag="seamark:type" value="separation_roundabout"/>
@@ -3889,6 +4058,44 @@
 
 
     <line>
+        <!-- depthcontourslines -->
+        <switch depthContours="true" hideContours="false" tag="contour" value="depth" strokeWidth="1">
+            <case minzoom="10" additional="$safetyLineType" color="#d40b44"/>
+
+            <!-- intervals -->
+            <case minzoom="11" additional="contourtype=10" color="$color2b" hideMinorContours="false"/>
+            <case minzoom="12" additional="contourtype=5" color="$color2b" hideMinorContours="false"/>
+            <case minzoom="14" additional="contourtype=1" color="$color2b" hideMinorContours="false"/>
+            <case minzoom="13" additional="contourtype=-1" color="$color1" hideMinorContours="false"/>
+            <!-- for compatibility 100,1000 intervals have suffix m -->
+            <case minzoom="7" additional="contourtype=100m" color="$color2a"/>
+            <case minzoom="6" additional="contourtype=1000m" color="$color2a"/>
+            <!-- dedicated contours, usable as safety contour -->
+            <case minzoom="10" additional="contourtype=0m" color="$color0"/>
+            <case minzoom="13" additional="contourtype=1m" color="$color2b" hideMinorContours="false"/>
+            <case minzoom="12" additional="contourtype=2m" color="$color2a"/>
+            <case minzoom="13" additional="contourtype=3m" color="$color2b" hideMinorContours="false"/>
+            <case minzoom="14" additional="contourtype=4m" color="$color2b" hideMinorContours="false"/>
+            <case minzoom="11" additional="contourtype=5m" color="$color2a"/>
+            <case minzoom="8" additional="contourtype=10m" color="$color2a"/>
+            <case minzoom="10" additional="contourtype=20m" color="$color2a" hideMinorContours="false"/>
+            <case minzoom="9" additional="contourtype=50m" color="$color2a" hideMinorContours="false"/>
+
+            <case minzoom="14" color="$color2a" hideMinorContours="false"/>
+
+            <apply_if depthContoursDashed="true">
+                <apply additional="contourtype=1m" pathEffect="15_3_2_3"/>
+                <apply additional="contourtype=2m" pathEffect="15_3_2_3_2_3"/>
+                <apply additional="contourtype=3m" pathEffect="15_3_2_3_2_3_2_3"/>
+                <apply additional="contourtype=4m" pathEffect="15_3_2_3_2_3_2_3_2_3"/>
+                <apply additional="contourtype=5m" pathEffect="2_2"/>
+                <apply additional="contourtype=10m" pathEffect="10_3"/>
+            </apply_if>
+
+            <apply_if depthContourWidth="thin" strokeWidth="0.6"/>
+            <apply_if depthContourWidth="thick" strokeWidth="1.5"/>
+        </switch>
+        <!-- depthcontourslines -->
         <switch minzoom="10" hideLightSectors="false" strokeWidth="0.8" pathEffect="2_2" color="#dd666666">
             <case tag="lightsector" value="limit"/>
             <case tag="lightsector" value="orientation" pathEffect="6_3" color_2="#88800080" strokeWidth_2="6">
