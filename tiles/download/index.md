@@ -24,7 +24,7 @@ To make full use of the data in these files in form of a [nautical chart](https:
 - use the [boating profile](https://osmand.net/docs/user/personal/profiles/),
 - enable the display of [nautical depth](https://osmand.net/docs/user/plugins/nautical-charts#depth-contours),
 - **install and activate** the `marine` [rendering styles](https://osmand.net/docs/user/map/vector-maps).
-    - [Marine Rendering Style](marine.render.xml)
+- [Marine Rendering Style](marine.render.xml)
 
 ### Raster Charts
 
