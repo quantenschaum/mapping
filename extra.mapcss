@@ -574,6 +574,9 @@ way["seamark:type"=dumping_ground] {
 	color: green;
     width: 5;
 }
+*["seamark:restricted_area:restriction"]:closed {
+	fill-color: magenta;
+}
 *["seamark:restricted_area:restriction"*=no_entry]:closed {
 	fill-color: red;
 }
