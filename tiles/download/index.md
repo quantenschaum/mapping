@@ -4,6 +4,8 @@
 
 Here you find precompiled charts for download in various formats usable in different applications.
 
+The downloadable files on this page are licensed under [CC0](https://github.com/quantenschaum/mapping/blob/master/LICENSE).
+
 ## [OsmAnd](https://osmand.net/)
 
 ### Vector Charts
