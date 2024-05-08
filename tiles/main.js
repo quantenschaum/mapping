@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   var basemaps = {
-    'OpenStreetMap':L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    'OpenStreetMap':L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //'OpenStreetMap':L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
       attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
       class:'grayscale',
