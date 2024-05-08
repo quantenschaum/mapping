@@ -110,7 +110,7 @@
      class="fill uniform vertical12 vertical23" style="fill:violet; stroke:none;"
      d="M 16 10.513672 L 16 13.914062 L 18 13.908203 L 16 10.513672 z " />
   <path
-     class="inline vertical13 cross12" style="fill:none; stroke:#FCD345; stroke-width:0.8;"
+     class="inline vertical13 cross12" style="fill:none; stroke:#fab20b; stroke-width:0.8;"
      stroke-linecap="round"
      d="M 16,13.645723 V 11.048101"
      id="path306" />

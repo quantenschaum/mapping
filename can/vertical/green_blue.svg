@@ -109,11 +109,11 @@
      id="g4073"
      transform="rotate(15,16,16)">
     <path
-       class="fill horizontal04 horizontal03 horizontal02 vertical02 vertical03 uniform cross02" style="fill:#5BCE3E; stroke:none;"
+       class="fill horizontal04 horizontal03 horizontal02 vertical02 vertical03 uniform cross02" style="fill:#00a650; stroke:none;"
        id="path3994"
        d="m 12.871094,11.953125 v 4.885263 l 6.257812,-1.676776 v -3.208487 z" />
     <path
-       class="fill vertical12" style="fill:#002EF5; stroke:none;"
+       class="fill vertical12" style="fill:#10508c; stroke:none;"
        id="path3983"
        d="M 16,11.953125 V 16 l 3.128906,-0.837891 v -3.208984 z" />
     <path

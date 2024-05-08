@@ -88,7 +88,7 @@
       COLORING{}
   </style>
   <path
-     class="outline uniform horizontal02 horizontal03" style="fill:none; stroke:#C72C14; stroke-width:0.8;"
+     class="outline uniform horizontal02 horizontal03" style="fill:none; stroke:#ed1c24; stroke-width:0.8;"
      d="M 16,4.840764 V 16"
      id="path241" />
   <path
@@ -96,11 +96,11 @@
      d="M 16,10.420382 V 16"
      id="path294" />
   <path
-     class="inline horizontal13" style="fill:none; stroke:#FCD345; stroke-width:0.8;"
+     class="inline horizontal13" style="fill:none; stroke:#fab20b; stroke-width:0.8;"
      d="M 16,8.0255979 V 16"
      id="path295" />
   <path
-     class="inline horizontal23" style="fill:none; stroke:#C72C14; stroke-width:0.8;"
+     class="inline horizontal23" style="fill:none; stroke:#ed1c24; stroke-width:0.8;"
      d="M 16,12.012799 V 16"
      id="path393" />
   <path

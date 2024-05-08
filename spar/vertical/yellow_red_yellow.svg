@@ -96,7 +96,7 @@
      id="g336"
      transform="rotate(15,16,16)">
     <path
-       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#FCD345; stroke:none;"
+       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#fab20b; stroke:none;"
        id="path303"
        d="M 17,4.8398438 H 15 V 16 h 2 z" />
     <path
@@ -124,7 +124,7 @@
        class="fill horizontal34" style="fill:none; stroke:none;"
        d="M 17 13.210938 L 15 13.210938 L 15 16 L 17 16 L 17 13.210938 z " />
     <path
-       class="inline cross12 vertical13" style="fill:none; stroke:#C72C14; stroke-width:0.8;"
+       class="inline cross12 vertical13" style="fill:none; stroke:#ed1c24; stroke-width:0.8;"
        d="M 16,4.840764 V 16"
        id="path260" />
     <path

@@ -114,7 +114,7 @@
       COLORING{}
   </style>
   <path
-   class="fill uniform horizontal02 horizontal03 vertical02 vertical03 cross02" style="fill:#FCD345; stroke:none;"
+   class="fill uniform horizontal02 horizontal03 vertical02 vertical03 cross02" style="fill:#fab20b; stroke:none;"
    id="path1480"
    d="m 9.8555911,16 1.2472839,-3.766667 h 9.794249 L 22.144408,16 Z" />
   <path
@@ -123,7 +123,7 @@
    d="M 21.3125 13.488281 L 10.6875 13.488281 L 9.8554688 16 L 22.144531 16 L 21.3125 13.488281 z " />
   <path
    id="path366"
-   class="fill horizontal12" style="fill:#C72C14; stroke:none;"
+   class="fill horizontal12" style="fill:#ed1c24; stroke:none;"
    d="M 21.521484 14.117188 L 10.478516 14.117188 L 9.8554688 16 L 22.144531 16 L 21.521484 14.117188 z " />
   <path
    id="path473"

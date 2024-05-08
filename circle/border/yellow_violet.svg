@@ -145,7 +145,7 @@
      class="fill squared12" style="fill:none; stroke:none;"
      d="M 16 9.8964844 L 16 11.90625 L 18.009766 11.90625 A 2.0098038 2.0098038 0 0 0 16 9.8964844 z " />
   <circle
-     class="outline border02" style="fill:none; stroke:#FCD345; stroke-width:0.8;"
+     class="outline border02" style="fill:none; stroke:#fab20b; stroke-width:0.8;"
      id="circle13"
      cx="16"
      cy="11.905389"

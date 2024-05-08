@@ -81,7 +81,7 @@
      id="g1701"
      transform="rotate(15,16,16)">
     <path
-       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#FCD345; stroke:none;"
+       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#fab20b; stroke:none;"
        id="path300"
        d="m 16.794922,4.4882812 -1.601563,0 -0.572265,8.0878908 -1.75,4.261719 5.636684,-1.509848 -1.128872,-2.751871 z" />
     <path
@@ -89,11 +89,11 @@
        id="path304"
        d="M 16,4.4882812 V 16.000001 l 2.507812,-0.671875 -1.128906,-2.751953 -0.583984,-8.0878918 z" />
     <path
-       class="fill horizontal13" style="fill:#C72C14; stroke:none;"
+       class="fill horizontal13" style="fill:#ed1c24; stroke:none;"
        id="path1936"
        d="m 14.921413,8.3317231 -0.312038,4.2444499 -1.742187,4.263672 5.640624,-1.511719 -1.128906,-2.751954 -0.306084,-4.2391184 z" />
     <path
-       class="fill horizontal23" style="fill:#FCD345; stroke:none;"
+       class="fill horizontal23" style="fill:#fab20b; stroke:none;"
        id="path1684"
        d="m 14.638675,12.16211 -0.0293,0.414063 -1.742187,4.263672 5.640624,-1.511719 -1.128906,-2.751953 -0.0293,-0.414063 z" />
     <path

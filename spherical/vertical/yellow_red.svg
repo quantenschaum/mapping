@@ -146,12 +146,12 @@
       COLORING{}
   </style>
   <path
-     class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#FCD345; stroke:none;"
+     class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#fab20b; stroke:none;"
      id="path313"
      d="m 16.359375,11.552277 c -2.628455,0 -3.898406,2.669853 -3.241562,4.447723 h 6.483124 c 0.656844,-1.77787 -0.613107,-4.447723 -3.241562,-4.447723" />
   <path
      id="path372"
-     class="fill vertical12" style="fill:#C72C14; stroke:none;"
+     class="fill vertical12" style="fill:#ed1c24; stroke:none;"
      d="M 17.166016 11.644531 L 16 16 L 19.601562 16 C 20.187002 14.4154 19.239497 12.124381 17.166016 11.644531 z " />
   <path
      id="path383"

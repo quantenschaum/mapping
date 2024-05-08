@@ -146,7 +146,7 @@
       COLORING{}
   </style>
   <path
-     class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#002EF5; stroke:none;"
+     class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#10508c; stroke:none;"
      id="path313"
      d="m 16.359375,11.552277 c -2.628455,0 -3.898406,2.669853 -3.241562,4.447723 h 6.483124 c 0.656844,-1.77787 -0.613107,-4.447723 -3.241562,-4.447723" />
   <path
@@ -182,11 +182,11 @@
      class="fill horizontal34" style="fill:none; stroke:none;"
      d="M 19.457031 16 L 13.027344 14.277344 C 12.898027 14.86784 12.922492 15.473022 13.117188 16 L 19.457031 16 z " />
   <path
-     class="inline cross12" style="fill:none; stroke:#FCD345; stroke-width:0.8;"
+     class="inline cross12" style="fill:none; stroke:#fab20b; stroke-width:0.8;"
      d="m 16,16 1.166016,-4.355469"
      id="path262" />
   <path
-     class="inline cross12" style="fill:none; stroke:#FCD345; stroke-width:0.8;"
+     class="inline cross12" style="fill:none; stroke:#fab20b; stroke-width:0.8;"
      d="m 13.518203,13.097656 c 1.874311,0.89326 3.934649,1.484975 6.243516,1.673828"
      id="path264" />
   <path

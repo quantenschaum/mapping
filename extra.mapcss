@@ -207,19 +207,19 @@ way[contourarea=depth] {
   fill-opacity: 0.8;
   fill-color: lightblue;
 }
-way[contourarea=depth][areatype=0] {
+way[contourarea=depth][areatype=-1] {
   fill-color: #cceccd;
 }
-way[contourarea=depth][areatype=2] {
+way[contourarea=depth][areatype=0] {
   fill-color: #a8e6fd;
 }
-way[contourarea=depth][areatype=5] {
+way[contourarea=depth][areatype=2] {
   fill-color: #cceffc;
 }
-way[contourarea=depth][areatype=10] {
+way[contourarea=depth][areatype=5] {
   fill-color: #e6f7fd;
 }
-way[contourarea=depth][areatype=999] {
+way[contourarea=depth][areatype=10] {
   fill-color: white;
 }
 relation[contourarea=depth] {
@@ -230,20 +230,26 @@ relation[contourarea=depth] {
 relation[contourarea=depth] way {
   width: 0;
 }
-relation[contourarea=depth][areatype=0] {
+relation[contourarea=depth][areatype=-1] {
   fill-color: #cceccd;
 }
-relation[contourarea=depth][areatype=2] {
+relation[contourarea=depth][areatype=0] {
   fill-color: #a8e6fd;
 }
-relation[contourarea=depth][areatype=5] {
+relation[contourarea=depth][areatype=2] {
   fill-color: #cceffc;
 }
-relation[contourarea=depth][areatype=10] {
+relation[contourarea=depth][areatype=5] {
   fill-color: #e6f7fd;
 }
-relation[contourarea=depth][areatype=999] {
+relation[contourarea=depth][areatype=10] {
   fill-color: white;
+}
+
+node["seamark:type"=pile] {
+	symbol-shape:	circle;
+	symbol-size: 6;
+	symbol-fill-color: black;
 }
 
 node["seamark:type"=light_float]::int1_buoy,
@@ -251,8 +257,8 @@ node["seamark:type"=light_vessel]::int1_buoy,
 node["seamark:type"^=buoy]::int1_buoy,
 node["seamark:type"^=beacon]::int1_buoy {
 	icon-image:		eval(concat("https://raw.githubusercontent.com/quantenschaum/mapping/icons/",
-	  any(replace(replace(tag(concat("seamark:",tag("seamark:type"),":shape")),
-	    "lattice",cond(regexp_test(".*;.*",tag(concat("seamark:",tag("seamark:type"),":colour"))),"tower","lattice")),"post","pile"),
+	  any(replace(replace(replace(tag(concat("seamark:",tag("seamark:type"),":shape")),
+	    "lattice",cond(regexp_test(".*;.*",tag(concat("seamark:",tag("seamark:type"),":colour"))),"tower","lattice")),"post","pile"),"pole","pile"),
 	    cond(regexp_test("buoy.*",tag("seamark:type")),"spar",cond(regexp_test("light_.*",tag("seamark:type")),"light_float","pile"))),"/",
 	  cond(regexp_test(".*;.*",tag(concat("seamark:",tag("seamark:type"),":colour"))),
 	    any(tag(concat("seamark:",tag("seamark:type"),":colour_pattern")),"horizontal"),""),"/",
@@ -383,7 +389,7 @@ node["seamark:light:category"=floodlight]::floodlight {
 }
 
 
-node["seamark:type"^=light_]::int1_lighthouse {
+node["seamark:type"^=light_m]::int1_lighthouse {
 	icon-image: eval(concat("https://raw.githubusercontent.com/quantenschaum/mapping/icons/",tag("seamark:type"),".svg"));
   icon-width: 60;
   icon-offset-x: 0;
@@ -504,8 +510,8 @@ node|z12-["seamark:radar_transponder:category"]::int1_radar_transponder {
   text-anchor-vertical: center;
   text-offset-x: 0;
   text-offset-y: 42;
-
 }
+
 node|z12-["seamark:radio_station:category"]::int1_radio_station {
 	symbol-shape:	circle;
 	symbol-size: 70;
@@ -553,3 +559,27 @@ way[natural=shoal][surface=sand]::shoal {
 	fill-color: orange;
 }
 
+way["seamark:type"=dumping_ground] {
+	color: black;
+    width: 2;
+    dashes: 6,3;
+}
+
+*["seamark:type"=restricted_area]:closed {
+	color: magenta;
+    width: 5;
+}
+*["seamark:restricted_area:category"*=reserve]:closed,
+*["seamark:restricted_area:category"*=sanctuary]:closed {
+	color: green;
+    width: 5;
+}
+*["seamark:restricted_area:restriction"]:closed {
+	fill-color: magenta;
+}
+*["seamark:restricted_area:restriction"*=no_entry]:closed {
+	fill-color: red;
+}
+*["seamark:restricted_area:restriction"*=restricted_entry]:closed {
+	fill-color: orange;
+}

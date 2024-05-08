@@ -102,7 +102,7 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="fill uniform border12 vertical02 vertical03 horizontal03 cross02" style="fill:#002EF5; stroke:none;"
+     class="fill uniform border12 vertical02 vertical03 horizontal03 cross02" style="fill:#10508c; stroke:none;"
      d="m 16.00009,14.041164 1.999822,-3.393243 -3.999645,-0.01094 z"
      id="path982" />
   <path
@@ -115,7 +115,7 @@
      d="M 16.000089,13.504135 V 10.906513"
      id="path306" />
   <path
-     class="inline horizontal13 cross12" style="fill:none; stroke:#5BCE3E; stroke-width:0.8;"
+     class="inline horizontal13 cross12" style="fill:none; stroke:#00a650; stroke-width:0.8;"
      stroke-linecap="round"
      d="M 15.016519,11.815568 H 16.98366"
      id="path298"/>

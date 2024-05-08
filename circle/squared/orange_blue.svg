@@ -138,11 +138,11 @@
      id="path369" />
   <path
      id="circle303"
-     class="fill squared12" style="fill:#002EF5; stroke:none;"
+     class="fill squared12" style="fill:#10508c; stroke:none;"
      d="M 16 11.90625 L 13.990234 11.90625 A 2.0098038 2.0098038 0 0 0 16 13.916016 L 16 11.90625 z " />
   <path
      id="path438"
-     class="fill squared12" style="fill:#002EF5; stroke:none;"
+     class="fill squared12" style="fill:#10508c; stroke:none;"
      d="M 16 9.8964844 L 16 11.90625 L 18.009766 11.90625 A 2.0098038 2.0098038 0 0 0 16 9.8964844 z " />
   <circle
      class="outline border02" style="fill:none; stroke:black; stroke-width:0.3;"

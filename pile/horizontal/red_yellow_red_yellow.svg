@@ -104,7 +104,7 @@
   <g
      id="g19">
     <path
-       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#C72C14; stroke:none;"
+       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#ed1c24; stroke:none;"
        d="M 17,16 V 6 h -2 v 10 z"
        id="path3219" />
     <path
@@ -129,15 +129,15 @@
        d="M 17 12.666016 L 15 12.666016 L 15 16 L 17 16 L 17 12.666016 z " />
     <path
        id="path309"
-       class="fill horizontal14" style="fill:#FCD345; stroke:none;"
+       class="fill horizontal14" style="fill:#fab20b; stroke:none;"
        d="M 17 8.5 L 15 8.5 L 15 16 L 17 16 L 17 8.5 z " />
     <path
        id="path314"
-       class="fill horizontal24 horizontal12" style="fill:#C72C14; stroke:none;"
+       class="fill horizontal24 horizontal12" style="fill:#ed1c24; stroke:none;"
        d="M 17 11 L 15 11 L 15 16 L 17 16 L 17 11 z " />
     <path
        id="path319"
-       class="fill horizontal34" style="fill:#FCD345; stroke:none;"
+       class="fill horizontal34" style="fill:#fab20b; stroke:none;"
        d="M 17 13.5 L 15 13.5 L 15 16 L 17 16 L 17 13.5 z " />
     <path
        class="inline cross12" style="fill:none; stroke:none;"

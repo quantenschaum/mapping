@@ -102,12 +102,12 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="fill uniform border12 vertical02 vertical03 horizontal03 cross02" style="fill:#FCD345; stroke:none;"
+     class="fill uniform border12 vertical02 vertical03 horizontal03 cross02" style="fill:#fab20b; stroke:none;"
      d="m 16.00009,10.514525 1.999822,3.393243 -3.999645,0.01094 z"
      id="path982" />
   <path
      id="path364"
-     class="fill uniform vertical12 vertical23" style="fill:#C72C14; stroke:none;"
+     class="fill uniform vertical12 vertical23" style="fill:#ed1c24; stroke:none;"
      d="M 16 10.513672 L 16 13.914062 L 18 13.908203 L 16 10.513672 z " />
   <path
      class="inline vertical13 cross12" style="fill:none; stroke:none;"

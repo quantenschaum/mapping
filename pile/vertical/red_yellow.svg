@@ -104,12 +104,12 @@
   <g
      id="g19">
     <path
-       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#C72C14; stroke:none;"
+       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#ed1c24; stroke:none;"
        d="M 17,16 V 6 h -2 v 10 z"
        id="path3219" />
     <path
        id="path1099"
-       class="fill vertical12" style="fill:#FCD345; stroke:none;"
+       class="fill vertical12" style="fill:#fab20b; stroke:none;"
        d="M 16 6 L 16 16 L 17 16 L 17 6 L 16 6 z " />
     <path
        id="path1104"

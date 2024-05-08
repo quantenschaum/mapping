@@ -107,16 +107,16 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="fill uniform border12 horizontal02 vertical02 horizontal03 vertical03 cross02 saltire02 squared02" style="fill:#002EF5; stroke:none;"
+     class="fill uniform border12 horizontal02 vertical02 horizontal03 vertical03 cross02 saltire02 squared02" style="fill:#10508c; stroke:none;"
      d="m 15.986192,9.3265012 2.405624,2.3928918 -2.393198,2.41468 -2.405624,-2.392896 z"
      id="path982" />
   <path
      id="path296"
-     class="fill horizontal13" style="fill:#FCD345; stroke:none;"
+     class="fill horizontal13" style="fill:#fab20b; stroke:none;"
      d="M 17.599609 10.929688 L 14.396484 10.929688 L 13.59375 11.740234 L 15.998047 14.134766 L 18.392578 11.71875 L 17.599609 10.929688 z " />
   <path
      id="path1037"
-     class="fill horizontal23" style="fill:#002EF5; stroke:none;"
+     class="fill horizontal23" style="fill:#10508c; stroke:none;"
      d="M 17.587891 12.53125 L 14.388672 12.53125 L 15.998047 14.134766 L 17.587891 12.53125 z " />
   <path
      id="path302"

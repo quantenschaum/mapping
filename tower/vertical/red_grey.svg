@@ -21,9 +21,9 @@
    inkscape:pagecheckerboard="0"
    inkscape:deskcolor="#505050"
    showgrid="false"
-   inkscape:zoom="97.8125"
-   inkscape:cx="12.85623"
-   inkscape:cy="11.281789"
+   inkscape:zoom="48.53125"
+   inkscape:cx="13.444945"
+   inkscape:cy="16"
    inkscape:window-width="2285"
    inkscape:window-height="1809"
    inkscape:window-x="1110"
@@ -82,71 +82,71 @@
 
   <path
    id="path558"
-   class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02 saltire02 squared02" style="fill:#C72C14; stroke:none;"
-   d="M 19.296146,16 18.307633,5.9999998 H 13.692367 L 12.703854,16 Z" />
+   class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02 saltire02 squared02" style="fill:#ed1c24; stroke:none;"
+   d="M 18.340391,16 17.638509,5.9999998 H 14.361492 L 13.65961,16 Z" />
   <path
    id="path939"
    class="fill vertical13" style="fill:none; stroke:none;"
-   d="M 14.900391 6 L 14.900391 16 L 19.296875 16 L 18.308594 6 L 14.900391 6 z " />
+   d="m 15.219236,6 v 10 h 3.121672 L 17.639191,6 Z" />
   <path
    id="path944"
    class="fill vertical12" style="fill:#808080; stroke:none;"
-   d="M 16 6 L 16 16 L 19.296875 16 L 18.308594 6 L 16 6 z " />
+   d="m 16,6 v 10 h 2.340908 L 17.639191,6 Z" />
   <path
    id="path949"
    class="fill vertical23" style="fill:none; stroke:none;"
-   d="M 17.099609 6 L 17.099609 16 L 19.296875 16 L 18.308594 6 L 17.099609 6 z " />
+   d="m 16.780765,6 v 10 h 1.560143 L 17.639191,6 Z" />
 <path
    id="path392"
    class="fill horizontal14" style="fill:none; stroke:none;"
-   d="M 18.554688 8.5 L 13.445312 8.5 L 12.703125 16 L 19.296875 16 L 18.554688 8.5 z " />
+   d="M 17.813927,8.5 H 14.186074 L 13.659093,16 h 4.681815 z" />
   <path
    id="path397"
    class="fill horizontal13" style="fill:none; stroke:none;"
-   d="M 18.636719 9.3339844 L 13.363281 9.3339844 L 12.703125 16 L 19.296875 16 L 18.636719 9.3339844 z " />
+   d="M 17.872172,9.3339844 H 14.127829 L 13.659093,16 h 4.681815 z" />
   <path
    id="path402"
    class="fill horizontal24 horizontal12" style="fill:none; stroke:none;"
-   d="M 18.802734 11 L 13.197266 11 L 12.703125 16 L 19.296875 16 L 18.802734 11 z " />
+   d="m 17.990049,11 h -3.980097 l -0.350859,5 h 4.681815 z" />
   <path
    id="path407"
    class="fill horizontal23" style="fill:none; stroke:none;"
-   d="M 18.966797 12.666016 L 13.033203 12.666016 L 12.703125 16 L 19.296875 16 L 18.966797 12.666016 z " />
+   d="M 18.10654,12.666016 H 13.893461 L 13.659093,16 h 4.681815 z" />
   <path
    id="path412"
    class="fill horizontal34" style="fill:none; stroke:none;"
-   d="M 19.050781 13.5 L 12.949219 13.5 L 12.703125 16 L 19.296875 16 L 19.050781 13.5 z " />
+   d="M 18.166173,13.5 H 13.833828 L 13.659093,16 h 4.681815 z" />
 <path
    id="path303"
    class="fill squared12" style="fill:none; stroke:none;"
-   d="M 16 11 L 13.197266 11 L 12.703125 16 L 16 16 L 16 11 z " />
+   d="m 16,11 h -1.990048 l -0.350859,5 H 16 Z" />
   <path
    id="path318"
    class="fill fill squared12" style="fill:none; stroke:none;"
-   d="M 16 6 L 16 11 L 18.802734 11 L 18.308594 6 L 16 6 z " />
+   d="m 16,6 v 5 h 1.990049 L 17.639191,6 Z" />
 <path
    class="inline cross12" style="fill:none; stroke:none;"
    d="M 16,16 V 6"
    id="path314" />
   <path
    class="inline cross12" style="fill:none; stroke:none;"
-   d="m 13.198111,11 h 5.604623"
+   d="m 14.010552,11 h 3.979497"
    id="path316" />
   <path
    class="inline saltire12" style="fill:none; stroke:none;"
-   d="M 13.068248,16.010224 18.031952,6.0944414"
-   id="path319"/>
+   d="M 13.918344,16.010224 17.442765,6.0944414"
+   id="path319" />
   <path
    class="inline saltire12" style="fill:none; stroke:none;"
-   d="M 18.898859,16.014642 13.918081,6.0892995"
+   d="M 18.058302,16.014642 14.521758,6.0892995"
    id="path321" />
   <path
    id="path1500"
    class="outline" style="fill:none; stroke:black; stroke-width:0.3;"
-   d="M 19.296146,16 18.307633,5.9999998 H 13.692367 L 12.703854,16 Z" />
+   d="M 18.340391,16 17.638509,5.9999998 H 14.361492 L 13.65961,16 Z" />
   <path
    class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"
-   d="m 11.26861,16 h 9.46278"
+   d="M 12.640532,16 H 19.35947"
    id="path5181" />
   <circle
    class="basepoint" style="fill:white; stroke:black; stroke-width:0.5;"

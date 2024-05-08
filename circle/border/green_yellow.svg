@@ -107,7 +107,7 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <circle
-     class="fill uniform border12 vertical02 horizontal02 vertical03 horizontal03 cross02 saltire02 squared02" style="fill:#FCD345; stroke:none;"
+     class="fill uniform border12 vertical02 horizontal02 vertical03 horizontal03 cross02 saltire02 squared02" style="fill:#fab20b; stroke:none;"
      id="path348"
      cx="16"
      cy="11.905389"
@@ -145,7 +145,7 @@
      class="fill squared12" style="fill:none; stroke:none;"
      d="M 16 9.8964844 L 16 11.90625 L 18.009766 11.90625 A 2.0098038 2.0098038 0 0 0 16 9.8964844 z " />
   <circle
-     class="outline border02" style="fill:none; stroke:#5BCE3E; stroke-width:0.8;"
+     class="outline border02" style="fill:none; stroke:#00a650; stroke-width:0.8;"
      id="circle13"
      cx="16"
      cy="11.905389"

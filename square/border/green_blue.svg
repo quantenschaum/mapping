@@ -121,7 +121,7 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="fill uniform border12 horizontal02 vertical02 horizontal03 vertical03 cross02 saltire02 squared02" style="fill:#002EF5; stroke:none;"
+     class="fill uniform border12 horizontal02 vertical02 horizontal03 vertical03 cross02 saltire02 squared02" style="fill:#10508c; stroke:none;"
      d="m 14.288277,10.519 3.383515,-0.009 0.01515,3.390231 -3.383515,0.009 z"
      id="path982" />
   <path
@@ -173,7 +173,7 @@
      d="m 17.523205,10.675084 -3.091357,3.100892"
      id="path317" />
   <path
-     class="outline border02" style="fill:none; stroke:#5BCE3E; stroke-width:0.8;"
+     class="outline border02" style="fill:none; stroke:#00a650; stroke-width:0.8;"
      d="m 14.288277,10.519 3.383515,-0.009 0.01515,3.390231 -3.383515,0.009 z"
      id="path13" />
 </svg>

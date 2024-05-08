@@ -81,7 +81,7 @@
      id="g1701"
      transform="rotate(15,16,16)">
     <path
-       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#5BCE3E; stroke:none;"
+       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#00a650; stroke:none;"
        id="path300"
        d="m 16.794922,4.4882812 -1.601563,0 -0.572265,8.0878908 -1.75,4.261719 5.636684,-1.509848 -1.128872,-2.751871 z" />
     <path
@@ -109,11 +109,11 @@
        id="path1687"
        d="m 14.371094,13.158204 -1.503906,3.681641 5.640624,-1.511719 -0.890624,-2.169922 z" />
     <path
-       class="inline cross12 vertical13" style="fill:none; stroke:#002EF5; stroke-width:0.8;"
+       class="inline cross12 vertical13" style="fill:none; stroke:#10508c; stroke-width:0.8;"
        d="M 16,4.4882812 16,16"
        id="path401" />
     <path
-       class="inline cross12" style="fill:none; stroke:#002EF5; stroke-width:0.8;"
+       class="inline cross12" style="fill:none; stroke:#10508c; stroke-width:0.8;"
        d="m 14.638675,12.16211 c 0.844576,0.160371 1.848102,0.177586 2.710931,0"
        id="path403"/>
     <path

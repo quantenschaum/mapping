@@ -85,11 +85,11 @@
       COLORING{}
   </style>
   <path
-     class="fill uniform horizontal02 vertical02 vertical03 cross02" style="fill:#5BCE3E; stroke:none;"
+     class="fill uniform horizontal02 vertical02 vertical03 cross02" style="fill:#00a650; stroke:none;"
      d="M 12.330341,16 C 11.763727,13.906682 11.94533,11.780846 15.64197,11.749561 19.33861,11.718271 19.661906,14.081182 19.151261,16 Z"
      id="path3885" />
   <path
-     class="fill horizontal12" style="fill:#FCD345; stroke:none;"
+     class="fill horizontal12" style="fill:#fab20b; stroke:none;"
      id="path4699"
      d="M 19.256694,13.879419 14.946403,14.260386 12.1072,14.064453 c -0.05971,0.60335 -0.0401,1.085541 0.139892,1.750513 h 6.822265 c 0.167907,-0.630933 0.290037,-1.309488 0.187337,-1.935547 z"/>
   <path

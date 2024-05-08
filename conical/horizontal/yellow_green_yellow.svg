@@ -108,7 +108,7 @@
      transform="rotate(15,16,16)">
     <path
        id="path295"
-       class="fill vertical02 vertical03 uniform horizontal02 horizontal03 horizontal04 cross02" style="fill:#FCD345; stroke:none;"
+       class="fill vertical02 vertical03 uniform horizontal02 horizontal03 horizontal04 cross02" style="fill:#fab20b; stroke:none;"
        d="m 16,9.7506672 c -2.447035,1.9115558 -2.942256,5.2686078 -3.128906,7.0878908 l 6.070053,-1.626636 C 18.511423,12.953334 17.473098,11.179022 16,9.7506672 Z" />
     <path
        id="path376"
@@ -124,11 +124,11 @@
        d="M 16.965571 10.81967 L 16.965926 15.741181 L 18.941169 15.211916 C 18.612729 13.485673 17.927565 12.042053 16.965571 10.81967 z " />
     <path
        id="path1008"
-       class="fill horizontal13" style="fill:#5BCE3E; stroke:none;"
+       class="fill horizontal13" style="fill:#00a650; stroke:none;"
        d="m 14.261719,11.817158 c -0.420836,0.831853 -1.353303,3.134089 -1.390625,5.021315 l 6.070053,-1.626466 c -0.256094,-1.073121 -0.668573,-2.501029 -1.273178,-3.394849 -1.150091,0.240672 -2.283414,0.206323 -3.40625,0 z" />
     <path
        id="path968"
-       class="fill horizontal23" style="fill:#FCD345; stroke:none;"
+       class="fill horizontal23" style="fill:#fab20b; stroke:none;"
        d="m 18.568358,13.883479 c -1.739701,0.397901 -3.455999,0.364736 -5.154296,0 -0.323835,1.110772 -0.46289,2.174553 -0.542968,2.955079 l 6.070311,-1.625 c -0.09696,-0.365508 -0.211154,-0.821843 -0.373047,-1.330079 z" />
     <path
        id="path1033"

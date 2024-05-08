@@ -96,7 +96,7 @@
      id="g336"
      transform="rotate(15,16,16)">
     <path
-       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#002EF5; stroke:none;"
+       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#10508c; stroke:none;"
        id="path303"
        d="M 17,4.8398438 H 15 V 16 h 2 z" />
     <path
@@ -109,7 +109,7 @@
        d="M 17 7.6308594 L 15 7.6308594 L 15 16 L 17 16 L 17 7.6308594 z " />
     <path
        id="path313"
-       class="fill horizontal13" style="fill:#FCD345; stroke:none;"
+       class="fill horizontal13" style="fill:#fab20b; stroke:none;"
        d="M 17 8.5605469 L 15 8.5605469 L 15 16 L 17 16 L 17 8.5605469 z " />
     <path
        id="path318"
@@ -117,7 +117,7 @@
        d="M 17 10.419922 L 15 10.419922 L 15 16 L 17 16 L 17 10.419922 z " />
     <path
        id="path323"
-       class="fill horizontal23" style="fill:#002EF5; stroke:none;"
+       class="fill horizontal23" style="fill:#10508c; stroke:none;"
        d="M 17 12.279297 L 15 12.279297 L 15 16 L 17 16 L 17 12.279297 z " />
     <path
        id="path328"

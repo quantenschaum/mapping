@@ -121,7 +121,7 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="fill uniform border12 horizontal02 vertical02 horizontal03 vertical03 cross02 saltire02 squared02" style="fill:#5BCE3E; stroke:none;"
+     class="fill uniform border12 horizontal02 vertical02 horizontal03 vertical03 cross02 saltire02 squared02" style="fill:#00a650; stroke:none;"
      d="m 14.288277,10.519 3.383515,-0.009 0.01515,3.390231 -3.383515,0.009 z"
      id="path982" />
   <path
@@ -165,11 +165,11 @@
      d="m 14.295851,12.214115 3.384028,-0.0089"
      id="path313" />
   <path
-     class="inline saltire12" style="fill:none; stroke:#FCD345; stroke-width:0.8;"
+     class="inline saltire12" style="fill:none; stroke:#fab20b; stroke-width:0.8;"
      d="m 14.430587,10.659652 3.121777,3.099952"
      id="path315" />
   <path
-     class="inline saltire12" style="fill:none; stroke:#FCD345; stroke-width:0.8;"
+     class="inline saltire12" style="fill:none; stroke:#fab20b; stroke-width:0.8;"
      d="m 17.523205,10.675084 -3.091357,3.100892"
      id="path317" />
   <path

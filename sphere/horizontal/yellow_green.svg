@@ -102,14 +102,14 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <circle
-     class="fill uniform horizontal02" style="fill:#FCD345; stroke:none;"
+     class="fill uniform horizontal02" style="fill:#fab20b; stroke:none;"
      id="path348"
      cx="16"
      cy="12.236607"
      r="1.7220814" />
   <path
      id="circle369"
-     class="fill horizontal12" style="fill:#5BCE3E; stroke:none;"
+     class="fill horizontal12" style="fill:#00a650; stroke:none;"
      d="M 17.722656 12.236328 L 14.277344 12.236328 A 1.7220814 1.7220814 0 0 0 16 13.958984 A 1.7220814 1.7220814 0 0 0 17.722656 12.236328 z " />
   <circle
      class="outline" style="fill:none; stroke:black; stroke-width:0.3;"
