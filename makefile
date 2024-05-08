@@ -218,9 +218,19 @@ mobac:
 	#java -Xms64m -Xmx1200M -jar data/mobac/Mobile_Atlas_Creator.jar
 	java -jar data/mobac/Mobile_Atlas_Creator.jar
 
+batch-0.xml: batch-all.xml
+	sed 's/mapZooms.*/mapZooms="6-9;10-11"/' batch-all.xml
+
+batch-1.xml: batch-all.xml
+	sed 's/mapZooms.*/mapZooms="12-13"/' batch-all.xml
+
+batch-2.xml: batch-all.xml
+	sed 's/mapZooms.*/mapZooms="14-15;16-"/' batch-all.xml
+
+
 BLEVEL=all
 
-obf: data/omc
+obf: data/omc batch-0.xml batch-1.xml batch-2.xml
 	mkdir -p $@
 	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch-$(BLEVEL).xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
