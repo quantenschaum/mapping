@@ -16,6 +16,7 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 - [Depth Contours DE](depth-de.obf)
 - [Depth Data NL](depth-nl.obf)
 - [Light Sectors Worldwide](lightsectors.obf)
+- [Marine Rendering Style](marine.render.xml)
 
 To make full use of the data in these files in form of a [nautical chart](https://osmand.net/docs/user/plugins/nautical-charts/), you have to
 
@@ -23,8 +24,7 @@ To make full use of the data in these files in form of a [nautical chart](https:
 - enable the [nautical charts plugin](https://osmand.net/docs/user/plugins/nautical-charts),
 - use the [boating profile](https://osmand.net/docs/user/personal/profiles/),
 - enable the display of [nautical depth](https://osmand.net/docs/user/plugins/nautical-charts#depth-contours),
-- **install and activate** the `marine` [rendering styles](https://osmand.net/docs/user/map/vector-maps).
-- [Marine Rendering Style](marine.render.xml)
+- **install and activate** the `marine` [rendering style](https://osmand.net/docs/user/map/vector-maps).
 
 ### Raster Charts
 
