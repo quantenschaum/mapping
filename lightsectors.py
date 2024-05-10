@@ -294,8 +294,7 @@ def generate_sectors(infile, outfile, config={}):
         sectors = get_sectors(n)
 
         if (
-            not sectors
-            or seamark_type not in major
+            not sectors or seamark_type not in major
             and not any(s.get("range", range0) >= min_range for s in sectors)
         ):
             continue
@@ -348,7 +347,7 @@ def generate_sectors(infile, outfile, config={}):
             is_leading = len(sectors) == 1 and any(
                 k in s.get("category", "") for k in leading_lights
             )
-            is_low = any(k in str(s) for k in low_light)
+            is_low = any(k in str(s) for k in low_light if k!="low")
 
             # directional line
             if r1 and is_ori:
