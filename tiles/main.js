@@ -85,10 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
   var overlays = {
     'Grid': grid,
     'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://github.com/quantenschaum/mapping">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
+      attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
     }),
     'QMAP NL':L.tileLayer.fallback('qmap-nl/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://github.com/quantenschaum/mapping">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
+      attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
     }),
     'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
       version:'1.3.0',
