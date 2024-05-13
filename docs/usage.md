@@ -87,3 +87,7 @@ You can i.e. choose between different colorings to adjust the map to your liking
 ## Other Software
 
 The charts can also be used in other software like AvNav or OpenCPN, the necessary files are available in the [download section](index.md). 
+
+### JOSM
+
+This project also provides icons and an additional style for [JOSM](https://josm.openstreetmap.de/) in a [separate branch](https://github.com/quantenschaum/mapping/tree/icons).

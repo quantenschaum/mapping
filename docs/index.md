@@ -58,7 +58,7 @@ You may also want to add this extra `mapcss` for better rendering of seamarks.
 
 - `https://raw.githubusercontent.com/quantenschaum/mapping/icons/extra.mapcss`
 
-## [AvNav](https://www.wellenvogel.net/software/avnav/docs/beschreibung.html)
+## [AvNav](https://www.wellenvogel.net/software/avnav/docs/beschreibung.html?lang=en)
 
 ![AvNav](img/avnav.png)
 
