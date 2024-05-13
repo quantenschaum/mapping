@@ -2,18 +2,20 @@ site_name: Free Nautical Charts
 site_url: http://waddenzee.duckdns.org/download/
 repo_url: https://github.com/quantenschaum/mapping
 repo_name: quantenschaum/mapping
-edit_uri: -/docs/
+edit_uri: docs/
 
 # pip install mkdocs mkdocs-material mkdocs-git-revision-date-localized-plugin
 
 nav:
-  - Chart: http://waddenzee.duckdns.org/
+  - Chart: ../
   - Download: index.md
+  - Usage: usage.md
+#  - Creation: creation.md
 
 theme:
   name: material
   language: en
-  logo: compass.svg
+  logo: img/compass.svg
   palette:
     - scheme: default
       media: "(prefers-color-scheme: light)"
@@ -36,11 +38,16 @@ theme:
     - navigation.top
     #    - navigation.instant
     - navigation.tracking
-    #    - navigation.tabs
+    - navigation.tabs
+    #    - navigation.prune
+    #    - navigation.indexes
     #    - navigation.tabs.sticky
     #    - navigation.sections
-    - navigation.expand
+    #    - navigation.expand
     - toc.follow
+    - toc.integrate
+    - search.highlight
+    - content.action.edit
 
 markdown_extensions:
   - admonition
@@ -56,37 +63,37 @@ markdown_extensions:
   #          format: !!python/name:pymdownx.superfences.fence_code_format
   #  - def_list
   - attr_list
-#  - tables
-#  - smarty
-#  - pymdownx.smartsymbols
-#  - pymdownx.critic
-#  - pymdownx.caret
-#  - pymdownx.keys
-#  - pymdownx.mark
-#  - pymdownx.tilde
-#  - pymdownx.magiclink
-#  - footnotes
-#  - pymdownx.emoji:
-#      emoji_index: !!python/name:materialx.emoji.twemoji
-#      emoji_generator: !!python/name:materialx.emoji.to_svg
-#  - pymdownx.tasklist:
-#      custom_checkbox: true
-#  - toc:
-#      permalink: true
-#  - pymdownx.arithmatex:
-#      generic: true
+  #  - tables
+  #  - smarty
+  #  - pymdownx.smartsymbols
+  #  - pymdownx.critic
+  #  - pymdownx.caret
+  #  - pymdownx.keys
+  #  - pymdownx.mark
+  #  - pymdownx.tilde
+  #  - pymdownx.magiclink
+  #  - footnotes
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+        #  - pymdownx.tasklist:
+        #      custom_checkbox: true
+        #  - toc:
+        #      permalink: true
+        #  - pymdownx.arithmatex:
+        #      generic: true
 
-#extra:
-#  #  homepage: https://example.com
-#  version:
-#    provider: mike
+        #extra:
+        #  homepage: https://example.com
+        #  version:
+        #    provider: mike
 
-#extra_javascript:
-#  - js/katex.js
-#  - https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/katex.min.js
+        #extra_javascript:
+        #  - js/katex.js
+        #  - https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/katex.min.js
 
-#extra_css:
-#  - https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css
+        #extra_css:
+        #  - https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css
 
 plugins:
   - search:
@@ -94,5 +101,6 @@ plugins:
   - git-revision-date-localized:
       #      enable_creation_date: true
       type: iso_date
+      fallback_to_build_date: true
 
 
