@@ -134,11 +134,14 @@ charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
 	chmod +rX -R $@
 
 upload:
-	cp -pv marine.render.xml depthcontourlines.addon.render.xml charts/
-	cp -pv charts/* tiles/download/
-	cd tiles/download/ && $(MAKE)
-	#rsync -htrlpv tiles/ nas:mapping/tiles/ $(O)
-	#rsync -htrlpP charts/ nas:mapping/tiles/download/ $(O)
+	rm -rf tmp && mkdir tmp
+	cp -rpv mkdocs.yml docs tmp
+	cp -rpv marine.render.xml depthcontourlines.addon.render.xml charts/* tmp/docs
+	cd tmp/docs && ./times.py index.md
+	cd tmp && mkdocs build
+	rm -rf tiles/download
+	mv tmp/site tiles/download
+	rm -rf tmp
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'

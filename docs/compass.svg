@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="24mm"
+   height="24mm"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="compass.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="11.006667"
+     inkscape:cx="36.296184"
+     inkscape:cy="37.795276"
+     inkscape:window-width="2067"
+     inkscape:window-height="1076"
+     inkscape:window-x="1206"
+     inkscape:window-y="240"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       fill="currentColor"
+       d="m 15,9 -3,-9 -3,9 -9,3 9,3 3,9 3,-9 9,-3 -9,-3 m -11,3 6,-2 1,2 H 4 m 8,8 -2,-6 2,-1 v 7 m 0,-16 2,6 -2,1 V 4 m 2,10 -1,-2 h 7 l -6,2 M 8.7,17.3 5,19 l 1.7,-3.7 1.6,0.5 0.4,1.5 m 8.6,-2 1.7,3.7 -3.7,-1.7 0.5,-1.6 1.5,-0.4 M 6.7,8.7 5,5 8.7,6.7 8.2,8.2 6.7,8.7 M 15.3,6.7 19,5 17.3,8.7 15.7,8.2 Z"
+       id="path5"
+       style="fill:#d7d7d7;fill-opacity:1" />
+  </g>
+</svg>
