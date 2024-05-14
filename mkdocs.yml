@@ -2,7 +2,7 @@ site_name: Free Nautical Charts
 site_url: http://waddenzee.duckdns.org/download/
 repo_url: https://github.com/quantenschaum/mapping
 repo_name: quantenschaum/mapping
-edit_uri: docs/
+edit_uri: edit/master/docs/
 
 # pip install mkdocs mkdocs-material mkdocs-git-revision-date-localized-plugin
 
