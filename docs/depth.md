@@ -1,24 +1,21 @@
 # Depth Data and Rendering
 
-see it in action: https://www.youtube.com/watch?v=TFhysaS7wj8
+see it in action: <https://www.youtube.com/watch?v=TFhysaS7wj8>
 
 ## TL;DR - How to get good depth data in OsmAnd
 
 To install the following files, download them to your phone and open them with OsmAnd (just tap and select OsmAnd).
 
-- install and enable the [marine map style](marine.render.xml)
-- install [depth rendering style](depthcontourlines.addon.render.xml) (replace!)
-- install [OBFs containing depth data](https://github.com/quantenschaum/mapping/releases)
+- install and enable the marine map style
+- install [OBFs containing depth data](index.md#vector-charts)
 
-:point_right: [Download](index.md#vector-charts) the files.
-
-:exclamation: This only works correctly with [render engine](https://osmand.net/docs/user/personal/global-settings/#map-rendering-engine) 2 and the render styles mentioned above!
+!!! attention 
+    This only works correctly with [render engine](https://osmand.net/docs/user/personal/global-settings/#map-rendering-engine) 2 and the marine style!
 
 ### Settings
 
-The custom render styles offer some config option, which can be use to adjust the look to your personal preferences.
+The marine rendering style offer some config option, which can be used to adjust the look to your personal preferences.
 
-- [additional settings](USAGE.md#additional-settings)
 - hide
     - spot soundings
     - depth contours
