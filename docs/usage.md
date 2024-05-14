@@ -46,32 +46,37 @@ OSM contains two render engines, version 2 is OpenGL based, it's faster and not 
 
 ### Vector Charts
 
-The look of and the data available in the OsmAnd nautical chart can be extended further. You need to [download the additional files for OsmAnd](index.md#osmand). Additionally, to buoys and beacon from OSM you also get
+![osmand vector chart](img/vector.png)
+
+The look of and the data available in the OsmAnd nautical chart can be extended further. You need to [download](index.md#vector-charts) the extra files for OsmAnd. Additionally, to buoys and beacon from OSM you also get
 
 - depth contours and spot soundings (in NL)
 - light sector limits and arcs with proper light descriptor strings
 
-Install these files (open them with OsmAnd) and switch to the _marine_ rendering style and enable _nautical depth_. Now your chart should look like this.
+Install these files and switch to the _marine_ rendering style and enable _nautical depth_. Now your chart should look like this.
 
-![osmand vector chart](img/vector.png)
+To make full use of the data in these files in form of a [nautical chart](https://osmand.net/docs/user/plugins/nautical-charts/), you have to
 
-!!! warning
+- use [render engine 2 (OpenGL)](https://osmand.net/docs/user/personal/global-settings#map-rendering-engine),
+- enable the [nautical charts plugin](https://osmand.net/docs/user/plugins/nautical-charts),
+- use the [boating profile](https://osmand.net/docs/user/personal/profiles/),
+- enable the display of [nautical depth](https://osmand.net/docs/user/plugins/nautical-charts#depth-contours),
+- **install and activate** the `marine` [rendering style](https://osmand.net/docs/user/map/vector-maps).
+
+!!! attention
     The vector chart will not be rendered properly without the marine rendering style and render engine 2 (OpenGL)!
 
 ### Raster Charts
 
-Another way to use these charts in OsmAnd is to use the raster chart. [Download](index.md#raster-charts) the `sqlitedb` files and install them in OsmAnd. The change the [map source](https://osmand.net/docs/user/map/raster-maps#main) to the raster chart or use it as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer). Using an overlay allows you to seamlessly switch between two chart with the transparency slider at the bottom of the chart. 
-
-Now your chart should look like this.
-
 ![osmand raster chart](img/raster.png)
+
+Another way to use these charts in OsmAnd is to use the [raster chart](https://osmand.net/docs/user/map/raster-maps) via the [online maps plugin](https://osmand.net/docs/user/plugins/online-map/). [Download](index.md#raster-charts) the chart files and install them in OsmAnd. The change the [base map](https://osmand.net/docs/user/map/raster-maps#main) to the raster chart or use it as an [overlay](https://osmand.net/docs/user/map/raster-maps#overlay-layer). Using an overlay allows you to seamlessly switch between two chart with the transparency slider at the bottom of the chart. 
 
 ### Online Charts
 
-You can also add online charts to OsmAnd (see [download](index.md#online-charts)), the tiles are loaded on demand into the cache. You can add them to OsmAnd by clicking these [magic links](https://osmand.net/docs/user/map/raster-maps#magic-url-to-install-map-source).
+The raster charts can also be added for [online usage](https://osmand.net/docs/user/plugins/online-map/), open the magic links](https://osmand.net/docs/user/map/raster-maps#magic-url-to-install-map-source) in OsmAnd to add them as map sources or [add them manually](https://osmand.net/docs/user/map/raster-maps#add-new-online-raster-map-source). This is useful for [downloading](https://osmand.net/docs/user/map/raster-maps/#download--update-tiles) only parts of the charts for offline usage.
 
-You may also want to add these.
-
+- [QMAP](index.md#online-charts)
 - [World Imagery](http://osmand.net/add-tile-source?name=World+Imagery&min_zoom=2&max_zoom=20&url_template=https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{0}/{1}/{2}) (<https://hub.arcgis.com/datasets/esri::world-imagery/about>)
 - [LuchtfotoQuick23LR](http://osmand.net/add-tile-source?name=LuchtfotoQuick23LR&min_zoom=2&max_zoom=18&url_template=https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0?layer=2023_ortho25%26style=default%26tilematrixset=EPSG:3857%26Service=WMTS%26Request=GetTile%26Version=1.0.0%26Format=image%2Fjpg%26TileMatrix={0}%26TileCol={1}%26TileRow={2}) (<https://www.pdok.nl/introductie/-/article/pdok-luchtfoto-rgb-open->)
 - [LuchtfotoQuick23HR](http://osmand.net/add-tile-source?name=LuchtfotoQuick23HR&min_zoom=2&max_zoom=20&url_template=https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0?layer=2023_orthoHR%26style=default%26tilematrixset=EPSG:3857%26Service=WMTS%26Request=GetTile%26Version=1.0.0%26Format=image%2Fjpg%26TileMatrix={0}%26TileCol={1}%26TileRow={2})
@@ -86,7 +91,7 @@ You can i.e. choose between different colorings to adjust the map to your liking
 
 ## Other Software
 
-The charts can also be used in other software like AvNav or OpenCPN, the necessary files are available in the [download section](index.md). 
+The charts can also be used in other software like AvNav or OpenCPN, the necessary files are available in the [download section](index.md#josm). 
 
 ### JOSM
 

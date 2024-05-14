@@ -28,22 +28,20 @@ The script creates
 - a colored line for directional lights with bearing and characteristics label
 - a marker at the light source with characteristics label
 
-:point_right: Example OBFs can be found in the [releases](https://github.com/quantenschaum/mapping/releases).
+:point_right: An OBF can be found in the [download section](index.md#vector-charts).
 
 In OsmAnd light sectors look like this.
 
-![light sectors](img/lightsectors.png)
+![light sectors](img2/lightsectors.png)
 
 overpass query
 
 ```
 [out:xml][timeout:90];
-(
-  nwr[~"seamark:type"~"light"];
-  nwr["seamark:light:range"][~"seamark:type"~"landmark"];
-  nwr["seamark:light:range"][~"seamark:type"~"beacon"];
-  nwr["seamark:light:1:range"][~"seamark:type"~"landmark"];
-  nwr["seamark:light:1:range"][~"seamark:type"~"beacon"];
+(  
+  nwr["seamark:type"="light_major"];   
+  nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:range"]; 	  
+  nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:1:range"];  
 );
 (._;>;);
 out meta;

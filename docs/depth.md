@@ -10,7 +10,7 @@ To install the following files, download them to your phone and open them with O
 - install [depth rendering style](depthcontourlines.addon.render.xml) (replace!)
 - install [OBFs containing depth data](https://github.com/quantenschaum/mapping/releases)
 
-:point_right: Download the files from the http://waddenzee.duckdns.org/download/.
+:point_right: [Download](index.md#vector-charts) the files.
 
 :exclamation: This only works correctly with [render engine](https://osmand.net/docs/user/personal/global-settings/#map-rendering-engine) 2 and the render styles mentioned above!
 
@@ -36,7 +36,7 @@ The safety contour settings allows to choose a contour line (must be in the data
 
 Here an example of paper style areas, dashed contours and a 2m safety line.
 
-![depth rendering](img/depth.png)
+![depth rendering](img2/depth.png)
 
 ## Data Sources
 
@@ -131,15 +131,15 @@ There are 15 types of contour lines identified by tag `contourtype`.
     - `1`
     - `5`
     - `10`
-    - `100m` - suffix `m` for compatibility with old rendering style
-    - `1000m` - suffix `m` for compatibility with old rendering style
+    - `100` 
+    - `1000` 
 
 ```
 contourtype=
 if(depth<0,'-1',
 if(depth in (0,1,2,3,4,5,10,20,50),to_string(depth)+'m',
-if(depth%1000=0,'1000m',
-if(depth%100=0,'100m',
+if(depth%1000=0,'1000',
+if(depth%100=0,'100',
 if(depth%10=0,'10',
 if(depth%5=0,'5',
 if(depth=1.8,'2m',
