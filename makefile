@@ -150,7 +150,7 @@ vwm-update:
 build:
 	git pull
 	$(MAKE) bsh
-	$(MAKE) bsh.obf
+	$(MAKE) qmap-de.obf
 	$(MAKE) lightsectors.obf
 	$(MAKE) vwm waddenzee.zip waddenzee.enc
 	$(MAKE) clean-cache
