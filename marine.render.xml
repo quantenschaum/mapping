@@ -126,6 +126,9 @@
   <renderingAttribute name="defaultColor">
     <case legend="true" attrColorValue="#ffffff"/>
     <case noPolygons="true" attrColorValue="#00555555"/>
+    <!--    <case depthColorScheme="ECDIS" attrColorValue="#C8B87A">-->
+    <!--      <case nightMode="true" attrColorValue="#2C291B"/>-->
+    <!--    </case>-->
     <case attrColorValue="#fddb8f">
       <apply_if nightMode="true" attrColorValue="#464234"/>
     </case>
@@ -242,9 +245,7 @@
 
   <renderingProperty attr="depthContoursDashed" name="Dashed Depth Contours" description="" type="boolean" possibleValues="" defaultValueDescription=""/>
 
-  <renderingProperty attr="depthContourColorScheme" name="Color Scheme" description="Depth contour lines color scheme" type="string" possibleValues="default,black,gray" defaultValueDescription="default"/>
-
-  <renderingProperty attr="depthAreaColorScheme" name="Depth Area Color Scheme" description="Depth area color scheme" type="string" possibleValues="ECDIS" defaultValueDescription="paper"/>
+  <renderingProperty attr="depthColorScheme" name="Depth Color Scheme" description="depth color scheme" type="string" possibleValues="ECDIS" defaultValueDescription="PAPER"/>
 
   <renderingProperty attr="spotSize" name="Spot Sounding Size" description="" type="string" possibleValues="10,12,14,16" defaultValueDescription="default"/>
 
@@ -253,34 +254,29 @@
   <renderingProperty attr="safetyContour" name="Safety Depth Contour" description="" type="string" possibleValues="0m,1m,2m,3m,4m,5m,10m" defaultValueDescription="off"/>
 
   <renderingAttribute name="color0">
-    <case depthContourColorScheme="gray" attrColorValue="#aa888888"/>
+    <!--  zero  -->
+    <case depthColorScheme="ECDIS" attrColorValue="#525A5C">
+      <case nightMode="true" attrColorValue="#363C3D"/>
+    </case>
     <case attrColorValue="#cc000000">
       <case nightMode="true" attrColorValue="#ccaaaaaa"/>
     </case>
   </renderingAttribute>
 
   <renderingAttribute name="color1">
-    <case depthContourColorScheme="gray" attrColorValue="#aa888888"/>
-    <case depthContourColorScheme="black" attrColorValue="#cc000000">
-      <case nightMode="true" attrColorValue="#ccaaaaaa"/>
+    <!--  drying  -->
+    <case depthColorScheme="ECDIS" attrColorValue="#7D888B">
+      <case nightMode="true" attrColorValue="#292E2E"/>
     </case>
     <case attrColorValue="#cc18992c"/>
   </renderingAttribute>
 
-  <renderingAttribute name="color2a">
-    <case depthContourColorScheme="gray" attrColorValue="#aa888888"/>
-    <case depthContourColorScheme="black" attrColorValue="#cc000000">
-      <case nightMode="true" attrColorValue="#ccaaaaaa"/>
+  <renderingAttribute name="color2">
+    <!--  underwater  -->
+    <case depthColorScheme="ECDIS" attrColorValue="#7D888B">
+      <case nightMode="true" attrColorValue="#292E2E"/>
     </case>
     <case attrColorValue="#cc118ac2"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="color2b">
-    <case depthContourColorScheme="gray" attrColorValue="#88888888"/>
-    <case depthContourColorScheme="black" attrColorValue="#88000000">
-      <case nightMode="true" attrColorValue="#88aaaaaa"/>
-    </case>
-    <case attrColorValue="#88118ac2"/>
   </renderingAttribute>
 
   <renderingAttribute name="depthTextColor">
@@ -527,7 +523,7 @@
     <case attrColorValue="#33ffffff"/>
   </renderingAttribute>
   <renderingAttribute name="tidalFlatColor">
-    <case tidalFlatStyle="darkgreen" attrColorValue="#aa7abf7d">
+    <case tidalFlatStyle="darkgreen" attrColorValue="#aa82B194">
       <case nightMode="true" attrColorValue="#aa085e0c"/>
     </case>
     <case attrColorValue="#ddcceccd">
@@ -3655,19 +3651,19 @@
   <polygon>
     <!-- depthcontourslines -->
     <switch minzoom="10" depthContours="true" hideAreas="false" tag="contourarea" value="depth">
-      <case depthAreaColorScheme="ECDIS">
+      <case depthColorScheme="ECDIS">
         <case nightMode="true">
-          <case additional="areatype=-1" color="#456157"/>
-          <case additional="areatype=0" color="#3D527C"/>
-          <case additional="areatype=2" color="#364559"/>
-          <case additional="areatype=5" color="#212B30"/>
-          <case additional="areatype=10" color="#0A0A0A"/>
+          <case additional="areatype=-1" color="#15251F"/>
+          <case additional="areatype=0" color="#16232F"/>
+          <case additional="areatype=2" color="#151B21"/>
+          <case additional="areatype=5" color="#0C0E0F"/>
+          <case additional="areatype=10" color="#070707"/>
         </case>
-        <case additional="areatype=-1" color="#709C90"/>
-        <case additional="areatype=0" color="#78A6F7"/>
-        <case additional="areatype=2" color="#90B8F5"/>
-        <case additional="areatype=5" color="#A8C7E6"/>
-        <case additional="areatype=10" color="#C2D9E8"/>
+        <case additional="areatype=-1" color="#82B194"/>
+        <case additional="areatype=0" color="#73B5EE"/>
+        <case additional="areatype=2" color="#97C4F1"/>
+        <case additional="areatype=5" color="#B9D4E0"/>
+        <case additional="areatype=10" color="#D3E9ED"/>
       </case>
       <case nightMode="true">
         <case additional="areatype=-1" color="#285c29"/>
@@ -4064,24 +4060,23 @@
       <case minzoom="10" additional="$safetyLineType" color="#d40b44"/>
 
       <!-- intervals -->
-      <case minzoom="6" additional="contourtype=1000" color="$color2a"/>
-      <case minzoom="7" additional="contourtype=100" color="$color2a"/>
-      <case minzoom="11" additional="contourtype=10" color="$color2b" hideMinorContours="false"/>
-      <case minzoom="12" additional="contourtype=5" color="$color2b" hideMinorContours="false"/>
-      <case minzoom="14" additional="contourtype=1" color="$color2b" hideMinorContours="false"/>
+      <case minzoom="6" additional="contourtype=1000" color="$color2"/>
+      <case minzoom="7" additional="contourtype=100" color="$color2"/>
+      <case minzoom="11" additional="contourtype=10" color="$color2" hideMinorContours="false"/>
+      <case minzoom="12" additional="contourtype=5" color="$color2" hideMinorContours="false"/>
+      <case minzoom="14" additional="contourtype=1" color="$color2" hideMinorContours="false"/>
       <case minzoom="13" additional="contourtype=-1" color="$color1" hideMinorContours="false"/>
       <!-- dedicated contours, usable as safety contour -->
       <case minzoom="10" additional="contourtype=0m" color="$color0"/>
-      <case minzoom="13" additional="contourtype=1m" color="$color2b" hideMinorContours="false"/>
-      <case minzoom="12" additional="contourtype=2m" color="$color2a"/>
-      <case minzoom="13" additional="contourtype=3m" color="$color2b" hideMinorContours="false"/>
-      <case minzoom="14" additional="contourtype=4m" color="$color2b" hideMinorContours="false"/>
-      <case minzoom="11" additional="contourtype=5m" color="$color2a"/>
-      <case minzoom="8" additional="contourtype=10m" color="$color2a"/>
-      <case minzoom="10" additional="contourtype=20m" color="$color2a" hideMinorContours="false"/>
-      <case minzoom="9" additional="contourtype=50m" color="$color2a" hideMinorContours="false"/>
-
-      <case minzoom="14" color="$color2a" hideMinorContours="false"/>
+      <case minzoom="13" additional="contourtype=1m" color="$color2" hideMinorContours="false"/>
+      <case minzoom="12" additional="contourtype=2m" color="$color2"/>
+      <case minzoom="13" additional="contourtype=3m" color="$color2" hideMinorContours="false"/>
+      <case minzoom="14" additional="contourtype=4m" color="$color2" hideMinorContours="false"/>
+      <case minzoom="11" additional="contourtype=5m" color="$color2"/>
+      <case minzoom="8" additional="contourtype=10m" color="$color2"/>
+      <case minzoom="10" additional="contourtype=20m" color="$color2" hideMinorContours="false"/>
+      <case minzoom="9" additional="contourtype=50m" color="$color2" hideMinorContours="false"/>
+      <case minzoom="14" color="$color2" hideMinorContours="false"/>
 
       <apply_if depthContoursDashed="true">
         <apply additional="contourtype=1m" pathEffect="15_3_2_3"/>
