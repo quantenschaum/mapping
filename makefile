@@ -31,6 +31,13 @@ vwm:
 	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@)-covr.gpkg $$F M_COVR -skipfailures -append; done
 	rm -rf data/$@
 
+DIR=
+
+dybde-no.gpkg:
+	echo "download data from https://kartkatalog.geonorge.no/metadata/sjoekart-dybdedata/2751aacf-5472-4850-a208-3532a51c529a"
+	rm -rf data/$(DIR)$@
+	for F in data/$(DIR)Basis*GML.zip; do B=$${F%.zip}; unzip -o -d data/$(DIR) $$F && ogr2ogr data/$(DIR)$@ $$B.gml -append && rm $$B.g*; done
+
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
 # need this because there is a typo in the WMS layer name (coastel)
@@ -233,6 +240,9 @@ batch-2.xml: batch-all.xml
 batch-3.xml: batch-all.xml
 	sed 's/mapZooms.*/mapZooms="16-"/' $< >$@
 
+batch-13.xml: batch-all.xml
+	sed 's/mapZooms.*/mapZooms="12-13;14-15;16-"/' $< >$@
+
 BLEVEL=all
 
 obf: data/omc batch-$(BLEVEL).xml
@@ -280,5 +290,3 @@ lightsectors.obf:
 
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/lightsectors.obf obf/*.obf
-
-
