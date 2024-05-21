@@ -38,6 +38,13 @@ dybde-no.gpkg:
 	rm -rf data/$(DIR)$@
 	for F in data/$(DIR)Basis*GML.zip; do B=$${F%.zip}; unzip -o -d data/$(DIR) $$F && ogr2ogr data/$(DIR)$@ $$B.gml -append && rm $$B.g*; done
 
+depth-no:
+	rm -rf osm obf
+	mkdir osm
+	cp -v data/no-$(R)/*.osm osm
+	$(MAKE) obf BLEVEL=13
+	data/omc/inspector.sh -c charts/depth-no-$(R).obf obf/*.obf
+
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
 # need this because there is a typo in the WMS layer name (coastel)
@@ -290,3 +297,4 @@ lightsectors.obf:
 
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/lightsectors.obf obf/*.obf
+

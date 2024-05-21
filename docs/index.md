@@ -15,9 +15,10 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 - [:de: QMAP DE](qmap-de.obf){:download}
 - [:de: Depth Contours DE](depth-de.obf){:download}
 - [:nl: Depth Data NL](depth-nl.obf){:download}
-- [:no: Depth Data NO east :material-arrow-right:](depth-no-east.obf){:download}
-- [:no: Depth Data NO west :material-arrow-left:](depth-no-west.obf){:download}
-- [:no: Depth Data NO north :material-arrow-up:](depth-no-north.obf){:download}
+- [:no: Depth Data NO east](depth-no-east.obf){:download}
+- [:no: Depth Data NO west](depth-no-west.obf){:download}
+- [:no: Depth Data NO mid](depth-no-mid.obf){:download}
+- [:no: Depth Data NO north](depth-no-north.obf){:download}
 - [:globe_with_meridians: Light Sectors Worldwide](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
 
