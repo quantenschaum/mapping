@@ -42,8 +42,14 @@ depth-no:
 	rm -rf osm obf
 	mkdir osm
 	cp -v data/no-$(R)/*.osm osm
-	$(MAKE) obf BLEVEL=13
+	$(MAKE) obf BLEVEL=no
 	data/omc/inspector.sh -c charts/depth-no-$(R).obf obf/*.obf
+
+depth-no.all:
+	$(MAKE) depth-no R=east
+	$(MAKE) depth-no R=west
+	$(MAKE) depth-no R=mid
+	$(MAKE) depth-no R=north
 
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
@@ -219,7 +225,7 @@ data/josm.jar:
 	wget -O $@ https://josm.openstreetmap.de/josm-tested.jar
 
 josm: data/josm.jar
-	java --add-exports=java.base/sun.security.action=ALL-UNNAMED --add-exports=java.desktop/com.sun.imageio.plugins.jpeg=ALL-UNNAMED --add-exports=java.desktop/com.sun.imageio.spi=ALL-UNNAMED -jar $<
+	java $(JAVA_OPTS) --add-exports=java.base/sun.security.action=ALL-UNNAMED --add-exports=java.desktop/com.sun.imageio.plugins.jpeg=ALL-UNNAMED --add-exports=java.desktop/com.sun.imageio.spi=ALL-UNNAMED -jar $<
 
 
 data/omc:
@@ -233,7 +239,7 @@ omc: data/omc
 
 mobac:
 	#java -Xms64m -Xmx1200M -jar data/mobac/Mobile_Atlas_Creator.jar
-	java -jar data/mobac/Mobile_Atlas_Creator.jar
+	java $(JAVA_OPTS) -jar data/mobac/Mobile_Atlas_Creator.jar
 
 batch-0.xml: batch-all.xml
 	sed 's/mapZooms.*/mapZooms="6-9;10-11"/' $< >$@
@@ -247,14 +253,15 @@ batch-2.xml: batch-all.xml
 batch-3.xml: batch-all.xml
 	sed 's/mapZooms.*/mapZooms="16-"/' $< >$@
 
-batch-13.xml: batch-all.xml
-	sed 's/mapZooms.*/mapZooms="12-13;14-15;16-"/' $< >$@
+batch-no.xml: batch-all.xml
+	sed 's/mapZooms.*/mapZooms="10-11;12-13;14-15;16-"/' $< >$@
+	sed 's/renderingTypesFile.*/renderingTypesFile="rendering_types-no.xml"/' $< >$@
 
 BLEVEL=all
 
 obf: data/omc batch-$(BLEVEL).xml
 	mkdir -p $@
-	java -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch-$(BLEVEL).xml
+	java $(JAVA_OPTS) -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch-$(BLEVEL).xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
 	rm -f $@/*.log
 
