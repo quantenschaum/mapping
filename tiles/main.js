@@ -84,6 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var overlays = {
     'Grid': grid,
+    'EMODnet Bathymetry':L.tileLayer.wms('https://ows.emodnet-bathymetry.eu/wms', {
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      layers: 'emodnet:mean_multicolour',
+      attribution: '<a href="https://emodnet.ec.europa.eu/">EMODnet</a>',
+      class:"invert"
+    }),
     'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.png', {
       attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
     }),
@@ -169,6 +177,12 @@ document.addEventListener("DOMContentLoaded", () => {
   basemaps['OpenStreetMap'].getContainer().classList.add('grayscale');
   map.on('baselayerchange', function(evt) {
     //console.log(evt);
+    if(evt.layer.options.class) {
+      evt.layer.getContainer().classList.add(evt.layer.options.class);
+    }
+  });
+  map.on('layeradd', function(evt) {
+//    console.log(evt);
     if(evt.layer.options.class) {
       evt.layer.getContainer().classList.add(evt.layer.options.class);
     }
