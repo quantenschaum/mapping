@@ -266,16 +266,15 @@ document.addEventListener("DOMContentLoaded", () => {
   L.chartTools({urlPrefix:''}).addTo(map);
 
   L.control.timelineSlider({
-        timelineItems: ["off","-6h","-5h","-4h","-3h","-2h","-1h","HW","+1h","+2h","+3h","+4h","+5h","+6h","Figures"],
+        timelineItems: ["off","-6h","-5h","-4h","-3h","-2h","-1h","HW Helgoland","+1h","+2h","+3h","+4h","+5h","+6h","Figures"],
         labelWidth:"40px",
         betweenLabelAndRangeSpace:"10px",
         changeMap: function(p){
-          console.log(p,p.label.replace("h","").replace("HW","+0"));
-          console.log(layers);
+          console.log(p);
           for(let i=0;i<layers._layers.length;i++){
             let l=layers._layers[i];
             if(l.name.startsWith("Tide")){
-              var x=p.label.replace("h","").replace("HW","+0");
+              var x=p.label.replace("h","").replace("HW Helgoland","+0");
               console.log(l);
               if(l.name.includes(x)) {
                 map.addLayer(l.layer);
