@@ -278,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
               if(name.includes(x)) {
 //                console.log("+",name);
                 map.addLayer(layer);
-              } else {
+              } else if(name.includes("Tide")||x!="off") {
 //                console.log("-",name);
                 map.removeLayer(layer);
               }
