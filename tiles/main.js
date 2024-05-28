@@ -147,12 +147,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let i = -6; i <= 6; i++) {
     let s=(i>=0?'+':'')+i;
-    overlays['Tide HW Helgoland '+s+'h']=L.tileLayer('tides/'+s+'/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
+    overlays['Tide HW Helgoland '+s+'h']=L.tileLayer('tides/hw'+s+'/{z}/{x}/{y}.png', {
+      attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
     });
   }
   overlays['Tide Figures']=L.tileLayer('tides/fig/{z}/{x}/{y}.png', {
-    attribution: '<a href="https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html">BSH GeoSeaPortal</a>'
+    attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
   });
 
   var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP NL']];

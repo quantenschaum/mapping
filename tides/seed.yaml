@@ -1,0 +1,22 @@
+seeds:
+  northsea:
+    caches: [ tides ]
+    levels: [ 8,9,10 ]
+    coverages: [ northsea ]
+  coast:
+    caches: [ tides ]
+    levels: [ 11,12,13 ]
+    coverages: [ coast ]
+  figures:
+    caches: [ figures ]
+    levels: [ 10,11,12 ]
+    coverages: [ northsea ]
+
+coverages:
+  northsea:
+    srs: 'EPSG:4326'
+    bbox: [ -4.086914,48.531157,9.722900,60.168842 ]
+  coast:
+    srs: 'EPSG:4326'
+    bbox: [ 6.273193,53.206033,9.404297,55.733296 ]
+

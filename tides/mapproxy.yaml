@@ -1,0 +1,51 @@
+globals:
+  image:
+    paletted: false
+    resampling_method: bilinear
+  cache:
+    link_single_color_images: true
+    meta_size: [ 6,6 ]
+    meta_buffer: 200
+    bulk_meta_tiles: true
+  tiles:
+    expires_hours: 24
+
+services:
+  tms:
+  wms:
+  demo:
+
+sources:
+  qgis:
+    type: wms
+    req:
+      url: http://localhost:8000/
+      transparent: true
+      map: tides.qgs
+      #layers: northsea,coast
+      filter: northsea,coast:"hwhour" = 0
+    coverage:
+      srs: 'EPSG:4326'
+      bbox: [ -4.086914,48.531157,9.722900,60.168842 ]
+
+caches:
+  tides:
+    sources: [ "qgis:northsea,coast" ]
+    grids: [ GLOBAL_WEBMERCATOR ]
+    cache:
+      type: mbtiles
+      filename: hw+0.mbtiles
+  figures:
+    sources: [ "qgis:figures" ]
+    grids: [ GLOBAL_WEBMERCATOR ]
+    cache:
+      type: mbtiles
+      filename: fig.mbtiles
+
+layers:
+  - name: tides
+    title: "Tides DE"
+    sources: [ tides ]
+  - name: figures
+    title: "Figures DE"
+    sources: [ figures ]
