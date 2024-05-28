@@ -148,11 +148,11 @@ document.addEventListener("DOMContentLoaded", () => {
   for (let i = -6; i <= 6; i++) {
     let s=(i>=0?'+':'')+i;
     overlays['Tide HW Helgoland '+s+'h']=L.tileLayer.fallback('tides/hw'+s+'/{z}/{x}/{y}.png', {
-      attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
+      attribution: '<a href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
     });
   }
   overlays['Tide Figures']=L.tileLayer.fallback('tides/fig/{z}/{x}/{y}.png', {
-    attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
+    attribution: '<a href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
   });
 
   var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP NL']];

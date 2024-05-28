@@ -38,9 +38,10 @@ clean-cache:
 	rm -rf cache_data
 
 convert: $(subst cache_data/,,$(wildcard cache_data/*.mbtiles)) \
-         $(subst mbtiles,sqlitedb,$(subst cache_data/,,$(wildcard cache_data/*.mbtiles))) \
-         $(subst .mbtiles,/,$(subst cache_data/,,$(wildcard cache_data/*.mbtiles)))
-	$(MAKE) gemf
+         $(subst .mbtiles,.sqlitedb,$(subst cache_data/,,$(wildcard cache_data/*.mbtiles))) \
+         $(subst .mbtiles,.gemf,$(subst cache_data/,,$(wildcard cache_data/*.mbtiles)))
+
+unpack:  $(subst .mbtiles,/,$(subst cache_data/,,$(wildcard cache_data/*.mbtiles)))
 
 %.mbtiles: cache_data/%.mbtiles
 	../tileconvert.py -yf $< $@ -t "$(basename $@) `date +%F`"
@@ -54,7 +55,10 @@ convert: $(subst cache_data/,,$(wildcard cache_data/*.mbtiles)) \
 %.gemf: %.mbtiles
 	../data/chartconvert/convert_mbtiles.py tms $@ $<
 
-gemf: $(patsubst %.mbtiles,%.gemf,$(wildcard *.mbtiles))
+zip:
+	zip tides.mbtiles.zip *.mbtiles
+	zip tides.sqlitedb.zip *.sqlitedb
+	zip tides.gemf.zip *.gemf
 
 clean:
-	rm -fv *.mbtiles *.sqlitedb *.gemf mapproxy-x.yaml hw*/ fig/
+	rm -frv *.mbtiles *.sqlitedb *.gemf mapproxy-x.yaml hw*/ fig/
