@@ -33,6 +33,7 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 
 - [:de: QMAP DE](qmap-de.sqlitedb){:download}
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
+- [:de: Tidal Atlas DE](tides.sqlitedb.zip){:download}
 
 #### Online Charts
 
@@ -63,6 +64,7 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
 
 - [:de: QMAP DE](qmap-de.gemf){:download}
 - [:nl: QMAP NL](qmap-nl.gemf){:download}
+- [:de: Tidal Atlas DE](tides.gemf.zip){:download}
 
 ## [OpenCPN](https://opencpn.org/)
 
@@ -72,3 +74,4 @@ OpenCPN and other applications can display raster charts from `mbtiles`.
 
 - [:de: QMAP DE](qmap-de.mbtiles){:download}
 - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
+- [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
