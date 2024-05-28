@@ -270,19 +270,19 @@ document.addEventListener("DOMContentLoaded", () => {
         labelWidth:"40px",
         betweenLabelAndRangeSpace:"10px",
         changeMap: function(p){
-          console.log(p);
-          for(let i=0;i<layers._layers.length;i++){
-            let l=layers._layers[i];
-            if(l.name.startsWith("Tide")){
-              var x=p.label.replace("h","").replace("HW Helgoland","+0");
-              console.log(l);
-              if(l.name.includes(x)) {
-                map.addLayer(l.layer);
+          var x=p.label.replace("HW Helgoland","+0h");
+//          console.log(x);
+          Object.entries(overlays).forEach(l=>{
+//            console.log(l);
+            var name=l[0],layer=l[1];
+              if(name.includes(x)) {
+//                console.log("+",name);
+                map.addLayer(layer);
               } else {
-                map.removeLayer(l.layer);
+//                console.log("-",name);
+                map.removeLayer(layer);
               }
-            }
-          }
+          });
         }
      }).addTo(map);
 });
