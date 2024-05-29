@@ -12,10 +12,15 @@ On this website you can view the available maps in your browser. You can switch 
 
 Additionally, you can switch to other base layers and overlays from other sources.
 
-- ENC - [ENC by RWS](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc) with Buoys and Beacons from the ENC
-- Vaarweg Markeringen - buoys and beacons directly from the [server by RWS](https://geo.rijkswaterstaat.nl/services/ogc/gdr/web/) (more up to date than the ENC)
-- BSH ... - selected layer from [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation) by [BSH](https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html)
-- [OpenSeaMap](https://map.openseamap.org/)
+- [ENC by RWS](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc) with Buoys and Beacons from the ENC
+- buoys and beacons directly from the [server by RWS](https://geo.rijkswaterstaat.nl/services/ogc/gdr/web/) (more up to date than the ENC)
+- selected layers from [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation) by [BSH](https://www.bsh.de/DE/THEMEN/Geoinformationen/geoinformationen_node.html)
+- SeaMarks layer from [OpenSeaMap](https://map.openseamap.org/)
+- [Tidal Atlas](tides.md) based on [data by BSH](https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas)
+- [EMODnet](https://emodnet.ec.europa.eu/) bathymetry
+- [World Imagery](https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9)
+- [PDOK Luchtfotos](https://www.pdok.nl/introductie/-/article/pdok-luchtfoto-rgb-open-) 
+- [OsmAnd](https://osmand.net/map/) nautical chart
 
 ## OpenSeaMap
 
