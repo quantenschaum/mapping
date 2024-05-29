@@ -265,12 +265,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   L.chartTools({urlPrefix:''}).addTo(map);
 
+  var tides=false;
+
   L.control.timelineSlider({
         timelineItems: ["off","-6h","-5h","-4h","-3h","-2h","-1h","HW Helgoland","+1h","+2h","+3h","+4h","+5h","+6h","Figures"],
         labelWidth:"40px",
         betweenLabelAndRangeSpace:"10px",
         changeMap: function(p){
           var x=p.label.replace("HW Helgoland","+0h");
+          var t=x!="off";
 //          console.log(x);
           Object.entries(overlays).forEach(l=>{
 //            console.log(l);
@@ -278,11 +281,12 @@ document.addEventListener("DOMContentLoaded", () => {
               if(name.includes(x)) {
 //                console.log("+",name);
                 map.addLayer(layer);
-              } else if(name.includes("Tide")||x!="off") {
+              } else if(name.includes("Tide") || !tides && t) {
 //                console.log("-",name);
                 map.removeLayer(layer);
               }
           });
+          tides=t;
         }
      }).addTo(map);
 });
