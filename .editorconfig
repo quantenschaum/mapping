@@ -14,3 +14,7 @@ indent_style = tab
 
 [*.md]
 trim_trailing_whitespace = false
+
+[*.xml]
+indent_style = tab
+
