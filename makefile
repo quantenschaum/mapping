@@ -5,7 +5,7 @@
 SHELL=/bin/bash
 OGR_OPTS=OGR_S57_OPTIONS="LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON,UPDATES=APPLY" S57_CSV="$(PWD)"
 
-.PHONY: nautical.render.xml render.diff marine.render.xml bsh.osm icons obf vwm bsh charts
+.PHONY: bsh.osm icons obf vwm bsh charts
 
 help:
 	cat README.md
