@@ -157,10 +157,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP NL']];
 
-  var isLocal=document.URL.startsWith('file') || document.URL.includes('localhost');
-
-  if(isLocal) {
-    overlays['QGIS'] = L.tileLayer('http://localhost:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png');
+  if(document.URL.includes('localhost')) {
+    overlays['QGIS'] = L.tileLayer.wms('http://localhost:8000', {
+      map: "bsh.qgs",
+      layers:'BSH',
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      tiled: "true"
+     });
+    overlays['MapProxy'] = L.tileLayer('http://localhost:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png');
   }
 
 
@@ -234,7 +240,8 @@ document.addEventListener("DOMContentLoaded", () => {
       showUnitControl: true,
   }).addTo(map);
 
-  L.control.opacity(overlays, {collapsed: true}).addTo(map);
+  var overlays2 = Object.fromEntries(Object.entries(overlays).filter(([k,v]) => !k.includes("Tide")));
+  L.control.opacity(overlays2, {collapsed: true}).addTo(map);
 
   map.on('contextmenu',(e) => {
     var b=map.getBounds();
@@ -263,7 +270,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  L.chartTools({urlPrefix:''}).addTo(map);
+  if(document.URL.includes('tools')) {
+    L.chartTools({urlPrefix:''}).addTo(map);
+  }
 
   var tides=false;
 
