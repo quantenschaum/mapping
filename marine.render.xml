@@ -10,24 +10,15 @@
 		type="boolean" possibleValues="" category="hide"/>-->
 	<renderingProperty attr="whiteWaterSports" name="Whitewater sports" description="Whitewater sports"
 		type="boolean" possibleValues="" category="routes"/>
-	<renderingProperty attr="lightDetail" name="Light detail"
-										 description="what light information to show"
-										 category="details" type="string" defaultValue="" defaultValueDescription="default"
-										 possibleValues="small,name_only,omit"/> <!-- used in INT-1 P, R, S Sections: Lights, Fog Signals, Radar -->
-	<renderingProperty attr="seabedDetail" name="Seabed detail"
-										 description="Additional text information on seabed surface_qualification, combined surface types, category and taxon of weed or seagrass"
-										 category="details" type="string" defaultValue="" defaultValueDescription="simple"
-										 possibleValues="category,all,omit"/> <!-- used in INT-1 J Section: Nature of the Seabed -->
-	<renderingProperty attr="currentTrackColor" name="Current GPX color"
-										 description="Color of the currently recording track"
-										 type="string"
-										 possibleValues="red,orange,yellow,lightgreen,green,lightblue,blue,purple,translucent_red,translucent_orange,translucent_yellow,translucent_lightgreen,translucent_green,translucent_lightblue,translucent_blue,translucent_purple"
-										 defaultValueDescription="default"/>
-	<renderingProperty attr="currentTrackWidth" name="Current GPX width"
-										 description="Width of the currently recording track"
-		type="string" possibleValues="thin,medium,bold" defaultValueDescription="default"/>
+	<renderingProperty attr="lightDetail" name="Light detail" description="what light information to show"
+ category="details" type="string" defaultValue="" defaultValueDescription="default" possibleValues="small,name_only,omit"/> <!-- used in INT-1 P, R, S Sections: Lights, Fog Signals, Radar -->
+	<renderingProperty attr="seabedDetail" name="Seabed detail" description="Additional text information on seabed surface_qualification, combined surface types, category and taxon of weed or seagrass" category="details" type="string" defaultValue="" defaultValueDescription="simple" possibleValues="category,all,omit"/> <!-- used in INT-1 J Section: Nature of the Seabed -->
+	<renderingProperty attr="currentTrackColor" name="Current GPX color" description="Color of the currently recording track"
+		 type="string" possibleValues="red,orange,yellow,lightgreen,green,lightblue,blue,purple,translucent_red,translucent_orange,translucent_yellow,translucent_lightgreen,translucent_green,translucent_lightblue,translucent_blue,translucent_purple" defaultValueDescription="default"/>
+	<renderingProperty attr="currentTrackWidth" name="Current GPX width" description="Width of the currently recording track"
+		 type="string" possibleValues="thin,medium,bold" defaultValueDescription="default"/>
 	<renderingProperty attr="noPolygons" name="Hide polygons" description="Make all areal land features on map transparent"
-		type="boolean" possibleValues="" category="hide"/>
+		 type="boolean" possibleValues="" category="hide"/>
 	<renderingProperty attr="legend" name="Legend" type="boolean" possibleValues="" category="ui_hidden"/>
 
 	<renderingProperty attr="watercolor" name="Water Color" description="Color of Water" type="string" defaultValueDescription="default" possibleValues="blue,white,gray"/>
@@ -116,7 +107,7 @@
 	</renderingAttribute>
 
 	<renderingProperty attr="engine_v1" type="boolean"/>
-	
+
 	<renderingAttribute name="waterwayArrows">
 		<case attrIntValue="1"/>
 	</renderingAttribute>
@@ -193,7 +184,7 @@
 	<renderingAttribute name="defaultSymbolPathSpacing">
 		<case attrFloatValue="5"/>
 	</renderingAttribute>
-	
+
 	<renderingAttribute name="defaultBlockPathSpacing">
 		<case attrFloatValue="100"/>
 	</renderingAttribute>
@@ -632,7 +623,7 @@
 		<case nightMode="true" attrColorValue="#555555"/>
 		<case attrColorValue="#888888"/>
 	</renderingAttribute>
-	
+
 	<order>
 		<!-- depthcontourslines -->
 		<switch area="false" objectType="2" order="80">
@@ -1592,12 +1583,12 @@
 			<!-- Seamarks -->
 			<switch minzoom="8" textColor="#0400ab" textHaloColor="#66dddddd" textHaloRadius="2">
 				<!-- INT-1 P, R, S Sections: Lights, Fog Signals, Radar. seamark:name and seamark:light tags as nameTag2 (as far as possible today). The OSMAND display was validated at Texel, Den Helder, Helgoland, Elbe and Weser Approaches, Rotterdam, Cherbourg.
-				default: 		name (light:character.group.period[in seconds].fog_signal:category.group.period[in seconds].radar_transponder:category.group) 
+				default: 		name (light:character.group.period[in seconds].fog_signal:category.group.period[in seconds].radar_transponder:category.group)
 								e.g. T6-VH 1 (Fl.2+1.10)= Buoy T6-VH 1 with light flashes in groups of 2 and 1. This is repeated after 10 seconds.
-								name (light:character.period[in seconds]) or name (light:character.group), with only one number element. 
+								name (light:character.period[in seconds]) or name (light:character.group), with only one number element.
 								sectors: 		name (sector1start[bearing in degree]-end[bearing in degree]-colour-sector2 ... -sector3 ... -lightcategory)
 				sector1...5:	name (sector1character.group.colour.period[in seconds].start[bearing in degree].end[bearing in degree].category[dircetional,upper].exhibition[night,fog,etc.].visibilitydistance[in nautical miles])
-				Note1: In the default, a single number remains ambiguous, because the group brackets and the unit cannot be added to the nameTag2, so far. 
+				Note1: In the default, a single number remains ambiguous, because the group brackets and the unit cannot be added to the nameTag2, so far.
 				Note2: The group tag is/cannot? be attributed correctly, e.g. for seamarks cardinal south.
 				More specific formatting, inclusion of colours and combination of text elements in the nameTags in OSMAND will require amendments for parsing of commands from rendering_types.xml and rendering styles (nautical.render.xml).
 				aiming at OSMAND text display according to IHO Chart INT-1 Section P: Lights and Section R Fog Signals, e.g. https://map.openseamap.org/?zoom=15&lon=4.79&lat=53.00 .
