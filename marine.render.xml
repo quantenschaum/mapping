@@ -1547,12 +1547,11 @@
             <case maxzoom="16" nameTag="" nameTag2="ele" textSize="13" textOrder="65"/>
             <case minzoom="17" nameTag="" nameTag2="ele" textSize="16" textOrder="65"/>
           </case>
-          <case minzoom="14" textSize="12" tag="natural" value="ridge" textOnPath="true" textDy="0"/>
-          <case minzoom="13" textSize="14" tag="natural" value="crater" textColor="#4e0d0d" textDy="-4"/>
-          <apply_if nightMode="true" textHaloRadius="$textHaloRadiusNight" textColor="#ffcc9b"
-                    textHaloColor="#77464234"/>
+					<case minzoom="14" textSize="12" tag="natural" value="ridge" nameTag="" textOnPath="true" textDy="0"/>
+					<case minzoom="13" textSize="14" tag="natural" value="crater" nameTag="" textColor="#4e0d0d" textDy="-4"/>
+					<apply_if nightMode="true" textHaloRadius="$textHaloRadiusNight" textColor="#ffcc9b" textHaloColor="#77464234"/>
         </switch>
-        <case minzoom="11" tag="natural" value="volcano" nameTag2="ele" textOrder="53" textHaloColor="#99ffd6c0">
+				<case minzoom="11" tag="natural" value="volcano" nameTag="" nameTag2="ele" textOrder="53" textHaloColor="#99ffd6c0">
           <case maxzoom="12" textSize="12"/>
           <case minzoom="13" textSize="13"/>
           <apply_if nightMode="true" textColor="#ffcc9b" textHaloColor="#77464234"/>
@@ -3459,17 +3458,13 @@
       <!-- INT-1 J Section Nature of the Seabed -->
       <!-- INT-1 J13, J14, J15 icons at single nodes -->
       <switch minzoom="14" iconVisibleSize="1">
-        <case tag="seamark:type" value="weed" icon="seamark_j132_weedkelp" iconOrder="5">
-          <apply_if nightMode="true" icon="seamark_j132_weedkelp" shield="seamark_j132_weedkelp_night"/>
-        </case>
-        <case tag="seamark:type" value="seagrass" icon="seamark_j134_seagrass" iconOrder="5">
-          <apply_if nightMode="true" icon="seamark_j134_seagrass" shield="seamark_j134_seagrass_night"/>
-        </case>
+				<case tag="seamark:type" value="weed" icon="seamark_j132_weedkelp" iconOrder="5"/>
+				<case tag="seamark:type" value="seagrass" icon="seamark_j134_seagrass" iconOrder="5"/>
         <case tag="seamark:type" value="sand_waves" icon="seamark_j14_sand_waves" iconOrder="150">
-          <apply_if nightMode="true" shield="seamark_j14_sand_waves_night"/>
+					<apply_if nightMode="true" icon="seamark_j14_sand_waves_night"/>
         </case>
         <case minzoom="15" tag="seamark:type" value="spring" icon="seamark_j15_spring" iconOrder="5">
-          <apply_if nightMode="true" shield="seamark_j15_spring_shield_night"/>
+					<apply_if nightMode="true" icon="seamark_j15_spring_night"/>
         </case>
         <apply_if seabedDetail="omit" icon="" shield=""/> <!-- no display of sebedDetail selected in renderingProperties-->
       </switch>
