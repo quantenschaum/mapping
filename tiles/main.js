@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
   for (let i = -6; i <= 6; i++) {
     let s=(i>=0?'+':'')+i;
     overlays['Tide HW Helgoland '+s+'h']=L.tileLayer.fallback('tides/hw'+s+'/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
+      attribution: '<a href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>', tide:true
     });
   }
   overlays['Tide Figures']=L.tileLayer.fallback('tides/fig/{z}/{x}/{y}.png', {
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
   map.on('overlayadd overlayremove',function(e){
 //    console.log(e);
     map.removeControl(opacity);
-    activeOverlays = Object.fromEntries(Object.entries(overlays).filter(([k,v]) => !k.includes("Grid") && !k.includes("Tide") && map.hasLayer(v)));
+    activeOverlays = Object.fromEntries(Object.entries(overlays).filter(([k,v]) => !k.includes("Grid") && !v.options.tide && map.hasLayer(v)));
 //    console.log(activeOverlays);
     if(Object.keys(activeOverlays).length) {
       opacity = L.control.opacity(activeOverlays, {collapsed: true});
@@ -293,28 +293,23 @@ document.addEventListener("DOMContentLoaded", () => {
     L.chartTools({urlPrefix:''}).addTo(map);
   }
 
-  var tides=false;
-
   L.control.timelineSlider({
-        timelineItems: ["off","-6h","-5h","-4h","-3h","-2h","-1h","HW Helgoland","+1h","+2h","+3h","+4h","+5h","+6h","Figures"],
+        timelineItems: ["off","-6h","-5h","-4h","-3h","-2h","-1h","HW Helgoland","+1h","+2h","+3h","+4h","+5h","+6h"],
         labelWidth:"40px",
         betweenLabelAndRangeSpace:"10px",
         changeMap: function(p){
           var x=p.label.replace("HW Helgoland","+0h");
-          var t=x!="off";
-//          console.log(x);
+//          console.log(p,x);
           Object.entries(overlays).forEach(l=>{
-//            console.log(l);
             var name=l[0],layer=l[1];
-              if(name.includes(x)) {
-//                console.log("+",name);
-                map.addLayer(layer);
-              } else if(name.includes("Tide") || !tides && t) {
-//                console.log("-",name);
-                map.removeLayer(layer);
-              }
+            if(!layer.options.tide) { return; }
+//            console.log(l);
+            if(name.includes(x)) {
+              map.addLayer(layer);
+            } else if(layer.options.tide) {
+              map.removeLayer(layer);
+            }
           });
-          tides=t;
         }
      }).addTo(map);
 });
