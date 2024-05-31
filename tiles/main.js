@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
+      tiled: true,
       attribution: '<a href="https://rijkswaterstaat.nl/">RWS</a> <a href="https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/">Chart Server</a>'
      }),
     'Worldy Imagery':L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -71,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
+      tiled: true,
       attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2023 8cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
@@ -78,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
+      tiled: true,
       attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
     }),
   };
@@ -88,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
+      tiled: true,
       layers: 'emodnet:mean_multicolour',
       attribution: '<a href="https://emodnet.ec.europa.eu/">EMODnet</a>',
       class:"invert"
@@ -102,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
+      tiled: true,
       layers: 'Coastal_Depth_area,Approach_Depth_area,Harbour_Depth_area',
       attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
@@ -109,20 +114,23 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
-      layers: '4_Approach',
+      tiled: true,
+      layers: 'Approach_Depths,Approach_Fishing_Facility_Marine_Farm_Areas,Approach_Offshore_Installations,Approach_Areas_Limits',
       attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'BSH NavAids':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows', {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
-      layers: 'Coastal_Lights,Coastal_Lateral_Buoys,Coastal_Cardinal_Buoys,Coastal_All_Other_Buoys,Coastal_Lateral_Beacons,Coastal_Cardinal_Beacons,Coastal_All_Other_Beacons,Approach_Lights,Approach_Lateral_Buoys,Approach_Cardinal_Buoys,Approach_All_Other_Buoys,Approach_Lateral_Beacons,Approach_Cardinal_Beacons,Approach_All_Other_Beacons,Harbour_Lights,Harbour_Lateral_Buoys,Harbour_Cardinal_Buoys,Harbour_All_Other_Buoys,Harbour_Lateral_Beacons,Harbour_Cardinal_Beacons,Harbour_All_Other_Beacons,Berthing_Lights,Berthing_Lateral_Buoys,Berthing_Cardinal_Buoys,Berthing_All_Other_Buoys,Berthing_Lateral_Beacons,Berthing_Cardinal_Beacons,Berthing_All_Other_Beacons',
+      tiled: true,
+      layers: 'Coastal_Lights,Coastal_Lateral_Beacons,Coastal_Cardinal_Beacons,Coastal_All_Other_Beacons,Coastal_Lateral_Buoys,Coastal_Cardinal_Buoys,Coastal_All_Other_Buoys,Coastal_Fog_Signals_Daymarks,Approach_Lights,Approach_Lateral_Beacons,Approach_Cardinal_Beacons,Approach_All_Other_Beacons,Approach_Lateral_Buoys,Approach_Cardinal_Buoys,Approach_All_Other_Buoys,Approach_Fog_Signals_Daymarks,Harbour_Lights,Harbour_Lateral_Beacons,Harbour_Cardinal_Beacons,Harbour_All_Other_Beacons,Harbour_Lateral_Buoys,Harbour_Cardinal_Buoys,Harbour_All_Other_Buoys,Harbour_Fog_Signals_Daymarks',
       attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'BSH Topo':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Topography/ows', {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
+      tiled: true,
       layers: '4_Approach,5_Harbour',
       attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
@@ -130,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
+      tiled: true,
       layers: '4_Approach,5_Harbour',
       attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
@@ -138,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
+      tiled: true,
       attribution: '<a href="https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979">RWS Buoys</a> <a href="https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049">RWS Beacons</a>'
      }),
     'OpenSeaMap':L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
@@ -164,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
-      tiled: "true"
+      tiled: true
      });
     overlays['MapProxy'] = L.tileLayer('http://localhost:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png');
   }
@@ -194,15 +204,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  new L.Hash(map); // try https://github.com/KoGor/leaflet-fullHash
+
+  L.control.polylineMeasure({
+      unit: 'nauticalmiles',
+      clearMeasurementsOnStop: false,
+      showBearings: true,
+      showClearControl: true,
+      showUnitControl: true,
+  }).addTo(map);
+
+  var opacity = L.control.opacity({}); //.addTo(map);
+
+  map.on('overlayadd overlayremove',function(e){
+//    console.log(e);
+    map.removeControl(opacity);
+    activeOverlays = Object.fromEntries(Object.entries(overlays).filter(([k,v]) => !k.includes("Grid") && !k.includes("Tide") && map.hasLayer(v)));
+//    console.log(activeOverlays);
+    if(Object.keys(activeOverlays).length) {
+      opacity = L.control.opacity(activeOverlays, {collapsed: true});
+      map.addControl(opacity);
+    }
+  });
+
   function restoreActiveLayers(){
     var active=sessionStorage.getItem("activeLayers");
 //    console.log(active);
     if(!active){ return; }
     active=JSON.parse(active);
-//    console.log(active);
+//    console.log("restore",active);
     for(let i=0;i<layers._layers.length;i++){
       let l=layers._layers[i];
-      if(active.includes(i)){
+      if(active.includes(l.name)){
         map.addLayer(l.layer);
       }else{
         map.removeLayer(l.layer);
@@ -216,32 +249,18 @@ document.addEventListener("DOMContentLoaded", () => {
     var active=[];
     for(let i=0;i<layers._layers.length;i++){
       let l=layers._layers[i];
-//      console.log(i,map.hasLayer(l.layer));
+//      console.log(i,l,map.hasLayer(l.layer));
       if(map.hasLayer(l.layer)) {
-        active.push(i);
+        active.push(l.name);
       }
     }
-//    console.log("active",active);
+//    console.log("store",active);
     sessionStorage.setItem("activeLayers",JSON.stringify(active));
   }
 
   storeActiveLayers();
 
   map.on('layeradd layerremove overlayadd overlayremove',storeActiveLayers);
-
-
-  new L.Hash(map); // try https://github.com/KoGor/leaflet-fullHash
-
-  L.control.polylineMeasure({
-      unit: 'nauticalmiles',
-      clearMeasurementsOnStop: false,
-      showBearings: true,
-      showClearControl: true,
-      showUnitControl: true,
-  }).addTo(map);
-
-  var overlays2 = Object.fromEntries(Object.entries(overlays).filter(([k,v]) => !k.includes("Tide")));
-  L.control.opacity(overlays2, {collapsed: true}).addTo(map);
 
   map.on('contextmenu',(e) => {
     var b=map.getBounds();
