@@ -309,7 +309,7 @@ def dir2mbtiles(inputs, output, args):
                 # print(f, z, x, y, len(tile))
                 if len(tile) < args.min_size:
                     continue
-                if args.invert_y:
+                if not args.invert_y:
                     y = 2**z - 1 - y
                 if z < args.min_convert or z > args.max_convert:
                     continue
