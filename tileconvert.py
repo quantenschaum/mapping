@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
-import sqlite3
 import argparse
-from datetime import datetime
-from os.path import isfile, exists
-from os import remove, makedirs
-from shutil import rmtree
+import glob
+import re
+import sqlite3
 from argparse import ArgumentDefaultsHelpFormatter
+from datetime import datetime
+from os import remove, makedirs
+from os.path import exists, isdir
+from shutil import rmtree
 
 
 def main():
@@ -15,10 +17,8 @@ def main():
         formatter_class=ArgumentDefaultsHelpFormatter,
     )
 
-    parser.add_argument(
-        "input", help="input file (omit for empty file)", metavar="mbtiles", nargs="*"
-    )
-    parser.add_argument("output", help="output file", metavar="sqlitedb")
+    parser.add_argument("input", help="input files", nargs="*")
+    parser.add_argument("output", help="output file")
     parser.add_argument("-f", "--force", action="store_true", help="overwrite output")
     parser.add_argument("-a", "--append", action="store_true", help="append to output")
     # parser.add_argument("-t", "--time", action="store_true", help="add time column")
@@ -58,7 +58,7 @@ def main():
         "-Y",
         "--inverted-y",
         action="store_true",
-        help="set inverted y flag for sqlitedb (sets flag only -y causes actual inversion)",
+        help="set inverted y flag for sqlitedb (sets flag only, -y causes actual inversion)",
     )
     parser.add_argument("--format", help="tile format for mbtiles", default="png")
     parser.add_argument(
@@ -77,20 +77,29 @@ def main():
         help="additional metadata for mbtiles (key=value)",
         action="append",
     )
+    parser.add_argument(
+        "-s",
+        "--min-size",
+        help="minimal size in bytes of tile required to include the tile",
+        type=int,
+        default=100,
+    )
     args = parser.parse_args()
 
     inputs = args.input
+    in_dir = inputs and inputs[0].endswith("/")
     for f in inputs:
-        assert isfile(f), f"{f} not found"
+        assert exists(f), f"{f} not found"
+        assert f.endswith(".mbtiles") or f.endswith("/")
 
     output = args.output
-    is_dir = output.endswith("/")
+    out_dir = output.endswith("/")
 
     assert output not in inputs, "output=input"
 
     if exists(output) and args.force:
         print("deleting", output)
-        if is_dir:
+        if out_dir:
             rmtree(output)
         else:
             remove(output)
@@ -102,10 +111,13 @@ def main():
     if args.invert_y:
         print("invert y")
 
-    if is_dir:
+    if out_dir:
         mbtiles2dir(inputs, output, args)
     elif output.endswith(".mbtiles"):
-        mbtiles2mbtiles(inputs, output, args)
+        if in_dir:
+            dir2mbtiles(inputs, output, args)
+        else:
+            mbtiles2mbtiles(inputs, output, args)
     elif output.endswith(".sqlitedb"):
         mbtiles2sqlitedb(inputs, output, args)
     else:
@@ -115,6 +127,11 @@ def main():
 def write(filename, data):
     with open(filename, "wb") as f:
         f.write(data)
+
+
+def read(filename):
+    with open(filename, "rb") as f:
+        return f.read()
 
 
 MOZILLA = "Mozilla/5.0 AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
@@ -164,6 +181,8 @@ def mbtiles2sqlitedb(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             z, x, y = int(row[0]), int(row[1]), int(row[2])
+            if len(row[3]) < args.min_size:
+                continue
             # negate invert because mbtiles uses TMS scheme https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
             if not args.invert_y:
                 y = 2**z - 1 - y
@@ -172,9 +191,9 @@ def mbtiles2sqlitedb(inputs, output, args):
             data = [x, y, z, 0, sqlite3.Binary(row[3])]
             if timecol:
                 data.append(now)
-            i += 1
             insert = f"INSERT OR REPLACE INTO tiles VALUES (?,?,?,?,?{',?' if timecol else ''})"
             dcur.execute(insert, data)
+            i += 1
         source.close()
     if i:
         print("copied", i, "tiles")
@@ -195,6 +214,8 @@ def mbtiles2dir(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             z, x, y = int(row[0]), int(row[1]), int(row[2])
+            if len(row[3]) < args.min_size:
+                continue
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
             if z < args.min_convert or z > args.max_convert:
@@ -202,6 +223,7 @@ def mbtiles2dir(inputs, output, args):
             dir = f"{output}/{z}/{x}"
             makedirs(dir, exist_ok=1)
             write(f"{dir}/{y}.png", row[3])
+            i += 1
         source.close()
     if i:
         print("copied", i, "tiles")
@@ -235,17 +257,69 @@ def mbtiles2mbtiles(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             z, x, y = int(row[0]), int(row[1]), int(row[2])
+            if len(row[3]) < args.min_size:
+                continue
             if args.invert_y:
                 y = 2**z - 1 - y
             if z < args.min_convert or z > args.max_convert:
                 continue
-
             dcur.execute(
                 "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
                 [z, x, y, sqlite3.Binary(row[3])],
             )
+            i += 1
 
         source.close()
+    if i:
+        print("copied", i, "tiles")
+
+    dest.commit()
+    dest.close()
+
+
+def dir2mbtiles(inputs, output, args):
+    assert not output.endswith("/")
+    print("writing to", output)
+    dest = sqlite3.connect(output)
+    dcur = dest.cursor()
+    # https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
+    dcur.execute("CREATE TABLE metadata (name text, value text);")
+    dcur.execute(
+        "CREATE TABLE tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
+    )
+    dcur.execute(
+        "CREATE UNIQUE INDEX tile_index on tiles (zoom_level, tile_column, tile_row);"
+    )
+    name = args.title or inputs[0]
+    dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
+    dcur.execute(f"INSERT INTO metadata VALUES ('format','{args.format}')")
+    for m in args.meta or []:
+        k, v = m.split("=", 1)
+        dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
+
+    i = 0
+    for input in inputs:
+        print("reading", input)
+        assert isdir(input)
+        for f in glob.glob(f"{input}*/*/*.{args.format}"):
+            m = re.match(r".*/(\d+)/(\d+)/(\d+)\..+", f)
+            if m:
+                z, x, y = list(map(int, m.groups()))
+                tile = read(f)
+                # print(f, z, x, y, len(tile))
+                if len(tile) < args.min_size:
+                    continue
+                if args.invert_y:
+                    y = 2**z - 1 - y
+                if z < args.min_convert or z > args.max_convert:
+                    continue
+
+                dcur.execute(
+                    "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
+                    [z, x, y, sqlite3.Binary(tile)],
+                )
+                i += 1
+
     if i:
         print("copied", i, "tiles")
 
