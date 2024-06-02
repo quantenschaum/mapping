@@ -120,7 +120,7 @@ docker:
 	docker-compose up -d
 
 docker-seed: docker
-	docker-compose exec qgis make seed
+	docker-compose exec -T qgis make seed
 	docker-compose down
 
 charts/%.mbtiles: cache_data/%.mbtiles
