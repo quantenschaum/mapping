@@ -132,7 +132,7 @@ charts/%.sqlitedb: cache_data/%.mbtiles
 	./convert.py -yf $< $@ -t "$(basename $(notdir $@)) `date +%F`"
 
 tiles/%/: cache_data/%.mbtiles
-	./convert.py -ya $< $@
+	./convert.py -yf $< $@
 	chmod +rX -R $@
 
 data/chartconvert:
@@ -141,17 +141,16 @@ data/chartconvert:
 	cd data && unzip -n avnav.zip && mv avnav-master/chartconvert .
 	cd data && rm -r avnav.zip avnav-master
 
-%.gemf: %.mbtiles data/chartconvert
+charts/%.gemf: charts/%.mbtiles data/chartconvert
 	data/chartconvert/convert_mbtiles.py tms $@ $<
 
 gemf: $(patsubst %.mbtiles,%.gemf,$(wildcard charts/*.mbtiles))
 
+tiles: $(patsubst cache_data/%.mbtiles,tiles/%/,$(wildcard cache_data/*.mbtiles))
+
 charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
-         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
-         $(patsubst cache_data/%.mbtiles,tiles/%/,$(wildcard cache_data/*.mbtiles))
-	$(MAKE) gemf
-	touch charts/.nobackup
-	chmod +rX -R $@
+        $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
+        $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
 upload:
 	rm -rf tmp && mkdir tmp
@@ -162,6 +161,7 @@ upload:
 	rm -rf tiles/download
 	mv tmp/site tiles/download
 	rm -rf tmp
+	chmod +rX -R $@
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
@@ -175,7 +175,7 @@ build:
 	$(MAKE) vwm waddenzee.zip waddenzee.enc
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
-	$(MAKE) charts upload
+	$(MAKE) charts tiles upload
 
 
 
