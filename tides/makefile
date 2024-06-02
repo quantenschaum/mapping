@@ -44,13 +44,13 @@ convert: $(subst cache_data/,,$(wildcard cache_data/*.mbtiles)) \
 unpack:  $(subst .mbtiles,/,$(subst cache_data/,,$(wildcard cache_data/*.mbtiles)))
 
 %.mbtiles: cache_data/%.mbtiles
-	../tileconvert.py -yf $< $@ -t "$(basename $@) `date +%F`"
+	../convert.py -yf $< $@ -t "$(basename $@) `date +%F`"
 
 %.sqlitedb: cache_data/%.mbtiles
-	../tileconvert.py -yf $< $@ -t "$(basename $@) `date +%F`"
+	../convert.py -yf $< $@ -t "$(basename $@) `date +%F`"
 
 %/: cache_data/%.mbtiles
-	../tileconvert.py -yf $< $@
+	../convert.py -yf $< $@
 
 %.gemf: %.mbtiles
 	../data/chartconvert/convert_mbtiles.py tms $@ $<
