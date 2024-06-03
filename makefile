@@ -125,14 +125,14 @@ docker-seed: docker
 
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	./convert.py -yf $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Mattribution=https://github.com/quantenschaum/mapping
+	./convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`"
 
-charts/%.sqlitedb: cache_data/%.mbtiles
+charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts
-	./convert.py -yf $< $@ -t "$(basename $(notdir $@)) `date +%F`"
+	./convert.py -f $< $@ -t "$(basename $(notdir $@)) `date +%F`"
 
-tiles/%/: cache_data/%.mbtiles
-	./convert.py -yf $< $@
+tiles/%/: charts/%.mbtiles
+	./convert.py -f $< $@
 	chmod +rX -R $@
 
 data/chartconvert:
