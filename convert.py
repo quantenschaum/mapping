@@ -157,21 +157,13 @@ def lat_lon(z, x, y):
 
 
 def in_bbox(z, x, y, args):
-    wesnzz = w, e, s, n, z0, z1 = (
-        args.west,
-        args.east,
-        args.south,
-        args.north,
-        args.min_zoom,
-        args.max_zoom,
-    )
-    if all(x is None for x in wesnzz):
-        return True
-    if z0 is not None and z < z0:
+    a, b = args.min_zoom, args.max_zoom
+    if a is not None and z < a:
         return False
-    if z1 is not None and z > z1:
+    if b is not None and z > b:
         return False
     lat, lon = lat_lon(z, x, y)
+    w, e, s, n = args.west, args.east, args.south, args.north
     if w is not None and lon < w:
         return False
     if e is not None and lon > e:
@@ -184,24 +176,19 @@ def in_bbox(z, x, y, args):
 
 
 def is_transparent(data, args):
-    if len(data) < args.min_size:
-        return True
     if not args.exclude_transparent:
         return False
     with Image.open(BytesIO(data)) as img:
-        # print(
-        #     img.info.get("transparency"),
-        #     len(data),
-        #     img.mode,
-        #     img.getextrema(),
-        #     img.mode == "RGBA" and img.getextrema()[3][0] == 255,
-        # )
         # assert img.mode == "RGBA", img.mode
-        return img.mode == "RGBA" and img.getextrema()[3][0] == 255
+        return img.mode == "RGBA" and img.getextrema()[3][1] == 0
 
 
 def skip(z, x, y, img, args):
-    return not in_bbox(z, x, y, args) or is_transparent(img, args)
+    return (
+        not in_bbox(z, x, y, args)
+        or len(img) < args.min_size
+        or is_transparent(img, args)
+    )
 
 
 MOZILLA = "Mozilla/5.0 AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
