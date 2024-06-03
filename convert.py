@@ -6,10 +6,13 @@ import re
 import sqlite3
 from argparse import ArgumentDefaultsHelpFormatter
 from datetime import datetime
+from io import BytesIO
 from math import atan, sinh, pi, degrees
 from os import remove, makedirs
 from os.path import exists, isdir
 from shutil import rmtree
+
+from PIL import Image
 
 
 def main():
@@ -25,12 +28,6 @@ def main():
     # parser.add_argument("-t", "--time", action="store_true", help="add time column")
     parser.add_argument("-z", "--min-zoom", type=int, help="min zoom level", default=5)
     parser.add_argument("-Z", "--max-zoom", type=int, help="max zoom level", default=18)
-    parser.add_argument(
-        "-c", "--min-convert", type=int, help="min zoom level to convert", default=5
-    )
-    parser.add_argument(
-        "-C", "--max-convert", type=int, help="max zoom level to convert", default=18
-    )
     parser.add_argument("-t", "--title", help="map name or title")
     parser.add_argument(
         "-u",
@@ -84,6 +81,12 @@ def main():
         help="minimal size in bytes of tile required to include the tile",
         type=int,
         default=100,
+    )
+    parser.add_argument(
+        "-X",
+        "--exclude-transparent",
+        help="exclude fully transparent tiles",
+        action="store_true",
     )
     parser.add_argument("--west", help="western limit", type=float)
     parser.add_argument("--east", help="eastern limit", type=float)
@@ -154,9 +157,20 @@ def lat_lon(z, x, y):
 
 
 def in_bbox(z, x, y, args):
-    wesn = w, e, s, n = args.west, args.east, args.south, args.north
-    if all(x is None for x in wesn):
+    wesnzz = w, e, s, n, z0, z1 = (
+        args.west,
+        args.east,
+        args.south,
+        args.north,
+        args.min_zoom,
+        args.max_zoom,
+    )
+    if all(x is None for x in wesnzz):
         return True
+    if z0 is not None and z < z0:
+        return False
+    if z1 is not None and z > z1:
+        return False
     lat, lon = lat_lon(z, x, y)
     if w is not None and lon < w:
         return False
@@ -169,7 +183,75 @@ def in_bbox(z, x, y, args):
     return True
 
 
+def is_transparent(data, args):
+    if len(data) < args.min_size:
+        return True
+    if not args.exclude_transparent:
+        return False
+    with Image.open(BytesIO(data)) as img:
+        # print(
+        #     img.info.get("transparency"),
+        #     len(data),
+        #     img.mode,
+        #     img.getextrema(),
+        #     img.mode == "RGBA" and img.getextrema()[3][0] == 255,
+        # )
+        # assert img.mode == "RGBA", img.mode
+        return img.mode == "RGBA" and img.getextrema()[3][0] == 255
+
+
+def skip(z, x, y, img, args):
+    return not in_bbox(z, x, y, args) or is_transparent(img, args)
+
+
 MOZILLA = "Mozilla/5.0 AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
+
+
+def mbtiles2mbtiles(inputs, output, args):
+    assert not output.endswith("/")
+    print("writing to", output)
+    dest = sqlite3.connect(output)
+    dcur = dest.cursor()
+    # https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
+    dcur.execute("CREATE TABLE metadata (name text, value text);")
+    dcur.execute(
+        "CREATE TABLE tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
+    )
+    dcur.execute(
+        "CREATE UNIQUE INDEX tile_index on tiles (zoom_level, tile_column, tile_row);"
+    )
+    name = args.title or inputs[0]
+    dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
+    dcur.execute(f"INSERT INTO metadata VALUES ('format','{args.format}')")
+    for m in args.meta or []:
+        k, v = m.split("=", 1)
+        dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
+
+    i, n = 0, 0
+    for input in inputs:
+        print("reading", input)
+        source = sqlite3.connect(input)
+        for row in source.execute(
+            "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
+        ):
+            n += 1
+            z, x, y = int(row[0]), int(row[1]), int(row[2])
+            if args.invert_y:
+                y = 2**z - 1 - y
+            if skip(z, x, 2**z - 1 - y, row[3], args):
+                continue
+            dcur.execute(
+                "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
+                [z, x, y, sqlite3.Binary(row[3])],
+            )
+            i += 1
+
+        source.close()
+    if i:
+        print(f"copied {i}/{n} tiles")
+
+    dest.commit()
+    dest.close()
 
 
 def mbtiles2sqlitedb(inputs, output, args):
@@ -206,24 +288,24 @@ def mbtiles2sqlitedb(inputs, output, args):
     )
     dcur.execute("CREATE UNIQUE INDEX IND on tiles (x,y,z,s);")
 
-    now = int((datetime.utcnow() - datetime(1970, 1, 1)).total_seconds() * 1000)
+    now = (
+        int((datetime.now() - datetime(1970, 1, 1)).total_seconds() * 1000)
+        if timecol
+        else None
+    )
 
-    i = 0
+    i, n = 0, 0
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
         for row in source.execute(
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
+            n += 1
             z, x, y = int(row[0]), int(row[1]), int(row[2])
-            if len(row[3]) < args.min_size:
-                continue
-            # negate invert because mbtiles uses TMS scheme https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
-            if not args.invert_y:
+            if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
-            if not in_bbox(z, x, 2**z - 1 - y, args):
-                continue
-            if z < args.min_convert or z > args.max_convert:
+            if skip(z, x, 2**z - 1 - y, row[3], args):
                 continue
             data = [x, y, z, 0, sqlite3.Binary(row[3])]
             if timecol:
@@ -233,7 +315,7 @@ def mbtiles2sqlitedb(inputs, output, args):
             i += 1
         source.close()
     if i:
-        print("copied", i, "tiles")
+        print(f"copied {i}/{n} tiles")
 
     dest.commit()
     dest.close()
@@ -243,21 +325,18 @@ def mbtiles2dir(inputs, output, args):
     assert output.endswith("/")
     print("writing to", output)
 
-    i = 0
+    i, n = 0, 0
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
         for row in source.execute(
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
+            n += 1
             z, x, y = int(row[0]), int(row[1]), int(row[2])
-            if len(row[3]) < args.min_size:
-                continue
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
-            if not in_bbox(z, x, 2**z - 1 - y, args):
-                continue
-            if z < args.min_convert or z > args.max_convert:
+            if skip(z, x, 2**z - 1 - y, row[3], args):
                 continue
             dir = f"{output}/{z}/{x}"
             makedirs(dir, exist_ok=1)
@@ -265,57 +344,7 @@ def mbtiles2dir(inputs, output, args):
             i += 1
         source.close()
     if i:
-        print("copied", i, "tiles")
-
-
-def mbtiles2mbtiles(inputs, output, args):
-    assert not output.endswith("/")
-    print("writing to", output)
-    dest = sqlite3.connect(output)
-    dcur = dest.cursor()
-    # https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
-    dcur.execute("CREATE TABLE metadata (name text, value text);")
-    dcur.execute(
-        "CREATE TABLE tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
-    )
-    dcur.execute(
-        "CREATE UNIQUE INDEX tile_index on tiles (zoom_level, tile_column, tile_row);"
-    )
-    name = args.title or inputs[0]
-    dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
-    dcur.execute(f"INSERT INTO metadata VALUES ('format','{args.format}')")
-    for m in args.meta or []:
-        k, v = m.split("=", 1)
-        dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
-
-    i = 0
-    for input in inputs:
-        print("reading", input)
-        source = sqlite3.connect(input)
-        for row in source.execute(
-            "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
-        ):
-            z, x, y = int(row[0]), int(row[1]), int(row[2])
-            if len(row[3]) < args.min_size:
-                continue
-            if args.invert_y:
-                y = 2**z - 1 - y
-            if not in_bbox(z, x, 2**z - 1 - y, args):
-                continue
-            if z < args.min_convert or z > args.max_convert:
-                continue
-            dcur.execute(
-                "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
-                [z, x, y, sqlite3.Binary(row[3])],
-            )
-            i += 1
-
-        source.close()
-    if i:
-        print("copied", i, "tiles")
-
-    dest.commit()
-    dest.close()
+        print(f"copied {i}/{n} tiles")
 
 
 def dir2mbtiles(inputs, output, args):
@@ -338,21 +367,18 @@ def dir2mbtiles(inputs, output, args):
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
 
-    i = 0
+    i, n = 0, 0
     for input in inputs:
         print("reading", input)
         assert isdir(input)
         for f in glob.glob(f"{input}*/*/*.{args.format}"):
             m = re.match(r".*/(\d+)/(\d+)/(\d+)\..+", f)
             if m:
+                n += 1
                 z, x, y = list(map(int, m.groups()))
                 tile = read(f)
                 # print(f, z, x, y, len(tile), lat_lon(z, x, y))
-                if not in_bbox(z, x, y, args):
-                    continue
-                if len(tile) < args.min_size:
-                    continue
-                if z < args.min_convert or z > args.max_convert:
+                if skip(z, x, y, tile, args):
                     continue
                 if not args.invert_y:
                     y = 2**z - 1 - y
@@ -364,7 +390,7 @@ def dir2mbtiles(inputs, output, args):
                 i += 1
 
     if i:
-        print("copied", i, "tiles")
+        print(f"copied {i}/{n} tiles")
 
     dest.commit()
     dest.close()
