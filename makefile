@@ -159,7 +159,7 @@ upload:
 	rm -rf tiles/download
 	mv tmp/site tiles/download
 	rm -rf tmp
-	chmod +rX -R $@
+	chmod +rX -R tiles
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
