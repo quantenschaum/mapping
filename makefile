@@ -144,11 +144,9 @@ data/chartconvert:
 charts/%.gemf: charts/%.mbtiles data/chartconvert
 	data/chartconvert/convert_mbtiles.py tms $@ $<
 
-gemf: $(patsubst %.mbtiles,%.gemf,$(wildcard charts/*.mbtiles))
-
 tiles: $(patsubst cache_data/%.mbtiles,tiles/%/,$(wildcard cache_data/*.mbtiles))
 
-charts: $(subst cache_data,charts,$(wildcard cache_data/*.mbtiles)) \
+charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
