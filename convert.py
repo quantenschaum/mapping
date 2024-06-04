@@ -214,7 +214,7 @@ def mbtiles2mbtiles(inputs, output, args):
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
 
-    i, n = 0, 0
+    i, n, b = 0, 0, 0
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
@@ -222,6 +222,7 @@ def mbtiles2mbtiles(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             n += 1
+            b += len(row[3])
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if args.invert_y:
                 y = 2**z - 1 - y
@@ -235,7 +236,7 @@ def mbtiles2mbtiles(inputs, output, args):
 
         source.close()
     if i:
-        print(f"copied {i}/{n} tiles")
+        print(f"copied {i}/{n} tiles, {b:,} bytes")
 
     dest.commit()
     dest.close()
@@ -281,7 +282,7 @@ def mbtiles2sqlitedb(inputs, output, args):
         else None
     )
 
-    i, n = 0, 0
+    i, n, b = 0, 0, 0
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
@@ -289,6 +290,7 @@ def mbtiles2sqlitedb(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             n += 1
+            b += len(row[3])
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
@@ -302,7 +304,7 @@ def mbtiles2sqlitedb(inputs, output, args):
             i += 1
         source.close()
     if i:
-        print(f"copied {i}/{n} tiles")
+        print(f"copied {i}/{n} tiles, {b:,} bytes")
 
     dest.commit()
     dest.close()
@@ -312,7 +314,7 @@ def mbtiles2dir(inputs, output, args):
     assert output.endswith("/")
     print("writing to", output)
 
-    i, n = 0, 0
+    i, n, b = 0, 0, 0
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
@@ -320,6 +322,7 @@ def mbtiles2dir(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             n += 1
+            b += len(row[3])
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
@@ -331,7 +334,7 @@ def mbtiles2dir(inputs, output, args):
             i += 1
         source.close()
     if i:
-        print(f"copied {i}/{n} tiles")
+        print(f"copied {i}/{n} tiles, {b:,} bytes")
 
 
 def dir2mbtiles(inputs, output, args):
@@ -354,7 +357,7 @@ def dir2mbtiles(inputs, output, args):
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
 
-    i, n = 0, 0
+    i, n, b = 0, 0, 0
     for input in inputs:
         print("reading", input)
         assert isdir(input)
@@ -362,6 +365,7 @@ def dir2mbtiles(inputs, output, args):
             m = re.match(r".*/(\d+)/(\d+)/(\d+)\..+", f)
             if m:
                 n += 1
+                b += len(tile)
                 z, x, y = list(map(int, m.groups()))
                 tile = read(f)
                 # print(f, z, x, y, len(tile), lat_lon(z, x, y))
@@ -377,7 +381,7 @@ def dir2mbtiles(inputs, output, args):
                 i += 1
 
     if i:
-        print(f"copied {i}/{n} tiles")
+        print(f"copied {i}/{n} tiles, {b:,} bytes")
 
     dest.commit()
     dest.close()
