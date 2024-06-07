@@ -200,7 +200,9 @@ def mbtiles2mbtiles(inputs, output, args):
     dest = sqlite3.connect(output)
     dcur = dest.cursor()
     # https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
+    dcur.execute("PRAGMA application_id = 0x4d504258;")
     dcur.execute("CREATE TABLE metadata (name text, value text);")
+    dcur.execute("CREATE UNIQUE INDEX meta_index on metadata (name);")
     dcur.execute(
         "CREATE TABLE tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
     )
@@ -365,9 +367,9 @@ def dir2mbtiles(inputs, output, args):
             m = re.match(r".*/(\d+)/(\d+)/(\d+)\..+", f)
             if m:
                 n += 1
+                tile = read(f)
                 b += len(tile)
                 z, x, y = list(map(int, m.groups()))
-                tile = read(f)
                 # print(f, z, x, y, len(tile), lat_lon(z, x, y))
                 if skip(z, x, y, tile, args):
                     continue
