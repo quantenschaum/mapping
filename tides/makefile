@@ -44,7 +44,7 @@ convert: $(patsubst cache_data/%.mbtiles,%.mbtiles,$(wildcard cache_data/*.mbtil
 unpack: $(patsubst cache_data/%.mbtiles,%/,$(wildcard cache_data/*.mbtiles))
 
 %.mbtiles: cache_data/%.mbtiles
-	../convert.py -yfX $< $@ -t "$(basename $@) `date +%F`" -F webp
+	../convert.py -yfX $< $@ -t "$(basename $@) `date +%F`" -F webp -s 100
 
 %.sqlitedb: %.mbtiles
 	../convert.py -f $< $@ -t "$(basename $@) `date +%F`"
