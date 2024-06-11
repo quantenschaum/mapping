@@ -11,7 +11,6 @@ from math import atan, sinh, pi, degrees
 from os import remove, makedirs
 from os.path import exists, isdir
 from shutil import rmtree
-
 from PIL import Image
 
 
@@ -58,7 +57,7 @@ def main():
         action="store_true",
         help="set inverted y flag for sqlitedb (sets flag only, -y causes actual inversion)",
     )
-    parser.add_argument("--format", help="tile format for mbtiles", default="png")
+    parser.add_argument("-F","--format", help="tile format for mbtiles")
     parser.add_argument(
         "-e",
         "--elliptic",
@@ -179,8 +178,32 @@ def is_transparent(data, args):
     if not args.exclude_transparent:
         return False
     with Image.open(BytesIO(data)) as img:
+        if not img.mode.startswith("RGB"): return False
         # assert img.mode == "RGBA", img.mode
-        return img.mode == "RGBA" and img.getextrema()[3][1] == 0
+        extrema=img.getextrema()
+        # return img.mode == "RGBA" and extrema[3][1] == 0
+        # print(img.mode,img.size,extrema)
+        return (img.mode == "RGBA" and extrema[3][1] == 0) # transparent
+             # or all(extrema[i][0]==255 for i in range(3)) # white
+             # or all(extrema[i][1]==0 for i in range(3))) # black
+        # all(extrema[i][0]==extrema[i][1] for i in range(len(img.mode))) # uniform
+
+
+def img2bytes(img,format="png",**kwargs):
+    b=BytesIO()
+    img.save(b,format=format,**kwargs)
+    b.seek(0)
+    return b.read()
+
+
+def recode(tile,format,**kwargs):
+    with Image.open(BytesIO(tile)) as img:
+        if img.format==format.upper(): return tile
+        # print(img.format,"->",format)
+        if img.mode=="RGBA" and img.getextrema()[3][0]==255:
+            img=img.convert("RGB") # remove unused transparency
+        kwargs.update({"lossless":True,"optimize":True})
+        return img2bytes(img,format,**kwargs)
 
 
 def skip(z, x, y, img, args):
@@ -192,6 +215,13 @@ def skip(z, x, y, img, args):
 
 
 MOZILLA = "Mozilla/5.0 AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
+
+
+def mbtiles_format(filename):
+    with sqlite3.connect(filename) as db:
+      cur=db.cursor()
+      r=cur.execute("SELECT value FROM metadata WHERE name = 'format'").fetchone()
+      return r[0] if r else "png"
 
 
 def mbtiles2mbtiles(inputs, output, args):
@@ -211,7 +241,9 @@ def mbtiles2mbtiles(inputs, output, args):
     )
     name = args.title or inputs[0]
     dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
-    dcur.execute(f"INSERT INTO metadata VALUES ('format','{args.format}')")
+    format=args.format or mbtiles_format(inputs[0])
+    print("format",format)
+    dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
     for m in args.meta or []:
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
@@ -224,15 +256,16 @@ def mbtiles2mbtiles(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             n += 1
-            b += len(row[3])
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if args.invert_y:
                 y = 2**z - 1 - y
             if skip(z, x, 2**z - 1 - y, row[3], args):
                 continue
+            tile=recode(row[3],format)
+            b += len(tile)
             dcur.execute(
                 "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
-                [z, x, y, sqlite3.Binary(row[3])],
+                [z, x, y, sqlite3.Binary(tile)],
             )
             i += 1
 
@@ -284,6 +317,9 @@ def mbtiles2sqlitedb(inputs, output, args):
         else None
     )
 
+    format=args.format or mbtiles_format(inputs[0])
+    print("format",format)
+
     i, n, b = 0, 0, 0
     for input in inputs:
         print("reading", input)
@@ -292,13 +328,14 @@ def mbtiles2sqlitedb(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             n += 1
-            b += len(row[3])
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
             if skip(z, x, 2**z - 1 - y, row[3], args):
                 continue
-            data = [x, y, z, 0, sqlite3.Binary(row[3])]
+            tile=recode(row[3],format)
+            b += len(tile)
+            data = [x, y, z, 0, sqlite3.Binary(tile)]
             if timecol:
                 data.append(now)
             insert = f"INSERT OR REPLACE INTO tiles VALUES (?,?,?,?,?{',?' if timecol else ''})"
@@ -316,6 +353,9 @@ def mbtiles2dir(inputs, output, args):
     assert output.endswith("/")
     print("writing to", output)
 
+    format=args.format or mbtiles_format(inputs[0])
+    print("format",format)
+
     i, n, b = 0, 0, 0
     for input in inputs:
         print("reading", input)
@@ -324,15 +364,16 @@ def mbtiles2dir(inputs, output, args):
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
         ):
             n += 1
-            b += len(row[3])
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
             if skip(z, x, 2**z - 1 - y, row[3], args):
                 continue
+            tile=recode(row[3],format)
+            b += len(tile)
             dir = f"{output}/{z}/{x}"
             makedirs(dir, exist_ok=1)
-            write(f"{dir}/{y}.png", row[3])
+            write(f"{dir}/{y}.{format}", tile)
             i += 1
         source.close()
     if i:
@@ -354,7 +395,9 @@ def dir2mbtiles(inputs, output, args):
     )
     name = args.title or inputs[0]
     dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
-    dcur.execute(f"INSERT INTO metadata VALUES ('format','{args.format}')")
+    format=args.format or "png"
+    print("format",format)
+    dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
     for m in args.meta or []:
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
@@ -363,16 +406,17 @@ def dir2mbtiles(inputs, output, args):
     for input in inputs:
         print("reading", input)
         assert isdir(input)
-        for f in glob.glob(f"{input}*/*/*.{args.format}"):
+        for f in glob.glob(f"{input}*/*/*.*"):
             m = re.match(r".*/(\d+)/(\d+)/(\d+)\..+", f)
             if m:
                 n += 1
                 tile = read(f)
-                b += len(tile)
                 z, x, y = list(map(int, m.groups()))
                 # print(f, z, x, y, len(tile), lat_lon(z, x, y))
                 if skip(z, x, y, tile, args):
                     continue
+                tile=recode(tile,format)
+                b += len(tile)
                 if not args.invert_y:
                     y = 2**z - 1 - y
 
