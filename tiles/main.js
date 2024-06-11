@@ -96,10 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
       attribution: '<a href="https://emodnet.ec.europa.eu/">EMODnet</a>',
       class:"invert"
     }),
-    'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.png', {
+    'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
     }),
-    'QMAP NL':L.tileLayer.fallback('qmap-nl/{z}/{x}/{y}.png', {
+    'QMAP NL':L.tileLayer.fallback('qmap-nl/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a>'
     }),
     'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
@@ -157,11 +157,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let i = -6; i <= 6; i++) {
     let s=(i>=0?'+':'')+i;
-    overlays['Tide HW Helgoland '+s+'h']=L.tileLayer.fallback('tides/hw'+s+'/{z}/{x}/{y}.png', {
+    overlays['Tide HW Helgoland '+s+'h']=L.tileLayer.fallback('tides/hw'+s+'/{z}/{x}/{y}.webp', {
       attribution: '<a href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>', tide:true
     });
   }
-  overlays['Tide Figures']=L.tileLayer.fallback('tides/fig/{z}/{x}/{y}.png', {
+  overlays['Tide Figures']=L.tileLayer.fallback('tides/fig/{z}/{x}/{y}.webp', {
     attribution: '<a href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
   });
 
