@@ -4,6 +4,9 @@ Here you find precompiled charts for download in various formats usable in diffe
 
 The downloadable files on this page are licensed under [CC0](https://github.com/quantenschaum/mapping/blob/master/LICENSE).
 
+!!! warning
+    Raster charts are now encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
+
 ## [OsmAnd](https://osmand.net/)
 
 ### Vector Charts
