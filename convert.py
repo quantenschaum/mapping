@@ -79,7 +79,7 @@ def main():
         "--min-size",
         help="minimal size in bytes of tile required to include the tile",
         type=int,
-        default=100,
+        default=0,
     )
     parser.add_argument(
         "-X",
