@@ -319,7 +319,7 @@ def mbtiles2sqlitedb(inputs, output, args):
         else None
     )
 
-    format=args.format or mbtiles_format(inputs[0])
+    format=args.format or (mbtiles_format(inputs[0]) if inputs else "png")
     print("format",format)
 
     i, n, b = 0, 0, 0
