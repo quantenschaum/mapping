@@ -131,7 +131,7 @@ charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts
 	./convert.py -f $< $@ -t "$(basename $(notdir $@)) `date +%F`"
 
-tiles/%/: charts/%.mbtiles
+www/%/: charts/%.mbtiles
 	./convert.py -f $< $@
 	chmod +rX -R $@
 
@@ -144,7 +144,7 @@ data/chartconvert:
 charts/%.gemf: charts/%.mbtiles data/chartconvert
 	data/chartconvert/convert_mbtiles.py tms $@ $<
 
-tiles: $(patsubst cache_data/%.mbtiles,tiles/%/,$(wildcard cache_data/*.mbtiles))
+tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles))
 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
@@ -156,10 +156,10 @@ upload:
 	cp -rpv marine.render.xml depthcontourlines.addon.render.xml charts/* tmp/docs
 	cd tmp/docs && ./times.py index.md
 	cd tmp && mkdocs build
-	rm -rf tiles/download
-	mv tmp/site tiles/download
+	rm -rf www/download
+	mv tmp/site www/download
 	rm -rf tmp
-	chmod +rX -R tiles
+	chmod +rX -R www
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
