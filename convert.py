@@ -218,10 +218,12 @@ MOZILLA = "Mozilla/5.0 AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
 
 
 def mbtiles_format(filename):
-    with sqlite3.connect(filename) as db:
-      cur=db.cursor()
-      r=cur.execute("SELECT value FROM metadata WHERE name = 'format'").fetchone()
-      return r[0] if r else "png"
+    db = sqlite3.connect(filename)
+    cur=db.cursor()
+    r=cur.execute("SELECT value FROM metadata WHERE name = 'format'").fetchone()
+    db.close()
+    return r[0] if r else "png"
+
 
 
 def mbtiles2mbtiles(inputs, output, args):
