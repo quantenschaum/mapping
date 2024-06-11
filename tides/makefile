@@ -37,20 +37,20 @@ mapproxy-x.yaml:
 clean-cache:
 	rm -rf cache_data
 
-convert: $(subst cache_data/,,$(wildcard cache_data/*.mbtiles)) \
-         $(subst .mbtiles,.sqlitedb,$(subst cache_data/,,$(wildcard cache_data/*.mbtiles))) \
-         $(subst .mbtiles,.gemf,$(subst cache_data/,,$(wildcard cache_data/*.mbtiles)))
+convert: $(patsubst cache_data/%.mbtiles,%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
+         $(patsubst cache_data/%.mbtiles,%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
+         $(patsubst cache_data/%.mbtiles,%.gemf,$(wildcard cache_data/*.mbtiles))
 
-unpack:  $(subst .mbtiles,/,$(subst cache_data/,,$(wildcard cache_data/*.mbtiles)))
+unpack: $(patsubst cache_data/%.mbtiles,%/,$(wildcard cache_data/*.mbtiles))
 
 %.mbtiles: cache_data/%.mbtiles
-	../convert.py -yf $< $@ -t "$(basename $@) `date +%F`"
+	../convert.py -yfX $< $@ -t "$(basename $@) `date +%F`" -F webp
 
-%.sqlitedb: cache_data/%.mbtiles
-	../convert.py -yf $< $@ -t "$(basename $@) `date +%F`"
+%.sqlitedb: %.mbtiles
+	../convert.py -f $< $@ -t "$(basename $@) `date +%F`"
 
-%/: cache_data/%.mbtiles
-	../convert.py -yf $< $@
+%/: %.mbtiles
+	../convert.py -f $< $@
 
 %.gemf: %.mbtiles
 	../data/chartconvert/convert_mbtiles.py tms $@ $<
