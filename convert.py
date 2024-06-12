@@ -201,18 +201,20 @@ def is_transparent(data, args):
 
 def img2bytes(img,format="png",**kwargs):
     b=BytesIO()
-    img.save(b,format=format,**kwargs)
+    img.save(b,format=format,lossless=True,optimize=True,**kwargs)
     b.seek(0)
     return b.read()
 
 
 def recode(tile,format,**kwargs):
+    if format=="jpg": format="jpeg"
     with Image.open(BytesIO(tile)) as img:
         if img.format==format.upper(): return tile
         # print(img.format,"->",format)
+        if format=="jpeg" and img.mode!="RGB":
+            img=img.convert("RGB")
         if img.mode=="RGBA" and img.getextrema()[3][0]==255:
             img=img.convert("RGB") # remove unused transparency
-        kwargs.update({"lossless":True,"optimize":True})
         return img2bytes(img,format,**kwargs)
 
 
