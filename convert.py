@@ -212,6 +212,8 @@ def recode(tile,format,**kwargs):
     with Image.open(BytesIO(tile)) as img:
         if img.format==format.upper(): return tile
         # print(img.format,"->",format)
+        if img.mode!="RGBA" and "transparency" in img.info:
+            img=img.convert("RGBA")
         if format=="jpeg" and img.mode!="RGB":
             img=img.convert("RGB")
         if img.mode=="RGBA" and img.getextrema()[3][0]==255:
