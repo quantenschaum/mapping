@@ -91,6 +91,12 @@ def main():
     parser.add_argument("--east", help="eastern limit", type=float)
     parser.add_argument("--south", help="southern limit", type=float)
     parser.add_argument("--north", help="northern limit", type=float)
+    parser.add_argument(
+        "-i",
+        "--info",
+        help="display file info",
+        action="store_true",
+    )
     args = parser.parse_args()
 
     inputs = args.input
@@ -102,6 +108,10 @@ def main():
     out_dir = output.endswith("/")
 
     assert output not in inputs, "output=input"
+
+    if args.info:
+      info(output,args)
+      return
 
     assert (
         not all(x is not None for x in [args.west, args.east]) or args.west < args.east
@@ -224,6 +234,19 @@ def mbtiles_format(filename):
     db.close()
     return r[0] if r else "png"
 
+def info(filename, args):
+    db = sqlite3.connect(filename)
+    cur=db.cursor()
+    print("METADATA")
+    for r in cur.execute("SELECT * FROM metadata"):
+      print(r[0],"=",r[1])
+    print("TILES")
+    print("  z    count        size")
+    for r in cur.execute("SELECT zoom_level,COUNT(zoom_level),SUM(LENGTH(tile_data)) FROM tiles GROUP BY zoom_level"):
+      print(f"{r[0]:3} {r[1]:8} {r[2]/1e6:8.2f} MB")
+    for r in cur.execute("SELECT 'sum',COUNT(zoom_level),SUM(LENGTH(tile_data)),AVG(LENGTH(tile_data)) FROM tiles"):
+      print(f"{r[0]:3} {r[1]:8} {r[2]/1e6:8.2f} MB {r[3]/1e3:8.2f} kB/tile")
+    db.close()
 
 
 def mbtiles2mbtiles(inputs, output, args):
