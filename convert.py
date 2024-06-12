@@ -207,6 +207,7 @@ def img2bytes(img,format="png",**kwargs):
 
 
 def recode(tile,format,**kwargs):
+    if not format: return tile
     if format=="jpg": format="jpeg"
     with Image.open(BytesIO(tile)) as img:
         if img.format==format.upper(): return tile
@@ -215,6 +216,7 @@ def recode(tile,format,**kwargs):
             img=img.convert("RGB")
         if img.mode=="RGBA" and img.getextrema()[3][0]==255:
             img=img.convert("RGB") # remove unused transparency
+        # print(img.format,"->",format)
         return img2bytes(img,format,**kwargs)
 
 
@@ -234,7 +236,12 @@ def mbtiles_format(filename):
     cur=db.cursor()
     r=cur.execute("SELECT value FROM metadata WHERE name = 'format'").fetchone()
     db.close()
-    return r[0] if r else "png"
+    return r[0] if r else None
+
+def fmt(tile):
+    with Image.open(BytesIO(tile)) as img:
+        return img.format.lower()
+
 
 def info(filename, args):
     db = sqlite3.connect(filename)
@@ -270,7 +277,8 @@ def mbtiles2mbtiles(inputs, output, args):
     dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
     format=args.format or mbtiles_format(inputs[0])
     print("format",format)
-    dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
+    if format:
+        dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
     for m in args.meta or []:
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
@@ -344,7 +352,7 @@ def mbtiles2sqlitedb(inputs, output, args):
         else None
     )
 
-    format=args.format or (mbtiles_format(inputs[0]) if inputs else "png")
+    format=args.format or mbtiles_format(inputs[0])
     print("format",format)
 
     i, n, b = 0, 0, 0
@@ -400,7 +408,7 @@ def mbtiles2dir(inputs, output, args):
             b += len(tile)
             dir = f"{output}/{z}/{x}"
             makedirs(dir, exist_ok=1)
-            write(f"{dir}/{y}.{format}", tile)
+            write(f"{dir}/{y}.{format or fmt(tile)}", tile)
             i += 1
         source.close()
     if i:
@@ -422,9 +430,10 @@ def dir2mbtiles(inputs, output, args):
     )
     name = args.title or inputs[0]
     dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
-    format=args.format or "png"
+    format=args.format
     print("format",format)
-    dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
+    if format:
+        dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
     for m in args.meta or []:
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
