@@ -97,10 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
       class:"invert"
     }),
     'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on data by <a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+      attribution: '<a href="/download/">QMAP DE</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on data by <a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
     }),
     'QMAP NL':L.tileLayer.fallback('qmap-nl/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on data by <a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>'
+      attribution: '<a href="/download/">QMAP NL</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on data by <a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>'
     }),
     'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
       version:'1.3.0',
