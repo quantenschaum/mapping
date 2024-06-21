@@ -4,7 +4,7 @@ Here you find precompiled charts for download in various formats usable in diffe
 
 The downloadable files on this page are licensed under [CC0](https://github.com/quantenschaum/mapping/blob/master/LICENSE).
 
-!!! warning
+!!! info
     Raster charts are now encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
 
 ## [OsmAnd](https://osmand.net/)
@@ -25,7 +25,7 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 - [:globe_with_meridians: Light Sectors Worldwide](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
 
-!!! attention
+!!! warning
     The vector chart will not be rendered properly without the marine rendering style and render engine 2 (OpenGL)!
 
 ### Raster Charts
@@ -46,6 +46,16 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 !!! tip
     Select `sqlitedb` as storage format.
 
+## [AvNav](https://www.wellenvogel.net/software/avnav/docs/beschreibung.html?lang=en)
+
+![AvNav](img/avnav.png)
+
+AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/avnav/docs/charts.html#chartformats) files. Simply drop the files into AvNav's `charts` folder.
+
+- [:de: QMAP DE](qmap-de.gemf){:download}
+- [:nl: QMAP NL](qmap-nl.gemf){:download}
+- [:de: Tidal Atlas DE](tides.gemf.zip){:download}
+
 ## [JOSM](https://josm.openstreetmap.de/)
 
 ![JOSM](img/josm.png)
@@ -58,16 +68,6 @@ The raster charts can be added to JOSM as [imagery layers](https://josm.openstre
 You may also want to add this extra `mapcss` for better rendering of seamarks.
 
 - `https://raw.githubusercontent.com/quantenschaum/mapping/icons/extra.mapcss`
-
-## [AvNav](https://www.wellenvogel.net/software/avnav/docs/beschreibung.html?lang=en)
-
-![AvNav](img/avnav.png)
-
-AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/avnav/docs/charts.html#chartformats) files. Simply drop the files into AvNav's `charts` folder.
-
-- [:de: QMAP DE](qmap-de.gemf){:download}
-- [:nl: QMAP NL](qmap-nl.gemf){:download}
-- [:de: Tidal Atlas DE](tides.gemf.zip){:download}
 
 ## [OpenCPN](https://opencpn.org/)
 
