@@ -75,6 +75,6 @@ You may also want to add this extra `mapcss` for better rendering of seamarks.
 
 OpenCPN and other applications can display raster charts from `mbtiles`.
 
-- [:de: QMAP DE](qmap-de.mbtiles){:download}
-- [:nl: QMAP NL](qmap-nl.mbtiles){:download}
+- [:de: QMAP DE](qmap-de.png.mbtiles){:download}
+- [:nl: QMAP NL](qmap-nl.png.mbtiles){:download}
 - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}

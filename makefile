@@ -127,6 +127,10 @@ charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
 	./convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fwebp
 
+charts/%.png.mbtiles: cache_data/%.mbtiles
+	mkdir -p charts
+	./convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fpng
+
 charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts
 	./convert.py -f $< $@ -t "$(basename $(notdir $@)) `date +%F`"
@@ -148,6 +152,7 @@ charts/%.gemf: charts/%.mbtiles data/chartconvert
 tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles))
 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
+        $(patsubst cache_data/%.mbtiles,charts/%.png.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
