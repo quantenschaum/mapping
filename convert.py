@@ -16,7 +16,9 @@ from progressbar import AnimatedMarker, Bar, BouncingBar, Counter, ETA, \
     AdaptiveETA, FileTransferSpeed, FormatLabel, Percentage, \
     ProgressBar, ReverseBar, RotatingMarker, \
     SimpleProgress, Timer, UnknownLength
-
+try:
+    import pillow_avif
+except: pass
 
 def main():
     parser = argparse.ArgumentParser(
@@ -205,7 +207,11 @@ def is_transparent(data, args):
 
 def img2bytes(img,format="png",**kwargs):
     b=BytesIO()
-    img.save(b,format=format,lossless=True,optimize=True,**kwargs)
+    if format=="avif":
+        img.save(b,format=format,**kwargs)
+        # img.save(b,format=format,codec="svt",**kwargs) # export SVT_LOG=1
+    else:
+        img.save(b,format=format,lossless=True,optimize=True,**kwargs)
     b.seek(0)
     return b.read()
 
@@ -215,14 +221,14 @@ def recode(tile,format,**kwargs):
     if format=="jpg": format="jpeg"
     with Image.open(BytesIO(tile)) as img:
         if img.format==format.upper(): return tile
-        # print(img.format,"->",format)
+        # print(img.format,img.size,img.info)
         if img.mode!="RGBA" and "transparency" in img.info:
             img=img.convert("RGBA")
         if format=="jpeg" and img.mode!="RGB":
             img=img.convert("RGB")
         if img.mode=="RGBA" and img.getextrema()[3][0]==255:
             img=img.convert("RGB") # remove unused transparency
-        # print(img.format,"->",format)
+        # print(img.format,"->",format,len(tile),len(img2bytes(img,format,**kwargs)))
         return img2bytes(img,format,**kwargs)
 
 
