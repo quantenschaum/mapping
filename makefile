@@ -125,7 +125,7 @@ docker-seed: docker
 
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	./convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -F webp
+	./convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fwebp
 
 charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts
@@ -133,6 +133,7 @@ charts/%.sqlitedb: charts/%.mbtiles
 
 www/%/: charts/%.mbtiles
 	./convert.py -f $< $@
+	./convert.py -a $< $@ -Fpng
 	chmod +rX -R $@
 
 data/chartconvert:
