@@ -65,7 +65,7 @@ The raster charts can be added to JOSM as [imagery layers](https://josm.openstre
 - :de: QMAP DE `tms:http://waddenzee.duckdns.org/qmap-de/{zoom}/{x}/{y}.png`
 - :nl: QMAP NL `tms:http://waddenzee.duckdns.org/qmap-nl/{zoom}/{x}/{y}.png`
 
-You may also want to add this extra `mapcss` for better rendering of seamarks.
+You may also want to [add this extra `mapcss`](https://josm.openstreetmap.de/wiki/Help/Preferences/MapPaintPreference) for better rendering of seamarks.
 
 - `https://raw.githubusercontent.com/quantenschaum/mapping/icons/extra.mapcss`
 
