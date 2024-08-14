@@ -278,7 +278,7 @@ def bar(m):
 
 def mbtiles2mbtiles(inputs, output, args):
     assert not output.endswith("/")
-    print("writing to", output)
+    print("writing", output)
     dest = sqlite3.connect(output)
     dcur = dest.cursor()
     # https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
@@ -335,7 +335,7 @@ def mbtiles2mbtiles(inputs, output, args):
 
 def mbtiles2sqlitedb(inputs, output, args):
     assert not output.endswith("/")
-    print("writing to", output)
+    print("writing", output)
     dest = sqlite3.connect(output)
 
     timecol = args.timecol or args.expire
@@ -410,7 +410,7 @@ def mbtiles2sqlitedb(inputs, output, args):
 
 def mbtiles2dir(inputs, output, args):
     assert output.endswith("/")
-    print("writing to", output)
+    print("writing", output)
 
     format=args.format or mbtiles_format(inputs[0])
     print("format",format)
@@ -444,7 +444,7 @@ def mbtiles2dir(inputs, output, args):
 
 def dir2mbtiles(inputs, output, args):
     assert not output.endswith("/")
-    print("writing to", output)
+    print("writing", output)
     dest = sqlite3.connect(output)
     dcur = dest.cursor()
     # https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
