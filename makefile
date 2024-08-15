@@ -135,9 +135,9 @@ charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts
 	./convert.py -f $< $@ -t "$(basename $(notdir $@)) `date +%F`"
 
-www/%/: charts/%.mbtiles
+www/%/: charts/%.mbtiles charts/%.png.mbtiles
 	./convert.py -f $< $@
-	./convert.py -a $< $@ -Fpng
+	./convert.py -a $(word 2,$^) $@
 	chmod +rX -R $@
 
 data/chartconvert:
