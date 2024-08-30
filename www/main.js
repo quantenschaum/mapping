@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+  window.devicePixelRatio=2; // https://github.com/Leaflet/Leaflet/issues/7403
+
   function d2dm(a,n){
       deg = (new URL(document.location)).searchParams.get("deg");
       if(deg) {
