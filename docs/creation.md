@@ -10,8 +10,8 @@ This is based on a [post](https://www.sigterritoires.fr/index.php/affichage-des-
 ## Data Sources
 
 - S-57 ENC: https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc
-- Buoys dataset: https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979
-- Beacons dataset: https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049
+- Buoys dataset: https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5
+- Beacons dataset: https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c
 
 There are several data sources by RWS, it's a bit confusing
 
