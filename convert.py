@@ -6,11 +6,11 @@ import re
 import sqlite3
 from argparse import ArgumentDefaultsHelpFormatter
 from datetime import datetime
-from io import BytesIO
 from math import atan, sinh, pi, degrees
 from os import remove, makedirs
 from os.path import exists, isdir
 from shutil import rmtree
+from io import BytesIO
 from PIL import Image
 from progressbar import AnimatedMarker, Bar, BouncingBar, Counter, ETA, \
     AdaptiveETA, FileTransferSpeed, FormatLabel, Percentage, \
@@ -32,7 +32,7 @@ def main():
     parser.add_argument("-a", "--append", action="store_true", help="append to output")
     # parser.add_argument("-t", "--time", action="store_true", help="add time column")
     parser.add_argument("-z", "--min-zoom", type=int, help="min zoom level", default=5)
-    parser.add_argument("-Z", "--max-zoom", type=int, help="max zoom level", default=18)
+    parser.add_argument("-Z", "--max-zoom", type=int, help="max zoom level", default=20)
     parser.add_argument("-t", "--title", help="map name or title")
     parser.add_argument(
         "-u",
@@ -78,7 +78,7 @@ def main():
         "-M",
         "--meta",
         help="additional metadata for mbtiles (key=value)",
-        action="append",
+        action="append", default=[]
     )
     parser.add_argument(
         "-s",
@@ -297,7 +297,7 @@ def mbtiles2mbtiles(inputs, output, args):
     print("format",format)
     if format:
         dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
-    for m in args.meta or []:
+    for m in [f"minzoom={args.min_zoom}",f"maxzoom={args.max_zoom}"]+args.meta:
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
 
@@ -373,7 +373,7 @@ def mbtiles2sqlitedb(inputs, output, args):
         else None
     )
 
-    format=args.format or mbtiles_format(inputs[0])
+    format=args.format or (mbtiles_format(inputs[0]) if inputs else None)
     print("format",format)
 
     i, n, b = 0, 0, 0
@@ -461,7 +461,7 @@ def dir2mbtiles(inputs, output, args):
     print("format",format)
     if format:
         dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
-    for m in args.meta or []:
+    for m in [f"minzoom={args.min_zoom}",f"maxzoom={args.max_zoom}"]+args.meta:
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
 
