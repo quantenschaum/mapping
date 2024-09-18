@@ -117,11 +117,11 @@ clean-cache:
 	rm -rf cache_data
 
 docker:
-	docker-compose up -d
+	docker compose up -d
 
 docker-seed: docker
-	docker-compose exec -T qgis make seed
-	docker-compose down
+	docker compose exec -T qgis make seed
+	docker compose down
 
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
