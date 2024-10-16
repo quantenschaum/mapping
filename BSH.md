@@ -6,6 +6,13 @@ Die verwendeten Daten stammen aus dem WMS auf https://gdi.bsh.de/ (z.B. https://
 
 [schreibt der Bund](https://www.bmi.bund.de/DE/themen/moderne-verwaltung/open-government/open-data/open-data-node.html) zu OpenData. Eine Nutzung der bereitgestellten Daten in OSM bietet der Zivilgesellschaft einen Mehrwert und ist daher im Sinne des Gesetzgebers.
 
+## Auslegung der GeoNutzV
+
+>§3(1) alle den Geodaten, Metadaten und Geodatendiensten **beigegebenen** Quellenvermerke und sonstigen
+rechtlichen Hinweise erkennbar und in optischem Zusammenhang eingebunden werden;
+
+Den Daten im genannten WMS ist *kein Quellenvermerk beigegeben*, folglich ist auch kein Quellenvermerk einzubinden. (vgl. DWD (https://www.dwd.de/DE/service/rechtliche_hinweise/vorlagen_quellenangabe.html))
+
 ## Direkte Nachfrage beim BSH
 
 **Anfrage** 25.09.2023
