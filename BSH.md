@@ -1,5 +1,13 @@
 # Nutzung von BSH-Daten
 
+Die verwendeten Daten stammen aus dem WMS auf https://gdi.bsh.de/ (z.B. https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities), als (OpenData) Lizenz ist die GeoNutzV (http://www.gesetze-im-internet.de/geonutzv/GeoNutzV.pdf) angegeben. 
+
+>Das Ziel ist daher der Aufbau eines Daten-Ökosystems, in dem Wirtschaft, Verwaltung und Zivilgesellschaft gegenseitig von einer guten Datenbasis und breiten Nutzungsmöglichkeiten profitieren können.
+
+[schreibt der Bund](https://www.bmi.bund.de/DE/themen/moderne-verwaltung/open-government/open-data/open-data-node.html) zu OpenData. Eine Nutzung der bereitgestellten Daten in OSM bietet der Zivilgesellschaft einen Mehrwert und ist daher im Sinne des Gesetzgebers.
+
+## Direkte Nachfrage beim BSH
+
 **Anfrage** 25.09.2023
 
 Ich wende mich als Nutzer und Mitwirkender des [OpenStreetMap-Projektes](https://www.openstreetmap.org/) an Sie als Open
