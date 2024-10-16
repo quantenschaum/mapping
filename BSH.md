@@ -39,7 +39,7 @@ Die WSV, welche ebenfalls Geodaten im Rahmen von OpenData unter den gleichen Bed
 dieser Frage positiv geäußert und dem OpenStreetMap-Projekte die Nutzung der Daten gestattet. Bei Veränderung der Daten
 muss der Quellenvermerk gelöscht werden. siehe https://wiki.openstreetmap.org/w/images/c/c6/Terms_of_usage_ienc.pdf
 
-Der DWD verhält sich zu diesem Thema ähnlich. siehe https://www.dwd.de/DE/service/copyright/vorlagen_quellenangabe.html
+Der DWD verhält sich zu diesem Thema ähnlich. siehe https://www.dwd.de/DE/service/rechtliche_hinweise/vorlagen_quellenangabe.html
 
 Ich würde das so zusammenfassen:
 
