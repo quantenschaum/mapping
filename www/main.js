@@ -97,6 +97,18 @@ document.addEventListener("DOMContentLoaded", () => {
       attribution: '<a href="https://emodnet.ec.europa.eu/">EMODnet</a>',
       class:"invert"
     }),
+    'BSH Bathymetry':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/ELC_INSPIRE/ows', {
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      layers: 'EL.GridCoverage',
+    }),
+    'BSH Contours':L.tileLayer.wms('https://gdi.bsh.de/en/mapservice/Elevation-depth-contours-WMS', {
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      layers: 'EL.ContourLine',
+    }),
     'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP DE</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on data by <a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
     }),
