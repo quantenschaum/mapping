@@ -23,7 +23,7 @@ def main():
                 mtime = os.path.getmtime(filename)
                 fsize = os.path.getsize(filename)
                 line = (
-                    m.group(1)
+                    m.group(1).replace('{:download}','')
                     + f" ({datetime.datetime.fromtimestamp(mtime):%Y-%m-%d}/{fsize/1e6:.1f}MB)"
                 )
             except:
