@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUserFull="Adam" saveDateTime="2024-11-08T09:41:50" projectname="QMAP Germany" saveUser="al" version="3.34.9-Prizren">
+<qgis saveUserFull="Adam" saveDateTime="2024-11-08T09:52:13" projectname="QMAP Germany" saveUser="al" version="3.34.9-Prizren">
   <homePath path=""/>
   <title>QMAP Germany</title>
   <transaction mode="Disabled"/>
@@ -177,10 +177,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>967035.83141967747360468</xmin>
-      <ymin>7141981.7196798101067543</ymin>
-      <xmax>975913.38964360766112804</xmax>
-      <ymax>7157341.81142699718475342</ymax>
+      <xmin>822054.58640409167855978</xmin>
+      <ymin>7069742.34444494545459747</ymin>
+      <xmax>960766.43365297373384237</xmax>
+      <ymax>7309743.77799458801746368</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -11985,8 +11985,8 @@ def my_form_open(dialog, layer, feature):
         <selectionColor invalid="1"/>
       </selection>
       <labeling type="rule-based">
-        <rules key="{1c39719e-02e4-48aa-8587-93cfbbfe6e0e}">
-          <rule filter="valdco" key="{be0cedc3-1769-4a8c-b8b3-1e1df6d1d7f9}">
+        <rules key="{1f2df918-4843-41e5-bd51-ddcfd6a18b6e}">
+          <rule filter="valdco" key="{2492e9f4-93a4-4423-8bec-e66117398227}">
             <settings calloutType="simple">
               <text-style forcedBold="0" allowHtml="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontStrikeout="0" fontFamily="Open Sans Semibold" blendMode="0" useSubstitutions="0" fontWordSpacing="0" multilineHeight="1" capitalization="0" legendString="Aa" multilineHeightUnit="Percentage" namedStyle="Regular" fontLetterSpacing="0" fontWeight="63" textOpacity="1" fontKerning="1" previewBkgrdColor="255,255,255,255" textOrientation="horizontal" isExpression="0" fontUnderline="0" forcedItalic="0" fontSizeUnit="Point" fontItalic="0" fontSize="9" textColor="80,80,80,255" fieldName="valdco">
                 <families/>
@@ -12083,7 +12083,7 @@ def my_form_open(dialog, layer, feature):
                   <Option type="Map" name="properties">
                     <Option type="Map" name="Color">
                       <Option value="true" type="bool" name="active"/>
-                      <Option value="map_get(map(0,'#51b1d4',1,'#535a5c',2,'#545C62'),@colorscheme)" type="QString" name="expression"/>
+                      <Option value="if(valdco=@safedepth,'#ec002f',&#xa;map_get(map(0,'#51b1d4',1,'#535a5c',2,'#545C62'),@colorscheme))" type="QString" name="expression"/>
                       <Option value="3" type="int" name="type"/>
                     </Option>
                   </Option>
@@ -12116,7 +12116,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule filter="orient" key="{2d6fd52f-acc6-42b7-8c3a-d9f0d9b5b57e}">
+          <rule filter="orient" key="{fdd65938-57b0-41c9-89f9-b7f161a46f8a}">
             <settings calloutType="simple">
               <text-style forcedBold="0" allowHtml="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontStrikeout="0" fontFamily="Open Sans" blendMode="0" useSubstitutions="0" fontWordSpacing="0" multilineHeight="1" capitalization="0" legendString="Aa" multilineHeightUnit="Percentage" namedStyle="Regular" fontLetterSpacing="0" fontWeight="50" textOpacity="1" fontKerning="1" previewBkgrdColor="255,255,255,255" textOrientation="horizontal" isExpression="0" fontUnderline="0" forcedItalic="0" fontSizeUnit="Point" fontItalic="0" fontSize="8" textColor="29,29,29,255" fieldName="orient">
                 <families/>
@@ -35452,7 +35452,7 @@ concat(@ub,' ',@name,' [',@z0,'-',@z1,']')
   <Sensors/>
   <ProjectViewSettings rotation="0" UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent ymax="7157341.81142699718475342" ymin="7141981.7196798101067543" xmin="963975.32348745048511773" xmax="978973.89757583464961499">
+    <DefaultViewExtent ymax="7309743.77799458801746368" ymin="7069742.34444494545459747" xmin="774234.14996310730930418" xmax="1008586.87009395810309798">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
