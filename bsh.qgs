@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUserFull="Adam" version="3.34.9-Prizren" projectname="QMAP Germany" saveUser="al" saveDateTime="2024-11-09T20:04:16">
+<qgis saveUserFull="Adam" version="3.34.9-Prizren" projectname="QMAP Germany" saveUser="al" saveDateTime="2024-11-09T20:09:34">
   <homePath path=""/>
   <title>QMAP Germany</title>
   <transaction mode="Disabled"/>
@@ -172,10 +172,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>1228028.82358524249866605</xmin>
-      <ymin>7233613.88314250484108925</ymin>
-      <xmax>1239407.52980487467721105</xmax>
-      <ymax>7253301.50073837116360664</ymax>
+      <xmin>1224324.16436021379195154</xmin>
+      <ymin>7235930.76526101492345333</ymin>
+      <xmax>1235702.87057984597049654</xmax>
+      <ymax>7255618.38285688124597073</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -11969,8 +11969,8 @@ def my_form_open(dialog, layer, feature):
         <selectionColor invalid="1"/>
       </selection>
       <labeling type="rule-based">
-        <rules key="{71f1f747-f00c-45d7-8d73-458a68014600}">
-          <rule key="{07f487e6-f4c0-47ab-bdda-9189fac0a390}" filter="valdco">
+        <rules key="{4c45609a-5dad-46ca-92d9-3c505ffac598}">
+          <rule key="{49c00cee-7b17-4885-83ef-c7ef9d300bd0}" filter="valdco">
             <settings calloutType="simple">
               <text-style fieldName="valdco" forcedBold="0" fontWordSpacing="0" fontStrikeout="0" fontItalic="0" namedStyle="Regular" fontKerning="1" multilineHeight="1" previewBkgrdColor="255,255,255,255" fontSizeUnit="Point" textOpacity="1" multilineHeightUnit="Percentage" textColor="80,80,80,255" fontUnderline="0" fontLetterSpacing="0" textOrientation="horizontal" useSubstitutions="0" allowHtml="0" legendString="Aa" isExpression="0" fontSize="9" fontSizeMapUnitScale="3x:0,0,0,0,0,0" blendMode="0" fontWeight="63" capitalization="0" fontFamily="Open Sans Semibold" forcedItalic="0">
                 <families/>
@@ -12100,7 +12100,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{be07b54d-281b-414b-8597-666d7bf3873b}" filter="orient">
+          <rule key="{17c150dc-26c9-4227-b4f6-9a7370292ea6}" filter="orient">
             <settings calloutType="simple">
               <text-style fieldName="orient" forcedBold="0" fontWordSpacing="0" fontStrikeout="0" fontItalic="0" namedStyle="Regular" fontKerning="1" multilineHeight="1" previewBkgrdColor="255,255,255,255" fontSizeUnit="Point" textOpacity="1" multilineHeightUnit="Percentage" textColor="29,29,29,255" fontUnderline="0" fontLetterSpacing="0" textOrientation="horizontal" useSubstitutions="0" allowHtml="0" legendString="Aa" isExpression="0" fontSize="8" fontSizeMapUnitScale="3x:0,0,0,0,0,0" blendMode="0" fontWeight="50" capitalization="0" fontFamily="Open Sans" forcedItalic="0">
                 <families/>
@@ -35669,7 +35669,7 @@ concat(@ub,' ',@name,' [',@z0,'-',@z1,']')
   <Sensors/>
   <ProjectViewSettings UseProjectScales="0" rotation="0">
     <Scales/>
-    <DefaultViewExtent ymin="7233613.88314250484108925" xmax="1243009.22681497153826058" xmin="1224427.12657514563761652" ymax="7253301.50073837116360664">
+    <DefaultViewExtent ymin="7235930.76526101492345333" xmax="1239304.56758994283154607" xmin="1220722.467350116930902" ymax="7255618.38285688124597073">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
@@ -35734,7 +35734,7 @@ concat(@ub,' ',@name,' [',@z0,'-',@z1,']')
       </spatialrefsys>
     </CoordinateCustomCrs>
   </ProjectDisplaySettings>
-  <ProjectGpsSettings destinationLayerName="coverage" autoAddTrackVertices="0" destinationLayerProvider="ogr" autoCommitFeatures="0" destinationFollowsActiveLayer="1" destinationLayerSource="/home/al/Projekte/mapping/data/bsh/AidsAndServices.gpkg|layername=AidsAndServices|geometrytype=Polygon|subset=marsys" destinationLayer="AidsAndServices_de5f02df_310c_471a_8e81_8b852b391785">
+  <ProjectGpsSettings destinationLayerName="contours" autoAddTrackVertices="0" destinationLayerProvider="ogr" autoCommitFeatures="0" destinationFollowsActiveLayer="1" destinationLayerSource="/home/al/Projekte/mapping/data/bsh/Hydrography.gpkg|layername=Hydrography|geometrytype=LineString|subset=valdco is not null" destinationLayer="Hydrography_a62d2491_2593_453a_a964_a73163ec4b40">
     <timeStampFields/>
   </ProjectGpsSettings>
 </qgis>
