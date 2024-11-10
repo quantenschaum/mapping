@@ -18,6 +18,9 @@ There are several data sources by RWS, it's a bit confusing
 - https://nationaalgeoregister.nl/geonetwork/srv/dut/catalog.search#/metadata/be1b1514-8d1f-48e1-9624-fee9b784138c <-- most appropriate according to RWS
 - https://nationaalgeoregister.nl/geonetwork/srv/dut/catalog.search#/metadata/be1b1514-8d1f-48e1-9624-fee9b784138b
 
+### Depth Data
+
+Depth contours and areas are included in the german dataset, but it is missing spot soundings. The spot soundings shown on the map are extracted at randomly generated locations from the dataset https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml. This is still experimental, data might be missing in some places or can be wrong. 
 
 ## Map tiles
 
