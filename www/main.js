@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
     attribution: '<a href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
   });
 
-  var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP NL']];
+  var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP Soundings DE'], overlays['QMAP NL']];
 
   if(document.URL.includes('localhost')) {
     overlays['QGIS'] = L.tileLayer.wms('http://localhost:8000', {
