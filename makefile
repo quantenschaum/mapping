@@ -69,6 +69,14 @@ bsh:
 	for F in $$(find data/bsh -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 	#for F in $$(find data/bsh -name "*.json"); do ogr2ogr data/bsh.gpkg $$F -append; done
 
+
+data/Elevation-Bathymetry.zip:
+	# https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml
+	wget -O data/Elevation-Bathymetry.zip https://gdi.bsh.de/de/data/Elevation-Bathymetry.zip
+
+bsh-bathy: data/Elevation-Bathymetry.zip
+	unzip $< -d data/Elevation-Bathymetry
+
 schutzzonen:
 	rm -rf data/$@ data/$@.gpkg
 	mkdir -p data/$@

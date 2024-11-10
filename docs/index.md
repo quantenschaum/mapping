@@ -7,8 +7,9 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
 !!! info
     Raster charts are now encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
 
-!!! info
-    The german chart now includes spot sounding extracted from https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml. This is experimental, data can be wrong or missing.
+!!! warning
+    The german chart now includes spot sounding extracted from <https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml> which is from 2018!  
+    This is experimental, data can be wrong or missing. Stop soundings and contour line are from different datasets, so they may mismatch in certain areas.
 
 ## [OsmAnd](https://osmand.net/)
 
@@ -16,7 +17,7 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
 
 ![osmand vector chart](img/vector.png)
 
-Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". (also see [usage](usage.md#vector-charts))
+Vector charts and styles for OsmAnd can be installed by make up simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". (also see [usage](usage.md#vector-charts))
 
 - [:de: QMAP DE](qmap-de.obf){:download}
 - [:de: Depth Contours DE](depth-de.obf){:download}
