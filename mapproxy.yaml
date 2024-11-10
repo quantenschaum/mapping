@@ -66,6 +66,11 @@ caches:
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
+  soundg-de:
+    sources: [ 'qgis:soundg-de' ]
+    grids: [ GLOBAL_WEBMERCATOR ]
+    cache:
+      type: mbtiles
   qmap-nl:
     sources: [ 'rws:enc,vwm' ]
     grids: [ GLOBAL_WEBMERCATOR ]
@@ -76,6 +81,9 @@ layers:
   - name: qmap-de
     title: "QMap DE"
     sources: [ qmap-de ]
+  - name: soundg-de
+    title: "QMap Soundings DE"
+    sources: [ soundg-de ]
   - name: qmap-nl
     title: "QMap NL"
     sources: [ qmap-nl ]
