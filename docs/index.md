@@ -21,6 +21,7 @@ Vector charts and styles for OsmAnd can be installed by make up simply opening t
 
 - [:de: QMAP DE](qmap-de.obf){:download}
 - [:de: Depth Contours DE](depth-de.obf){:download}
+- [:de: Spot Soundings DE](soundg-de.obf){:download}
 - [:nl: Depth Data NL](depth-nl.obf){:download}
 - [:no: Depth Data NO east](depth-no-east.obf){:download}
 - [:no: Depth Data NO west](depth-no-west.obf){:download}
@@ -39,6 +40,7 @@ Vector charts and styles for OsmAnd can be installed by make up simply opening t
 The charts are imported by opening the `sqlitedb` files with the app. (also see [usage](usage.md#raster-charts))
 
 - [:de: QMAP DE](qmap-de.sqlitedb){:download}
+- [:de: QMAP Soundings DE](soundg-de.sqlitedb){:download}
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
 - [:de: Tidal Atlas DE](tides.sqlitedb.zip){:download}
 
@@ -57,6 +59,7 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/avnav/docs/charts.html#chartformats) files. Simply drop the files into AvNav's `charts` folder.
 
 - [:de: QMAP DE](qmap-de.gemf){:download}
+- [:de: QMAP Soundings DE](soundg-de.gemf){:download}
 - [:nl: QMAP NL](qmap-nl.gemf){:download}
 - [:de: Tidal Atlas DE](tides.gemf.zip){:download}
 
@@ -80,6 +83,7 @@ You may also want to [add this extra `mapcss`](https://josm.openstreetmap.de/wik
 OpenCPN and other applications can display raster charts from `mbtiles`.
 
 - [:de: QMAP DE](qmap-de.png.mbtiles){:download}
+- [:de: QMAP Soundings DE](soundg-de.png.mbtiles){:download}
 - [:nl: QMAP NL](qmap-nl.png.mbtiles){:download}
 
 !!! info
