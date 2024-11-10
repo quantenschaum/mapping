@@ -112,6 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
     'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP DE</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on data by <a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
     }),
+    'QMAP Soundings DE':L.tileLayer.fallback('soundg-de/{z}/{x}/{y}.webp', {
+      attribution: '<a href="/download/">QMAP Soundings DE</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
+    }),
     'QMAP NL':L.tileLayer.fallback('qmap-nl/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP NL</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on data by <a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>'
     }),
