@@ -51,11 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
   var basemaps = {
     'OpenStreetMap':L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //'OpenStreetMap':L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+      attribution: '<a target="_blank" href="https://www.openstreetmap.org/">OpenStreetMap</a>',
       class:'grayscale',
     }),
     'OsmAnd Nautical':L.tileLayer('https://maptile.osmand.net/tile/nautical/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://osmand.net/map">OsmAnd</a>'
+      attribution: '<a target="_blank" href="https://osmand.net/map">OsmAnd</a>'
     }),
     'ENC (RWS)':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/WMSServer', {
       layers:'0,2,3,4,5,6,7',
@@ -63,10 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
       transparent:'true',
       format:'image/png',
       tiled: true,
-      attribution: '<a href="https://rijkswaterstaat.nl/">RWS</a> <a href="https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/">Chart Server</a>'
+      attribution: '<a target="_blank" href="https://rijkswaterstaat.nl/">RWS</a> <a target="_blank" href="https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/">Chart Server</a>'
      }),
     'Worldy Imagery':L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      attribution: '<a href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">ArcGIS ESRI World Imagery</a>'
+      attribution: '<a target="_blank" href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">ArcGIS ESRI World Imagery</a>'
     }),
     'Luchtfoto 2023 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2023_ortho25',
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       transparent:'true',
       format:'image/jpg',
       tiled: true,
-      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
+      attribution: '<a target="_blank" href="https://www.pdok.nl/">PDOK</a>'
     }),
     'Luchtfoto 2023 8cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
       layers:'2023_orthoHR',
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       transparent:'true',
       format:'image/jpg',
       tiled: true,
-      attribution: '<a href="https://www.pdok.nl/">PDOK</a>'
+      attribution: '<a target="_blank" href="https://www.pdok.nl/">PDOK</a>'
     }),
   };
 
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
       format:'image/png',
       tiled: true,
       layers: 'emodnet:mean_multicolour',
-      attribution: '<a href="https://emodnet.ec.europa.eu/">EMODnet</a>',
+      attribution: '<a target="_blank" href="https://emodnet.ec.europa.eu/">EMODnet</a>',
       class:"invert"
     }),
     'BSH Bathymetry':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/ELC_INSPIRE/ows', {
@@ -102,27 +102,27 @@ document.addEventListener("DOMContentLoaded", () => {
       transparent:'true',
       format:'image/png',
       layers: 'EL.GridCoverage',
-      attribution: '<a href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetry</a>'
+      attribution: '<a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetry</a>'
     }),
     'BSH Contours':L.tileLayer.wms('https://gdi.bsh.de/en/mapservice/Elevation-depth-contours-WMS', {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
       layers: 'EL.ContourLine',
-      attribution: '<a href="https://inspire-geoportal.ec.europa.eu/srv/api/records/cee22cf8-60c0-401b-8a98-e01959b66f9b">BSH Contours</a>'
+      attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/cee22cf8-60c0-401b-8a98-e01959b66f9b">BSH Contours</a>'
     }),
     'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP DE</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+      attribution: '<a href="/download/">QMAP DE</a> <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a target="_blank" href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
     }),
     'QMAP DE inverted':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP DE</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>',
+      attribution: '<a href="/download/">QMAP DE</a> <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a target="_blank" href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>',
       class:"invert"
     }),
     'QMAP Soundings DE':L.tileLayer.fallback('soundg-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP Soundings DE</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
+      attribution: '<a href="/download/">QMAP Soundings DE</a> <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
     }),
     'QMAP NL':L.tileLayer.fallback('qmap-nl/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP NL</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>'
+      attribution: '<a href="/download/">QMAP NL</a> <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>'
     }),
     'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
       version:'1.3.0',
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       format:'image/png',
       tiled: true,
       layers: 'Coastal_Depth_area,Approach_Depth_area,Harbour_Depth_area',
-      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
+      attribution: '<a target="_blank" href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'BSH Hydro':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Hydrography/ows', {
       version:'1.3.0',
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       format:'image/png',
       tiled: true,
       layers: 'Approach_Depths,Approach_Fishing_Facility_Marine_Farm_Areas,Approach_Offshore_Installations,Approach_Areas_Limits',
-      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
+      attribution: '<a target="_blank" href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'BSH NavAids':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows', {
       version:'1.3.0',
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
       format:'image/png',
       tiled: true,
       layers: 'Coastal_Lights,Coastal_Lateral_Beacons,Coastal_Cardinal_Beacons,Coastal_All_Other_Beacons,Coastal_Lateral_Buoys,Coastal_Cardinal_Buoys,Coastal_All_Other_Buoys,Coastal_Fog_Signals_Daymarks,Approach_Lights,Approach_Lateral_Beacons,Approach_Cardinal_Beacons,Approach_All_Other_Beacons,Approach_Lateral_Buoys,Approach_Cardinal_Buoys,Approach_All_Other_Buoys,Approach_Fog_Signals_Daymarks,Harbour_Lights,Harbour_Lateral_Beacons,Harbour_Cardinal_Beacons,Harbour_All_Other_Beacons,Harbour_Lateral_Buoys,Harbour_Cardinal_Buoys,Harbour_All_Other_Buoys,Harbour_Fog_Signals_Daymarks',
-      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
+      attribution: '<a target="_blank" href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'BSH Topo':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Topography/ows', {
       version:'1.3.0',
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
       format:'image/png',
       tiled: true,
       layers: '4_Approach,5_Harbour',
-      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
+      attribution: '<a target="_blank" href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'BSH Obstr':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_RocksWrecksObstructions/ows', {
       version:'1.3.0',
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
       format:'image/png',
       tiled: true,
       layers: '4_Approach,5_Harbour',
-      attribution: '<a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
+      attribution: '<a target="_blank" href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH GeoSeaPortal</a>'
     }),
     'Vaarweg Markeringen':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
       layers:'vaarweg_markering_drijvend,vaarweg_markering_vast',
@@ -170,21 +170,21 @@ document.addEventListener("DOMContentLoaded", () => {
       transparent:'true',
       format:'image/png',
       tiled: true,
-      attribution: '<a href="https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979">RWS Buoys</a> <a href="https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049">RWS Beacons</a>'
+      attribution: '<a target="_blank" href="https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979">RWS Buoys</a> <a target="_blank" href="https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049">RWS Beacons</a>'
      }),
     'OpenSeaMap':L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://openseamap.org/">OpenSeaMap</a>'
+      attribution: '<a target="_blank" href="https://openseamap.org/">OpenSeaMap</a>'
     }),
   };
 
   for (let i = -6; i <= 6; i++) {
     let s=(i>=0?'+':'')+i;
     overlays['Tide HW Helgoland '+s+'h']=L.tileLayer.fallback('tides/hw'+s+'/{z}/{x}/{y}.webp', {
-      attribution: '<a href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>', tide:true
+      attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>', tide:true
     });
   }
   overlays['Tide Figures']=L.tileLayer.fallback('tides/fig/{z}/{x}/{y}.webp', {
-    attribution: '<a href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
+    attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
   });
 
   var layers = [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP Soundings DE'], overlays['QMAP NL']];
