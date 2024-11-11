@@ -155,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tiled: true,
       layers: '4_Approach,5_Harbour',
       attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
+    }),
     'BSH Obstr':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_RocksWrecksObstructions/ows', {
       version:'1.3.0',
       transparent:'true',
