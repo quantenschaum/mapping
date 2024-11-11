@@ -112,17 +112,17 @@ document.addEventListener("DOMContentLoaded", () => {
       attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/cee22cf8-60c0-401b-8a98-e01959b66f9b">BSH Contours</a>'
     }),
     'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP DE</a> <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
+      attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
     }),
     'QMAP DE inverted':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP DE</a> <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
+      attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
       class:"invert"
     }),
     'QMAP Soundings DE':L.tileLayer.fallback('soundg-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP Soundings DE</a> <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
+      attribution: '<a href="/download/">QMAP Soundings DE</a> based on <a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
     }),
     'QMAP NL':L.tileLayer.fallback('qmap-nl/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP NL</a> <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>'
+      attribution: '<a href="/download/">QMAP NL</a> based on <a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>'
     }),
     'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
       version:'1.3.0',
@@ -155,7 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tiled: true,
       layers: '4_Approach,5_Harbour',
       attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
-    }),
     'BSH Obstr':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_RocksWrecksObstructions/ows', {
       version:'1.3.0',
       transparent:'true',
