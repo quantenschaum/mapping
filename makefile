@@ -113,6 +113,7 @@ mapproxy:
 	mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001
 
 seed:
+	sleep 3
 	mkdir -p cache_data && touch cache_data/.nobackup
 	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
 
