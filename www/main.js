@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       transparent:'true',
       format:'image/png',
       tiled: true,
-      attribution: '<a target="_blank" href="https://data.overheid.nl/dataset/2c5f6817-d902-4123-9b1d-103a0a484979">RWS Buoys</a> <a target="_blank" href="https://data.overheid.nl/dataset/c3d9facc-5b74-4cae-8841-135890f44049">RWS Beacons</a>'
+      attribution: '<a target="_blank" href="https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5">RWS Buoys</a> <a target="_blank" href="https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c">RWS Beacons</a>'
      }),
     'OpenSeaMap':L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
       attribution: '<a target="_blank" href="https://openseamap.org/">OpenSeaMap</a>'
