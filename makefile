@@ -73,6 +73,7 @@ bsh:
 data/Elevation-Bathymetry.zip:
 	# https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml
 	wget -O data/Elevation-Bathymetry.zip https://gdi.bsh.de/de/data/Elevation-Bathymetry.zip
+	wget -O data/SKN_Nordsee_2021.zip https://data.bsh.de/OpenData/Main/SKN_Nordsee_2021/SKN_Nordsee_2021.zip
 
 bsh-bathy: data/Elevation-Bathymetry.zip
 	unzip $< -d data/Elevation-Bathymetry
