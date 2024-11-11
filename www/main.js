@@ -102,15 +102,21 @@ document.addEventListener("DOMContentLoaded", () => {
       transparent:'true',
       format:'image/png',
       layers: 'EL.GridCoverage',
+      attribution: '<a href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetry</a>'
     }),
     'BSH Contours':L.tileLayer.wms('https://gdi.bsh.de/en/mapservice/Elevation-depth-contours-WMS', {
       version:'1.3.0',
       transparent:'true',
       format:'image/png',
       layers: 'EL.ContourLine',
+      attribution: '<a href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetry</a>'
     }),
     'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP DE</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+    }),
+    'QMAP DE inverted':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
+      attribution: '<a href="/download/">QMAP DE</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a href="https://www.bsh.de/DE/DATEN/GeoSeaPortal/geoseaportal_node.html">BSH</a>'
+      class:"invert"
     }),
     'QMAP Soundings DE':L.tileLayer.fallback('soundg-de/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP Soundings DE</a> <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CC0)</a> based on <a href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
