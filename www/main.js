@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
       transparent:'true',
       format:'image/png',
       layers: 'EL.GridCoverage',
-      attribution: '<a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetry</a>'
+      attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/5afbd3f9-8bd8-4bfc-a77c-ac3de4ace07f">BSH Bathymetry</a>'
     }),
     'BSH Contours':L.tileLayer.wms('https://gdi.bsh.de/en/mapservice/Elevation-depth-contours-WMS', {
       version:'1.3.0',
