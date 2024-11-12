@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
       class: "night"
     }),
     'QMAP Soundings DE':L.tileLayer.fallback('http://waddenzee.duckdns.org/soundg-de/{z}/{x}/{y}.webp', {
+      minZoom: 13,
       attribution: '<a href="/download/">QMAP Soundings DE</a> based on <a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
     }),
     'QMAP NL':L.tileLayer.fallback('http://waddenzee.duckdns.org/qmap-nl/{z}/{x}/{y}.webp', {
@@ -206,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
     center: [54.264,9.196],
     zoom: 8,
     layers: layers,
-    minZoom: 6,
+    minZoom: 7,
     maxZoom: 18,
   });
 
