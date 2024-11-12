@@ -7,7 +7,7 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
 !!! info
     Raster charts are now encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
 
-???+ note "Data Sources"
+??? note "Data Sources"
     The charts provided by this projekt are based on data by
     
     - :de: BSH: [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/), [Bathymetry](https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml), [Tidal Data](https://data.bsh.de/OpenData/Main/)
@@ -15,7 +15,7 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
 
 !!! warning
     The german chart now includes spot sounding extracted from <https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml> which is from 2018!  
-    This is experimental, data can be wrong or missing. Spot soundings and contour line are from different datasets, so they may mismatch in certain areas.
+    This is experimental, data can be wrong or missing. Spot soundings and contour lines are from different datasets, so they may mismatch in certain areas.  
 
 ## [OsmAnd](https://osmand.net/)
 
