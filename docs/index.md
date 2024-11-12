@@ -7,8 +7,8 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
 !!! info
     Raster charts are now encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
 
-??? note "Data Sources"
-    The charts provided by this projekt are based on data by
+!!! note "Data Sources"
+    The charts provided by this project are based on data by
     
     - :de: BSH: [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/), [Bathymetry](https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml), [Tidal Data](https://data.bsh.de/OpenData/Main/)
     - :nl: RWS [ENC](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc), Vaarwegmarkeringen [drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5)/[vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c)
