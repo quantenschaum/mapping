@@ -88,6 +88,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var overlays = {
     'Grid': grid,
+    'QMAP DE':L.tileLayer.fallback('http://waddenzee.duckdns.org/qmap-de/{z}/{x}/{y}.webp', {
+      attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
+    }),
+    'QMAP DE night':L.tileLayer.fallback('http://waddenzee.duckdns.org/qmap-de/{z}/{x}/{y}.webp', {
+      attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
+      class: "night"
+    }),
+    'QMAP Soundings DE':L.tileLayer.fallback('http://waddenzee.duckdns.org/soundg-de/{z}/{x}/{y}.webp', {
+      attribution: '<a href="/download/">QMAP Soundings DE</a> based on <a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
+    }),
+    'QMAP NL':L.tileLayer.fallback('http://waddenzee.duckdns.org/qmap-nl/{z}/{x}/{y}.webp', {
+      attribution: '<a href="/download/">QMAP NL</a> based on <a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>'
+    }),
     'EMODnet Bathymetry':L.tileLayer.wms('https://ows.emodnet-bathymetry.eu/wms', {
       version:'1.3.0',
       transparent:'true',
@@ -95,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tiled: true,
       layers: 'emodnet:mean_multicolour',
       attribution: '<a target="_blank" href="https://emodnet.ec.europa.eu/">EMODnet</a>',
-      class:"invert"
+      class: "invert"
     }),
     'BSH Bathymetry':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/ELC_INSPIRE/ows', {
       version:'1.3.0',
@@ -103,26 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
       format:'image/png',
       layers: 'EL.GridCoverage',
       attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/5afbd3f9-8bd8-4bfc-a77c-ac3de4ace07f">BSH Bathymetry</a>'
-    }),
-    'BSH Contours':L.tileLayer.wms('https://gdi.bsh.de/en/mapservice/Elevation-depth-contours-WMS', {
-      version:'1.3.0',
-      transparent:'true',
-      format:'image/png',
-      layers: 'EL.ContourLine',
-      attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/cee22cf8-60c0-401b-8a98-e01959b66f9b">BSH Contours</a>'
-    }),
-    'QMAP DE':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
-    }),
-    'QMAP DE inverted':L.tileLayer.fallback('qmap-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
-      class:"invert"
-    }),
-    'QMAP Soundings DE':L.tileLayer.fallback('soundg-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP Soundings DE</a> based on <a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
-    }),
-    'QMAP NL':L.tileLayer.fallback('qmap-nl/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP NL</a> based on <a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>'
     }),
     'BSH SkinOfEarth':L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
       version:'1.3.0',
@@ -163,6 +156,13 @@ document.addEventListener("DOMContentLoaded", () => {
       tiled: true,
       layers: '4_Approach,5_Harbour',
       attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
+    }),
+    'BSH Contours':L.tileLayer.wms('https://gdi.bsh.de/en/mapservice/Elevation-depth-contours-WMS', {
+      version:'1.3.0',
+      transparent:'true',
+      format:'image/png',
+      layers: 'EL.ContourLine',
+      attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/cee22cf8-60c0-401b-8a98-e01959b66f9b">BSH Contours</a>'
     }),
     'Vaarweg Markeringen':L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
       layers:'vaarweg_markering_drijvend,vaarweg_markering_vast',
@@ -334,4 +334,18 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
      }).addTo(map);
+
+     let textbox = L.Control.extend({
+        onAdd: function() {
+          var text = L.DomUtil.create('div');
+          text.id = "infobox";
+          text.innerHTML = '<a href="/download/">background information and downloads</a>';
+          return text;
+        },
+
+    });
+    new textbox({
+      position: 'bottomleft',
+    }).addTo(map);
+
 });

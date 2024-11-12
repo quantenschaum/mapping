@@ -7,9 +7,15 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
 !!! info
     Raster charts are now encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
 
+???+ note "Data Sources"
+    The charts provided by this projekt are based on data by
+    
+    - :de: BSH: [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/), [Bathymetry](https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml), [Tidal Data](https://data.bsh.de/OpenData/Main/)
+    - :nl: RWS [ENC](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc), Vaarwegmarkeringen [drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5)/[vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c)
+
 !!! warning
     The german chart now includes spot sounding extracted from <https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml> which is from 2018!  
-    This is experimental, data can be wrong or missing. Stop soundings and contour line are from different datasets, so they may mismatch in certain areas.
+    This is experimental, data can be wrong or missing. Spot soundings and contour line are from different datasets, so they may mismatch in certain areas.
 
 ## [OsmAnd](https://osmand.net/)
 
@@ -17,16 +23,12 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
 
 ![osmand vector chart](img/vector.png)
 
-Vector charts and styles for OsmAnd can be installed by make up simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". (also see [usage](usage.md#vector-charts))
+Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". (also see [usage](usage.md#vector-charts))
 
-- [:de: QMAP DE](qmap-de.obf){:download}
+- [:de: QMAP DE (nav aids)](qmap-de.obf){:download}
 - [:de: Depth Contours DE](depth-de.obf){:download}
 - [:de: Spot Soundings DE](soundg-de.obf){:download}
 - [:nl: Depth Data NL](depth-nl.obf){:download}
-- [:no: Depth Data NO east](depth-no-east.obf){:download}
-- [:no: Depth Data NO west](depth-no-west.obf){:download}
-- [:no: Depth Data NO mid](depth-no-mid.obf){:download}
-- [:no: Depth Data NO north](depth-no-north.obf){:download}
 - [:globe_with_meridians: Light Sectors Worldwide](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
 
@@ -63,19 +65,6 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
 - [:nl: QMAP NL](qmap-nl.gemf){:download}
 - [:de: Tidal Atlas DE](tides.gemf.zip){:download}
 
-## [JOSM](https://josm.openstreetmap.de/)
-
-![JOSM](img/josm.png)
-
-The raster charts can be added to JOSM as [imagery layers](https://josm.openstreetmap.de/wiki/Help/Preferences/Imagery).
-
-- :de: QMAP DE `tms:http://waddenzee.duckdns.org/qmap-de/{zoom}/{x}/{y}.png`
-- :nl: QMAP NL `tms:http://waddenzee.duckdns.org/qmap-nl/{zoom}/{x}/{y}.png`
-
-You may also want to [add this extra `mapcss`](https://josm.openstreetmap.de/wiki/Help/Preferences/MapPaintPreference) (as last entry) for improved rendering of seamarks.
-
-- `https://raw.githubusercontent.com/quantenschaum/mapping/icons/extra.mapcss`
-
 ## [OpenCPN](https://opencpn.org/)
 
 ![OpenCPN](img/opencpn.png)
@@ -88,3 +77,16 @@ OpenCPN and other applications can display raster charts from `mbtiles`.
 
 !!! info
     OpenCPN does not support WebP, so there are separate `mbtiles` files with png tiles.
+
+## [JOSM](https://josm.openstreetmap.de/)
+
+![JOSM](img/josm.png)
+
+The raster charts can be added to JOSM as [imagery layers](https://josm.openstreetmap.de/wiki/Help/Preferences/Imagery).
+
+- :de: QMAP DE `tms:http://waddenzee.duckdns.org/qmap-de/{zoom}/{x}/{y}.png`
+- :nl: QMAP NL `tms:http://waddenzee.duckdns.org/qmap-nl/{zoom}/{x}/{y}.png`
+
+You may also want to [add this extra `mapcss`](https://josm.openstreetmap.de/wiki/Help/Preferences/MapPaintPreference) (as last entry) for improved rendering of seamarks.
+
+- `https://raw.githubusercontent.com/quantenschaum/mapping/icons/extra.mapcss`
