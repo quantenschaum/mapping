@@ -91,10 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
     'QMAP DE':L.tileLayer.fallback('http://waddenzee.duckdns.org/qmap-de/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
     }),
-    'QMAP DE night':L.tileLayer.fallback('http://waddenzee.duckdns.org/qmap-de/{z}/{x}/{y}.webp', {
-      attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
-      class: "night"
-    }),
     'QMAP Soundings DE':L.tileLayer.fallback('http://waddenzee.duckdns.org/soundg-de/{z}/{x}/{y}.webp', {
       minZoom: 13,
       attribution: '<a href="/download/">QMAP Soundings DE</a> based on <a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
@@ -180,11 +176,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let i = -6; i <= 6; i++) {
     let s=(i>=0?'+':'')+i;
-    overlays['Tide HW Helgoland '+s+'h']=L.tileLayer.fallback('tides/hw'+s+'/{z}/{x}/{y}.webp', {
+    overlays['Tide HW Helgoland '+s+'h']=L.tileLayer.fallback('http://waddenzee.duckdns.org/tides/hw'+s+'/{z}/{x}/{y}.webp', {
       attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>', tide:true
     });
   }
-  overlays['Tide Figures']=L.tileLayer.fallback('tides/fig/{z}/{x}/{y}.webp', {
+  overlays['Tide Figures']=L.tileLayer.fallback('http://waddenzee.duckdns.org/tides/fig/{z}/{x}/{y}.webp', {
     attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
   });
 
@@ -347,6 +343,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     new textbox({
       position: 'bottomleft',
+    }).addTo(map);
+
+     let nightswitch = L.Control.extend({
+        onAdd: function() {
+          var text = L.DomUtil.create('div');
+          text.innerHTML = '<button>nightmode</button>';
+          $(text).find('button').click(e=>{
+            if($('#map.night').length)
+              $('#map').removeClass('night');
+            else
+              $('#map').addClass('night');
+          });
+          return text;
+        },
+
+    });
+    new nightswitch({
+      position: 'topright',
     }).addTo(map);
 
 });
