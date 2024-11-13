@@ -266,7 +266,7 @@
 		<case depthColorScheme="ECDIS" attrColorValue="#7D888B">
 			<case nightMode="true" attrColorValue="#292E2E"/>
 		</case>
-		<case attrColorValue="#cc118ac2"/>
+		<case attrColorValue="#cc545C62"/>
 	</renderingAttribute>
 
 	<renderingAttribute name="depthTextColor">
@@ -283,37 +283,6 @@
 		<case safetyContour="5m" attrStringValue="contourtype=5m"/>
 		<case safetyContour="10m" attrStringValue="contourtype=10m"/>
 		<case attrStringValue="contourtype=x"/>
-	</renderingAttribute>
-
-	<renderingAttribute name="safetyAreaType0">
-		<case safetyContour="0m" attrStringValue="areatype=-1"/>
-		<case safetyContour="1m" attrStringValue="areatype=-1"/>
-		<case safetyContour="2m" attrStringValue="areatype=-1"/>
-		<case safetyContour="3m" attrStringValue="areatype=-1"/>
-		<case safetyContour="4m" attrStringValue="areatype=-1"/>
-		<case safetyContour="5m" attrStringValue="areatype=-1"/>
-		<case safetyContour="10m" attrStringValue="areatype=-1"/>
-		<case attrStringValue="areatype=x"/>
-	</renderingAttribute>
-
-	<renderingAttribute name="safetyAreaType2">
-		<case safetyContour="2m" attrStringValue="areatype=0"/>
-		<case safetyContour="3m" attrStringValue="areatype=0"/>
-		<case safetyContour="4m" attrStringValue="areatype=0"/>
-		<case safetyContour="5m" attrStringValue="areatype=0"/>
-		<case safetyContour="10m" attrStringValue="areatype=0"/>
-		<case attrStringValue="areatype=x"/>
-	</renderingAttribute>
-
-	<renderingAttribute name="safetyAreaType5">
-		<case safetyContour="5m" attrStringValue="areatype=2"/>
-		<case safetyContour="10m" attrStringValue="areatype=2"/>
-		<case attrStringValue="areatype=x"/>
-	</renderingAttribute>
-
-	<renderingAttribute name="safetyAreaType10">
-		<case safetyContour="10m" attrStringValue="areatype=5"/>
-		<case attrStringValue="areatype=x"/>
 	</renderingAttribute>
 	<!-- depthcontourslines -->
 
@@ -3440,18 +3409,14 @@
 				<case additional="areatype=5" color="#0f5698"/>
 				<case additional="areatype=10" color="#0b4c8a"/>
 			</case>
-			<case additional="areatype=-1" color="#cceccd"/>
-			<case additional="areatype=0" color="#a8e6fd"/>
-			<case additional="areatype=2" color="#cceffc"/>
-			<case additional="areatype=5" color="#e6f7fd"/>
-			<case additional="areatype=10" color="#ffffff"/>
+			<case additional="areatype=-1" color="#CADBC1"/>
+			<case additional="areatype=0" color="#afcce3"/>
+			<case additional="areatype=2" color="#CADEEF"/>
+			<case additional="areatype=5" color="#F1F6FC"/>
+			<case additional="areatype=10" color="#FFFFFF"/>
 			<apply>
 				<switch shader="hazard">
 					<apply_if nightMode="true" shader="hazard_night"/>
-					<case additional="$safetyAreaType0"/>
-					<case additional="$safetyAreaType2"/>
-					<case additional="$safetyAreaType5"/>
-					<case additional="$safetyAreaType10"/>
 				</switch>
 			</apply>
 		</switch>
@@ -3837,7 +3802,7 @@
 			<case minzoom="12" additional="contourtype=2m" color="$color2"/>
 			<case minzoom="13" additional="contourtype=3m" color="$color2" hideMinorContours="false"/>
 			<case minzoom="14" additional="contourtype=4m" color="$color2" hideMinorContours="false"/>
-			<case minzoom="11" additional="contourtype=5m" color="$color2"/>
+			<case minzoom="11" additional="contourtype=5m" color="$color0"/>
 			<case minzoom="8" additional="contourtype=10m" color="$color2"/>
 			<case minzoom="10" additional="contourtype=20m" color="$color2" hideMinorContours="false"/>
 			<case minzoom="9" additional="contourtype=50m" color="$color2" hideMinorContours="false"/>
