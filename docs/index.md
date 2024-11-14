@@ -66,15 +66,15 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/avnav/docs/charts.html#chartformats) files, but it also supports `mbtiles`, just not on Android. Simply drop the files into AvNav's `charts` folder.
 
 - GEMF
-  - [:de: QMAP DE](qmap-de.gemf){:download}
-  - [:de: QMAP Soundings DE](soundg-de.gemf){:download}
-  - [:nl: QMAP NL](qmap-nl.gemf){:download}
-  - [:de: Tidal Atlas DE](tides.gemf.zip){:download}
+    - [:de: QMAP DE](qmap-de.gemf){:download}
+    - [:de: QMAP Soundings DE](soundg-de.gemf){:download}
+    - [:nl: QMAP NL](qmap-nl.gemf){:download}
+    - [:de: Tidal Atlas DE](tides.gemf.zip){:download}
 - MBTILES
-  - [:de: QMAP DE](qmap-de.mbtiles){:download}
-  - [:de: QMAP Soundings DE](soundg-de.mbtiles){:download}
-  - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
-  - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
+    - [:de: QMAP DE](qmap-de.mbtiles){:download}
+    - [:de: QMAP Soundings DE](soundg-de.mbtiles){:download}
+    - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
+    - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
 
 ## [OpenCPN](https://opencpn.org/)
 
