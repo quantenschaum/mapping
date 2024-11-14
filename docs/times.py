@@ -14,7 +14,7 @@ def main():
     output = []
     for line in input.splitlines():
         # line=line.strip()
-        m = re.match(r"(-\s+\[.+\]\((.+?)\).*)", line) if ":download" in line else None
+        m = re.match(r"(\s*-\s+\[.+\]\((.+?)\).*)", line) if ":download" in line else None
         if m:
             try:
                 # print(m.groups(), m.group(2))
