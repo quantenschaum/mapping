@@ -168,13 +168,14 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
 
 upload:
 	rm -rf tmp && mkdir tmp
+	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
 	cp -rpv marine.render.xml depthcontourlines.addon.render.xml charts/* tmp/docs
 	cd tmp/docs && ./times.py index.md
 	cd tmp && mkdocs build
 	rm -rf www/download
 	mv tmp/site www/download
-	rm -rf tmp
+	#rm -rf tmp
 	chmod +rX -R www
 
 vwm-update:
