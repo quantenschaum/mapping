@@ -63,12 +63,18 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 
 ![AvNav](img/avnav.png)
 
-AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/avnav/docs/charts.html#chartformats) files. Simply drop the files into AvNav's `charts` folder.
+AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/avnav/docs/charts.html#chartformats) files, but it also supports `mbtiles`, just not on Android. Simply drop the files into AvNav's `charts` folder.
 
-- [:de: QMAP DE](qmap-de.gemf){:download}
-- [:de: QMAP Soundings DE](soundg-de.gemf){:download}
-- [:nl: QMAP NL](qmap-nl.gemf){:download}
-- [:de: Tidal Atlas DE](tides.gemf.zip){:download}
+- GEMF
+  - [:de: QMAP DE](qmap-de.gemf){:download}
+  - [:de: QMAP Soundings DE](soundg-de.gemf){:download}
+  - [:nl: QMAP NL](qmap-nl.gemf){:download}
+  - [:de: Tidal Atlas DE](tides.gemf.zip){:download}
+- MBTILES
+  - [:de: QMAP DE](qmap-de.mbtiles){:download}
+  - [:de: QMAP Soundings DE](soundg-de.mbtiles){:download}
+  - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
+  - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
 
 ## [OpenCPN](https://opencpn.org/)
 
@@ -81,7 +87,7 @@ OpenCPN and other applications can display raster charts from `mbtiles`.
 - [:nl: QMAP NL](qmap-nl.png.mbtiles){:download}
 
 !!! info
-    OpenCPN does not support WebP, so there are separate `mbtiles` files with png tiles.
+    OpenCPN does not support WebP, so there are separate `mbtiles` files containing png tiles.
 
 ## [JOSM](https://josm.openstreetmap.de/)
 
