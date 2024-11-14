@@ -10,8 +10,13 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
 !!! note "Data Sources"
     The charts provided by this project are based on data by
     
-    - :de: BSH: [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/), [Bathymetry](https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml), [Tidal Data](https://data.bsh.de/OpenData/Main/)
-    - :nl: RWS: [ENC](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc), Vaarwegmarkeringen [drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5)/[vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c)
+    - :de: [BSH](https://www.bsh.de/)
+        - [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2))
+        - [Bathymetry](https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
+        - [Tidal Data](https://data.bsh.de/OpenData/Main/) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2)?)
+    - :nl: [RWS](https://www.rijkswaterstaat.nl/)
+        - [ENC](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc) (?)
+        - Vaarwegmarkeringen [drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5)/[vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.de))
 
 !!! warning
     The german chart now includes spot sounding extracted from <https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml> which is from 2018!  
