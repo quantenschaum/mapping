@@ -15,7 +15,7 @@ Den Daten im genannten WMS ist *kein Quellenvermerk beigegeben*, folglich ist au
 
 ## Datenlizenz Deutschland
 
-Ähnlich verhält es sich bei der [DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0), dieser verlangt die Angabe eines Quellenvermerks
+Ähnlich verhält es sich bei der [DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0), diese verlangt die Angabe eines Quellenvermerks
 
 >nur soweit die datenhaltende Stelle die Angaben [...] zum Quellenvermerk bereitstellt.
 
