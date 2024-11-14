@@ -175,7 +175,7 @@ upload:
 	cd tmp && mkdocs build
 	rm -rf www/download
 	mv tmp/site www/download
-	#rm -rf tmp
+	rm -rf tmp
 	chmod +rX -R www
 
 vwm-update:
