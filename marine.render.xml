@@ -270,7 +270,7 @@
 	</renderingAttribute>
 
 	<renderingAttribute name="depthTextColor">
-		<case nightMode="true" attrColorValue="#aaaaaaaa"/>
+		<case nightMode="true" attrColorValue="#aaaaaa"/>
 		<case attrColorValue="#333333"/>
 	</renderingAttribute>
 
@@ -3119,6 +3119,7 @@
 				<case additional="seamark:obstruction:category=construction" icon="seamark_obstruction_construction"/>
 				<case minzoom="14" additional="seamark:obstruction:category=stump" icon="seamark_obstruction_stump" icon_shift_py="-0.8"/>
 				<apply_if additional="depth:exposition=shoaler" shield="seamark_rock_shield"/>
+				<apply_if nightMode="true" shield="seamark_rock_shield"/>
 			</case>
 
 			<case minzoom="15" tag="seamark:type" value="distance_mark" icon="seamark_distance_mark" iconOrder="150">
@@ -3202,6 +3203,7 @@
 				<case additional="seamark:rock:water_level=covers" icon="seamark_rock_covers"/>
 				<case additional="seamark:rock:water_level=awash" icon="seamark_rock_awash"/>
 				<apply_if additional="seamark:lnam" iconOrder="25"/>
+				<apply_if nightMode="true" shield="seamark_rock_shield"/>
 			</case>
 
 			<!-- INT-1 J Section Nature of the Seabed -->
@@ -3403,14 +3405,14 @@
 				<case additional="areatype=10" color="#D3E9ED"/>
 			</case>
 			<case nightMode="true">
-				<case additional="areatype=-1" color="#285c29"/>
-				<case additional="areatype=0" color="#1a71c1"/>
-				<case additional="areatype=2" color="#1462ac"/>
-				<case additional="areatype=5" color="#0f5698"/>
-				<case additional="areatype=10" color="#0b4c8a"/>
+				<case additional="areatype=-1" color="#141C0E"/>
+				<case additional="areatype=0" color="#142330"/>
+				<case additional="areatype=2" color="#0C1721"/>
+				<case additional="areatype=5" color="#04060A"/>
+				<case additional="areatype=10" color="#000000"/>
 			</case>
 			<case additional="areatype=-1" color="#CADBC1"/>
-			<case additional="areatype=0" color="#afcce3"/>
+			<case additional="areatype=0" color="#AFCCE3"/>
 			<case additional="areatype=2" color="#CADEEF"/>
 			<case additional="areatype=5" color="#F1F6FC"/>
 			<case additional="areatype=10" color="#FFFFFF"/>
