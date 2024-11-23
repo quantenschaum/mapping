@@ -66,9 +66,51 @@ bsh:
 	for L in RocksWrecksObstructions; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_3)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
 	for L in Hydrography Topography; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_2)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
 	#for F in data/bsh/*.json; do jq . $$F>data/bsh/tmp; mv data/bsh/tmp $$F; done
+	for F in data/bsh/*.json; do ./ubands.py $$F; done
 	for F in $$(find data/bsh -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
-	#for F in $$(find data/bsh -name "*.json"); do ogr2ogr data/bsh.gpkg $$F -append; done
+	#for F in $$(find data/bsh -name "*.gpkg"); do ogr2ogr data/bsh.gpkg $$F -append; done
 
+ubands:
+	for F in data/bsh/*.json; do ./ubands.py $$F; done
+
+filter:
+	A=(Overview General Coast Approach Harbour Berthing xxx) ; \
+	I=0; for UB in Overview General Coast Approach Harbour Berthing; do \
+	  ((I=I+1)); echo $$I $$UB; rm -rf data/bsh/$$I; mkdir -p data/bsh/$$I; \
+	  for L in $$(cd data/bsh; ls *.json); do echo $$L; \
+			ogr2ogr data/bsh/$$I/$$L data/bsh/$$L -where "id LIKE '$$UB%'"; \
+    done; \
+		ogr2ogr data/bsh/$$I/coverage.json data/bsh/AidsAndServices.json -where "id LIKE '$${A[$$I]}%' AND marsys=1"; \
+	done
+
+icons: icons/gen
+
+icons/gen:
+	cd icons && rm -rf gen/* && ../genicons.py
+	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
+
+spreet:
+	git clone https://github.com/flother/spreet
+	cd spreet && cargo build --release
+
+sprites: icons spreet
+	spreet/target/release/spreet icons/INT1  www/icons-mono --recursive --ratio 2
+	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 1/g' www/icons-mono.json -i
+
+	spreet/target/release/spreet icons/INT1  www/icons-mono@2x --recursive --ratio 4
+	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 2/g' www/icons-mono@2x.json -i
+
+	spreet/target/release/spreet icons/gen  www/icons --recursive --ratio 2
+	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 1/g' www/icons.json -i
+
+	spreet/target/release/spreet icons/gen  www/icons@2x --recursive --ratio 4
+	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 2/g' www/icons@2x.json -i
+
+pbf:
+	rm -rf www/$@
+	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9,10]], ["all",["==","uband",3],["in","$$zoom",11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]] ]}' --no-tile-compression -x lnam --output-to-directory=www/$@       # -o www/bsh.mbtiles
+	du -sch www/pbf/*
+# 	cat www/pbf/metadata.json |jq .json -r |jq >www/tile.json
 
 data/Elevation-Bathymetry.zip:
 	# https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml
@@ -90,12 +132,6 @@ waypoints:
 	rm -rf data/Wegepunkte2024.gpx
 	wget -O data/waypoints.zip https://nvcharts.com/downloads/wegepunkte/2024/Wegepunkte2024_txt.zip
 	cd data && unzip -n waypoints.zip && rm waypoints.zip
-
-icons: icons/gen
-
-icons/gen:
-	cd icons && ./genicons.py
-	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
 
 bsh1.qgs: bsh.qgs
 	sed 's#<value>000000</value>#<value>1</value>#g' $< >$@

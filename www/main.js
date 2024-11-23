@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  var debug=window.location.href.includes('debug');
+
   function d2dm(a,n){
       deg = (new URL(document.location)).searchParams.get("deg");
       if(deg) {
@@ -198,7 +200,6 @@ document.addEventListener("DOMContentLoaded", () => {
     overlays['MapProxy'] = L.tileLayer('http://localhost:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png');
   }
 
-
   var map = L.map('map', {
     center: [54.264,9.196],
     zoom: 8,
@@ -206,6 +207,32 @@ document.addEventListener("DOMContentLoaded", () => {
     minZoom: 7,
     maxZoom: 18,
   });
+
+   if(debug){
+     L.GridLayer.GridDebug = L.GridLayer.extend({
+      createTile: function (coords) {
+        const tile = document.createElement('div');
+        tile.style.outline = '1px solid red';
+        tile.style.fontSize = '10pt';
+        tile.innerHTML = [coords.z, coords.x, coords.y].join('/');
+        return tile;
+      },
+    });
+
+    L.gridLayer.gridDebug = function (opts) {
+      return new L.GridLayer.GridDebug(opts);
+    };
+    map.addLayer(L.gridLayer.gridDebug());
+  }
+
+  var gl = L.maplibreGL({
+      style: 'style.json'
+  });//.addTo(map);
+
+  var glmap=gl.getMaplibreMap();
+  console.log(glmap);
+
+  basemaps['Vector (experimental)']=gl;
 
   var layers=L.control.layers(basemaps, overlays, {collapsed: true}).addTo(map);
 
