@@ -29,6 +29,37 @@ object_colors = {
     "pink": "#FFC0CB", # 13
 }
 
+color_types={ # to reduce numer of combinations
+  'pillar pile spar stake cairn can spherical barrel super-buoy conical light_float':
+  ['white','black','red','green','yellow'],
+
+  'tower lattice':
+  ['white','black','red','green','yellow','brown','grey'],
+
+  'circle':
+  ['red'],
+
+  'circle x-shape cross':
+  ['yellow'],
+
+  '2_spheres 2_cones_up 2_cones_down 2_cones_base_together 2_cones_point_together':
+  ['black'],
+
+  'cylinder cone_point_down cone_point_up':
+  ['red','green'],
+
+  'triangle_point_up square rhombus triangle_point_down':
+  ['white','black','red','green','yellow'],
+}
+
+def colors_for(s):
+  colors=None
+  for types,cols in color_types.items():
+    if s in types: colors=cols
+  # print(s,colors)
+  if not colors: return object_colors
+  return {k:v for k,v in object_colors.items() if k in colors}
+
 lights = {
     "light",
     "floodlight",
@@ -93,7 +124,7 @@ def main():
             secs = {int(m[0]) for m in matches} if p else {1}
             print(s, p, secs)
             for n in secs:
-                colors = light_colors if s in lights else object_colors
+                colors = light_colors if s in lights else colors_for(s)
                 cols = tuple(
                     product(
                         *([tuple(filter(lambda c: c or n == 1, colors.keys()))] * n)
