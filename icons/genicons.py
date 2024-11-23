@@ -11,19 +11,19 @@ patterns = (None, "vertical", "horizontal", "cross", "saltire", "border", "squar
 
 object_colors = {
     "": None,
-    "white": "white",
-    "black": "black",
+    "white": "#ffffff",
+    "black": "#000000",
     "red": "#ed1c24",
     "green": "#00a650",
     "blue": "#10508c",
     "yellow": "#fab20b",
     "grey": "#808080",
-    "brown": "brown",
-    "amber": "amber",
-    "violet": "violet",
+    "brown": "#A52A2A",
+    "amber": "#FFBF00",
+    "violet": "#EE82EE",
     "orange": "#F7A837",
     "magenta": "#ec008c",  # ec008c DE44E8
-    "pink": "pink",
+    "pink": "#FFC0CB",
 }
 
 lights = {
