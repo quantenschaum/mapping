@@ -4,17 +4,49 @@
    width="32"
    height="32"
    id="svg2"
+   sodipodi:docname="light.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-
+  <style
+     type="text/css"
+     id="base">
+      .outline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
+      }
+      .fill {
+        fill: #800080;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      COLORING{}
+  </style>
   <g
      id="g390"
-     transform="matrix(1.3244227,-0.15389032,-0.15389032,-1.3244227,7.1595679,29.541469)"
-     clip-path="url(#clipPath6748)"
-     style="fill:#800080">
+     inkscape:transform-center-x="0.0"
+     inkscape:transform-center-y="0.0">
     <path
-       d="M 0,0 C -0.967,-0.795 -2.396,-0.656 -3.192,0.311 -3.987,1.278 -3.847,2.708 -2.88,3.503 -1.912,4.299 3.427,6.824 6.661,8.413 4.585,5.712 0.968,0.796 0,0"
-       style="fill:#800080;fill-opacity:1;fill-rule:evenodd;stroke:none"
+      class="fill uniform"
+       d="m 23.129659,26.226475 c 0.891806,0.878519 2.327513,0.868236 3.207029,-0.02348 0.878519,-0.891806 0.86733,-2.328599 -0.02448,-3.207118 C 25.4195,22.116271 20.328463,19.122631 17.25,17.25 c 1.825402,2.876297 4.986947,8.09687 5.879659,8.976475"
        id="path392" />
   </g>
 </svg>

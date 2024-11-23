@@ -6,24 +6,27 @@ from os.path import isfile, basename, splitext, dirname
 from itertools import product
 from re import findall
 from glob import glob
+from s57 import S57
+
+outpath = "gen"
 
 patterns = (None, "vertical", "horizontal", "cross", "saltire", "border", "squared")
 
 object_colors = {
     "": None,
-    "white": "#ffffff",
-    "black": "#000000",
-    "red": "#ed1c24",
-    "green": "#00a650",
-    "blue": "#10508c",
-    "yellow": "#fab20b",
-    "grey": "#808080",
-    "brown": "#A52A2A",
-    "amber": "#FFBF00",
-    "violet": "#EE82EE",
-    "orange": "#F7A837",
-    "magenta": "#ec008c",  # ec008c DE44E8
-    "pink": "#FFC0CB",
+    "white": "#ffffff", # 1
+    "black": "#000000", # 2
+    "red": "#ed1c24", # 3
+    "green": "#00a650", # 4
+    "blue": "#10508c", # 5
+    "yellow": "#fab20b", # 6
+    "grey": "#808080", # 7
+    "brown": "#A52A2A", # 8
+    "amber": "#FFBF00", # 9
+    "violet": "#EE82EE", # 10
+    "orange": "#F7A837", # 11
+    "magenta": "#ec008c", # 12
+    "pink": "#FFC0CB", # 13
 }
 
 lights = {
@@ -41,8 +44,12 @@ light_colors = {
     "orange": "#fa870b",
 }
 
-
-outpath = "gen"
+def s57id(value):
+  for n,d in S57.items():
+    if type(d)!=dict: continue
+    for k,v in d.items():
+      if v==value:
+        return k,n
 
 
 def read(f):
@@ -51,6 +58,20 @@ def read(f):
 
 
 def write(f, c):
+    # base,ext=splitext(f)
+    # parts=base.split('/')
+    # codes=[]
+    # for p in parts:
+    #   s=s57id(p)
+    #   o=f'{s[1]}{s[0]}' if s else p
+    #   if '_' in p:
+    #     o=','.join(str(s57id(x)[0]) for x in p.split('_'))
+    #   codes.append(str(o))
+    # f2='/'.join(codes)+ext
+    # print(f,f2)
+    # f=f2
+    assert not isfile(f), f
+    makedirs(dirname(f), exist_ok=True)
     with open(f, "w") as f:
         f.write(c)
 
@@ -60,7 +81,6 @@ def main():
         svg = read(f)
         s = splitext(f)[0]
         if "COLORING{}" not in svg:
-            makedirs(outpath, exist_ok=True)
             write("/".join((outpath, f"{s}.svg")), svg)
             continue
         # print(s)
@@ -151,7 +171,6 @@ def main():
                     # svgout = svgout.replace("COLORING{}", "\n".join(styles))
                     # print(svgout)
 
-                    makedirs(dirname(out), exist_ok=True)
                     write(out, svgout)
 
 

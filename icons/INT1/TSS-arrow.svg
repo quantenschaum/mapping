@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="56"
+   height="56"
    id="svg2"
    sodipodi:docname="TSS-arrow.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
@@ -10,15 +10,35 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="20.439805"
+     inkscape:cx="13.57645"
+     inkscape:cy="27.348597"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
   <g
      id="g2642"
-     transform="matrix(0,-0.43403395,-0.62123683,0,17.937016,14.665737)"
+     transform="matrix(0,-1.6493213,-2.3606889,0,35.360626,22.929825)"
      clip-path="url(#clipPath42603)"
      style="stroke-width:2.56773">
     <path
        d="M 6.0835697,-7.0172917e-7 V 2.2679993 H -19.047108 v 1.701 H 6.0835697 v 2.267 l 6.4412203,-3.118 z"
-       style="fill:none;stroke:#ec008c;stroke-width:0.57773779;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:#ec008c;stroke-width:0.577738;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
        id="path2644"
        sodipodi:nodetypes="cccccccc" />
   </g>

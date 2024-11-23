@@ -11,55 +11,6 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <style
-   type="text/css"
-   id="base">
-      .outline {
-        fill: none;
-        stroke: black;
-        stroke-width: 0.3;
-      }
-      .inline {
-        fill: none;
-        stroke: none;
-        stroke-width: 0.8;
-      }
-      .fill {
-        fill: none;
-        stroke: none;
-        stroke-width: 0.3;
-      }
-      .baseline {
-        fill: none;
-        stroke: black;
-        stroke-width: 0.5;
-      }
-      .basepoint {
-        fill: white;
-        stroke: black;
-        stroke-width: 0.5;
-      }
-      COLORING{}
-  </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <g
    id="g15760"
    transform="translate(-0.0168421,-35.177191)"><path
