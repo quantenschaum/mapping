@@ -5,6 +5,7 @@ from os import listdir, makedirs
 from os.path import isfile, basename, splitext, dirname
 from itertools import product
 from re import findall
+from glob import glob
 
 patterns = (None, "vertical", "horizontal", "cross", "saltire", "border", "squared")
 
@@ -55,7 +56,7 @@ def write(f, c):
 
 
 def main():
-    for f in list(filter(lambda f: isfile(f) and f.endswith(".svg"), listdir("."))):
+    for f in glob('*.svg'):
         svg = read(f)
         s = splitext(f)[0]
         if "COLORING{}" not in svg:
