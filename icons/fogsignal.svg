@@ -10,43 +10,6 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs10" />
-  <sodipodi:namedview
-     id="namedview22131"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     showgrid="false"
-     showguides="true"
-     inkscape:zoom="23.109375"
-     inkscape:cx="14.950642"
-     inkscape:cy="26.742394"
-     inkscape:window-width="2131"
-     inkscape:window-height="1758"
-     inkscape:window-x="1346"
-     inkscape:window-y="231"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2">
-    <sodipodi:guide
-       position="10.083411,16"
-       orientation="0,1"
-       id="guide22613"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="16,24.496756"
-       orientation="-1,0"
-       id="guide22615"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-  </sodipodi:namedview>
   <g
      id="g541"
      transform="rotate(-160,16,16)">
