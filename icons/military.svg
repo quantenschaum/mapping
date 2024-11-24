@@ -10,6 +10,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs15" />
   <sodipodi:namedview
      id="namedview22131"
      pagecolor="#ffffff"
@@ -22,8 +24,8 @@
      showgrid="false"
      showguides="true"
      inkscape:zoom="33.71875"
-     inkscape:cx="15.733086"
-     inkscape:cy="13.241891"
+     inkscape:cx="12.693234"
+     inkscape:cy="13.271548"
      inkscape:window-width="1792"
      inkscape:window-height="1297"
      inkscape:window-x="1689"
@@ -45,10 +47,9 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
   </sodipodi:namedview>
-
   <g
      id="g163087"
-     transform="matrix(1.3333333,0,0,-1.3333333,-657.01143,275.03104)">
+     transform="matrix(1.3333333,0,0,-1.3333333,-656.80944,279.26107)">
     <g
        id="g2474"
        transform="translate(505.3697,196.2778)"
