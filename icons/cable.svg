@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="14.645333"
+   height="2.8565979"
    id="svg2"
    sodipodi:docname="cable.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
@@ -10,6 +10,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
   <sodipodi:namedview
      id="namedview22131"
      pagecolor="#ffffff"
@@ -21,24 +23,24 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      showguides="true"
-     inkscape:zoom="33.71875"
-     inkscape:cx="16"
-     inkscape:cy="16"
+     inkscape:zoom="32.21875"
+     inkscape:cx="-5.2298739"
+     inkscape:cy="-13.082444"
      inkscape:window-width="1792"
      inkscape:window-height="1297"
-     inkscape:window-x="1685"
-     inkscape:window-y="692"
+     inkscape:window-x="1175"
+     inkscape:window-y="338"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2">
+     inkscape:current-layer="g3104">
     <sodipodi:guide
-       position="10.083411,16"
+       position="1.4060775,1.4282986"
        orientation="0,1"
        id="guide22613"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="16,24.496756"
+       position="7.3226665,9.9250546"
        orientation="-1,0"
        id="guide22615"
        inkscape:locked="false"
@@ -47,7 +49,7 @@
   </sodipodi:namedview>
   <g
      id="g3104"
-     transform="matrix(1.3333333,0,0,-1.3333333,8.6773335,17.201632)"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,2.6299313)"
      clip-path="url(#clipPath41763)">
     <path
        d="M 0,0 C 1.011,0 0.785,1.772 1.889,1.772 3.02,1.772 2.656,0 3.608,0 4.623,0 4.554,1.837 5.569,1.802 6.531,1.771 6.459,0 7.369,0 8.469,0 8.281,1.772 9.226,1.772 10.209,1.772 10.031,0 10.984,0"

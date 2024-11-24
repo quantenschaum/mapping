@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="7.5586667"
+   height="5.5"
    id="svg2"
-   sodipodi:docname="area-m.svg"
+   sodipodi:docname="area-g.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1741" />
   <sodipodi:namedview
      id="namedview22131"
      pagecolor="#ffffff"
@@ -22,8 +24,8 @@
      showgrid="false"
      showguides="true"
      inkscape:zoom="33.71875"
-     inkscape:cx="16"
-     inkscape:cy="16"
+     inkscape:cx="-3.5143652"
+     inkscape:cy="0.48934198"
      inkscape:window-width="1792"
      inkscape:window-height="1297"
      inkscape:window-x="1685"
@@ -31,31 +33,32 @@
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2">
     <sodipodi:guide
-       position="10.083411,16"
+       position="-2.0872753,2.75"
        orientation="0,1"
        id="guide22613"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="16,24.496756"
+       position="3.8293137,13.532983"
        orientation="-1,0"
        id="guide22615"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
   </sodipodi:namedview>
-   <g
+  <g
      id="g64158"
-     transform="matrix(1.3333333,0,0,-1.3333333,-670.39063,994.15087)">
+     transform="matrix(1.3333333,0,0,-1.3333333,-682.56132,980.98267)"
+     style="fill:#2ea948;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none;stroke-opacity:1">
     <path
        d="m 511.921,733.392 h 5.669 v 0.568 h -5.669 z"
-       style="fill:#2ea948ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       style="fill:#2ea948;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;stroke-dasharray:none;stroke-opacity:1"
        id="path3128"
        clip-path="url(#clipPath41709)" />
     <path
        d="m 514.47,731.976 h 0.567 v 1.985 h -0.567 z"
-       style="fill:#2ea948ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       style="fill:#2ea948;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;stroke-dasharray:none;stroke-opacity:1"
        id="path3130"
        clip-path="url(#clipPath41703)" />
   </g>
