@@ -2,16 +2,7 @@
   "version": 8,
   "name": "Vector Test Tiles",
   "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=L8FrrrJGE2n415wJo8BL",
-  "sprite": [
-    {
-      "id": "c",
-      "url": "icons"
-    },
-    {
-      "id": "m",
-      "url": "icons-mono"
-    }
-  ],
+  "sprite": "icons",
   "sources": {
     "osm-raster": {
       "type": "raster",
@@ -58,13 +49,12 @@
         "paint": {
           "fill-color": [ "case",
             [ "!", ["has", "drval1"]], "#F9ECC0",
-            [ "!", ["has", "drval2"]], "#F1F6FC",
+            [ "!", ["has", "drval2"]], "#eee",
             [ "<", ["get", "drval1"], 0 ], "#CADBC1",
             [ "<", ["get", "drval1"], 2 ], "#AFCCE3",
             [ "<", ["get", "drval1"], 5 ], "#CADEEF",
             [ "<", ["get", "drval1"], 10 ], "#F1F6FC",
             "white" ],
-          "fill-outline-color": ["case",[ "!", ["has", "drval2"]],"gray","rgba(0,0,0,0)"],
           "fill-opacity": ["case",["has","drval1"],1,0.5]
         }
     },
@@ -97,6 +87,145 @@
         }
     },
     {
+        "id": "topo-areas",
+        "type": "fill",
+        "source": "bsh",
+        "source-layer": "Topography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["!=",["get","coast_type"],1],["!=",["get","land_type"],6]],
+        "paint": {
+          "fill-opacity": 0.6,
+          "fill-color": ["case",
+            ["==",["get","land_type"],1],"#ae9147",
+            ["==",["get","land_type"],4],"#7cb6ea",
+            ["==",["get","land_type"],7],"#a17d29",
+            ["==",["get","land_type"],9],"#7cb6ea",
+            ["==",["get","land_type"],11],"green",
+            ["==",["get","coast_type"],2],"#c6a632",
+            ["has","catbrg"],"#cb9b35",
+            ["has","facility_type"],"#ae9147",
+            ["has","trans_type"],"#555",
+            ["has","dock_type"],"#7cb6ea",
+            "gray"]
+        }
+    },
+    {
+        "id": "topo-lines",
+        "type": "line",
+        "source": "bsh",
+        "source-layer": "Topography",
+        "filter": [ "all", ["==", ["geometry-type"], "LineString"]],
+        "paint": {
+          "line-color": ["case",
+            ["==",["get","land_type"],7],"#0066d4",
+            ["==",["get","land_type"],4],"brown",
+            ["==",["get","caution_type"],4],"brown",
+            ["==",["get","land_type"],8],"gray",
+            ["==",["get","util_type"],8],"gray",
+            ["==",["get","trans_type"],2],"#0066d4",
+            "black"],
+          "line-width": ["case",
+            ["==",["get","land_type"],7],1.5,
+            ["==",["get","trans_type"],2],3,
+            ["==",["get","land_type"],2],3,
+            ["==",["get","catslc"],9],2,
+            ["==",["get","catslc"],2],1.5,
+            ["==",["get","catslc"],10],2.5,
+            1]
+        }
+    },
+    {
+        "id": "piles",
+        "type": "circle",
+        "source": "bsh",
+        "source-layer": "Topography",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","catple"],["has","catmor"]]],
+        "paint": {
+          "circle-radius": 3
+        }
+    },
+    {
+        "id": "harhours",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","cathaf"]]],
+        "layout": {
+          "icon-image": ["match",["get","cathaf"],5,"marina",4,"fishingharbour",""],
+          "icon-overlap": "always",
+          "text-field": "{objnam}",
+          "text-size": 12,
+          "text-anchor": "top",
+          "text-optional": true,
+          "text-offset": [0,1.2]
+        },
+        "paint": {
+          "text-color": "magenta"
+        }
+    },
+    {
+        "id": "dir-of-buoyage",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],[ "has", "orient" ],["==",["get","meta_type"],6]],
+        "layout": {
+          "icon-image": "dir-buoyage-a",
+          "icon-rotate": ["get","orient"]
+        },
+        "paint": {
+          "icon-opacity": 0.5
+        }
+    },
+    {
+        "id": "rocks",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "RocksWrecksObstructions",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["==", ["get","caution_type"], 6]],
+        "layout": {
+         "icon-image": ["concat","rock-",["case",
+            ["==",["get","expsou"],2],"dangerous",
+            ["==",["get","watlev"],4],"covers",
+            ["==",["get","watlev"],5],"awash",
+            "submerged"]],
+         "icon-overlap": "always",
+         "text-field": "({valsou})",
+         "text-size": ["case",["has","valsou"],12,0],
+         "text-anchor": "top",
+         "text-optional": true,
+         "text-offset": [0,0.5]
+        },
+        "paint": {
+          "text-color": ["case", ["<",5,["get","valsou"]],"gray", "black"]
+        }
+    },
+    {
+        "id": "wrecks",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "RocksWrecksObstructions",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["!=", ["get","caution_type"], 6]],
+        "layout": {
+         "icon-image": ["case",
+           ["==",["get","catwrk"],1],"wreck-non-dangerous",
+           ["==",["get","catwrk"],2],"wreck-dangerous",
+           ["==",["get","catwrk"],4],"wreck-hull_showing",
+           ["==",["get","catwrk"],5],"wreck-hull_showing",
+           ["==",["get","catobs"],6],"foul",
+           ["==",["get","catobs"],7],"foul",
+           "obstruction"],
+         "icon-overlap": "always",
+         "text-field": "({valsou})",
+         "text-size": ["case",["has","valsou"],12,0],
+         "text-anchor": "top",
+         "text-optional": true,
+         "text-offset": [0,0.8]
+        },
+        "paint": {
+          "text-color": ["case", ["<",5,["get","valsou"]],"gray", "black"]
+        }
+    },
+    {
         "id": "lights",
         "type": "symbol",
         "source": "bsh",
@@ -111,7 +240,7 @@
               ["==",5,["get","colour"]],"blue",
               ["==",6,["get","colour"]],"yellow",
             "generic"],
-            ["concat","c:",["case",["==",["get","catlit"],8],"floodlight/","light/"] ,["var","col"]]],
+            ["concat","",["case",["==",["get","catlit"],8],"floodlight/","light/"] ,["var","col"]]],
           "icon-rotate": ["+",90,["case",
             ["==",3,["get","colour"]],10,
             ["==",4,["get","colour"]],-10
@@ -129,7 +258,7 @@
         "source-layer": "AidsAndServices",
         "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","valnmr"]],
         "layout": {
-          "icon-image": ["case",[">",["get","valnmr"],5],"m:light-major","m:light-minor"],
+          "icon-image": ["case",[">",["get","valnmr"],5],"light-major","light-minor"],
           "icon-overlap": "always"
         }
     },
@@ -140,22 +269,73 @@
         "source-layer": "AidsAndServices",
         "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","catfog"]],
         "layout": {
-          "icon-image": "m:fogsignal",
+          "icon-image": "fogsignal",
           "icon-overlap": "always"
         }
     },
     {
-        "id": "buoys",
+        "id": "radar-reflectors",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["==",["get","conrad"],3]],
+        "layout": {
+          "icon-image": "radar-reflector",
+          "icon-rotate": -60,
+          "icon-offset": [0,-8],
+          "icon-overlap": "always"
+        }
+    },
+    {
+        "id": "topmarks",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","topshp"],["has","boyshp"],["has","bcnshp"]]],
+        "layout": {
+          "icon-image": ["concat","",["case",
+              ["all",["has","boyshp"],["==",["get","colour"],"3,1"]],"sphere/red",
+              ["all",["has","boyshp"],["==",["get","colour"],"2,3,2"]],"2_spheres/black",
+              ["all",["has","bcnshp"],["==",["get","colour"],"2,3,2"]],"2_spheres/black",
+              ["all",["has","boyshp"],["==",["get","catlam"],2],["==",["get","objnam"],1]],"cone_point_up/green",
+              ["all",["has","boyshp"],["==",["get","catlam"],1],["==",["get","objnam"],2]],"cylinder/red",
+              ["==",["get","catcam"],1],"2_cones_up/black",
+              ["==",["get","catcam"],2],"2_cones_base_together/black",
+              ["==",["get","catcam"],3],"2_cones_down/black",
+              ["==",["get","catcam"],4],"2_cones_point_together/black",
+              ["==",["get","topshp"],3],"sphere/generic",
+              ["==",["get","topshp"],8],"cross/generic",
+              ["==",["get","topshp"],9],"rhombus/generic",
+              ["==",["get","topshp"],12],"rhombus/generic",
+              ["==",["get","topshp"],19],"square/generic",
+              ["==",["get","topshp"],20],"square/generic",
+              ["==",["get","topshp"],21],"square/generic",
+              ["==",["get","topshp"],24],"triangle_point_up/generic",
+              ["==",["get","topshp"],25],"triangle_point_down/generic",
+            ""]],
+          "icon-overlap": "always",
+          "icon-offset": ["case",
+              ["has","bcnshp"],["literal",[0,-19]],
+              ["==",["get","boyshp"],1],["literal",[0,-12]],
+              ["==",["get","boyshp"],2],["literal",[0,-8]],
+              ["==",["get","boyshp"],3],["literal",[0,-9]],
+              ["literal",[0,-22]]],
+          "icon-rotate": ["case",["all",["has","boyshp"],["!",["in",["get","boyshp"],["literal",[6,7]]]]],15,0]
+        }
+    },
+    {
+        "id": "buoys-beacons",
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
         "filter": ["any",[ "has", "boyshp" ],[ "has", "bcnshp" ]],
         "layout": {
           "icon-image": ["case",
-            ["all",["==",["get","bcnshp"],1],["==",["get","catlam"],2],["!",["has","colour"]]],"c:perch-starboard",
-            ["all",["==",["get","bcnshp"],1],["==",["get","catlam"],1],["!",["has","colour"]]],"c:perch-port",
-            ["all",["==",["get","bcnshp"],2],["==",["get","catlam"],2],["!",["has","colour"]]],"c:withy-starboard",
-            ["all",["==",["get","bcnshp"],2],["==",["get","catlam"],1],["!",["has","colour"]]],"c:withy-port",
+            ["all",["==",["get","bcnshp"],1],["==",["get","catlam"],2],["!",["has","colour"]]],"perch-starboard",
+            ["all",["==",["get","bcnshp"],1],["==",["get","catlam"],1],["!",["has","colour"]]],"perch-port",
+            ["all",["==",["get","bcnshp"],2],["==",["get","catlam"],2],["!",["has","colour"]]],"withy-starboard",
+            ["all",["==",["get","bcnshp"],2],["==",["get","catlam"],1],["!",["has","colour"]]],"withy-port",
+            ["in","Pegel",["get","objnam"]],"tide-gauge",
             ["let","shp",["case",
               ["==",1,["get","boyshp"]],"conical/",
               ["==",2,["get","boyshp"]],"can/",
@@ -200,7 +380,7 @@
               ["==","4,1,4",["get","colour"]],"green_white_green",
               ["==","3,1,3",["get","colour"]],"red_white_red",
             "generic"],
-            ["concat","c:",["var","shp"],["var","pat"],["var","col"]]]]]],
+            ["concat","",["var","shp"],["var","pat"],["var","col"]]]]]],
           "icon-overlap": "always",
            "text-field":
            ["case",
@@ -228,104 +408,6 @@
         }
     },
     {
-        "id": "topmarks",
-        "type": "symbol",
-        "source": "bsh",
-        "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","topshp"],["has","boyshp"],["has","bcnshp"]]],
-        "layout": {
-          "icon-image": ["concat","c:",["case",
-              ["all",["has","boyshp"],["==",["get","colour"],"3,1"]],"sphere/red",
-              ["all",["has","boyshp"],["==",["get","colour"],"2,3,2"]],"2_spheres/black",
-              ["all",["has","bcnshp"],["==",["get","colour"],"2,3,2"]],"2_spheres/black",
-              ["all",["has","boyshp"],["==",["get","catlam"],2],["==",["get","objnam"],1]],"cone_point_up/green",
-              ["all",["has","boyshp"],["==",["get","catlam"],1],["==",["get","objnam"],2]],"cylinder/red",
-              ["==",["get","catcam"],1],"2_cones_up/black",
-              ["==",["get","catcam"],2],"2_cones_base_together/black",
-              ["==",["get","catcam"],3],"2_cones_down/black",
-              ["==",["get","catcam"],4],"2_cones_point_together/black",
-              ["==",["get","topshp"],3],"sphere/generic",
-              ["==",["get","topshp"],8],"cross/generic",
-              ["==",["get","topshp"],9],"rhombus/generic",
-              ["==",["get","topshp"],12],"rhombus/generic",
-              ["==",["get","topshp"],19],"square/generic",
-              ["==",["get","topshp"],20],"square/generic",
-              ["==",["get","topshp"],21],"square/generic",
-              ["==",["get","topshp"],24],"triangle_point_up/generic",
-              ["==",["get","topshp"],25],"triangle_point_down/generic",
-            ""]],
-          "icon-overlap": "always",
-          "icon-offset": ["case",
-              ["has","bcnshp"],["literal",[0,-19]],
-              ["==",["get","boyshp"],1],["literal",[0,-12]],
-              ["literal",[0,-22]]],
-          "icon-rotate": ["case",["all",["has","boyshp"],["!",["in",["get","boyshp"],["literal",[6,7]]]]],15,0]
-        }
-    },
-    {
-        "id": "dir-of-buoyage",
-        "type": "symbol",
-        "source": "bsh",
-        "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],[ "has", "orient" ],["==",["get","meta_type"],6]],
-        "layout": {
-          "icon-image": "c:dir-buoyage-a",
-          "icon-rotate": ["get","orient"]
-        },
-        "paint": {
-          "icon-opacity": 0.5
-        }
-    },
-    {
-        "id": "rocks",
-        "type": "symbol",
-        "source": "bsh",
-        "source-layer": "RocksWrecksObstructions",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["==", ["get","caution_type"], 6]],
-        "layout": {
-         "icon-image": ["concat","m:rock-",["case",
-            ["==",["get","expsou"],2],"dangerous",
-            ["==",["get","watlev"],4],"covers",
-            ["==",["get","watlev"],5],"awash",
-            "submerged"]],
-         "icon-overlap": "always",
-         "text-field": "({valsou})",
-         "text-size": ["case",["has","valsou"],12,0],
-         "text-anchor": "top",
-         "text-optional": true,
-         "text-offset": [0,0.5]
-        },
-        "paint": {
-          "text-color": ["case", ["<",5,["get","valsou"]],"gray", "black"]
-        }
-    },
-    {
-        "id": "wrecks",
-        "type": "symbol",
-        "source": "bsh",
-        "source-layer": "RocksWrecksObstructions",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["!=", ["get","caution_type"], 6]],
-        "layout": {
-         "icon-image": ["case",
-           ["==",["get","catwrk"],1],"m:wreck-non-dangerous",
-           ["==",["get","catwrk"],2],"m:wreck-dangerous",
-           ["==",["get","catwrk"],4],"m:wreck-hull_showing",
-           ["==",["get","catwrk"],5],"m:wreck-hull_showing",
-           ["==",["get","catobs"],6],"m:foul",
-           ["==",["get","catobs"],7],"m:foul",
-           "c:obstruction"],
-         "icon-overlap": "always",
-         "text-field": "({valsou})",
-         "text-size": ["case",["has","valsou"],12,0],
-         "text-anchor": "top",
-         "text-optional": true,
-         "text-offset": [0,0.8]
-        },
-        "paint": {
-          "text-color": ["case", ["<",5,["get","valsou"]],"gray", "black"]
-        }
-    },
-    {
         "id": "landmarks",
         "type": "symbol",
         "source": "bsh",
@@ -333,11 +415,18 @@
         "filter": [ "all", ["==", ["geometry-type"], "Point"], ["has", "catlmk"]],
         "layout": {
           "icon-image": ["case",
-          ["==",["get","catlmk"],3],"m:chimney",
-          ["==",["get","catlmk"],7],"m:mast",
-          ["==",["get","catlmk"],19],"m:wind-turbine",
+          ["==",["get","catlmk"],3],"chimney",
+          ["==",["get","catlmk"],5],"flagstaff",
+          ["==",["get","catlmk"],6],"flare-stack",
+          ["==",["get","catlmk"],7],"mast",
+          ["==",["get","catlmk"],9],"monument",
+          ["==",["get","catlmk"],10],"pile/generic",
+          ["==",["get","catlmk"],18],"windmill",
+          ["==",["get","catlmk"],19],"wind-turbine",
+          ["==",["get","functn"],20],"church",
+          ["==",["get","functn"],21],"church",
           ["all",["==",["get","catlmk"],17],["has","colour"]],
-              ["concat","c:tower/",["case",
+              ["concat","tower/",["case",
                 ["==",1,["get","colpat"]],"horizontal/",
                 ["==",2,["get","colpat"]],"vertical/",
                  ""],
@@ -356,6 +445,7 @@
                 ["==",12,["get","colour"]],"magenta",
                 ["==",13,["get","colour"]],"pink",
                 ["==","3,1",["get","colour"]],"red_white",
+                ["==","4,1",["get","colour"]],"green_white",
                 ["==","2,6",["get","colour"]],"black_yellow",
                 ["==","6,2",["get","colour"]],"yellow_black",
                 ["==","6,2,6",["get","colour"]],"yellow_black_yellow",
@@ -367,32 +457,14 @@
                 ["==","4,1,4",["get","colour"]],"green_white_green",
                 ["==","3,1,3",["get","colour"]],"red_white_red",
                 "generic"]],
-          ["==",["get","catlmk"],17],"m:tower",
-          "m:tower"],
+          ["==",["get","catlmk"],17],"tower",
+          ["==",["get","catlmk"],"17,16"],"tower",
+          "tower"],
           "icon-overlap": "always",
-         "text-field": "{objnam}",
-         "text-size": 12,
-         "text-anchor": "bottom-left",
-         "text-offset": [1.2,-1]
-        }
-    },
-    {
-        "id": "topo",
-        "type": "line",
-        "source": "bsh",
-        "source-layer": "Topography",
-        "filter": [ "all", ["==", ["geometry-type"], "LineString"]],
-        "paint": {
-        }
-    },
-    {
-        "id": "piles",
-        "type": "circle",
-        "source": "bsh",
-        "source-layer": "Topography",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","catple"],["has","catmor"]]],
-        "paint": {
-          "circle-radius": 3
+          "text-field": "{objnam}",
+          "text-size": 12,
+          "text-anchor": "bottom-left",
+          "text-offset": [1.2,-1]
         }
     },
     {
@@ -501,6 +573,29 @@
         }
     },
     {
+        "id": "seabed",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"]],
+        "layout": {
+          "icon-image": ["case",
+            ["any",[">",["get","catwed"],2]],"seagrass",
+            ["any",["has","catwed"],["==",["get","caution_type"],8]],"kelp",
+            "kelp"],
+          "text-field": ["case",
+            ["has","catwed"],["match",["get","catwed"],1,"Ke",2,"Wd",3,"Sg",4,"Sa",""],
+            ["match",["get","natsur"],
+              1,"M",2,"Cy",3,"Si",4,"S",5,"St",6,"G",7,"P",8,"Cb",9,"R",11,"La",14,"Co",17,"Sh",18,"Bo",
+              ["get","natsur"]
+            ]],
+          "text-anchor": "top",
+          "text-size": 14,
+          "text-optional": true,
+          "icon-offset": [0,-6]
+        }
+    },
+    {
         "id": "spot-soundings",
         "type": "symbol",
         "source": "bsh",
@@ -515,44 +610,21 @@
         }
     },
     {
-        "id": "seabed",
-        "type": "symbol",
-        "source": "bsh",
-        "source-layer": "Hydrography",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"]],
-        "layout": {
-          "icon-image": ["case",
-            ["any",[">",["get","catwed"],2]],"m:seagrass",
-            ["any",["has","catwed"],["==",["get","caution_type"],8]],"m:kelp",
-            "m:kelp"],
-          "text-field": ["case",
-            ["has","catwed"],["match",["get","catwed"],1,"Ke",2,"Wd",3,"Sg",4,"Sa",""],
-            ["match",["get","natsur"],
-              1,"M",2,"Cy",3,"Si",4,"S",5,"St",6,"G",7,"P",8,"Cb",9,"R",11,"La",14,"Co",17,"Sh",18,"Bo",
-              ["get","natsur"]
-            ]],
-          "text-anchor": "top",
-          "text-size": 14,
-          "text-optional": true,
-          "icon-offset": [0,-6]
-        }
-    },
-    {
         "id": "deptharea-label",
         "type": "symbol",
         "source": "bsh",
         "source-layer": "SkinOfTheEarth",
         "filter": ["all",["has","drval1"],["!",["has","drval2"]]],
-        "paint": {
-          "text-color": "blue"
-        },
         "layout": {
           "text-field": ["concat",["case",["==",["get","quasou"],10],"maintained depth ",""],["get","drval1"],"m"],
           "text-size": 12
+        },
+        "paint": {
+          "text-opacity": 0.8
         }
     },
     {
-        "id": "area-labels",
+        "id": "topo-labels",
         "type": "symbol",
         "source": "bsh",
         "source-layer": "Topography",
@@ -564,6 +636,20 @@
         },
         "paint": {
           "text-color": "gray"
+        }
+    },
+    {
+        "id": "berth-labels",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Topography",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","berth_type"],["has","objnam"]],
+        "layout": {
+          "text-field": "{objnam}",
+          "text-size": 12
+        },
+        "paint": {
+          "text-color": "magenta"
         }
     },
     {
@@ -614,8 +700,8 @@
          ],
          "text-size": 12,
          "text-font": ["Open Sans Bold"],
-         "text-anchor": "bottom-left",
-         "text-offset": [1.2,0.6]
+         "text-anchor": "top-left",
+         "text-offset": [1.2,-0.5]
         }
     },
     {

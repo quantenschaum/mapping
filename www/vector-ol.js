@@ -16,7 +16,7 @@ if (window.location.hash !== '') {
 
 const map = new ol.Map({
   layers: [
-    new ol.layer.Tile({ source: new ol.source.OSM(), }),
+//    new ol.layer.Tile({ source: new ol.source.OSM(), }),
   ],
   target: 'map',
   view: new ol.View({
@@ -26,9 +26,9 @@ const map = new ol.Map({
   }),
 });
 
-//layer = new ol.layer.VectorTile({declutter: true});
-//olms.applyStyle(layer,"https://api.maptiler.com/maps/openstreetmap/style.json?key=L8FrrrJGE2n415wJo8BL");
-//map.addLayer(layer);
+layer = new ol.layer.VectorTile({declutter: true});
+olms.applyStyle(layer,"https://api.maptiler.com/maps/openstreetmap/style.json?key=L8FrrrJGE2n415wJo8BL");
+map.addLayer(layer);
 
 layer = new ol.layer.VectorTile({declutter: true});
 olms.applyStyle(layer,"style.json");

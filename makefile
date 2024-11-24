@@ -94,21 +94,14 @@ spreet:
 	cd spreet && cargo build --release
 
 sprites: icons spreet
-	spreet/target/release/spreet icons/INT1  www/icons-mono --recursive --ratio 2
-	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 1/g' www/icons-mono.json -i
-
-	spreet/target/release/spreet icons/INT1  www/icons-mono@2x --recursive --ratio 4
-	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 2/g' www/icons-mono@2x.json -i
-
 	spreet/target/release/spreet icons/gen  www/icons --recursive --ratio 2
 	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 1/g' www/icons.json -i
-
 	spreet/target/release/spreet icons/gen  www/icons@2x --recursive --ratio 4
 	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 2/g' www/icons@2x.json -i
 
-pbf:
+vector:
 	rm -rf www/$@
-	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9,10]], ["all",["==","uband",3],["in","$$zoom",11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]] ]}' --no-tile-compression -x lnam --output-to-directory=www/$@       # -o www/bsh.mbtiles
+	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9,10]], ["all",["==","uband",3],["in","$$zoom",11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]] ]}' --no-tile-compression -x lnam --output-to-directory=www/pbf       # -o www/bsh.mbtiles
 	du -sch www/pbf/*
 # 	cat www/pbf/metadata.json |jq .json -r |jq >www/tile.json
 

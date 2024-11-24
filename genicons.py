@@ -30,10 +30,10 @@ object_colors = {
 }
 
 color_types={ # to reduce numer of combinations
-  'pillar pile spar stake cairn can spherical barrel super-buoy conical light_float ':
+  'pillar spar can spherical barrel super-buoy conical light_float ':
   ['','white','black','red','green','yellow'],
 
-  'tower lattice ':
+  'tower lattice pile stake cairn ':
   ['','white','black','red','green','yellow','brown','grey'],
 
   'sphere ':
@@ -46,10 +46,10 @@ color_types={ # to reduce numer of combinations
   ['','black'],
 
   'cylinder cone_point_down cone_point_up ':
-  ['','black','red','green'],
+  ['','black','white','red','green'],
 
   'circle ':
-  ['','white','red'],
+  ['','black','white','white','red'],
 
   'triangle_point_up square rhombus triangle_point_down ':
   ['','white','black','red','green','yellow'],
