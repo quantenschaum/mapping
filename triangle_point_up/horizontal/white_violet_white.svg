@@ -10,63 +10,6 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs3019" />
-  <sodipodi:namedview
-     id="namedview10"
-     pagecolor="#ffffff"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#505050"
-     showgrid="false"
-     inkscape:zoom="157"
-     inkscape:cx="14.203822"
-     inkscape:cy="12.366242"
-     inkscape:window-width="2285"
-     inkscape:window-height="1809"
-     inkscape:window-x="1481"
-     inkscape:window-y="140"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2"
-     showguides="true">
-    <sodipodi:guide
-       position="29.834395,16"
-       orientation="0,1"
-       id="guide1528"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="16,20.585987"
-       orientation="-1,0"
-       id="guide1530"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="17.171975,27.159236"
-       orientation="0,-1"
-       id="guide3117"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="17,16"
-       orientation="1,0"
-       id="guide3217"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="12.83112,18.085792"
-       orientation="0,-1"
-       id="guide807"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="12.819277,21.485475"
-       orientation="0,-1"
-       id="guide809"
-       inkscape:locked="false" />
-  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -102,7 +45,7 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="fill uniform border12 vertical02 vertical03 horizontal03 cross02" style="fill:white; stroke:none;"
+     class="fill uniform border12 vertical02 vertical03 horizontal03 cross02" style="fill:#ffffff; stroke:none;"
      d="m 16.00009,10.514525 1.999822,3.393243 -3.999645,0.01094 z"
      id="path982" />
   <path
@@ -115,7 +58,7 @@
      d="M 16,13.645723 V 11.048101"
      id="path306" />
   <path
-     class="inline horizontal13 cross12" style="fill:none; stroke:violet; stroke-width:0.8;"
+     class="inline horizontal13 cross12" style="fill:none; stroke:#EE82EE; stroke-width:0.8;"
      stroke-linecap="round"
      d="m 15.016429,12.746912 h 1.967142"
      id="path298" />

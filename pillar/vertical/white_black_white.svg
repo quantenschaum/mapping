@@ -10,43 +10,6 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs20" />
-  <sodipodi:namedview
-     id="namedview18"
-     pagecolor="#ffffff"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#505050"
-     showgrid="false"
-     inkscape:zoom="69.915183"
-     inkscape:cx="14.224378"
-     inkscape:cy="13.816741"
-     inkscape:window-width="2391"
-     inkscape:window-height="1826"
-     inkscape:window-x="1436"
-     inkscape:window-y="88"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="g1701"
-     showguides="true">
-    <sodipodi:guide
-       position="16,21.058596"
-       orientation="-1,0"
-       id="guide163"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="27.817128,16"
-       orientation="0,1"
-       id="guide215"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -81,7 +44,7 @@
      id="g1701"
      transform="rotate(15,16,16)">
     <path
-       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:white; stroke:none;"
+       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#ffffff; stroke:none;"
        id="path300"
        d="m 16.794922,4.4882812 -1.601563,0 -0.572265,8.0878908 -1.75,4.261719 5.636684,-1.509848 -1.128872,-2.751871 z" />
     <path
@@ -109,7 +72,7 @@
        id="path1687"
        d="m 14.371094,13.158204 -1.503906,3.681641 5.640624,-1.511719 -0.890624,-2.169922 z" />
     <path
-       class="inline cross12 vertical13" style="fill:none; stroke:black; stroke-width:0.8;"
+       class="inline cross12 vertical13" style="fill:none; stroke:#000000; stroke-width:0.8;"
        d="M 16,4.4882812 16,16"
        id="path401" />
     <path

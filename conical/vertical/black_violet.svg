@@ -10,69 +10,6 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs12" />
-  <sodipodi:namedview
-     id="namedview18"
-     pagecolor="#ffffff"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#505050"
-     showgrid="false"
-     inkscape:zoom="90.509668"
-     inkscape:cx="16.633582"
-     inkscape:cy="12.849456"
-     inkscape:window-width="2391"
-     inkscape:window-height="1826"
-     inkscape:window-x="1319"
-     inkscape:window-y="132"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="g4073"
-     showguides="true">
-    <sodipodi:guide
-       position="16,21.058596"
-       orientation="-1,0"
-       id="guide163"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="16,16"
-       orientation="-0.25881905,0.96592583"
-       id="guide1002"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="12.3125,16"
-       orientation="0,-1"
-       id="guide309"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="16,16"
-       orientation="0.96592583,-0.25881905"
-       id="guide303"
-       inkscape:label=""
-       inkscape:locked="false"
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="15,16"
-       orientation="0.96592583,-0.25881905"
-       id="guide305"
-       inkscape:label=""
-       inkscape:locked="false"
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="17,16"
-       orientation="0.96592583,-0.25881905"
-       id="guide307"
-       inkscape:label=""
-       inkscape:locked="false"
-       inkscape:color="rgb(0,134,229)" />
-  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -108,7 +45,7 @@
      transform="rotate(15,16,16)">
     <path
        id="path295"
-       class="fill vertical02 vertical03 uniform horizontal02 horizontal03 horizontal04 cross02" style="fill:black; stroke:none;"
+       class="fill vertical02 vertical03 uniform horizontal02 horizontal03 horizontal04 cross02" style="fill:#000000; stroke:none;"
        d="m 16,9.7506672 c -2.447035,1.9115558 -2.942256,5.2686078 -3.128906,7.0878908 l 6.070053,-1.626636 C 18.511423,12.953334 17.473098,11.179022 16,9.7506672 Z" />
     <path
        id="path376"
@@ -116,7 +53,7 @@
        d="M 15.033697 10.688245 L 15.034074 16.258819 L 18.941169 15.211916 C 18.511445 12.95333 17.472661 11.178395 15.999564 9.7500412 C 15.636111 10.033961 15.316418 10.350323 15.033697 10.688245 z " />
     <path
        id="path1002"
-       class="fill vertical12" style="fill:violet; stroke:none;"
+       class="fill vertical12" style="fill:#EE82EE; stroke:none;"
        d="m 16,9.7506672 0,6.2499998 2.941406,-0.787109 C 18.615585,13.801826 18.113656,11.689146 16,9.7506672 Z" />
     <path
        id="path381"

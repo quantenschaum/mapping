@@ -10,71 +10,6 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs20" />
-  <sodipodi:namedview
-     id="namedview18"
-     pagecolor="#ffffff"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#505050"
-     showgrid="false"
-     inkscape:zoom="64"
-     inkscape:cx="13.835938"
-     inkscape:cy="13.40625"
-     inkscape:window-width="2391"
-     inkscape:window-height="1826"
-     inkscape:window-x="1436"
-     inkscape:window-y="88"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="g329"
-     showguides="true">
-    <sodipodi:guide
-       position="16,21.058596"
-       orientation="-1,0"
-       id="guide163"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="27.817128,16"
-       orientation="0,1"
-       id="guide215"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="16,16"
-       orientation="-0.25881905,0.96592583"
-       id="guide1002"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="16,16"
-       orientation="0.96592583,-0.25881905"
-       id="guide145"
-       inkscape:label=""
-       inkscape:locked="false"
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="16.690392,22.77819"
-       orientation="0.96592583,-0.25881905"
-       id="guide251"
-       inkscape:label=""
-       inkscape:locked="false"
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="18.896198,22.53434"
-       orientation="0.96592583,-0.25881905"
-       id="guide253"
-       inkscape:label=""
-       inkscape:locked="false"
-       inkscape:color="rgb(0,134,229)" />
-  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -109,7 +44,7 @@
      id="g4073"
      transform="rotate(15,16,16)">
     <path
-       class="fill horizontal04 horizontal03 horizontal02 vertical02 vertical03 uniform cross02" style="fill:black; stroke:none;"
+       class="fill horizontal04 horizontal03 horizontal02 vertical02 vertical03 uniform cross02" style="fill:#000000; stroke:none;"
        id="path3994"
        d="m 12.871094,11.953125 v 4.885263 l 6.257812,-1.676776 v -3.208487 z" />
     <path
@@ -145,11 +80,11 @@
        id="path1750"
        d="m 19.128906,14.988778 h -6.257812 v 1.84961 l 6.257812,-1.675782 z" />
     <path
-       class="inline cross12" style="fill:none; stroke:violet; stroke-width:0.8;"
+       class="inline cross12" style="fill:none; stroke:#EE82EE; stroke-width:0.8;"
        d="m 16,16 0,-4.047194"
        id="path357" />
     <path
-       class="inline cross12" style="fill:none; stroke:violet; stroke-width:0.8;"
+       class="inline cross12" style="fill:none; stroke:#EE82EE; stroke-width:0.8;"
        d="m 12.737214,13.652157 6.258515,0.0013"
        id="path455" />
     <path

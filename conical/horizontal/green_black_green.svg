@@ -10,69 +10,6 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs12" />
-  <sodipodi:namedview
-     id="namedview18"
-     pagecolor="#ffffff"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#505050"
-     showgrid="false"
-     inkscape:zoom="90.509668"
-     inkscape:cx="16.633582"
-     inkscape:cy="12.849456"
-     inkscape:window-width="2391"
-     inkscape:window-height="1826"
-     inkscape:window-x="1319"
-     inkscape:window-y="132"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="g4073"
-     showguides="true">
-    <sodipodi:guide
-       position="16,21.058596"
-       orientation="-1,0"
-       id="guide163"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="16,16"
-       orientation="-0.25881905,0.96592583"
-       id="guide1002"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="12.3125,16"
-       orientation="0,-1"
-       id="guide309"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="16,16"
-       orientation="0.96592583,-0.25881905"
-       id="guide303"
-       inkscape:label=""
-       inkscape:locked="false"
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="15,16"
-       orientation="0.96592583,-0.25881905"
-       id="guide305"
-       inkscape:label=""
-       inkscape:locked="false"
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="17,16"
-       orientation="0.96592583,-0.25881905"
-       id="guide307"
-       inkscape:label=""
-       inkscape:locked="false"
-       inkscape:color="rgb(0,134,229)" />
-  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -124,7 +61,7 @@
        d="M 16.965571 10.81967 L 16.965926 15.741181 L 18.941169 15.211916 C 18.612729 13.485673 17.927565 12.042053 16.965571 10.81967 z " />
     <path
        id="path1008"
-       class="fill horizontal13" style="fill:black; stroke:none;"
+       class="fill horizontal13" style="fill:#000000; stroke:none;"
        d="m 14.261719,11.817158 c -0.420836,0.831853 -1.353303,3.134089 -1.390625,5.021315 l 6.070053,-1.626466 c -0.256094,-1.073121 -0.668573,-2.501029 -1.273178,-3.394849 -1.150091,0.240672 -2.283414,0.206323 -3.40625,0 z" />
     <path
        id="path968"

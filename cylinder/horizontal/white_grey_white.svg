@@ -10,63 +10,6 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs15" />
-  <sodipodi:namedview
-     id="namedview10"
-     pagecolor="#ffffff"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#505050"
-     showgrid="false"
-     inkscape:zoom="78.5"
-     inkscape:cx="19.089172"
-     inkscape:cy="11.394904"
-     inkscape:window-width="2285"
-     inkscape:window-height="1809"
-     inkscape:window-x="1481"
-     inkscape:window-y="140"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2"
-     showguides="true">
-    <sodipodi:guide
-       position="29.834395,16"
-       orientation="0,1"
-       id="guide1528"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="16,20.585987"
-       orientation="-1,0"
-       id="guide1530"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="17.171975,27.159236"
-       orientation="0,-1"
-       id="guide3117"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="17,16"
-       orientation="1,0"
-       id="guide3217"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="12.83112,18.085792"
-       orientation="0,-1"
-       id="guide807"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="12.819277,21.485475"
-       orientation="0,-1"
-       id="guide809"
-       inkscape:locked="false" />
-  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -102,7 +45,7 @@
      d="M 16,13.914208 V 16"
      id="path241" />
   <path
-     class="fill uniform horizontal02 horizontal03" style="fill:white; stroke:none;"
+     class="fill uniform horizontal02 horizontal03" style="fill:#ffffff; stroke:none;"
      d="m 14.666187,10.519026 2.643946,-0.009 0.01184,3.399682 -2.643946,0.009 z"
      id="path982" />
   <path
@@ -111,7 +54,7 @@
      d="M 17.314453 11.664062 L 14.669922 11.664062 L 14.677734 13.917969 L 17.322266 13.910156 L 17.314453 11.664062 z " />
   <path
      id="path924"
-     class="fill horizontal23" style="fill:white; stroke:none;"
+     class="fill horizontal23" style="fill:#ffffff; stroke:none;"
      d="M 17.318359 12.746094 L 14.673828 12.746094 L 14.677734 13.917969 L 17.322266 13.910156 L 17.318359 12.746094 z " />
   <path
      id="path298"

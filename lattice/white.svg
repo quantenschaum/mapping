@@ -10,45 +10,7 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"><defs
-   id="defs11" /><sodipodi:namedview
-   id="namedview10"
-   pagecolor="#ffffff"
-   bordercolor="#eeeeee"
-   borderopacity="1"
-   inkscape:showpageshadow="0"
-   inkscape:pageopacity="0"
-   inkscape:pagecheckerboard="0"
-   inkscape:deskcolor="#505050"
-   showgrid="false"
-   inkscape:zoom="97.8125"
-   inkscape:cx="14.706709"
-   inkscape:cy="11.281789"
-   inkscape:window-width="2285"
-   inkscape:window-height="1809"
-   inkscape:window-x="1110"
-   inkscape:window-y="161"
-   inkscape:window-maximized="0"
-   inkscape:current-layer="svg2"
-   showguides="true"><sodipodi:guide
-     position="29.834395,16"
-     orientation="0,1"
-     id="guide1528"
-     inkscape:locked="false"
-     inkscape:label=""
-     inkscape:color="rgb(0,134,229)" /><sodipodi:guide
-     position="16,20.585987"
-     orientation="-1,0"
-     id="guide1530"
-     inkscape:locked="false"
-     inkscape:label=""
-     inkscape:color="rgb(0,134,229)" /><sodipodi:guide
-     position="17.171975,26"
-     orientation="0,1"
-     id="guide3117"
-     inkscape:locked="false"
-     inkscape:label=""
-     inkscape:color="rgb(0,134,229)" /></sodipodi:namedview>
+   xmlns:svg="http://www.w3.org/2000/svg">
   <style
    type="text/css"
    id="base">
@@ -80,24 +42,24 @@
       COLORING{}
   </style>
 <path
-   class="outline uniform" style="fill:none; stroke:white; stroke-width:0.8;"
+   class="outline uniform" style="fill:none; stroke:#ffffff; stroke-width:0.8;"
    d="m 13.544558,7.495261 5.159199,2.512006"
    id="path248" />
   <path
-   class="outline uniform" style="fill:none; stroke:white; stroke-width:0.8;"
+   class="outline uniform" style="fill:none; stroke:#ffffff; stroke-width:0.8;"
    d="m 18.455442,7.495261 -5.159199,2.512006"
    id="path250" />
 
 <path
-   class="outline uniform" style="fill:none; stroke:white; stroke-width:0.8;"
+   class="outline uniform" style="fill:none; stroke:#ffffff; stroke-width:0.8;"
    d="m 13.198111,11 5.882584,2.820452"
    id="path295" />
   <path
-   class="outline uniform" style="fill:none; stroke:white; stroke-width:0.8;"
+   class="outline uniform" style="fill:none; stroke:#ffffff; stroke-width:0.8;"
    d="m 18.80189,11 -5.882584,2.820452"
    id="path393" />
   <path
-   class="outline uniform" style="fill:none; stroke:white; stroke-width:0.8;"
+   class="outline uniform" style="fill:none; stroke:#ffffff; stroke-width:0.8;"
    d="M 12.703854,16 13.692367,5.9999998 h 4.615266 L 19.296146,16"
    id="path447" />
   <path

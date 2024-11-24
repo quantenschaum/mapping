@@ -10,53 +10,6 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs11" />
-  <sodipodi:namedview
-     id="namedview10"
-     pagecolor="#ffffff"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#505050"
-     showgrid="false"
-     inkscape:zoom="78.5"
-     inkscape:cx="13"
-     inkscape:cy="12.388535"
-     inkscape:window-width="2285"
-     inkscape:window-height="1809"
-     inkscape:window-x="1481"
-     inkscape:window-y="140"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2"
-     showguides="true">
-    <sodipodi:guide
-       position="29.834395,16"
-       orientation="0,1"
-       id="guide1528"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="16,20.585987"
-       orientation="-1,0"
-       id="guide1530"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="17.171975,27.159236"
-       orientation="0,-1"
-       id="guide3117"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="17,16"
-       orientation="1,0"
-       id="guide3217"
-       inkscape:locked="false" />
-  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -88,11 +41,11 @@
       COLORING{}
   </style>
   <path
-     class="outline uniform horizontal02 horizontal03" style="fill:none; stroke:violet; stroke-width:0.8;"
+     class="outline uniform horizontal02 horizontal03" style="fill:none; stroke:#EE82EE; stroke-width:0.8;"
      d="M 16,4.840764 V 16"
      id="path241" />
   <path
-     class="inline horizontal12" style="fill:none; stroke:black; stroke-width:0.8;"
+     class="inline horizontal12" style="fill:none; stroke:#000000; stroke-width:0.8;"
      d="M 16,10.420382 V 16"
      id="path294" />
   <path

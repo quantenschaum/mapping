@@ -10,45 +10,7 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"><defs
-   id="defs11" /><sodipodi:namedview
-   id="namedview10"
-   pagecolor="#ffffff"
-   bordercolor="#eeeeee"
-   borderopacity="1"
-   inkscape:showpageshadow="0"
-   inkscape:pageopacity="0"
-   inkscape:pagecheckerboard="0"
-   inkscape:deskcolor="#505050"
-   showgrid="false"
-   inkscape:zoom="48.53125"
-   inkscape:cx="13.444945"
-   inkscape:cy="16"
-   inkscape:window-width="2285"
-   inkscape:window-height="1809"
-   inkscape:window-x="1110"
-   inkscape:window-y="161"
-   inkscape:window-maximized="0"
-   inkscape:current-layer="svg2"
-   showguides="true"><sodipodi:guide
-     position="29.834395,16"
-     orientation="0,1"
-     id="guide1528"
-     inkscape:locked="false"
-     inkscape:label=""
-     inkscape:color="rgb(0,134,229)" /><sodipodi:guide
-     position="16,20.585987"
-     orientation="-1,0"
-     id="guide1530"
-     inkscape:locked="false"
-     inkscape:label=""
-     inkscape:color="rgb(0,134,229)" /><sodipodi:guide
-     position="17.171975,26"
-     orientation="0,1"
-     id="guide3117"
-     inkscape:locked="false"
-     inkscape:label=""
-     inkscape:color="rgb(0,134,229)" /></sodipodi:namedview>
+   xmlns:svg="http://www.w3.org/2000/svg">
   <style
    type="text/css"
    id="base">
@@ -82,7 +44,7 @@
 
   <path
    id="path558"
-   class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02 saltire02 squared02" style="fill:white; stroke:none;"
+   class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02 saltire02 squared02" style="fill:#ffffff; stroke:none;"
    d="M 18.340391,16 17.638509,5.9999998 H 14.361492 L 13.65961,16 Z" />
   <path
    id="path939"
@@ -106,7 +68,7 @@
    d="M 17.872172,9.3339844 H 14.127829 L 13.659093,16 h 4.681815 z" />
   <path
    id="path402"
-   class="fill horizontal24 horizontal12" style="fill:white; stroke:none;"
+   class="fill horizontal24 horizontal12" style="fill:#ffffff; stroke:none;"
    d="m 17.990049,11 h -3.980097 l -0.350859,5 h 4.681815 z" />
   <path
    id="path407"
