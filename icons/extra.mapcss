@@ -256,7 +256,7 @@ node["seamark:type"=light_float]::int1_buoy,
 node["seamark:type"=light_vessel]::int1_buoy,
 node["seamark:type"^=buoy]::int1_buoy,
 node["seamark:type"^=beacon]::int1_buoy {
-	icon-image:		eval(concat("icons/gen/",
+	icon-image:		eval(concat("gen/",
 	  any(replace(replace(replace(tag(concat("seamark:",tag("seamark:type"),":shape")),
 	    "lattice",cond(regexp_test(".*;.*",tag(concat("seamark:",tag("seamark:type"),":colour"))),"tower","lattice")),"post","pile"),"pole","pile"),
 	    cond(regexp_test("buoy.*",tag("seamark:type")),"spar",cond(regexp_test("light_.*",tag("seamark:type")),"light_float","pile"))),"/",
@@ -271,13 +271,13 @@ node["seamark:type"^=beacon]::int1_buoy {
 }
 
 node["seamark:beacon_lateral:shape"=perch]::int1_buoy {
-	icon-image:		eval(concat("icons/gen/perch-",tag("seamark:beacon_lateral:category"),".svg"));
+	icon-image:		eval(concat("gen/perch-",tag("seamark:beacon_lateral:category"),".svg"));
 }
 node["seamark:beacon_lateral:shape"=withy]::int1_buoy {
-	icon-image:		eval(concat("icons/gen/withy-",tag("seamark:beacon_lateral:category"),".svg"));
+	icon-image:		eval(concat("gen/withy-",tag("seamark:beacon_lateral:category"),".svg"));
 }
 node["seamark:beacon_special_purpose:category"=notice]::int1_buoy {
-	icon-image:		eval(concat("icons/gen/square/",
+	icon-image:		eval(concat("gen/square/",
 	  tag(concat("seamark:",tag("seamark:type"),":colour_pattern")),"/",
 	  any(replace(tag(concat("seamark:",tag("seamark:type"),":colour")),";","_"), "generic"),
 	  ".svg"));
@@ -288,13 +288,13 @@ node["seamark:beacon_special_purpose:shape"=lattice]["seamark:beacon_special_pur
 node["seamark:beacon_cardinal:shape"=lattice]["seamark:beacon_cardinal:colour"*=";"]::lattice,
 node["seamark:beacon_isolated_danger:shape"=lattice]["seamark:beacon_isolated_danger:colour"*=";"]::lattice,
 node["seamark:beacon_lateral:shape"=lattice]["seamark:beacon_lateral:colour"*=";"]::lattice {
-	icon-image:		"icons/gen/lattice/generic.svg";
+	icon-image:		"gen/lattice/generic.svg";
 	icon-height:	60;
   icon-offset-x:  0;
   icon-offset-y:  0;
 }
 node["seamark:type"=mooring]["seamark:mooring:category"=buoy]::int1_buoy {
-	icon-image:		eval(concat("icons/gen/",
+	icon-image:		eval(concat("gen/",
 	  any(tag(concat("seamark:",tag("seamark:type"),":shape")),"spherical"),"/",
 	  cond(regexp_test(".*;.*",tag(concat("seamark:",tag("seamark:type"),":colour"))),
 	    any(tag(concat("seamark:",tag("seamark:type"),":colour_pattern")),"horizontal"),""),"/",
@@ -307,7 +307,7 @@ node["seamark:type"=mooring]["seamark:mooring:category"=buoy]::int1_buoy {
 }
 
 node["seamark:type"=mooring]["seamark:mooring:category"=buoy]::int1_topmark {
-	icon-image: "icons/gen/sphere/generic.svg";
+	icon-image: "gen/sphere/generic.svg";
   icon-rotation: eval(cond(regexp_test("barrel|super-buoy",tag(concat("seamark:",tag("seamark:type"),":shape"))),0,15/180*3.1415));
 	icon-height:	60;
   icon-offset-x:  0;
@@ -315,7 +315,7 @@ node["seamark:type"=mooring]["seamark:mooring:category"=buoy]::int1_topmark {
     cond(regexp_test("conical",tag(concat("seamark:",tag("seamark:type"),":shape"))),-11,-21)));
 }
 node["seamark:topmark:shape"]::int1_topmark {
-	icon-image:		eval(concat("icons/gen/",
+	icon-image:		eval(concat("gen/",
 	  replace(replace(replace(replace(replace(replace(tag("seamark:topmark:shape"),"rectangle, vertical","square"),"rectangle, horizontal","square"),"board","square"),"trapezium","triangle point"), ",", ""), " ", "_"), "/",
 	  tag("seamark:topmark:colour_pattern"), "/",
 	  any(replace(tag("seamark:topmark:colour"),";","_"), "generic"),
@@ -344,7 +344,7 @@ node["seamark:topmark:shape"^=rectangle]::int1_topmark {
 }
 
 node["seamark:daymark:shape"]::int1_daymark {
-	icon-image:		eval(concat("icons/gen/",
+	icon-image:		eval(concat("gen/",
 	  replace(replace(replace(tag("seamark:daymark:shape"),"board","square"), ",", ""), " ", "_"), "/",
 	  tag("seamark:daymark:colour_pattern"), "/",
 	  any(replace(tag("seamark:daymark:colour"),";","_"), "generic"),
@@ -360,7 +360,7 @@ node["seamark:daymark:shape"=board]::int1_daymark {
 node["seamark:light:character"]::int1_light,
 node["seamark:light:colour"*=";"]::int1_light,
 node["seamark:light:1:colour"]::int1_light {
-	icon-image:				"icons/gen/light/generic.svg";
+	icon-image:				"gen/light/generic.svg";
   icon-width: 60;
   icon-offset-x: 0;
   icon-offset-y: 0;
@@ -368,7 +368,7 @@ node["seamark:light:1:colour"]::int1_light {
   icon-rotation: eval(0*3.1415/180);
 }
 node["seamark:light:colour"]::int1_light {
-	icon-image:				eval(concat("icons/gen/light/",cond(regexp_test(".*;.*",tag("seamark:light:colour")),"generic",tag("seamark:light:colour")),".svg"));
+	icon-image:				eval(concat("gen/light/",cond(regexp_test(".*;.*",tag("seamark:light:colour")),"generic",tag("seamark:light:colour")),".svg"));
   icon-width: 60;
   icon-offset-x: 0;
   icon-offset-y: 0;
@@ -381,7 +381,7 @@ node["seamark:light:category"=floodlight]::int1_light {
 }
 
 node["seamark:light:category"=floodlight]::floodlight {
-  icon-image: eval(concat("icons/gen/floodlight/",any(tag("seamark:light:colour"),"generic"),".svg"));
+  icon-image: eval(concat("gen/floodlight/",any(tag("seamark:light:colour"),"generic"),".svg"));
   icon-width: 60;
   icon-offset-x: 0;
   icon-offset-y: 10;
@@ -390,7 +390,7 @@ node["seamark:light:category"=floodlight]::floodlight {
 
 
 node["seamark:type"^=light_m]::int1_lighthouse {
-	icon-image: eval(concat("icons/gen/",tag("seamark:type"),".svg"));
+	icon-image: eval(concat("gen/",tag("seamark:type"),".svg"));
   icon-width: 60;
   icon-offset-x: 0;
   icon-offset-y: 0;
@@ -458,7 +458,7 @@ way[lightsector=orientation] {
 
 node["seamark:fog_signal"=yes]::int1_fog_signal,
 node["seamark:fog_signal:category"]::int1_fog_signal  {
-	icon-image:		"icons/gen/fogsignal.svg";
+	icon-image:		"gen/fogsignal.svg";
 	icon-height:	60;
   icon-offset-x:  0;
   icon-offset-y:  0;
@@ -472,7 +472,7 @@ node["seamark:fog_signal:category"]::int1_fog_signal  {
 }
 
 node|z12-["seamark:radar_reflector"=yes]::int1_radar_reflector {
-	icon-image:		"icons/gen/radar_reflector.svg";
+	icon-image:		"gen/radar_reflector.svg";
 	icon-height:	60;
   icon-offset-x:  0;
   icon-offset-y:  20;

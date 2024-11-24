@@ -3,9 +3,10 @@
 # https://www.teledynecaris.com/s-57/frames/S57catalog.htm
 
 SHELL=/bin/bash
+export PATH:=$(PWD)/scripts:$(PATH)
 OGR_OPTS=OGR_S57_OPTIONS="LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON,UPDATES=APPLY" S57_CSV="$(PWD)"
 
-.PHONY: bsh.osm icons obf vwm bsh charts
+.PHONY: bsh.osm icons obf vwm bsh charts qgis mapproxy
 
 help:
 	cat README.md
@@ -19,10 +20,10 @@ vwm:
 	for F in $$(find data/vwm -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 
 %.csv:
-	wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
+	cd data && wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
 
 %.zip:
-	wget -O data/$@ "`./rwsget.py $(basename $@)`"
+	wget -O data/$@ "`rwsget.py $(basename $@)`"
 
 %.enc:
 	rm -rf data/$@ data/$(basename $@).gpkg data/$(basename $@)-covr.gpkg
@@ -60,34 +61,24 @@ BSH_LAYERS_3=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
 BSH_BBOX=53.0,3.3,56.0,14.4
 
 bsh:
-	rm -rf data/bsh #data/bsh.gpkg
-	mkdir -p data/bsh
+	rm -rf data/bsh data/bsh.gpkg && mkdir -p data/bsh
 	for L in AidsAndServices SkinOfTheEarth; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_1)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
 	for L in RocksWrecksObstructions; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_3)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
 	for L in Hydrography Topography; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_2)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
-	#for F in data/bsh/*.json; do jq . $$F>data/bsh/tmp; mv data/bsh/tmp $$F; done
-	for F in data/bsh/*.json; do ./ubands.py $$F; done
+# 	for F in data/bsh/*.json; do jq . $$F>data/bsh/tmp; mv data/bsh/tmp $$F; done
+# 	for F in data/bsh/*.json; do ubands.py $$F; done
 	for F in $$(find data/bsh -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
-	#for F in $$(find data/bsh -name "*.gpkg"); do ogr2ogr data/bsh.gpkg $$F -append; done
+# 	for F in $$(find data/bsh -name "*.gpkg"); do ogr2ogr data/bsh.gpkg $$F -append; done
 
 ubands:
-	for F in data/bsh/*.json; do ./ubands.py $$F; done
-
-filter:
-	A=(Overview General Coast Approach Harbour Berthing xxx) ; \
-	I=0; for UB in Overview General Coast Approach Harbour Berthing; do \
-	  ((I=I+1)); echo $$I $$UB; rm -rf data/bsh/$$I; mkdir -p data/bsh/$$I; \
-	  for L in $$(cd data/bsh; ls *.json); do echo $$L; \
-			ogr2ogr data/bsh/$$I/$$L data/bsh/$$L -where "id LIKE '$$UB%'"; \
-    done; \
-		ogr2ogr data/bsh/$$I/coverage.json data/bsh/AidsAndServices.json -where "id LIKE '$${A[$$I]}%' AND marsys=1"; \
-	done
+	rm -rf data/bsh/cleaned && mkdir data/bsh/cleaned
+	for F in data/bsh/*.json; do ubands.py $$F $${F/bsh/bsh/cleaned}; done
 
 icons: icons/gen
 
 icons/gen:
-	cd icons && rm -rf gen/* && ../genicons.py
-	sed 's#icons/gen#https://raw.githubusercontent.com/quantenschaum/mapping/icons#g' extra.mapcss >icons/gen/extra.mapcss
+	cd icons && rm -rf gen/* && genicons.py
+	sed 's#gen/#https://raw.githubusercontent.com/quantenschaum/mapping/icons/#g' icons/extra.mapcss >icons/gen/extra.mapcss
 
 spreet:
 	git clone https://github.com/flother/spreet
@@ -100,8 +91,8 @@ sprites: icons spreet
 	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 2/g' www/icons@2x.json -i
 
 vector:
-	rm -rf www/$@
-	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9,10]], ["all",["==","uband",3],["in","$$zoom",11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]] ]}' --no-tile-compression -x lnam --output-to-directory=www/pbf       # -o www/bsh.mbtiles
+	rm -rf www/pbf
+	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/cleaned/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9,10]], ["all",["==","uband",3],["in","$$zoom",11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]] ]}' --no-tile-compression -x lnam --output-to-directory=www/pbf       # -o www/bsh.mbtiles
 	du -sch www/pbf/*
 # 	cat www/pbf/metadata.json |jq .json -r |jq >www/tile.json
 
@@ -116,7 +107,7 @@ bsh-bathy: data/Elevation-Bathymetry.zip
 schutzzonen:
 	rm -rf data/$@ data/$@.gpkg
 	mkdir -p data/$@
-	cd data/$@ && ../../$@.py
+	cd data/$@ && schutzzonen.py
 	cd data/ && for F in $@/*.zip; do unzip -n $$F -d $${F%.*}; ogr2ogr schutzzonen.gpkg $${F%.*} -append; rm -r $${F%.*}; done
 	cd data/ && for F in $@/*.json; do ogr2ogr schutzzonen.gpkg $$F -append; done
 
@@ -126,26 +117,26 @@ waypoints:
 	wget -O data/waypoints.zip https://nvcharts.com/downloads/wegepunkte/2024/Wegepunkte2024_txt.zip
 	cd data && unzip -n waypoints.zip && rm waypoints.zip
 
-bsh1.qgs: bsh.qgs
+qgis/bsh1.qgs: qgis/bsh.qgs
 	sed 's#<value>000000</value>#<value>1</value>#g' $< >$@
 
-bsh2.qgs: bsh.qgs
+qgis/bsh2.qgs: qgis/bsh.qgs
 	sed 's#<value>000000</value>#<value>2</value>#g' $< >$@
 
 serve:
-	cd tiles && python -m http.server 8002
+	cd www && python -m http.server 8002
 
-qgis: icons bsh1.qgs bsh2.qgs
-	QGIS_SERVER_PARALLEL_RENDERING=1 qgis_mapserver
+qgis: icons qgis/bsh1.qgs qgis/bsh2.qgs
+	cd qgis && QGIS_SERVER_PARALLEL_RENDERING=1 qgis_mapserver
 
 mapproxy:
 	mkdir -p cache_data && touch cache_data/.nobackup
-	mapproxy-util serve-develop mapproxy.yaml -b 0.0.0.0:8001
+	mapproxy-util serve-develop mapproxy/mapproxy.yaml -b 0.0.0.0:8001
 
 seed:
 	sleep 3
 	mkdir -p cache_data && touch cache_data/.nobackup
-	mapproxy-seed -f mapproxy.yaml -s seed.yaml $(O)
+	mapproxy-seed -f mapproxy/mapproxy.yaml -s mapproxy/seed.yaml $(O)
 
 stop-all:
 	pkill qgis_mapserve || true
@@ -164,19 +155,19 @@ docker-seed: docker
 
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	./convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fwebp
+	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fwebp
 
 charts/%.png.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	./convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fpng
+	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fpng
 
 charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts
-	./convert.py -f $< $@ -t "$(basename $(notdir $@)) `date +%F`"
+	convert.py -f $< $@ -t "$(basename $(notdir $@)) `date +%F`"
 
 www/%/: charts/%.mbtiles charts/%.png.mbtiles
-	./convert.py -f $< $@
-	./convert.py -a $(word 2,$^) $@
+	convert.py -f $< $@
+	convert.py -a $(word 2,$^) $@
 	chmod +rX -R $@
 
 data/chartconvert:
@@ -199,7 +190,7 @@ upload:
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
-	cp -rpv marine.render.xml depthcontourlines.addon.render.xml charts/* tmp/docs
+	cp -rpv osmand/marine.render.xml osmand/depthcontourlines.addon.render.xml charts/* tmp/docs
 	cd tmp/docs && ./times.py index.md
 	cd tmp && mkdocs build
 	rm -rf www/download
@@ -209,7 +200,7 @@ upload:
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
-	./update.py rws_buoys data/vwm/drijvend.json wad.osm
+	update.py rws_buoys data/vwm/drijvend.json wad.osm
 
 build:
 	git pull
@@ -285,36 +276,36 @@ mobac:
 	#java -Xms64m -Xmx1200M -jar data/mobac/Mobile_Atlas_Creator.jar
 	java $(JAVA_OPTS) -jar data/mobac/Mobile_Atlas_Creator.jar
 
-batch-0.xml: batch-all.xml
+osmand/batch-0.xml: osmand/batch-all.xml
 	sed 's/mapZooms.*/mapZooms="6-9;10-11"/' $< >$@
 
-batch-1.xml: batch-all.xml
+osmand/batch-1.xml: osmand/batch-all.xml
 	sed 's/mapZooms.*/mapZooms="12-13"/' $< >$@
 
-batch-2.xml: batch-all.xml
+osmand/batch-2.xml: osmand/batch-all.xml
 	sed 's/mapZooms.*/mapZooms="14-15"/' $< >$@
 
-batch-3.xml: batch-all.xml
+osmand/batch-3.xml: osmand/batch-all.xml
 	sed 's/mapZooms.*/mapZooms="16-"/' $< >$@
 
-batch-no.xml: batch-all.xml
+osmand/batch-no.xml: osmand/batch-all.xml
 	sed 's/mapZooms.*/mapZooms="10-11;12-13;14-15;16-"/' $< >$@
 	sed 's/renderingTypesFile.*/renderingTypesFile="rendering_types-no.xml"/' $< >$@
 
 BLEVEL=all
 
-obf: data/omc batch-$(BLEVEL).xml
+obf: data/omc osmand/batch-$(BLEVEL).xml
 	mkdir -p $@
-	java $(JAVA_OPTS) -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator batch-$(BLEVEL).xml
+	java $(JAVA_OPTS) -cp "$$(ls $</*.jar)" net.osmand.util.IndexBatchCreator osmand/batch-$(BLEVEL).xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
 	rm -f $@/*.log
 
 qmap-de.obf: bsh.osm
 	rm -rf osm && mkdir -p osm
-	for L in buoys beacons facilities lights stations; do ./update.py bsh-$$L data/bsh/AidsAndServices.json none osm/$$L.osm -a; done
-	for L in rocks wrecks obstructions; do ./update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none osm/$$L.osm -a; done
-	for L in seabed; do ./update.py bsh-$$L data/bsh/Hydrography.json none osm/$$L.osm -a; done
-	for L in beacons facilities lights; do ./lightsectors.py osm/$$L.osm osm/$$L-sectors.osm; done
+	for L in buoys beacons facilities lights stations; do update.py bsh-$$L data/bsh/AidsAndServices.json none osm/$$L.osm -a; done
+	for L in rocks wrecks obstructions; do update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none osm/$$L.osm -a; done
+	for L in seabed; do update.py bsh-$$L data/bsh/Hydrography.json none osm/$$L.osm -a; done
+	for L in beacons facilities lights; do lightsectors.py osm/$$L.osm osm/$$L-sectors.osm; done
 
 	rm -rf obf
 	$(MAKE) obf
@@ -327,23 +318,23 @@ lightsectors.obf:
 	rm -rf obf
 
 	#rm -rf osm && mkdir -p osm
-	#./lightsectors.py data/lights.osm osm/$@
+	#lightsectors.py data/lights.osm osm/$@
 	#$(MAKE) obf
 
 	rm -rf osm && mkdir -p osm
-	./lightsectors.py data/lights.osm osm/lightsectors-0.osm -a 0.30 -f 1.6 -r 16
+	lightsectors.py data/lights.osm osm/lightsectors-0.osm -a 0.30 -f 1.6 -r 16
 	$(MAKE) obf BLEVEL=0
 
 	rm -rf osm && mkdir -p osm
-	./lightsectors.py data/lights.osm osm/lightsectors-1.osm -a 0.20 -f 0.8 -r 8
+	lightsectors.py data/lights.osm osm/lightsectors-1.osm -a 0.20 -f 0.8 -r 8
 	$(MAKE) obf BLEVEL=1
 
 	rm -rf osm && mkdir -p osm
-	./lightsectors.py data/lights.osm osm/lightsectors-2.osm -a 0.15 -f 0.4 -r 4
+	lightsectors.py data/lights.osm osm/lightsectors-2.osm -a 0.15 -f 0.4 -r 4
 	$(MAKE) obf BLEVEL=2
 
 	rm -rf osm && mkdir -p osm
-	./lightsectors.py data/lights.osm osm/lightsectors-3.osm -a 0.10 -f 0.2 -r 2
+	lightsectors.py data/lights.osm osm/lightsectors-3.osm -a 0.10 -f 0.2 -r 2
 	$(MAKE) obf BLEVEL=3
 
 	mkdir -p charts

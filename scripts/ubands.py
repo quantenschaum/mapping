@@ -53,9 +53,6 @@ def main():
         if props.get('marsys')==1: b-=1
         props['uband']=b
 
-    # if 'uband' in props:
-    #   props['minzoom'],props['maxzoom']=zooms(props['uband'])
-
     for k in list(props.keys()):
       v=props[k]
       if type(v)==str:

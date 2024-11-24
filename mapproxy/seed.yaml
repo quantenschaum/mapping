@@ -36,30 +36,30 @@ seeds:
 
 coverages:
   overview:
-    datasource: data/bsh/AidsAndServices.gpkg
+    datasource: ../data/bsh/AidsAndServices.gpkg
     where: recind="Overview"
     srs: 'EPSG:4326'
   general:
-    datasource: data/bsh/AidsAndServices.gpkg
+    datasource: ../data/bsh/AidsAndServices.gpkg
     where: recind="General"
     srs: 'EPSG:4326'
   coastal:
-    datasource: data/bsh/AidsAndServices.gpkg
+    datasource: ../data/bsh/AidsAndServices.gpkg
     where: recind="Coastal"
     srs: 'EPSG:4326'
   approach:
-    datasource: data/bsh/AidsAndServices.gpkg
+    datasource: ../data/bsh/AidsAndServices.gpkg
     where: recind="Approach"
     srs: 'EPSG:4326'
   harbour:
-    datasource: data/bsh/AidsAndServices.gpkg
+    datasource: ../data/bsh/AidsAndServices.gpkg
     where: recind="Harbour"
     srs: 'EPSG:4326'
   berthing:
-    datasource: data/bsh/AidsAndServices.gpkg
+    datasource: ../data/bsh/AidsAndServices.gpkg
     where: recind="Berthing"
     srs: 'EPSG:4326'
   waddenzee:
-    datasource: data/waddenzee-covr.gpkg
+    datasource: ../data/waddenzee-covr.gpkg
     where: CATCOV=1
     srs: 'EPSG:4326'

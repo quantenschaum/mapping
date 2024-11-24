@@ -2,7 +2,7 @@
 <batch_process>
   <process_attributes
     mapZooms="6-9;10-11;12-13;14-15;16-"
-    renderingTypesFile="rendering_types.xml"
+    renderingTypesFile="osmand/rendering_types.xml"
     zoomWaySmoothness="2"
     osmDbDialect="sqlite"
     mapDbDialect="sqlite"/>
