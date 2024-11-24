@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="mast.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview367"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="36.125"
+     inkscape:cx="16"
+     inkscape:cy="15.986159"
+     inkscape:window-width="1920"
+     inkscape:window-height="2091"
+     inkscape:window-x="1920"
+     inkscape:window-y="32"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+    <g
+     id="g139946"
+     transform="matrix(1.3333333,0,0,-1.3333333,-90.255064,415.96305)">
+    <g
+       id="g1690"
+       transform="translate(78.9073,299.8113)"
+       clip-path="url(#clipPath115554)">
+      <path
+         d="M 0,0 H -1.484 V 0.341 H 0.062 Z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path1692" />
+    </g>
+    <g
+       id="g1694"
+       transform="translate(80.3293,300.1534)"
+       clip-path="url(#clipPath115548)">
+      <path
+         d="M 0,0 H 1.63 V -0.341 H 0.062 Z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path1696" />
+    </g>
+    <g
+       id="g1698"
+       transform="translate(79.0113,299.9824)"
+       clip-path="url(#clipPath115542)">
+      <path
+         d="M 0,0 C 0,0.377 0.305,0.681 0.68,0.681 1.056,0.681 1.361,0.377 1.361,0 1.361,-0.375 1.056,-0.679 0.68,-0.679 0.305,-0.679 0,-0.375 0,0 Z"
+         style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1700" />
+    </g>
+    <g
+       id="g1702"
+       transform="translate(78.9543,300.0154)"
+       clip-path="url(#clipPath115536)">
+      <path
+         d="M 0,0 0.708,8.192 1.426,0"
+         style="fill:none;stroke:#231f20;stroke-width:0.397;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1704" />
+    </g>
+  </g>
+</svg>

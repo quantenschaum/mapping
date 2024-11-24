@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <g
+     id="g25250"
+     transform="matrix(1.3333333,0,0,-1.3333333,-345.8353,379.31111)">
+    <g
+       id="g376"
+       transform="translate(270.6571,272.4132)"
+       clip-path="url(#clipPath24982)">
+      <path
+         d="M 0,0 H -4.453 V 0.34 H 0.03 Z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path378" />
+    </g>
+    <g
+       id="g380"
+       transform="translate(272.0391,272.6972)"
+       clip-path="url(#clipPath24976)">
+      <path
+         d="M 0,0 H 5.221 V -0.285 H -0.076 Z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path382" />
+    </g>
+    <g
+       id="g384"
+       transform="translate(266.4961,276.1122)"
+       clip-path="url(#clipPath24970)">
+      <path
+         d="m 0,0 10.764,-3.414 v -0.285 c 0,0 -5.061,0.016 -5.143,0.207 C 5.519,-3.25 5.059,-2.818 4.971,-2.776 4.824,-2.704 4.088,-3.056 4.03,-3.451 3.534,-3.659 2.26,-3.414 2.26,-3.414 L 0,0"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path386" />
+    </g>
+    <g
+       id="g388"
+       transform="translate(272.5571,277.7162)"
+       clip-path="url(#clipPath24964)">
+      <path
+         d="m 0,0 0.674,-0.22 -1.051,-3.234 -0.674,0.219 z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path390" />
+    </g>
+    <g
+       id="g392"
+       transform="translate(270.6271,272.4592)"
+       clip-path="url(#clipPath24958)">
+      <path
+         d="M 0,0 C 0,0.408 0.33,0.738 0.737,0.738 1.144,0.738 1.474,0.408 1.474,0 1.474,-0.406 1.144,-0.736 0.737,-0.736 0.33,-0.736 0,-0.406 0,0 Z"
+         style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path394" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="spar.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <style
+     type="text/css"
+     id="base">
+      .outline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
+      }
+      .fill {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      COLORING{}
+  </style>
+  <g
+     id="g336"
+     transform="rotate(15,16,16)">
+    <path
+       class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02" style="fill:#FFC0CB; stroke:none;"
+       id="path303"
+       d="M 17,4.8398438 H 15 V 16 h 2 z" />
+    <path
+       id="path309"
+       class="fill vertical12" style="fill:none; stroke:none;"
+       d="M 16 4.8398438 L 16 16 L 17 16 L 17 4.8398438 L 16 4.8398438 z " />
+    <path
+       id="path307"
+       class="fill horizontal14" style="fill:none; stroke:none;"
+       d="M 17 7.6308594 L 15 7.6308594 L 15 16 L 17 16 L 17 7.6308594 z " />
+    <path
+       id="path313"
+       class="fill horizontal13" style="fill:none; stroke:none;"
+       d="M 17 8.5605469 L 15 8.5605469 L 15 16 L 17 16 L 17 8.5605469 z " />
+    <path
+       id="path318"
+       class="fill horizontal24 horizontal12" style="fill:none; stroke:none;"
+       d="M 17 10.419922 L 15 10.419922 L 15 16 L 17 16 L 17 10.419922 z " />
+    <path
+       id="path323"
+       class="fill horizontal23" style="fill:none; stroke:none;"
+       d="M 17 12.279297 L 15 12.279297 L 15 16 L 17 16 L 17 12.279297 z " />
+    <path
+       id="path328"
+       class="fill horizontal34" style="fill:none; stroke:none;"
+       d="M 17 13.210938 L 15 13.210938 L 15 16 L 17 16 L 17 13.210938 z " />
+    <path
+       class="inline cross12 vertical13" style="fill:none; stroke:#EE82EE; stroke-width:0.8;"
+       d="M 16,4.840764 V 16"
+       id="path260" />
+    <path
+       class="inline cross12" style="fill:none; stroke:#EE82EE; stroke-width:0.8;"
+       d="m 15,10.419922 h 2"
+       id="path262" />
+    <path
+       class="outline" style="fill:none; stroke:black; stroke-width:0.3;"
+       d="M 15,16 V 4.840764 h 2 V 16"
+       id="path3219" />
+  </g>
+  <path
+     class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"
+     d="m 13,16 h 6"
+     id="path5181" />
+  <circle
+     class="basepoint" style="fill:white; stroke:black; stroke-width:0.5;"
+     id="path5349"
+     cx="16"
+     cy="16"
+     r="1" />
+</svg>

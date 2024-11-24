@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <g
+     id="g154411"
+     transform="matrix(1.3333333,0,0,-1.3333333,-89.957346,528.12927)">
+    <g
+       id="g1598"
+       transform="translate(79.1753,390.6613)"
+       clip-path="url(#clipPath115692)">
+      <path
+         d="M 0,0 0.567,0.368 V -6 H 0 Z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path1600" />
+    </g>
+    <g
+       id="g1602"
+       transform="translate(80.1383,384.1124)"
+       clip-path="url(#clipPath115686)">
+      <path
+         d="M 0,0 H 2.013"
+         style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1604" />
+    </g>
+    <g
+       id="g1606"
+       transform="translate(76.7653,384.1124)"
+       clip-path="url(#clipPath115680)">
+      <path
+         d="M 0,0 H 2.083"
+         style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1608" />
+    </g>
+    <g
+       id="g1610"
+       transform="translate(79.4383,390.8624)"
+       clip-path="url(#clipPath115674)">
+      <path
+         d="M 0,0 H 3.118"
+         style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1612" />
+    </g>
+    <g
+       id="g1614"
+       transform="translate(79.4373,390.8634)"
+       clip-path="url(#clipPath115668)">
+      <path
+         d="M 0,0 -1.559,2.699"
+         style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1616" />
+    </g>
+    <g
+       id="g1618"
+       transform="translate(79.4373,390.8644)"
+       clip-path="url(#clipPath115662)">
+      <path
+         d="M 0,0 -1.559,-2.7"
+         style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1620" />
+    </g>
+    <g
+       id="g1622"
+       transform="translate(78.7783,384.1114)"
+       clip-path="url(#clipPath115656)">
+      <path
+         d="M 0,0 C 0,0.375 0.305,0.68 0.68,0.68 1.056,0.68 1.361,0.375 1.361,0 1.361,-0.377 1.056,-0.68 0.68,-0.68 0.305,-0.68 0,-0.377 0,0 Z"
+         style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1624" />
+    </g>
+  </g>
+</svg>

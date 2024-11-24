@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="40"
+   id="svg2"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+
+  <g
+     id="g193296"
+     transform="translate(0,3.9484991)">
+    <g
+       id="g2656"
+       transform="matrix(-0.00503335,1.3333238,1.3333238,0.00503335,12.191528,9.7699633)"
+       clip-path="url(#clipPath42579)">
+      <path
+         d="M 0,0 -8.097,2.824 0,5.613"
+         style="fill:none;stroke:#ec008c;stroke-width:0.85;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path2658" />
+    </g>
+    <g
+       id="g2660"
+       transform="matrix(-0.00503335,1.3333238,1.3333238,0.00503335,16.02711,8.818718)"
+       clip-path="url(#clipPath42573)">
+      <path
+         d="M 0,0 C 0,2.974 2.411,5.386 5.386,5.386 8.36,5.386 10.772,2.974 10.772,0 10.772,-2.975 8.36,-5.386 5.386,-5.386 2.411,-5.386 0,-2.975 0,0 Z"
+         style="fill:none;stroke:#ec008c;stroke-width:0.85;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path2662" />
+    </g>
+  </g>
+</svg>

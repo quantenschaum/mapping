@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+    <g
+     id="g9115"
+     transform="matrix(1.3333333,0,0,-1.3333333,-89.626837,643.11459)">
+    <g
+       id="g1558"
+       transform="translate(77.9363,470.3163)"
+       clip-path="url(#clipPath115752)">
+      <path
+         d="m 0,0 0.709,5.345 h 1.13 L 2.548,0.032"
+         style="fill:none;stroke:#231f20;stroke-width:0.397;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1560" />
+    </g>
+    <g
+       id="g1562"
+       transform="translate(78.6663,476.1124)"
+       clip-path="url(#clipPath115746)">
+      <path
+         d="M 0,0 C 0.047,1.109 0.612,1.928 1.847,1.584 3.409,2.614 4.276,0.968 3.776,0.187 3.472,-0.289 2.551,-0.576 1.705,0.524 1.611,0.352 1.187,0 0.969,-0.095"
+         style="fill:none;stroke:#231f20;stroke-width:0.283;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1564" />
+    </g>
+    <g
+       id="g1566"
+       transform="translate(78.5293,470.3224)"
+       clip-path="url(#clipPath115740)">
+      <path
+         d="M 0,0 C 0,0.376 0.305,0.68 0.68,0.68 1.056,0.68 1.361,0.376 1.361,0 1.361,-0.376 1.056,-0.681 0.68,-0.681 0.305,-0.681 0,-0.376 0,0 Z"
+         style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path1568" />
+    </g>
+    <g
+       id="g1570"
+       transform="translate(79.9213,470.4933)"
+       clip-path="url(#clipPath115734)">
+      <path
+         d="M 0,0 H 1.697 V -0.341 H -0.012 Z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path1572" />
+    </g>
+    <g
+       id="g1574"
+       transform="translate(78.5153,470.1523)"
+       clip-path="url(#clipPath115728)">
+      <path
+         d="M 0,0 H -1.716 V 0.34 H 0.012 Z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path1576" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="watertower.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+
+  <g
+     id="g9013"
+     transform="matrix(3.7795276,0,0,3.7795276,-3449.2766,372.41594)">
+    <g
+       id="g2802"
+       clip-path="url(#clipPath2806)"
+       transform="matrix(0.35277777,0,0,-0.35277777,862.02234,54.375795)">
+      <g
+         id="g2808"
+         transform="translate(154.7489,421.4348)">
+        <path
+           d="M 0,0 C 0,0.376 0.304,0.681 0.681,0.681 1.056,0.681 1.36,0.376 1.36,0 1.36,-0.375 1.056,-0.68 0.681,-0.68 0.304,-0.68 0,-0.375 0,0 Z"
+           style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+           id="path2810" />
+      </g>
+    </g>
+    <path
+       d="m 916.16921,-96.908577 h 1.37019 v 0.699911 h -1.37019 z"
+       style="fill:none;stroke:#231f20;stroke-width:0.140053;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+       id="path2814" />
+    <path
+       d="m 916.05449,-94.297034 h 0.54504 m 0.52493,0 h 0.52988"
+       style="fill:none;stroke:#231f20;stroke-width:0.119944;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+       id="path2818" />
+    <path
+       d="m 916.35421,-94.316331 0.12488,-1.901825 m 0.87489,1.901825 -0.12488,-1.901825"
+       style="fill:none;stroke:#231f20;stroke-width:0.140053;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+       id="path2822" />
+  </g>
+</svg>

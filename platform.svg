@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+
+  <g
+     id="g188860"
+     transform="matrix(1.3333333,0,0,-1.3333333,-638.43158,1131.9797)">
+    <g
+       id="g3030"
+       transform="translate(493.4457,834.3628)"
+       clip-path="url(#clipPath41925)">
+      <path
+         d="M 0,0 H -5.244 V 5.244 H 0 Z"
+         style="fill:none;stroke:#231f20;stroke-width:0.425;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path3032" />
+    </g>
+    <g
+       id="g3034"
+       transform="translate(488.2017,834.3628)"
+       clip-path="url(#clipPath41919)">
+      <path
+         d="M 0,0 Z"
+         style="fill:none;stroke:#231f20;stroke-width:0.425;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+         id="path3036" />
+    </g>
+    <g
+       id="g3038"
+       transform="translate(489.8317,836.9847)"
+       clip-path="url(#clipPath41913)">
+      <path
+         d="M 0,0 C 0,0.548 0.444,0.992 0.992,0.992 1.54,0.992 1.984,0.548 1.984,0 1.984,-0.548 1.54,-0.992 0.992,-0.992 0.444,-0.992 0,-0.548 0,0"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path3040" />
+    </g>
+  </g>
+</svg>

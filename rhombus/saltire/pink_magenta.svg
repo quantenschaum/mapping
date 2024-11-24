@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="rhombus.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <style
+     type="text/css"
+     id="base">
+      .outline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.3;
+      }
+      .inline {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.8;
+      }
+      .fill {
+        fill: none;
+        stroke: none;
+        stroke-width: 0.3;
+      }
+      .baseline {
+        fill: none;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      .basepoint {
+        fill: white;
+        stroke: black;
+        stroke-width: 0.5;
+      }
+      COLORING{}
+  </style>
+  <path
+     class="baseline" style="fill:none; stroke:black; stroke-width:0.5;"
+     d="M 16,13.914208 V 16"
+     id="path241" />
+  <path
+     class="fill uniform border12 horizontal02 vertical02 horizontal03 vertical03 cross02 saltire02 squared02" style="fill:#FFC0CB; stroke:none;"
+     d="m 15.986192,9.3265012 2.405624,2.3928918 -2.393198,2.41468 -2.405624,-2.392896 z"
+     id="path982" />
+  <path
+     id="path296"
+     class="fill horizontal13" style="fill:none; stroke:none;"
+     d="M 17.599609 10.929688 L 14.396484 10.929688 L 13.59375 11.740234 L 15.998047 14.134766 L 18.392578 11.71875 L 17.599609 10.929688 z " />
+  <path
+     id="path1037"
+     class="fill horizontal23" style="fill:none; stroke:none;"
+     d="M 17.587891 12.53125 L 14.388672 12.53125 L 15.998047 14.134766 L 17.587891 12.53125 z " />
+  <path
+     id="path302"
+     class="fill vertical13" style="fill:none; stroke:none;"
+     d="M 15.193359 10.126953 L 15.193359 13.333984 L 15.998047 14.134766 L 18.392578 11.71875 L 15.986328 9.3261719 L 15.193359 10.126953 z " />
+  <path
+     id="path307"
+     class="fill vertical23" style="fill:none; stroke:none;"
+     d="M 16.792969 10.128906 L 16.792969 13.332031 L 18.392578 11.71875 L 16.792969 10.128906 z " />
+  <path
+     id="path304"
+     class="fill horizontal12" style="fill:none; stroke:none;"
+     d="M 18.371094 11.740234 L 13.59375 11.740234 L 15.998047 14.134766 L 18.371094 11.740234 z " />
+  <path
+     id="path380"
+     class="fill vertical12" style="fill:none; stroke:none;"
+     d="M 16 9.3398438 L 16 14.132812 L 18.392578 11.71875 L 16 9.3398438 z " />
+  <path
+     id="path258"
+     class="fill squared12" style="fill:none; stroke:none;"
+     d="M 16 11.738281 L 14.792969 10.53125 L 13.59375 11.740234 L 14.798828 12.941406 L 16 11.738281 z " />
+  <path
+     id="path449"
+     class="fill squared12" style="fill:none; stroke:none;"
+     d="M 17.197266 10.53125 L 15.996094 11.734375 L 17.191406 12.929688 L 18.392578 11.71875 L 17.197266 10.53125 z " />
+  <path
+     class="inline cross12" style="fill:none; stroke:none;"
+     d="m 15.985072,9.551151 0.009,4.352652"
+     id="path255" />
+  <path
+     class="inline cross12" style="fill:none; stroke:none;"
+     d="m 13.799564,11.742133 4.37792,-0.02589"
+     id="path257" />
+  <path
+     class="inline saltire12" style="fill:none; stroke:#ec008c; stroke-width:0.8;"
+     d="M 17.189453,10.522461 14.795899,12.9375"
+     id="path259" />
+  <path
+     class="inline saltire12" style="fill:none; stroke:#ec008c; stroke-width:0.8;"
+     d="m 14.789593,10.533839 2.405719,2.392919"
+     id="path261" />
+  <path
+     class="outline border02" style="fill:none; stroke:black; stroke-width:0.3;"
+     d="m 15.986192,9.3265012 2.405624,2.3928918 -2.393198,2.41468 -2.405624,-2.392896 z"
+     id="path13" />
+</svg>
