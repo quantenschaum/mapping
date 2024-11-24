@@ -118,7 +118,7 @@
           "line-color": ["case",
             ["==",["get","land_type"],7],"#0066d4",
             ["==",["get","land_type"],4],"brown",
-            ["==",["get","caution_type"],4],"brown",
+            ["==",["get","caution_type"],4],"gray",
             ["==",["get","land_type"],8],"gray",
             ["==",["get","util_type"],8],"gray",
             ["==",["get","trans_type"],2],"#0066d4",
@@ -335,7 +335,6 @@
             ["all",["==",["get","bcnshp"],1],["==",["get","catlam"],1],["!",["has","colour"]]],"perch-port",
             ["all",["==",["get","bcnshp"],2],["==",["get","catlam"],2],["!",["has","colour"]]],"withy-starboard",
             ["all",["==",["get","bcnshp"],2],["==",["get","catlam"],1],["!",["has","colour"]]],"withy-port",
-            ["in","Pegel",["get","objnam"]],"tide-gauge",
             ["let","shp",["case",
               ["==",1,["get","boyshp"]],"conical/",
               ["==",2,["get","boyshp"]],"can/",
@@ -515,32 +514,71 @@
         "paint": {
           "line-color": ["case",["has","catpip"],"black","magenta"],
           "line-width": 1,
+          "line-opacity": 0.3,
           "line-dasharray": [6,2]
+        }
+    },
+    {
+        "id": "cables-pipes-sym",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "LineString"], ["has", "util_type"]],
+        "layout": {
+          "icon-image": ["case",["has","catpip"],"pipeline","cable"],
+          "icon-overlap": "always",
+          "symbol-placement": "line",
+          "symbol-spacing": 15
         }
     },
     {
         "id": "restricted-areas",
         "type": "line",
         "source": "bsh",
-        "source-layer": "-Hydrography",
+        "source-layer": "Hydrography",
         "filter": [ "all", ["==", ["geometry-type"], "Polygon"]],
         "paint": {
-          "line-color": "magenta",
-          "line-width": 0.5
+          "line-color": "gray",
+          "line-width": 0.5,
+          "line-dasharray": [2,4]
+        }
+    },
+    {
+        "id": "restricted-areas-sym",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["any",["has","restrn"],["has","catmpa"],["has","catcbl"],["has","catpra"],["has","catrea"],["has","util_type"]]],
+        "layout": {
+          "icon-image": ["case",["all",["in",["get","catrea"],["literal",[4,5,6,7,22,23,27,28]]],["!=",["get","restrn"],7]],"area-g","area-m"],
+          "icon-overlap": "always",
+          "symbol-placement": "line",
+          "symbol-spacing": 15
+        }
+    },
+    {
+        "id": "restricted-areas-no-entry",
+        "type": "fill",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["==",["get","restrn"],7]],
+        "paint": {
+          "fill-color": "red",
+          "fill-opacity": 0.05
         }
     },
     {
         "id": "restricted-area-names",
         "type": "symbol",
         "source": "bsh",
-        "source-layer": "-Hydrography",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"]],
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["any",["has","restrn"],["has","catmpa"],["has","catcbl"],["has","catpra"],["has","catrea"],["has","util_type"]]],
         "layout": {
           "text-field": "{objnam}",
           "text-size": 12
         },
         "paint": {
-          "text-color": "magenta"
+          "text-color": ["case",["all",["in",["get","catrea"],["literal",[4,5,6,7,22,23,27,28]]],["!=",["get","restrn"],7]],"green","magenta"]
         }
     },
     {
