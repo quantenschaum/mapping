@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 # coding: utf-8
+import re
 
-from os import listdir, makedirs
-from os.path import isfile, basename, splitext, dirname
-from itertools import product
+from os import listdir, makedirs, symlink, remove
+from os.path import isfile, basename, splitext, dirname, islink, exists, relpath
+from itertools import product, pairwise
 from re import findall
 from glob import glob
-from s57 import S57
+from typing import Iterable
+from s57 import S57, abbr_color
 
 outpath = "gen"
 
-patterns = (None, "vertical", "horizontal", "cross", "saltire", "border", "squared")
+patterns = None, "horizontal", "vertical", "squared", "border"#, "cross", "saltire"
 
 object_colors = {
     "": None,
@@ -29,45 +31,6 @@ object_colors = {
     "pink": "#FFC0CB", # 13
 }
 
-color_types={ # to reduce numer of combinations
-  'pillar spar can spherical barrel super-buoy conical light_float ':
-  ['','white','black','red','green','yellow'],
-
-  'tower lattice pile stake cairn ':
-  ['','white','black','red','green','yellow','brown','grey'],
-
-  'sphere ':
-  ['','red','black'],
-
-  'x-shape cross ':
-  ['','yellow'],
-
-  '2_spheres 2_cones_up 2_cones_down 2_cones_base_together 2_cones_point_together ':
-  ['','black'],
-
-  'cylinder cone_point_down cone_point_up ':
-  ['','black','white','red','green'],
-
-  'circle ':
-  ['','black','white','white','red'],
-
-  'triangle_point_up square rhombus triangle_point_down ':
-  ['','white','black','red','green','yellow'],
-}
-
-def colors_for(s):
-  colors=None
-  for types,cols in color_types.items():
-    if s+' ' in types: colors=cols
-  # print(s,colors)
-  if not colors: return object_colors
-  return {k:v for k,v in object_colors.items() if k in colors}
-
-lights = {
-    "light",
-    "floodlight",
-}
-
 light_colors = {
     "generic": "#800080",
     "white": "#fab20b",
@@ -76,84 +39,144 @@ light_colors = {
     "blue": "#10508c",
     "yellow": "#fab20b",
     "orange": "#fa870b",
+    "amber": "#FFBF00", # 9
 }
 
+lights = {
+    "light",
+    "floodlight",
+}
+
+color_types={ # to reduce numer of combinations
+  'pillar spar can spherical barrel super-buoy conical light_float ':
+  ['','white','black','red','green','yellow'],
+
+  'tower lattice pile stake cairn ':
+  ['','white','black','red','green','yellow','brown','grey'],
+
+  'sphere ':
+  ['','black','white','red'],
+
+  'x-shape cross ':
+  ['','black','yellow'],
+
+  '2_spheres 2_cones_up 2_cones_down 2_cones_base_together 2_cones_point_together ':
+  ['','black'],
+
+  'cylinder cone_point_down cone_point_up ':
+  ['','black','white','red','green'],
+
+  'circle sphere_over_rhombus ':
+  ['','black','white','red','green'],
+
+  'triangle_point_up square rhombus triangle_point_down flag ':
+  ['','black','white','red','green','yellow'],
+}
+
+def colors_for(s):
+  if s in lights:
+    return light_colors.keys()
+
+  colors=None
+  for types,cols in color_types.items():
+    if s+' ' in types:
+      return cols
+
+  return object_colors.keys()
+
+
+def patterns_for(s):
+  return patterns
+
+
+S57data={k:v for k,v in S57.items() if k in 'COLOUR COLPAT TOPSHP BOYSHP BCNSHP CATLMK'}
+
 def s57id(value):
-  for n,d in S57.items():
-    if type(d)!=dict: continue
+  if not value: return
+  for n,d in S57data.items():
+    if not isinstance(d,dict): continue
     for k,v in d.items():
       if v==value:
-        return k,n
+        # return f'{n}_{k}'
+        return k
 
 
 def read(f):
     with open(f) as f:
         return f.read()
 
+def alt_name(svg):
+  m=re.search(r'"([A-Z]{6}_\d+)"',svg)
+  if m:
+    return m[1].replace('_','/')
+
+# for f in object_colors.keys():
+#   id=s57id(f)
+#   if id: print(f,id)
+#
+# for f in patterns:
+#   id=s57id(f)
+#   if id: print(f,id)
+#
+# for f in glob('../icons/*.svg'):
+#   print(f,alt_name(read(f)))
+#
+# xxx
+
+
 
 def write(f, c):
-    # base,ext=splitext(f)
-    # parts=base.split('/')
-    # codes=[]
-    # for p in parts:
-    #   s=s57id(p)
-    #   o=f'{s[1]}{s[0]}' if s else p
-    #   if '_' in p:
-    #     o=','.join(str(s57id(x)[0]) for x in p.split('_'))
-    #   codes.append(str(o))
-    # f2='/'.join(codes)+ext
-    # print(f,f2)
-    # f=f2
-    assert not isfile(f), f
+    print(f)
+    # assert not exists(f), f
     makedirs(dirname(f), exist_ok=True)
     with open(f, "w") as f:
-        f.write(c)
+        if isinstance(c,list):
+          f.writelines(l+'\n' for l in c)
+        else:
+          f.write(c)
+
+
+def link(src,dst):
+    makedirs(dirname(dst),exist_ok=1)
+    try: remove(dst)
+    except: pass
+    symlink(relpath(src,dirname(dst)),dst)
 
 
 def main():
     for f in glob('*.svg'):
         svg = read(f)
-        s = splitext(f)[0]
-        if "COLORING{}" not in svg:
-            write("/".join((outpath, f"{s}.svg")), svg)
-            continue
-        # print(s)
-        for p in patterns:
-            # print(s, p)
-            matches = findall(rf" {p}\d(\d)", svg) if p else 1
-            if not matches:
-                # print("SKIPPED", s, p)
-                continue
-            secs = {int(m[0]) for m in matches} if p else {1}
-            print(s, p, secs)
-            for n in secs:
-                colors = light_colors if s in lights else colors_for(s)
-                cols = tuple(
-                    product(
-                        *([tuple(filter(lambda c: c or n == 1, colors.keys()))] * n)
-                    )
-                )
-                for cs in cols:
-                    if len(cs) > 1:
-                        if len(set(cs)) > 2:
-                            continue  # >2 colors
-                        discard = 0
-                        for i, c in enumerate(cs[:-1]):
-                            if c == cs[i + 1]:
-                                discard = 1  # same adjacent colors
-                        if discard:
-                            continue
+        icon = splitext(f)[0]
 
-                    out = (
-                        "/".join(
-                            filter(
-                                bool,
-                                (outpath, s, p, "_".join([c or "generic" for c in cs])),
-                            )
-                        )
-                        + ".svg"
-                    )
-                    # print(out)
+        if "COLORING{}" not in svg:
+            out="/".join((outpath, f"{icon}.svg"))
+            write(out, svg)
+            alt=alt_name(svg)
+            if alt:
+                alt='/'.join((outpath,alt+'.svg'))
+                print('>',alt)
+                link(out,alt)
+            continue
+        # continue
+
+        color_codes = light_colors if icon in lights else object_colors
+
+        for p in patterns_for(icon):
+            matches = findall(rf" {p}\d(\d)", svg) if p else 1
+            if not matches: continue
+            sections = {int(m[0]) for m in matches} if p else {1}
+            # print(icon, p, sections)
+
+            for s in sections:
+                colors = colors_for(icon)
+
+                cols=list(filter(lambda l: len(set(l))<=2 and all(len(set(p))==2 for p in pairwise(l)),
+                    product(filter(lambda c: c or s == 1, colors), repeat=s)))
+
+                # print(cols)
+
+                for cs in cols:
+                    # print(icon,p,cs)
 
                     width_out = 0.3
                     width_in = 0.8
@@ -162,14 +185,14 @@ def main():
                     color_base_out = "black"
                     color_base_fill = "white"
 
-                    svgout = svg
+                    svg_lines = svg.splitlines()
                     styles = []
                     for i, c in enumerate(filter(bool, cs)):
-                        c = colors[c]
+                        c = color_codes[c]
                         lines = []
-                        for l in svgout.splitlines():
+                        for l in svg_lines:
                             if "class" in l and "style" not in l:
-                                css_class = f"{p}{i}{n}" if p else "uniform"
+                                css_class = f"{p}{i}{s}" if p else "uniform"
                                 if css_class in l:
                                     if "fill" in l:
                                         style = f"fill:{c}; stroke:none;"
@@ -178,14 +201,14 @@ def main():
                                     elif "inline" in l:
                                         style = f"fill:none; stroke:{c}; stroke-width:{width_in};"
                                     else:
-                                        assert 0, (p, i, c, n, l)
+                                        assert 0, (p, i, c, s, l)
                                     l += f' style="{style}"'  # style in element, JOSM does not support global <style/>
                                     styles.append(f".{css_class} {{ {style} }}")
                             lines.append(l)
-                        svgout = "\n".join(lines)
+                        svg_lines = lines
 
                     lines = []
-                    for l in svgout.splitlines():
+                    for l in svg_lines:
                         if "class" in l and "style" not in l:
                             if "fill" in l:
                                 style = f"fill:none; stroke:none;"
@@ -200,12 +223,26 @@ def main():
                             l += f' style="{style}"'
                             # l += f' style="{style}" {param(l) if not cs[0] else ""}'
                         lines.append(l)
-                    svgout = "\n".join(lines)
+                    svg_lines = lines
 
-                    # svgout = svgout.replace("COLORING{}", "\n".join(styles))
-                    # print(svgout)
+                    # svg_lines = svg_lines.replace("COLORING{}", "\n".join(styles))
+                    # print(svg_lines)
 
-                    write(out, svgout)
+                    out = "/".join(filter(bool,(outpath,icon,p,"_".join([c or "generic" for c in cs]))))+".svg"
+                    write(out, svg_lines)
+
+                    aname=alt_name(svg)
+                    if aname:
+                      alt = "/".join((outpath,aname,str(s57id(p) or 0),','.join(list(map(lambda i:str(i or 0),map(s57id,cs)))) or '0'))+".svg"
+                      print('>',alt)
+                      link(out,alt)
+
+                      alt = "/".join((outpath,aname,str(s57id(p) or 0),''.join(list(map(lambda i:abbr_color(i) if i else '_',map(s57id,cs)))) or '0'))+".svg"
+                      print('>',alt)
+                      link(out,alt)
+
+
+
 
 
 def param(line):

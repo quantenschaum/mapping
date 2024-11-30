@@ -4,13 +4,33 @@
    width="32"
    height="32"
    id="svg2"
-   sodipodi:docname="2_spheres.svg"
+   sodipodi:docname="sphere_over_rhombus.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-
+  <defs
+     id="defs21" />
+  <sodipodi:namedview
+     id="namedview19"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="28.34375"
+     inkscape:cx="15.911797"
+     inkscape:cy="15.982359"
+     inkscape:window-width="1625"
+     inkscape:window-height="1200"
+     inkscape:window-x="1911"
+     inkscape:window-y="668"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
   <style
      type="text/css"
      id="base">
@@ -43,34 +63,26 @@
   </style>
   <path
      class="baseline"
-     d="M 16,9.7566423 V 10.590959"
-     id="TOPSHP_4" />
-  <path
-     class="baseline"
      d="M 16,13.914208 V 16"
-     id="path241" />
-  <circle
+     id="TOPSHP_18" />
+  <path
      class="fill uniform horizontal12"
-     id="path348"
-     cx="16"
-     cy="12.236607"
-     r="1.7220814" />
+     d="m 15.986192,9.3265012 2.405624,2.3928918 -2.393198,2.41468 -2.405624,-2.392896 z"
+     id="path982" />
+  <path
+     class="outline"
+     d="m 15.986192,9.3265012 2.405624,2.3928918 -2.393198,2.41468 -2.405624,-2.392896 z"
+     id="path13" />
   <circle
      class="fill uniform horizontal02"
-     id="circle703"
+     id="path348"
      cx="16"
-     cy="8.1109962"
+     cy="7.3369536"
      r="1.7220814" />
   <circle
      class="outline"
-     id="circle15"
+     id="circle13"
      cx="16"
-     cy="12.236607"
-     r="1.7220814" />
-  <circle
-     class="outline"
-     id="circle17"
-     cx="16"
-     cy="8.1109962"
+     cy="7.3369536"
      r="1.7220814" />
 </svg>

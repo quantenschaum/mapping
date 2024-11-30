@@ -4,14 +4,51 @@
    width="32"
    height="32"
    id="svg2"
-   sodipodi:docname="tower.svg"
+   sodipodi:docname="radar_scanner.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-    <g
-     id="g142029"
+  <defs
+     id="defs16" />
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="38.34375"
+     inkscape:cx="15.608802"
+     inkscape:cy="16"
+     inkscape:window-width="1978"
+     inkscape:window-height="1471"
+     inkscape:window-x="716"
+     inkscape:window-y="264"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2">
+    <sodipodi:guide
+       position="17.333333,16"
+       orientation="0,1"
+       id="guide745"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,33.691057"
+       orientation="-1,0"
+       id="guide1473"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
+  <g
+     id="CATLMK_16"
      transform="matrix(1.3333333,0,0,-1.3333333,-84.410397,757.83195)">
     <g
        id="g1430"
@@ -59,4 +96,13 @@
          id="path1448" />
     </g>
   </g>
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="M 16,4.7130127 V 6.6102354"
+     id="path1557"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="m 12.679137,4.7130127 h 6.641726"
+     id="path1559" />
 </svg>

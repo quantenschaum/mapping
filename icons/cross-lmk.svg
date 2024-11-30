@@ -4,12 +4,14 @@
    width="32"
    height="32"
    id="svg2"
-   sodipodi:docname="monument.svg"
+   sodipodi:docname="cross-lmk.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
   <sodipodi:namedview
      id="namedview367"
      pagecolor="#ffffff"
@@ -21,14 +23,13 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="36.125"
-     inkscape:cx="16"
+     inkscape:cx="12.775087"
      inkscape:cy="15.986159"
      inkscape:window-width="1920"
      inkscape:window-height="2091"
-     inkscape:window-x="1920"
-     inkscape:window-y="32"
+     inkscape:window-x="653"
+     inkscape:window-y="29"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2"
      showguides="true">
     <sodipodi:guide
        position="16.941176,16"
@@ -45,31 +46,13 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
   </sodipodi:namedview>
-
   <g
-     id="CATLMK_9"
+     id="CATLMK_14"
      transform="matrix(3.7795276,0,0,3.7795276,-2606.5013,446.66212)">
     <path
        d="m 694.72015,-113.94043 h -0.64064 m -0.45191,0 h -0.60749"
        style="fill:none;stroke:#231f20;stroke-width:0.119944;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
        id="path3965" />
-    <g
-       id="g3969"
-       clip-path="url(#clipPath3973-3)"
-       transform="matrix(0.35277777,0,0,-0.35277777,646.82319,5.295286)">
-      <g
-         id="g3975"
-         transform="translate(132.0145,337.991)">
-        <path
-           d="M 0,0 0.621,4.216 C 0.33,4.437 0.142,4.785 0.142,5.178 c 0,0.665 0.539,1.205 1.205,1.205 0.665,0 1.204,-0.54 1.204,-1.205 0,-0.393 -0.188,-0.741 -0.479,-0.962 L 2.693,0"
-           style="fill:none;stroke:#231f20;stroke-width:0.397;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
-           id="path3977" />
-      </g>
-    </g>
-    <path
-       d="m 693.46853,-115.55241 0.56162,-0.56162 m -0.4826,1.03293 0.77329,-0.77364 m -0.84631,1.39665 0.68262,-0.68298 m -0.67416,1.22449 0.78282,-0.78281 m -0.19086,0.74083 0.24166,-0.24201"
-       style="fill:none;stroke:#231f20;stroke-width:0.0998361;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
-       id="path3981" />
     <g
        id="g3991"
        transform="matrix(0.35277777,0,0,-0.35277777,693.6301,-113.94043)"
@@ -79,5 +62,13 @@
          style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
          id="path3993" />
     </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 693.87013,-114.18067 v -2.68152"
+       id="path1938" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 693.01013,-116.06572 h 1.72"
+       id="path1940" />
   </g>
 </svg>
