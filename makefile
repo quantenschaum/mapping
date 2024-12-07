@@ -3,8 +3,8 @@
 # https://www.teledynecaris.com/s-57/frames/S57catalog.htm
 
 SHELL=/bin/bash
-export PATH:=$(PWD)/scripts:$(PATH)
-OGR_OPTS=OGR_S57_OPTIONS="LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON,UPDATES=APPLY" S57_CSV="$(PWD)"
+export PATH:=$(PWD)/scripts:$(PWD)/spreet/target/release:$(PWD)/tippecanoe:$(PATH)
+OGR_OPTS=OGR_S57_OPTIONS="LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON" S57_CSV="$(PWD)"
 
 .PHONY: bsh.osm icons obf vwm bsh charts qgis mapproxy
 
@@ -52,27 +52,29 @@ depth-no.all:
 	$(MAKE) depth-no R=mid
 	$(MAKE) depth-no R=north
 
-BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows
 BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
 # need this because there is a typo in the WMS layer name (coastel)
 BSH_LAYERS_2=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing
 # no overview layer for obstructions
 BSH_LAYERS_3=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
 BSH_BBOX=53.0,3.3,56.0,14.4
+BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)
 
 bsh:
-	rm -rf data/bsh data/bsh.gpkg && mkdir -p data/bsh
-	for L in AidsAndServices SkinOfTheEarth; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_1)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
-	for L in RocksWrecksObstructions; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_3)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
-	for L in Hydrography Topography; do wget -O data/bsh/$$L.json "$(BSH_WMS)?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=$(BSH_LAYERS_2)&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)"; done
-# 	for F in data/bsh/*.json; do jq . $$F>data/bsh/tmp; mv data/bsh/tmp $$F; done
-# 	for F in data/bsh/*.json; do ubands.py $$F; done
-	for F in $$(find data/bsh -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
-# 	for F in $$(find data/bsh -name "*.gpkg"); do ogr2ogr data/bsh.gpkg $$F -append; done
+# 	rm -rf data/bsh && mkdir -p data/bsh
+# 	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
+# 	cd data/bsh && for L in Hydrography Topography;         do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
+# 	cd data/bsh && for L in RocksWrecksObstructions;        do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
+	cd data/bsh && rm -rf layers filtered *.gpkg filter.log
+	cd data/bsh && for F in *.json; do filter.py $$F filtered/$$F layers >>filter.log; done
+# 	cd data/bsh && for F in *.json; do ogr2ogr $${F/.json/.gpkg} $$F; done
+	cd data/bsh && for F in filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
+	cd data/bsh && for F in layers/*.json; do ogr2ogr layers.gpkg $$F -append; done
 
-ubands:
+filter:
 	rm -rf data/bsh/cleaned && mkdir data/bsh/cleaned
 	for F in data/bsh/*.json; do ubands.py $$F $${F/bsh/bsh/cleaned}; done
+	for F in $$(find data/bsh/cleaned -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 
 icons: icons/gen
 
@@ -84,15 +86,15 @@ spreet:
 	git clone https://github.com/flother/spreet
 	cd spreet && cargo build --release
 
-sprites: icons spreet
-	spreet/target/release/spreet icons/gen  www/icons --recursive --ratio 2
+sprites: icons
+	spreet icons/gen  www/icons --recursive --unique --ratio 2
 	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 1/g' www/icons.json -i
-	spreet/target/release/spreet icons/gen  www/icons@2x --recursive --ratio 4
+	spreet icons/gen  www/icons@2x --recursive --unique --ratio 4
 	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 2/g' www/icons@2x.json -i
 
 vector:
 	rm -rf www/pbf
-	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/cleaned/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9,10]], ["all",["==","uband",3],["in","$$zoom",11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]] ]}' --no-tile-compression -x lnam --output-to-directory=www/pbf       # -o www/bsh.mbtiles
+	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9,10]], ["all",["==","uband",3],["in","$$zoom",11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]] ]}' --no-tile-compression -x lnam --output-to-directory=www/pbf       # -o www/bsh.mbtiles
 	du -sch www/pbf/*
 # 	cat www/pbf/metadata.json |jq .json -r |jq >www/tile.json
 

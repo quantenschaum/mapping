@@ -241,6 +241,16 @@ def main():
                       print('>',alt)
                       link(out,alt)
 
+                    if icon in lights:
+                      alt='/'.join((outpath,icon,str(s57id(cs[0]) if cs[0]!='generic' else 0)))+'.svg'
+                      print('>',alt)
+                      link(out,alt)
+
+                      alt='/'.join((outpath,icon,abbr_color(cs[0]) if cs[0]!='generic' else '_'))+'.svg'
+                      print('>',alt)
+                      link(out,alt)
+
+
 
 
 

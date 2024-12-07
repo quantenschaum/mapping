@@ -4,6 +4,22 @@ from collections import OrderedDict
 from itertools import groupby
 import re
 
+COLOURS_SHORT={
+    1: "W",
+    2: "B",
+    3: "R",
+    4: "G",
+    5: "Bu",
+    6: "Y",
+    7: "Gy",
+    8: "Br",
+    9: "Am",
+    10: "Vi",
+    11: "Or",
+    12: "Ma",
+    13: "Pi",
+}
+
 S57 = {
     "COLOUR": {
         1: "white",
@@ -20,6 +36,14 @@ S57 = {
         12: "magenta",
         13: "pink",
     },
+    "COLPAT": {
+        1: "horizontal",
+        2: "vertical",
+        3: "diagonal",
+        4: "squared",
+        5: "stripes",
+        6: "border",
+    },
     "BOYSHP": {
         1: "conical",
         2: "can",
@@ -28,13 +52,14 @@ S57 = {
         5: "spar",
         6: "barrel",
         7: "super-buoy",
+        8: "ice-buoy",
     },
     "BCNSHP": {
         1: None,  # stake, pole, perch, post
         2: "withy",
         3: "tower",
-        4: "pile",
-        5: "lattice",
+        4: "lattice",
+        5: "pile",
         6: "cairn",
         7: "buoyant",
     },
@@ -55,6 +80,8 @@ S57 = {
         14: "2 cones down",  # south
         15: "besom, point up",
         16: "besom, point down",
+        17: "flag",
+        18: "sphere over rhombus",
         19: "square",
         20: "rectangle, horizontal",
         21: "rectangle, vertical",
@@ -62,9 +89,13 @@ S57 = {
         23: "trapezium, down",
         24: "triangle, point up",
         25: "triangle, point down",
+        26: "circle",
+        27: "2 upright crosses",
         28: "t-shape",
         29: "triangle, point up over circle",
+        30: "upright cross over circle",
         31: "rhombus over circle",
+        32: "circle over triangle, point up",
         33: "other",
         98: "cylinder over sphere",
         99: "cone, point up over sphere",
@@ -122,6 +153,8 @@ S57 = {
         3: "submerged",
         4: "covers",
         5: "awash",
+        6: "floods",
+        7: "floating",
     },
     "CATWRK": {
         1: "non-dangerous",
@@ -192,14 +225,6 @@ S57 = {
         2: "east",
         3: "south",
         4: "west",
-    },
-    "COLPAT": {
-        1: "horizontal",
-        2: "vertical",
-        3: "diagonal",
-        4: "squared",
-        5: "stripes",
-        6: "border",
     },
     "CATSPM": {
         # https://wiki.openstreetmap.org/wiki/Seamarks/Special_Purpose_Marks
@@ -408,23 +433,23 @@ S57 = {
         1: "cairn",
         2: "cemetery",
         3: "chimney",
-        9: "monument",
-        10: "column",
-        14: "cross",
         4: "dish_aerial",
-        15: "dome",
         5: "flagstaff",
         6: "flare_stack",
         7: "mast",
+        8: "windsock",
+        9: "monument",
+        10: "column",
         11: "memorial",
         12: "obelisk",
-        16: "radar_scanner",
-        20: "spire",
         13: "statue",
+        14: "cross",
+        15: "dome",
+        16: "radar_scanner",
         17: "tower",
         18: "windmill",
         19: "windmotor",
-        8: "windsock",
+        20: "spire",
         21: "boulder",
     },
     "BUISHP": {
@@ -729,6 +754,27 @@ secondary = (
     "FOGSIG",
     "RTPBCN",
 )
+
+
+def abbr_color(c):
+  try:
+    return COLOURS_SHORT[c]
+  except:
+    c=[i for i,n in S57['COLOUR'].items() if n==c][0]
+    return COLOURS_SHORT[c]
+
+
+def resolve(props, suf='', sep='_'):
+  o={}
+  for k,v in props.items():
+    try:
+      m=S57.get(k.upper())
+      if m:
+        vs = map(int, v if isinstance(v,list) else str(v).split(','))
+        o[k+suf]='_'.join(m[i].replace(',','').replace(' ','_') for i in vs)
+    except: pass
+  return o
+
 
 
 def is_primary(l):
