@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import sys
-
+import json
 from requests import get
 
 
@@ -25,7 +25,7 @@ def main():
         if e["name"].lower().startswith(name):
             # print(e)
             file_id = e["fileId"]
-            url = f"https://www.vaarweginformatie.nl/{path}{file_id}"
+            url = f"https://www.vaarweginformatie.nl/fdd/{path}{file_id}"
             print(url)
             break
 
