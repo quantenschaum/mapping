@@ -24,7 +24,7 @@ sources:
       map: bsh.qgs
       #tiled: true
     coverage:
-      datasource: ../data/bsh/AidsAndServices.gpkg
+      datasource: ../data/bsh/bsh.gpkg
       where: recind="Overview"
       srs: 'EPSG:4326'
   qgis1:
@@ -35,7 +35,7 @@ sources:
       transparent: true
       map: bsh1.qgs
     coverage:
-      datasource: ../data/bsh/AidsAndServices.gpkg
+      datasource: ../data/bsh/bsh.gpkg
       where: recind="Overview"
       srs: 'EPSG:4326'
   qgis2:
@@ -46,7 +46,7 @@ sources:
       transparent: true
       map: bsh2.qgs
     coverage:
-      datasource: ../data/bsh/AidsAndServices.gpkg
+      datasource: ../data/bsh/bsh.gpkg
       where: recind="Overview"
       srs: 'EPSG:4326'
   rws:
