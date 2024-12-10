@@ -36,6 +36,7 @@
         "id": "osm",
         "type": "raster",
         "source": "osm-raster",
+        "maxzoom": 22,
         "paint": {
           "raster-saturation": -1
         }
@@ -45,17 +46,17 @@
         "type": "fill",
         "source": "bsh",
         "source-layer": "SkinOfTheEarth",
-        "filter": ["any",["has","drval1"],["has","land_type"]],
+        "filter": ["any",["has","DRVAL1"],["has","land_type"]],
         "paint": {
           "fill-color": [ "case",
-            [ "!", ["has", "drval1"]], "#F9ECC0",
-            [ "!", ["has", "drval2"]], "#eee",
-            [ "<", ["get", "drval1"], 0 ], "#CADBC1",
-            [ "<", ["get", "drval1"], 2 ], "#AFCCE3",
-            [ "<", ["get", "drval1"], 5 ], "#CADEEF",
-            [ "<", ["get", "drval1"], 10 ], "#F1F6FC",
+            [ "!", ["has", "DRVAL1"]], "#F9ECC0",
+            [ "!", ["has", "DRVAL2"]], "#eee",
+            [ "<", ["get", "DRVAL1"], 0 ], "#CADBC1",
+            [ "<", ["get", "DRVAL1"], 2 ], "#AFCCE3",
+            [ "<", ["get", "DRVAL1"], 5 ], "#CADEEF",
+            [ "<", ["get", "DRVAL1"], 10 ], "#F1F6FC",
             "white" ],
-          "fill-opacity": ["case",["has","drval1"],1,0.5]
+          "fill-opacity": ["case",["has","DRVAL1"],1,0.5]
         }
     },
     {
@@ -63,10 +64,10 @@
         "type": "line",
         "source": "bsh",
         "source-layer": "Hydrography",
-        "filter": [ "has", "valdco" ],
+        "filter": [ "has", "VALDCO" ],
         "paint": {
-          "line-color": [ "case", [ "==", ["get", "valdco"], 2 ], "red", "gray" ],
-          "line-width": [ "case", [ "==", ["get", "valdco"], 5 ], 1.6, 1 ]
+          "line-color": [ "case", [ "==", ["get", "VALDCO"], 2 ], "red", "gray" ],
+          "line-width": [ "case", [ "==", ["get", "VALDCO"], 5 ], 1.6, 1 ]
         }
     },
     {
@@ -74,9 +75,9 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "Hydrography",
-        "filter": [ "has", "valdco" ],
+        "filter": [ "has", "VALDCO" ],
         "layout": {
-         "text-field": "{valdco}",
+         "text-field": "{VALDCO}",
          "text-size": 12,
          "text-anchor": "center",
          "symbol-placement": "line",
@@ -93,7 +94,7 @@
         "source-layer": "Topography",
         "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["!=",["get","coast_type"],1],["!=",["get","land_type"],6]],
         "paint": {
-          "fill-opacity": 0.6,
+          "fill-opacity": ["case",["==",["get","land_type"],11],0.2,0.6],
           "fill-color": ["case",
             ["==",["get","land_type"],1],"#ae9147",
             ["==",["get","land_type"],4],"#7cb6ea",
@@ -101,7 +102,7 @@
             ["==",["get","land_type"],9],"#7cb6ea",
             ["==",["get","land_type"],11],"green",
             ["==",["get","coast_type"],2],"#c6a632",
-            ["has","catbrg"],"#cb9b35",
+            ["has","CATBRG"],"#cb9b35",
             ["has","facility_type"],"#ae9147",
             ["has","trans_type"],"#555",
             ["has","dock_type"],"#7cb6ea",
@@ -127,9 +128,9 @@
             ["==",["get","land_type"],7],1.5,
             ["==",["get","trans_type"],2],3,
             ["==",["get","land_type"],2],3,
-            ["==",["get","catslc"],9],2,
-            ["==",["get","catslc"],2],1.5,
-            ["==",["get","catslc"],10],2.5,
+            ["==",["get","CATSLC"],2],1.5,
+            ["==",["get","CATSLC"],9],2,
+            ["==",["get","CATSLC"],10],2.5,
             1]
         }
     },
@@ -138,9 +139,23 @@
         "type": "circle",
         "source": "bsh",
         "source-layer": "Topography",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","catple"],["has","catmor"]]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","CATPLE"],["has","CATMOR"]]],
         "paint": {
           "circle-radius": 3
+        }
+    },
+    {
+        "id": "dir-of-buoyage",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],[ "has", "ORIENT" ],["==",["get","meta_type"],6]],
+        "layout": {
+          "icon-image": "dir-buoyage-a",
+          "icon-rotate": ["get","ORIENT"]
+        },
+        "paint": {
+          "icon-opacity": 0.5
         }
     },
     {
@@ -148,11 +163,14 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","cathaf"]]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","CATHAF"]]],
         "layout": {
-          "icon-image": ["match",["get","cathaf"],5,"marina",4,"fishingharbour",""],
+          "icon-image": ["case",
+            ["in",5,["get","CATHAF"]],"marina",
+            ["in",4,["get","CATHAF"]],"fishingharbour",
+            ""],
           "icon-overlap": "always",
-          "text-field": "{objnam}",
+          "text-field": "{OBJNAM}",
           "text-size": 12,
           "text-anchor": "top",
           "text-optional": true,
@@ -163,17 +181,14 @@
         }
     },
     {
-        "id": "dir-of-buoyage",
+        "id": "rocks-dangerous",
         "type": "symbol",
         "source": "bsh",
-        "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],[ "has", "orient" ],["==",["get","meta_type"],6]],
+        "source-layer": "RocksWrecksObstructions",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["==", ["get","caution_type"], 6],["==", ["get","EXPSOU"], 2]],
         "layout": {
-          "icon-image": "dir-buoyage-a",
-          "icon-rotate": ["get","orient"]
-        },
-        "paint": {
-          "icon-opacity": 0.5
+         "icon-image": "obstruction",
+         "icon-overlap": "always"
         }
     },
     {
@@ -184,45 +199,44 @@
         "filter": [ "all", ["==", ["geometry-type"], "Point"],["==", ["get","caution_type"], 6]],
         "layout": {
          "icon-image": ["concat","rock-",["case",
-            ["==",["get","expsou"],2],"dangerous",
-            ["==",["get","watlev"],4],"covers",
-            ["==",["get","watlev"],5],"awash",
+            ["==",["get","WATLEV"],4],"covers",
+            ["==",["get","WATLEV"],5],"awash",
             "submerged"]],
          "icon-overlap": "always",
-         "text-field": "({valsou})",
-         "text-size": ["case",["has","valsou"],12,0],
+         "text-field": "({VALSOU})",
+         "text-size": ["case",["has","VALSOU"],12,0],
          "text-anchor": "top",
          "text-optional": true,
-         "text-offset": [0,0.5]
+         "text-offset": [0,0.6]
         },
         "paint": {
-          "text-color": ["case", ["<",5,["get","valsou"]],"gray", "black"]
+          "text-color": ["case", ["<",5,["get","VALSOU"]],"gray", "black"]
         }
     },
     {
-        "id": "wrecks",
+        "id": "obstructions",
         "type": "symbol",
         "source": "bsh",
         "source-layer": "RocksWrecksObstructions",
         "filter": [ "all", ["==", ["geometry-type"], "Point"],["!=", ["get","caution_type"], 6]],
         "layout": {
          "icon-image": ["case",
-           ["==",["get","catwrk"],1],"wreck-non-dangerous",
-           ["==",["get","catwrk"],2],"wreck-dangerous",
-           ["==",["get","catwrk"],4],"wreck-hull_showing",
-           ["==",["get","catwrk"],5],"wreck-hull_showing",
-           ["==",["get","catobs"],6],"foul",
-           ["==",["get","catobs"],7],"foul",
+           ["==",["get","CATWRK"],1],"wreck-non-dangerous",
+           ["==",["get","CATWRK"],2],"wreck-dangerous",
+           ["==",["get","CATWRK"],4],"wreck-hull_showing",
+           ["==",["get","CATWRK"],5],"wreck-hull_showing",
+           ["==",["get","CATOBS"],6],"foul",
+           ["==",["get","CATOBS"],7],"foul",
            "obstruction"],
          "icon-overlap": "always",
-         "text-field": "({valsou})",
-         "text-size": ["case",["has","valsou"],12,0],
+         "text-field": "({VALSOU})",
+         "text-size": ["case",["has","VALSOU"],12,0],
          "text-anchor": "top",
          "text-optional": true,
          "text-offset": [0,0.8]
         },
         "paint": {
-          "text-color": ["case", ["<",5,["get","valsou"]],"gray", "black"]
+          "text-color": ["case", ["<",5,["get","VALSOU"]],"gray", "black"]
         }
     },
     {
@@ -230,25 +244,58 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "litchr" ]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ]],
         "layout": {
-          "icon-image": ["let","col",["case",
-              ["==",1,["get","colour"]],"white",
-              ["==",2,["get","colour"]],"black",
-              ["==",3,["get","colour"]],"red",
-              ["==",4,["get","colour"]],"green",
-              ["==",5,["get","colour"]],"blue",
-              ["==",6,["get","colour"]],"yellow",
-            "generic"],
-            ["concat","",["case",["==",["get","catlit"],8],"floodlight/","light/"] ,["var","col"]]],
-          "icon-rotate": ["+",90,["case",
-            ["==",3,["get","colour"]],10,
-            ["==",4,["get","colour"]],-10
-            ,0]],
+          "icon-image": ["concat",
+            ["case",["in",8,["get","CATLIT"]],"floodlight/","light/"],
+            ["case",["has","color"],["get","color"],"generic"]],
+          "icon-rotate": ["case",
+            ["has","ORIENT"],["get","ORIENT"],
+            ["all",["has","SECTR1"],["has","SECTR2"]],
+              ["let","angle",
+                ["case",[">=",["get","SECTR2"],["get","SECTR1"]],
+                  ["-",["get","SECTR2"],["get","SECTR1"]],
+                  ["+",["-",["get","SECTR2"],["get","SECTR1"]],360]],
+                ["+",["get","SECTR1"],["/",["var","angle"],2]]],
+            ["+",45,["case",
+            ["in",3,["get","COLOUR"]],10,
+            ["in",4,["get","COLOUR"]],-10
+            ,0]]],
+          "icon-overlap": "always"
+        }
+    },
+    {
+        "id": "lights-sector1",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],[ "has", "SECTR1" ],[">=",["zoom"],10]],
+        "layout": {
+          "icon-image": "line-dashed",
+          "icon-size": 0.8,
+          "icon-rotate": ["get","SECTR1"],
+          "icon-offset": [0,256],
           "icon-overlap": "always"
         },
         "paint": {
-         "text-color": "blue"
+          "icon-opacity": 0.5
+        }
+    },
+    {
+        "id": "lights-sector2",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],[ "has", "SECTR2" ],[">=",["zoom"],10]],
+        "layout": {
+          "icon-image": "line-dashed",
+          "icon-size": 0.8,
+          "icon-rotate": ["get","SECTR2"],
+          "icon-offset": [0,256],
+          "icon-overlap": "always"
+        },
+        "paint": {
+          "icon-opacity": 0.5
         }
     },
     {
@@ -256,9 +303,9 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","valnmr"]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","VALNMR"]],
         "layout": {
-          "icon-image": ["case",[">",["get","valnmr"],5],"light-major","light-minor"],
+          "icon-image": ["case",[">",["get","VALNMR"],10],"light-major","light-minor"],
           "icon-overlap": "always"
         }
     },
@@ -267,7 +314,7 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","catfog"]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","CATFOG"]],
         "layout": {
           "icon-image": "fogsignal",
           "icon-overlap": "always"
@@ -278,7 +325,7 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["==",["get","conrad"],3]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["==",["get","CONRAD"],3]],
         "layout": {
           "icon-image": "radar-reflector",
           "icon-rotate": -60,
@@ -291,116 +338,61 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","topshp"],["has","boyshp"],["has","bcnshp"]]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",["has","TOPSHP"],["has","BOYSHP"],["has","BCNSHP"]]],
         "layout": {
-          "icon-image": ["concat","",["case",
-              ["all",["has","boyshp"],["==",["get","colour"],"3,1"]],"sphere/red",
-              ["all",["has","boyshp"],["==",["get","colour"],"2,3,2"]],"2_spheres/black",
-              ["all",["has","bcnshp"],["==",["get","colour"],"2,3,2"]],"2_spheres/black",
-              ["all",["has","boyshp"],["==",["get","catlam"],2],["==",["get","objnam"],1]],"cone_point_up/green",
-              ["all",["has","boyshp"],["==",["get","catlam"],1],["==",["get","objnam"],2]],"cylinder/red",
-              ["==",["get","catcam"],1],"2_cones_up/black",
-              ["==",["get","catcam"],2],"2_cones_base_together/black",
-              ["==",["get","catcam"],3],"2_cones_down/black",
-              ["==",["get","catcam"],4],"2_cones_point_together/black",
-              ["==",["get","topshp"],3],"sphere/generic",
-              ["==",["get","topshp"],8],"cross/generic",
-              ["==",["get","topshp"],9],"rhombus/generic",
-              ["==",["get","topshp"],12],"rhombus/generic",
-              ["==",["get","topshp"],19],"square/generic",
-              ["==",["get","topshp"],20],"square/generic",
-              ["==",["get","topshp"],21],"square/generic",
-              ["==",["get","topshp"],24],"triangle_point_up/generic",
-              ["==",["get","topshp"],25],"triangle_point_down/generic",
-            ""]],
+          "icon-image": ["case",
+              ["all",["has","BOYSHP"],["==",["get","color"],"RW"]],"sphere/red",
+              ["all",["has","BOYSHP"],["==",["get","color"],"BRB"]],"2_spheres/black",
+              ["all",["has","BCNSHP"],["==",["get","color"],"BRB"]],"2_spheres/black",
+              ["all",["has","BOYSHP"],["==",["get","CATLAM"],2],["==",["get","OBJNAM"],"1"]],"cone_point_up/green",
+              ["all",["has","BOYSHP"],["==",["get","CATLAM"],1],["==",["get","OBJNAM"],"2"]],"cylinder/red",
+              ["==",["get","CATCAM"],1],"2_cones_up/black",
+              ["==",["get","CATCAM"],2],"2_cones_base_together/black",
+              ["==",["get","CATCAM"],3],"2_cones_down/black",
+              ["==",["get","CATCAM"],4],"2_cones_point_together/black",
+              ["concat","TOPSHP","/",["get","TOPSHP"],"/",["coalesce",["get","COLPAT"],0],"/",["coalesce",["get","color"],0]]],
           "icon-overlap": "always",
           "icon-offset": ["case",
-              ["has","bcnshp"],["literal",[0,-19]],
-              ["==",["get","boyshp"],1],["literal",[0,-12]],
-              ["==",["get","boyshp"],2],["literal",[0,-8]],
-              ["==",["get","boyshp"],3],["literal",[0,-9]],
+              ["has","TOPSHP"],["literal",[0,-20]],
+              ["has","BCNSHP"],["literal",[0,-19]],
+              ["==",["get","BOYSHP"],1],["literal",[0,-12]],
+              ["==",["get","BOYSHP"],2],["literal",[0,-8]],
+              ["==",["get","BOYSHP"],3],["literal",[0,-9]],
               ["literal",[0,-22]]],
-          "icon-rotate": ["case",["all",["has","boyshp"],["!",["in",["get","boyshp"],["literal",[6,7]]]]],15,0]
+          "icon-rotate": ["case",["all",["has","BOYSHP"],["!",["in",["get","BOYSHP"],["literal",[6,7]]]]],15,0],
+          "icon-size": ["case",["any",["has","BOYSHP"],["has","BCNSHP"]],1,1.2]
         }
     },
     {
-        "id": "buoys-beacons",
+        "id": "buoys",
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": ["any",[ "has", "boyshp" ],[ "has", "bcnshp" ]],
+        "filter": [ "has", "BOYSHP" ],
+        "layout": {
+          "icon-image": ["concat","BOYSHP","/",["get","BOYSHP"],"/",["coalesce",["get","COLPAT"],0],"/",["coalesce",["get","color"],0]],
+          "icon-overlap": "always",
+           "text-field": "{color}",
+           "text-size": 10,
+           "text-offset": [0,1],
+           "text-optional": true
+        }
+    },
+    {
+        "id": "beacons",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "has", "BCNSHP" ],
         "layout": {
           "icon-image": ["case",
-            ["all",["==",["get","bcnshp"],1],["==",["get","catlam"],2],["!",["has","colour"]]],"perch-starboard",
-            ["all",["==",["get","bcnshp"],1],["==",["get","catlam"],1],["!",["has","colour"]]],"perch-port",
-            ["all",["==",["get","bcnshp"],2],["==",["get","catlam"],2],["!",["has","colour"]]],"withy-starboard",
-            ["all",["==",["get","bcnshp"],2],["==",["get","catlam"],1],["!",["has","colour"]]],"withy-port",
-            ["let","shp",["case",
-              ["==",1,["get","boyshp"]],"conical/",
-              ["==",2,["get","boyshp"]],"can/",
-              ["==",3,["get","boyshp"]],"spherical/",
-              ["==",4,["get","boyshp"]],"pillar/",
-              ["==",5,["get","boyshp"]],"spar/",
-              ["==",6,["get","boyshp"]],"barrel/",
-              ["==",1,["get","bcnshp"]],"pile/",
-              ["==",2,["get","bcnshp"]],"withy/",
-              ["==",3,["get","bcnshp"]],"tower/",
-              ["==",4,["get","bcnshp"]],"lattice/",
-              ["==",5,["get","bcnshp"]],"pile/",
-              ["==",6,["get","bcnshp"]],"cairn/",
-            "pillar/"],
-            ["let","pat",["case",
-              ["==",1,["get","colpat"]],"horizontal/",
-              ["==",2,["get","colpat"]],"vertical/",
-            ""],
-            ["let","col",["case",
-              ["==",1,["get","colour"]],"white",
-              ["==",2,["get","colour"]],"black",
-              ["==",3,["get","colour"]],"red",
-              ["==",4,["get","colour"]],"green",
-              ["==",5,["get","colour"]],"blue",
-              ["==",6,["get","colour"]],"yellow",
-              ["==",7,["get","colour"]],"grey",
-              ["==",8,["get","colour"]],"brown",
-              ["==",9,["get","colour"]],"amber",
-              ["==",10,["get","colour"]],"violet",
-              ["==",11,["get","colour"]],"orange",
-              ["==",12,["get","colour"]],"magenta",
-              ["==",13,["get","colour"]],"pink",
-              ["==","3,1",["get","colour"]],"red_white",
-              ["==","2,6",["get","colour"]],"black_yellow",
-              ["==","6,2",["get","colour"]],"yellow_black",
-              ["==","6,2,6",["get","colour"]],"yellow_black_yellow",
-              ["==","2,6,2",["get","colour"]],"black_yellow_black",
-              ["==","3,4,3",["get","colour"]],"red_green_red",
-              ["==","4,3,4",["get","colour"]],"green_red_green",
-              ["==","6,3,6",["get","colour"]],"yellow_red_yellow",
-              ["==","2,3,2",["get","colour"]],"black_red_black",
-              ["==","4,1,4",["get","colour"]],"green_white_green",
-              ["==","3,1,3",["get","colour"]],"red_white_red",
-            "generic"],
-            ["concat","",["var","shp"],["var","pat"],["var","col"]]]]]],
+            ["all",["==",["get","BCNSHP"],1],["==",["get","CATLAM"],2],["!",["has","COLOUR"]]],"perch-starboard",
+            ["all",["==",["get","BCNSHP"],1],["==",["get","CATLAM"],1],["!",["has","COLOUR"]]],"perch-port",
+            ["all",["==",["get","BCNSHP"],2],["==",["get","CATLAM"],2],["!",["has","COLOUR"]]],"withy-starboard",
+            ["all",["==",["get","BCNSHP"],2],["==",["get","CATLAM"],1],["!",["has","COLOUR"]]],"withy-port",
+            ["concat","BCNSHP","/",["get","BCNSHP"],"/",["coalesce",["get","COLPAT"],0],"/",["coalesce",["get","color"],0]]],
           "icon-overlap": "always",
-           "text-field":
-           ["case",
-              ["==",1,["get","colour"]],"W",
-              ["==",2,["get","colour"]]," ",
-              ["==",3,["get","colour"]],"R",
-              ["==",4,["get","colour"]],"G",
-              ["==",5,["get","colour"]],"B",
-              ["==",6,["get","colour"]],"Y",
-              ["==","3,1",["get","colour"]],"RW",
-              ["==","2,6",["get","colour"]],"BY",
-              ["==","6,2",["get","colour"]],"YB",
-              ["==","6,2,6",["get","colour"]],"YBY",
-              ["==","2,6,2",["get","colour"]],"BYB",
-              ["==","3,4,3",["get","colour"]],"RGR",
-              ["==","4,3,4",["get","colour"]],"GRG",
-              ["==","6,3,6",["get","colour"]],"YRY",
-              ["==","2,3,2",["get","colour"]],"BRB",
-              ["==","4,1,4",["get","colour"]],"GWG",
-              ["==","3,1,3",["get","colour"]],"RWR",
-           ["get","colour"]],
+           "text-field": "{color}",
            "text-size": 10,
            "text-offset": [0,1],
            "text-optional": true
@@ -411,59 +403,20 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"], ["has", "catlmk"]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"], ["has", "CATLMK"]],
         "layout": {
           "icon-image": ["case",
-          ["==",["get","catlmk"],3],"chimney",
-          ["==",["get","catlmk"],5],"flagstaff",
-          ["==",["get","catlmk"],6],"flare-stack",
-          ["==",["get","catlmk"],7],"mast",
-          ["==",["get","catlmk"],9],"monument",
-          ["==",["get","catlmk"],10],"pile/generic",
-          ["==",["get","catlmk"],18],"windmill",
-          ["==",["get","catlmk"],19],"wind-turbine",
-          ["==",["get","functn"],20],"church",
-          ["==",["get","functn"],21],"church",
-          ["all",["==",["get","catlmk"],17],["has","colour"]],
-              ["concat","tower/",["case",
-                ["==",1,["get","colpat"]],"horizontal/",
-                ["==",2,["get","colpat"]],"vertical/",
-                 ""],
-                ["case",
-                ["==",1,["get","colour"]],"white",
-                ["==",2,["get","colour"]],"black",
-                ["==",3,["get","colour"]],"red",
-                ["==",4,["get","colour"]],"green",
-                ["==",5,["get","colour"]],"blue",
-                ["==",6,["get","colour"]],"yellow",
-                ["==",7,["get","colour"]],"grey",
-                ["==",8,["get","colour"]],"brown",
-                ["==",9,["get","colour"]],"amber",
-                ["==",10,["get","colour"]],"violet",
-                ["==",11,["get","colour"]],"orange",
-                ["==",12,["get","colour"]],"magenta",
-                ["==",13,["get","colour"]],"pink",
-                ["==","3,1",["get","colour"]],"red_white",
-                ["==","4,1",["get","colour"]],"green_white",
-                ["==","2,6",["get","colour"]],"black_yellow",
-                ["==","6,2",["get","colour"]],"yellow_black",
-                ["==","6,2,6",["get","colour"]],"yellow_black_yellow",
-                ["==","2,6,2",["get","colour"]],"black_yellow_black",
-                ["==","3,4,3",["get","colour"]],"red_green_red",
-                ["==","4,3,4",["get","colour"]],"green_red_green",
-                ["==","6,3,6",["get","colour"]],"yellow_red_yellow",
-                ["==","2,3,2",["get","colour"]],"black_red_black",
-                ["==","4,1,4",["get","colour"]],"green_white_green",
-                ["==","3,1,3",["get","colour"]],"red_white_red",
-                "generic"]],
-          ["==",["get","catlmk"],17],"tower",
-          ["==",["get","catlmk"],"17,16"],"tower",
-          "tower"],
+          ["in",20,["get","FUNCTN"]],"church",
+          ["in",21,["get","FUNCTN"]],"church",
+          ["all",["in",17,["get","CATLMK"]],["has","color"]],
+              ["concat","BCNSHP/3/",["coalesce",["get","COLPAT"],0],"/",["coalesce",["get","color"],0]],
+          ["concat","CATLMK/",["get","CATLMK"]]],
           "icon-overlap": "always",
-          "text-field": "{objnam}",
+          "text-field": "{OBJNAM}",
           "text-size": 12,
           "text-anchor": "bottom-left",
-          "text-offset": [1.2,-1]
+          "text-offset": [1.2,-1.2],
+          "text-optional": true
         }
     },
     {
@@ -471,7 +424,7 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "Topography",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","valmag"]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","VALMAG"]],
         "layout": {
           "text-field": "{label}",
           "text-size": 12
@@ -485,7 +438,7 @@
         "type": "line",
         "source": "bsh",
         "source-layer": "Hydrography",
-        "filter": [ "all", ["==", ["geometry-type"], "LineString"],["has","catnav"]],
+        "filter": [ "all", ["==", ["geometry-type"], "LineString"],["has","CATNAV"]],
         "layout": {
         },
         "paint": {
@@ -499,23 +452,10 @@
         "type": "line",
         "source": "bsh",
         "source-layer": "Hydrography",
-        "filter": [ "all", ["==", ["geometry-type"], "LineString"],["has","cattrk"]],
+        "filter": [ "all", ["==", ["geometry-type"], "LineString"],["has","CATTRK"]],
         "paint": {
           "line-color": "black",
           "line-width": 1
-        }
-    },
-    {
-        "id": "cables-pipes",
-        "type": "line",
-        "source": "bsh",
-        "source-layer": "Hydrography",
-        "filter": [ "all", ["==", ["geometry-type"], "LineString"], ["has", "util_type"]],
-        "paint": {
-          "line-color": ["case",["has","catpip"],"black","magenta"],
-          "line-width": 1,
-          "line-opacity": 0.3,
-          "line-dasharray": [6,2]
         }
     },
     {
@@ -525,22 +465,10 @@
         "source-layer": "Hydrography",
         "filter": [ "all", ["==", ["geometry-type"], "LineString"], ["has", "util_type"]],
         "layout": {
-          "icon-image": ["case",["has","catpip"],"pipeline","cable"],
+          "icon-image": ["case",["has","CATPIP"],"pipeline","cable"],
           "icon-overlap": "always",
           "symbol-placement": "line",
-          "symbol-spacing": 15
-        }
-    },
-    {
-        "id": "restricted-areas",
-        "type": "line",
-        "source": "bsh",
-        "source-layer": "Hydrography",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"]],
-        "paint": {
-          "line-color": "gray",
-          "line-width": 0.5,
-          "line-dasharray": [2,4]
+          "symbol-spacing": 25
         }
     },
     {
@@ -548,12 +476,25 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "Hydrography",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["any",["has","restrn"],["has","catmpa"],["has","catcbl"],["has","catpra"],["has","catrea"],["has","util_type"]]],
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["any",["has","RESTRN"],["has","CATMPA"],["has","CATCBL"],["has","CATPRA"],["has","CATREA"],["has","util_type"]]],
         "layout": {
-          "icon-image": ["case",["all",["in",["get","catrea"],["literal",[4,5,6,7,22,23,27,28]]],["!=",["get","restrn"],7]],"area-g","area-m"],
+          "icon-image": ["case",
+            ["in",7,["get","RESTRN"]],"area-m",
+            ["in",4,["get","CATREA"]],"area-g",
+            ["in",5,["get","CATREA"]],"area-g",
+            ["in",6,["get","CATREA"]],"area-g",
+            ["in",7,["get","CATREA"]],"area-g",
+            ["in",22,["get","CATREA"]],"area-g",
+            ["in",23,["get","CATREA"]],"area-g",
+            ["in",27,["get","CATREA"]],"area-g",
+            ["in",28,["get","CATREA"]],"area-g",
+            "area-m"],
           "icon-overlap": "always",
           "symbol-placement": "line",
-          "symbol-spacing": 15
+          "symbol-spacing": 25
+        },
+        "paint": {
+          "icon-opacity": 0.5
         }
     },
     {
@@ -561,10 +502,21 @@
         "type": "fill",
         "source": "bsh",
         "source-layer": "Hydrography",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["==",["get","restrn"],7]],
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["in",7,["get","RESTRN"]]],
         "paint": {
           "fill-color": "red",
           "fill-opacity": 0.05
+        }
+    },
+    {
+        "id": "restricted-areas-restricted-entry",
+        "type": "fill",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["in",8,["get","RESTRN"]]],
+        "paint": {
+          "fill-color": "yellow",
+          "fill-opacity": 0.03
         }
     },
     {
@@ -572,13 +524,23 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "Hydrography",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["any",["has","restrn"],["has","catmpa"],["has","catcbl"],["has","catpra"],["has","catrea"],["has","util_type"]]],
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["any",["has","RESTRN"],["has","CATMPA"],["has","CATCBL"],["has","CATPRA"],["has","CATREA"],["has","util_type"]]],
         "layout": {
-          "text-field": "{objnam}",
+          "text-field": "{OBJNAM}",
           "text-size": 12
         },
         "paint": {
-          "text-color": ["case",["all",["in",["get","catrea"],["literal",[4,5,6,7,22,23,27,28]]],["!=",["get","restrn"],7]],"green","magenta"]
+          "text-color": ["case",
+            ["in",7,["get","RESTRN"]],"magenta",
+            ["in",4,["get","CATREA"]],"green",
+            ["in",5,["get","CATREA"]],"green",
+            ["in",6,["get","CATREA"]],"green",
+            ["in",7,["get","CATREA"]],"green",
+            ["in",22,["get","CATREA"]],"green",
+            ["in",23,["get","CATREA"]],"green",
+            ["in",27,["get","CATREA"]],"green",
+            ["in",28,["get","CATREA"]],"green",
+            "magenta"]
         }
     },
     {
@@ -586,7 +548,7 @@
         "type": "line",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],[ "has", "marsys" ]],
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],[ "has", "MARSYS" ]],
         "layout": {
         },
         "paint": {
@@ -599,7 +561,7 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],[ "has", "marsys" ]],
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],[ "has", "MARSYS" ]],
         "layout": {
           "text-field": "{name}",
           "text-anchor": "top",
@@ -618,19 +580,57 @@
         "filter": [ "all", ["==", ["geometry-type"], "Point"]],
         "layout": {
           "icon-image": ["case",
-            ["any",[">",["get","catwed"],2]],"seagrass",
-            ["any",["has","catwed"],["==",["get","caution_type"],8]],"kelp",
+            ["any",[">",["get","CATWED"],2]],"seagrass",
+            ["any",["has","CATWED"],["==",["get","caution_type"],8]],"kelp",
             "kelp"],
           "text-field": ["case",
-            ["has","catwed"],["match",["get","catwed"],1,"Ke",2,"Wd",3,"Sg",4,"Sa",""],
-            ["match",["get","natsur"],
-              1,"M",2,"Cy",3,"Si",4,"S",5,"St",6,"G",7,"P",8,"Cb",9,"R",11,"La",14,"Co",17,"Sh",18,"Bo",
-              ["get","natsur"]
-            ]],
+            ["has","CATWED"],["match",["get","CATWED"],1,"Ke",2,"Wd",3,"Sg",4,"Sa",""],
+            ["concat",
+            ["match",["get","NATQUA"],
+                "1", "f",
+                "2", "m",
+                "3", "c",
+                "4", "brk",
+                "5", "stk",
+                "6", "so",
+                "7", "stf",
+                "8", "vol",
+                "9", "ca",
+               "10", "h",
+               ""],
+            ["match",["get","NATSUR"],
+               "1", "M",
+               "1/4", "M/S",
+               "2", "Cy",
+               "3", "Si",
+               "4", "S",
+               "4/1", "S/M",
+               "4/5", "S/St",
+               "4/6", "S/G",
+               "4/7", "S/P",
+               "4/8", "S/Cb",
+               "5", "St",
+               "6", "G",
+               "7", "P",
+               "7,8", "P/Cb",
+               "7/8", "P/Cb",
+               "8", "Cb",
+               "8,7", "Cb/P",
+               "8/7", "Cb/P",
+               "9", "R",
+              "11", "La",
+              "14", "Co",
+              "17", "Sh",
+              "18", "Bo",
+            ""]]
+            ],
           "text-anchor": "top",
-          "text-size": 14,
+          "text-size": 12,
           "text-optional": true,
           "icon-offset": [0,-6]
+        },
+        "paint": {
+          "text-color": "gray"
         }
     },
     {
@@ -652,9 +652,9 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "SkinOfTheEarth",
-        "filter": ["all",["has","drval1"],["!",["has","drval2"]]],
+        "filter": ["all",["has","DRVAL1"],["!",["has","DRVAL2"]]],
         "layout": {
-          "text-field": ["concat",["case",["==",["get","quasou"],10],"maintained depth ",""],["get","drval1"],"m"],
+          "text-field": ["concat",["case",["==",["get","QUASOU"],10],"maintained depth ",""],["get","DRVAL1"],"m"],
           "text-size": 12
         },
         "paint": {
@@ -666,9 +666,9 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "Topography",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","objnam"]],
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","OBJNAM"]],
         "layout": {
-          "text-field": "{objnam}",
+          "text-field": "{OBJNAM}",
          "text-size": 14,
          "text-font": ["Open Sans Italic"]
         },
@@ -681,9 +681,9 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "Topography",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","berth_type"],["has","objnam"]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["has","berth_type"],["has","OBJNAM"]],
         "layout": {
-          "text-field": "{objnam}",
+          "text-field": "{OBJNAM}",
           "text-size": 12
         },
         "paint": {
@@ -695,9 +695,9 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",[ "has", "boyshp" ],[ "has", "bcnshp" ]]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["any",[ "has", "BOYSHP" ],[ "has", "BCNSHP" ]]],
         "layout": {
-         "text-field": "{objnam}",
+         "text-field": "{OBJNAM}",
          "text-size": 12,
          "text-anchor": "bottom-left",
          "text-offset": [1.2,-1]
@@ -710,38 +710,50 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "litchr" ]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],["!",["in",8,["get","CATLIT"]]]],
         "layout": {
-         "text-field": ["concat",["case",
-          ["==",1,["get","litchr"]],"F",
-          ["==",2,["get","litchr"]],"Fl",
-          ["==",3,["get","litchr"]],"LFl",
-          ["==",4,["get","litchr"]],"Q",
-          ["==",5,["get","litchr"]],"VQ",
-          ["==",6,["get","litchr"]],"UQ",
-          ["==",7,["get","litchr"]],"Iso",
-          ["==",8,["get","litchr"]],"Oc",
-          ["==",9,["get","litchr"]],"IQ",
-          ["==",10,["get","litchr"]],"IVQ",
-         ["get","litchr"]],
-         ["case",["==",["get","siggrp"],"(1)"],"",["get","siggrp"]],
-         ["case",
-            ["==",2,["get","colour"]]," B",
-            ["==",3,["get","colour"]]," R",
-            ["==",4,["get","colour"]]," G",
-            ["==",5,["get","colour"]]," Bu",
-            ["==",6,["get","colour"]]," Y",
-         ""],
-         " ",["get","sigper"],"s",
-         ["case",["has","height"],["concat"," ",["get","height"],"m"],""],
-         ["case",["has","valnmr"],["concat"," ",["get","valnmr"],"M"],""]
-         ],
+         "text-field": ["concat",
+            ["match",["get","LITCHR"],
+               1, "F",
+               2, "Fl",
+               3, "LFl",
+               4, "Q",
+               5, "VQ",
+               6, "UQ",
+               7, "Iso",
+               8, "Oc",
+               9, "IQ",
+              10, "IVQ",
+              11, "IUQ",
+              12, "Mo",
+              13, "FFl",
+              14, "FlLFl",
+              15, "OcFl",
+              16, "FLFl",
+              17, "Al.Oc",
+              18, "Al.LFl",
+              19, "Al.Fl",
+              20, "Al.Gr",
+              25, "Q+LFl",
+              26, "VQ+LFl",
+              27, "UQ+LFl",
+              28, "Al",
+              29, "Al.FFl",
+              "??" ],
+            ["case",["all",["!=",["get","SIGGRP"],"(1)"],["!=",["get","SIGGRP"],"()"]],["get","SIGGRP"],
+                ["case",["==",["get","color"],"W"],"","."]],
+            ["case",["!=",["get","color"],"W"],["concat",["get","color"]],""],
+            ["case",["has","SIGPER"],["concat"," ",["get","SIGPER"],"s"],""],
+            ["case",["has","HEIGHT"],["concat"," ",["get","HEIGHT"],"m"],""],
+            ["case",["has","VALNMR"],["concat"," ",["get","VALNMR"],"M"],""]
+            ],
          "text-size": 12,
          "text-font": ["Open Sans Bold"],
          "text-anchor": "top-left",
          "text-offset": [1.2,-0.5]
         }
     },
+
     {
         "id": "osm-seamarks",
         "type": "raster",

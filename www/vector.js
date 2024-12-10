@@ -10,6 +10,14 @@ var map = new maplibregl.Map({
 
 map.addControl(new maplibregl.NavigationControl(),'top-left');
 
+map.on('click', 'SkinOfTheEarth', (e) => {
+  console.log(e);
+  new maplibregl.Popup()
+    .setLngLat(e.lngLat)
+    .setHTML(`${e.features[0].properties}`)
+    .addTo(map);
+});
+
 //map.on("styleimagemissing", e=>{
 //  var id=e.id;
 //  var size=64;
