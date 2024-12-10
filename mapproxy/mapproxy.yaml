@@ -7,6 +7,7 @@ globals:
     meta_size: [ 6,6 ]
     meta_buffer: 200
     bulk_meta_tiles: true
+    base_dir: ../cache_data
   tiles:
     expires_hours: 24
 

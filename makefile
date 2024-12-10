@@ -61,10 +61,10 @@ BSH_BBOX=53.0,3.3,56.0,14.4
 BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)
 
 bsh:
-# 	rm -rf data/bsh && mkdir -p data/bsh
-# 	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
-# 	cd data/bsh && for L in Hydrography Topography;         do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
-# 	cd data/bsh && for L in RocksWrecksObstructions;        do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
+	rm -rf data/bsh && mkdir -p data/bsh
+	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
+	cd data/bsh && for L in Hydrography Topography;         do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
+	cd data/bsh && for L in RocksWrecksObstructions;        do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
 	cd data/bsh && rm -rf layers filtered *.gpkg filter.log
 	cd data/bsh && for F in *.json; do filter.py $$F filtered/$$F layers >>filter.log; done
 # 	cd data/bsh && for F in *.json; do ogr2ogr $${F/.json/.gpkg} $$F; done
@@ -94,7 +94,7 @@ sprites: icons
 
 vector:
 	rm -rf www/pbf
-	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9,10]], ["all",["==","uband",3],["in","$$zoom",11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]] ]}' --no-tile-compression -x lnam --output-to-directory=www/pbf       # -o www/bsh.mbtiles
+	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/filtered/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9,10]], ["all",["==","uband",3],["in","$$zoom",11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]] ]}' --no-tile-compression -x lnam --output-to-directory=www/pbf       # -o www/bsh.mbtiles
 	du -sch www/pbf/*
 # 	cat www/pbf/metadata.json |jq .json -r |jq >www/tile.json
 
