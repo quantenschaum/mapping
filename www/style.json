@@ -135,6 +135,93 @@
         }
     },
     {
+        "id": "TSS-inshore-traffic-zone",
+        "type": "line",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","CATTSS"],["==",["get","zone_type"],4]],
+        "paint": {
+          "line-color": "magenta",
+          "line-dasharray": [1,4],
+          "line-opacity": 0.8
+        }
+    },
+    {
+        "id": "TSS-separation-zone",
+        "type": "fill",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","CATTSS"],["==",["get","zone_type"],11]],
+        "paint": {
+          "fill-color": "magenta",
+          "fill-opacity": 0.2
+        }
+    },
+    {
+        "id": "TSS-crossing-zone",
+        "type": "fill",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","CATTSS"],["==",["get","zone_type"],8]],
+        "paint": {
+          "fill-color": "yellow",
+          "fill-opacity": 0.2
+        }
+    },
+    {
+        "id": "TSS-separation-lane",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","CATTSS"],["==",["get","zone_type"],9]],
+        "layout": {
+          "icon-image": "TSS-arrow",
+          "icon-rotate": ["get","ORIENT"]
+        },
+        "paint": {
+          "icon-opacity": 0.8
+        }
+    },
+    {
+        "id": "TSS-separation-boundary",
+        "type": "line",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "LineString"],["has","CATTSS"],["==",["get","zone_type"],7]],
+        "paint": {
+          "line-color": "magenta",
+          "line-width": 2,
+          "line-dasharray": [4,4],
+          "line-opacity": 0.8
+        }
+    },
+    {
+        "id": "TSS-separation-line",
+        "type": "line",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "LineString"],["has","CATTSS"],["==",["get","zone_type"],6]],
+        "paint": {
+          "line-color": "magenta",
+          "line-width": 2,
+          "line-opacity": 0.8
+        }
+    },
+    {
+        "id": "traffic-lane",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["==",["get","zone_type"],7]],
+        "layout": {
+          "icon-image": "TSS-arrow-dashed",
+          "icon-rotate": ["get","ORIENT"]
+        },
+        "paint": {
+          "icon-opacity": 0.8
+        }
+    },
+    {
         "id": "piles",
         "type": "circle",
         "source": "bsh",
@@ -178,6 +265,17 @@
         },
         "paint": {
           "text-color": "magenta"
+        }
+    },
+    {
+        "id": "platforms",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],["has", "CATOFP"]],
+        "layout": {
+         "icon-image": "platform",
+         "icon-overlap": "always"
         }
     },
     {
@@ -272,13 +370,13 @@
         "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],[ "has", "SECTR1" ],[">=",["zoom"],10]],
         "layout": {
           "icon-image": "line-dashed",
-          "icon-size": 0.8,
           "icon-rotate": ["get","SECTR1"],
           "icon-offset": [0,256],
+          "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1]],
           "icon-overlap": "always"
         },
         "paint": {
-          "icon-opacity": 0.5
+          "icon-opacity": 0.7
         }
     },
     {
@@ -289,13 +387,92 @@
         "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],[ "has", "SECTR2" ],[">=",["zoom"],10]],
         "layout": {
           "icon-image": "line-dashed",
-          "icon-size": 0.8,
           "icon-rotate": ["get","SECTR2"],
           "icon-offset": [0,256],
+          "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1]],
           "icon-overlap": "always"
         },
         "paint": {
-          "icon-opacity": 0.5
+          "icon-opacity": 0.7
+        }
+    },
+    {
+        "id": "lights-arc-0",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],[ "has", "SECTR1" ],[ "has", "SECTR2" ],[">=",["zoom"],10]],
+        "layout": {
+          "icon-image": ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
+              ["concat","arc-",["step",["var","angle"],-1,0,0,4.444,1,13.333,2,40,3,120,4],"-",["get","color"]]],
+          "icon-rotate": ["get","SECTR1"],
+          "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1],
+              ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
+                  ["interpolate",["linear"],["var","angle"],0,3,5,1]] ],
+          "icon-overlap": "always"
+        },
+        "paint": {
+          "icon-opacity": 0.8
+        }
+    },
+    {
+        "id": "lights-arc-1",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],[ "has", "SECTR1" ],[ "has", "SECTR2" ],[">=",["zoom"],10]],
+        "layout": {
+          "icon-image": ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
+              ["concat","arc-",["step",["var","angle"],-1,0,0,4.444,1,13.333,2,40,3,120,4],"-",["get","color"]]],
+          "icon-rotate": ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]], ["+",["get","SECTR1"],["*",["var","angle"],0.5],["step",["var","angle"],-1,0,-0.741,4.444,-2.222,13.333,-6.666,40,-20,120,-60]]],
+          "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1],
+              ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
+                  ["interpolate",["linear"],["var","angle"],0,3,5,1]] ],
+          "icon-overlap": "always"
+        },
+        "paint": {
+          "icon-opacity": 0.8
+        }
+    },
+    {
+        "id": "lights-arc-3",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],[ "has", "SECTR1" ],[ "has", "SECTR2" ],[">=",["zoom"],10]],
+        "layout": {
+          "icon-image": ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
+              ["concat","arc-",["step",["var","angle"],-1,0,0,4.444,1,13.333,2,40,3,120,4],"-",["get","color"]]],
+          "icon-rotate": ["-",["get","SECTR2"],["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],["step",["var","angle"],-1,0,1.481,4.444,4.444,13.333,13.333,40,40,120,120]]],
+          "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1],
+              ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
+                  ["interpolate",["linear"],["var","angle"],0,3,5,1]] ],
+          "icon-overlap": "always"
+        },
+        "paint": {
+          "icon-opacity": 0.8
+        }
+    },
+    {
+        "id": "lights-full",
+        "type": "circle",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],[ ">", ["get","VALNMR"],15 ],["!",["has","ORIENT"]],["!",["has","SECTR1"]],[">=",["zoom"],10]],
+        "layout": {
+        },
+        "paint": {
+          "circle-radius": ["step",["get","VALNMR"],0,0,40,20,60],
+          "circle-opacity": 0,
+          "circle-stroke-width": 5,
+          "circle-stroke-opacity": 0.7,
+          "circle-stroke-color": ["match",["get","COLOUR"],
+            "1","#fab20b",
+            "3","#ed1c24",
+            "4","#00a650",
+            "6","#fab20b",
+            "11","#fab20b",
+            "#800080"]
         }
     },
     {
@@ -346,6 +523,7 @@
               ["all",["has","BCNSHP"],["==",["get","color"],"BRB"]],"2_spheres/black",
               ["all",["has","BOYSHP"],["==",["get","CATLAM"],2],["==",["get","OBJNAM"],"1"]],"cone_point_up/green",
               ["all",["has","BOYSHP"],["==",["get","CATLAM"],1],["==",["get","OBJNAM"],"2"]],"cylinder/red",
+              ["==",["get","CATSPM"],"46"],"flag/generic",
               ["==",["get","CATCAM"],1],"2_cones_up/black",
               ["==",["get","CATCAM"],2],"2_cones_base_together/black",
               ["==",["get","CATCAM"],3],"2_cones_down/black",
@@ -472,6 +650,28 @@
         }
     },
     {
+        "id": "restricted-areas",
+        "type": "line",
+        "source": "bsh",
+        "source-layer": "-Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["any",["has","RESTRN"],["has","CATMPA"],["has","CATCBL"],["has","CATPRA"],["has","CATREA"],["has","util_type"]]],
+        "paint": {
+          "line-color": ["case",
+            ["in",7,["get","RESTRN"]],"magenta",
+            ["in",4,["get","CATREA"]],"green",
+            ["in",5,["get","CATREA"]],"green",
+            ["in",6,["get","CATREA"]],"green",
+            ["in",7,["get","CATREA"]],"green",
+            ["in",22,["get","CATREA"]],"green",
+            ["in",23,["get","CATREA"]],"green",
+            ["in",27,["get","CATREA"]],"green",
+            ["in",28,["get","CATREA"]],"green",
+            "magenta"],
+          "line-dasharray": [4,2],
+          "line-opacity": 0.8
+        }
+    },
+    {
         "id": "restricted-areas-sym",
         "type": "symbol",
         "source": "bsh",
@@ -520,11 +720,31 @@
         }
     },
     {
+        "id": "restricted-no-anchor",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["any",["has","RESTRN"]]],
+        "layout": {
+          "icon-image": ["case",
+            ["in",11,["get","RESTRN"]],"no-diving",
+            ["in",1,["get","RESTRN"]],"no-anchor",
+            ["in",3,["get","RESTRN"]],"no-fishing",
+            "xxx"],
+          "icon-overlap": "always",
+          "symbol-placement": "line",
+          "symbol-spacing": 100
+        },
+        "paint": {
+          "icon-opacity": 0.8
+        }
+    },
+    {
         "id": "restricted-area-names",
         "type": "symbol",
         "source": "bsh",
         "source-layer": "Hydrography",
-        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["any",["has","RESTRN"],["has","CATMPA"],["has","CATCBL"],["has","CATPRA"],["has","CATREA"],["has","util_type"]]],
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["any",["has","RESTRN"],["has","CATMPA"],["has","CATCBL"],["has","CATPRA"],["has","CATREA"],["has","util_type"],["has","CATACH"]]],
         "layout": {
           "text-field": "{OBJNAM}",
           "text-size": 12
@@ -541,6 +761,97 @@
             ["in",27,["get","CATREA"]],"green",
             ["in",28,["get","CATREA"]],"green",
             "magenta"]
+        }
+    },
+    {
+        "id": "marine-farm",
+        "type": "line",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","CATMFA"]],
+        "paint": {
+          "line-color": ["case",["==",["get","CATMFA"],2],"magenta","black"],
+          "line-dasharray": [4,4],
+          "line-opacity": 0.8
+        }
+    },
+    {
+        "id": "marine-farm-shellfish",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["==",["get","CATMFA"],2]],
+        "layout": {
+          "icon-image": "shellfish",
+          "icon-overlap": "always",
+          "icon-size": 0.8,
+          "symbol-placement": "line",
+          "symbol-spacing": 90
+        },
+        "paint": {
+          "icon-opacity": 0.8
+        }
+    },
+    {
+        "id": "marine-farm-genegral",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","CATMFA"],["!=",["get","CATMFA"],2]],
+        "layout": {
+          "icon-image": "marine-farm",
+          "icon-overlap": "always",
+          "icon-size": 0.8,
+          "symbol-spacing": 90
+        },
+        "paint": {
+          "icon-opacity": 0.8
+        }
+    },
+    {
+        "id": "anchorages",
+        "type": "line",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","CATACH"]],
+        "paint": {
+          "line-color": "magenta",
+          "line-dasharray": [4,4],
+          "line-opacity": 0.8
+        }
+    },
+    {
+        "id": "anchorages-sym",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","CATACH"]],
+        "layout": {
+          "icon-image": "anchor",
+          "icon-overlap": "always",
+          "icon-size": 0.5,
+          "symbol-placement": "line",
+          "symbol-spacing": 100
+        },
+        "paint": {
+          "icon-opacity": 0.8
+        }
+    },
+    {
+        "id": "military-sym",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "Hydrography",
+        "filter": [ "all", ["==", ["geometry-type"], "Polygon"],["has","CATMPA"]],
+        "layout": {
+          "icon-image": "military",
+          "icon-overlap": "always",
+          "icon-size": 0.8,
+          "symbol-placement": "line",
+          "symbol-spacing": 120
+        },
+        "paint": {
+          "icon-opacity": 0.8
         }
     },
     {
