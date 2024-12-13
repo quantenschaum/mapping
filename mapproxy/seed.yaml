@@ -1,15 +1,15 @@
 seeds:
   overview:
     caches: [ qmap-de ]
-    levels: [ 7,8,9 ] # 7
+    levels: [ 7,8,9 ] # <=7
     coverages: [ overview ]
   general:
-    caches: [ qmap-de ]
+    caches: [ qmap-de, soundg-de ]
     levels: [ 10 ] # 10
     coverages: [ general ]
   coastal:
-    caches: [ qmap-de ]
-    levels: [ 11,12 ] # 11
+    caches: [ qmap-de, soundg-de ]
+    levels: [ 11,12 ] # 11,13
     coverages: [ coastal ]
   # for following levels also seed lower level because there are
   # "holes" in the coverage and allow 2 steps overzoom,
@@ -17,15 +17,15 @@ seeds:
   # so, lower a lower level map is shown in the background
   approach:
     caches: [ qmap-de, soundg-de ]
-    levels: [ 13,14,15 ] # 13
+    levels: [ 13,14,15 ] # 13,14
     coverages: [ approach ]
   harbour:
     caches: [ qmap-de, soundg-de ]
-    levels: [ 13,14,15,16,17 ] # 15
+    levels: [ 13,14,15,16,17 ] # 15,16
     coverages: [ harbour ]
   berthing:
     caches: [ qmap-de, soundg-de ]
-    levels: [ 13,14,15,16,17,18 ] # 16
+    levels: [ 13,14,15,16,17,18 ] # >=17
     coverages: [ berthing ]
   waddenzee:
     caches: [ qmap-nl ]
