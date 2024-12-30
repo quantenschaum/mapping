@@ -62,9 +62,9 @@ BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows?SERVICE=WMS&VERSION=1.3
 
 bsh:
 	rm -rf data/bsh && mkdir -p data/bsh
-	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
-	cd data/bsh && for L in Hydrography Topography;         do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
-	cd data/bsh && for L in RocksWrecksObstructions;        do wget -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
+	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget --no-check-certificate -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
+	cd data/bsh && for L in Hydrography Topography;         do wget --no-check-certificate -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
+	cd data/bsh && for L in RocksWrecksObstructions;        do wget --no-check-certificate -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
 	cd data/bsh && rm -rf layers filtered *.gpkg filter.log
 	cd data/bsh && for F in *.json; do filter.py $$F filtered/$$F layers >>filter.log; done
 # 	cd data/bsh && for F in *.json; do ogr2ogr $${F/.json/.gpkg} $$F; done
