@@ -16,7 +16,8 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
         - [Tidal Data](https://data.bsh.de/OpenData/Main/) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2)?)
     - :nl: [RWS](https://www.rijkswaterstaat.nl/)
         - [ENC](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc) (?)
-        - Vaarwegmarkeringen [drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5)/[vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.de))
+        - [Vaarwegmarkeringen drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
+        - [Vaarwegmarkeringen vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
 
 !!! warning
     The german chart now includes spot sounding extracted from <https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml> which is from 2018!  
