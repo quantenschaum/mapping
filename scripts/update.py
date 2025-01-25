@@ -462,9 +462,11 @@ def load_rws_buoys(filename, skip_errors=0):
 
             for i, l in enumerate((rws_buoy, rws_topmark, rws_light)):
                 p = f["properties"]
-                p = {b: p[a] for a, b in l.items() if p.get(a) and p[a] != "#"}
+                p = {b: p[a] for a, b in l.items() if p.get(a,'#') != '#'}
                 if i == 0:
                     p["buoy_type"] = 1
+                for k,v in dict(p).items():
+                    if v=='L': del p[k]
                 if p:
                     add_tags(tags, p)
                     fix_tags(tags)
@@ -473,7 +475,7 @@ def load_rws_buoys(filename, skip_errors=0):
             points.append(tags)
         except Exception as x:
             print(x)
-            assert skip_errors, x
+            assert skip_errors, (x,f)
 
     print("buoys", len(points))
 

@@ -55,7 +55,7 @@ color_types={ # to reduce numer of combinations
   ['','white','black','red','green','yellow','brown','grey'],
 
   'sphere ':
-  ['','black','white','red'],
+  ['','black','white','red','green'],
 
   'x-shape cross ':
   ['','black','yellow'],
