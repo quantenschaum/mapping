@@ -365,7 +365,7 @@ node["seamark:light:1:colour"]::int1_light {
   icon-offset-x: 0;
   icon-offset-y: 0;
   icon-opacity: 0.7;
-  icon-rotation: eval(0*3.1415/180);
+  icon-rotation: eval(45*3.1415/180);
 }
 node["seamark:light:colour"]::int1_light {
 	icon-image:				eval(concat("gen/light/",cond(regexp_test(".*;.*",tag("seamark:light:colour")),"generic",tag("seamark:light:colour")),".svg"));
@@ -373,7 +373,7 @@ node["seamark:light:colour"]::int1_light {
   icon-offset-x: 0;
   icon-offset-y: 0;
   icon-opacity: 0.7;
-  icon-rotation: eval(0*3.1415/180);
+  icon-rotation: eval(45*3.1415/180);
 }
 
 node["seamark:light:category"=floodlight]::int1_light {

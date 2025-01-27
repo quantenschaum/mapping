@@ -4,13 +4,49 @@
    width="512"
    height="512"
    id="svg2"
-   sodipodi:docname="compass-outer.svg"
+   sodipodi:docname="outer.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-
+  <defs
+     id="defs606" />
+  <sodipodi:namedview
+     id="namedview604"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="1.7382812"
+     inkscape:cx="255.71236"
+     inkscape:cy="256"
+     inkscape:window-width="1920"
+     inkscape:window-height="1134"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2">
+    <sodipodi:guide
+       position="256,425.70787"
+       orientation="-1,0"
+       id="guide1389"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="551.1191,256"
+       orientation="0,1"
+       id="guide1391"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
   <path
      style="fill:#ec008c;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.23595"
      d="M 21.618409,256.40119 H 44.738125 V 255.5249 H 21.618409 Z"
