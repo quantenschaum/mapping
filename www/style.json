@@ -16,14 +16,14 @@
       "tileSize": 256,
       "attribution": "<a href=\"https://www.openseamap.org/\">OpenSeaMap</a>"
     },
-    "bsh": {
+    "-bsh": {
       "type": "vector",
-      "tiles": ["http://localhost:63342/mapping/www/pbf/{z}/{x}/{y}.pbf"],
+      "tiles": ["http://localhost:63343/mapping/www/pbf/{z}/{x}/{y}.pbf"],
       "minzoom": 6,
       "maxzoom": 16,
       "attribution": "<a href=\"https://www.geoseaportal.de/mapapps/resources/apps/navigation\">BSH</a>"
     },
-    "-bsh": {
+    "bsh": {
       "type": "vector",
       "tiles": ["http://waddenzee.duckdns.org/pbf/{z}/{x}/{y}.pbf"],
       "minzoom": 6,
@@ -415,7 +415,8 @@
           "icon-rotate": ["get","SECTR1"],
           "icon-offset": [0,256],
           "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1]],
-          "icon-overlap": "always"
+          "icon-overlap": "always",
+          "icon-pitch-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.7
@@ -432,7 +433,8 @@
           "icon-rotate": ["get","SECTR2"],
           "icon-offset": [0,256],
           "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1]],
-          "icon-overlap": "always"
+          "icon-overlap": "always",
+          "icon-pitch-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.7
@@ -451,7 +453,8 @@
           "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1],
               ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
                   ["interpolate",["linear"],["var","angle"],0,3,6,1]] ],
-          "icon-overlap": "always"
+          "icon-overlap": "always",
+          "icon-pitch-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.8
@@ -470,7 +473,8 @@
           "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1],
               ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
                   ["interpolate",["linear"],["var","angle"],0,3,6,1]]],
-          "icon-overlap": "always"
+          "icon-overlap": "always",
+          "icon-pitch-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.8
@@ -489,7 +493,8 @@
           "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1],
               ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
                   ["interpolate",["linear"],["var","angle"],0,3,6,1]] ],
-          "icon-overlap": "always"
+          "icon-overlap": "always",
+          "icon-pitch-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.8
