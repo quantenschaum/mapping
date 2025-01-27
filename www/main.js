@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
       attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
     }),
     'QMAP Soundings DE':L.tileLayer.fallback('http://waddenzee.duckdns.org/soundg-de/{z}/{x}/{y}.webp', {
-      minZoom: 13,
+      minZoom: 10,
       attribution: '<a href="/download/">QMAP Soundings DE</a> based on <a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
     }),
     'QMAP NL':L.tileLayer.fallback('http://waddenzee.duckdns.org/qmap-nl/{z}/{x}/{y}.webp', {
