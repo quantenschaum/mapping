@@ -13,7 +13,7 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
     
     - :de: [BSH](https://www.bsh.de/)
         - [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2))
-        - [Bathymetry](https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
+        - [Bathymetry](https://www.geoseaportal.de/atomfeeds/ELC_INSPIRE_de.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [Tidal Data](https://data.bsh.de/OpenData/Main/) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2)?)
     - :nl: [RWS](https://www.rijkswaterstaat.nl/)
         - [ENC](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc) (?)
