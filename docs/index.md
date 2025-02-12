@@ -5,7 +5,8 @@ Here you find precompiled charts for download in various formats usable in diffe
 The downloadable files on this page are licensed under [CC0](https://github.com/quantenschaum/mapping/blob/master/LICENSE).
 
 !!! failure
-    The BSH changed its WMS server. They do no longer provide vector data.  
+    The BSH [changed](https://www.geoseaportal.de/de/news.xml) its [WMS server](https://gdi.bsh.de/public/public_services.html).  
+    They do no longer provide vector data. 
     Data for Germany cannot be updated!
 
 !!! info
@@ -25,7 +26,7 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
         - [Vaarwegmarkeringen vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
 
 !!! warning
-    The german chart now includes spot sounding extracted from <https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml> which is from 2018!  
+    The german chart now includes spot sounding extracted from <https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml> which is from 2018 and was last updated 2023-05!  
     This is experimental, data can be wrong or missing. Spot soundings and contour lines are from different datasets, so they may mismatch in certain areas.  
 
 ## [OsmAnd](https://osmand.net/)
