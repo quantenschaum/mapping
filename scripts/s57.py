@@ -1094,7 +1094,7 @@ def fix_tags(tags):
     n = "seamark:name"
     l = "seamark:lnam"
     if (
-        len(tags.get(n, "")) > 6
+        len(str(tags.get(n, ""))) > 6
         and is_bb
         and (tags.get(l, "").startswith("022") or tags.get(l, "").startswith("22"))
     ):
