@@ -58,15 +58,15 @@ BSH_LAYERS_2=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing
 # no overview layer for obstructions
 BSH_LAYERS_3=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
 BSH_BBOX=53.0,3.3,56.0,14.4
-BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=application/json;type=geojson&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)
+BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=application/rss+xml&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)
 
 bsh:
 	rm -rf data/bsh && mkdir -p data/bsh
-	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget --no-check-certificate -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
-	cd data/bsh && for L in Hydrography Topography;         do wget --no-check-certificate -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
-	cd data/bsh && for L in RocksWrecksObstructions;        do wget --no-check-certificate -O $$L.json "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
+	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
+	cd data/bsh && for L in Hydrography Topography;         do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
+	cd data/bsh && for L in RocksWrecksObstructions;        do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
 	cd data/bsh && rm -rf layers filtered *.gpkg filter.log
-	cd data/bsh && for F in *.json; do filter.py $$F filtered/$$F layers >>filter.log; done
+	cd data/bsh && for F in *.xml; do filter.py $$F filtered/$${F/xml/json} layers >>filter.log; done
 # 	cd data/bsh && for F in *.json; do ogr2ogr $${F/.json/.gpkg} $$F; done
 	cd data/bsh && for F in filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
 	cd data/bsh && for F in layers/*.json; do ogr2ogr layers.gpkg $$F -append; done
@@ -206,8 +206,8 @@ vwm-update:
 
 build:
 	git pull
-# 	$(MAKE) bsh
-# 	$(MAKE) qmap-de.obf
+	$(MAKE) bsh
+	$(MAKE) qmap-de.obf
 	$(MAKE) lightsectors.obf
 	$(MAKE) vwm waddenzee.zip waddenzee.enc
 	$(MAKE) clean-cache
