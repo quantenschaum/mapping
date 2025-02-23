@@ -7,7 +7,8 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
 !!! failure
     The BSH [changed](https://www.geoseaportal.de/de/news.xml) its [WMS server](https://gdi.bsh.de/public/public_services.html).  
     They do no longer provide vector data. 
-    Data for Germany cannot be updated!
+    Data for Germany ~~cannot be~~ can still be updated but may contain errors in the depth contour areas!  
+    Nav aids and contour lines should be correct, though.
 
 !!! info
     Raster charts are now encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
