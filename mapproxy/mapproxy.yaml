@@ -10,6 +10,8 @@ globals:
     base_dir: ../cache_data
   tiles:
     expires_hours: 24
+  http:
+    client_timeout: 60
 
 services:
   tms:
