@@ -11,7 +11,7 @@ globals:
   tiles:
     expires_hours: 24
   http:
-    client_timeout: 60
+    client_timeout: 300
 
 services:
   tms:
