@@ -76,11 +76,13 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
 
 - GEMF
     - [:de: QMAP DE](qmap-de.gemf){:download}
+    - [:de: QMAP Contours DE](contours-de.gemf){:download}
     - [:de: QMAP Soundings DE](soundg-de.gemf){:download}
     - [:nl: QMAP NL](qmap-nl.gemf){:download}
     - [:de: Tidal Atlas DE](tides.gemf.zip){:download}
 - MBTILES
     - [:de: QMAP DE](qmap-de.mbtiles){:download}
+    - [:de: QMAP Contours DE](contours-de.mbtiles){:download}
     - [:de: QMAP Soundings DE](soundg-de.mbtiles){:download}
     - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
     - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
@@ -92,6 +94,7 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
 OpenCPN and other applications can display raster charts from `mbtiles`.
 
 - [:de: QMAP DE](qmap-de.png.mbtiles){:download}
+- [:de: QMAP Contours DE](contours-de.png.mbtiles){:download}
 - [:de: QMAP Soundings DE](soundg-de.png.mbtiles){:download}
 - [:nl: QMAP NL](qmap-nl.png.mbtiles){:download}
 

@@ -93,6 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
     'QMAP DE':L.tileLayer.fallback('http://waddenzee.duckdns.org/qmap-de/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
     }),
+    'QMAP Contours DE':L.tileLayer.fallback('http://waddenzee.duckdns.org/contours-de/{z}/{x}/{y}.webp', {
+      minZoom: 10,
+      attribution: '<a href="/download/">QMAP Contours DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
+    }),
     'QMAP Soundings DE':L.tileLayer.fallback('http://waddenzee.duckdns.org/soundg-de/{z}/{x}/{y}.webp', {
       minZoom: 10,
       attribution: '<a href="/download/">QMAP Soundings DE</a> based on <a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>'
