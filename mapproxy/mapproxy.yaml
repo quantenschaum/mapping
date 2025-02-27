@@ -19,17 +19,19 @@ services:
   demo:
 
 sources:
-  qgis:
+  qgis0:
     type: wms
     req:
       url: http://localhost:8000/
       transparent: true
       map: bsh.qgs
-      #tiled: true
+      tiled: true
     coverage:
       datasource: ../data/bsh/bsh.gpkg
       where: recind="Overview"
       srs: 'EPSG:4326'
+#    image:
+#      transparent_color: '#f9ecc0'
   qgis1:
     # shifted usage band as underlay
     type: wms
@@ -37,6 +39,7 @@ sources:
       url: http://localhost:8000/
       transparent: true
       map: bsh1.qgs
+      tiled: true
     coverage:
       datasource: ../data/bsh/bsh.gpkg
       where: recind="Overview"
@@ -48,6 +51,7 @@ sources:
       url: http://localhost:8000/
       transparent: true
       map: bsh2.qgs
+      tiled: true
     coverage:
       datasource: ../data/bsh/bsh.gpkg
       where: recind="Overview"
@@ -58,6 +62,7 @@ sources:
       url: http://localhost:8000/
       transparent: true
       map: rws.qgs
+      tiled: true
     coverage:
       datasource: ../data/waddenzee-covr.gpkg
       where: CATCOV=1
@@ -65,12 +70,17 @@ sources:
 
 caches:
   qmap-de:
-    sources: [ 'qgis2:BSH','qgis1:BSH','qgis:BSH' ]
+    sources: [ 'qgis2:BSH','qgis1:BSH','qgis0:BSH' ]
+    grids: [ GLOBAL_WEBMERCATOR ]
+    cache:
+      type: mbtiles
+  contours-de:
+    sources: [ 'qgis2:skin,hyd1','qgis1:skin,hyd1','qgis0:skin,hyd1' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
   soundg-de:
-    sources: [ 'qgis:soundg-de' ]
+    sources: [ 'qgis0:soundg-de' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
@@ -84,6 +94,9 @@ layers:
   - name: qmap-de
     title: "QMap DE"
     sources: [ qmap-de ]
+  - name: contours-de
+    title: "QMap Contours DE"
+    sources: [ contours-de ]
   - name: soundg-de
     title: "QMap Soundings DE"
     sources: [ soundg-de ]
