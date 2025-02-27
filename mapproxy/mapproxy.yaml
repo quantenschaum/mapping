@@ -25,7 +25,7 @@ sources:
       url: http://localhost:8000/
       transparent: true
       map: bsh.qgs
-      tiled: true
+#      tiled: true
     coverage:
       datasource: ../data/bsh/bsh.gpkg
       where: recind="Overview"
@@ -39,7 +39,7 @@ sources:
       url: http://localhost:8000/
       transparent: true
       map: bsh1.qgs
-      tiled: true
+#      tiled: true
     coverage:
       datasource: ../data/bsh/bsh.gpkg
       where: recind="Overview"
@@ -51,7 +51,7 @@ sources:
       url: http://localhost:8000/
       transparent: true
       map: bsh2.qgs
-      tiled: true
+#      tiled: true
     coverage:
       datasource: ../data/bsh/bsh.gpkg
       where: recind="Overview"
@@ -62,7 +62,7 @@ sources:
       url: http://localhost:8000/
       transparent: true
       map: rws.qgs
-      tiled: true
+#      tiled: true
     coverage:
       datasource: ../data/waddenzee-covr.gpkg
       where: CATCOV=1
