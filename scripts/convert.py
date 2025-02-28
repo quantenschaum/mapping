@@ -11,7 +11,7 @@ from os import remove, makedirs
 from os.path import exists, isdir
 from shutil import rmtree
 from io import BytesIO
-from PIL import Image
+from PIL import Image, ImageColor
 from progressbar import AnimatedMarker, Bar, BouncingBar, Counter, ETA, \
     AdaptiveETA, FileTransferSpeed, FormatLabel, Percentage, \
     ProgressBar, ReverseBar, RotatingMarker, \
@@ -92,6 +92,12 @@ def main():
         "--exclude-transparent",
         help="exclude fully transparent tiles",
         action="store_true",
+    )
+    parser.add_argument(
+        "-c",
+        "--transparent",
+        metavar='RRGGBB',
+        help="color to replace with transparency",
     )
     parser.add_argument("--west", help="western limit", type=float)
     parser.add_argument("--east", help="eastern limit", type=float)
@@ -216,20 +222,37 @@ def img2bytes(img,format="png",**kwargs):
     return b.read()
 
 
-def recode(tile,format,**kwargs):
+def recode(tile,format,transparent=None):
+    assert format or not transparent, 'need format when setting transparency'
     if not format: return tile
     if format=="jpg": format="jpeg"
+    if transparent:
+        assert format!='jpeg', 'jpeg does not support transparency'
+        transparent=ImageColor.getcolor('#'+transparent,'RGB')
     with Image.open(BytesIO(tile)) as img:
-        if img.format==format.upper(): return tile
+        if not transparent and img.format==format.upper(): return tile
         # print(img.format,img.size,img.info)
         if img.mode!="RGBA" and "transparency" in img.info:
             img=img.convert("RGBA")
+        if transparent:
+            img=make_transparent(img,transparent)
         if format=="jpeg" and img.mode!="RGB":
             img=img.convert("RGB")
         if img.mode=="RGBA" and img.getextrema()[3][0]==255:
             img=img.convert("RGB") # remove unused transparency
         # print(img.format,"->",format,len(tile),len(img2bytes(img,format,**kwargs)))
-        return img2bytes(img,format,**kwargs)
+        return img2bytes(img,format)
+
+
+def make_transparent(img,col):
+    import numpy as np
+    if img.mode!='RGBA': img=img.convert("RGBA")
+    data = np.array(img)   # "data" is a height x width x 4 numpy array
+    r,g,b,a = data.T # Temporarily unpack the bands for readability
+    mask = (r == col[0]) & (g == col[1]) & (b == col[2])
+    if not mask.any(): return img
+    data[...,-1][mask.T] = 0 # Transpose back needed
+    return Image.fromarray(data)
 
 
 def skip(z, x, y, img, args):
@@ -316,7 +339,7 @@ def mbtiles2mbtiles(inputs, output, args):
                 y = 2**z - 1 - y
             if skip(z, x, 2**z - 1 - y, row[3], args):
                 continue
-            tile=recode(row[3],format)
+            tile=recode(row[3],format,args.transparent)
             b += len(tile)
             dcur.execute(
                 "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
@@ -391,7 +414,7 @@ def mbtiles2sqlitedb(inputs, output, args):
                 y = 2**z - 1 - y
             if skip(z, x, 2**z - 1 - y, row[3], args):
                 continue
-            tile=recode(row[3],format)
+            tile=recode(row[3],format,args.transparent)
             b += len(tile)
             data = [x, y, z, 0, sqlite3.Binary(tile)]
             if timecol:
@@ -430,7 +453,7 @@ def mbtiles2dir(inputs, output, args):
                 y = 2**z - 1 - y
             if skip(z, x, 2**z - 1 - y, row[3], args):
                 continue
-            tile=recode(row[3],format)
+            tile=recode(row[3],format,args.transparent)
             b += len(tile)
             dir = f"{output}/{z}/{x}"
             makedirs(dir, exist_ok=1)
@@ -480,7 +503,7 @@ def dir2mbtiles(inputs, output, args):
                 # print(f, z, x, y, len(tile), lat_lon(z, x, y))
                 if skip(z, x, y, tile, args):
                     continue
-                tile=recode(tile,format)
+                tile=recode(tile,format,args.transparent)
                 b += len(tile)
                 if not args.invert_y:
                     y = 2**z - 1 - y
