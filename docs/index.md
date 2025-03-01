@@ -13,7 +13,9 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
     - Land areas are now transparent, to allow combining it with other charts.
     - An additional contours layer was added, that only contains depth contours. It could be used as a base for OpenSeaMap.
     - Raster charts are encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
-    PNG based tiles are available, too.
+      PNG based tiles are available, too.
+    - The german chart includes spot sounding extracted from <https://www.geoseaportal.de/atomfeeds/ELC_INSPIRE_de.xml> which is from 2018 and was last updated 2023-05!
+      This is experimental, data can be wrong or missing. Spot soundings and contour lines are from different datasets, so they may mismatch in certain areas.  
 
 !!! note "Data Sources"
     The charts provided by this project are based on data by
@@ -27,10 +29,6 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
         - [ENC](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc) (?)
         - [Vaarwegmarkeringen drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
         - [Vaarwegmarkeringen vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
-
-!!! warning
-    The german chart now includes spot sounding extracted from <https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml> which is from 2018 and was last updated 2023-05!  
-    This is experimental, data can be wrong or missing. Spot soundings and contour lines are from different datasets, so they may mismatch in certain areas.  
 
 ## [OsmAnd](https://osmand.net/)
 
