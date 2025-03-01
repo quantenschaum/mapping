@@ -5,13 +5,14 @@ Here you find precompiled charts for download in various formats usable in diffe
 The downloadable files on this page are licensed under [CC0](https://github.com/quantenschaum/mapping/blob/master/LICENSE).
 
 !!! failure
-    The BSH [changed](https://www.geoseaportal.de/de/news.xml) its [WMS server](https://gdi.bsh.de/public/public_services.html).  
-    They do no longer provide vector data. 
-    Data for Germany ~~cannot be~~ can still be updated but may contain errors in the depth contour areas!  
+    The BSH [changed](https://www.geoseaportal.de/de/news.xml) its [WMS server](https://gdi.bsh.de/public/public_services.html). They do no longer provide vector data. 
+    Data for Germany may still be updated but may contain errors in the depth contour areas!
     Nav aids and contour lines should be correct, though.
 
 !!! info
-    Raster charts are now encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
+    - Land areas are now transparent, to allow combining it with other charts.
+    - An additional contours layer was added, that only contains depth contours. It could be used as a base for OpenSeaMap.
+    - Raster charts are encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
     PNG based tiles are available, too.
 
 !!! note "Data Sources"
