@@ -80,6 +80,8 @@ icons: icons/gen
 
 icons/gen:
 	cd icons && rm -rf gen/* && genicons.py
+	cd icons/gen && ln -sr TOPSHP/12 TOPSHP/9
+	cd icons/gen && ln -sr TOPSHP/19 TOPSHP/20
 	cd icons/gen && ln -sr TOPSHP/19 TOPSHP/21
 	cd icons/gen && mkdir -p TOPSHP/15/0 && ln -sr TOPSHP/15.svg TOPSHP/15/0/0.svg
 	cd icons/gen && mkdir -p TOPSHP/16/0 && ln -sr TOPSHP/16.svg TOPSHP/16/0/0.svg
