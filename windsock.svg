@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   id="svg2"
+   sodipodi:docname="windsock.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs16">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3749">
+      <path
+         d="m 76.203,444.544 h 122.4 v 25.423 h -122.4 z"
+         id="path3747" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="30.75"
+     inkscape:cx="15.300813"
+     inkscape:cy="15.98374"
+     inkscape:window-width="1702"
+     inkscape:window-height="1471"
+     inkscape:window-x="811"
+     inkscape:window-y="66"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g3745">
+    <sodipodi:guide
+       position="17.333333,16"
+       orientation="0,1"
+       id="guide745"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,33.691057"
+       orientation="-1,0"
+       id="guide1473"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
+  <g
+     id="CATLMK_8"
+     transform="matrix(1.3333333,0,0,-1.3333333,-166.84123,619.72055)">
+    <g
+       id="g3745"
+       clip-path="url(#clipPath3749)">
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.37499995;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         d="m 137.13093,453.50289 v 6.26525"
+         id="path7836" />
+      <g
+         id="g3759"
+         transform="translate(136.5116,452.6523)">
+        <path
+           d="m 0,0 h -1.503 v 0.283 h 1.502 z"
+           style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path3761" />
+      </g>
+      <g
+         id="g3763"
+         transform="translate(137.7831,452.9355)">
+        <path
+           d="M 0,0 H 1.477 V -0.283 H -0.008 Z"
+           style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path3765" />
+      </g>
+      <g
+         id="g3767"
+         transform="translate(136.4257,452.7939)">
+        <path
+           d="M 0,0 C 0,0.392 0.317,0.709 0.709,0.709 1.1,0.709 1.418,0.392 1.418,0 1.418,-0.392 1.1,-0.709 0.709,-0.709 0.317,-0.709 0,-0.392 0,0 Z"
+           style="fill:none;stroke:#231f20;stroke-width:0.283;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+           id="path3769" />
+      </g>
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.37500002;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="m 137.13093,459.76814 5.74136,-0.29422 v -1.12321 l -5.72857,-0.50794 h 0.009 z"
+         id="path7892" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 138.37386,459.70444 v -1.7526"
+         id="path7990" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 140.00161,459.62103 v -1.52486"
+         id="path7992" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 141.48635,459.54494 v -1.31712"
+         id="path7994" />
+    </g>
+  </g>
+</svg>

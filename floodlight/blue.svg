@@ -10,6 +10,43 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs13" />
+  <sodipodi:namedview
+     id="namedview11"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="36.8125"
+     inkscape:cx="16"
+     inkscape:cy="16"
+     inkscape:window-width="2084"
+     inkscape:window-height="1422"
+     inkscape:window-x="1126"
+     inkscape:window-y="49"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2">
+    <sodipodi:guide
+       position="16,22.926995"
+       orientation="-1,0"
+       id="guide742"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="22.519525,16"
+       orientation="0,1"
+       id="guide1524"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -42,7 +79,9 @@
   </style>
   <g
      id="g10055"
-     transform="matrix(1.3333333,0,0,-1.3333333,-72.648075,870.02074)">
+     transform="matrix(-1.3333333,0,0,1.3333333,104.65479,-838.01506)"
+     inkscape:transform-center-x="-0.0057661896"
+     inkscape:transform-center-y="3.9392016">
     <path
        class="fill uniform" style="fill:#10508c; stroke:none;"
        d="m 66.3358,641.5703 -0.418,3.76 -0.08,0.559 c 0.138,0.019 0.474,0.034 0.656,0.035 0.185,10e-4 0.461,-0.007 0.629,-0.039 l -0.071,-0.555 -0.419,-3.76 h -0.297"

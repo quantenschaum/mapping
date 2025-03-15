@@ -10,6 +10,57 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="57.8125"
+     inkscape:cx="16"
+     inkscape:cy="16"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2">
+    <sodipodi:guide
+       position="-2.8367568,16"
+       orientation="0,1"
+       id="guide737"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="16,24.077838"
+       orientation="-1,0"
+       id="guide1465"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="19.95809,12.029512"
+       orientation="0.70710678,0.70710678"
+       id="guide3761"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="17.29435,17.278164"
+       orientation="-0.70710678,0.70710678"
+       id="guide5578"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -42,10 +93,11 @@
   </style>
   <g
      id="g390"
-     inkscape:transform-center-x="0.0"
-     inkscape:transform-center-y="0.0">
+     inkscape:transform-center-x="-0.010064436"
+     inkscape:transform-center-y="8.1469017"
+     transform="rotate(45.310716,16.000047,15.998522)">
     <path
-      class="fill uniform" style="fill:#800080; stroke:none;"
+       class="fill uniform" style="fill:#800080; stroke:none;"
        d="m 23.129659,26.226475 c 0.891806,0.878519 2.327513,0.868236 3.207029,-0.02348 0.878519,-0.891806 0.86733,-2.328599 -0.02448,-3.207118 C 25.4195,22.116271 20.328463,19.122631 17.25,17.25 c 1.825402,2.876297 4.986947,8.09687 5.879659,8.976475"
        id="path392" />
   </g>

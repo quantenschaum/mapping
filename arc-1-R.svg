@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100"
+   height="100"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="arc-1-W.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="12.14"
+     inkscape:cx="41.598023"
+     inkscape:cy="50.041186"
+     inkscape:window-width="1932"
+     inkscape:window-height="1699"
+     inkscape:window-x="233"
+     inkscape:window-y="196"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg5"
+     showguides="true">
+    <sodipodi:guide
+       position="50,13.229166"
+       orientation="-1,0"
+       id="guide756"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="13.229166,50"
+       orientation="0,1"
+       id="guide758"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <path
+     transform="rotate(90,50,50)"
+     style="fill:none;stroke:#ed1c24;stroke-width:2;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers"
+     id="path1631"
+     sodipodi:type="arc"
+     sodipodi:cx="50"
+     sodipodi:cy="50"
+     sodipodi:rx="49"
+     sodipodi:ry="49"
+     sodipodi:start="0"
+     sodipodi:end="0.077562432"
+     sodipodi:open="true"
+     sodipodi:arc-type="arc"
+     d="m 99,50 a 49,49 0 0 1 -0.147316,3.79675" />
+</svg>
