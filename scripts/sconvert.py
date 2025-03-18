@@ -106,6 +106,7 @@ def acronym(data, read):
     if val and val in s57attr:
         # data["attribute"] = s57attr[val][0]
         data["acronym"] = s57attr[val][1]
+    # if 'ftype' in data: print(data)
 
 def acronym_code(name):
     name=name.upper()
@@ -149,6 +150,7 @@ def lines(data, read):
 
 
 def areas(data, read, skip_triangles=1):
+    # print(data)
     if skip_triangles:
         read(data["rlen"] - 50 - data["count"] * 16)
     else:
@@ -159,6 +161,7 @@ def areas(data, read, skip_triangles=1):
         for t in range(tris):
             tritype, nvert = unpack(read, "BI")
             bbox = unpack(read, "dddd")
+            # print(bbox)
             vertices = [unpack(read, "ff") for i in range(nvert)]
             triangles.append({"ttype": tritype, "bbox": bbox, "vertices": vertices})
     data["edges"] = [unpack(read, "IIII") for j in range(data["count"])]
@@ -351,7 +354,7 @@ def decode(files):
         #     c = len(list(filter(lambda r: r["rtype"] == t, records)))
         #     print(f"{t:3} {n:40} {c:6}")
         chart = os.path.basename(os.path.splitext(f)[0])
-        uband = int(chart[-1])
+        uband = 0#int(chart[-1])
         state0 = {"chart": chart, "uband": uband}
         rx, ry = None, None
         lines = []
@@ -543,12 +546,7 @@ PRIMITIVES={'Point':1,'MultiPoint':1,
             'Line':2,'LineString':2,'MultiLineString':2,
             'Area':3,'Polygon':3,'MultiPolygon':3}
 
-SCALES={1:1500000,
-        2:180000,
-        3:90000,
-        4:22000,
-        5:8000,
-        6:4000}
+SCALES={1:1500000, 2:180000, 3:90000, 4:22000, 5:8000, 6:4000}
 
 def bounds(features):
     coverage=list(filter(lambda o:o['properties'].get('layer','').upper()=='M_COVR'
@@ -562,13 +560,27 @@ def bounds(features):
       c=g['coordinates']
       lons+=[x[0] for xs in c for x in xs]
       lats+=[x[1] for xs in c for x in xs]
-    # return min(lats),max(lats),min(lons),max(lons)
-    return min(lons),max(lons),min(lats),max(lats)
+    return min(lats),max(lats),min(lons),max(lons)
+
+def cbounds(coords):
+  # print(coords)
+  while True:
+    try: iter(coords[0])
+    except: break
+    coords=[x for l in coords for x in l]
+  # print(coords)
+  lons,lats=coords[::2],coords[1::2]
+  # print(lons,lats)
+  return min(lats),max(lats),min(lons),max(lons)
+
+
+def find_keys(dic,val):
+  return [k for k,v in dic.items() if v==val]
 
 
 def write_senc(filename,features):
-    w,e,s,n=bounds(features)
-    cell_center=(w+e)/2,(s+n)/2
+    S,N,W,E=bounds(features)
+    cell_center=(W+E)/2,(S+N)/2
     cx,cy=ll2grid(*cell_center)
 
     # assert len(c)==1
@@ -579,6 +591,7 @@ def write_senc(filename,features):
 
     cellname=min(o['properties'].get('chart','x-cellname') for o in features)
     uband=min(o['properties'].get('uband',0) for o in features)
+    scamax=min(o['properties'].get('SCAMAX',99999999) for o in features)
     scamin=max(o['properties'].get('SCAMIN',0) for o in features)
     scale=max(o['properties'].get('scale',0) for o in features) or SCALES.get(uband,0) or scamin
     sdatum='Mean sea level'
@@ -599,7 +612,7 @@ def write_senc(filename,features):
       f.write(record(HEADER_CELL_NATIVESCALE,struct.pack(BO+'I',scale)))
       f.write(record(HEADER_CELL_SENCCREATEDATE,created.encode()+b'\0'))
       f.write(record(HEADER_CELL_SOUNDINGDATUM,sdatum.encode()+b'\0'))
-      f.write(record(CELL_EXTENT_RECORD,struct.pack(BO+'8d',s,w,n,w,n,e,s,e)))
+      f.write(record(CELL_EXTENT_RECORD,struct.pack(BO+'8d',S,W,N,W,N,E,S,E)))
       # f.write(record(CELL_COVR_RECORD,struct.pack(BO+f'I{len(covr)}f',len(covr)//2,*covr)))
 
       id=-1
@@ -617,7 +630,7 @@ def write_senc(filename,features):
         r,m=b'',0
         conts=[]
         for c in coordinates:
-          edge=[(x-cx,y-cy) for x,y in map(lambda x:ll2grid(*x),c)]
+          edge=[(x-cx,y-cy) for x,y in map(lambda x:ll2grid(*x),reversed(c))]
           conts.append(edge)
           assert len(edge)>=2, edge
 
@@ -641,8 +654,10 @@ def write_senc(filename,features):
           r+=struct.pack(BO+'IIII',node0_id,edge_id,node1_id,0)
           m+=1
 
+        S,N,W,E=cbounds(coordinates)
+
         if ptype==2:
-          return record(FEATURE_GEOMETRY_RECORD_LINE,struct.pack(BO+'ddddI',0,0,0,0,m)+r)
+          return record(FEATURE_GEOMETRY_RECORD_LINE,struct.pack(BO+'ddddI',S,N,W,E,m)+r)
 
         if ptype==3:
           t=struct.pack(BO+f'{m}I',*[len(c) for c in conts]) # points per contour
@@ -664,16 +679,15 @@ def write_senc(filename,features):
           else:
             trias=[]
 
-          k=0
+          k=1
           ttype=4 # 4=tris 5=strip 6=fan
-          t+=struct.pack(BO+'BIdddd',ttype,3*len(trias),0,0,0,0)
-          k+=1
+          t+=struct.pack(BO+'BIdddd',ttype,3*len(trias),W,E,S,N)
           for tri in trias:
             assert len(tri)==3
             for v in tri:
               t+=struct.pack(BO+'ff',*v)
 
-          return record(FEATURE_GEOMETRY_RECORD_AREA,struct.pack(BO+'ddddIII',0,0,0,0,len(conts),k,m)+t+r)
+          return record(FEATURE_GEOMETRY_RECORD_AREA,struct.pack(BO+'ddddIII',S,N,W,E,len(conts),k,m)+t+r)
 
 
       for o in features:
@@ -684,6 +698,7 @@ def write_senc(filename,features):
         gtype=g['type']
         ptype=PRIMITIVES[gtype]
         c=g['coordinates']
+        if len(l)!=6: continue
         ftype=acronym_code(l)
         if ftype is None:
           print('skipped',l)
@@ -693,7 +708,7 @@ def write_senc(filename,features):
         if ptype not in primitives:
           print('skipped invalid primitive type',l,gtype,primitives)
           continue
-        f.write(record(FEATURE_ID_RECORD,struct.pack(BO+'IHB',ftype,next_id(),ptype)))
+        f.write(record(FEATURE_ID_RECORD,struct.pack(BO+'HHB',ftype,next_id(),ptype-1)))
 
         for r in attributes(p): f.write(r)
 
@@ -740,9 +755,10 @@ def write_senc(filename,features):
       for sdgs in soundings.values():
         s=sdgs[0]
         props={k:v for k,v in s['properties'].items() if k.upper()!='DEPTH'}
-        f.write(record(FEATURE_ID_RECORD,struct.pack(BO+'IHB',ftype,next_id(),1)))
+        f.write(record(FEATURE_ID_RECORD,struct.pack(BO+'HHB',ftype,next_id(),1)))
         for r in attributes(props): f.write(r)
-        r=struct.pack(BO+'4dI',0,0,0,0,len(sdgs))
+        s,n,w,e=cbounds([s['geometry']['coordinates'] for s in sdgs])
+        r=struct.pack(BO+'4dI',s,n,w,e,len(sdgs))
         for s in sdgs:
           c=s['geometry']['coordinates']
           x,y=[a-b for a,b in zip(ll2grid(*c),(cx,cy))]
@@ -786,9 +802,9 @@ def main():
           write_senc(os.path.join(out,c+'.senc'),data)
         else:
           print(len(charts),'charts')
-          for c in charts:
+          for c in sorted(charts):
             data1=list(filter(lambda o:o['properties'].get(field)==c,data))
-            w,e,s,n=bounds(data1)
+            s,n,w,e=bounds(data1)
             uband=min(o['properties'].get('uband',0) for o in data1)
 
             def filt(o):

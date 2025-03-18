@@ -309,12 +309,15 @@ def main():
     fn=f'{sys.argv[3]}/{ifile[0]}-{l}.json'
     save_json(fn, {"type": "FeatureCollection", "features": list(filter(filt,features))})
 
-  no_layer=list(filter(lambda f:'layer' not in f['properties'],features))
-  print('features w/o layer',len(no_layer))
+  unmatched=list(filter(lambda f:'layer' not in f['properties'],features))
+  if unmatched:
+    print('unmatched',len(unmatched))
+    fn=f'{sys.argv[3]}/{ifile[0]}-unmatched.json'
+    save_json(fn, {"type": "FeatureCollection", "features": unmatched})
 
+  return
   values=group_keys(features,1)
   print()
-  return
 
   for k in sorted(values.keys()):
     if '_type' not in k: continue
@@ -353,7 +356,7 @@ UNIQUE_ATTRS={'JRSDTN': 'ADMARE', 'CATAIR': 'AIRARE', 'CATBUA': 'BUAARE', 'CATIN
               'SURATH': 'M_SREL', 'SURTYP': 'M_SREL', 'DUNITS': 'M_UNIT', 'HUNITS': 'M_UNIT', 'PUNITS': 'M_UNIT',
               '$TINTS': '$AREAS', '$SCALE': '$CSYMB', '$CSIZE': '$COMPS', '$CHARS': '$TEXTS', '$JUSTH': '$TEXTS',
               '$JUSTV': '$TEXTS', '$NTXST': '$TEXTS', '$SPACE': '$TEXTS', '$TXSTR': '$TEXTS', 'eleva1': 'depare',
-              'eleva2': 'depare', 'catsit': 'sistat', 'catsiw': 'sistaw', 'catbrt': 'berths', 'catcbl': 'cblohd',
+              'eleva2': 'depare', 'catsit': 'sistat', 'catsiw': 'sistaw', 'catbrt': 'berths', #'catcbl': 'cblohd',
               'catfry': 'feryrt', 'cathbr': 'hrbare', 'curvhw': 'curent', 'curvlw': 'curent', 'curvmw': 'curent',
               'curvow': 'curent', 'cathlk': 'hulkes', 'catchp': 'chkpnt', 'catslc': 'slcons', 'catnmk': 'notmrk',
               'fnctnm': 'notmrk', 'addmrk': 'notmrk', 'disbk1': 'notmrk', 'disbk2': 'notmrk', 'bunves': 'bunsta',
@@ -365,7 +368,7 @@ UNIQUE_ATTRS={'JRSDTN': 'ADMARE', 'CATAIR': 'AIRARE', 'CATBUA': 'BUAARE', 'CATIN
               'lc_bm2': 'lg_vsp', 'lc_lg1': 'lg_vsp', 'lc_lg2': 'lg_vsp', 'lc_dr1': 'lg_vsp', 'lc_dr2': 'lg_vsp',
               'ANATR1': 'ANNOTA', 'ANATR2': 'ANNOTA', 'ANATR3': 'ANNOTA', 'ANLYR1': 'ANNOTA', 'ANATR5': 'ANNOTA',
               'ANATR4': 'ANNOTA', 'ANATR9': 'ANNOTA', 'ANATRA': 'ANNOTA', 'ANTXT1': 'ANNOTA', 'ANATR6': 'ANNOTA',
-              'ANATR7': 'ANNOTA', 'ANATR8': 'ANNOTA'}
+              'ANATR7': 'ANNOTA', 'ANATR8': 'ANNOTA', }
 
 def layer(props):
   for a,l in UNIQUE_ATTRS.items():
@@ -398,19 +401,32 @@ def layer(props):
       return 'BCNISD'
     return 'BCNSPP'
 
+  if props.get('beacon_type'):
+    return 'BCNSPP'
+  if props.get('light_type')==3:
+    return 'PILPNT'
+  if props.get('facility_type')==6:
+    return 'HRBARE'
+  if props.get('facility_type')==4:
+    return 'HRBFAC'
+
   if 'TOPSHP' in props:
     return 'DAYMAR'
   if props.get('caution_type')==6:
     return 'UWTROC'
-  if 'MARSYS' in props:
+  if 'MARSYS' in props or props.get('meta_type')==6:
     return 'M_NSYS'
   if props.get('facility_type')==13:
     return 'RSCSTA'
+  if props.get('signal_type')==5:
+    return 'RTPBCN'
+  if props.get('facility_type')==11:
+    return 'OFSPLF'
   if 'CATCRN' in props:
     return 'CRANES'
   if 'TRAFIC' in props and props.get('catgeo')==1:
     return 'RDOCAL'
-  if 'FUNCTN' in props:
+  if 'FUNCTN' in props or props.get('facility_type')==1:
     return 'BUISGL'
   if 'CATWED' in props or props.get('caution_type')==8:
     return 'WEDKLP'
@@ -418,18 +434,78 @@ def layer(props):
     return 'SBDARE'
   if 'VALDCO' in props:
     return 'DEPCNT'
+  if 'ELEVAT' in props:
+    return 'LNDELV'
+  if 'CATBRG' in props:
+    return 'BRIDGE'
   if 'DRVAL1' in props and 'DRVAL2' in props:
     return 'DEPARE'
+  if props.get('land_type')==1:
+    return 'BUAARE'
+  if props.get('depth_type')==1 and props.get('catgeo')==3:
+    return 'LAKARE'
+  if props.get('land_type')==4 and props.get('catgeo')==3:
+    return 'LAKARE'
+  if props.get('land_type')==7 and props.get('catgeo')==3:
+    return 'PRDARE'
   if props.get('land_type')==5:
     return 'LNDARE'
+  if props.get('land_type')==6:
+    return 'LNDRGN'
+  if props.get('land_type')==9:
+    return 'RIVERS'
+  if props.get('land_type')==10:
+    return 'SLOGRD'
+  if props.get('mark_type')==2:
+    return 'DISMAR'
+  if props.get('trans_type')==3:
+    return 'CANALS'
+  if props.get('trans_type')==7:
+    return 'ROADWY'
+  if props.get('dock_type')==4:
+    return 'DOCARE'
   if props.get('depth_type')==2:
     return 'DRGARE'
+  if props.get('caution_type')==4:
+    return 'TIDEWY'
   if 'CATREA' in props:
     return 'RESARE'
   if 'CATACH' in props:
     return 'ACHARE'
-  if 'OBJNAM' in props and props.get('coast_type')==1 and props.get('catgeo')==3:
+  if props.get('coast_type')==1 and props.get('catgeo')==3:
     return 'SEAARE'
+  if props.get('coast_type')==1 and props.get('catgeo')==2:
+    return 'COALNE'
+  if 'CATPIP' in props and props.get('catgeo')==3:
+    return 'PIPARE'
+  if 'CATPIP' in props and props.get('catgeo')==2:
+    return 'PIPSOL'
+  if 'CATCBL' in props and props.get('catgeo')==3:
+    return 'CBLARE'
+  if 'CATCBL' in props and props.get('catgeo')==2:
+    return 'CBLSUB'
+  if props.get('util_type')==2:
+    return 'CBLSUB'
+  if 'RYRMGV' in props and 'VALACM' in props and 'VALMAG' in props:
+    return 'MAGVAR'
+
+  if props.get('zone_type')==6 and props.get('catgeo')==2:
+    return 'TSELNE'
+  if props.get('zone_type')==7 and props.get('catgeo')==2:
+    return 'TSSBND'
+  if props.get('zone_type')==7 and props.get('catgeo')==3:
+    return 'RCTLPT'
+  if props.get('zone_type')==8:
+    return 'TSSCRS'
+  if props.get('zone_type')==9:
+    return 'TSSLPT'
+  # if props.get('zone_type')==10:
+  #   return 'TSSRON'
+  if props.get('zone_type')==11:
+    return 'TSEZNE'
+
+  if 'Radar' in props.get('OBJNAM','') and 'COMCHA' in props:
+    return 'RADRNG'
 
 
 def group_keys(features, log=0, filt=None):
