@@ -10,6 +10,7 @@ import struct
 import sys
 from math import radians, degrees, log, tan, pi, atan, exp, isfinite
 import argparse
+import triangle
 
 from geojson import (
     Point,
@@ -648,8 +649,6 @@ def write_senc(filename,features):
 
           polygon=conts[0]
           assert polygon[0]==polygon[-1]
-
-          import triangle
 
           if polygon:
             polygon=polygon[:-1]
