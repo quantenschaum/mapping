@@ -801,6 +801,7 @@ def main():
 
     files = args.input
     out = args.output
+    os.makedirs(out, exist_ok=True)
 
     if files[0].endswith('json'):
         data=read_features(files)
@@ -811,7 +812,6 @@ def main():
           write_senc(os.path.join(out,c+'.senc'),data)
         else:
           print(len(charts),'charts')
-          os.makedirs(out, exist_ok=True)
           for c in charts:
             data1=list(filter(lambda o:o['properties'].get(field)==c,data))
             w,e,s,n=bounds(data1)
@@ -828,7 +828,6 @@ def main():
             write_senc(os.path.join(out,c+'.senc'),data1+data2)
         return
 
-    os.makedirs(out, exist_ok=True)
 
     features = decode(files)
     for l in sorted({f.properties['layer'] for f in features}):
