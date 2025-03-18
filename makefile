@@ -199,7 +199,7 @@ upload:
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
-	cp -rpv osmand/marine.render.xml osmand/depthcontourlines.addon.render.xml charts/* data/*.gpkg tmp/docs
+	cp -rpv osmand/marine.render.xml osmand/depthcontourlines.addon.render.xml charts/* data/*.gpkg data/bsh/*.gpkg tmp/docs
 	cd tmp/docs && ./times.py index.md
 	cd tmp && mkdocs build
 	rm -rf www/download
