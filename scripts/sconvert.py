@@ -648,23 +648,12 @@ def write_senc(filename,features):
 
           polygon=conts[0]
           assert polygon[0]==polygon[-1]
-          # polygon=polygon[:-1]
-          # if len(conts)>1: polygon=[]
-          # if len(polygon)>50: polygon=[]
-
-          import shapely
-          # polygon= shapely.Polygon(polygon)
-          # trias=shapely.ops.triangulate(polygon)
-          # trias=[tr.exterior.coords[:3] for tr in trias]
 
           import triangle
 
           if polygon:
             polygon=polygon[:-1]
             n=len(polygon)
-            # print('polygon',n)
-            # print(polygon)
-            # print([[i,(i+1)%n] for i in range(n)])
 
             trias=triangle.triangulate({
               'vertices': polygon,
@@ -676,21 +665,7 @@ def write_senc(filename,features):
           else:
             trias=[]
 
-          # polygon=list(reversed(polygon))
-          # trias = triangulate(polygon)
-          # trias = tripy.earclip(polygon)
-          # print('trias',len(trias))
-          # for tri in trias: print(tri)
           k=0
-
-          # for tri in trias:
-          #   vertices=tri
-          #   ttype=4 # 4=tris 5=strip 6=fan
-          #   t+=struct.pack(BO+'BIdddd',ttype,len(vertices),0,0,0,0)
-          #   k+=1
-          #   for v in vertices:
-          #     t+=struct.pack(BO+'ff',*v)
-
           ttype=4 # 4=tris 5=strip 6=fan
           t+=struct.pack(BO+'BIdddd',ttype,3*len(trias),0,0,0,0)
           k+=1
