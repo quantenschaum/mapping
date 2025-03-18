@@ -2,12 +2,24 @@
 
 Here you find precompiled charts for download in various formats usable in different applications.
 
-The downloadable files on this page are licensed under [CC0](https://github.com/quantenschaum/mapping/blob/master/LICENSE).
+
+??? danger "Disclaimer"
+    The charts and data files provided are for informational and reference purposes only. They are not intended for navigation, official maritime operations, or any activity requiring precise geographic, hydrographic data. Users should consult official sources, such as government agencies or certified navigation providers, for authoritative and up-to-date navigation information.
+    
+    No warranty, express or implied, is given regarding the accuracy, reliability, or completeness of the provided charts. The provider assumes no responsibility or liability for any errors, omissions, or misuse of this information. 
+    
+    **Use at your own risk!**
+
+??? info "License"    
+    The downloadable files on this page are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 !!! failure
     The BSH [changed](https://www.geoseaportal.de/de/news.xml) its [WMS server](https://gdi.bsh.de/public/public_services.html). They do no longer provide vector data. 
     Data for Germany may still be updated but may contain errors in the depth contour areas!
     Nav aids and contour lines should be correct, though.
+    
+!!! tip "Vector Data"
+    SENC files containing vector charts for AVNav have been added, that can be rendered by [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html). This is still experimental and not as complete as the raster charts.
 
 !!! info
     - Land areas are now transparent, to allow combining it with other charts.
@@ -17,7 +29,7 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
     - The german chart includes spot sounding extracted from <https://www.geoseaportal.de/atomfeeds/ELC_INSPIRE_de.xml> which is from 2018 and was last updated 2023-05!
       This is experimental, data can be wrong or missing. Spot soundings and contour lines are from different datasets, so they may mismatch in certain areas.  
 
-!!! note "Data Sources"
+??? note "Data Sources"
     The charts provided by this project are based on data by
     
     - :de: [BSH](https://www.bsh.de/)
@@ -29,6 +41,13 @@ The downloadable files on this page are licensed under [CC0](https://github.com/
         - [ENC](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc) (?)
         - [Vaarwegmarkeringen drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
         - [Vaarwegmarkeringen vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
+
+??? note "Raw Data"
+    Raw data files are available here. They can be used in [QGIS](https://qgis.org/) to render your own charts or to investigate or play with dat data. The QGIS file used in this project can be found on [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis).
+    
+    - [BSH Data](bsh.gpkg){:download}
+    - [BSH Bathymetry](bathy.gpkg){:download}
+    - [RWS Waddenzee](waddenzee.gpkg){:download}
 
 ## [OsmAnd](https://osmand.net/)
 
@@ -65,7 +84,7 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 - :nl: QMAP NL online [`http://waddenzee.duckdns.org/qmap-nl/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-NL&min_zoom=8&max_zoom=16&url_template=http://waddenzee.duckdns.org/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.webp)
 
 !!! tip
-    Select `sqlitedb` as storage format.
+    Select `sqlitedb` as storage format. This will store the tiles more efficiently into a single database file.
 
 ## [AvNav](https://www.wellenvogel.net/software/avnav/docs/beschreibung.html?lang=en)
 
@@ -85,6 +104,13 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
     - [:de: QMAP Soundings DE](soundg-de.mbtiles){:download}
     - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
     - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
+- SENC
+    - [:de: QMAP DE](qmap-de.zip){:download}
+
+??? tip "SENC Vector Charts"
+    The SENC files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html) plugin.
+
+    ![OchartsNG](img/ochartsng.png)
 
 ## [OpenCPN](https://opencpn.org/)
 
@@ -111,4 +137,4 @@ The raster charts can be added to JOSM as [imagery layers](https://josm.openstre
 
 You may also want to [add this extra `mapcss`](https://josm.openstreetmap.de/wiki/Help/Preferences/MapPaintPreference) (as last entry) for improved rendering of seamarks.
 
-- `https://raw.githubusercontent.com/quantenschaum/mapping/icons/extra.mapcss`
+- `https://raw.githubusercontent.com/quantenschaum/mapping/refs/heads/icons/extra.mapcss`

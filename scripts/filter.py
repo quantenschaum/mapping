@@ -265,6 +265,14 @@ def main():
       if m:
         props['name']=m.group(1)
 
+    if 'chart' not in props:
+      name=props.get('name')
+      if name:
+        props['chart']=name
+      dsnm=props.get('dsnm')
+      if dsnm:
+        props['chart']=dsnm.replace('.000','')
+
     # if 'LITCHR' in props:
     #   props['light']=light_spec(props)
 
@@ -284,11 +292,29 @@ def main():
       cs = ''.join(map(abbr_color,map(int, str(cols).split(','))))
       props['color']=cs
 
+    if 'catgeo' not in props:
+      g=f['geometry']['type']
+      props['catgeo']=1 if 'Point' in g else 2 if 'Line' in g else 3 if 'Polygon' in g else 0
+
+    if 'layer' not in props:
+      l=layer(props)
+      if l: props['layer']=l
+
   if ofile:
     save_json(ofile,data)
 
+  layers=set(filter(lambda x:x,(f['properties'].get('layer') for f in features)))
+  for l in layers:
+    filt = lambda f: f['properties'].get('layer')==l
+    fn=f'{sys.argv[3]}/{ifile[0]}-{l}.json'
+    save_json(fn, {"type": "FeatureCollection", "features": list(filter(filt,features))})
+
+  no_layer=list(filter(lambda f:'layer' not in f['properties'],features))
+  print('features w/o layer',len(no_layer))
+
   values=group_keys(features,1)
   print()
+  return
 
   for k in sorted(values.keys()):
     if '_type' not in k: continue
@@ -306,6 +332,104 @@ def main():
       filt = lambda f: f['properties'].get(k) is not None
       fn=f'{sys.argv[3]}/{ifile[0]}-{k}.json'
       save_json(fn, {"type": "FeatureCollection", "features": list(filter(filt,features))})
+
+UNIQUE_ATTRS={'JRSDTN': 'ADMARE', 'CATAIR': 'AIRARE', 'CATBUA': 'BUAARE', 'CATINB': 'BOYINB', 'ICEFAC': 'CBLOHD',
+              'VERCSA': 'CBLOHD', 'CATCAN': 'CANALS', 'CATCHP': 'CHKPNT', 'CATCOA': 'COALNE', 'CATCTR': 'CTRPNT',
+              'CATDAM': 'DAMCON', 'CATDOC': 'DOCARE', 'CATDPG': 'DMPGRD', 'CATFNC': 'FNCLNE', 'CATFRY': 'FERYRT',
+              'CATFIF': 'FSHFAC', 'CATFOG': 'FOGSIG', 'SIGGEN': 'FOGSIG', 'CATFOR': 'FORSTC', 'CATHAF': 'HRBFAC',
+              'CATHLK': 'HULKES', 'CATICE': 'ICEARE', 'CATLND': 'LNDRGN', 'CATLMK': 'LNDMRK', 'CATLIT': 'LIGHTS',
+              'EXCLIT': 'LIGHTS', 'LITCHR': 'LIGHTS', 'LITVIS': 'LIGHTS', 'MLTYLT': 'LIGHTS', 'VALNMR': 'LIGHTS',
+              'VALLMA': 'LOCMAG', 'CATMFA': 'MARCUL', 'CATMPA': 'MIPARE', 'CATMOR': 'MORFAC', 'CATNAV': 'NAVLNE',
+              'CATOBS': 'OBSTRN', 'CATOFP': 'OFSPLF', 'CATOLB': 'OILBAR', 'CATPLE': 'PILPNT', 'CATPIL': 'PILBOP',
+              'NPLDST': 'PILBOP', 'PILDST': 'PILBOP', 'CATPYL': 'PYLONS', 'CATRAS': 'RADSTA', 'CATRTB': 'RTPBCN',
+              'RADWAL': 'RTPBCN', 'CALSGN': 'RDOSTA', 'CATROS': 'RDOSTA', 'ESTRNG': 'RDOSTA', 'CATRSC': 'RSCSTA',
+              'CATROD': 'ROADWY', 'CATRUN': 'RUNWAY', 'CATSEA': 'SEAARE', 'CATSLC': 'SLCONS', 'CATSIT': 'SISTAT',
+              'CATSIW': 'SISTAW', 'CATSIL': 'SILTNK', 'CATSCF': 'SMCFAC', 'TS_TSP': 'TS_PAD', 'TS_TSV': 'TS_TIS',
+              'T_HWLW': 'T_TIMS', 'T_TSVL': 'T_TIMS', 'CATVEG': 'VEGATN', 'CATWAT': 'WATTUR', 'CATWED': 'WEDKLP',
+              'CATWRK': 'WRECKS', 'CAT_TS': 'TS_FEB', 'CLSDEF': 'NEWOBJ', 'CLSNAM': 'NEWOBJ', 'SYMINS': 'NEWOBJ',
+              'CSCALE': 'M_CSCL', 'CATCOV': 'M_COVR', 'SHIPAM': 'M_HOPA', 'PUBREF': 'M_NPUB', 'AGENCY': 'M_PROD',
+              'CPDATE': 'M_PROD', 'NMDATE': 'M_PROD', 'PRCTRY': 'M_PROD', 'CATQUA': 'M_QUAL', 'CATZOC': 'M_QUAL',
+              'QUAPOS': 'M_SREL', 'SCVAL1': 'M_SREL', 'SCVAL2': 'M_SREL', 'SDISMN': 'M_SREL', 'SDISMX': 'M_SREL',
+              'SURATH': 'M_SREL', 'SURTYP': 'M_SREL', 'DUNITS': 'M_UNIT', 'HUNITS': 'M_UNIT', 'PUNITS': 'M_UNIT',
+              '$TINTS': '$AREAS', '$SCALE': '$CSYMB', '$CSIZE': '$COMPS', '$CHARS': '$TEXTS', '$JUSTH': '$TEXTS',
+              '$JUSTV': '$TEXTS', '$NTXST': '$TEXTS', '$SPACE': '$TEXTS', '$TXSTR': '$TEXTS', 'eleva1': 'depare',
+              'eleva2': 'depare', 'catsit': 'sistat', 'catsiw': 'sistaw', 'catbrt': 'berths', 'catcbl': 'cblohd',
+              'catfry': 'feryrt', 'cathbr': 'hrbare', 'curvhw': 'curent', 'curvlw': 'curent', 'curvmw': 'curent',
+              'curvow': 'curent', 'cathlk': 'hulkes', 'catchp': 'chkpnt', 'catslc': 'slcons', 'catnmk': 'notmrk',
+              'fnctnm': 'notmrk', 'addmrk': 'notmrk', 'disbk1': 'notmrk', 'disbk2': 'notmrk', 'bunves': 'bunsta',
+              'catbun': 'bunsta', 'catrfd': 'refdmp', 'catgag': 'wtwgag', 'higwat': 'wtwgag', 'lowwat': 'wtwgag',
+              'meawat': 'wtwgag', 'othwat': 'wtwgag', 'sdrlev': 'wtwgag', 'vcrlev': 'wtwgag', 'cattab': 'tisdge',
+              'schref': 'tisdge', 'shptyp': 'tisdge', 'useshp': 'tisdge', 'aptref': 'tisdge', 'catvtr': 'vehtrf',
+              'catexs': 'excnst', 'lg_bme': 'lg_sdm', 'lg_lgs': 'lg_sdm', 'lg_drt': 'lg_sdm', 'lg_wdp': 'lg_sdm',
+              'lc_wd1': 'lg_vsp', 'lc_wd2': 'lg_vsp', 'lg_spd': 'lg_vsp', 'lg_spr': 'lg_vsp', 'lc_bm1': 'lg_vsp',
+              'lc_bm2': 'lg_vsp', 'lc_lg1': 'lg_vsp', 'lc_lg2': 'lg_vsp', 'lc_dr1': 'lg_vsp', 'lc_dr2': 'lg_vsp',
+              'ANATR1': 'ANNOTA', 'ANATR2': 'ANNOTA', 'ANATR3': 'ANNOTA', 'ANLYR1': 'ANNOTA', 'ANATR5': 'ANNOTA',
+              'ANATR4': 'ANNOTA', 'ANATR9': 'ANNOTA', 'ANATRA': 'ANNOTA', 'ANTXT1': 'ANNOTA', 'ANATR6': 'ANNOTA',
+              'ANATR7': 'ANNOTA', 'ANATR8': 'ANNOTA'}
+
+def layer(props):
+  for a,l in UNIQUE_ATTRS.items():
+    if a.upper() in props: return l
+    if a.lower() in props: return l
+
+  if 'BOYSHP' in props:
+    if 'CATLAM' in props:
+      return 'BOYLAT'
+    if 'CATCAM' in props:
+      return 'BOYCAR'
+    if 'CATSPM' in props:
+      return 'BOYSPP'
+    if all(c in str(props.get('COLOUR','')) for c in '13'):
+      return 'BOYSAW'
+    if all(c in str(props.get('COLOUR','')) for c in '23'):
+      return 'BOYISD'
+    return 'BOYSPP'
+
+  if 'BCNSHP' in props:
+    if 'CATLAM' in props:
+      return 'BCNLAT'
+    if 'CATCAM' in props:
+      return 'BCNCAR'
+    if 'CATSPM' in props:
+      return 'BCNSPP'
+    if all(c in str(props.get('COLOUR','')) for c in '13'):
+      return 'BCNSAW'
+    if all(c in str(props.get('COLOUR','')) for c in '23'):
+      return 'BCNISD'
+    return 'BCNSPP'
+
+  if 'TOPSHP' in props:
+    return 'DAYMAR'
+  if props.get('caution_type')==6:
+    return 'UWTROC'
+  if 'MARSYS' in props:
+    return 'M_NSYS'
+  if props.get('facility_type')==13:
+    return 'RSCSTA'
+  if 'CATCRN' in props:
+    return 'CRANES'
+  if 'TRAFIC' in props and props.get('catgeo')==1:
+    return 'RDOCAL'
+  if 'FUNCTN' in props:
+    return 'BUISGL'
+  if 'CATWED' in props or props.get('caution_type')==8:
+    return 'WEDKLP'
+  if 'NATSUR' in props and props.get('caution_type')==4:
+    return 'SBDARE'
+  if 'VALDCO' in props:
+    return 'DEPCNT'
+  if 'DRVAL1' in props and 'DRVAL2' in props:
+    return 'DEPARE'
+  if props.get('land_type')==5:
+    return 'LNDARE'
+  if props.get('depth_type')==2:
+    return 'DRGARE'
+  if 'CATREA' in props:
+    return 'RESARE'
+  if 'CATACH' in props:
+    return 'ACHARE'
+  if 'OBJNAM' in props and props.get('coast_type')==1 and props.get('catgeo')==3:
+    return 'SEAARE'
 
 
 def group_keys(features, log=0, filt=None):

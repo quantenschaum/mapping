@@ -4,7 +4,7 @@
 
 SHELL=/bin/bash
 export PATH:=$(PWD)/scripts:$(PWD)/spreet/target/release:$(PWD)/tippecanoe:$(PATH)
-OGR_OPTS=OGR_S57_OPTIONS="LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON" S57_CSV="$(PWD)"
+OGR_OPTS=OGR_S57_OPTIONS="LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON" S57_CSV="$(PWD)/scripts"
 
 .PHONY: bsh.osm icons obf vwm bsh charts qgis mapproxy
 
@@ -20,12 +20,12 @@ vwm:
 	for F in $$(find data/vwm -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 
 %.csv:
-	cd data && wget https://github.com/OpenCPN/OpenCPN/raw/master/data/s57data/$@
+	curl https://raw.githubusercontent.com/OpenCPN/OpenCPN/refs/heads/master/data/s57data/$(notdir $@) >$@
 
 %.zip:
 	wget -O data/$@ "`rwsget.py $(basename $@)`"
 
-%.enc:
+%.enc: scripts/s57objectclasses.csv scripts/s57attributes.csv
 	rm -rf data/$@ data/$(basename $@).gpkg data/$(basename $@)-covr.gpkg
 	unzip -j -n data/$(basename $@).zip -d data/$@
 	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@).gpkg      $$F        -skipfailures -append; done
@@ -199,7 +199,7 @@ upload:
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
-	cp -rpv osmand/marine.render.xml osmand/depthcontourlines.addon.render.xml charts/* tmp/docs
+	cp -rpv osmand/marine.render.xml osmand/depthcontourlines.addon.render.xml charts/* data/*.gpkg tmp/docs
 	cd tmp/docs && ./times.py index.md
 	cd tmp && mkdocs build
 	rm -rf www/download
@@ -214,7 +214,7 @@ vwm-update:
 build:
 	git pull
 	$(MAKE) bsh
-	$(MAKE) qmap-de.obf
+	$(MAKE) qmap-de.obf qmap-de.zip
 	$(MAKE) lightsectors.obf
 	$(MAKE) vwm waddenzee.zip waddenzee.enc
 	$(MAKE) clean-cache
@@ -320,6 +320,12 @@ qmap-de.obf: bsh.osm
 	$(MAKE) obf
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/qmap-de.obf obf/*.obf
+
+qmap-de.zip: scripts/s57objectclasses.csv scripts/s57attributes.csv
+	rm -rf qmap-de/ $@
+	sconvert.py -o qmap-de data/bsh/layers/*.json data/soundg.json
+	echo "ChartInfo:QMAP-DE `date +%F`" >qmap-de/Chartinfo.txt
+	zip charts/$@ -r qmap-de
 
 lightsectors.obf:
 	wget -O data/lights.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];( 	  nwr["seamark:type"="light_major"];   nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:range"]; 	  nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:1:range"];   	);(._;>;);out meta;'
