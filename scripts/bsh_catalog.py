@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# coding: utf-8
+
 import os.path
 from pyquery import PyQuery as pq
 
