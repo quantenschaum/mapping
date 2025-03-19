@@ -19,7 +19,7 @@ Here you find precompiled charts for download in various formats usable in diffe
     Nav aids and contour lines should be correct, though.
     
 !!! tip "Vector Data"
-    SENC files containing vector charts for AVNav have been added, that can be rendered by [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html). This is still experimental and not as complete as the raster charts.
+    S57 files containing vector charts for AVNav and OpenCPN have been added. For AVNav these chart can be rendered by [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html). 
 
 !!! info
     - Land areas are now transparent, to allow combining it with other charts.
@@ -104,7 +104,7 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
     - [:de: QMAP Soundings DE](soundg-de.mbtiles){:download}
     - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
     - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
-- SENC
+- S57/SENC
     - [:de: QMAP DE](qmap-de.zip){:download}
 
 ??? tip "SENC Vector Charts"
