@@ -323,7 +323,7 @@ qmap-de.obf: bsh.osm
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/qmap-de.obf obf/*.obf
 
-qmap-de.zip: scripts/s57objectclasses.csv scripts/s57attributes.csv
+qmap-de.zip:
 	rm -rf qmap-de/ $@
 	sconvert.py -o qmap-de data/bsh/layers/*.json data/soundg.json
 	echo "ChartInfo:QMAP-DE `date +%F`" >qmap-de/Chartinfo.txt
