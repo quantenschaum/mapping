@@ -8,9 +8,12 @@ import json
 import os
 import struct
 import sys
+from datetime import datetime
 from math import radians, degrees, log, tan, pi, atan, exp, isfinite
 import argparse
 import triangle
+from collections import defaultdict
+import shapely
 
 from geojson import (
     Point,
@@ -345,7 +348,7 @@ def read_oesu(filename):
     return records
 
 
-def decode(files):
+def read_senc(files):
     features = []
     for f in files:
         records = read_oesu(f)
@@ -371,6 +374,8 @@ def decode(files):
                 rlat, rlon = [r[k] for k in ("lat", "lon")]
                 rx, ry = ll2grid(rlon, rlat)
                 cell = r
+            # if rtype in (CELL_COVR_RECORD,CELL_NOCOVR_RECORD):
+            #     print(r)
             if rtype == FEATURE_ID_RECORD:
                 state = state0.copy()
                 state["layer"] = r["acronym"]
@@ -548,22 +553,15 @@ PRIMITIVES={'Point':1,'MultiPoint':1,
 
 SCALES={1:1500000, 2:180000, 3:90000, 4:22000, 5:8000, 6:4000}
 
-def bounds(features):
-    coverage=list(filter(lambda o:o['properties'].get('layer','').upper()=='M_COVR'
-                            and o['properties']['CATCOV']==1,features))
-    if not coverage:
-      coverage=list(filter(lambda o:'RECIND' in o['properties'],features))
-    lons,lats=[],[]
-    for m in coverage:
-      g=m['geometry']
-      assert g['type']=='Polygon',g
-      c=g['coordinates']
-      lons+=[x[0] for xs in c for x in xs]
-      lats+=[x[1] for xs in c for x in xs]
-    return min(lats),max(lats),min(lons),max(lons)
 
-def cbounds(coords):
-  # print(coords)
+def bounds(coords):
+  if isinstance(coords[0],dict):
+    snwe=None
+    for f in coords:
+      b=bounds(f['geometry']['coordinates'])
+      snwe=[m(a,b) for m,a,b in zip((min,max)*2,snwe or b,b)]
+    return snwe
+
   while True:
     try: iter(coords[0])
     except: break
@@ -577,27 +575,50 @@ def cbounds(coords):
 def find_keys(dic,val):
   return [k for k,v in dic.items() if v==val]
 
+def find_key(dic,val):
+  keys=find_keys(dic,val)
+  if len(keys)==1: return keys[0]
+
+
+def coverage(features):
+  for f in filter(lambda o:o['properties'].get('layer','').upper()=='M_COVR',features):
+    g=f['geometry']
+    assert g['type']=='Polygon',g
+    c=g['coordinates']
+    verts=[y[i] for x in c for y in x for i in (1,0)]
+    catcov=f['properties'].get('CATCOV',1)==1
+    ctype=CELL_COVR_RECORD if catcov else CELL_NOCOVR_RECORD
+    # print('coverage',catcov,verts)
+    yield record(ctype,struct.pack(BYTE_ORDER+f'I{len(verts)}f',len(verts)//2,*verts))
+
+
+def sort_key(feature):
+  p=PRIMITIVES[feature['geometry']['type']]
+  if p==1: return 2
+  if p==2: return 1
+  c=feature['geometry']['coordinates']
+  if 'Multi' in feature['geometry']['type']: c=c[0] # first polygon
+  p=shapely.Polygon(c[0]) # outer contour
+  return -abs(p.area) # sort by area, to get polygons big first, small last
+
 
 def write_senc(filename,features):
-    S,N,W,E=bounds(features)
-    cell_center=(W+E)/2,(S+N)/2
-    cx,cy=ll2grid(*cell_center)
 
-    # assert len(c)==1
-    # c=c[0]
-    # # print(c,len(c))
-    # covr=[x[i] for x in c for i in (1,0)]
-    # # print(covr,len(covr)//2)
+    features=sorted(features, key=sort_key)
 
-    cellname=min(o['properties'].get('chart','x-cellname') for o in features)
+    S,N,W,E=bounds(features) # cell/chart bounds
+    cell_center=(W+E)/2,(S+N)/2 # cell center lon, lat
+    cx,cy=ll2grid(*cell_center) # cell center in grid coordinates
+
+    cellname=min(o['properties'].get('chart','chart') for o in features)
     uband=min(o['properties'].get('uband',0) for o in features)
-    scamax=min(o['properties'].get('SCAMAX',99999999) for o in features)
+    scamax=min(o['properties'].get('SCAMAX',999999) for o in features)
     scamin=max(o['properties'].get('SCAMIN',0) for o in features)
     scale=max(o['properties'].get('scale',0) for o in features) or SCALES.get(uband,0) or scamin
-    sdatum='Mean sea level'
+    sdatum='undefined'
     published='yyyymmdd'
     updated='yyyymmdd'
-    created='yyyymmdd'
+    created=datetime.now().strftime('%Y%m%d')
 
     print(cellname,uband,scale)
 
@@ -613,48 +634,59 @@ def write_senc(filename,features):
       f.write(record(HEADER_CELL_SENCCREATEDATE,created.encode()+b'\0'))
       f.write(record(HEADER_CELL_SOUNDINGDATUM,sdatum.encode()+b'\0'))
       f.write(record(CELL_EXTENT_RECORD,struct.pack(BO+'8d',S,W,N,W,N,E,S,E)))
-      # f.write(record(CELL_COVR_RECORD,struct.pack(BO+f'I{len(covr)}f',len(covr)//2,*covr)))
+      for r in coverage(features): f.write(r)
 
-      id=-1
+      fid=0
 
       def next_id():
-        nonlocal id
-        id+=1
-        return id
+        nonlocal fid
+        fid+=1
+        return fid
 
       nodes={}
       edges={}
 
-      def contours(coordinates,ptype):
+      def contours(coordinates, ptype):
         assert ptype in (2,3), ptype
         r,m=b'',0
         conts=[]
         for c in coordinates:
-          edge=[(x-cx,y-cy) for x,y in map(lambda x:ll2grid(*x),reversed(c))]
+          edge=[(x-cx,y-cy) for x,y in map(lambda x:ll2grid(*x),c)]
           conts.append(edge)
           assert len(edge)>=2, edge
 
           # first/last node of edge
           node0,node1=edge[0],edge[-1]
-          node0_id,node1_id=len(nodes)+1,len(nodes)+2
-          nodes[node0_id]=node0
+
+          node0_id=find_key(nodes,node0)
+          if not node0_id:
+            node0_id=len(nodes)+1
+            nodes[node0_id]=node0
+          # else: print('node',node0_id)
+
           if ptype==3:
             assert node0==node1, 'polygon not closed'
             node1_id=node0_id
           else:
-            nodes[node1_id]=node1
+            node1_id=find_key(nodes,node1)
+            if not node1_id:
+              node1_id=len(nodes)+1
+              nodes[node1_id]=node1
 
           # inner nodes of edge
           edge=edge[1:-1]
           edge_id=0
           if edge:
-            edge_id=len(edges)+1
-            edges[edge_id]=edge
+            edge_id=find_key(edges,edge)
+            if not edge_id:
+              edge_id=len(edges)+1
+              edges[edge_id]=edge
+            # else: print('edge',edge_id)
           # print((node0_id,edge_id,node1_id,0))
           r+=struct.pack(BO+'IIII',node0_id,edge_id,node1_id,0)
           m+=1
 
-        S,N,W,E=cbounds(coordinates)
+        S,N,W,E=bounds(coordinates) # feature bounds
 
         if ptype==2:
           return record(FEATURE_GEOMETRY_RECORD_LINE,struct.pack(BO+'ddddI',S,N,W,E,m)+r)
@@ -662,7 +694,8 @@ def write_senc(filename,features):
         if ptype==3:
           t=struct.pack(BO+f'{m}I',*[len(c) for c in conts]) # points per contour
 
-          polygon=conts[0]
+          if len(conts)>1: print('skipping holes in polygon')
+          polygon=conts[0] # outer contour only
           assert polygon[0]==polygon[-1]
 
           if polygon:
@@ -706,7 +739,7 @@ def write_senc(filename,features):
         # print(l,ftype)
         primitives={PRIMITIVES[v] for v in s57obj[ftype][6]}
         if ptype not in primitives:
-          print('skipped invalid primitive type',l,gtype,primitives)
+          print('skipped invalid primitive',l,gtype)
           continue
         f.write(record(FEATURE_ID_RECORD,struct.pack(BO+'HHB',ftype,next_id(),ptype-1)))
 
@@ -745,10 +778,10 @@ def write_senc(filename,features):
 
 
       # soundings as 3D multipoints
-      soundings=collections.defaultdict()
+      soundings=defaultdict(list)
       for s in filter(lambda o:o['properties']['layer'].upper()=='SOUNDG',features):
         p=str({k:v for k,v in s['properties'].items() if k.upper()!='DEPTH'})
-        soundings.setdefault(p,[]).append(s)
+        soundings[p].append(s)
 
       ftype=acronym_code('SOUNDG')
       # print('SOUNDGs',len(soundings))
@@ -757,7 +790,7 @@ def write_senc(filename,features):
         props={k:v for k,v in s['properties'].items() if k.upper()!='DEPTH'}
         f.write(record(FEATURE_ID_RECORD,struct.pack(BO+'HHB',ftype,next_id(),1)))
         for r in attributes(props): f.write(r)
-        s,n,w,e=cbounds([s['geometry']['coordinates'] for s in sdgs])
+        s,n,w,e=bounds([s['geometry']['coordinates'] for s in sdgs])
         r=struct.pack(BO+'4dI',s,n,w,e,len(sdgs))
         for s in sdgs:
           c=s['geometry']['coordinates']
@@ -767,8 +800,6 @@ def write_senc(filename,features):
         f.write(record(FEATURE_GEOMETRY_RECORD_MULTIPOINT,r))
 
       f.write(b'\0')
-
-
 
 
 def read_features(files):
@@ -782,6 +813,7 @@ def read_features(files):
             p['layer']=p.get('layer',layer)
             features.append(o)
     return features
+
 
 def main():
     parser = argparse.ArgumentParser(description="senc converter: senc <--> geojson")
@@ -797,29 +829,25 @@ def main():
         data=read_features(files)
         field='chart'
         charts=set(filter(lambda o:o,(o['properties'].get(field) for o in data)))
-        if len(charts)<=1:
-          c=charts[0] if charts else 'chart'
-          write_senc(os.path.join(out,c+'.senc'),data)
-        else:
-          print(len(charts),'charts')
-          for c in sorted(charts):
-            data1=list(filter(lambda o:o['properties'].get(field)==c,data))
-            s,n,w,e=bounds(data1)
-            uband=min(o['properties'].get('uband',0) for o in data1)
+        print(len(charts),'charts')
+        for c in sorted(charts):
+          data1=list(filter(lambda o:o['properties'].get(field)==c,data))
+          s,n,w,e=bounds(data1)
+          uband=min(o['properties'].get('uband',0) for o in data1)
 
-            def filt(o):
-              if field in o['properties']: return
-              if o['geometry']['type']!='Point': return
-              if o['properties'].get('uband')!=uband: return
-              lon,lat=o['geometry']['coordinates']
-              return w<=lon<=e and s<=lat<=n
+          def filt(o):
+            if field in o['properties']: return
+            if o['geometry']['type']!='Point': return
+            if o['properties'].get('uband')!=uband: return
+            lon,lat=o['geometry']['coordinates']
+            return w<=lon<=e and s<=lat<=n
 
-            data2=list(filter(filt,data))
-            write_senc(os.path.join(out,c+'.senc'),data1+data2)
+          data2=list(filter(filt,data))
+          write_senc(os.path.join(out,c+'.senc'),data1+data2)
         return
 
 
-    features = decode(files)
+    features = read_senc(files)
     for l in sorted({f.properties['layer'] for f in features}):
         fs = list(filter(lambda f: f.properties['layer'] == l, features))
         print(l, len(fs))

@@ -19,13 +19,15 @@ vwm:
 	#for F in data/vwm/*.json; do jq . $$F>data/vwm/tmp; mv data/vwm/tmp $$F; done
 	for F in $$(find data/vwm -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 
+csv:  scripts/s57objectclasses.csv scripts/s57attributes.csv
+
 %.csv:
 	curl https://raw.githubusercontent.com/OpenCPN/OpenCPN/refs/heads/master/data/s57data/$(notdir $@) >$@
 
 %.zip:
 	wget -O data/$@ "`rwsget.py $(basename $@)`"
 
-%.enc: scripts/s57objectclasses.csv scripts/s57attributes.csv
+%.enc:
 	rm -rf data/$@ data/$(basename $@).gpkg data/$(basename $@)-covr.gpkg
 	unzip -j -n data/$(basename $@).zip -d data/$@
 	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@).gpkg      $$F        -skipfailures -append; done
