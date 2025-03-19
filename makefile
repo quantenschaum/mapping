@@ -64,6 +64,7 @@ BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows?SERVICE=WMS&VERSION=1.3
 
 bsh:
 	rm -rf data/bsh && mkdir -p data/bsh
+	curl https://linchart60.bsh.de/chartserver/katalog.xml >data/bsh/catalog.html && bsh_catalog.py
 	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
 	cd data/bsh && for L in Hydrography Topography;         do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
 	cd data/bsh && for L in RocksWrecksObstructions;        do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
@@ -72,6 +73,7 @@ bsh:
 # 	cd data/bsh && for F in *.json; do ogr2ogr $${F/.json/.gpkg} $$F; done
 	cd data/bsh && for F in filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
 	cd data/bsh && for F in layers/*.json; do ogr2ogr layers.gpkg $$F -append; done
+
 
 filter:
 	rm -rf data/bsh/cleaned && mkdir data/bsh/cleaned

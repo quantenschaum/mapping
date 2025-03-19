@@ -551,7 +551,8 @@ PRIMITIVES={'Point':1,'MultiPoint':1,
             'Line':2,'LineString':2,'MultiLineString':2,
             'Area':3,'Polygon':3,'MultiPolygon':3}
 
-SCALES={1:1500000, 2:180000, 3:90000, 4:22000, 5:8000, 6:4000}
+# https://www.bsh.de/DE/PUBLIKATIONEN/Naut_Produktkatalog/naut_produktkatalog_node.html
+SCALES={1:1500000, 2:180000, 3:90000, 4:22000, 5:12000, 6:4000}
 
 
 def bounds(coords):
@@ -602,6 +603,15 @@ def sort_key(feature):
   return -abs(p.area) # sort by area, to get polygons big first, small last
 
 
+def catalog():
+  try:
+    with open(os.path.dirname(__file__)+'/../data/bsh/catalog.json') as f:
+          return json.load(f)
+  except: return {}
+
+CATALOG=catalog()
+
+
 def write_senc(filename,features):
 
     features=sorted(features, key=sort_key)
@@ -610,26 +620,37 @@ def write_senc(filename,features):
     cell_center=(W+E)/2,(S+N)/2 # cell center lon, lat
     cx,cy=ll2grid(*cell_center) # cell center in grid coordinates
 
-    cellname=min(o['properties'].get('chart','chart') for o in features)
+    cell=cellname=min(o['properties'].get('chart','chart') for o in features)
     uband=min(o['properties'].get('uband',0) for o in features)
     scamax=min(o['properties'].get('SCAMAX',999999) for o in features)
     scamin=max(o['properties'].get('SCAMIN',0) for o in features)
     scale=max(o['properties'].get('scale',0) for o in features) or SCALES.get(uband,0) or scamin
-    sdatum='undefined'
-    published='yyyymmdd'
-    updated='yyyymmdd'
+    sdatum=''
+    edition=0
+    published=''
+    update=0
+    updated=''
     created=datetime.now().strftime('%Y%m%d')
 
-    print(cellname,uband,scale)
+    meta=CATALOG.get(cellname)
+    if meta:
+      cellname=meta['c_title']
+      scale=int(meta['c_scale'])
+      edition=int(meta['editionNumber'])
+      update=int(meta['updateNumber'])
+      published=meta.get('editionDate','')
+      updated=meta.get('issueDate','')
+
+    print(cell,uband,scale,edition,update,updated,cellname)
 
     with (open(filename,'wb') as f):
       BO=BYTE_ORDER
       f.write(record(HEADER_SENC_VERSION,struct.pack(BO+'H',201)))
       f.write(record(HEADER_CELL_NAME,cellname.encode()+b'\0'))
       f.write(record(HEADER_CELL_PUBLISHDATE,published.encode()+b'\0'))
-      f.write(record(HEADER_CELL_EDITION,struct.pack(BO+'H',1)))
+      f.write(record(HEADER_CELL_EDITION,struct.pack(BO+'H',edition)))
       f.write(record(HEADER_CELL_UPDATEDATE,updated.encode()+b'\0'))
-      f.write(record(HEADER_CELL_UPDATE,struct.pack(BO+'H',1)))
+      f.write(record(HEADER_CELL_UPDATE,struct.pack(BO+'H',update)))
       f.write(record(HEADER_CELL_NATIVESCALE,struct.pack(BO+'I',scale)))
       f.write(record(HEADER_CELL_SENCCREATEDATE,created.encode()+b'\0'))
       f.write(record(HEADER_CELL_SOUNDINGDATUM,sdatum.encode()+b'\0'))
