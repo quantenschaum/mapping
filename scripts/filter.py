@@ -302,6 +302,10 @@ def main():
       l=layer(props)
       if l: props['layer']=l
 
+  # remove old and HD charts - https://linchart60.bsh.de/chartserver/katalog.xml
+  features=data['features']=[f for f in features if f['properties'].get('chart','xxxNO')[3:5] in ('NO','OS')]
+  assert features
+
   if ofile:
     save_json(ofile,data)
 
@@ -528,7 +532,9 @@ def layer(props):
   if props.get('berth_type')==2 and area:
     return 'ACHARE'
 
-  if 'Radar' in props.get('OBJNAM','') and 'COMCHA' in props:
+  if 'Radar' in props.get('OBJNAM','') and area:
+    return 'RADRNG'
+  if 'RADAR' in props.get('OBJNAM','') and area:
     return 'RADRNG'
 
   if props.get('light_type')==3 and point:

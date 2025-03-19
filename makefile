@@ -72,7 +72,7 @@ bsh:
 	cd data/bsh && for F in *.xml; do filter.py $$F filtered/$${F/xml/json} layers >>filter.log; done
 # 	cd data/bsh && for F in *.json; do ogr2ogr $${F/.json/.gpkg} $$F; done
 	cd data/bsh && for F in filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
-	cd data/bsh && for F in layers/*.json; do ogr2ogr layers.gpkg $$F -append; done
+# 	cd data/bsh && for F in layers/*.json; do ogr2ogr layers.gpkg $$F -append; done
 
 
 filter:

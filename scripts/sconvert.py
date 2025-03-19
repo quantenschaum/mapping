@@ -28,7 +28,6 @@ from geojson import (
 from jinja2.nodes import FromImport
 
 BYTE_ORDER = "="
-
 # https://github.com/bdbcat/o-charts_pi/blob/master/src/Osenc.h#L88
 HEADER_SENC_VERSION = 1
 HEADER_CELL_NAME = 2
@@ -147,15 +146,18 @@ def grid2ll(easting, northing):
 def multipoint(data, read):
     data["points"] = [unpack(read, "fff") for i in range(data["count"])]
 
+TABLE_STRIDE=4
 
 def lines(data, read):
-    data["edges"] = [unpack(read, "IIII") for j in range(data["count"])]
+    fmt = 'I'*TABLE_STRIDE
+    pad = (0,)*(4-TABLE_STRIDE)
+    data["edges"] = [unpack(read, fmt)+pad for i in range(data["count"])]
 
 
 def areas(data, read, skip_triangles=1):
     # print(data)
     if skip_triangles:
-        read(data["rlen"] - 50 - data["count"] * 16)
+        read(data["rlen"] - 50 - data["count"] * (4*TABLE_STRIDE))
     else:
         conts, tris = [data[k] for k in ("contours", "triprim")]
         pointcount = unpack(read, f"{conts}I")
@@ -167,7 +169,8 @@ def areas(data, read, skip_triangles=1):
             # print(bbox)
             vertices = [unpack(read, "ff") for i in range(nvert)]
             triangles.append({"ttype": tritype, "bbox": bbox, "vertices": vertices})
-    data["edges"] = [unpack(read, "IIII") for j in range(data["count"])]
+
+    lines(data,read)
 
 
 def edge_node_table(data, read):
@@ -189,6 +192,8 @@ def connected_node_table(data, read):
         nodes[index] = [v / s for v in unpack(read, "ff")]
     data["nodes"] = nodes
 
+# https://github.com/bdbcat/oesenc_pi/blob/master/src/Osenc.h
+# https://github.com/OpenCPN/OpenCPN/blob/master/gui/include/gui/Osenc.h
 
 # <key>:<datatype>
 TYPE2DATA = {
@@ -292,7 +297,7 @@ def unpack(stream, fmt):
     return struct.unpack(fmt, buf)
 
 
-def read(stream):
+def parse_records(stream):
     size, rlen = 0, 0
 
     def readdata(n):
@@ -329,6 +334,7 @@ def read(stream):
                 pass
         data[name] = val
     r = rlen - size
+    assert not r
     if r:
         print(data["rtype"], "skipped", r)
         readdata(r)
@@ -337,11 +343,13 @@ def read(stream):
     return data
 
 
-def read_oesu(filename):
+def parse_senc(filename):
+    global TABLE_STRIDE
+    TABLE_STRIDE = 3 if filename.upper().endswith('.S57') else 4
     records = []
     with open(filename, "rb") as f:
         while True:
-            r = read(f)
+            r = parse_records(f)
             if not r:
                 break
             records.append(r)
@@ -351,7 +359,7 @@ def read_oesu(filename):
 def read_senc(files):
     features = []
     for f in files:
-        records = read_oesu(f)
+        records = parse_senc(f)
         print("converting", f)
         # for t, n in TYPE2REC.items():
         #     c = len(list(filter(lambda r: r["rtype"] == t, records)))
@@ -368,6 +376,8 @@ def read_senc(files):
             rtype = r["rtype"]
             # print({k:('...' if k in ('points','edges','nodes','array') else v) for k,v in r.items()})
             # print({k:v for k,v in r.items()})
+            # if rtype==HEADER_SENC_VERSION:
+            #     print(r)
             if rtype == HEADER_CELL_NATIVESCALE:
                 state0['scale']=r['scale']
             if rtype == CELL_EXTENT_RECORD:
@@ -436,13 +446,16 @@ def read_senc(files):
                 f = Feature(geometry=p, properties=props)
                 features.append(f)
 
+
         for r in lines:
             # print(r)
             lines = []
             for a, b, c, v in r["edges"]:
                 line = []
                 line.append(nodes[a])
-                line += (reversed(edges[b]) if v else edges[b]) if b else []
+                if b in edges:
+                  line += (reversed(edges[b]) if v else edges[b]) if b else []
+                else: print('skipped invalid edge')
                 line.append(nodes[c])
                 lines.append(line)
             l = LineString(line) if len(lines) == 1 else MultiLineString(lines)
@@ -460,7 +473,9 @@ def read_senc(files):
                     if line: lines.append(line)
                     line = []
                     line.append(nodes[a])
-                line += (reversed(edges[b]) if v else edges[b]) if b else []
+                if b in edges:
+                  line += (reversed(edges[b]) if v else edges[b]) if b else []
+                else: print('skipped invalid edge')
                 line.append(nodes[c])
                 e = c
             lines.append(line)
@@ -620,6 +635,7 @@ def write_senc(filename,features):
     cell_center=(W+E)/2,(S+N)/2 # cell center lon, lat
     cx,cy=ll2grid(*cell_center) # cell center in grid coordinates
 
+    version=201 if filename.endswith('.senc') else 200
     cell=cellname=min(o['properties'].get('chart','chart') for o in features)
     uband=min(o['properties'].get('uband',0) for o in features)
     scamax=min(o['properties'].get('SCAMAX',999999) for o in features)
@@ -640,12 +656,13 @@ def write_senc(filename,features):
       update=int(meta['updateNumber'])
       published=meta.get('editionDate','')
       updated=meta.get('issueDate','')
+    # else: return
 
     print(cell,uband,scale,edition,update,updated,cellname)
 
     with (open(filename,'wb') as f):
       BO=BYTE_ORDER
-      f.write(record(HEADER_SENC_VERSION,struct.pack(BO+'H',201)))
+      f.write(record(HEADER_SENC_VERSION,struct.pack(BO+'H',version)))
       f.write(record(HEADER_CELL_NAME,cellname.encode()+b'\0'))
       f.write(record(HEADER_CELL_PUBLISHDATE,published.encode()+b'\0'))
       f.write(record(HEADER_CELL_EDITION,struct.pack(BO+'H',edition)))
@@ -653,7 +670,7 @@ def write_senc(filename,features):
       f.write(record(HEADER_CELL_UPDATE,struct.pack(BO+'H',update)))
       f.write(record(HEADER_CELL_NATIVESCALE,struct.pack(BO+'I',scale)))
       f.write(record(HEADER_CELL_SENCCREATEDATE,created.encode()+b'\0'))
-      f.write(record(HEADER_CELL_SOUNDINGDATUM,sdatum.encode()+b'\0'))
+      # f.write(record(HEADER_CELL_SOUNDINGDATUM,sdatum.encode()+b'\0'))
       f.write(record(CELL_EXTENT_RECORD,struct.pack(BO+'8d',S,W,N,W,N,E,S,E)))
       for r in coverage(features): f.write(r)
 
@@ -704,7 +721,10 @@ def write_senc(filename,features):
               edges[edge_id]=edge
             # else: print('edge',edge_id)
           # print((node0_id,edge_id,node1_id,0))
-          r+=struct.pack(BO+'IIII',node0_id,edge_id,node1_id,0)
+          if version>200:
+            r+=struct.pack(BO+'IIII',node0_id,edge_id,node1_id,0)
+          else:
+            r+=struct.pack(BO+'III',node0_id,edge_id,node1_id)
           m+=1
 
         S,N,W,E=bounds(coordinates) # feature bounds
@@ -846,6 +866,7 @@ def main():
     out = args.output
     os.makedirs(out, exist_ok=True)
 
+
     if files[0].endswith('json'):
         data=read_features(files)
         field='chart'
@@ -864,7 +885,7 @@ def main():
             return w<=lon<=e and s<=lat<=n
 
           data2=list(filter(filt,data))
-          write_senc(os.path.join(out,c+'.senc'),data1+data2)
+          write_senc(os.path.join(out,c+'.S57'),data1+data2)
         return
 
 
