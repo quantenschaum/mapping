@@ -3,12 +3,10 @@
 
 import csv
 import json
-import struct
 from datetime import datetime
 import argparse
-import triangle
 from collections import defaultdict
-import shapely
+from itertools import accumulate
 from os import makedirs
 from os.path import basename, splitext, dirname, join
 
@@ -22,7 +20,12 @@ from geojson import (
     Feature,
     FeatureCollection,
 )
-from triangle.plot import vertices
+
+try:
+  import shapely
+  import numpy as np
+  import mapbox_earcut as earcut
+except: pass
 
 from senc import SENC, grid2ll, ll2grid, S57_RECORD_TYPES, HEADER_CELL_NAME, HEADER_CELL_PUBLISHDATE, HEADER_CELL_EDITION, HEADER_CELL_UPDATEDATE, HEADER_CELL_UPDATE, HEADER_CELL_NATIVESCALE, HEADER_CELL_SENCCREATEDATE, CELL_EXTENT_RECORD, HEADER_CELL_SOUNDINGDATUM, FEATURE_ID_RECORD, FEATURE_GEOMETRY_RECORD_POINT, VECTOR_CONNECTED_NODE_TABLE_RECORD, VECTOR_EDGE_NODE_TABLE_RECORD, FEATURE_ATTRIBUTE_RECORD, CELL_COVR_RECORD, CELL_NOCOVR_RECORD, FEATURE_GEOMETRY_RECORD_MULTIPOINT, FEATURE_GEOMETRY_RECORD_LINE, FEATURE_GEOMETRY_RECORD_AREA, write_txt, senc2s57
 
@@ -156,37 +159,46 @@ def senc2features(filename, txtdir=None, multipoints=False):
           features.append(f)
       continue
 
+    def contours(edgelist,pc=None):
+      line,lines,s,e = None,[],None,None
+      for n0, ed, n1, flip in edgelist:
+        if n0 != e: # start of new segment
+        # if e is None: # start of new segment
+          if line: lines.append(line)
+          line = []
+          s=n0
+          line.append(node_table[n0])
+          # print('\nline',end=' ')
+        # print((n0,ed,n1),end=' ')
+        if ed in edge_table:
+          line += (reversed(edge_table[ed]) if flip else edge_table[ed]) if ed else []
+        elif ed: print('skipped invalid edge')
+        line.append(node_table[n1])
+        e = None if n1==s else n1 # e=None if closed loop
+        # if pc and len(line)>=pc[len(lines)]: e=None
+      lines.append(line)
+      # print()
+      for l in lines:
+        for a,b in zip(l[:-1],l[1:]): assert a!=b, 'repeated nodes'
+      return lines
+
     if r['name']=='line':
       assert ptype==2
-      lines=[]
-      for a, b, c, v in r["edges"]:
-        line = []
-        line.append(node_table[a])
-        if b in edge_table:
-          line += (reversed(edge_table[b]) if v else edge_table[b]) if b else []
-        elif b: print('skipped invalid edge')
-        line.append(node_table[c])
-        lines.append(line)
-      l = LineString(line) if len(lines)==1 else MultiLineString(lines)
+      lines=contours(r['edges'])
+      l = LineString(lines[0]) if len(lines)==1 else MultiLineString(lines)
       f = Feature(geometry=l, properties=props)
       features.append(f)
       continue
 
     if r['name']=='area':
       assert ptype==3
-      line,lines = [],[]
-      e = 0
-      for a, b, c, v in r["edges"]:
-        if a != e:
-          if line: lines.append(line)
-          line = []
-          line.append(node_table[a])
-        if b in edge_table:
-          line += (reversed(edge_table[b]) if v else edge_table[b]) if b else []
-        elif b: print('skipped invalid edge')
-        line.append(node_table[c])
-        e = c
-      lines.append(line)
+      assert r['contours']==len(r['pointcount']),(r['contours'],len(r['pointcount']))
+      # print(r['contours'])
+      lines=contours(r['edges'],r['pointcount'])
+      # assert len(lines)==r['contours'],(len(lines),r['contours'])
+      for i,l in enumerate(lines):
+        assert l[0]==l[-1],'polygon not closed'
+        # assert len(l)==r['pointcount'][i],(len(l),r['pointcount'][i])
       l = Polygon(lines)
       f = Feature(geometry=l, properties=props)
       features.append(f)
@@ -293,7 +305,7 @@ def features2senc(filename,features):
     print(cell,uband,scale,edition,update,updated,cellname)
     assert edition>0,edition
 
-    with SENC(filename,1) as senc:
+    with SENC(filename,'w') as senc:
       senc.add_record(type=HEADER_CELL_NAME, cellname=cellname)
       senc.add_record(type=HEADER_CELL_PUBLISHDATE, published=published)
       senc.add_record(type=HEADER_CELL_EDITION, edition=edition)
@@ -344,8 +356,7 @@ def features2senc(filename,features):
               node1_id=len(nodes)+1
               nodes[node1_id]=node1
 
-          # inner nodes of edge
-          edge=edge[1:-1]
+          edge=edge[1:-1] # inner nodes of edge
           edge_id=0
           if edge:
             edge_id=find_key(edges,edge)
@@ -361,27 +372,16 @@ def features2senc(filename,features):
           senc.add_record(type=FEATURE_GEOMETRY_RECORD_LINE, bbox=bbox, edges=edge_ids)
 
         if ptype==3:
-          if len(conts)>1: print('skipping holes in polygon',l)
-          polygon=conts[0] # outer contour only
-          assert polygon[0]==polygon[-1]
+          def triangulate(polygon):
+            verts=np.array([v for c in polygon for v in c]).reshape(-1,2)
+            rings=list(accumulate(len(c) for c in polygon))
+            indices=earcut.triangulate_float32(verts, rings)
+            return [verts[i] for i in indices]
 
-          trias=[]
-          if polygon:
-            try:
-              polygon=polygon[:-1]
-              n=len(polygon)
-
-              tri=triangle.triangulate({
-                'vertices': polygon,
-                'segments': [[i,(i+1)%n] for i in range(n)],
-              },'p')
-              verts=tri['vertices']
-              trias=tri['triangles']
-              trias=[verts[i] for tri in trias for i in tri]
-            except: print('triangulation failed')
-
-          senc.add_record(type=FEATURE_GEOMETRY_RECORD_AREA, bbox=bbox, contours=len(conts), pointcount=[len(c) for c in conts],
-                          edges=edge_ids, triangles=[{'ttype':4, 'bbox':bbox[2:4]+bbox[:2], 'vertices':trias}]) # 4=tris 5=strip 6=fan
+          # ttype: 4=tris 5=strip 6=fan
+          senc.add_record(type=FEATURE_GEOMETRY_RECORD_AREA, bbox=bbox,
+                          contours=len(conts), pointcount=[len(c) for c in conts], edges=edge_ids,
+                          triangles=[{'ttype':4, 'bbox':bbox[2:4]+bbox[:2], 'vertices':triangulate(conts)}])
 
 
       def attributes(p):
@@ -430,9 +430,9 @@ def features2senc(filename,features):
 
         elif 'Polygon' in gtype:
           if 'Multi' in gtype:
-            print('skipped',gtype,l)
-            continue
-          contours(c,ptype)
+            for p in c: contours(p,ptype)
+          else:
+            contours(c,ptype)
         else: print('skipped',l,gtype,ptype)
 
       if nodes:

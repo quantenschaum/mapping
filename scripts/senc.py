@@ -84,8 +84,8 @@ def line(data, unpack=None, pack=None):
 
 def area(data, unpack=None, pack=None):
     if unpack:
-        conts, tris = [data[k] for k in ("contours", "triprim")]
-        pointcount = unpack(f"{conts}I")
+        contours, tris = [data[k] for k in ("contours", "trias")]
+        pointcount = unpack(f"{contours}I")
         data["pointcount"] = pointcount
         triangles = data["triangles"] = []
         for t in range(tris):
@@ -100,7 +100,7 @@ def area(data, unpack=None, pack=None):
         assert len(p)==c
         pack(f'{c}I',*p)
         triangles=data['triangles']
-        assert len(triangles)==data['triprim']
+        assert len(triangles)==data['trias']
         for t in triangles:
           tt,bb,vs=t['ttype'],t['bbox'],t['vertices'] # bbox=WESN
           pack('BIdddd',tt,len(vs),*bb)
@@ -179,7 +179,7 @@ RECORDS = {
         'area',
         'bbox:dddd', # SNWE
         "contours:I",
-        "triprim:I",
+        "trias:I",
         "count:I",
         area,
     ],
@@ -187,7 +187,7 @@ RECORDS = {
         'area',
         'bbox:dddd', # SNWE
         "contours:I",
-        "triprim:I",
+        "trias:I",
         "count:I",
         "scale:d",
         area,
@@ -211,9 +211,9 @@ RECORDS = {
 
 class SENC():
   'reads/writes an SENC/S57 file to/from dicts'
-  def __init__(self,filename,writeable=False):
+  def __init__(self,filename,mode='r'):
     self.filename=filename
-    self._writeable=writeable
+    self._writeable='w' in mode
     self._BO='<'
     self._stride=4 if filename.endswith('.senc') else 3
     self._fid=0
@@ -223,7 +223,8 @@ class SENC():
     self._fd=open(self.filename,'wb' if self._writeable else 'rb')
     self._limit=None
     if self._writeable:
-      self.set_version(201 if self._stride==4 else 200)
+      ver=201 if self._stride==4 else 200
+      self.add_record(type=HEADER_SENC_VERSION, version=ver)
     return self
 
   def __exit__(self, exc_type, exc_val, exc_tb):
@@ -250,10 +251,10 @@ class SENC():
   def read(self, n, exactly=False):
     'read (exactly) n bytes, enforce limit'
     if self._limit is not None:
+      assert self._limit-n>=0,f'limit exceeded: {self._limit}'
       self._limit-=n
-      assert self._limit>=0,f'limit exceeded: {self._limit}'
     data=self._fd.read(n)
-    assert not exactly or len(data)==n, f'not enough data: {n}'
+    assert not exactly or len(data)==n, f'not exactly: {len(data)}<{n}'
     return data
 
   def unpack(self,fmt):
@@ -321,7 +322,6 @@ class SENC():
         data['name']=f
         continue
       name, fmt = f.split(":")
-      r = self.limit()
       fmt = eval(f'f"{fmt}"')
       # print(name,fmt)
       val=self.unpack(fmt)
@@ -341,7 +341,7 @@ class SENC():
     if 'nodes' in data: data['count']=len(data['nodes'])
     if 'points' in data: data['count']=len(data['points'])
     if 'array' in data: data['count']=len(data['array'])//2
-    if 'triangles' in data: data['triprim']=len(data['triangles'])
+    if 'triangles' in data: data['trias']=len(data['triangles'])
     if 'ftype' in data:
       if 'id' in data: self._fid=data['id']
       else:
@@ -368,10 +368,6 @@ class SENC():
     self.end_record()
 
 
-  def set_version(self,ver):
-    self.add_record(type=HEADER_SENC_VERSION, version=ver)
-
-
 def write_txt(filename,txt):
   with open(filename,'w') as f:
     f.write(txt)
@@ -385,7 +381,7 @@ def senc2s57(fi,fo):
   et=et[0]['edges'] # the edge table
   eid=max(et.keys())+1 # next edge ID
 
-  with SENC(fo,1) as s57:
+  with SENC(fo,'w') as s57:
     for r in senc:
       t=r['type']
       if t==CELL_TXTDSC_INFO_FILE_RECORD: write_txt(join(dirname(fo),r['file']),r['text'])
