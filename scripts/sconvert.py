@@ -534,7 +534,7 @@ def main():
         fo=join(out,basename(fi).replace('.senc','.S57'))
         print(fi,'-->',fo)
         senc2s57(fi,fo)
-        return
+      return
 
     # GeoJSON --> SENC
     if files[0].endswith('json'):
