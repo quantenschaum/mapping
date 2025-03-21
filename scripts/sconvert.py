@@ -24,7 +24,7 @@ from geojson import (
 )
 from triangle.plot import vertices
 
-from senc import SENC, grid2ll, ll2grid, S57_RECORD_TYPES, HEADER_CELL_NAME, HEADER_CELL_PUBLISHDATE, HEADER_CELL_EDITION, HEADER_CELL_UPDATEDATE, HEADER_CELL_UPDATE, HEADER_CELL_NATIVESCALE, HEADER_CELL_SENCCREATEDATE, CELL_EXTENT_RECORD, HEADER_CELL_SOUNDINGDATUM, FEATURE_ID_RECORD, FEATURE_GEOMETRY_RECORD_POINT, VECTOR_CONNECTED_NODE_TABLE_RECORD, VECTOR_EDGE_NODE_TABLE_RECORD, FEATURE_ATTRIBUTE_RECORD, CELL_COVR_RECORD, CELL_NOCOVR_RECORD, FEATURE_GEOMETRY_RECORD_MULTIPOINT, FEATURE_GEOMETRY_RECORD_LINE, FEATURE_GEOMETRY_RECORD_AREA
+from senc import SENC, grid2ll, ll2grid, S57_RECORD_TYPES, HEADER_CELL_NAME, HEADER_CELL_PUBLISHDATE, HEADER_CELL_EDITION, HEADER_CELL_UPDATEDATE, HEADER_CELL_UPDATE, HEADER_CELL_NATIVESCALE, HEADER_CELL_SENCCREATEDATE, CELL_EXTENT_RECORD, HEADER_CELL_SOUNDINGDATUM, FEATURE_ID_RECORD, FEATURE_GEOMETRY_RECORD_POINT, VECTOR_CONNECTED_NODE_TABLE_RECORD, VECTOR_EDGE_NODE_TABLE_RECORD, FEATURE_ATTRIBUTE_RECORD, CELL_COVR_RECORD, CELL_NOCOVR_RECORD, FEATURE_GEOMETRY_RECORD_MULTIPOINT, FEATURE_GEOMETRY_RECORD_LINE, FEATURE_GEOMETRY_RECORD_AREA, write_txt, senc2s57
 
 def to(typ, val):
     try: return typ(val)
@@ -91,13 +91,13 @@ def senc2features(filename, txtdir=None, multipoints=False):
       continue
 
     if r['name']=='cell_name':
-      # chart=r['cellname']
-      # uband=int(chart[-1])
+      chart=r['cellname'] or chart
+      uband=int(chart[-1])
       continue
 
     if r['name']=='cell_extent':
-      cs,cn=r['se_lat'],r['nw_lat']
-      cw,ce=r['sw_lon'],r['ne_lon']
+      cs,cw=r['sw']
+      cn,ce=r['ne']
       clat,clon=(cs+cn)/2,(cw+ce)/2
       cx,cy=ll2grid(clon,clat)
       continue
@@ -195,11 +195,9 @@ def senc2features(filename, txtdir=None, multipoints=False):
   return features
 
 
-def write(filename, data):
-    with open(filename, "w") as f:
-        json.dump(data, f, indent=2)
 
-def save_json(filename,data,**kwargs):
+
+def write_json(filename,data,**kwargs):
   with open(filename,'w') as f:
     try:
       assert data['type']=='FeatureCollection'
@@ -305,7 +303,7 @@ def features2senc(filename,features):
       senc.add_record(type=HEADER_CELL_SENCCREATEDATE, created=datetime.now().strftime('%Y%m%d'))
       # senc.add_record(type=HEADER_CELL_SOUNDINGDATUM, datum=sdatum)
 
-      senc.add_record(type=CELL_EXTENT_RECORD,sw_lat=S,sw_lon=W,nw_lat=N,nw_lon=W,ne_lat=N,ne_lon=E,se_lat=S,se_lon=E)
+      senc.add_record(type=CELL_EXTENT_RECORD,sw=(S,W),nw=(N,W),se=(S,E),ne=(N,E))
 
       for f in filter(lambda f:f['properties'].get('layer','').upper()=='M_COVR',features):
         g=f['geometry']
@@ -357,10 +355,10 @@ def features2senc(filename,features):
             # else: print('edge',edge_id)
           edge_ids.append((node0_id,edge_id,node1_id,0))
 
-        S,N,W,E=bounds(coordinates) # feature bounds
+        bbox=bounds(coordinates) # feature bounds
 
         if ptype==2:
-          senc.add_record(type=FEATURE_GEOMETRY_RECORD_LINE, south=S, north=N, west=W, east=E, edges=edge_ids)
+          senc.add_record(type=FEATURE_GEOMETRY_RECORD_LINE, bbox=bbox, edges=edge_ids)
 
         if ptype==3:
           if len(conts)>1: print('skipping holes in polygon',l)
@@ -382,8 +380,8 @@ def features2senc(filename,features):
               trias=[verts[i] for tri in trias for i in tri]
             except: print('triangulation failed')
 
-          senc.add_record(type=FEATURE_GEOMETRY_RECORD_AREA, south=S, north=N, west=W, east=E, contours=len(conts), pointcount=[len(c) for c in conts],
-                          edges=edge_ids, triangles=[{'ttype':4, 'bbox':(W,E,S,N), 'vertices':trias}]) # 4=tris 5=strip 6=fan
+          senc.add_record(type=FEATURE_GEOMETRY_RECORD_AREA, bbox=bbox, contours=len(conts), pointcount=[len(c) for c in conts],
+                          edges=edge_ids, triangles=[{'ttype':4, 'bbox':bbox[2:4]+bbox[:2], 'vertices':trias}]) # 4=tris 5=strip 6=fan
 
 
       def attributes(p):
@@ -460,14 +458,14 @@ def features2senc(filename,features):
         props={k:v for k,v in s['properties'].items() if k.upper()!='DEPTH'}
         senc.add_record(type=FEATURE_ID_RECORD, ftype=ftype, primitive=0)
         attributes(props)
-        S,N,W,E=bounds([s['geometry']['coordinates'] for s in sdgs])
+        bbox=bounds([s['geometry']['coordinates'] for s in sdgs])
         points=[]
         for s in sdgs:
           c=s['geometry']['coordinates']
           x,y=[a-b for a,b in zip(ll2grid(*c),(cx,cy))]
           d=s['properties'].get('DEPTH') or s['properties'].get('depth',0.0)
           points.append((x,y,d))
-        senc.add_record(type=FEATURE_GEOMETRY_RECORD_MULTIPOINT, south=S, north=N, west=W, east=E, points=points)
+        senc.add_record(type=FEATURE_GEOMETRY_RECORD_MULTIPOINT, bbox=bbox, points=points)
 
 
 
@@ -485,37 +483,6 @@ def read_features(files):
 
 
 
-def senc2s57(fi,fo):
-  senc=SENC(fi).records()
-  et=list(filter(lambda r:r['name']=='edge_table',senc))
-  assert len(et)==1
-  assert 'scale' not in et[0]
-  et=et[0]['edges'] # the edge table
-  eid=max(et.keys())+1 # next edge ID
-
-  with SENC(fo,1) as s57:
-    for r in senc:
-      t=r['type']
-      if t==101: # text
-        with open(join(dirname(fo),r['file']),'w') as f:
-          f.write(r['text'])
-      if t in S57_RECORD_TYPES and t not in (1,96): # skip edge table
-        if 'edges' in r: # lines and areas
-          edges=[]
-          for e in r['edges']:
-            if e[1] and e[3]: # reversed edge
-              et[eid]=list(reversed(et[e[1]])) # added reversed add to edge table
-              e=(e[0],eid,e[2]) # update indices
-              eid+=1
-            else: e=e[:3] # drop 4th int
-            edges.append(e) # set new indices
-          r['edges']=edges
-        s57.add_record(**r)
-      else:
-        assert t not in (84,85,86),t # stop on EXT record (not implemented)
-    s57.add_record(type=96,edges=et) # write modified edge table
-
-
 def main():
     parser = argparse.ArgumentParser(description="chart converter: S57/SENC <--> GeoJSON and SENC --> S57")
     parser.add_argument('-o',"--output", help="output dir", default='.')
@@ -530,6 +497,7 @@ def main():
 
     # SENC --> S57
     if args.s57:
+      write_txt(join(out,'Chartinfo.txt'),f'ChartInfo:{basename(out)}\n')
       for fi in files:
         fo=join(out,basename(fi).replace('.senc','.S57'))
         print(fi,'-->',fo)
@@ -538,6 +506,7 @@ def main():
 
     # GeoJSON --> SENC
     if files[0].endswith('json'):
+      write_txt(join(out,'Chartinfo.txt'),f'ChartInfo:{basename(out)}\n')
       features=read_features(files)
       charts=set(filter(lambda f:f,(f['properties'].get('chart') for f in features)))
       print(len(charts),'charts')
@@ -570,11 +539,10 @@ def main():
           for f in fs:
             filename,text=f.properties['filename'],f.properties['text']
             print(filename)
-            with open(f'{out}/{filename}','w') as txt:
-              txt.write(text)
+            write_txt(join(out,filename),text)
           continue
         print(l, len(fs))
-        save_json(f"{out}/{l}.json", FeatureCollection(fs))
+        write_json(f"{out}/{l}.json", FeatureCollection(fs))
 
 
 if __name__ == "__main__":

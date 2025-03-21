@@ -13,6 +13,7 @@ https://github.com/bdbcat/o-charts_pi/blob/master/src/Osenc.h
 
 import struct
 from math import radians, log, tan, pi, atan, degrees, exp
+from os.path import join, dirname
 
 HEADER_SENC_VERSION = 1
 HEADER_CELL_NAME = 2
@@ -101,7 +102,7 @@ def area(data, unpack=None, pack=None):
         triangles=data['triangles']
         assert len(triangles)==data['triprim']
         for t in triangles:
-          tt,bb,vs=t['ttype'],t['bbox'],t['vertices']
+          tt,bb,vs=t['ttype'],t['bbox'],t['vertices'] # bbox=WESN
           pack('BIdddd',tt,len(vs),*bb)
           for v in vs: pack('ff',*v)
 
@@ -143,46 +144,40 @@ def node_table(data, unpack=None, pack=None):
 
 RECORDS = {
     HEADER_SENC_VERSION: ['cell_version',"version:H"],
-    HEADER_CELL_NAME: ['cell_name',"cellname:{r}s"],
-    HEADER_CELL_PUBLISHDATE: ['cell_publish_date',"published:{r}s"],
+    HEADER_CELL_NAME: ['cell_name',"cellname:z"],
+    HEADER_CELL_PUBLISHDATE: ['cell_publish_date',"published:z"],
     HEADER_CELL_EDITION: ['cell_edition',"edition:H"],
-    HEADER_CELL_UPDATEDATE: ['cell_update_date',"updated:{r}s"],
+    HEADER_CELL_UPDATEDATE: ['cell_update_date',"updated:z"],
     HEADER_CELL_UPDATE: ['cell_update',"update:H"],
     HEADER_CELL_NATIVESCALE: ['cell_native_scale',"scale:I"],
-    HEADER_CELL_SENCCREATEDATE: ['cell_creation_date',"created:{r}s"],
-    HEADER_CELL_SOUNDINGDATUM: ['cell_sounding_datum',"datum:{r}s"],
+    HEADER_CELL_SENCCREATEDATE: ['cell_creation_date',"created:z"],
+    HEADER_CELL_SOUNDINGDATUM: ['cell_sounding_datum',"datum:z"],
+    CELL_EXTENT_RECORD: ['cell_extent','sw:dd','nw:dd','ne:dd','se:dd'],
+    CELL_COVR_RECORD: ['cell_coverage',"count:I", "array:{2*d['count']}f"],
+    CELL_NOCOVR_RECORD: ['cell_no_coverage',"count:I", "array:{2*d['count']}f"],
     FEATURE_ID_RECORD: ['feature',"ftype:H", "id:H", "primitive:B"],
     FEATURE_ATTRIBUTE_RECORD: [
         'attribute',
         "atype:H",
         "vtype:B",
-        "value:{str(r)+'s' if d['vtype']==4 else 'd' if d['vtype']==2 else 'I'}",
+        "value:{'z' if d['vtype']==4 else 'd' if d['vtype']==2 else 'I'}",
     ],
     FEATURE_GEOMETRY_RECORD_POINT: ['point',"lat:d", "lon:d"],
     FEATURE_GEOMETRY_RECORD_MULTIPOINT: [
         'multipoint',
-        "south:d",
-        "north:d",
-        "west:d",
-        "east:d",
+        'bbox:dddd', # SNWE
         "count:I",
         multipoint,
     ],
     FEATURE_GEOMETRY_RECORD_LINE: [
         'line',
-        "south:d",
-        "north:d",
-        "west:d",
-        "east:d",
+        'bbox:dddd', # SNWE
         "count:I",
         line,
     ],
     FEATURE_GEOMETRY_RECORD_AREA: [
         'area',
-        "south:d",
-        "north:d",
-        "west:d",
-        "east:d",
+        'bbox:dddd', # SNWE
         "contours:I",
         "triprim:I",
         "count:I",
@@ -190,10 +185,7 @@ RECORDS = {
     ],
     FEATURE_GEOMETRY_RECORD_AREA_EXT: [
         'area',
-        "south:d",
-        "north:d",
-        "west:d",
-        "east:d",
+        'bbox:dddd', # SNWE
         "contours:I",
         "triprim:I",
         "count:I",
@@ -204,26 +196,7 @@ RECORDS = {
     VECTOR_EDGE_NODE_TABLE_EXT_RECORD: ['edge_table',"count:I", "scale:d", edge_table],
     VECTOR_CONNECTED_NODE_TABLE_RECORD: ['node_table',"count:I", node_table],
     VECTOR_CONNECTED_NODE_TABLE_EXT_RECORD: ['node_table,'"count:I", "scale:d", node_table],
-    CELL_COVR_RECORD: ['cell_coverage',"count:I", "array:{2*d['count']}f"],
-    CELL_NOCOVR_RECORD: ['cell_no_coverage',"count:I", "array:{2*d['count']}f"],
-    CELL_EXTENT_RECORD: [
-        'cell_extent',
-        "sw_lat:d",
-        "sw_lon:d",
-        "nw_lat:d",
-        "nw_lon:d",
-        "ne_lat:d",
-        "ne_lon:d",
-        "se_lat:d",
-        "se_lon:d",
-    ],
-    CELL_TXTDSC_INFO_FILE_RECORD: [
-        'text',
-        "flength:I",
-        "clength:I",
-        "file:{d['flength']}s",
-        "text:{r}s",
-    ],
+    CELL_TXTDSC_INFO_FILE_RECORD: ['text',"flength:I","clength:I","file:z","text:z"],
     SERVER_STATUS_RECORD: [
         'server_status',
         "server:H",
@@ -285,6 +258,14 @@ class SENC():
 
   def unpack(self,fmt):
     'read data from file'
+    if fmt=='z': # zero terminated string
+      s=b''
+      while True:
+        c=self.unpack('s')[0]
+        if c!=b'\0': s+=c
+        else: break
+      # print('<z',s.decode())
+      return s.decode()
     n=struct.calcsize(self._BO+fmt)
     b=self.read(n)
     if len(b)!=n: return
@@ -292,7 +273,11 @@ class SENC():
 
   def pack(self,fmt,*vals):
     'write data to file'
-    self._fd.write(struct.pack(self._BO+fmt,*vals))
+    if fmt=='z':
+      # print('>z',vals[0])
+      self._fd.write(vals[0].encode()+b'\0')
+    else:
+      self._fd.write(struct.pack(self._BO+fmt,*vals))
 
   def get_type(self):
     'return next record type, set limit'
@@ -303,6 +288,24 @@ class SENC():
     if h:
       self.limit(h[1]-6)
       return h[0]
+
+
+  def start_record(self,rtype):
+    assert not hasattr(self,'_pos')
+    assert self._stride==4 or rtype in S57_RECORD_TYPES, f'record type {rtype} {RECORDS[rtype][0]} not allowed in S57'
+    self._pos=self._fd.tell()
+    self.pack('HI',rtype,0)
+
+
+  def end_record(self,s=None):
+    size=self._fd.tell()-self._pos
+    # print('> size',size-6)
+    assert s is None or size-6==s, (size-6,s)
+    self._fd.seek(self._pos+2,0)
+    self.pack('I',size)
+    self._fd.seek(0,2)
+    del self._pos
+
 
   def get_record(self):
     t=self.get_type()
@@ -323,31 +326,10 @@ class SENC():
       # print(name,fmt)
       val=self.unpack(fmt)
       # print(val)
-      val = val[0] if len(val) == 1 else val
-      if fmt.endswith("s"):
-        try: val = val.decode().replace("\x00", "")
-        except: pass
-      data[name] = val
+      data[name] = val[0] if len(val) == 1 else val
 
     assert not self.limit(), f'remaining bytes: {self.limit()}'
     return data
-
-
-  def start_record(self,rtype):
-    assert not hasattr(self,'_pos')
-    assert self._stride==4 or rtype in S57_RECORD_TYPES, f'record type {rtype} {RECORDS[rtype][0]} not allowed in S57'
-    self._pos=self._fd.tell()
-    self.pack('HI',rtype,0)
-
-
-  def end_record(self,s=None):
-    size=self._fd.tell()-self._pos
-    # print('> size',size-6)
-    assert s is None or size-6==s, (size-6,s)
-    self._fd.seek(self._pos+2,0)
-    self.pack('I',size)
-    self._fd.seek(0,2)
-    del self._pos
 
 
   def add_record(self,**data):
@@ -370,23 +352,17 @@ class SENC():
       data['vtype']=4 if isinstance(v,str) else 2 if isinstance(v,float) else 0
     self.start_record(t)
     # print('>',data)
-    r,d='-',data
+    d=data
     for f in fields:
       if callable(f):
         # print('>',f)
         f(data,pack=self.pack)
         continue
       if ':' not in f: continue
-      name, fmt0 = f.split(":")
+      name, fmt = f.split(":")
+      fmt = eval(f'f"{fmt}"')
       val=data[name]
-      if name=='array': r=len(val)*4
-      # if name=='value': d={'vtype':4 if isinstance(val,str) else 2 if isinstance(val,float) else 0}
-      # if name=='file': d=data
-      fmt = eval(f'f"{fmt0}"')
       # print('>',name,fmt0,fmt,val)
-      if fmt.endswith('s'):
-        self._fd.write(val.encode()+b'\0')
-        continue
       if len(fmt)==1: val=[val]
       self.pack(fmt, *val)
     self.end_record()
@@ -396,14 +372,37 @@ class SENC():
     self.add_record(type=HEADER_SENC_VERSION, version=ver)
 
 
+def write_txt(filename,txt):
+  with open(filename,'w') as f:
+    f.write(txt)
 
 
+def senc2s57(fi,fo):
+  senc=SENC(fi).records()
+  et=list(filter(lambda r:r['name']=='edge_table',senc))
+  assert len(et)==1
+  assert 'scale' not in et[0]
+  et=et[0]['edges'] # the edge table
+  eid=max(et.keys())+1 # next edge ID
+
+  with SENC(fo,1) as s57:
+    for r in senc:
+      t=r['type']
+      if t==CELL_TXTDSC_INFO_FILE_RECORD: write_txt(join(dirname(fo),r['file']),r['text'])
+      if t in S57_RECORD_TYPES and t not in (HEADER_SENC_VERSION,VECTOR_EDGE_NODE_TABLE_RECORD):
+        if 'edges' in r: # lines and areas
+          edges=[]
+          for e in r['edges']:
+            if e[1] and e[3]: # edge with reverse flag
+              et[eid]=list(reversed(et[e[1]])) # added flipped add to edge table
+              e=(e[0],eid,e[2]) # update indices
+              eid+=1
+            else: e=e[:3] # drop 4th int
+            edges.append(e) # set new indices
+          r['edges']=edges
+        s57.add_record(**r)
+      else:
+        assert t not in (VECTOR_EDGE_NODE_TABLE_EXT_RECORD,VECTOR_CONNECTED_NODE_TABLE_EXT_RECORD,FEATURE_GEOMETRY_RECORD_AREA_EXT),t # stop on EXT record (not implemented)
+    s57.add_record(type=VECTOR_EDGE_NODE_TABLE_RECORD,edges=et) # write modified edge table
 
 
-if __name__=='__main__':
-  with SENC('../ocharts/oesenc-export/export/OC-49-H11SO4.senc') as s:
-    with SENC('foo.senc',writeable=1) as o:
-      for r in s:
-        if r['type'] in S57_RECORD_TYPES and r['type']!=1:
-          print(r['size'])
-          o.add_record(**r)
