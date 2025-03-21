@@ -413,10 +413,6 @@ def layer(props):
 
   if props.get('beacon_type') and point:
     return 'BCNSPP'
-  if props.get('facility_type')==6 and area:
-    return 'HRBARE'
-  if props.get('facility_type')==4:
-    return 'HRBFAC'
 
   if 'TOPSHP' in props and point:
     return 'DAYMAR'
@@ -426,14 +422,10 @@ def layer(props):
     return 'UWTROC'
   if 'MARSYS' in props or props.get('meta_type')==6:
     return 'M_NSYS'
-  if props.get('facility_type')==13 and point:
-    return 'RSCSTA'
   if props.get('signal_type')==1 and line:
     return 'RADLNE'
   if props.get('signal_type')==5 and point:
     return 'RTPBCN'
-  if props.get('facility_type')==11 and (point or area):
-    return 'OFSPLF'
   if 'CATCRN' in props and (point or area):
     return 'CRANES'
   if 'TRAFIC' in props and point:
@@ -501,12 +493,18 @@ def layer(props):
 
   if props.get('zone_type')==1 and area:
     return 'DWRTPT'
+  if props.get('zone_type')==2 and area:
+    return 'FAIRWY'
   if props.get('zone_type')==4 and line:
     return 'RCRTCL'
-  if props.get('zone_type')==7 and area:
-    return 'RCTLPT'
   if props.get('zone_type')==4 and area:
     return 'ISTZNE'
+  if props.get('zone_type')==7 and area:
+    return 'RCTLPT'
+  if props.get('zone_type')==17 and area:
+    return 'MIPARE'
+  if props.get('zone_type')==10 and area:
+    return 'FISGRD'
 
   if 'CATTSS' in props:
     if props.get('zone_type')==6 and line:
@@ -539,16 +537,28 @@ def layer(props):
 
   if props.get('light_type')==3 and point:
     return 'PILPNT'
+
   if 'FUNCTN' in props or props.get('facility_type')==1:
     return 'BUISGL'
   if props.get('facility_type')==3 and area:
     return 'CRANES'
-  if props.get('facility_type')==7 and (point or area):
+  if props.get('facility_type')==4:
+    return 'CRANES'
+  if props.get('facility_type')==7 and point:
+    return 'HRBFAC'
+  if props.get('facility_type')==7 and area:
     return 'HULKES'
   if props.get('facility_type')==12 and (line or area):
     return 'PONTON'
   if props.get('facility_type')==9:
     return 'LNDMRK'
+  if props.get('facility_type')==11 and (point or area):
+    return 'OFSPLF'
+  if props.get('facility_type')==13 and point:
+    return 'RSCSTA'
+  if props.get('facility_type')==6 and area:
+    return 'HRBARE'
+
   if props.get('light_type')==1 and point:
     return 'DAYMAR'
   if props.get('light_type')==6 and point:
@@ -575,14 +585,20 @@ def layer(props):
     return 'RAILWY'
   if props.get('trans_type')==4 and line:
     return 'CONVYR'
+  if props.get('trans_type')==4 and area:
+    return 'CAUSWY'
+  if props.get('trans_type')==6 and area:
+    return 'PYLONS'
   if props.get('land_type')==7 and (line or area):
     return 'RIVERS'
   if props.get('land_type')==4:
     return 'LNDELV'
   if props.get('land_type')==2 and line:
-    return 'SLOTOP'
-  if props.get('land_type')==8 and (line or area):
     return 'DYKCON'
+  if props.get('land_type')==2 and area:
+    return 'DAMCON'
+  if props.get('land_type')==8 and (line or area):
+    return 'SLOTOP'
   if props.get('berth_type')==3:
     return 'BERTHS'
   if props.get('util_type')==3 and line:
