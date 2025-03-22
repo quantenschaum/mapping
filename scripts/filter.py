@@ -258,22 +258,14 @@ def main():
     if 'id' in f:
       b=band(f['id'])
       if b:
-        # if props.get('MARSYS'): b-=1
         props['uband']=b
 
-    name=props.get('name')
-    if name:
-      m=re.match(r'(.+)\.000$',name)
-      if m:
-        props['name']=m.group(1)
-
     if 'chart' not in props:
-      name=props.get('name')
-      if name:
-        props['chart']=name
-      dsnm=props.get('dsnm')
-      if dsnm:
-        props['chart']=dsnm.replace('.000','')
+      chart=props.get('dsnm',props.get('name'))
+      if chart:
+        props['chart']=chart.replace('.000','')
+
+    # print(ifile,props.get('chart'),props.get('uband'),props.get('lnam'))
 
     # if 'LITCHR' in props:
     #   props['light']=light_spec(props)
@@ -303,8 +295,8 @@ def main():
       if l: props['layer']=l
 
   # remove old and HD charts - https://linchart60.bsh.de/chartserver/katalog.xml
-  features=data['features']=[f for f in features if f['properties'].get('chart','xxxNO')[3:5] in ('NO','OS')]
-  assert features
+  # features=data['features']=[f for f in features if re.match(r'DE\d(NO|OS)...',f['properties'].get('chart','DE0NOxxx'))]
+  # assert features
 
   if ofile:
     save_json(ofile,data)

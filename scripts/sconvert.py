@@ -153,7 +153,7 @@ def senc2features(filename, txtdir=None, multipoints=False):
         features.append(f)
       else:
         for x, y, depth in r['points']:
-          props["DEPTH"] = round(depth,1)
+          props['VALSOU'] = round(depth,1)
           p = Point(grid2ll(cx+x,cy+y))
           f = Feature(geometry=p, properties=props.copy())
           features.append(f)
@@ -281,7 +281,7 @@ def features2senc(filename,features):
     cx,cy=ll2grid(clon,clat) # cell center in grid coordinates
 
     version=201 if filename.endswith('.senc') else 200
-    cell=cellname=min(o['properties'].get('chart','chart') for o in features)
+    chart=cell=min(o['properties'].get('chart','chart') for o in features)
     uband=min(o['properties'].get('uband',0) for o in features)
     scamax=min(o['properties'].get('SCAMAX',999999) for o in features)
     scamin=max(o['properties'].get('SCAMIN',0) for o in features)
@@ -292,9 +292,13 @@ def features2senc(filename,features):
     update=0
     updated=''
 
-    meta=CATALOG.get(cellname)
+    # try to prevent overlapping cells to have exactly the same scale
+    # to prevent duplicate data to rendered simultaneously
+    scale+=hash(chart)%10
+
+    meta=CATALOG.get(cell)
     if meta:
-      cellname=meta['c_title']
+      cell=meta['c_title']
       scale=int(meta['c_scale'])
       edition=int(meta['editionNumber'])
       update=int(meta['updateNumber'])
@@ -302,11 +306,11 @@ def features2senc(filename,features):
       updated=meta.get('issueDate','')
     # else: return
 
-    print(cell,uband,scale,edition,update,updated,cellname)
+    print(f'{chart} u{uband} 1:{scale} ed{edition} up{update} {cell}')
     assert edition>0,edition
 
     with SENC(filename,'w') as senc:
-      senc.add_record(type=HEADER_CELL_NAME, cellname=cellname)
+      senc.add_record(type=HEADER_CELL_NAME, cellname=cell)
       senc.add_record(type=HEADER_CELL_PUBLISHDATE, published=published)
       senc.add_record(type=HEADER_CELL_EDITION, edition=edition)
       senc.add_record(type=HEADER_CELL_UPDATEDATE, updated=updated)
@@ -315,17 +319,29 @@ def features2senc(filename,features):
       senc.add_record(type=HEADER_CELL_SENCCREATEDATE, created=datetime.now().strftime('%Y%m%d'))
       # senc.add_record(type=HEADER_CELL_SOUNDINGDATUM, datum=sdatum)
 
-      senc.add_record(type=CELL_EXTENT_RECORD,sw=(S,W),nw=(N,W),se=(S,E),ne=(N,E))
+      senc.add_record(type=CELL_EXTENT_RECORD,sw=(S,W),se=(S,E),ne=(N,E),nw=(N,W))
 
-      for f in filter(lambda f:f['properties'].get('layer','').upper()=='M_COVR',features):
-        g=f['geometry']
-        assert g['type']=='Polygon',g
-        c=g['coordinates']
-        verts=[y[i] for x in c for y in x for i in (1,0)]
-        catcov=f['properties'].get('CATCOV',1)==1
-        ctype=CELL_COVR_RECORD if catcov else CELL_NOCOVR_RECORD
-        # print('coverage',catcov)
-        senc.add_record(type=ctype,array=verts)
+      def coverage(features):
+        k=0
+        for f in filter(lambda f:f['properties'].get('layer','').upper()=='M_COVR',features):
+          g=f['geometry']
+          assert g['type']=='Polygon',g
+          c=g['coordinates']
+          # assert len(c)==1,'coverage has holes'
+          # verts=[y[i] for x in c for y in x for i in (1,0)]
+          if len(c)>1: print('skipping holes in coverage')
+          verts=[x[i] for x in c[0] for i in (1,0)]
+          catcov=f['properties'].get('CATCOV',1)==1
+          ctype=CELL_COVR_RECORD if catcov else CELL_NOCOVR_RECORD
+          # print('coverage',catcov)
+          senc.add_record(type=ctype,array=verts)
+          k+=1
+        return k
+
+      if not coverage(features): # set coverage to bbox if no M_COVR present
+        coverage([{'type':'Feature',
+                   'properties':{'layer':'M_COVR','CATCOV':1},
+                   'geometry':{'type':'Polygon','coordinates':[[(S,W),(S,E),(N,E),(N,W),(S,W)]]}}])
 
       nodes,edges={},{}
 
@@ -455,7 +471,7 @@ def features2senc(filename,features):
       # print('SOUNDGs',len(soundings))
       for sdgs in soundings.values():
         s=sdgs[0]
-        props={k:v for k,v in s['properties'].items() if k.upper()!='DEPTH'}
+        props={k:v for k,v in s['properties'].items() if k.upper() not in ('VALSOU','DEPTH')}
         senc.add_record(type=FEATURE_ID_RECORD, ftype=ftype, primitive=0)
         attributes(props)
         bbox=bounds([s['geometry']['coordinates'] for s in sdgs])
@@ -463,11 +479,10 @@ def features2senc(filename,features):
         for s in sdgs:
           c=s['geometry']['coordinates']
           x,y=[a-b for a,b in zip(ll2grid(*c),(cx,cy))]
-          d=s['properties'].get('DEPTH') or s['properties'].get('depth',0.0)
-          points.append((x,y,d))
+          p=s['properties']
+          d=p.get('VALSOU',p.get('DEPTH'))
+          if d is not None: points.append((x,y,d))
         senc.add_record(type=FEATURE_GEOMETRY_RECORD_MULTIPOINT, bbox=bbox, points=points)
-
-
 
 def read_features(files):
     features=[]

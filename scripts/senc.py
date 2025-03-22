@@ -298,7 +298,10 @@ class SENC():
     self.pack('HI',rtype,0)
 
 
-  def end_record(self,s=None):
+  def end_record(self,s=None,revert=False):
+    if revert:
+      self._fd.seek(self._pos)
+      return
     size=self._fd.tell()-self._pos
     # print('> size',size-6)
     assert s is None or size-6==s, (size-6,s)
@@ -350,22 +353,26 @@ class SENC():
     if 'value' in data:
       v=data['value']
       data['vtype']=4 if isinstance(v,str) else 2 if isinstance(v,float) else 0
-    self.start_record(t)
-    # print('>',data)
-    d=data
-    for f in fields:
-      if callable(f):
-        # print('>',f)
-        f(data,pack=self.pack)
-        continue
-      if ':' not in f: continue
-      name, fmt = f.split(":")
-      fmt = eval(f'f"{fmt}"')
-      val=data[name]
-      # print('>',name,fmt0,fmt,val)
-      if len(fmt)==1: val=[val]
-      self.pack(fmt, *val)
-    self.end_record()
+    try:
+      self.start_record(t)
+      # print('>',data)
+      d=data
+      for f in fields:
+        if callable(f):
+          # print('>',f)
+          f(data,pack=self.pack)
+          continue
+        if ':' not in f: continue
+        name, fmt = f.split(":")
+        fmt = eval(f'f"{fmt}"')
+        val=data[name]
+        # print('>',name,fmt0,fmt,val)
+        if len(fmt)==1: val=[val]
+        self.pack(fmt, *val)
+      self.end_record()
+    except Exception as x:
+      print('reverted',x,data)
+      self.end_record(revert=True)
 
 
 def write_txt(filename,txt):
