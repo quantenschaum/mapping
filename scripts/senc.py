@@ -301,6 +301,7 @@ class SENC():
   def end_record(self,s=None,revert=False):
     if revert:
       self._fd.seek(self._pos)
+      del self._pos
       return
     size=self._fd.tell()-self._pos
     # print('> size',size-6)
@@ -382,10 +383,13 @@ def write_txt(filename,txt):
 
 def senc2s57(fi,fo):
   senc=SENC(fi).records()
-  et=list(filter(lambda r:r['name']=='edge_table',senc))
-  assert len(et)==1
-  assert 'scale' not in et[0]
-  et=et[0]['edges'] # the edge table
+  et={}
+  for t in list(filter(lambda r:r['name']=='edge_table',senc)):
+    assert 'scale' not in t
+    for i,v in t['edges'].items():
+      assert i not in et,f'duplicate edge id {i}'
+      et[i]=v
+
   eid=max(et.keys())+1 # next edge ID
 
   with SENC(fo,'w') as s57:
