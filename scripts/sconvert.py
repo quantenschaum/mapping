@@ -292,9 +292,9 @@ def features2senc(filename,features):
     update=0
     updated=''
 
-    # try to prevent overlapping cells to have exactly the same scale
-    # to prevent duplicate data to rendered simultaneously
-    scale+=hash(chart)%10
+    # give overlapping cells not exactly the same scale
+    # to prevent duplicate data to be rendered
+    scale+=hash(chart)%100
 
     meta=CATALOG.get(cell)
     if meta:
@@ -480,7 +480,7 @@ def features2senc(filename,features):
           c=s['geometry']['coordinates']
           x,y=[a-b for a,b in zip(ll2grid(*c),(cx,cy))]
           p=s['properties']
-          d=p.get('VALSOU',p.get('DEPTH'))
+          d=p.get('VALSOU',p.get('DEPTH',p.get('depth')))
           if d is not None: points.append((x,y,d))
         senc.add_record(type=FEATURE_GEOMETRY_RECORD_MULTIPOINT, bbox=bbox, points=points)
 
