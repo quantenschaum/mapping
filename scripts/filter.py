@@ -295,8 +295,8 @@ def main():
       if l: props['layer']=l
 
   # remove old and HD charts - https://linchart60.bsh.de/chartserver/katalog.xml
-  # features=data['features']=[f for f in features if re.match(r'DE\d(NO|OS)...',f['properties'].get('chart','DE0NOxxx'))]
-  # assert features
+  features=data['features']=[f for f in features if re.match(r'DE\d(NO|OS)...',f['properties'].get('chart','DE0NOxxx'))]
+  assert features
 
   if ofile:
     save_json(ofile,data)

@@ -341,7 +341,7 @@ def features2senc(filename,features):
       if not coverage(features): # set coverage to bbox if no M_COVR present
         coverage([{'type':'Feature',
                    'properties':{'layer':'M_COVR','CATCOV':1},
-                   'geometry':{'type':'Polygon','coordinates':[[(S,W),(S,E),(N,E),(N,W),(S,W)]]}}])
+                   'geometry':{'type':'Polygon','coordinates':[[(W,S),(E,S),(E,N),(W,N),(W,S)]]}}])
 
       nodes,edges={},{}
 

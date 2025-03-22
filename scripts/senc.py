@@ -354,8 +354,8 @@ class SENC():
     if 'value' in data:
       v=data['value']
       data['vtype']=4 if isinstance(v,str) else 2 if isinstance(v,float) else 0
+    self.start_record(t)
     try:
-      self.start_record(t)
       # print('>',data)
       d=data
       for f in fields:
