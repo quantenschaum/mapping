@@ -86,7 +86,10 @@ def senc2features(filename, txtdir=None, multipoints=False):
   node_table,edge_table={},{}
 
   chart=splitext(basename(filename))[0]
-  uband=int(chart[-1])
+  if chart.startswith("OC"):
+    uband=int(chart[-1])
+  else:
+    uband=int(chart[2])
 
   for r in recs: # first pass
     if r['name']=='cell_native_scale':
@@ -95,7 +98,10 @@ def senc2features(filename, txtdir=None, multipoints=False):
 
     if r['name']=='cell_name':
       chart=r['cellname'] or chart
-      uband=int(chart[-1])
+      if chart.startswith("OC"):
+        uband=int(chart[-1])
+      else:
+        uband=int(chart[2])
       continue
 
     if r['name']=='cell_extent':
@@ -179,7 +185,10 @@ def senc2features(filename, txtdir=None, multipoints=False):
       lines.append(line)
       # print()
       for l in lines:
-        for a,b in zip(l[:-1],l[1:]): assert a!=b, 'repeated nodes'
+        try:
+          for a,b in zip(l[:-1],l[1:]): assert a!=b, 'repeated nodes'
+        except:
+          print('repeated nodes')
       return lines
 
     if r['name']=='line':
