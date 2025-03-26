@@ -68,17 +68,14 @@ bsh:
 	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
 	cd data/bsh && for L in Hydrography Topography;         do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
 	cd data/bsh && for L in RocksWrecksObstructions;        do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
+	$(MAKE) filter
+
+filter:
 	cd data/bsh && rm -rf layers filtered *.gpkg filter.log
 	cd data/bsh && for F in *.xml; do filter.py $$F filtered/$${F/xml/json} layers >>filter.log; done
 # 	cd data/bsh && for F in *.json; do ogr2ogr $${F/.json/.gpkg} $$F; done
 	cd data/bsh && for F in filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
 # 	cd data/bsh && for F in layers/*.json; do ogr2ogr layers.gpkg $$F -append; done
-
-
-filter:
-	rm -rf data/bsh/cleaned && mkdir data/bsh/cleaned
-	for F in data/bsh/*.json; do ubands.py $$F $${F/bsh/bsh/cleaned}; done
-	for F in $$(find data/bsh/cleaned -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
 
 icons: icons/gen
 
@@ -168,11 +165,11 @@ TRANSPARENT=-cf9ecc0
 
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fwebp $(TRANSPARENT)
+	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fwebp #$(TRANSPARENT)
 
 charts/%.png.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fpng $(TRANSPARENT)
+	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fpng #$(TRANSPARENT)
 
 charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts
@@ -326,7 +323,7 @@ qmap-de.obf: bsh.osm
 	data/omc/inspector.sh -c charts/qmap-de.obf obf/*.obf
 
 qmap-de.zip:
-	rm -rf qmap-de/ $@
+	rm -rf qmap-de/ charts/$@
 	sconvert.py -o qmap-de data/bsh/layers/*.json data/soundg.json
 	echo "ChartInfo:QMAP-DE `date +%F`" >qmap-de/Chartinfo.txt
 	zip charts/$@ -r qmap-de
