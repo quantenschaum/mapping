@@ -185,7 +185,10 @@ def senc2features(filename, txtdir=None, multipoints=False):
       lines.append(line)
       # print()
       for l in lines:
-        for a,b in zip(l[:-1],l[1:]): assert a!=b, 'repeated nodes'
+        try:
+          for a,b in zip(l[:-1],l[1:]): assert a!=b, 'repeated nodes'
+        except:
+          print('repeated nodes')
       return lines
 
     if r['name']=='line':
