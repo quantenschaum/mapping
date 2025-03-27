@@ -45,8 +45,9 @@ Here you find precompiled charts for download in various formats usable in diffe
     Raw data files are available here. They can be used in [QGIS](https://qgis.org/) to render your own charts or to investigate or play with dat data. The QGIS file used in this project can be found on [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis).
     
     - [BSH Data](bsh.gpkg){:download}
-    - [BSH Bathymetry](soundg-de.gpkg){:download}
+    - [BSH Soundings](soundg-de.gpkg){:download}
     - [RWS Waddenzee](waddenzee.gpkg){:download}
+    - [Icons](icons.zip){:download}
 
 ## [OsmAnd](https://osmand.net/)
 

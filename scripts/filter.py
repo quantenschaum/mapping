@@ -114,7 +114,7 @@ def convert_xml(ifile,ofile):
   print('converting',ifile,'-->',ofile)
   xml=pq(filename=ifile)
   items=xml('item')
-  print(len(items),'items')
+  print(len(items),'xml items')
   features=[]
   for i in items:
     i=pq(i)
@@ -301,17 +301,24 @@ def main():
       if l: props['layer']=l
 
   # remove old and HD charts - https://linchart60.bsh.de/chartserver/katalog.xml
-  features=data['features']=[f for f in features if re.match(r'DE\d(NO|OS)...',f['properties'].get('chart','DE0NOxxx'))]
+  # features=data['features']=[f for f in features if re.match(r'DE\d(NO|OS)...',f['properties'].get('chart','DE0NOxxx'))]
+  features=data['features']=[f for f in features if f['properties'].get('chart','DE2NO000') in CATALOG]
   assert features
 
   if ofile:
     save_json(ofile,data)
 
+  # save layer, one file per layer
   layers=set(filter(lambda x:x,(f['properties'].get('layer') for f in features)))
   for l in layers:
+    fn=f'{sys.argv[3]}/{l}.json'
+    if exists(fn): # append to existing data
+      fs0=load_json(fn)['features']
+    else: fs0=[]
     filt = lambda f: f['properties'].get('layer')==l
-    fn=f'{sys.argv[3]}/{ifile[0]}-{l}.json'
-    save_json(fn, {"type": "FeatureCollection", "features": list(filter(filt,features))})
+    fs1=list(filter(filt,features))
+    if fs0: print('adding to',l,len(fs1))
+    save_json(fn, {"type": "FeatureCollection", "features": fs0+fs1})
 
   unmatched=list(filter(lambda f:'layer' not in f['properties'],features))
   if unmatched:

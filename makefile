@@ -72,7 +72,7 @@ bsh:
 
 filter:
 	cd data/bsh && rm -rf layers filtered *.gpkg filter.log
-	cd data/bsh && for F in *.xml; do filter.py $$F filtered/$${F/xml/json} layers >>filter.log; done
+	cd data/bsh && for F in *.xml; do filter.py $$F filtered/$${F/xml/json} layers |tee -a filter.log; done
 # 	cd data/bsh && for F in *.json; do ogr2ogr $${F/.json/.gpkg} $$F; done
 	cd data/bsh && for F in filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
 # 	cd data/bsh && for F in layers/*.json; do ogr2ogr layers.gpkg $$F -append; done
@@ -87,6 +87,10 @@ icons/gen:
 	cd icons/gen && mkdir -p TOPSHP/15/0 && ln -sr TOPSHP/15.svg TOPSHP/15/0/0.svg
 	cd icons/gen && mkdir -p TOPSHP/16/0 && ln -sr TOPSHP/16.svg TOPSHP/16/0/0.svg
 	sed 's#gen/#https://raw.githubusercontent.com/quantenschaum/mapping/refs/heads/icons/#g' icons/extra.mapcss >icons/gen/extra.mapcss
+
+icons.zip: icons/gen
+	rm -f charts/$@
+	zip charts/$@ -r icons/gen
 
 spreet:
 	git clone https://github.com/flother/spreet
@@ -196,7 +200,7 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
-upload:
+upload: icons.zip
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
