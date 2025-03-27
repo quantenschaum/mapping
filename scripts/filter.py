@@ -13,6 +13,7 @@ from time import sleep
 from types import NoneType
 from s57 import resolve, abbr_color
 from pyquery import PyQuery as pq
+from sconvert import CATALOG
 
 def load_json(filename):
   with open(filename) as f:
@@ -263,7 +264,12 @@ def main():
     if 'chart' not in props:
       chart=props.get('dsnm',props.get('name'))
       if chart:
-        props['chart']=chart.replace('.000','')
+        chart=chart.replace('.000','')
+        props['chart']=chart
+
+        meta=CATALOG.get(chart)
+        if meta:
+          props['scale']=int(meta['c_scale'])
 
     # print(ifile,props.get('chart'),props.get('uband'),props.get('lnam'))
 
