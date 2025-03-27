@@ -22,7 +22,6 @@ Here you find precompiled charts for download in various formats usable in diffe
     S57 files containing vector charts for AVNav and OpenCPN have been added. For AVNav these chart can be rendered by [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html). 
 
 !!! info
-    - Land areas are now transparent, to allow combining it with other charts.
     - An additional contours layer was added, that only contains depth contours. It could be used as a base for OpenSeaMap.
     - Raster charts are encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
       PNG based tiles are available, too.
@@ -46,7 +45,7 @@ Here you find precompiled charts for download in various formats usable in diffe
     Raw data files are available here. They can be used in [QGIS](https://qgis.org/) to render your own charts or to investigate or play with dat data. The QGIS file used in this project can be found on [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis).
     
     - [BSH Data](bsh.gpkg){:download}
-    - [BSH Bathymetry](bathy.gpkg){:download}
+    - [BSH Bathymetry](soundg-de.gpkg){:download}
     - [RWS Waddenzee](waddenzee.gpkg){:download}
 
 ## [OsmAnd](https://osmand.net/)
