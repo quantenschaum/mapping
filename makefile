@@ -324,7 +324,7 @@ qmap-de.obf: bsh.osm
 
 qmap-de.zip:
 	rm -rf qmap-de/ charts/$@
-	sconvert.py -o qmap-de data/bsh/layers/*.json data/soundg.json
+	sconvert.py -o qmap-de data/bsh/layers/*.json data/soundg-de.json
 	echo "ChartInfo:QMAP-DE `date +%F`" >qmap-de/Chartinfo.txt
 	zip charts/$@ -r qmap-de
 
