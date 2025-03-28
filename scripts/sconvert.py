@@ -437,8 +437,19 @@ def features2senc(filename,features):
         # print(l,ftype)
         primitives={PRIMITIVES[v] for v in s57obj[ftype][6]}
         if ptype not in primitives:
-          print('skipped invalid primitive',l,gtype)
-          continue
+          if ptype==2 and 3 in primitives and 'Multi' not in gtype:
+            print('line -> polygon',l,gtype)
+            if gtype=='LineString':
+              gtype='Polygon'
+              c=[c] # line as outer contour
+          elif ptype==3 and 2 in primitives and 'Multi' not in gtype:
+            print('polygon -> line',l,gtype)
+            if gtype=='Polygon':
+              gtype='LineString'
+              c=c[0] # outer contour as line
+          else:
+            print('skipped invalid primitive',l,gtype)
+            continue
 
         senc.add_record(type=FEATURE_ID_RECORD,ftype=ftype,primitive=ptype-1)
         attributes(p)
