@@ -46,7 +46,9 @@ Here you find precompiled charts for download in various formats usable in diffe
     
     - [BSH Data](bsh.gpkg){:download}
     - [BSH Soundings](soundg-de.gpkg){:download}
+    - [BSH QGIS-Project](bsh.qgs){:download}
     - [RWS Waddenzee](waddenzee.gpkg){:download}
+    - [RWS QGIS-Project](rws.qgs){:download}
     - [Icons](icons.zip){:download}
 
 ## [OsmAnd](https://osmand.net/)

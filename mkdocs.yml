@@ -9,9 +9,9 @@ edit_uri: edit/master/docs/
 nav:
   - Chart: ../
   - Download: index.md
-  - Usage: usage.md
+#  - Usage: usage.md
   - Tidal Atlas: tides.md
-  - Creation: creation.md
+#  - Creation: creation.md
 
 theme:
   name: material
