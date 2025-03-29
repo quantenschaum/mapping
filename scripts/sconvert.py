@@ -478,11 +478,10 @@ def features2senc(filename,features):
         senc.add_record(type=VECTOR_EDGE_NODE_TABLE_RECORD,edges=edges)
 
 
-
       # soundings as 3D multipoints
       soundings=defaultdict(list) # group by attributes
       for s in filter(lambda o:o['properties']['layer'].upper()=='SOUNDG',features):
-        p=str({k:v for k,v in s['properties'].items() if k.upper()!='DEPTH'})
+        p=str({k:v for k,v in s['properties'].items() if k.upper() not in ('VALSOU','DEPTH')})
         soundings[p].append(s)
 
       ftype=acronym_code('SOUNDG')
@@ -498,7 +497,7 @@ def features2senc(filename,features):
           c=s['geometry']['coordinates']
           x,y=[a-b for a,b in zip(ll2grid(*c),(cx,cy))]
           p=s['properties']
-          d=p.get('VALSOU',p.get('DEPTH',p.get('depth')))
+          d=p.get('VALSOU',p.get('DEPTH'))
           if d is not None: points.append((x,y,d))
         senc.add_record(type=FEATURE_GEOMETRY_RECORD_MULTIPOINT, bbox=bbox, points=points)
 
