@@ -80,9 +80,11 @@ def acronym_code(name):
 
 def get_uband(chart):
   if chart.startswith("OC"):
-    uband=int(chart[-1])
+    return int(chart[-1])
   elif chart.startswith("DE"):
-    uband=int(chart[2])
+    return int(chart[2])
+  else:
+    return 0
 
 def senc2features(filename, txtdir=None, multipoints=False):
   'convert SENC records to GeoJSON features'
