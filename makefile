@@ -216,11 +216,13 @@ vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
 	update.py rws_buoys data/vwm/drijvend.json wad.osm
 
+SKIP_LIGHTS=true
+
 build:
 	git pull
 	$(MAKE) bsh
 	$(MAKE) qmap-de.obf qmap-de.zip
-	$(MAKE) lightsectors.obf
+	$(SKIP_LIGHTS) || $(MAKE) lightsectors.obf
 	$(MAKE) vwm waddenzee.zip waddenzee.enc
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
