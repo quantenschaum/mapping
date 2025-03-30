@@ -84,7 +84,7 @@ I managed to create an OBF containing depth contours and spot soundings. The wor
         - `contourtype=[5m,10m,20m,50m,100m,...]` (see below)
     - contour areas
         - `contourarea=depth`
-        - `areatype=[0,2,5,10,999]` (see below)
+        - `areatype=[-1,0,2,5,10]` (see below)
 - export layer as geopackage only containing the added columns
 - import into [JOSM](https://josm.openstreetmap.de/) via [OpenData](https://wiki.openstreetmap.org/wiki/JOSM/Plugins/OpenData) plugin
 - save as [OSM XML](https://wiki.openstreetmap.org/wiki/OSM_XML) file
