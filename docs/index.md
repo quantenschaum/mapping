@@ -11,7 +11,8 @@ Here you find precompiled charts for download in various formats usable in diffe
     **Use at your own risk!**
 
 ??? info "License"    
-    The downloadable files on this page are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+    - The downloadable files on this page are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+    - The code of this project used to generate the charts an other data is licensed under [GPL](https://www.gnu.org/licenses/gpl-3.0.de.html).
 
 !!! failure
     The BSH [changed](https://www.geoseaportal.de/de/news.xml) its [WMS server](https://gdi.bsh.de/public/public_services.html). They do no longer provide vector data. 
