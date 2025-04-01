@@ -72,7 +72,8 @@ bsh:
 
 filter:
 	cd data/bsh && rm -rf layers filtered *.gpkg filter.log
-	cd data/bsh && for F in *.xml; do filter.py $$F filtered/$${F/xml/json} layers |tee -a filter.log; done
+	cd data/bsh; if [[ -f AidsAndServices.json ]]; then for F in *.json; do filter.py $$F filtered/$${F/xml/json} layers |tee -a filter.log; done; \
+		else for F in *.xml; do filter.py $$F filtered/$${F/xml/json} layers |tee -a filter.log; done; fi
 # 	cd data/bsh && for F in *.json; do ogr2ogr $${F/.json/.gpkg} $$F; done
 	cd data/bsh && for F in filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
 # 	cd data/bsh && for F in layers/*.json; do ogr2ogr layers.gpkg $$F -append; done
@@ -316,7 +317,7 @@ obf: data/omc osmand/batch-$(BLEVEL).xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
 	rm -f $@/*.log
 
-qmap-de.obf: bsh.osm
+qmap-de.obf:
 	rm -rf osm && mkdir -p osm
 	for L in buoys beacons facilities lights stations; do update.py bsh-$$L data/bsh/AidsAndServices.json none osm/$$L.osm -a; done
 	for L in rocks wrecks obstructions; do update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none osm/$$L.osm -a; done

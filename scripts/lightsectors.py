@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+try:
+  from rich_argparse import ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter
+except: pass
+
 import os
 from itertools import chain
 from math import ceil
@@ -10,6 +15,16 @@ import requests
 from pyquery import PyQuery as pq
 
 from s57 import *
+
+from functools import partial
+from rich.console import Console
+from rich.progress import track
+from rich.traceback import install
+console=Console()
+if console.is_terminal:
+  print=console.print
+  track=partial(track,console=console)
+  install()
 
 
 def linspace(start, stop, num=10):
@@ -23,7 +38,7 @@ def get_tag(key, node, type=lambda v: v):
     try:
         return type(v) if v else None
     except:
-        print("error getting", key, node, file=stderr)
+        print("error getting", key, node)
         return None
 
 
@@ -287,7 +302,7 @@ def generate_sectors(infile, outfile, config={}):
     osm_objects = list(chain(osm("node"), osm("way")))
     N = len(osm_objects)
 
-    for i, n in enumerate(osm_objects, 1):
+    for i, n in track(enumerate(osm_objects, 1),'processing',total=N):
         n = pq(n)
 
         seamark_type = get_tag("seamark:type", n)
@@ -410,8 +425,6 @@ def generate_sectors(infile, outfile, config={}):
 
 
 def main():
-    from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
-
     parser = ArgumentParser(
         prog="light sector generator",
         description="generate light sector limits and arcs from OSM data",

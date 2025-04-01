@@ -4,11 +4,24 @@
 import csv
 import json
 from datetime import datetime
-import argparse
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+try:
+  from rich_argparse import ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter
+except: pass
 from collections import defaultdict
 from itertools import accumulate
 from os import makedirs
 from os.path import basename, splitext, dirname, join
+
+from functools import partial
+from rich.console import Console
+from rich.progress import track
+from rich.traceback import install
+console=Console()
+if console.is_terminal:
+  print=console.print
+  track=partial(track,console=console)
+  install()
 
 from geojson import (
     Point,
@@ -180,7 +193,7 @@ def senc2features(filename, txtdir=None, multipoints=False):
         # print((n0,ed,n1),end=' ')
         if ed in edge_table:
           line += (reversed(edge_table[ed]) if flip else edge_table[ed]) if ed else []
-        elif ed: print('skipped invalid edge')
+        elif ed: print('[red]skipped invalid edge[/]')
         line.append(node_table[n1])
         e = None if n1==s else n1 # e=None if closed loop
         # if pc and len(line)>=pc[len(lines)]: e=None
@@ -188,7 +201,7 @@ def senc2features(filename, txtdir=None, multipoints=False):
       # print()
       for l in lines:
         for a,b in zip(l[:-1],l[1:]):
-          if a==b: print('repeated nodes')
+          if a==b: print('[red]repeated nodes[/]')
       return lines
 
     if r['name']=='line':
@@ -315,7 +328,7 @@ def features2senc(filename,features):
       updated=meta.get('issueDate','')
     # else: return
 
-    print(f'{chart} u{uband} 1:{scale} ed{edition} up{update} {cell}')
+    print(f'{chart} u{uband} 1:{scale:,} ed{edition} up{update} {cell}')
     assert edition>0,edition
 
     with SENC(filename,'w') as senc:
@@ -338,7 +351,7 @@ def features2senc(filename,features):
           c=g['coordinates']
           # assert len(c)==1,'coverage has holes'
           # verts=[y[i] for x in c for y in x for i in (1,0)]
-          if len(c)>1: print('skipping holes in coverage')
+          if len(c)>1: print('[red]skipping holes in coverage[/]')
           verts=[x[i] for x in c[0] for i in (1,0)]
           catcov=f['properties'].get('CATCOV',1)==1
           ctype=CELL_COVR_RECORD if catcov else CELL_NOCOVR_RECORD
@@ -435,23 +448,23 @@ def features2senc(filename,features):
         if len(l)!=6: continue
         ftype=acronym_code(l)
         if ftype is None:
-          print('skipped',l)
+          print('[red]skipped[/]',l)
           continue
         # print(l,ftype)
         primitives={PRIMITIVES[v] for v in s57obj[ftype][6]}
         if ptype not in primitives:
           if ptype==2 and 3 in primitives and 'Multi' not in gtype:
-            print('line -> polygon',l,gtype)
+            print('[yellow]line -> polygon[/]',l,gtype)
             if gtype=='LineString':
               gtype='Polygon'
               c=[c] # line as outer contour
           elif ptype==3 and 2 in primitives and 'Multi' not in gtype:
-            print('polygon -> line',l,gtype)
+            print('[yellow]polygon -> line[/]',l,gtype)
             if gtype=='Polygon':
               gtype='LineString'
               c=c[0] # outer contour as line
           else:
-            print('skipped invalid primitive',l,gtype)
+            print('[red]skipped invalid primitive[/]',l,gtype)
             continue
 
         senc.add_record(type=FEATURE_ID_RECORD,ftype=ftype,primitive=ptype-1)
@@ -469,7 +482,7 @@ def features2senc(filename,features):
             for p in c: contours(p,ptype)
           else:
             contours(c,ptype)
-        else: print('skipped',l,gtype,ptype)
+        else: print('[red]skipped[/]',l,gtype,ptype)
 
       if nodes:
         # print('nodes',len(nodes))
@@ -503,22 +516,21 @@ def features2senc(filename,features):
           if d is not None: points.append((x,y,d))
         senc.add_record(type=FEATURE_GEOMETRY_RECORD_MULTIPOINT, bbox=bbox, points=points)
 
-def read_features(files):
+
+def read_features(filename):
     features=[]
-    for fi in files:
-      print(fi)
-      layer=splitext(basename(fi))[0]
-      with open(fi) as g:
-        for f in json.load(g)['features']:
-          p=f['properties']
-          p['layer']=p.get('layer',layer)
-          features.append(f)
+    layer=splitext(basename(filename))[0]
+    with open(filename) as g:
+      for f in json.load(g)['features']:
+        p=f['properties']
+        p['layer']=p.get('layer',layer)
+        features.append(f)
     return features
 
 
 
 def main():
-    parser = argparse.ArgumentParser(description="chart converter: S57/SENC <--> GeoJSON and SENC --> S57")
+    parser = ArgumentParser(description="chart converter: S57/SENC <--> GeoJSON and SENC --> S57", formatter_class=ArgumentDefaultsHelpFormatter)
     parser.add_argument('-o',"--output", help="output dir", default='.')
     parser.add_argument('-s',"--s57", help="convert SENC to S57", action='store_true')
     parser.add_argument("input", help="input files (senc/json)", nargs="+")
@@ -532,7 +544,7 @@ def main():
     # SENC --> S57
     if args.s57:
       write_txt(join(out,'Chartinfo.txt'),f'ChartInfo:{basename(out)}\n')
-      for fi in files:
+      for fi in track(files,'SENC --> S57'):
         fo=join(out,basename(fi).replace('.senc','.S57'))
         print(fi,'-->',fo)
         senc2s57(fi,fo)
@@ -541,10 +553,13 @@ def main():
     # GeoJSON --> SENC
     if files[0].endswith('json'):
       write_txt(join(out,'Chartinfo.txt'),f'ChartInfo:{basename(out)}\n')
-      features=read_features(files)
+      features=[]
+      for fi in track(files,'reading GeoJSON'):
+        print(fi)
+        features+=read_features(fi)
       charts=set(filter(lambda f:f,(f['properties'].get('chart') for f in features)))
       print(len(charts),'charts')
-      for c in sorted(charts):
+      for c in track(sorted(charts),'writing S57'):
         data1=list(filter(lambda f:f['properties'].get('chart')==c,features))
         s,n,w,e=bounds(data1)
         uband=min(o['properties'].get('uband',0) for o in data1)
@@ -564,11 +579,11 @@ def main():
 
     # SENC --> GeoJSON
     features = []
-    for f in files:
+    for f in track(files,'reading SENCs'):
       print(f)
       features+=senc2features(f,out)
 
-    for l in sorted({f.properties['layer'] for f in features}):
+    for l in track(sorted({f.properties['layer'] for f in features}),'writing GeoJSON'):
         fs = list(filter(lambda f: f.properties['layer'] == l, features))
         if l=='text':
           for f in fs:

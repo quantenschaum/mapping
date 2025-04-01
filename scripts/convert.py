@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 
-import argparse
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+try:
+  from rich_argparse import ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter
+except: pass
+
 import glob
 import re
 import sqlite3
-from argparse import ArgumentDefaultsHelpFormatter
 from datetime import datetime
 from math import atan, sinh, pi, degrees
 from os import remove, makedirs
@@ -12,16 +15,22 @@ from os.path import exists, isdir
 from shutil import rmtree
 from io import BytesIO
 from PIL import Image, ImageColor
-from progressbar import AnimatedMarker, Bar, BouncingBar, Counter, ETA, \
-    AdaptiveETA, FileTransferSpeed, FormatLabel, Percentage, \
-    ProgressBar, ReverseBar, RotatingMarker, \
-    SimpleProgress, Timer, UnknownLength
 try:
     import pillow_avif
 except: pass
 
+from functools import partial
+from rich.console import Console
+from rich.progress import track
+from rich.traceback import install
+console=Console()
+if console.is_terminal:
+  print=console.log
+  track=partial(track,console=console)
+  install()
+
 def main():
-    parser = argparse.ArgumentParser(
+    parser = ArgumentParser(
         description="Converts mbtiles to sqlitedb for use with OsmAnd",
         formatter_class=ArgumentDefaultsHelpFormatter,
     )
@@ -293,11 +302,13 @@ def info(filename, args):
     db.close()
 
 
-def bar(m):
+def pbar(iter,m=0):
     if isinstance(m, sqlite3.Connection):
         m=m.execute("SELECT COUNT(zoom_level) FROM tiles").fetchone()[0]
-    return ProgressBar(widgets=[Percentage(), Bar(), AdaptiveETA()], maxval=m).start()
-
+    else:
+        m=len(iter)
+    return track(iter,'[green]converting[/]',total=m)
+    # return tqdm(iter,total=m,unit='T',unit_scale=True,dynamic_ncols=True)
 
 def mbtiles2mbtiles(inputs, output, args):
     assert not output.endswith("/")
@@ -328,12 +339,10 @@ def mbtiles2mbtiles(inputs, output, args):
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
-        pbar = bar(source)
-        for row in source.execute(
+        for row in pbar(source.execute(
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
-        ):
+        ),source):
             n += 1
-            pbar.update(n)
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if args.invert_y:
                 y = 2**z - 1 - y
@@ -348,7 +357,6 @@ def mbtiles2mbtiles(inputs, output, args):
             i += 1
 
         source.close()
-        pbar.finish()
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
 
@@ -403,12 +411,10 @@ def mbtiles2sqlitedb(inputs, output, args):
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
-        pbar = bar(source)
-        for row in source.execute(
+        for row in pbar(source.execute(
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
-        ):
+        ),source):
             n += 1
-            pbar.update(n)
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
@@ -423,7 +429,6 @@ def mbtiles2sqlitedb(inputs, output, args):
             dcur.execute(insert, data)
             i += 1
         source.close()
-        pbar.finish()
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
 
@@ -442,12 +447,10 @@ def mbtiles2dir(inputs, output, args):
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
-        pbar = bar(source)
-        for row in source.execute(
+        for row in pbar(source.execute(
             "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
-        ):
+        ),source):
             n += 1
-            pbar.update(n)
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
@@ -460,7 +463,6 @@ def mbtiles2dir(inputs, output, args):
             write(f"{dir}/{y}.{format or fmt(tile)}", tile)
             i += 1
         source.close()
-        pbar.finish()
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
 
@@ -492,12 +494,11 @@ def dir2mbtiles(inputs, output, args):
     for input in inputs:
         print("reading", input)
         assert isdir(input)
-        pbar = bar(len(glob.glob(f"{input}*/*/*.*")))
-        for f in glob.glob(f"{input}*/*/*.*"):
+        files=glob.glob(f"{input}*/*/*.*")
+        for f in pbar(glob.glob(f"{input}*/*/*.*")):
             m = re.match(r".*/(\d+)/(\d+)/(\d+)\..+", f)
             if m:
                 n += 1
-                pbar.update(n)
                 tile = read(f)
                 z, x, y = list(map(int, m.groups()))
                 # print(f, z, x, y, len(tile), lat_lon(z, x, y))
@@ -513,7 +514,6 @@ def dir2mbtiles(inputs, output, args):
                     [z, x, y, sqlite3.Binary(tile)],
                 )
                 i += 1
-        pbar.finish()
 
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")

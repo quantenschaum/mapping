@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+try:
+  from rich_argparse import ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter
+except: pass
+
 import json
 import os
 import sys
@@ -14,6 +19,16 @@ from types import NoneType
 from s57 import resolve, abbr_color
 from pyquery import PyQuery as pq
 from sconvert import CATALOG
+
+from functools import partial
+from rich.console import Console
+from rich.progress import track
+from rich.traceback import install
+console=Console()
+if console.is_terminal:
+  print=console.log
+  track=partial(track,console=console)
+  install()
 
 def load_json(filename):
   with open(filename) as f:
@@ -111,12 +126,12 @@ def data_types(features):
 
 
 def convert_xml(ifile,ofile):
-  print('converting',ifile,'-->',ofile)
+  print('converting',ifile,'-->',ofile,)
   xml=pq(filename=ifile)
   items=xml('item')
   print(len(items),'xml items')
   features=[]
-  for i in items:
+  for i in track(items,'[red]converting[/]'):
     i=pq(i)
     title=i('title').text()
     # print(title)
@@ -211,21 +226,26 @@ def convert_xml(ifile,ofile):
   save_json(ofile,{ 'type':'FeatureCollection', 'features':features })
 
 def main():
-  ifile = sys.argv[1] if len(sys.argv)>1 else None
-  ofile = sys.argv[2] if len(sys.argv)>2 else None
+  parser = ArgumentParser(description="BSH WMS data filter", formatter_class=ArgumentDefaultsHelpFormatter)
+  parser.add_argument('input', help='input file (xml/json)')
+  parser.add_argument('output', help='output file (json)')
+  parser.add_argument('layers', help="layers directory", nargs='?')
+  args = parser.parse_args()
+
+  ifile = args.input
+  ofile = args.output
+  ldir  = args.layers
 
   if ifile.endswith('.xml'):
     jfile=ifile.replace('.xml','.json')
     convert_xml(ifile,jfile)
     ifile=jfile
 
-  if ofile=='.': ofile=ifile
-
-  print('processing', ifile, '-->', ofile)
-
   data=load_json(ifile)
 
   features=data['features']
+
+  print(f'[yellow]processing[/] {len(features)} from {ifile}')
 
   for f in features:
     props=f['properties'] # make upper case keys for 6 char fields
@@ -248,7 +268,7 @@ def main():
   dtypes=data_types(features)
   # for k,v in dtypes.items(): print(k,v)
 
-  for f in features:
+  for f in track(features,'[green]filtering[/]'):
     props=f['properties']
 
     # convert values to determined types
@@ -306,12 +326,15 @@ def main():
   assert features
 
   if ofile:
+    print('saving to',ofile)
     save_json(ofile,data)
 
   # save layer, one file per layer
+  if not ldir: return
+  print('writing layers to',ldir)
   layers=set(filter(lambda x:x,(f['properties'].get('layer') for f in features)))
   for l in layers:
-    fn=f'{sys.argv[3]}/{l}.json'
+    fn=f'{ldir}/{l}.json'
     if exists(fn): # append to existing data
       fs0=load_json(fn)['features']
     else: fs0=[]
@@ -323,7 +346,7 @@ def main():
   unmatched=list(filter(lambda f:'layer' not in f['properties'],features))
   if unmatched:
     print('unmatched',len(unmatched))
-    fn=f'{sys.argv[3]}/{ifile[0]}-unmatched.json'
+    fn=f'{ldir}/{ifile[0]}-unmatched.json'
     save_json(fn, {"type": "FeatureCollection", "features": unmatched})
 
   return
@@ -339,12 +362,12 @@ def main():
       print()
 
       # if len(sys.argv)>3:
-      #   fn=f'{sys.argv[3]}/{ifile[0]}-{k}={v}.json'
+      #   fn=f'{ldir}/{ifile[0]}-{k}={v}.json'
       #   save_json(fn, {"type": "FeatureCollection", "features": list(filter(filt,features))})
 
     if len(sys.argv)>3:
       filt = lambda f: f['properties'].get(k) is not None
-      fn=f'{sys.argv[3]}/{ifile[0]}-{k}.json'
+      fn=f'{ldir}/{ifile[0]}-{k}.json'
       save_json(fn, {"type": "FeatureCollection", "features": list(filter(filt,features))})
 
 # https://github.com/OpenCPN/OpenCPN/tree/master/data/s57data

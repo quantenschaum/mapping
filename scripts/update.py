@@ -16,6 +16,21 @@ from pyquery import PyQuery as pq
 
 from s57 import *
 
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+try:
+  from rich_argparse import ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter
+except: pass
+
+from functools import partial
+from rich.console import Console
+from rich.progress import track
+from rich.traceback import install
+console=Console()
+if console.is_terminal:
+  print=console.print
+  track=partial(track,console=console)
+  install()
+
 dx = 0.01
 dy = dx
 
@@ -157,7 +172,7 @@ def load_enc(layer_files, other_files):
             t = {"_type_": t} if t else {}
             return load_geojson(f, inject=t)
         except Exception as x:
-            print(x, f, file=stderr)
+            print(x, f)
             return []
 
     data, other = [
@@ -687,7 +702,7 @@ def update_osm(
 
     matches = {}
     modifications = []
-    for e in list(x("node")):
+    for e in track(list(x("node")),'updating nodes'):
         n = pq(e)
         if not n.find("tag[k='seamark:type']"):
             continue
@@ -741,7 +756,7 @@ def update_osm(
         if len(p) > 1:
             ll = p[0]["ll"]
             print(
-                "AMBIGOUS",
+                "[red]AMBIGOUS",
                 len(p),
                 distance(ll, p[1]["ll"]),
                 match,
@@ -755,14 +770,14 @@ def update_osm(
 
         if not n.attr["action"]:
             if age and age.days < min_age:
-                print("SKIPPED", type, name, ts)
+                print("[yellow]SKIPPED", type, name, ts)
                 continue
             if user and (
                 n.attr("user") == user[1:]
                 if user.startswith("-")
                 else n.attr("user") != user
             ):
-                print("SKIPPED", type, name, n.attr("user"))
+                print("[yellow]SKIPPED", type, name, n.attr("user"))
                 continue
 
         if remove and len(p) == 0:
@@ -777,22 +792,22 @@ def update_osm(
                 m = update_node(n, p, s_dist)
                 if m:
                     m.insert(0, "CHANGED")
-                    print(*m[:3])
+                    # print(*m[:3])
                     modifications.append(m)
 
     added = 0
     if add:
-        for i, p in enumerate(data, 1):
+        for i, p in track(enumerate(data, 1),'adding points',total=len(data)):
             n = pq(f'<node id="{-i}" visible="true" lat="nan" lon="nan"/>')
             m = update_node(n, p, s_dist)
             m.insert(0, "ADDED")
-            print(*m[:3])
+            # print(*m[:3])
             modifications.append(m)
             x("osm").append(n)
             added += 1
 
-    print("MATCHED", matches)
-    print("ADDED", added)
+    print("[yellow]MATCHED", matches)
+    print("[green]ADDED", added)
 
     if modifications:
         with open(outfile, "wb") as f:
@@ -823,8 +838,6 @@ def update_osm(
 
 
 def main():
-    from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
-
     parser = ArgumentParser(
         description="update buoys by manipulating OSM xml from geojson",
         epilog="https://github.com/quantenschaum/mapping/",
