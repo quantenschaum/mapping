@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-import argparse
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+try:
+  from rich_argparse import ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter
+except: pass
+
 import os
 import re
 from subprocess import run
@@ -22,7 +26,7 @@ TEX=r'''\documentclass{article}
 '''
 
 def main():
-  parser = argparse.ArgumentParser(description="poster printer based on pdfposter and LaTeX")
+  parser = ArgumentParser(description="poster printer based on pdfposter and LaTeX",formatter_class=ArgumentDefaultsHelpFormatter)
   parser.add_argument("input", help="input PDF")
   parser.add_argument("output", help="output PDF", nargs='?')
   parser.add_argument("-s",'--scale', help="scale factor")

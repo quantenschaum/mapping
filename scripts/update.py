@@ -7,7 +7,6 @@ from functools import reduce
 from math import inf, isnan, log, pi, pow, sqrt, tan, isfinite
 from os.path import basename, splitext
 from os.path import isfile
-from sys import stderr
 
 import pendulum
 import requests

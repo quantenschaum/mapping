@@ -328,7 +328,7 @@ def features2senc(filename,features):
       updated=meta.get('issueDate','')
     # else: return
 
-    print(f'{chart} u{uband} 1:{scale:,} ed{edition} up{update} {cell}')
+    print(f'[yellow]{chart} [magenta]u{uband} [green]1:{scale:,} [blue]ed{edition} [red]up{update} [grey]{cell}')
     assert edition>0,edition
 
     with SENC(filename,'w') as senc:
