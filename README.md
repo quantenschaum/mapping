@@ -14,4 +14,4 @@ Converting chart data from different sources (S57-ENC, GeoJSON) to
 
 :point_right: [Documentation](http://waddenzee.duckdns.org/download/)
 
-![example map](docs/img/raster.png)
+![example map](docs/img/vector.png)
