@@ -531,9 +531,10 @@ def read_features(filename):
 
 def main():
     parser = ArgumentParser(description="chart converter: S57/SENC <--> GeoJSON and SENC --> S57", formatter_class=ArgumentDefaultsHelpFormatter)
+    parser.add_argument("input", help="input files (senc/json)", nargs="+")
     parser.add_argument('-o',"--output", help="output dir", default='.')
     parser.add_argument('-s',"--s57", help="convert SENC to S57", action='store_true')
-    parser.add_argument("input", help="input files (senc/json)", nargs="+")
+    parser.add_argument('-t',"--title", help="S57 chart title")
     args = parser.parse_args()
 
     files = args.input
@@ -552,7 +553,8 @@ def main():
 
     # GeoJSON --> SENC
     if files[0].endswith('json'):
-      write_txt(join(out,'Chartinfo.txt'),f'ChartInfo:{basename(out)}\n')
+      title = args.title or basename(out)
+      write_txt(join(out,'Chartinfo.txt'),f'ChartInfo:{title}\n')
       features=[]
       for fi in track(files,'reading GeoJSON'):
         print(fi)
