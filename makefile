@@ -201,7 +201,7 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
-upload: icons.zip
+upload: icons.zip data.zip
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
@@ -212,6 +212,9 @@ upload: icons.zip
 	mv tmp/site www/download
 	rm -rf tmp
 	chmod +rX -R www
+
+data.zip:
+	zip charts/$@ -r icons/gen data/bsh/bsh.gpkg data/soundg-de.gpkg data/waddenzee.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
@@ -228,8 +231,6 @@ build:
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
 	$(MAKE) charts tiles upload
-
-
 
 
 
