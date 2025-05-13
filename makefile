@@ -71,12 +71,10 @@ bsh:
 	$(MAKE) filter
 
 filter:
-	cd data/bsh && rm -rf layers filtered *.gpkg filter.log
+	cd data/bsh && rm -rf layers filtered filter.log
 	cd data/bsh; if [[ -f AidsAndServices.json ]]; then for F in *.json; do filter.py $$F filtered/$${F/xml/json} layers |tee -a filter.log; done; \
 		else for F in *.xml; do filter.py $$F filtered/$${F/xml/json} layers |tee -a filter.log; done; fi
-# 	cd data/bsh && for F in *.json; do ogr2ogr $${F/.json/.gpkg} $$F; done
-	cd data/bsh && for F in filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
-# 	cd data/bsh && for F in layers/*.json; do ogr2ogr layers.gpkg $$F -append; done
+	cd data && rm -f bsh.gpkg && for F in bsh/filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
 
 icons: icons/gen
 
@@ -214,7 +212,7 @@ upload: icons.zip data.zip
 	chmod +rX -R www
 
 data.zip:
-	zip charts/$@ -r icons/gen data/bsh/bsh.gpkg data/soundg-de.gpkg data/waddenzee.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
+	zip charts/$@ -r icons/gen data/bsh.gpkg data/soundg-de.gpkg data/waddenzee.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
