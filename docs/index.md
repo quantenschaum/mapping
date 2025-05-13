@@ -45,7 +45,7 @@ Here you find precompiled charts for download in various formats usable in diffe
 ??? note "Raw Data"
     Raw data files are available here. They can be used in [QGIS](https://qgis.org/) to render your own charts or to investigate or play with dat data. The QGIS file used in this project can be found on [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis).
     
-    - [Data Package (everything to render/print charts in one ZIP)](data.zip){:download}
+    - [Data Package (everything to render/print charts in one ZIP)](qmap-data.zip){:download}
     
     individual files    
 
