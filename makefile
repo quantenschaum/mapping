@@ -199,7 +199,7 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
-upload: icons.zip data.zip
+upload: icons.zip qmap-data.zip
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
@@ -211,7 +211,7 @@ upload: icons.zip data.zip
 	rm -rf tmp
 	chmod +rX -R www
 
-data.zip:
+qmap-data.zip:
 	zip charts/$@ -r icons/gen data/bsh.gpkg data/soundg-de.gpkg data/waddenzee.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
 
 vwm-update:
