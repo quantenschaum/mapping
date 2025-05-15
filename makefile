@@ -27,14 +27,13 @@ csv:  scripts/s57objectclasses.csv scripts/s57attributes.csv
 %.zip:
 	wget -O data/$@ "`rwsget.py $(basename $@)`"
 
-%.enc:
+%.enc: %.zip
 	rm -rf data/$@ data/$(basename $@).gpkg data/$(basename $@)-covr.gpkg
 	unzip -j -n data/$(basename $@).zip -d data/$@
 	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@).gpkg      $$F        -skipfailures -append; done
 	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@)-covr.gpkg $$F M_COVR -skipfailures -append; done
 	rm -rf data/$@
 
-DIR=
 
 dybde-no.gpkg:
 	echo "download data from https://kartkatalog.geonorge.no/metadata/sjoekart-dybdedata/2751aacf-5472-4850-a208-3532a51c529a"
@@ -225,7 +224,9 @@ build:
 	$(MAKE) bsh
 	$(MAKE) qmap-de.obf qmap-de.zip
 	$(SKIP_LIGHTS) || $(MAKE) lightsectors.obf
-	$(MAKE) vwm waddenzee.zip waddenzee.enc
+	$(MAKE) -j vwm waddenzee.enc zeeland.enc
+	ogr2ogr data/waddenzee.gpkg data/zeeland.gpkg -append
+	ogr2ogr data/waddenzee-covr.gpkg data/zeeland-covr.gpkg -append
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
 	$(MAKE) charts tiles upload
