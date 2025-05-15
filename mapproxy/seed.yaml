@@ -36,27 +36,27 @@ seeds:
 
 coverages:
   overview:
-    datasource: ../data/bsh/bsh.gpkg
+    datasource: ../data/bsh.gpkg
     where: RECIND="Overview"
     srs: 'EPSG:4326'
   general:
-    datasource: ../data/bsh/bsh.gpkg
+    datasource: ../data/bsh.gpkg
     where: RECIND="General"
     srs: 'EPSG:4326'
   coastal:
-    datasource: ../data/bsh/bsh.gpkg
+    datasource: ../data/bsh.gpkg
     where: RECIND="Coastal"
     srs: 'EPSG:4326'
   approach:
-    datasource: ../data/bsh/bsh.gpkg
+    datasource: ../data/bsh.gpkg
     where: RECIND="Approach"
     srs: 'EPSG:4326'
   harbour:
-    datasource: ../data/bsh/bsh.gpkg
+    datasource: ../data/bsh.gpkg
     where: RECIND="Harbour"
     srs: 'EPSG:4326'
   berthing:
-    datasource: ../data/bsh/bsh.gpkg
+    datasource: ../data/bsh.gpkg
     where: RECIND="Berthing"
     srs: 'EPSG:4326'
   waddenzee:
