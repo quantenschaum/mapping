@@ -11,6 +11,20 @@ OGR_OPTS=OGR_S57_OPTIONS="LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,L
 help:
 	cat README.md
 
+SKIP_LIGHTS=true
+
+build:
+	git pull
+	$(MAKE) bsh
+	$(MAKE) qmap-de.obf qmap-de.zip
+	$(SKIP_LIGHTS) || $(MAKE) lightsectors.obf
+	$(MAKE) -j vwm waddenzee.enc zeeland.enc
+	ogr2ogr data/waddenzee.gpkg data/zeeland.gpkg -append
+	ogr2ogr data/waddenzee-covr.gpkg data/zeeland-covr.gpkg -append
+	$(MAKE) clean-cache
+	$(MAKE) docker-seed
+	$(MAKE) charts tiles upload
+
 vwm:
 	rm -rf data/vwm
 	mkdir -p data/vwm
@@ -211,25 +225,12 @@ upload: icons.zip qmap-data.zip
 	chmod +rX -R www
 
 qmap-data.zip:
-	zip charts/$@ -r icons/gen data/bsh.gpkg data/soundg-de.gpkg data/waddenzee.gpkg data/vwm/*.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
+	zip charts/$@ -r icons/gen data/bsh.gpkg data/soundg-de.gpkg data/waddenzee.gpkg data/zeeland.gpkg data/vwm/*.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
 	update.py rws_buoys data/vwm/drijvend.json wad.osm
 
-SKIP_LIGHTS=true
-
-build:
-	git pull
-	$(MAKE) bsh
-	$(MAKE) qmap-de.obf qmap-de.zip
-	$(SKIP_LIGHTS) || $(MAKE) lightsectors.obf
-	$(MAKE) -j vwm waddenzee.enc zeeland.enc
-	ogr2ogr data/waddenzee.gpkg data/zeeland.gpkg -append
-	ogr2ogr data/waddenzee-covr.gpkg data/zeeland-covr.gpkg -append
-	$(MAKE) clean-cache
-	$(MAKE) docker-seed
-	$(MAKE) charts tiles upload
 
 
 
