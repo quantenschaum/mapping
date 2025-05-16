@@ -11,10 +11,7 @@ OGR_OPTS=OGR_S57_OPTIONS="LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,L
 help:
 	cat README.md
 
-SKIP_LIGHTS=true
-
 build:
-	git pull
 # 	$(MAKE) lightsectors.obf
 	$(MAKE) -j bsh vwm waddenzee.enc zeeland.enc
 	ogr2ogr data/waddenzee.gpkg data/zeeland.gpkg -append
