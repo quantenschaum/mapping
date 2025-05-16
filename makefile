@@ -16,7 +16,7 @@ SKIP_LIGHTS=true
 build:
 	git pull
 # 	$(MAKE) lightsectors.obf
-	$(MAKE) bsh vwm waddenzee.enc zeeland.enc
+	$(MAKE) -j bsh vwm waddenzee.enc zeeland.enc
 	ogr2ogr data/waddenzee.gpkg data/zeeland.gpkg -append
 	ogr2ogr data/waddenzee-covr.gpkg data/zeeland-covr.gpkg -append
 	$(MAKE) qmap-de.obf qmap-de.zip
