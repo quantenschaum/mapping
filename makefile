@@ -221,7 +221,7 @@ upload: icons.zip qmap-data.zip
 	chmod +rX -R www
 
 qmap-data.zip:
-	zip charts/$@ -r icons/gen data/bsh.gpkg data/soundg-de.gpkg data/waddenzee.gpkg data/zeeland.gpkg data/vwm/*.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
+	zip charts/$@ -r icons/gen data/bsh.gpkg data/soundg-de.gpkg data/waddenzee.gpkg data/vwm/*.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
