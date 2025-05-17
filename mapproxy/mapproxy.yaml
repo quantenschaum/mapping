@@ -60,7 +60,7 @@ sources:
       transparent: true
       map: rws.qgs
     coverage:
-      datasource: ../data/waddenzee-covr.gpkg
+      datasource: ../data/rws-covr.gpkg
       where: CATCOV=1
       srs: 'EPSG:4326'
 

@@ -27,12 +27,12 @@ seeds:
     caches: [ qmap-de, contours-de, soundg-de ]
     levels: [ 13,14,15,16,17,18 ] # >=17
     coverages: [ berthing ]
-  waddenzee:
+  rws:
     caches: [ qmap-nl ]
     levels:
       from: 6
       to: 16
-    coverages: [ waddenzee ]
+    coverages: [ rws ]
 
 coverages:
   overview:
@@ -59,7 +59,7 @@ coverages:
     datasource: ../data/bsh.gpkg
     where: RECIND="Berthing"
     srs: 'EPSG:4326'
-  waddenzee:
-    datasource: ../data/waddenzee-covr.gpkg
+  rws:
+    datasource: ../data/rws-covr.gpkg
     where: CATCOV=1
     srs: 'EPSG:4326'

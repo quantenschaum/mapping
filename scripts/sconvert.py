@@ -99,6 +99,8 @@ def get_uband(chart):
   else:
     return 0
 
+CHART='chart'
+
 def senc2features(filename, txtdir=None, multipoints=False):
   'convert SENC records to GeoJSON features'
   recs=SENC(filename).records()
@@ -145,7 +147,7 @@ def senc2features(filename, txtdir=None, multipoints=False):
         f.write(r['text'])
       continue
 
-  props0={'chart':chart, 'uband':uband, 'scale':scale}
+  props0={CHART:chart, 'uband':uband, 'scale':scale}
 
   for r in recs: # second pass
     if r['name']=='feature':
@@ -268,9 +270,11 @@ def bounds(coords):
     try: iter(coords[0])
     except: break
     coords=[x for l in coords for x in l]
-  # print(coords)
+  coords = coords[:len(coords)-len(coords)%2]
+  assert len(coords)%2==0,coords
+  # print('coords',coords)
   lons,lats=coords[::2],coords[1::2]
-  # print(lons,lats)
+  # print('lons',lons,'lats',lats)
   return min(lats),max(lats),min(lons),max(lons)
 
 
@@ -294,7 +298,7 @@ def sort_key(feature):
 
 
 
-def features2senc(filename,features):
+def features2senc(filename,features,scale_jitter=100):
     features=sorted(features, key=sort_key)
 
     S,N,W,E=bounds(features) # cell/chart bounds
@@ -303,7 +307,7 @@ def features2senc(filename,features):
     cx,cy=ll2grid(clon,clat) # cell center in grid coordinates
 
     version=201 if filename.endswith('.senc') else 200
-    chart=cell=min(o['properties'].get('chart','chart') for o in features)
+    chart=cell=min(o['properties'].get(CHART,'chart') for o in features)
     uband=min(o['properties'].get('uband',0) for o in features)
     scamax=min(o['properties'].get('SCAMAX',999999) for o in features)
     scamin=max(o['properties'].get('SCAMIN',0) for o in features)
@@ -316,7 +320,8 @@ def features2senc(filename,features):
 
     # give overlapping cells not exactly the same scale
     # to prevent duplicate data to be rendered
-    scale+=hash(chart)%100
+    if scale_jitter:
+      scale+=hash(chart)%scale_jitter
 
     meta=CATALOG.get(cell)
     if meta:
@@ -493,7 +498,7 @@ def features2senc(filename,features):
         senc.add_record(type=VECTOR_EDGE_NODE_TABLE_RECORD,edges=edges)
 
 
-      # soundings as 3D multipoints
+      # convert soundings to 3D multipoints
       soundings=defaultdict(list) # group by attributes
       for s in filter(lambda o:o['properties']['layer'].upper()=='SOUNDG',features):
         p=str({k:v for k,v in s['properties'].items() if k.upper() not in ('VALSOU','DEPTH')})
@@ -509,7 +514,7 @@ def features2senc(filename,features):
         bbox=bounds([s['geometry']['coordinates'] for s in sdgs])
         points=[]
         for s in sdgs:
-          c=s['geometry']['coordinates']
+          c=s['geometry']['coordinates'][:2]
           x,y=[a-b for a,b in zip(ll2grid(*c),(cx,cy))]
           p=s['properties']
           d=p.get('VALSOU',p.get('DEPTH'))
@@ -523,6 +528,8 @@ def read_features(filename):
     with open(filename) as g:
       for f in json.load(g)['features']:
         p=f['properties']
+        p=f['properties']={k: v for k, v in p.items() if v is not None} # drop empty fields
+        p=f['properties']={k: ','.join(map(str,v)) if isinstance(v,list) else v for k, v in p.items()} # merge lists into strings
         p['layer']=p.get('layer',layer)
         features.append(f)
     return features
@@ -535,6 +542,8 @@ def main():
     parser.add_argument('-o',"--output", help="output dir", default='.')
     parser.add_argument('-s',"--s57", help="convert SENC to S57", action='store_true')
     parser.add_argument('-t',"--title", help="S57 chart title")
+    parser.add_argument('-u',"--uband", help="override usage band (1-6)", type=int)
+    parser.add_argument('-j',"--jitter", help="scale jitter to prevent duplicate data on same scale", type=int, default=100)
     args = parser.parse_args()
 
     files = args.input
@@ -559,15 +568,19 @@ def main():
       for fi in track(files,'reading GeoJSON'):
         print(fi)
         features+=read_features(fi)
-      charts=set(filter(lambda f:f,(f['properties'].get('chart') for f in features)))
+      if args.uband:
+        for f in features:
+          f['properties']['uband']=args.uband
+      charts=set(filter(lambda f:f,(f['properties'].get(CHART) for f in features)))
       print(len(charts),'charts')
       for c in track(sorted(charts),'writing S57'):
-        data1=list(filter(lambda f:f['properties'].get('chart')==c,features))
+        data1=list(filter(lambda f:f['geometry'] and f['properties'].get(CHART)==c,features))
         s,n,w,e=bounds(data1)
         uband=min(o['properties'].get('uband',0) for o in data1)
 
         def filt(f):
-          if 'chart' in f['properties']: return
+          if CHART in f['properties']: return
+          if not f['geometry']: return
           if f['geometry']['type']!='Point': return
           if f['properties'].get('uband')!=uband: return
           lon,lat=f['geometry']['coordinates']
@@ -575,7 +588,7 @@ def main():
 
         data2=list(filter(filt,features))
         if data2: print('added points:',len(data2))
-        features2senc(join(out,c+'.S57'),data1+data2)
+        features2senc(join(out,c+'.S57'),data1+data2,args.jitter)
       return
 
 

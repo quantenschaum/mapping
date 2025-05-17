@@ -4,7 +4,8 @@
 
 SHELL=/bin/bash
 export PATH:=$(PWD)/scripts:$(PWD)/spreet/target/release:$(PWD)/tippecanoe:$(PATH)
-OGR_OPTS=OGR_S57_OPTIONS="LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON" S57_CSV="$(PWD)/scripts"
+export OGR_S57_OPTIONS=LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON
+# export S57_CSV="$(PWD)/scripts"
 
 .PHONY: bsh.osm icons obf vwm bsh charts qgis mapproxy
 
@@ -13,21 +14,17 @@ help:
 
 build:
 # 	$(MAKE) lightsectors.obf
-	$(MAKE) -j bsh vwm waddenzee.enc zeeland.enc
-	ogr2ogr data/waddenzee.gpkg data/zeeland.gpkg -append
-	ogr2ogr data/waddenzee-covr.gpkg data/zeeland-covr.gpkg -append
-	$(MAKE) qmap-de.obf qmap-de.zip
+	$(MAKE) -j bsh vwm rws
+	$(MAKE) -j qmap-de.obf qmap-de.zip qmap-nl.zip
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
 	$(MAKE) charts tiles upload
 
 vwm:
-	rm -rf data/vwm
-	mkdir -p data/vwm
+	rm -rf data/vwm && mkdir -p data/vwm
 	wget -O data/vwm/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
 	wget -O data/vwm/vast.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
-	#for F in data/vwm/*.json; do jq . $$F>data/vwm/tmp; mv data/vwm/tmp $$F; done
-	for F in $$(find data/vwm -name "*.json"); do ogr2ogr $${F/.json/.gpkg} $$F; done
+	for F in $$(find data/vwm -name "*.json"); do ogr2ogr data/vwm.gpkg $$F -append; done
 
 csv:  scripts/s57objectclasses.csv scripts/s57attributes.csv
 
@@ -40,10 +37,19 @@ csv:  scripts/s57objectclasses.csv scripts/s57attributes.csv
 %.enc: %.zip
 	rm -rf data/$@ data/$(basename $@).gpkg data/$(basename $@)-covr.gpkg
 	unzip -j -n data/$(basename $@).zip -d data/$@
-	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@).gpkg      $$F        -skipfailures -append; done
-	for F in $$(find data/$@ -name "*.000"); do $(OGR_OPTS) ogr2ogr data/$(basename $@)-covr.gpkg $$F M_COVR -skipfailures -append; done
+	for F in $$(find data/$@ -name "*.000"); do S57_CSV="$(PWD)/scripts" ogr2ogr -q $${F//.000/.gpkg} $$F; done
+	for F in $$(find data/$@ -name "*.gpkg"); do C=$${F##*/}; C=$${C%.gpkg}; for L in `ogrinfo -q $$F |grep : |cut -d ' ' -f 2`; do echo "$$C $$L"; ogrinfo $$F -q -sql "ALTER TABLE $$L ADD COLUMN chart TEXT"; ogrinfo $$F -q -sql "UPDATE $$L SET chart = '$$C'"; done; done
+	for F in $$(find data/$@ -name "*.gpkg"); do ogr2ogr data/$(basename $@).gpkg $$F -append; done
 	rm -rf data/$@
 
+rws: waddenzee.enc zeeland.enc
+	cp data/waddenzee.gpkg data/$@.gpkg
+	ogr2ogr data/$@.gpkg data/zeeland.gpkg -append
+	ogr2ogr data/$@-covr.gpkg data/$@.gpkg M_COVR
+
+%.layers: data/%.gpkg
+	rm -rf data/$@ && mkdir data/$@
+	for L in `ogrinfo -q $< |grep : |cut -d ' ' -f 2`; do echo $$L; ogr2ogr -q -f GeoJSON data/$@/$$L.json $< $$L; done
 
 dybde-no.gpkg:
 	echo "download data from https://kartkatalog.geonorge.no/metadata/sjoekart-dybdedata/2751aacf-5472-4850-a208-3532a51c529a"
@@ -221,7 +227,7 @@ upload: icons.zip qmap-data.zip
 	chmod +rX -R www
 
 qmap-data.zip:
-	zip charts/$@ -r icons/gen data/bsh.gpkg data/soundg-de.gpkg data/waddenzee.gpkg data/vwm/*.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
+	zip charts/$@ -r icons/gen data/bsh.gpkg data/soundg-de.gpkg data/rws.gpkg data/vwm.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'
@@ -244,7 +250,7 @@ data/us:
 	for F in $@/*.zip; do unzip $$F -d $@; done
 
 us: data/us
-	for F in $$(find $< -name "*.000"); do echo $$F; $(OGR_OPTS) ogr2ogr data/us.gpkg $$F -skipfailures -append; done
+	for F in $$(find $< -name "*.000"); do echo $$F; ogr2ogr data/us.gpkg $$F -skipfailures -append; done
 
 
 
@@ -327,10 +333,16 @@ qmap-de.obf:
 	data/omc/inspector.sh -c charts/qmap-de.obf obf/*.obf
 
 qmap-de.zip:
-	rm -rf qmap-de/ charts/$@
-	sconvert.py -o qmap-de data/bsh/layers/*.json data/soundg-de.json
-	echo "ChartInfo:QMAP-DE `date +%F`" >qmap-de/Chartinfo.txt
+	rm -rf qmap-de/
+	sconvert.py -o qmap-de data/bsh/layers/*.json data/soundg-de.json -t "QMAP-DE `date +%F`"
+	rm -f charts/$@
 	zip charts/$@ -r qmap-de
+
+qmap-nl.zip: rws.layers
+	rm -rf $(basename $@)/
+	sconvert.py -o $(basename $@) data/$</*.json -t "QMAP-NL `date +%F`" -u4 -j0
+	rm -f charts/$@
+	zip charts/$@ -r $(basename $@)
 
 lightsectors.obf:
 	wget -O data/lights.osm 'https://overpass-api.de/api/interpreter?data=[out:xml][timeout:90];( 	  nwr["seamark:type"="light_major"];   nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:range"]; 	  nwr[~"seamark:type"~"landmark|light|beacon"]["seamark:light:1:range"];   	);(._;>;);out meta;'

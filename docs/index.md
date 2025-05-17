@@ -113,11 +113,15 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
     - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
 - S57/SENC
     - [:de: QMAP DE](qmap-de.zip){:download}
+    - [:nl: QMAP NL](qmap-nl.zip){:download}
 
 ??? tip "SENC Vector Charts"
     The SENC files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html) plugin.
 
     ![OchartsNG](img/ochartsng.png)
+    
+    The buoys and beacons in QMAP-NL are those from the original ENC and not from the separate dataset. 
+    The scale/usage band of the chart was adjusted to display properly in AvNav, it does not work when converting the charts with OpenCPN.
 
 ## [OpenCPN](https://opencpn.org/)
 
