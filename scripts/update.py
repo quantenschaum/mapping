@@ -822,6 +822,8 @@ def update_osm(
             pass
 
         if review:
+            modifications.sort(key=lambda e:e[1][1] or '')
+
             for i, m in enumerate(modifications, 1):
                 for j, l in enumerate(m):
                     print(f"{'  'if j>1 else ''}{l}", end=" " if j == 0 else "\n")
