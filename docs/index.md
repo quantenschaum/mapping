@@ -115,7 +115,7 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
     - [:de: QMAP DE](qmap-de.zip){:download}
     - [:nl: QMAP NL](qmap-nl.zip){:download}
 
-??? tip "SENC Vector Charts"
+!!! tip "SENC Vector Charts"
     The SENC files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html) plugin.
 
     ![OchartsNG](img/ochartsng.png)
