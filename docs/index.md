@@ -95,6 +95,8 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 
 ## [AvNav](https://www.wellenvogel.net/software/avnav/docs/beschreibung.html?lang=en)
 
+### Raster Charts
+
 ![AvNav](img/avnav.png)
 
 AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/avnav/docs/charts.html#chartformats) files, but it also supports `mbtiles`, just not on Android. Simply drop the files into AvNav's `charts` folder.
@@ -112,16 +114,18 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
     - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
     - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
 - S57/SENC
-    - [:de: QMAP DE](qmap-de.zip){:download}
-    - [:nl: QMAP NL](qmap-nl.zip){:download}
 
-!!! tip "SENC Vector Charts"
-    The SENC files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html) plugin.
+### Vector Charts
 
-    ![OchartsNG](img/ochartsng.png)
+![OchartsNG](img/ochartsng.png)
+
+The SENC/S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html) plugin, they work with OpenCPN as well.
     
-    The buoys and beacons in QMAP-NL are those from the original ENC and not from the separate dataset. 
-    The scale/usage band of the chart was adjusted to display properly in AvNav, it does not work when converting the charts with OpenCPN.
+- [:de: QMAP DE](qmap-de.zip){:download}
+- [:nl: QMAP NL](qmap-nl.zip){:download}
+
+!!! info
+    The buoys and beacons in QMAP-NL are those from the original ENC and not from the separate dataset. The scale/usage band of the chart was adjusted to display properly in AvNav, it does not work out of the box when converting the charts with OpenCPN.
 
 ## [OpenCPN](https://opencpn.org/)
 
@@ -133,6 +137,7 @@ OpenCPN and other applications can display raster charts from `mbtiles`.
 - [:de: QMAP Contours DE](contours-de.png.mbtiles){:download}
 - [:de: QMAP Soundings DE](soundg-de.png.mbtiles){:download}
 - [:nl: QMAP NL](qmap-nl.png.mbtiles){:download}
+- Vector Charts: see above
 
 !!! info
     OpenCPN does not support WebP, so there are separate `mbtiles` files containing png tiles.
