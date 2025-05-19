@@ -542,7 +542,7 @@ def main():
     parser.add_argument('-o',"--output", help="output dir", default='.')
     parser.add_argument('-s',"--s57", help="convert SENC to S57", action='store_true')
     parser.add_argument('-t',"--title", help="S57 chart title")
-    parser.add_argument('-u',"--uband", help="override usage band (1-6)", type=int)
+    parser.add_argument('-u',"--uband", help="override usage band (1-6), sets native scale", type=int)
     parser.add_argument('-j',"--jitter", help="scale jitter to prevent duplicate data on same scale", type=int, default=100)
     args = parser.parse_args()
 
@@ -557,7 +557,7 @@ def main():
       for fi in track(files,'SENC --> S57'):
         fo=join(out,basename(fi).replace('.senc','.S57'))
         print(fi,'-->',fo)
-        senc2s57(fi,fo)
+        senc2s57(fi,fo,scale=SCALES.get(args.uband))
       return
 
     # GeoJSON --> SENC

@@ -381,7 +381,7 @@ def write_txt(filename,txt):
     f.write(txt)
 
 
-def senc2s57(fi,fo):
+def senc2s57(fi,fo,scale=None):
   senc=SENC(fi).records()
   et={}
   for t in list(filter(lambda r:r['name']=='edge_table',senc)):
@@ -395,6 +395,7 @@ def senc2s57(fi,fo):
   with SENC(fo,'w') as s57:
     for r in senc:
       t=r['type']
+      if scale and t==HEADER_CELL_NATIVESCALE: r['scale']=scale
       if t==CELL_TXTDSC_INFO_FILE_RECORD: write_txt(join(dirname(fo),r['file']),r['text'])
       if t in S57_RECORD_TYPES and t not in (HEADER_SENC_VERSION,VECTOR_EDGE_NODE_TABLE_RECORD):
         if 'edges' in r: # lines and areas
