@@ -113,7 +113,6 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
     - [:de: QMAP Soundings DE](soundg-de.mbtiles){:download}
     - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
     - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
-- S57/SENC
 
 ### Vector Charts
 
