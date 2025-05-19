@@ -87,7 +87,7 @@ bsh:
 
 filter:
 	cd data/bsh && rm -rf layers filtered filter.log
-	cd data/bsh; if [[ -f AidsAndServices.json ]]; then for F in *.json; do filter.py $$F filtered/$${F/xml/json} layers |tee -a filter.log; done; \
+	cd data/bsh; if [[ -f AidsAndServices.json ]]; then for F in *.json; do filter.py $$F filtered/$$F layers |tee -a filter.log; done; \
 		else for F in *.xml; do filter.py $$F filtered/$${F/xml/json} layers |tee -a filter.log; done; fi
 	cd data && rm -f bsh.gpkg && for F in bsh/filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
 
@@ -340,7 +340,7 @@ qmap-de.zip:
 
 qmap-nl.zip: rws.layers
 	rm -rf $(basename $@)/
-	sconvert.py -o $(basename $@) data/$</*.json -t "QMAP-NL `date +%F`" -u4 -j0
+	sconvert.py -o $(basename $@) data/rws.layers/*.json -t "QMAP-NL `date +%F`" -u4 -j0
 	rm -f charts/$@
 	zip charts/$@ -r $(basename $@)
 
