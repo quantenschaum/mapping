@@ -472,7 +472,7 @@ node["seamark:fog_signal:category"]::int1_fog_signal  {
 }
 
 node|z12-["seamark:radar_reflector"=yes]::int1_radar_reflector {
-	icon-image:		"gen/radar_reflector.svg";
+	icon-image:		"gen/radar-reflector.svg";
 	icon-height:	60;
   icon-offset-x:  0;
   icon-offset-y:  20;
