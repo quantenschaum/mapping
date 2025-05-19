@@ -48,29 +48,29 @@ lights = {
 }
 
 color_types={ # to reduce numer of combinations
-  'pillar spar can spherical barrel super-buoy conical light_float ':
-  ['','white','black','red','green','yellow'],
+  'pillar spar can spherical barrel super-buoy conical light_float':
+  'white black red green yellow',
 
-  'tower lattice pile stake cairn ':
-  ['','white','black','red','green','yellow','brown','grey'],
+  'tower lattice pile stake cairn':
+  'white black red green yellow brown grey',
 
-  'sphere ':
-  ['','black','white','red','green'],
+  'sphere':
+  ' black white red green',
 
-  'x-shape cross ':
-  ['','black','yellow'],
+  'x-shape cross':
+  ' black yellow',
 
-  '2_spheres 2_cones_up 2_cones_down 2_cones_base_together 2_cones_point_together ':
-  ['','black'],
+  '2_spheres 2_cones_up 2_cones_down 2_cones_base_together 2_cones_point_together':
+  ' black red green',
 
-  'cylinder cone_point_down cone_point_up ':
-  ['','black','white','red','green'],
+  'cylinder cone_point_down cone_point_up':
+  'black white red green',
 
-  'circle sphere_over_rhombus ':
-  ['','black','white','red','green'],
+  'circle sphere_over_rhombus':
+  'black white red green',
 
-  'triangle_point_up square rhombus triangle_point_down flag ':
-  ['','black','white','red','green','yellow'],
+  'triangle_point_up square rhombus triangle_point_down flag':
+  'black white red green yellow',
 }
 
 def colors_for(s):
@@ -79,7 +79,9 @@ def colors_for(s):
 
   colors=None
   for types,cols in color_types.items():
-    if s+' ' in types:
+    types=types.split()
+    cols=['']+cols.split()
+    if s in types:
       return cols
 
   return object_colors.keys()
