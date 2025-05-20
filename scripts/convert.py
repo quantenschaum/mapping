@@ -182,6 +182,7 @@ def read(filename):
 def lat_lon(z, x, y):
     n = 2**z
     lon = x / n * 360 - 180
+    if y<0: y = 2**z - 1 + y
     lat = degrees(atan(sinh(pi * (1 - 2 * y / n))))
     return lat, lon
 
@@ -351,11 +352,11 @@ def mbtiles2mbtiles(inputs, output, args):
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if args.invert_y:
                 y = 2**z - 1 - y
-            if skip(z, x, 2**z - 1 - y, row[3], args):
+            if skip(z, x, -y, row[3], args):
                 continue
             tile=recode(row[3],format,args.transparent)
             b += len(tile)
-            update_bbox(bbox,z,x,y)
+            update_bbox(bbox,z,x,-y)
             dcur.execute(
                 "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
                 [z, x, y, sqlite3.Binary(tile)],
@@ -365,9 +366,10 @@ def mbtiles2mbtiles(inputs, output, args):
         source.close()
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
+        print(f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}")
 
     for m in [f"minzoom={bbox['z']}",f"maxzoom={bbox['Z']}",
-              f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']},"] + args.meta:
+              f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']}"] + args.meta:
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT  OR REPLACE INTO metadata VALUES ('{k}','{v}')")
 
@@ -419,6 +421,7 @@ def mbtiles2sqlitedb(inputs, output, args):
     print("format",format)
 
     i, n, b = 0, 0, 0
+    bbox={}
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
@@ -429,7 +432,7 @@ def mbtiles2sqlitedb(inputs, output, args):
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
-            if skip(z, x, 2**z - 1 - y, row[3], args):
+            if skip(z, x, -y, row[3], args):
                 continue
             tile=recode(row[3],format,args.transparent)
             b += len(tile)
@@ -437,11 +440,13 @@ def mbtiles2sqlitedb(inputs, output, args):
             if timecol:
                 data.append(now)
             insert = f"INSERT OR REPLACE INTO tiles VALUES (?,?,?,?,?{',?' if timecol else ''})"
+            update_bbox(bbox, z, x, y)
             dcur.execute(insert, data)
             i += 1
         source.close()
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
+        print(f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}")
 
     dest.commit()
     dest.close()
@@ -455,6 +460,7 @@ def mbtiles2dir(inputs, output, args):
     print("format",format)
 
     i, n, b = 0, 0, 0
+    bbox={}
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
@@ -465,17 +471,19 @@ def mbtiles2dir(inputs, output, args):
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
-            if skip(z, x, 2**z - 1 - y, row[3], args):
+            if skip(z, x, -y, row[3], args):
                 continue
             tile=recode(row[3],format,args.transparent)
             b += len(tile)
             dir = f"{output}/{z}/{x}"
             makedirs(dir, exist_ok=1)
+            update_bbox(bbox, z, x, y)
             write(f"{dir}/{y}.{format or fmt(tile)}", tile)
             i += 1
         source.close()
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
+        print(f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}")
 
 
 def dir2mbtiles(inputs, output, args):
@@ -517,7 +525,7 @@ def dir2mbtiles(inputs, output, args):
                 b += len(tile)
                 if not args.invert_y:
                     y = 2**z - 1 - y
-                update_bbox(bbox, z, x, y)
+                update_bbox(bbox, z, x, -y)
                 dcur.execute(
                     "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
                     [z, x, y, sqlite3.Binary(tile)],
@@ -526,11 +534,11 @@ def dir2mbtiles(inputs, output, args):
 
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
+        print(f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}")
 
     for m in [f"minzoom={bbox['z']}",f"maxzoom={bbox['Z']}",
-              f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']},"] + args.meta:
+              f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']}"] + args.meta:
         k, v = m.split("=", 1)
-        print(k,v)
         dcur.execute(f"INSERT  OR REPLACE INTO metadata VALUES ('{k}','{v}')")
 
     dest.commit()
