@@ -14,8 +14,8 @@ help:
 
 build:
 # 	$(MAKE) lightsectors.obf
-	$(MAKE) -j bsh vwm rws
-	$(MAKE) -j qmap-de.obf qmap-de.zip qmap-nl.zip
+	$(MAKE) bsh vwm rws
+	$(MAKE) qmap-de.obf qmap-de.zip qmap-nl.zip
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
 	$(MAKE) charts tiles upload
