@@ -83,6 +83,7 @@ bsh:
 	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
 	cd data/bsh && for L in Hydrography Topography;         do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
 	cd data/bsh && for L in RocksWrecksObstructions;        do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
+	ls data/bsh/Topography.json
 	$(MAKE) filter
 
 filter:
