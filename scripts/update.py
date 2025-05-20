@@ -3,6 +3,7 @@
 
 import json
 import os
+import re
 from functools import reduce
 from math import inf, isnan, log, pi, pow, sqrt, tan, isfinite
 from os.path import basename, splitext
@@ -148,9 +149,9 @@ def load_geojson(filename, geotype="point", inject={}):
         except:
             types.add("unknown")
 
-    print("known keys", keys.intersection(S57keys.keys()))
-    print("other keys", keys.difference(S57keys.keys()))
-    print("types", types)
+    # print("known keys", keys.intersection(S57keys.keys()))
+    # print("other keys", keys.difference(S57keys.keys()))
+    # print("types", types)
 
     return selected
 
@@ -822,7 +823,15 @@ def update_osm(
             pass
 
         if review:
-            modifications.sort(key=lambda e:e[1][1] or '')
+            def sortkey(e):
+              name=str(e[1][1] or '')
+              name=name.replace(' ','')
+              m=re.match(r'(.*?)(\d+)',name)
+              if m:
+                name=f'{m.group(1)}{int(m.group(2)):06}'
+              return name
+
+            modifications.sort(key=sortkey)
 
             for i, m in enumerate(modifications, 1):
                 for j, l in enumerate(m):
