@@ -205,6 +205,14 @@ def in_bbox(z, x, y, args):
     return True
 
 
+def update_bbox(bbox,z,x,y):
+    lat, lon = lat_lon(z, x, y)
+    for k,v in [('z',z),('x',lon),('y',lat)]:
+      for c,f in [(str.lower,min),(str.upper,max)]:
+        bbox[c(k)]=f(bbox.get(c(k),v),v)
+    return bbox
+
+
 def is_transparent(data, args):
     if not args.exclude_transparent:
         return False
@@ -310,6 +318,7 @@ def pbar(iter,m=0):
     return track(iter,'[green]converting[/]',total=m)
     # return tqdm(iter,total=m,unit='T',unit_scale=True,dynamic_ncols=True)
 
+
 def mbtiles2mbtiles(inputs, output, args):
     assert not output.endswith("/")
     print("writing", output)
@@ -331,17 +340,13 @@ def mbtiles2mbtiles(inputs, output, args):
     print("format",format)
     if format:
         dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
-    for m in [f"minzoom={args.min_zoom}",f"maxzoom={args.max_zoom}"]+args.meta:
-        k, v = m.split("=", 1)
-        dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
 
     i, n, b = 0, 0, 0
+    bbox={}
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
-        for row in pbar(source.execute(
-            "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
-        ),source):
+        for row in pbar(source.execute("SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"), source):
             n += 1
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if args.invert_y:
@@ -350,6 +355,7 @@ def mbtiles2mbtiles(inputs, output, args):
                 continue
             tile=recode(row[3],format,args.transparent)
             b += len(tile)
+            update_bbox(bbox,z,x,y)
             dcur.execute(
                 "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
                 [z, x, y, sqlite3.Binary(tile)],
@@ -359,6 +365,11 @@ def mbtiles2mbtiles(inputs, output, args):
         source.close()
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
+
+    for m in [f"minzoom={bbox['z']}",f"maxzoom={bbox['Z']}",
+              f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']},"] + args.meta:
+        k, v = m.split("=", 1)
+        dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
 
     dest.commit()
     dest.close()
@@ -486,11 +497,9 @@ def dir2mbtiles(inputs, output, args):
     print("format",format)
     if format:
         dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
-    for m in [f"minzoom={args.min_zoom}",f"maxzoom={args.max_zoom}"]+args.meta:
-        k, v = m.split("=", 1)
-        dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
 
     i, n, b = 0, 0, 0
+    bbox={}
     for input in inputs:
         print("reading", input)
         assert isdir(input)
@@ -508,7 +517,7 @@ def dir2mbtiles(inputs, output, args):
                 b += len(tile)
                 if not args.invert_y:
                     y = 2**z - 1 - y
-
+                update_bbox(bbox, z, x, y)
                 dcur.execute(
                     "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
                     [z, x, y, sqlite3.Binary(tile)],
@@ -517,6 +526,12 @@ def dir2mbtiles(inputs, output, args):
 
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
+
+    for m in [f"minzoom={bbox['z']}",f"maxzoom={bbox['Z']}",
+              f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']},"] + args.meta:
+        k, v = m.split("=", 1)
+        print(k,v)
+        dcur.execute(f"INSERT INTO metadata VALUES ('{k}','{v}')")
 
     dest.commit()
     dest.close()
