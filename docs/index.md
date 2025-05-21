@@ -14,11 +14,6 @@ Here you find precompiled charts for download in various formats usable in diffe
     - The downloadable files on this page are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
     - The code of this project used to generate the charts an other data is licensed under [GPL](https://www.gnu.org/licenses/gpl-3.0.de.html).
 
-!!! failure
-    The BSH [changed](https://www.geoseaportal.de/de/news.xml) its [WMS server](https://gdi.bsh.de/public/public_services.html). They do no longer provide vector data. 
-    Data for Germany may still be updated but may contain errors in the depth contour areas!
-    Nav aids and contour lines should be correct, though.
-    
 !!! tip "Vector Data"
     S57 files containing vector charts for AVNav and OpenCPN have been added. For AVNav these chart can be rendered by [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html). 
 
