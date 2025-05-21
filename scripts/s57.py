@@ -836,6 +836,7 @@ def is_something(props):
 
 
 def s57type(props):
+    props={k:v for k,v in props.items() if v is not None}
     _type_ = props.get("_type_")
     if _type_:
         return _type_
@@ -889,6 +890,16 @@ def s57type(props):
             return bb + "_lateral"
         if bb == "beacon":
             return bb + "_special_purpose"
+    if props.get('signal_type')==5:
+      return 'radar_transponder'
+    if props.get('facility_type')==11:
+      return 'platform'
+    if 'functn' in props or props.get('facility_type')==1:
+      return 'building'
+    if props.get('facility_type')==4:
+      return 'crane'
+    if props.get('signal_type')==2:
+      return 'radio_station'
     assert 0, (types, props)
 
 
@@ -935,6 +946,7 @@ def s57cat(props):
 
 
 def s57translate(props):
+    props={k:v for k,v in props.items() if v is not None}
     typ = s57type(props)
     tags = {"seamark:type": typ}
     for k, t in S57keys.items():

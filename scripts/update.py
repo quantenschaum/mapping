@@ -132,7 +132,7 @@ def load_geojson(filename, geotype="point", inject={}):
 
     def key(e):
         p = e["properties"]
-        return int(p["scamax"] or p["scamin"] or 99999999)
+        return int(p.get("scamax") or p.get("scamin") or 99999999)
 
     selected = [sorted(g, key=key)[0] for g in grouped.values()]
 
