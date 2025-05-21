@@ -7,14 +7,14 @@ export PATH:=$(PWD)/scripts:$(PWD)/spreet/target/release:$(PWD)/tippecanoe:$(PAT
 export OGR_S57_OPTIONS=LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON
 # export S57_CSV="$(PWD)/scripts"
 
-.PHONY: bsh.osm icons obf vwm bsh charts qgis mapproxy
+.PHONY: icons obf vwm charts qgis mapproxy
 
 help:
 	cat README.md
 
 build:
 # 	$(MAKE) lightsectors.obf
-	$(MAKE) bsh vwm rws
+	$(MAKE) vwm rws
 	$(MAKE) qmap-de.obf qmap-de.zip qmap-nl.zip
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
@@ -68,29 +68,6 @@ depth-no.all:
 	$(MAKE) depth-no R=west
 	$(MAKE) depth-no R=mid
 	$(MAKE) depth-no R=north
-
-BSH_LAYERS_1=1_Overview,2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
-# need this because there is a typo in the WMS layer name (coastel)
-BSH_LAYERS_2=1_Overview,2_General,3_Coastel,4_Approach,5_Harbour,6_Berthing
-# no overview layer for obstructions
-BSH_LAYERS_3=2_General,3_Coastal,4_Approach,5_Harbour,6_Berthing
-BSH_BBOX=53.0,3.3,56.0,14.4
-BSH_WMS=https://gdi.bsh.de/mapservice_gs/NAUTHIS_$$L/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=application/rss+xml&WIDTH=99999999&HEIGHT=99999999&CRS=EPSG:4326&BBOX=$(BSH_BBOX)
-
-bsh:
-	rm -rf data/bsh && mkdir -p data/bsh
-	curl https://linchart60.bsh.de/chartserver/katalog.xml >data/bsh/catalog.html && bsh_catalog.py
-	cd data/bsh && for L in AidsAndServices SkinOfTheEarth; do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_1)"; done
-	cd data/bsh && for L in Hydrography Topography;         do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_2)"; done
-	cd data/bsh && for L in RocksWrecksObstructions;        do wget --no-check-certificate -O $$L.xml "$(BSH_WMS)&LAYERS=$(BSH_LAYERS_3)"; done
-	ls data/bsh/Topography.json
-	$(MAKE) filter
-
-filter:
-	cd data/bsh && rm -rf layers filtered filter.log
-	cd data/bsh; if [[ -f AidsAndServices.json ]]; then for F in *.json; do filter.py $$F filtered/$$F layers |tee -a filter.log; done; \
-		else for F in *.xml; do filter.py $$F filtered/$${F/xml/json} layers |tee -a filter.log; done; fi
-	cd data && rm -f bsh.gpkg && for F in bsh/filtered/*.json; do ogr2ogr bsh.gpkg $$F -append; done
 
 icons: icons/gen
 
