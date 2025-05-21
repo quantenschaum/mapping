@@ -1,14 +1,6 @@
-# Nautical Charts
+# Free Nautical Charts
 
-Converting chart data from different sources (S57-ENC, GeoJSON) to
-
-- map tiles
-  - web view
-  - mbtiles
-  - sqlitedb
-  - gemf
-- OSM
-- OsmAnd OBFs
+Conversion of chart data from different formats and sources to create free nautical charts.
 
 :exclamation: This is still very work in progress!
 

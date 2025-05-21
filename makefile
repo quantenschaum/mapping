@@ -300,9 +300,9 @@ obf: data/omc osmand/batch-$(BLEVEL).xml
 
 qmap-de.obf:
 	rm -rf osm && mkdir -p osm
-	for L in buoys beacons facilities lights stations; do update.py bsh-$$L data/bsh/AidsAndServices.json none osm/$$L.osm -a; done
-	for L in rocks wrecks obstructions; do update.py bsh-$$L data/bsh/RocksWrecksObstructions.json none osm/$$L.osm -a; done
-	for L in seabed; do update.py bsh-$$L data/bsh/Hydrography.json none osm/$$L.osm -a; done
+	for L in buoys beacons facilities lights stations; do update.py bsh-$$L data/bsh/A*.json none osm/$$L.osm -a; done
+	for L in rocks wrecks obstructions; do update.py bsh-$$L data/bsh/R*.json none osm/$$L.osm -a; done
+	for L in seabed; do update.py bsh-$$L data/bsh/H*.json none osm/$$L.osm -a; done
 	for L in beacons facilities lights; do lightsectors.py osm/$$L.osm osm/$$L-sectors.osm; done
 
 	rm -rf obf
