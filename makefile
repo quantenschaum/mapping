@@ -205,6 +205,7 @@ upload: icons.zip qmap-data.zip
 	chmod +rX -R www
 
 qmap-data.zip:
+	rm -f charts/$@
 	zip charts/$@ -r icons/gen data/bsh.gpkg data/soundg-de.gpkg data/rws.gpkg data/vwm.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
 
 vwm-update:
