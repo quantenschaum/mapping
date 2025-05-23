@@ -543,6 +543,7 @@ def main():
     parser.add_argument('-s',"--s57", help="convert SENC to S57", action='store_true')
     parser.add_argument('-t',"--title", help="S57 chart title")
     parser.add_argument('-u',"--uband", help="override usage band (1-6), sets native scale", type=int)
+    parser.add_argument('-c',"--chart", help="override chart field")
     parser.add_argument('-j',"--jitter", help="scale jitter to prevent duplicate data on same scale", type=int, default=100)
     args = parser.parse_args()
 
@@ -568,9 +569,15 @@ def main():
       for fi in track(files,'reading GeoJSON'):
         print(fi)
         features+=read_features(fi)
+
       if args.uband:
         for f in features:
           f['properties']['uband']=args.uband
+
+      if args.chart:
+        for f in features:
+          f['properties'][CHART]=args.chart
+
       charts=set(filter(lambda f:f,(f['properties'].get(CHART) for f in features)))
       print(len(charts),'charts')
       for c in track(sorted(charts),'writing S57'):

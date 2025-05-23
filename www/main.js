@@ -70,16 +70,16 @@ document.addEventListener("DOMContentLoaded", () => {
     'Worldy Imagery':L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: '<a target="_blank" href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">ArcGIS ESRI World Imagery</a>'
     }),
-    'Luchtfoto 2023 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2023_ortho25',
+    'Luchtfoto 25cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
+      layers:'Actueel_ortho25',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',
       tiled: true,
       attribution: '<a target="_blank" href="https://www.pdok.nl/">PDOK</a>'
     }),
-    'Luchtfoto 2023 8cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
-      layers:'2023_orthoHR',
+    'Luchtfoto 8cm':L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
+      layers:'Actueel_orthoHR',
       version:'1.3.0',
       transparent:'true',
       format:'image/jpg',

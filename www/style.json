@@ -18,14 +18,14 @@
     },
     "-bsh": {
       "type": "vector",
-      "tiles": ["http://localhost:63343/mapping/www/pbf/{z}/{x}/{y}.pbf"],
+      "tiles": ["https://localhost:63343/mapping/www/pbf/{z}/{x}/{y}.pbf"],
       "minzoom": 6,
       "maxzoom": 16,
       "attribution": "<a href=\"https://www.geoseaportal.de/mapapps/resources/apps/navigation\">BSH</a>"
     },
     "bsh": {
       "type": "vector",
-      "tiles": ["http://waddenzee.duckdns.org/pbf/{z}/{x}/{y}.pbf"],
+      "tiles": ["https://waddenzee.duckdns.org/pbf/{z}/{x}/{y}.pbf"],
       "minzoom": 6,
       "maxzoom": 16,
       "attribution": "<a href=\"https://www.geoseaportal.de/mapapps/resources/apps/navigation\">BSH</a>"
@@ -401,7 +401,8 @@
             ["in",3,["get","COLOUR"]],10,
             ["in",4,["get","COLOUR"]],-10
             ,0]]],
-          "icon-overlap": "always"
+          "icon-overlap": "always",
+          "icon-rotation-alignment": "map"
         }
     },
     {
@@ -416,7 +417,8 @@
           "icon-offset": [0,256],
           "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1]],
           "icon-overlap": "always",
-          "icon-pitch-alignment": "map"
+          "icon-pitch-alignment": "map",
+          "icon-rotation-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.7
@@ -434,7 +436,8 @@
           "icon-offset": [0,256],
           "icon-size": ["*",["case",["==",["get","EXCLIT"],3],0.5,1],["interpolate",["linear"],["coalesce",["get","VALNMR"],99],3,0.6,10,1]],
           "icon-overlap": "always",
-          "icon-pitch-alignment": "map"
+          "icon-pitch-alignment": "map",
+          "icon-rotation-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.7
@@ -454,7 +457,8 @@
               ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
                   ["interpolate",["linear"],["var","angle"],0,3,6,1]] ],
           "icon-overlap": "always",
-          "icon-pitch-alignment": "map"
+          "icon-pitch-alignment": "map",
+          "icon-rotation-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.8
@@ -474,7 +478,8 @@
               ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
                   ["interpolate",["linear"],["var","angle"],0,3,6,1]]],
           "icon-overlap": "always",
-          "icon-pitch-alignment": "map"
+          "icon-pitch-alignment": "map",
+          "icon-rotation-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.8
@@ -494,7 +499,8 @@
               ["let","angle", ["+",["-",["get","SECTR2"],["get","SECTR1"]],["case",[">=",["get","SECTR2"],["get","SECTR1"]],0,360]],
                   ["interpolate",["linear"],["var","angle"],0,3,6,1]] ],
           "icon-overlap": "always",
-          "icon-pitch-alignment": "map"
+          "icon-pitch-alignment": "map",
+          "icon-rotation-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.8
@@ -519,7 +525,8 @@
             "4","#00a650",
             "6","#fab20b",
             "11","#fab20b",
-            "#800080"]
+            "#800080"],
+          "circle-pitch-alignment": "map"
         }
     },
     {
@@ -996,14 +1003,14 @@
         "id": "spot-soundings",
         "type": "symbol",
         "source": "bsh",
-        "source-layer": "soundg",
+        "source-layer": "soundgde",
         "layout": {
-         "text-field": "{DEPTH}",
+         "text-field": "{depth}",
          "text-size": 12,
          "text-anchor": "center"
         },
         "paint": {
-          "text-color": ["case", [">",0,["get","DEPTH"]],"green", ["<",5,["get","DEPTH"]],"gray", "black"]
+          "text-color": ["case", [">",0,["get","VALSOU"]],"green", ["<",5,["get","VALSOU"]],"gray", "black"]
         }
     },
     {
