@@ -50,14 +50,17 @@ Here you find precompiled charts for download in various formats usable in diffe
 
 Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". (also see [usage](usage.md#vector-charts))
 
-- [:de: QMAP DE (nav aids)](qmap-de.obf){:download}
 - [:de: Depth Contours DE](depth-de.obf){:download}
 - [:de: Spot Soundings DE](soundg-de.obf){:download}
 - [:nl: Depth Data NL](depth-nl.obf){:download}
 - [:globe_with_meridians: Light Sectors Worldwide](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
+- [:de: QMAP DE (nav aids)*](qmap-de.obf){:download}
 
-!!! warning
+!!! warning "* QMAP DE"
+    The QMAP DE vector chart contains navaids, rocks and other point like objects. It is meant to be used *instead* of the OSM data, not in combination with it. If you activate both, you will get duplicate objects, which can be confusing.
+
+!!! warning "Rendering Style"
     The vector chart will not be rendered properly without the marine rendering style and render engine 2 (OpenGL)!
 
 ### Raster Charts
@@ -67,7 +70,8 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 The charts are imported by opening the `sqlitedb` files with the app. (also see [usage](usage.md#raster-charts))
 
 - [:de: QMAP DE](qmap-de.sqlitedb){:download}
-- [:de: QMAP Soundings DE](soundg-de.sqlitedb){:download}
+- [:de: QMAP DE Contours](contours-de.sqlitedb){:download}
+- [:de: QMAP DE Soundings](soundg-de.sqlitedb){:download}
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
 - [:de: Tidal Atlas DE](tides.sqlitedb.zip){:download}
 
@@ -89,14 +93,14 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
 
 - GEMF
     - [:de: QMAP DE](qmap-de.gemf){:download}
-    - [:de: QMAP Contours DE](contours-de.gemf){:download}
-    - [:de: QMAP Soundings DE](soundg-de.gemf){:download}
+    - [:de: QMAP DE Contours](contours-de.gemf){:download}
+    - [:de: QMAP DE Soundings](soundg-de.gemf){:download}
     - [:nl: QMAP NL](qmap-nl.gemf){:download}
     - [:de: Tidal Atlas DE](tides.gemf.zip){:download}
 - MBTILES
     - [:de: QMAP DE](qmap-de.mbtiles){:download}
-    - [:de: QMAP Contours DE](contours-de.mbtiles){:download}
-    - [:de: QMAP Soundings DE](soundg-de.mbtiles){:download}
+    - [:de: QMAP DE Contours](contours-de.mbtiles){:download}
+    - [:de: QMAP DE Soundings](soundg-de.mbtiles){:download}
     - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
     - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
 
@@ -110,7 +114,7 @@ The SENC/S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.ne
 - [:nl: QMAP NL](qmap-nl.zip){:download}
 
 !!! info
-    The buoys and beacons in QMAP-NL are those from the original ENC and not from the separate dataset. The scale/usage band of the chart was adjusted to display properly in AvNav, it does not work out of the box when converting the charts with OpenCPN.
+    The buoys and beacons in QMAP-NL vector chart are those from the original ENC and not from the separate dataset. The scale/usage band of the chart was adjusted to display properly in AvNav, it does not work out of the box when converting the charts with OpenCPN.
 
 ## [OpenCPN](https://opencpn.org/)
 
@@ -119,8 +123,8 @@ The SENC/S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.ne
 OpenCPN and other applications can display raster charts from `mbtiles`.
 
 - [:de: QMAP DE](qmap-de.png.mbtiles){:download}
-- [:de: QMAP Contours DE](contours-de.png.mbtiles){:download}
-- [:de: QMAP Soundings DE](soundg-de.png.mbtiles){:download}
+- [:de: QMAP DE Contours](contours-de.png.mbtiles){:download}
+- [:de: QMAP DE Soundings](soundg-de.png.mbtiles){:download}
 - [:nl: QMAP NL](qmap-nl.png.mbtiles){:download}
 - Vector Charts: see above
 
