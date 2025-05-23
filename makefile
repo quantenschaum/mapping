@@ -324,9 +324,9 @@ qmap-de.zip:
 	rm -f charts/$@
 	zip charts/$@ -r qmap-de
 
-qmap-nl.zip: #rws.layers
+qmap-nl.zip: rws.layers
 	rm -rf $(basename $@)/
-	cp -v data/vwm/layers/*.json data/rws.layers
+# 	cp -v data/vwm/layers/*.json data/rws.layers
 	sconvert.py -o $(basename $@) data/rws.layers/*.json -t "QMAP-NL `date +%F`" -u4 -j0
 	rm -f charts/$@
 	zip charts/$@ -r $(basename $@)

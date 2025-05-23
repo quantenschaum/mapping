@@ -113,7 +113,7 @@ The SENC/S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.ne
 - [:de: QMAP DE](qmap-de.zip){:download}
 - [:nl: QMAP NL](qmap-nl.zip){:download}
 
-!!! info
+!!! "QNAP NL"
     The buoys and beacons in QMAP-NL vector chart are those from the original ENC and not from the separate dataset. The scale/usage band of the chart was adjusted to display properly in AvNav, it does not work out of the box when converting the charts with OpenCPN.
 
 ## [OpenCPN](https://opencpn.org/)
