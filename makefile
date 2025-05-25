@@ -216,7 +216,7 @@ upload: icons.zip qmap-data.zip qmap-de.tiles.zip soundg-de.tiles.zip qmap-nl.ti
 	chmod +rX -R www
 
 %.tiles.zip:
-	zip - -q -r $(patsubst %.tiles.zip,www/%/,$@) -x '*.png' >charts/$@
+	cd www && zip - -q -r $(patsubst %.tiles.zip,%/,$@) -x '*.png' >../charts/$@
 
 qmap-data.zip:
 	rm -f charts/$@
