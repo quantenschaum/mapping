@@ -116,11 +116,14 @@ bsh-bathy: data/Elevation-Bathymetry.zip
 	unzip $< -d data/Elevation-Bathymetry
 
 schutzzonen:
-	rm -rf data/$@ data/$@.gpkg
-	mkdir -p data/$@
-	cd data/$@ && schutzzonen.py
-	cd data/ && for F in $@/*.zip; do unzip -n $$F -d $${F%.*}; ogr2ogr schutzzonen.gpkg $${F%.*} -append; rm -r $${F%.*}; done
-	cd data/ && for F in $@/*.json; do ogr2ogr schutzzonen.gpkg $$F -append; done
+ 	rm -rf data/$@
+ 	mkdir -p data/$@
+ 	cd data/$@ && schutzzonen.py
+ 	cd data/ && for F in $@/*.zip; do unzip -n $$F -d $${F%.*}; ogr2ogr schutzzonen.gpkg $${F%.*} -append; rm -r $${F%.*}; done
+
+	rm -rf data/$@.gpkg
+	cd data/$@ && for F in *.json; do ogr2ogr $$F.gpx $$F -t_srs "EPSG:4326"; done
+	cd data/$@ && for F in *.json; do ogr2ogr ../$@.gpkg $$F -append -t_srs "EPSG:4326"; done
 
 waypoints:
 	mkdir -p data
@@ -181,6 +184,7 @@ charts/%.sqlitedb: charts/%.mbtiles
 www/%/: charts/%.mbtiles charts/%.png.mbtiles
 	convert.py -f $< $@
 	convert.py -a $(word 2,$^) $@
+	cp www/map.html $@/index.html
 	chmod +rX -R $@
 
 data/chartconvert:
@@ -199,7 +203,7 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
-upload: icons.zip qmap-data.zip
+upload: icons.zip qmap-data.zip qmap-de.tiles.zip soundg-de.tiles.zip qmap-nl.tiles.zip
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
@@ -210,6 +214,9 @@ upload: icons.zip qmap-data.zip
 	mv tmp/site www/download
 	rm -rf tmp
 	chmod +rX -R www
+
+%.tiles.zip:
+	zip - -r $(patsubst %.tiles.zip,www/%/,$@) -x '*.png' >charts/$@
 
 qmap-data.zip:
 	rm -f charts/$@
