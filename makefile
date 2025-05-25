@@ -116,10 +116,10 @@ bsh-bathy: data/Elevation-Bathymetry.zip
 	unzip $< -d data/Elevation-Bathymetry
 
 schutzzonen:
- 	rm -rf data/$@
- 	mkdir -p data/$@
- 	cd data/$@ && schutzzonen.py
- 	cd data/ && for F in $@/*.zip; do unzip -n $$F -d $${F%.*}; ogr2ogr schutzzonen.gpkg $${F%.*} -append; rm -r $${F%.*}; done
+	rm -rf data/$@
+	mkdir -p data/$@
+	cd data/$@ && schutzzonen.py
+	cd data/ && for F in $@/*.zip; do unzip -n $$F -d $${F%.*}; ogr2ogr schutzzonen.gpkg $${F%.*} -append; rm -r $${F%.*}; done
 
 	rm -rf data/$@.gpkg
 	cd data/$@ && for F in *.json; do ogr2ogr $$F.gpx $$F -t_srs "EPSG:4326"; done
