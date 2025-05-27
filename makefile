@@ -18,7 +18,7 @@ build:
 	$(MAKE) qmap-de.obf qmap-de.zip qmap-nl.zip
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
-	$(MAKE) charts tiles upload
+	$(MAKE) charts tiles zips upload
 
 vwm:
 	rm -rf data/vwm && mkdir -p data/vwm
@@ -203,7 +203,9 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
-upload: icons.zip qmap-data.zip qmap-de.tiles.zip soundg-de.tiles.zip qmap-nl.tiles.zip
+zips: icons.zip qmap-data.zip qmap-de.tiles.zip soundg-de.tiles.zip qmap-nl.tiles.zip
+
+upload:
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
