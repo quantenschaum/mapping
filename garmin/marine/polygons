@@ -1,0 +1,5 @@
+contourarea=depth & areatype=-1  { add mkgmap:xt-depth='0m';  } [0x010301 resolution 18]
+contourarea=depth & areatype=0   { add mkgmap:xt-depth='2m';  } [0x010302 resolution 18]
+contourarea=depth & areatype=2   { add mkgmap:xt-depth='5m';  } [0x010304 resolution 18]
+contourarea=depth & areatype=5   { add mkgmap:xt-depth='10m'; } [0x010305 resolution 18]
+contourarea=depth & areatype=10  {                            } [0x010306 resolution 18]

@@ -1,0 +1,2 @@
+point=depth & depth<0  { add mkgmap:xt-depth='${depth|subst:-}m' } [0x010302 resolution 20]
+point=depth            { add mkgmap:xt-depth='${depth}m'         } [0x010301 resolution 20]
