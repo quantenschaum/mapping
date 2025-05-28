@@ -210,6 +210,9 @@ document.addEventListener("DOMContentLoaded", () => {
     maxZoom: 18,
   });
 
+
+  map.attributionControl.setPrefix('<a class="highlight" href="https://waddenzee.duckdns.org/download/">QMAP (download and more)</a>, <a href="https://leafletjs.com/">Leaflet</a>');
+
    if(debug){
      L.GridLayer.GridDebug = L.GridLayer.extend({
       createTile: function (coords) {
@@ -361,18 +364,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
      }).addTo(map);
 
-     let textbox = L.Control.extend({
-        onAdd: function() {
-          var text = L.DomUtil.create('div');
-          text.id = "infobox";
-          text.innerHTML = '<a href="/download/">background information and downloads</a>';
-          return text;
-        },
-
-    });
-    new textbox({
-      position: 'bottomleft',
-    }).addTo(map);
+//     let textbox = L.Control.extend({
+//        onAdd: function() {
+//          var text = L.DomUtil.create('div');
+//          text.id = "infobox";
+//          text.innerHTML = '<a href="/download/">background information and downloads</a>';
+//          return text;
+//        },
+//
+//    });
+//    new textbox({
+//      position: 'bottomleft',
+//    }).addTo(map);
 
      let nightswitch = L.Control.extend({
         onAdd: function() {
