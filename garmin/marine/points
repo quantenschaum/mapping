@@ -1,15 +1,20 @@
+uband<=2 & point=depth & depth<0  { add mkgmap:xt-depth='${depth|subst:-}m' } [0x010302 resolution 18]
+uband<=2 & point=depth            { add mkgmap:xt-depth='${depth}m'         } [0x010301 resolution 18]
 uband<=3 & point=depth & depth<0  { add mkgmap:xt-depth='${depth|subst:-}m' } [0x010302 resolution 20]
 uband<=3 & point=depth            { add mkgmap:xt-depth='${depth}m'         } [0x010301 resolution 20]
 uband<=4 & point=depth & depth<0  { add mkgmap:xt-depth='${depth|subst:-}m' } [0x010302 resolution 22]
 uband<=4 & point=depth            { add mkgmap:xt-depth='${depth}m'         } [0x010301 resolution 22]
 uband<=5 & point=depth & depth<0  { add mkgmap:xt-depth='${depth|subst:-}m' } [0x010302 resolution 23]
 uband<=5 & point=depth            { add mkgmap:xt-depth='${depth}m'         } [0x010301 resolution 23]
-           point=depth & depth<0  { add mkgmap:xt-depth='${depth|subst:-}m' } [0x010302 resolution 24]
-           point=depth            { add mkgmap:xt-depth='${depth}m'         } [0x010301 resolution 24]
+uband<=6 & point=depth & depth<0  { add mkgmap:xt-depth='${depth|subst:-}m' } [0x010302 resolution 24]
+uband<=6 & point=depth            { add mkgmap:xt-depth='${depth}m'         } [0x010301 resolution 24]
 
+seamark:light:character=* & seamark:light:group=* & seamark:light:period=* { name '${seamark:name|def:|subst: } ${seamark:light:character}.${seamark:light:colour|def:|subst:white|substring:0:1}(${seamark:light:group})${seamark:light:period}'; }
+seamark:light:character=* & seamark:light:group!=* & seamark:light:period=* { name '${seamark:name|def:|subst: } ${seamark:light:character}.${seamark:light:colour|def:|subst:white|substring:0:1}.${seamark:light:period}'; }
+seamark:light:character=* & seamark:light:group=* & seamark:light:period!=* { name '${seamark:name|def:|subst: } ${seamark:light:character}.${seamark:light:colour|def:|subst:white|substring:0:1}(${seamark:light:group})'; }
+seamark:light:character=* & seamark:light:group!=* & seamark:light:period!=* { name '${seamark:name|def:|subst: } ${seamark:light:character}.${seamark:light:colour|def:|subst:white|substring:0:1}'; }
 
-
-
+seamark:light:character!=* & seamark:name=* { name '${seamark:name|subst: }'; }
 
 # copied from mkgmap #######################################################
 
