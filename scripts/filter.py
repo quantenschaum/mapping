@@ -13,7 +13,7 @@ import re
 from collections import defaultdict
 from itertools import groupby, permutations, combinations_with_replacement, product, pairwise, chain
 from os import makedirs
-from os.path import dirname, exists
+from os.path import dirname, exists, basename, splitext
 from time import sleep
 from types import NoneType
 from s57 import resolve, abbr_color
@@ -26,9 +26,9 @@ from rich.progress import track
 from rich.traceback import install
 console=Console()
 if console.is_terminal:
-  print=console.log
+  print=console.print
   track=partial(track,console=console)
-  install()
+  # install()
 
 def load_json(filename):
   with open(filename) as f:
@@ -111,7 +111,7 @@ def parse(s):
   # return array(number(s))
 
 
-TYPES = None, int, float, list, str
+TYPES = None, bool, int, float, list, str
 
 def data_types(features):
   types={}
@@ -119,8 +119,11 @@ def data_types(features):
     for k,v in f['properties'].items():
       t=types.get(k)
       st=type(parse(v))
-      # print(k,v,st)
-      types[k]=max(t,st,key=TYPES.index)
+      # print(k,v,st,t)
+      if k=='VALSOU': types[k]=float
+      if k=='ZVALUE': types[k]=float
+      if k=='DEPTH': types[k]=float
+      else: types[k]=max(t,st,key=TYPES.index)
       # print(st,t,types[k])
   return {k:(array if v==list else v) for k,v in types.items()}
 
@@ -227,30 +230,73 @@ def convert_xml(ifile,ofile):
 
 def main():
   parser = ArgumentParser(description="BSH WMS data filter", formatter_class=ArgumentDefaultsHelpFormatter)
-  parser.add_argument('input', help='input file (xml/json)')
-  parser.add_argument('output', help='output file (json)')
-  parser.add_argument('layers', help="layers directory", nargs='?')
+  parser.add_argument('input', help='input file', nargs='+')
+  parser.add_argument('-o','--output', help='output file')
+  parser.add_argument('-L','--layers', help="layers directory")
+  parser.add_argument('-u','--uband', help="override uband", type=int)
+  parser.add_argument('-c','--chart', help="override chart")
+  parser.add_argument('-l','--layer', help="override layer")
+  parser.add_argument('--bsh', help="filter BSH charts",action='store_true')
   args = parser.parse_args()
 
-  ifile = args.input
+  ifiles = args.input
   ofile = args.output
   ldir  = args.layers
+  assert ofile or ldir
 
-  if ifile.endswith('.xml'):
-    jfile=ifile.replace('.xml','.json')
-    convert_xml(ifile,jfile)
-    ifile=jfile
+  # if ifile.endswith('.xml'):
+  #   jfile=ifile.replace('.xml','.json')
+  #   convert_xml(ifile,jfile)
+  #   ifile=jfile
 
-  data=load_json(ifile)
+  features=[]
+  for fi in ifiles:
+    data=load_json(fi)
+    fs=data['features']
+    for f in fs: f['properties']['file']=fi
+    features=features+fs
 
-  features=data['features']
+  print(f'[yellow]processing[/] {len(features)} features')
 
-  print(f'[yellow]processing[/] {len(features)} from {ifile}')
+  # add lights
+  # for f in features:
+  #   props=f['properties']
+  #   light_text=props.get('LIGHTS_TEXT')
+  #   if light_text:
+  #     light=light_text.split()
+  #     # print(light)
+  #     m=re.match(r'(\w+)(\(.+\))?$',light[0])
+  #     # print(m.groups())
+  #     if m:
+  #       lit={
+  #         'LITCHR':m.group(1),
+  #         'SIGGRP':m.group(2),
+  #         'COLOUR':light[1],
+  #       }
+  #     else:
+  #       print(light_text)
+  #       continue
+  #     for s in light[2:]:
+  #       if s.endswith('s'):
+  #         lit['SIGPER']=s[:-1]
+  #         break
+  #     for s in light[3:]:
+  #       if s.endswith('M'):
+  #         lit['VALNMR']=s[:-1]
+  #         break
+  #     print(lit)
+  #     # features.append({'type':'Feature','properties':lit,'geometry':f['geometry']})
 
   for f in features:
     props=f['properties'] # make upper case keys for 6 char fields
     props={k.upper() if len(k)==6 else k:v for k,v in props.items()}
     f['properties']=props
+
+    # list --> string
+    for k in list(props):
+      v=props[k]
+      if isinstance(v,list):
+        props[k]=','.join(map(str,v))
 
     # remove empty data values
     for k,v in dict(props).items():
@@ -264,11 +310,22 @@ def main():
           continue
         props[k]=v
 
+    if 'LIGHTHOUSES' in props['file']:
+      props['BCNSHP']=3
+
+    light_text=props.get('LIGHTS_TEXT')
+    if light_text:
+      props['OBJNAM']=(props.get('OBJNAM','')+' '+light_text).strip()
+
   # determine type of each field
   dtypes=data_types(features)
   # for k,v in dtypes.items(): print(k,v)
 
   for f in track(features,'[green]filtering[/]'):
+    if 'geometry' not in f: continue
+    if 'coordinates' not in f['geometry']: continue
+    if 'properties' not in f: continue
+
     props=f['properties']
 
     # convert values to determined types
@@ -287,9 +344,10 @@ def main():
         chart=chart.replace('.000','')
         props['chart']=chart
 
-        meta=CATALOG.get(chart)
-        if meta:
-          props['scale']=int(meta['c_scale'])
+        if args.bsh:
+          meta=CATALOG.get(chart)
+          if meta:
+            props['scale']=int(meta['c_scale'])
 
     # print(ifile,props.get('chart'),props.get('uband'),props.get('lnam'))
 
@@ -307,10 +365,14 @@ def main():
     #       res[k+'__']=''.join(c[0] for c in res[k+'_'].split('_')).upper()
     #       props.update(res)
 
+    depth=props.get('ZVALUE',props.get('DEPTH',props.get('depth')))
+    if depth is not None:
+      props['VALSOU']=depth
+
     cols=props.get('COLOUR')
-    if cols:
-      cs = ''.join(map(abbr_color,map(int, str(cols).split(','))))
-      props['color']=cs
+    # if cols:
+    #   cs = ''.join(map(abbr_color,map(int, str(cols).split(','))))
+    #   props['color']=cs
 
     if 'catgeo' not in props:
       g=f['geometry']['type']
@@ -318,15 +380,27 @@ def main():
 
     if 'layer' not in props:
       l=layer(props)
-      if l: props['layer']=l
+      # print('layer',l)
+      if l:
+        props['layer']=l
+      else:
+        name=splitext(basename(props['file']))[0]
+        l=name.split('_')[0]
+        if len(l)==6:
+          props['layer']=l.upper()
+
+    if args.uband: props['uband']=args.uband
+    if args.chart: props['chart']=args.chart
+    if args.layer: props['layer']=args.layer
 
   # remove old and HD charts - https://linchart60.bsh.de/chartserver/katalog.xml
   # features=data['features']=[f for f in features if re.match(r'DE\d(NO|OS)...',f['properties'].get('chart','DE0NOxxx'))]
-  features=data['features']=[f for f in features if f['properties'].get('chart','DE2NO000') in CATALOG]
-  assert features
+  if args.bsh:
+    features=data['features']=[f for f in features if f['properties'].get('chart','DE2NO000') in CATALOG]
+    assert features
 
   if ofile:
-    print('saving to',ofile)
+    print('writing to',ofile)
     save_json(ofile,data)
 
   # save layer, one file per layer
@@ -346,8 +420,11 @@ def main():
   unmatched=list(filter(lambda f:'layer' not in f['properties'],features))
   if unmatched:
     print('unmatched',len(unmatched))
-    fn=f'{ldir}/{ifile[0]}-unmatched.json'
-    save_json(fn, {"type": "FeatureCollection", "features": unmatched})
+    fn=f'{ldir}/unmatched.json'
+    if exists(fn): # append to existing data
+      um0=load_json(fn)['features']
+    else: um0=[]
+    save_json(fn, {"type": "FeatureCollection", "features": um0+unmatched})
 
   return
   values=group_keys(features,1)
@@ -413,25 +490,32 @@ def layer(props):
     if a.upper() in props or a.lower() in props:
       if g in ls: return ls[g]
 
+  if 'VALSOU' in props and point:
+    return 'SOUNDG'
+  if 'TOPSHP' in props and point and props.get('light_type')==1:
+    return 'DAYMAR'
+  if 'TOPSHP' in props and point:
+    return 'TOPMAR'
+
   if 'BOYSHP' in props and point:
-    if 'CATLAM' in props:
+    if 'CATLAM' in props or str(props.get('COLOUR','')) in '34': # RG
       return 'BOYLAT'
-    if 'CATCAM' in props:
+    if 'CATCAM' in props or all(c in str(props.get('COLOUR','')) for c in '26'): # BY
       return 'BOYCAR'
-    if 'CATSPM' in props:
+    if 'CATSPM' in props or props.get('COLOUR')=='6': # Y
       return 'BOYSPP'
-    if all(c in str(props.get('COLOUR','')) for c in '13'):
+    if all(c in str(props.get('COLOUR','')) for c in '13'): # WR
       return 'BOYSAW'
-    if all(c in str(props.get('COLOUR','')) for c in '23'):
+    if all(c in str(props.get('COLOUR','')) for c in '23'): # BR
       return 'BOYISD'
     return 'BOYSPP'
 
   if 'BCNSHP' in props and point:
-    if 'CATLAM' in props:
+    if 'CATLAM' in props or str(props.get('COLOUR','')) in '34': # RG
       return 'BCNLAT'
-    if 'CATCAM' in props:
+    if 'CATCAM' in props or all(c in str(props.get('COLOUR','')) for c in '26'): # BY
       return 'BCNCAR'
-    if 'CATSPM' in props:
+    if 'CATSPM' in props or props.get('COLOUR')=='6': # Y
       return 'BCNSPP'
     if all(c in str(props.get('COLOUR','')) for c in '13'):
       return 'BCNSAW'
@@ -442,8 +526,6 @@ def layer(props):
   if props.get('beacon_type') and point:
     return 'BCNSPP'
 
-  if 'TOPSHP' in props and point:
-    return 'DAYMAR'
   if props.get('caution_type')==2:
     return 'OBSTRN'
   if props.get('caution_type')==6:
@@ -558,9 +640,9 @@ def layer(props):
   if props.get('berth_type')==2 and area:
     return 'ACHARE'
 
-  if 'Radar' in props.get('OBJNAM','') and area:
+  if 'Radar' in str(props.get('OBJNAM','')) and area:
     return 'RADRNG'
-  if 'RADAR' in props.get('OBJNAM','') and area:
+  if 'RADAR' in str(props.get('OBJNAM','')) and area:
     return 'RADRNG'
 
   if props.get('light_type')==3 and point:

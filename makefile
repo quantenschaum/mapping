@@ -25,10 +25,10 @@ vwm:
 	wget -O data/vwm/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
 	wget -O data/vwm/vast.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
 
-	vconvert.py data/vwm/drijvend.json data/vwm/drijvend+.json
-	vconvert.py data/vwm/vast.json data/vwm/vast+.json
-	filter.py data/vwm/drijvend+.json data/vwm/drijvend+.json data/vwm/layers
-	filter.py data/vwm/vast+.json data/vwm/vast+.json data/vwm/layers
+	vconvert.py data/vwm/drijvend.json data/vwm/drijvend.s57.json
+	vconvert.py data/vwm/vast.json data/vwm/vast.s57.json
+	filter.py data/vwm/drijvend.s57.json -L data/vwm/layers
+	filter.py data/vwm/vast.s57.json -L data/vwm/layers
 
 	rm -f data/vwm.gpkg
 	for F in $$(find data/vwm -name "*.json"); do ogr2ogr data/vwm.gpkg $$F -append; done

@@ -13,15 +13,14 @@ from itertools import accumulate
 from os import makedirs
 from os.path import basename, splitext, dirname, join
 
-from functools import partial
-from rich.console import Console
-from rich.progress import track
-from rich.traceback import install
-console=Console()
-if console.is_terminal:
-  print=console.print
-  track=partial(track,console=console)
-  install()
+if __name__ == "__main__":
+  from functools import partial
+  from rich.console import Console
+  from rich.progress import track
+  console=Console()
+  if console.is_terminal:
+    print=console.print
+    track=partial(track,console=console)
 
 from geojson import (
     Point,
@@ -441,7 +440,6 @@ def features2senc(filename,features,scale_jitter=100):
           # print(a,v,acronym_code(a),vtype,type(v))
           senc.add_record(type=FEATURE_ATTRIBUTE_RECORD,atype=atype,value=v)
 
-
       for f in features:
         p=f['properties']
         l=p['layer']
@@ -458,14 +456,22 @@ def features2senc(filename,features,scale_jitter=100):
         # print(l,ftype)
         primitives={PRIMITIVES[v] for v in s57obj[ftype][6]}
         if ptype not in primitives:
-          if ptype==2 and 3 in primitives and 'Multi' not in gtype:
+          if ptype==2 and 3 in primitives:
             print('[yellow]line -> polygon[/]',l,gtype)
-            if gtype=='LineString':
+            assert 'Line' in gtype
+            if 'Multi' in gtype:
+              gtype='MultiPolygon'
+              c=[[l] for l in c] # lines as outer contours
+            else:
               gtype='Polygon'
               c=[c] # line as outer contour
-          elif ptype==3 and 2 in primitives and 'Multi' not in gtype:
+          elif ptype==3 and 2 in primitives:
             print('[yellow]polygon -> line[/]',l,gtype)
-            if gtype=='Polygon':
+            assert 'Polygon' in gtype
+            if 'Multi' in gtype:
+              gtype='MultiLineString'
+              c=[p[0] for p in c] # outer contours as lines
+            else:
               gtype='LineString'
               c=c[0] # outer contour as line
           else:
@@ -544,7 +550,7 @@ def main():
     parser.add_argument('-t',"--title", help="S57 chart title")
     parser.add_argument('-u',"--uband", help="override usage band (1-6), sets native scale", type=int)
     parser.add_argument('-c',"--chart", help="override chart field")
-    parser.add_argument('-j',"--jitter", help="scale jitter to prevent duplicate data on same scale", type=int, default=100)
+    parser.add_argument('-j',"--jitter", help="scale jitter to prevent duplicate data on same scale", type=int, default=0)
     args = parser.parse_args()
 
     files = args.input
