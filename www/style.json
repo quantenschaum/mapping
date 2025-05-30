@@ -28,7 +28,7 @@
       "tiles": ["https://waddenzee.duckdns.org/pbf/{z}/{x}/{y}.pbf"],
       "minzoom": 6,
       "maxzoom": 16,
-      "attribution": "<a href=\"https://www.geoseaportal.de/mapapps/resources/apps/navigation\">BSH</a>"
+      "attribution": "<a href=\"https://waddenzee.duckdns.org/download/\">QMAP</a>"
     }
   },
   "layers": [

@@ -1,8 +1,12 @@
+var style=(new URL(document.location)).searchParams.get("style");
+if(!style) style='style.json';
+
+
 var map = new maplibregl.Map({
     container: 'map', // container id
 //    style: 'https://demotiles.maplibre.org/style.json',
 //    style: 'https://api.maptiler.com/maps/openstreetmap/style.json?key=L8FrrrJGE2n415wJo8BL',
-    style: 'style.json',
+    style: style,
     center: [9.239,54.397], // starting position [lng, lat]
     zoom: 7, // starting zoom
     hash: true,
