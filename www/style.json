@@ -2,27 +2,8 @@
   "version": 8,
   "name": "Vector Test Tiles",
   "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=L8FrrrJGE2n415wJo8BL",
-  "sprite": "icons",
+  "sprite": "https://waddenzee.duckdns.org/icons",
   "sources": {
-    "osm-raster": {
-      "type": "raster",
-      "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-      "tileSize": 256,
-      "attribution": "<a href=\"https://www.openstreetmap.org/\">OSM</a>"
-    },
-    "seamarks": {
-      "type": "raster",
-      "tiles": ["https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png"],
-      "tileSize": 256,
-      "attribution": "<a href=\"https://www.openseamap.org/\">OpenSeaMap</a>"
-    },
-    "-bsh": {
-      "type": "vector",
-      "tiles": ["https://localhost:63343/mapping/www/pbf/{z}/{x}/{y}.pbf"],
-      "minzoom": 6,
-      "maxzoom": 16,
-      "attribution": "<a href=\"https://www.geoseaportal.de/mapapps/resources/apps/navigation\">BSH</a>"
-    },
     "bsh": {
       "type": "vector",
       "tiles": ["https://waddenzee.duckdns.org/pbf/{z}/{x}/{y}.pbf"],
@@ -32,15 +13,6 @@
     }
   },
   "layers": [
-    {
-        "id": "osm",
-        "type": "raster",
-        "source": "osm-raster",
-        "maxzoom": 22,
-        "paint": {
-          "raster-saturation": -1
-        }
-    },
     {
         "id": "depthareas",
         "type": "fill",
@@ -206,7 +178,8 @@
         "layout": {
           "icon-image": "TSS-arrow",
           "icon-size": 0.6,
-          "icon-rotate": ["get","ORIENT"]
+          "icon-rotate": ["get","ORIENT"],
+          "icon-rotation-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.8
@@ -257,7 +230,8 @@
         "layout": {
           "icon-image": "TSS-arrow-dashed",
           "icon-size": 0.6,
-          "icon-rotate": ["get","ORIENT"]
+          "icon-rotate": ["get","ORIENT"],
+          "icon-rotation-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.8
@@ -281,7 +255,8 @@
         "filter": [ "all", ["==", ["geometry-type"], "Polygon"],[ "has", "ORIENT" ],["==",["get","meta_type"],6]],
         "layout": {
           "icon-image": "dir-buoyage-a",
-          "icon-rotate": ["get","ORIENT"]
+          "icon-rotate": ["get","ORIENT"],
+          "icon-rotation-alignment": "map"
         },
         "paint": {
           "icon-opacity": 0.5
@@ -384,7 +359,27 @@
         "type": "symbol",
         "source": "bsh",
         "source-layer": "AidsAndServices",
-        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ]],
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],
+          ["!",["any",["has","ORIENT"],["all",["has","SECTR1"],["has","SECTR2"]]]]],
+        "layout": {
+          "icon-image": ["concat",
+            ["case",["in",8,["get","CATLIT"]],"floodlight/","light/"],
+            ["case",["has","color"],["get","color"],"generic"]],
+          "icon-rotate": ["+",45,["case",
+            ["in",3,["get","COLOUR"]],10,
+            ["in",4,["get","COLOUR"]],-10
+            ,0]],
+          "icon-overlap": "always",
+          "icon-rotation-alignment": "viewport"
+        }
+    },
+    {
+        "id": "lights-oriented",
+        "type": "symbol",
+        "source": "bsh",
+        "source-layer": "AidsAndServices",
+        "filter": [ "all", ["==", ["geometry-type"], "Point"],[ "has", "LITCHR" ],
+          ["any",["has","ORIENT"],["all",["has","SECTR1"],["has","SECTR2"]]]],
         "layout": {
           "icon-image": ["concat",
             ["case",["in",8,["get","CATLIT"]],"floodlight/","light/"],
@@ -397,10 +392,7 @@
                   ["-",["get","SECTR2"],["get","SECTR1"]],
                   ["+",["-",["get","SECTR2"],["get","SECTR1"]],360]],
                 ["+",["get","SECTR1"],["/",["var","angle"],2]]],
-            ["+",45,["case",
-            ["in",3,["get","COLOUR"]],10,
-            ["in",4,["get","COLOUR"]],-10
-            ,0]]],
+                0],
           "icon-overlap": "always",
           "icon-rotation-alignment": "map"
         }
@@ -1118,13 +1110,6 @@
          "text-anchor": "top-left",
          "text-offset": ["case",["has","SECTR1"],["literal",[1.2,1.1]],["literal",[1.2,-0.5]]]
         }
-    },
-
-    {
-        "id": "osm-seamarks",
-        "type": "raster",
-        "source": "seamarks",
-        "maxzoom": 1
     }
   ]
 }
