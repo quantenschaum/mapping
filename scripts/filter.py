@@ -370,9 +370,10 @@ def main():
       props['VALSOU']=depth
 
     cols=props.get('COLOUR')
-    # if cols:
-    #   cs = ''.join(map(abbr_color,map(int, str(cols).split(','))))
-    #   props['color']=cs
+    if cols:
+      try:
+        props['color']=''.join(map(abbr_color,map(int, str(cols).split(','))))
+      except: pass
 
     if 'catgeo' not in props:
       g=f['geometry']['type']
