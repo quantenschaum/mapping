@@ -41,6 +41,8 @@
 
 	<renderingProperty attr="shellsStyle" name="Shells Style" description="Style for Shells on Seabed" type="string" defaultValueDescription="gray" possibleValues="rocks,stones,red"/>
 
+	<renderingProperty attr="eleUnits" name="Elevation units" type="string" possibleValues="meters,feet" defaultValueDescription="default" category="ui_hidden"/>
+
 	<renderingAttribute name="gpxColor"> <!-- deprecated -->
 		<case attrColorValue="#b400ffff"/>
 	</renderingAttribute>
@@ -637,7 +639,6 @@
 			<case tag="leisure" value="marina"/>
 			<case tag="seamark:type" value="hulk"/>
 			<case tag="seamark:type" value="marine_farm"/>
-			<case tag="seamark:type" value="rapids"/>
 			<case tag="seamark:type" value="waterfall"/>
 			<case tag="seamark:type" value="wreck"/>
 			<case tag="seamark:type" value="rock"/>
@@ -732,7 +733,6 @@
 			</switch>
 			<case tag="waterway" value="dam" order="10"/>
 			<case tag="waterway" value="weir" order="10"/>
-<!--			<case tag="waterway" value="rapids"/>-->
 			<case tag="landuse" value="residential" order="4"/>
 			<switch order="5">
 				<case tag="natural" value="water" order="3"/>
@@ -769,7 +769,6 @@
 			<case tag="natural" value="bay"/>
 			<switch order="40">
 				<case tag="seamark:type" value="lock_basin"/>
-				<case tag="seamark:type" value="lock_basin_part"/>
 			</switch>
 			<case tag="barrier" value="city_wall"/>
 			<case tag="seamark:type" value="fortified_structure"/>
@@ -778,7 +777,6 @@
 			<case tag="seamark:type" value="gate"/>
 			<case tag="seamark:type" value="inshore_traffic_zone"/>
 			<case tag="seamark:type" value="pipeline_area"/>
-			<case tag="seamark:type" value="rapids"/>
 			<case tag="seamark:type" value="waterfall"/>
 			<case tag="seamark:type" value="recommended_track" order="81"/>
 			<case tag="seamark:type" value="recommended_traffic_lane" order="81"/>
@@ -1440,7 +1438,6 @@
 				<apply_if nightMode="true" textColor="$defaultTextColorNight" textHaloColor="#77464234"/>
 			</switch>
 			<switch minzoom="16" nameTag="">
-				<case tag="seamark:type" value="rapids"/>
 				<case tag="whitewater" value="put_in" textDy="-4"/>
 				<case tag="whitewater" value="egress" textDy="-4"/>
 				<case tag="whitewater" value="put_in;egress" textDy="-4"/>
@@ -1479,21 +1476,35 @@
 
 			<switch textColor="#654321" textWrapWidth="25" textHaloColor="#aafddb8f" textHaloRadius="$textHaloRadiusDay" textItalic="true">
 				<switch>
-					<case minzoom="12" tag="natural" value="peak">
-						<case maxzoom="13" nameTag="ele" textSize="11" textOrder="60"/>
-						<case maxzoom="14" nameTag="" nameTag2="ele" textSize="12" textOrder="60"/>
-						<case maxzoom="16" nameTag="" nameTag2="ele" textSize="13" textOrder="65"/>
-						<case minzoom="17" nameTag="" nameTag2="ele" textSize="16" textOrder="65"/>
-					</case>
+					<switch minzoom="10" tag="natural" additional="osmand_prominent_peak=yes" nameTag="">
+						<case value="peak"/>
+						<case value="volcano" textHaloColor="#99ffd6c0"/>
+						<apply textSize="11" intersectionMargin="5" textOrder="38" textDy="0"/>
+					</switch>
+					<switch>
+						<case minzoom="12" tag="natural" value="peak" textOrder="80"/>
+						<case minzoom="12" tag="natural" value="volcano" textOrder="79"/>
+						<apply>
+							<switch>
+								<case eleUnits="feet" nameTag="ele_feet"/>
+								<case eleUnits="feet" nameTag="" nameTag2="ele_feet"/>
+								<case eleUnits="meters" nameTag="ele" />
+								<case eleUnits="meters" nameTag="" nameTag2="ele"/>
+								<case eleUnits="" nameTag="ele" />
+								<case eleUnits="" nameTag="" nameTag2="ele"/>
+								<apply_if maxzoom="12" textSize="11" intersectionMargin="15"/>
+								<apply_if minzoom="13" maxzoom="14" textSize="12"/>
+								<apply_if minzoom="15" maxzoom="16" textSize="13"/>
+								<apply_if minzoom="17" textSize="15"/>
+								<apply_if maxzoom="14" engine_v1="true" textDy="-2"/>
+								<apply_if minzoom="15" engine_v1="true" textDy="-1"/>
+							</switch>
+						</apply>
+					</switch>
 					<case minzoom="14" textSize="12" tag="natural" value="ridge" nameTag="" textOnPath="true" textDy="0"/>
 					<case minzoom="13" textSize="14" tag="natural" value="crater" nameTag="" textColor="#4e0d0d" textDy="-4"/>
 					<apply_if nightMode="true" textHaloRadius="$textHaloRadiusNight" textColor="#ffcc9b" textHaloColor="#77464234"/>
 				</switch>
-				<case minzoom="11" tag="natural" value="volcano" nameTag="" nameTag2="ele" textOrder="53" textHaloColor="#99ffd6c0">
-					<case maxzoom="12" textSize="12"/>
-					<case minzoom="13" textSize="13"/>
-					<apply_if nightMode="true" textColor="#ffcc9b" textHaloColor="#77464234"/>
-				</case>
 				<apply_if engine_v1="false" textDy="0"/>
 			</switch>
 			<case minzoom="9" tag="natural" value="cape" nameTag="" textSize="12" textColor="#510060" textHaloColor="#55fbe2ff" textWrapWidth="25" textHaloRadius="$textHaloRadiusDay" textItalic="true" textOrder="140">
@@ -1511,6 +1522,7 @@
 				<case minzoom="8" tag="natural" value="bay" nameTag="" textOnPath="true" textWrapWidth="17" textOrder="229"/>
 				<case minzoom="8" tag="natural" value="strait" nameTag="" textOnPath="true" textWrapWidth="25" textOrder="230"/>
 				<case minzoom="13" tag="waterway" value="stream" nameTag="" textOnPath="true" textOrder="256"/>
+				<case minzoom="13" tag="waterway" value="flowline" nameTag="" textOnPath="true" textOrder="256"/>
 				<case minzoom="13" tag="waterway" value="wadi" nameTag="" textOnPath="true" textOrder="263"/>
 				<case minzoom="11" tag="waterway" value="river" nameTag="" textOnPath="true" textMinDistance="80" textOrder="234"/>
 				<case minzoom="13" tag="waterway" value="canal" nameTag="" textOnPath="true" textMinDistance="80" textOrder="235"/>
@@ -1530,12 +1542,7 @@
 					<case tag="seamark:type" value="waterfall" nameTag2="height"/>
 					<apply textWrapWidth="20" textOnPath="true" textOrder="255"/>
 				</switch>
-				<switch minzoom="17" nameTag="">
-					<case tag="waterway" value="rapids"/>
-					<case tag="seamark:waterway" value="rapids"/>
-					<apply textSize="11" textOnPath="true"/>
-<!--					<apply_if engine_v1="true" textDy="6"/>-->
-				</switch>
+				<case minzoom="17" tag="seamark:waterway" value="rapids" nameTag="" textSize="11" textOnPath="true"/>
 
 				<case minzoom="13" tag="landuse" value="water" nameTag="" textWrapWidth="20"/>
 				<case minzoom="13" tag="landuse" value="reservoir" nameTag="" textWrapWidth="20"/>
@@ -1607,7 +1614,6 @@
 					<case minzoom="16" tag="seamark:type" value="pile" nameTag="seamark:name"/>
 					<switch minzoom="16" textOnPath="true" textOrder="130">
 						<case tag="seamark:type" value="lock_basin"/>
-						<case tag="seamark:type" value="lock_basin_part"/>
 						<case minzoom="17" tag="seamark:type" value="gate"/>
 					</switch>
 					<apply textWrapWidth="19"/>
