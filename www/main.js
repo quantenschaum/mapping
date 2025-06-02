@@ -213,6 +213,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   map.attributionControl.setPrefix('<a class="highlight" href="https://waddenzee.duckdns.org/download/">QMAP (download and more)</a>, <a href="https://leafletjs.com/">Leaflet</a>');
 
+  fetch('https://waddenzee.duckdns.org/qmap-de/8/133/81.webp')
+  .then(response => {
+    let dateHeader = response.headers.get('Last-Modified');
+    let date = new Date(dateHeader).toISOString().slice(0, 10);
+    map.attributionControl.setPrefix('<a class="highlight" href="https://waddenzee.duckdns.org/download/">QMAP (download and more, last update '+date+')</a>, <a href="https://leafletjs.com/">Leaflet</a>');
+  });
+
    if(debug){
      L.GridLayer.GridDebug = L.GridLayer.extend({
       createTile: function (coords) {
