@@ -50,7 +50,7 @@ Here you find precompiled charts for download in various formats usable in diffe
 
 ### Vector Charts
 
-![osmand vector chart](img/vector.png)
+![osmand vector chart](img/vector.webp)
 
 Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". (also see [usage](usage.md#vector-charts))
 
@@ -69,7 +69,7 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 
 ### Raster Charts
 
-![osmand raster chart](img/raster.png)
+![osmand raster chart](img/raster.webp)
 
 The charts are imported by opening the `sqlitedb` files with the app. (also see [usage](usage.md#raster-charts))
 
@@ -91,7 +91,7 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 
 ### Raster Charts
 
-![AvNav](img/avnav.png)
+![AvNav](img/avnav.webp)
 
 AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/avnav/docs/charts.html#chartformats) files, but it also supports `mbtiles`, just not on Android. Simply drop the files into AvNav's `charts` folder.
 
@@ -110,7 +110,7 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
 
 ### Vector Charts
 
-![OchartsNG](img/ochartsng.png)
+![OchartsNG](img/ochartsng.webp)
 
 The SENC/S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html) plugin, they work with OpenCPN as well.
     
@@ -122,7 +122,7 @@ The SENC/S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.ne
 
 ## [OpenCPN](https://opencpn.org/)
 
-![OpenCPN](img/opencpn.png)
+![OpenCPN](img/opencpn.webp)
 
 OpenCPN and other applications can display raster charts from `mbtiles`.
 
@@ -137,7 +137,7 @@ OpenCPN and other applications can display raster charts from `mbtiles`.
 
 ## [JOSM](https://josm.openstreetmap.de/)
 
-![JOSM](img/josm.png)
+![JOSM](img/josm.webp)
 
 The raster charts can be added to JOSM as [imagery layers](https://josm.openstreetmap.de/wiki/Help/Preferences/Imagery).
 
@@ -154,4 +154,4 @@ There is **experimental** support for Garmin devices. The file contains depth da
 
 - [:de: Depthdata DE](gmapsupp.img){:download}
 
-![garmin](img/garmin.png)
+![garmin](img/garmin.webp)
