@@ -3,7 +3,7 @@
 Here you find precompiled charts for download in various formats usable in different applications.
 
 !!! warning "New URL"
-    This project was moved to the new location <freenauticalchart.net> and uses Cloudflare CDN for improved performance.
+    This project was moved to the new location <https://freenauticalchart.net> and now uses Cloudflare CDN for improved performance.
 
 ??? danger "Disclaimer"
     The charts and data files provided are for informational and reference purposes only. They are not intended for navigation, official maritime operations, or any activity requiring precise geographic, hydrographic data. Users should consult official sources, such as government agencies or certified navigation providers, for authoritative and up-to-date navigation information.
