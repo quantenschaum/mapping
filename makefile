@@ -197,6 +197,7 @@ charts/%.gemf: charts/%.mbtiles data/chartconvert
 	data/chartconvert/convert_mbtiles.py tms $@ $<
 
 tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles))
+	touch www/updated
 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.png.mbtiles,$(wildcard cache_data/*.mbtiles)) \

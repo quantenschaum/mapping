@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   map.attributionControl.setPrefix('<a class="highlight" href="https://waddenzee.duckdns.org/download/">QMAP (download and more)</a>, <a href="https://leafletjs.com/">Leaflet</a>');
 
-  fetch('https://waddenzee.duckdns.org/qmap-de/8/133/81.webp')
+  fetch('https://waddenzee.duckdns.org/updated')
   .then(response => {
     let dateHeader = response.headers.get('Last-Modified');
     let date = new Date(dateHeader).toISOString().slice(0, 10);
