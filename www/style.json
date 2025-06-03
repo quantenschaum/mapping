@@ -2,14 +2,14 @@
   "version": 8,
   "name": "Vector Test Tiles",
   "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=L8FrrrJGE2n415wJo8BL",
-  "sprite": "https://waddenzee.duckdns.org/icons",
+  "sprite": "https://freenauticalchart.net/icons",
   "sources": {
     "bsh": {
       "type": "vector",
-      "tiles": ["https://waddenzee.duckdns.org/pbf/{z}/{x}/{y}.pbf"],
+      "tiles": ["https://freenauticalchart.net/pbf/{z}/{x}/{y}.pbf"],
       "minzoom": 6,
       "maxzoom": 16,
-      "attribution": "<a href=\"https://waddenzee.duckdns.org/download/\">QMAP</a>"
+      "attribution": "<a href=\"https://freenauticalchart.net/download/\">QMAP</a>"
     }
   },
   "layers": [

@@ -14,7 +14,7 @@ seeds:
   # for following levels also seed lower level because there are
   # "holes" in the coverage and allow 2 steps overzoom,
   # 2 zoom levels blow are underlayed in the mapproxy config
-  # so, lower a lower level map is shown in the background
+  # so, a lower level map is shown in the background
   approach:
     caches: [ qmap-de, contours-de, soundg-de ]
     levels: [ 13,14,15 ] # 13,14

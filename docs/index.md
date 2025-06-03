@@ -81,8 +81,8 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 
 #### Online Charts
 
-- :de: QMAP DE online [`https://waddenzee.duckdns.org/qmap-de/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-DE&min_zoom=8&max_zoom=16&url_template=https://waddenzee.duckdns.org/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.webp)
-- :nl: QMAP NL online [`https://waddenzee.duckdns.org/qmap-nl/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-NL&min_zoom=8&max_zoom=16&url_template=https://waddenzee.duckdns.org/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.webp)
+- :de: QMAP DE online [`https://freenauticalchart.net/qmap-de/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-DE&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.webp)
+- :nl: QMAP NL online [`https://freenauticalchart.net/qmap-nl/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-NL&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.webp)
 
 !!! tip
     Select `sqlitedb` as storage format. This will store the tiles more efficiently into a single database file.
@@ -141,8 +141,8 @@ OpenCPN and other applications can display raster charts from `mbtiles`.
 
 The raster charts can be added to JOSM as [imagery layers](https://josm.openstreetmap.de/wiki/Help/Preferences/Imagery).
 
-- :de: QMAP DE `tms:https://waddenzee.duckdns.org/qmap-de/{zoom}/{x}/{y}.png`
-- :nl: QMAP NL `tms:https://waddenzee.duckdns.org/qmap-nl/{zoom}/{x}/{y}.png`
+- :de: QMAP DE `tms:https://freenauticalchart.net/qmap-de/{zoom}/{x}/{y}.png`
+- :nl: QMAP NL `tms:https://freenauticalchart.net/qmap-nl/{zoom}/{x}/{y}.png`
 
 You may also want to [add this extra `mapcss`](https://josm.openstreetmap.de/wiki/Help/Preferences/MapPaintPreference) (as last entry) for improved rendering of seamarks.
 

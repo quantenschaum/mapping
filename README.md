@@ -4,6 +4,6 @@ Conversion of chart data from different formats and sources to create free nauti
 
 :exclamation: This is still very work in progress!
 
-:point_right: [Documentation](http://waddenzee.duckdns.org/download/)
+:point_right: [Documentation](http://freenauticalchart.net/download/)
 
 ![example map](docs/img/vector.png)
