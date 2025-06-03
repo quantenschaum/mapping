@@ -2,6 +2,8 @@
 
 Here you find precompiled charts for download in various formats usable in different applications.
 
+!!! warning "New URL"
+    This project was moved to the new location <freenauticalchart.net> and uses Cloudflare CDN for improved performance.
 
 ??? danger "Disclaimer"
     The charts and data files provided are for informational and reference purposes only. They are not intended for navigation, official maritime operations, or any activity requiring precise geographic, hydrographic data. Users should consult official sources, such as government agencies or certified navigation providers, for authoritative and up-to-date navigation information.
@@ -117,7 +119,7 @@ The SENC/S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.ne
 - [:de: QMAP DE](qmap-de.zip){:download}
 - [:nl: QMAP NL](qmap-nl.zip){:download}
 
-!!! "QNAP NL"
+!!! info "QNAP NL"
     The buoys and beacons in QMAP-NL vector chart are those from the original ENC and not from the separate dataset. The scale/usage band of the chart was adjusted to display properly in AvNav, it does not work out of the box when converting the charts with OpenCPN.
 
 ## [OpenCPN](https://opencpn.org/)
