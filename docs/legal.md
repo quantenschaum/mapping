@@ -56,6 +56,17 @@ Mehr Infos: [Google Datenschutzerklärung](https://policies.google.com/privacy)
 
 Für das Laden von JavaScript-Bibliotheken wird das CDN `unpkg.com` verwendet. Dabei wird Ihre IP-Adresse an den CDN-Anbieter übermittelt.
 
+#### Cloudflare CDN
+
+Unsere Website nutzt den Dienst **Cloudflare CDN** der Cloudflare, Inc., um die Leistung, Sicherheit und Zuverlässigkeit der Website zu verbessern. Cloudflare stellt ein Content Delivery Network (CDN) bereit, das Inhalte zwischenspeichert und Schutz vor Angriffen wie DDoS-Attacken bietet.
+
+Bei der Nutzung unserer Website werden personenbezogene Daten wie Ihre IP-Adresse, Browserinformationen und weitere technische Daten an Cloudflare übermittelt und dort verarbeitet. Diese Daten werden benötigt, um die Sicherheit und Funktionsfähigkeit der Website zu gewährleisten.
+
+Cloudflare verarbeitet Ihre Daten gemäß den geltenden Datenschutzbestimmungen, insbesondere der Datenschutz-Grundverordnung (DSGVO). Weitere Informationen zur Datenverarbeitung und Ihren Rechten finden Sie in der [Datenschutzerklärung von Cloudflare](https://www.cloudflare.com/privacypolicy/).
+
+Durch die Nutzung unserer Website erklären Sie sich mit der Verarbeitung Ihrer personenbezogenen Daten durch Cloudflare einverstanden.
+
+
 ### 5. Cookies  
 
 Diese Webseite verwendet **keine Cookies** und keine Tracking-Technologien.

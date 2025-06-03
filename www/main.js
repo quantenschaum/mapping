@@ -96,19 +96,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var overlays = {
     'Grid': grid,
-    'QMAP DE':L.tileLayer.fallback('https://waddenzee.duckdns.org/qmap-de/{z}/{x}/{y}.webp', {
+    'QMAP DE':L.tileLayer.fallback('/qmap-de/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
       bounds: boundsDE
     }),
-    'QMAP Contours DE':L.tileLayer.fallback('https://waddenzee.duckdns.org/contours-de/{z}/{x}/{y}.webp', {
+    'QMAP Contours DE':L.tileLayer.fallback('/contours-de/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP Contours DE</a> based on <a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
       bounds: boundsDE
     }),
-    'QMAP Soundings DE':L.tileLayer.fallback('https://waddenzee.duckdns.org/soundg-de/{z}/{x}/{y}.webp', {
+    'QMAP Soundings DE':L.tileLayer.fallback('/soundg-de/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP Soundings DE</a> based on <a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH Bathymetrie 2018</a>',
       bounds: boundsDE
     }),
-    'QMAP NL':L.tileLayer.fallback('https://waddenzee.duckdns.org/qmap-nl/{z}/{x}/{y}.webp', {
+    'QMAP NL':L.tileLayer.fallback('/qmap-nl/{z}/{x}/{y}.webp', {
       attribution: '<a href="/download/">QMAP NL</a> based on <a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>',
       bounds: boundsNL
     }),
@@ -197,11 +197,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let i = -6; i <= 6; i++) {
     let s=(i>=0?'+':'')+i;
-    overlays['Tide HW Helgoland '+s+'h']=L.tileLayer.fallback('https://waddenzee.duckdns.org/tides/hw'+s+'/{z}/{x}/{y}.webp', {
+    overlays['Tide HW Helgoland '+s+'h']=L.tileLayer.fallback('/tides/hw'+s+'/{z}/{x}/{y}.webp', {
       attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>', tide:true
     });
   }
-  overlays['Tide Figures']=L.tileLayer.fallback('https://waddenzee.duckdns.org/tides/fig/{z}/{x}/{y}.webp', {
+  overlays['Tide Figures']=L.tileLayer.fallback('/tides/fig/{z}/{x}/{y}.webp', {
     attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
   });
 
@@ -228,13 +228,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  map.attributionControl.setPrefix('<a class="highlight" href="https://waddenzee.duckdns.org/download/">QMAP (download and more)</a>, <a href="https://leafletjs.com/">Leaflet</a>');
+  map.attributionControl.setPrefix('<a class="highlight" href="/download/">QMAP (download and more)</a>, <a href="https://leafletjs.com/">Leaflet</a>');
 
-  fetch('https://waddenzee.duckdns.org/updated')
+  fetch('/updated')
   .then(response => {
     let dateHeader = response.headers.get('Last-Modified');
     let date = new Date(dateHeader).toISOString().slice(0, 10);
-    map.attributionControl.setPrefix('<a class="highlight" href="https://waddenzee.duckdns.org/download/">QMAP (download and more, last updated '+date+')</a>, <a href="https://leafletjs.com/">Leaflet</a>');
+    map.attributionControl.setPrefix('<a class="highlight" href="/download/">QMAP (download and more, last updated '+date+')</a>, <a href="https://leafletjs.com/">Leaflet</a>');
   });
 
    if(debug){
@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", () => {
       $.get('http://localhost:8111/imagery',{
         name:'Waddenzee',
         type:'tms',
-        url:'https://waddenzee.duckdns.org/qmap-de/{zoom}/{x}/{y}.png'
+        url:'/qmap-de/{zoom}/{x}/{y}.png'
       });
       $.get('http://localhost:8111/imagery',{
         name:'OpenStreetMap',
