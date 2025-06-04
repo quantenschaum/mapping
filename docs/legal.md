@@ -66,6 +66,15 @@ Cloudflare verarbeitet Ihre Daten gemäß den geltenden Datenschutzbestimmungen,
 
 Durch die Nutzung unserer Website erklären Sie sich mit der Verarbeitung Ihrer personenbezogenen Daten durch Cloudflare einverstanden.
 
+#### Cloudflare Web Analytics
+
+Wir verwenden auf unserer Website **Cloudflare Web Analytics**, ein datenschutzfreundliches Analysetool der Firma Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA.
+
+Cloudflare Web Analytics ermöglicht es uns, aggregierte und anonymisierte statistische Auswertungen über die Nutzung unserer Website zu erstellen, ohne dabei Cookies zu verwenden oder personenbezogene Daten der Besucher zu speichern. Die Erfassung erfolgt rein serverseitig und beinhaltet beispielsweise Informationen wie Seitenaufrufe, verwendeter Browser oder Referrer.
+
+Die Verarbeitung erfolgt auf Grundlage von **Art. 6 Abs. 1 lit. f DSGVO** (berechtigtes Interesse). Unser berechtigtes Interesse liegt in der Analyse und Verbesserung unseres Webangebots, ohne in die Privatsphäre unserer Nutzer einzugreifen.
+
+Weitere Informationen findest du in der [Datenschutzerklärung von Cloudflare](https://www.cloudflare.com/privacypolicy/).
 
 ### 5. Cookies  
 

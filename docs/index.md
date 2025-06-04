@@ -16,15 +16,8 @@ Here you find precompiled charts for download in various formats usable in diffe
     - The downloadable files on this page are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
     - The code of this project used to generate the charts an other data is licensed under [GPL](https://www.gnu.org/licenses/gpl-3.0.de.html).
 
-!!! tip "Vector Data"
-    S57 files containing vector charts for AVNav and OpenCPN have been added. For AVNav these chart can be rendered by [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html). 
-
 !!! info
-    - An additional contours layer was added, that only contains depth contours. It could be used as a base for OpenSeaMap.
-    - Raster charts are encoded with [WebP](https://en.wikipedia.org/wiki/WebP) to reduce file size. This might not work in all applications.
-      PNG based tiles are available, too.
-    - The german chart includes spot sounding extracted from <https://www.geoseaportal.de/atomfeeds/ELC_INSPIRE_de.xml> which is from 2018 and was last updated 2023-05!
-      This is experimental, data can be wrong or missing. Spot soundings and contour lines are from different datasets, so they may mismatch in certain areas.  
+    The german chart includes spot sounding extracted from <https://www.geoseaportal.de/atomfeeds/ELC_INSPIRE_de.xml> which is from 2018 and was last updated 2023-05! This is experimental, data can be wrong or missing. Spot soundings and contour lines are from different datasets, so they may mismatch in certain areas.  
 
 ??? note "Data Sources"
     The charts provided by this project are based on data by
@@ -114,12 +107,12 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
 
 ![OchartsNG](img/ochartsng.webp)
 
-The SENC/S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html) plugin, they work with OpenCPN as well.
+The S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html) plugin, they work with [OpenCPN](https://opencpn.org/) as well.
     
 - [:de: QMAP DE](qmap-de.zip){:download}
 - [:nl: QMAP NL](qmap-nl.zip){:download}
 
-!!! info "QNAP NL"
+!!! info "QMAP NL"
     The buoys and beacons in QMAP-NL vector chart are those from the original ENC and not from the separate dataset. The scale/usage band of the chart was adjusted to display properly in AvNav, it does not work out of the box when converting the charts with OpenCPN.
 
 ## [OpenCPN](https://opencpn.org/)
