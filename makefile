@@ -361,3 +361,31 @@ lightsectors.obf:
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/lightsectors.obf obf/*.obf
 
+depth+de.obf:
+	rm -rf obf
+	rm -rf osm && mkdir -p osm
+	cp data/depth-de-6.osm osm
+	$(MAKE) obf
+	cp obf/depth-de-6.obf charts/$@
+
+depth-de.obf:
+	rm -rf obf
+
+	rm -rf osm && mkdir -p osm
+	cp data/depth-de-2.osm osm
+	$(MAKE) obf BLEVEL=0
+
+	rm -rf osm && mkdir -p osm
+	cp data/depth-de-3.osm osm
+	$(MAKE) obf BLEVEL=1
+
+	rm -rf osm && mkdir -p osm
+	cp data/depth-de-4.osm osm
+	$(MAKE) obf BLEVEL=2
+
+	rm -rf osm && mkdir -p osm
+	cp data/depth-de-6.osm osm
+	$(MAKE) obf BLEVEL=3
+
+	mkdir -p charts
+	data/omc/inspector.sh -c charts/$@ obf/*.obf
