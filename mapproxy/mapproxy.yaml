@@ -76,7 +76,7 @@ caches:
     cache:
       type: mbtiles
   soundg-de:
-    sources: [ 'qgis0:soundg-de' ]
+    sources: [ 'qgis0:soundings' ]
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles

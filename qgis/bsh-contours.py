@@ -50,7 +50,7 @@ def process(cmd, l1, l2, name):
     project.addMapLayer(l)
     return l
     
-def difference(l1, l2 ,name):
+def diff(l1, l2 ,name):
     return process('difference', l1, l2, name)
     
 def intersect(l1, l2 ,name):
@@ -70,17 +70,19 @@ def merge(l1, l2 ,name):
     project.addMapLayer(l)
     return l
  
+soundings=layer('soundings')
 contours=layer('contours')
 depthareas=fixed('depthareas')
 coverage=layer('coverage')
   
 def select_uband(uband):
+    soundings.setSubsetString(f"layer='SOUNDG' and VALSOU is not null and uband<={uband}")
     contours.setSubsetString(f'VALDCO is not null and uband={uband}')
     depthareas.setSubsetString(f'DRVAL1 is not null and uband={uband}')
     coverage.setSubsetString(f'uband={uband}')
 
 def strip_fields(layer):
-    keep='uband contour contourtype depth contourarea areatype'.split()
+    keep='uband contour contourtype depth contourarea areatype point'.split()
     fields=layer.fields()
     indices = [fields.indexOf(f.name()) for f in fields if f.name() not in keep]
     layer.dataProvider().deleteAttributes(indices)
@@ -89,6 +91,7 @@ def strip_fields(layer):
         
 a=depthareas
 c=contours
+s=soundings
 
 for u in range(1,7):
     print(f'uband {u}')
@@ -96,14 +99,19 @@ for u in range(1,7):
     if u>1:
         a1=diff(a,coverage,f'a{u}*')
         c1=diff(c,coverage,f'c{u}*')
+        #s1=diff(s,coverage,f's{u}*')
         a=merge(a1,depthareas,f'a{u}')
         c=merge(c1,contours,f'c{u}')
+        s=merge(soundings,None,f's{u}')
     else:
         a=merge(a,None,f'a{u}')
         c=merge(c,None,f'c{u}')
+        s=merge(soundings,None,f's{u}')
     gpkg=f'{datadir}/depth-de-{u}.gpkg'
     strip_fields(a)
     strip_fields(c)
-    save(a,'areas',gpkg)
-    save(c,'conts',gpkg, 1)
+    strip_fields(s)
+    save(a,'depare',gpkg)
+    save(c,'depcnt',gpkg, 1)
+    save(s,'soundg',gpkg, 1)
     

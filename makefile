@@ -322,7 +322,7 @@ qmap-de.obf:
 
 qmap-de.zip:
 	rm -rf qmap-de/
-	sconvert.py -o qmap-de data/bsh/layers/*.json data/soundg-de.json -t "QMAP-DE `date +%F`"
+	sconvert.py -o qmap-de data/bsh/layers/*.json -t "QMAP-DE `date +%F`"
 	rm -f charts/$@
 	zip charts/$@ -r qmap-de
 
@@ -361,15 +361,12 @@ lightsectors.obf:
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/lightsectors.obf obf/*.obf
 
-depth+de.obf:
-	rm -rf obf
-	rm -rf osm && mkdir -p osm
-	cp data/depth-de-6.osm osm
-	$(MAKE) obf
-	cp obf/depth-de-6.obf charts/$@
-
 depth-de.obf:
 	rm -rf obf
+# 	rm -rf osm && mkdir -p osm
+# 	cp data/depth-de-6.osm osm
+# 	$(MAKE) obf
+# 	cp obf/depth-de-6.obf charts/$@
 
 	rm -rf osm && mkdir -p osm
 	cp data/depth-de-2.osm osm

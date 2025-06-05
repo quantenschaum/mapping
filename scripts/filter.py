@@ -65,6 +65,13 @@ def band(fid):
   if len(b)==1:
     return BANDS[b[0]]
 
+def scale2band(s):
+  if not s: return 1
+  if s>650_000: return 2
+  if s>300_000: return 3
+  if s>80_000: return 4
+  if s>20_000: return 5
+  return 6
 
 def light_spec(data):
   data=dict(data)
@@ -368,6 +375,10 @@ def main():
     depth=props.get('ZVALUE',props.get('DEPTH',props.get('depth')))
     if depth is not None:
       props['VALSOU']=depth
+      if props.get('chart')=='1500000':
+        props['uband']=scale2band(props.get('SCAMIN'))
+        del props['chart']
+        del props['depth']
 
     cols=props.get('COLOUR')
     if cols:
@@ -397,7 +408,7 @@ def main():
   # remove old and HD charts - https://linchart60.bsh.de/chartserver/katalog.xml
   # features=data['features']=[f for f in features if re.match(r'DE\d(NO|OS)...',f['properties'].get('chart','DE0NOxxx'))]
   if args.bsh:
-    features=data['features']=[f for f in features if f['properties'].get('chart','DE2NO000') in CATALOG]
+    features=data['features']=[f for f in features if f['properties'].get('chart','DE2NO000') in CATALOG or 'VALSOU' in f['properties']]
     assert features
 
   if ofile:
@@ -491,8 +502,6 @@ def layer(props):
     if a.upper() in props or a.lower() in props:
       if g in ls: return ls[g]
 
-  if 'VALSOU' in props and point:
-    return 'SOUNDG'
   if 'TOPSHP' in props and point and props.get('light_type')==1:
     return 'DAYMAR'
   if 'TOPSHP' in props and point:
@@ -648,6 +657,9 @@ def layer(props):
 
   if props.get('light_type')==3 and point:
     return 'PILPNT'
+
+  if 'VALSOU' in props and point:
+    return 'SOUNDG'
 
   if 'FUNCTN' in props or props.get('facility_type')==1:
     return 'BUISGL'

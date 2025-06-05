@@ -49,8 +49,7 @@ Here you find precompiled charts for download in various formats usable in diffe
 
 Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". (also see [usage](usage.md#vector-charts))
 
-- [:de: Depth Contours DE](depth-de.obf){:download}
-- [:de: Spot Soundings DE](soundg-de.obf){:download}
+- [:de: Depth Data DE](depth-de.obf){:download}
 - [:nl: Depth Data NL](depth-nl.obf){:download}
 - [:globe_with_meridians: Light Sectors Worldwide](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
@@ -69,7 +68,6 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 The charts are imported by opening the `sqlitedb` files with the app. (also see [usage](usage.md#raster-charts))
 
 - [:de: QMAP DE](qmap-de.sqlitedb){:download}
-- [:de: QMAP DE Contours](contours-de.sqlitedb){:download}
 - [:de: QMAP DE Soundings](soundg-de.sqlitedb){:download}
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
 - [:de: Tidal Atlas DE](tides.sqlitedb.zip){:download}
