@@ -17,14 +17,14 @@ Here you find precompiled charts for download in various formats usable in diffe
     - The code of this project used to generate the charts an other data is licensed under [GPL](https://www.gnu.org/licenses/gpl-3.0.de.html).
 
 !!! info
-    The german chart includes spot sounding extracted from <https://www.geoseaportal.de/atomfeeds/ELC_INSPIRE_de.xml> which is from 2018 and was last updated 2023-05! This is experimental, data can be wrong or missing. Spot soundings and contour lines are from different datasets, so they may mismatch in certain areas.  
+    The german chart includes spot soundings extracted from <https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml> which is from 2018 and was last updated 2023-05! This is experimental, data can be wrong or missing. Spot soundings and contour lines are from different datasets, so they may mismatch in certain areas.  
 
 ??? note "Data Sources"
     The charts provided by this project are based on data by
     
     - :de: [BSH](https://www.bsh.de/)
         - [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2))
-        - [Bathymetry](https://www.geoseaportal.de/atomfeeds/ELC_INSPIRE_de.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
+        - [Bathymetry](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [SKN Seekartenull](https://data.bsh.de/OpenData/Main/SKN_Nordsee_2021/) (?)
         - [Tidal Data](https://data.bsh.de/OpenData/Main/) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2)?)
     - :nl: [RWS](https://www.rijkswaterstaat.nl/)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-import datetime
+from datetime import datetime
 import os.path
 import re
 import sys
@@ -14,25 +14,24 @@ def main():
     output = []
     for line in input.splitlines():
         # line=line.strip()
-        m = re.match(r"(\s*-\s+\[.+\]\((.+?)\).*)", line) if ":download" in line else None
+        m = re.search(r"\[.+\]\((.+?)\)\{:download\}", line)
         if m:
             try:
-                # print(m.groups(), m.group(2))
-                filename = m.group(2)
+                # print(m.groups())
+                filename = m.group(1)
                 # filename="index.md"
                 mtime = os.path.getmtime(filename)
                 fsize = os.path.getsize(filename)
-                line = (
-                    m.group(1).replace('{:download}','')
-                    + f" ({datetime.datetime.fromtimestamp(mtime):%Y-%m-%d}/{fsize/1e6:.1f}MB)"
-                )
+                line = (line
+                  .replace('{:download}', f" ({datetime.fromtimestamp(mtime):%Y-%m-%d}/{fsize/1e6:.1f}MB)")
+                  .replace(f'({filename})',f'({filename}?t={int(mtime)})'))
             except:
                 pass
-        # print(line)
-        output.append(line + "\n")
-
-    with open(sys.argv[1], "w") as f:
-        f.writelines(output)
+        print(line)
+        # output.append(line + "\n")
+    #
+    # with open(sys.argv[1], "w") as f:
+    #     f.writelines(output)
 
 
 main()

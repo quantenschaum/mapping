@@ -7,7 +7,7 @@ How to print your own charts [like this one](print/Juist.pdf).
 You can print your own custom charts with the classical lat/lon zebra border as follows.
 
 1. Install [QGIS](https://qgis.org/) on your computer.
-2. Download the [data package](qmap-data.zip) containing all necessary file.
+2. Download the [data package](qmap-data.zip){:download} containing all necessary file.
 3. Unzip the data package.
 4. Open `bsh.qgs` with QGIS.
 5. Select `Project > Layout Manager`.

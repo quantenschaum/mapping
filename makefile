@@ -211,7 +211,7 @@ upload:
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
 	cp -rpv osmand/marine.render.xml charts/* data/*.gpkg qgis/*.qgs tmp/docs
-	cd tmp/docs && ./times.py index.md
+	cd tmp/docs && ./times.py index.md >index.md && ./times.py print.md >print.md
 	cd tmp && mkdocs build
 	rm -rf www/download
 	mv tmp/site www/download

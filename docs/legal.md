@@ -19,7 +19,7 @@ Adam Lucke, Anschrift wie oben.
 
 ### 1. Allgemeine Hinweise  
 
-Diese Datenschutzerklärung informiert Sie über die Art, den Umfang und den Zweck der Verarbeitung personenbezogener Daten auf der Webseite `freenauticalchart.net` bzw. `waddenzee.duckdns.org`.
+Diese Datenschutzerklärung informiert Sie über die Art, den Umfang und den Zweck der Verarbeitung personenbezogener Daten auf der Webseite `freenauticalchart.net` (zuvor `waddenzee.duckdns.org`).
 
 Diese Webseite dient der Bereitstellung von Karteninhalten im Rahmen eines privaten, nicht-kommerziellen, Open-Source-Projekts.
 
