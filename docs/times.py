@@ -7,8 +7,8 @@ import re
 import sys
 
 
-def main():
-    with open(sys.argv[1]) as f:
+def replace(file):
+    with open(file) as f:
         input = f.read()
 
     output = []
@@ -27,11 +27,15 @@ def main():
                   .replace(f'({filename})',f'({filename}?t={int(mtime)})'))
             except:
                 pass
-        print(line)
-        # output.append(line + "\n")
-    #
-    # with open(sys.argv[1], "w") as f:
-    #     f.writelines(output)
+        # print(line)
+        output.append(line + "\n")
+
+    with open(file, "w") as f:
+        f.writelines(output)
+
+def main():
+    for f in sys.argv[1:]:
+        replace(f)
 
 
 main()
