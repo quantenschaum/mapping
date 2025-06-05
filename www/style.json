@@ -995,9 +995,9 @@
         "id": "spot-soundings",
         "type": "symbol",
         "source": "bsh",
-        "source-layer": "soundgde",
+        "source-layer": "SOUNDG",
         "layout": {
-         "text-field": "{depth}",
+         "text-field": "{VALSOU}",
          "text-size": 12,
          "text-anchor": "center"
         },
