@@ -44,3 +44,9 @@ html, body, #map {
     background-color: blue;
   }
 }
+
+@media (max-width: 480px) {
+  .leaflet-control-attribution {
+    max-width: 50%;
+  }
+}

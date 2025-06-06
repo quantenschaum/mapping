@@ -1,4 +1,7 @@
+import './manifest.json';
+import './icon.png';
 import './style.css';
+
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-hash';
@@ -10,12 +13,23 @@ import 'leaflet.control.opacity';
 import 'leaflet.nauticscale/dist/leaflet.nauticscale';
 import './leaflet-timeline-slider';
 
+const params = new URLSearchParams(window.location.search);
+console.log(params.get('l'));
+
+if ('serviceWorker' in navigator && params.get('app')=='1') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(reg => console.log('SW registered', reg))
+      .catch(err => console.error('SW registration failed', err));
+  });
+}
+
 const debug = process.env.NODE_ENV === 'development';
 
 function d2dm(a, n) {
-  const deg = (new URL(document.location)).searchParams.get("deg");
-  if (deg) {
-    var n = parseInt(deg);
+  const dec = params.get('dec');
+  if (dec) {
+    var n = parseInt(dec);
     var f = Math.pow(10, n);
     return Math.round(a * f) / f;
   }
@@ -66,6 +80,8 @@ const grid = L.latlngGraticule({
 const boundsDE = L.latLngBounds([53.0, 3.3], [56.0, 14.4]);
 const boundsNL = L.latLngBounds([51.2, 3.0], [53.8, 7.3]);
 
+const baseurl = 'https://freenauticalchart.net';
+
 const basemaps = {
   'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '<a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -81,7 +97,7 @@ const basemaps = {
     format: 'image/png',
     tiled: true,
     attribution: '<a target="_blank" href="https://rijkswaterstaat.nl/">RWS</a> <a target="_blank" href="https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/">Chart Server</a>',
-    bounds: boundsNL
+    bounds: boundsNL,
   }),
   'Worldy Imagery': L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: '<a target="_blank" href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">World Imagery</a>'
@@ -93,7 +109,7 @@ const basemaps = {
     format: 'image/jpg',
     tiled: true,
     attribution: '<a target="_blank" href="https://www.pdok.nl/">PDOK</a>',
-    bounds: boundsNL
+    bounds: boundsNL,
   }),
   'Luchtfoto 8cm': L.tileLayer.wms('https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0', {
     layers: 'Actueel_orthoHR',
@@ -102,27 +118,27 @@ const basemaps = {
     format: 'image/jpg',
     tiled: true,
     attribution: '<a target="_blank" href="https://www.pdok.nl/">PDOK</a>',
-    bounds: boundsNL
+    bounds: boundsNL,
   }),
 };
 
 const overlays = {
   'Grid': grid,
-  'QMAP DE': L.tileLayer.fallback('/qmap-de/{z}/{x}/{y}.webp', {
+  'QMAP DE': L.tileLayer.fallback(baseurl + '/qmap-de/{z}/{x}/{y}.webp', {
     attribution: '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
-    bounds: boundsDE
+    bounds: boundsDE,
   }),
-  'QMAP Contours DE': L.tileLayer.fallback('/contours-de/{z}/{x}/{y}.webp', {
+  'QMAP Contours DE': L.tileLayer.fallback(baseurl + '/contours-de/{z}/{x}/{y}.webp', {
     attribution: '<a href="/download/">QMAP Contours DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
-    bounds: boundsDE
+    bounds: boundsDE,
   }),
-  'QMAP Soundings DE': L.tileLayer.fallback('/soundg-de/{z}/{x}/{y}.webp', {
+  'QMAP Soundings DE': L.tileLayer.fallback(baseurl + '/soundg-de/{z}/{x}/{y}.webp', {
     attribution: '<a href="/download/">QMAP Soundings DE</a> (<a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH</a>)',
-    bounds: boundsDE
+    bounds: boundsDE,
   }),
-  'QMAP NL': L.tileLayer.fallback('/qmap-nl/{z}/{x}/{y}.webp', {
+  'QMAP NL': L.tileLayer.fallback(baseurl + '/qmap-nl/{z}/{x}/{y}.webp', {
     attribution: '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
-    bounds: boundsNL
+    bounds: boundsNL,
   }),
   'EMODnet Bathymetry': L.tileLayer.wms('https://ows.emodnet-bathymetry.eu/wms', {
     version: '1.3.0',
@@ -139,7 +155,7 @@ const overlays = {
     format: 'image/png',
     layers: 'EL.GridCoverage',
     attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/5afbd3f9-8bd8-4bfc-a77c-ac3de4ace07f">BSH Bathymetry</a>',
-    bounds: boundsDE
+    bounds: boundsDE,
   }),
   'BSH SkinOfEarth': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
     version: '1.3.0',
@@ -148,7 +164,7 @@ const overlays = {
     tiled: true,
     layers: 'Coastal_Depth_area,Approach_Depth_area,Harbour_Depth_area',
     attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
-    bounds: boundsDE
+    bounds: boundsDE,
   }),
   'BSH Hydro': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Hydrography/ows', {
     version: '1.3.0',
@@ -157,7 +173,7 @@ const overlays = {
     tiled: true,
     layers: 'Approach_Depths,Approach_Fishing_Facility_Marine_Farm_Areas,Approach_Offshore_Installations,Approach_Areas_Limits',
     attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
-    bounds: boundsDE
+    bounds: boundsDE,
   }),
   'BSH NavAids': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows', {
     version: '1.3.0',
@@ -166,7 +182,7 @@ const overlays = {
     tiled: true,
     layers: 'Coastal_Lights,Coastal_Lateral_Beacons,Coastal_Cardinal_Beacons,Coastal_All_Other_Beacons,Coastal_Lateral_Buoys,Coastal_Cardinal_Buoys,Coastal_All_Other_Buoys,Coastal_Fog_Signals_Daymarks,Approach_Lights,Approach_Lateral_Beacons,Approach_Cardinal_Beacons,Approach_All_Other_Beacons,Approach_Lateral_Buoys,Approach_Cardinal_Buoys,Approach_All_Other_Buoys,Approach_Fog_Signals_Daymarks,Harbour_Lights,Harbour_Lateral_Beacons,Harbour_Cardinal_Beacons,Harbour_All_Other_Beacons,Harbour_Lateral_Buoys,Harbour_Cardinal_Buoys,Harbour_All_Other_Buoys,Harbour_Fog_Signals_Daymarks',
     attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
-    bounds: boundsDE
+    bounds: boundsDE,
   }),
   'BSH Topo': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Topography/ows', {
     version: '1.3.0',
@@ -175,7 +191,7 @@ const overlays = {
     tiled: true,
     layers: '4_Approach,5_Harbour',
     attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
-    bounds: boundsDE
+    bounds: boundsDE,
   }),
   'BSH Obstr': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_RocksWrecksObstructions/ows', {
     version: '1.3.0',
@@ -191,7 +207,7 @@ const overlays = {
     format: 'image/png',
     layers: 'EL.ContourLine',
     attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/cee22cf8-60c0-401b-8a98-e01959b66f9b">BSH Contours</a>',
-    bounds: boundsDE
+    bounds: boundsDE,
   }),
   'Vaarweg Markeringen': L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
     layers: 'vaarweg_markering_drijvend,vaarweg_markering_vast',
@@ -203,38 +219,37 @@ const overlays = {
   }),
   'OpenSeaMap': L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
     attribution: '<a target="_blank" href="https://openseamap.org/">OpenSeaMap</a>',
-    bounds: boundsNL
+    bounds: boundsNL,
   }),
 };
 
 for (let i = -6; i <= 6; i++) {
   let s = (i >= 0 ? '+' : '') + i;
-  overlays['Tide HW Helgoland ' + s + 'h'] = L.tileLayer.fallback('/tides/hw' + s + '/{z}/{x}/{y}.webp', {
+  overlays['Tide HW Helgoland ' + s + 'h'] = L.tileLayer.fallback(baseurl + '/tides/hw' + s + '/{z}/{x}/{y}.webp', {
     attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>',
     tide: true
   });
 }
-overlays['Tide Figures'] = L.tileLayer.fallback('/tides/fig/{z}/{x}/{y}.webp', {
+overlays['Tide Figures'] = L.tileLayer.fallback(baseurl + '/tides/fig/{z}/{x}/{y}.webp', {
   attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
 });
 
 const map = L.map('map', {
   center: [54.264, 9.196],
   zoom: 8,
-  layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP Soundings DE'], overlays['QMAP NL']],
-  // layers: [basemaps['OpenStreetMap'], overlays['Grid']],
+  // layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP Soundings DE'], overlays['QMAP NL']],
+  layers: [basemaps['OpenStreetMap'], overlays['Grid']],
   minZoom: 7,
   maxZoom: 18,
 });
 
 map.attributionControl.setPrefix('<a class="highlight" href="/download/">QMAP (download and more)</a>, <a href="https://leafletjs.com/">Leaflet</a>');
 
-fetch('/updated')
-  .then(response => {
-    let dateHeader = response.headers.get('Last-Modified');
-    let date = new Date(dateHeader).toISOString().slice(0, 10);
-    map.attributionControl.setPrefix('<a class="highlight" href="/download/">QMAP (download and more, last updated ' + date + ')</a>, <a href="https://leafletjs.com/">Leaflet</a>');
-  });
+fetch('/updated').then(response => {
+  let dateHeader = response.headers.get('Last-Modified');
+  let date = new Date(dateHeader).toISOString().slice(0, 10);
+  map.attributionControl.setPrefix('<a class="highlight" href="/download/">QMAP (download and more, last updated ' + date + ')</a>, <a href="https://leafletjs.com/">Leaflet</a>');
+});
 
 new L.Hash(map);
 
@@ -326,13 +341,12 @@ const nightswitch = L.Control.extend({
 new nightswitch({position: 'bottomright'}).addTo(map);
 
 
-function restoreActiveLayers() {
+function restoreActiveLayers(l) {
   var active = sessionStorage.getItem("activeLayers");
-  console.log(active);
-  if (!active) {
-    return;
-  }
   active = JSON.parse(active);
+  if (l) active = l.split(',');
+  console.log(active);
+  if (!active) return;
   console.log("restore", active);
   for (let i = 0; i < layers._layers.length; i++) {
     let l = layers._layers[i];
@@ -344,7 +358,7 @@ function restoreActiveLayers() {
   }
 }
 
-restoreActiveLayers();
+restoreActiveLayers(params.get('l'));
 
 function storeActiveLayers() {
   var active = [];
