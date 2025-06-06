@@ -8,6 +8,7 @@ import 'leaflet.polylinemeasure';
 import 'leaflet.polylinemeasure/Leaflet.PolylineMeasure.css';
 import 'leaflet.control.opacity';
 import 'leaflet.nauticscale/dist/leaflet.nauticscale';
+import './leaflet-timeline-slider';
 
 const debug = process.env.NODE_ENV === 'development';
 
@@ -278,6 +279,28 @@ map.on('overlayadd overlayremove', function (e) {
   }
 });
 
+L.control.timelineSlider({
+  timelineItems: ["off", "-6h", "-5h", "-4h", "-3h", "-2h", "-1h", "HW Helgoland", "+1h", "+2h", "+3h", "+4h", "+5h", "+6h"],
+  labelWidth: "40px",
+  betweenLabelAndRangeSpace: "10px",
+  changeMap: function (p) {
+    var x = p.label.replace("HW Helgoland", "+0h");
+//          console.log(p,x);
+    Object.entries(overlays).forEach(l => {
+      var name = l[0], layer = l[1];
+      if (!layer.options.tide) {
+        return;
+      }
+//            console.log(l);
+      if (name.includes(x)) {
+        map.addLayer(layer);
+      } else if (layer.options.tide) {
+        map.removeLayer(layer);
+      }
+    });
+  }
+}).addTo(map);
+
 
 const nightswitch = L.Control.extend({
   onAdd: (m) => {
@@ -301,6 +324,7 @@ const nightswitch = L.Control.extend({
 
 
 new nightswitch({position: 'bottomright'}).addTo(map);
+
 
 function restoreActiveLayers() {
   var active = sessionStorage.getItem("activeLayers");
