@@ -237,8 +237,8 @@ overlays['Tide Figures'] = L.tileLayer.fallback(baseurl + '/tides/fig/{z}/{x}/{y
 const map = L.map('map', {
   center: [54.264, 9.196],
   zoom: 8,
-  // layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP Soundings DE'], overlays['QMAP NL']],
-  layers: [basemaps['OpenStreetMap'], overlays['Grid']],
+  layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP Soundings DE'], overlays['QMAP NL']],
+  // layers: [basemaps['OpenStreetMap'], overlays['Grid']],
   minZoom: 7,
   maxZoom: 18,
 });
