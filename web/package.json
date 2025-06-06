@@ -1,0 +1,31 @@
+{
+  "name": "freenauticalchart",
+  "version": "1.0.0",
+  "description": "frontend for freenauticalchart.net",
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack --mode development --watch"
+  },
+  "keywords": [],
+  "author": "quantenschaum",
+  "license": "GPLv3",
+  "browserslist": [
+    "defaults"
+  ],
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "leaflet-graticule": "^0.0.1",
+    "leaflet-hash": "^0.2.1",
+    "leaflet.control.opacity": "^1.6.0",
+    "leaflet.nauticscale": "^1.1.0",
+    "leaflet.polylinemeasure": "^3.0.0",
+    "leaflet.tilelayer.fallback": "^1.0.4"
+  }
+}
