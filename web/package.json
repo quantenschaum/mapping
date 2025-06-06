@@ -27,6 +27,7 @@
     "leaflet-graticule": "^0.0.1",
     "leaflet-hash": "^0.2.1",
     "leaflet.control.opacity": "^1.6.0",
+    "leaflet.locatecontrol": "^0.84.2",
     "leaflet.nauticscale": "^1.1.0",
     "leaflet.polylinemeasure": "^3.0.0",
     "leaflet.tilelayer.fallback": "^1.0.4"

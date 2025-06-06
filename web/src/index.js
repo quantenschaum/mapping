@@ -12,11 +12,14 @@ import 'leaflet.polylinemeasure/Leaflet.PolylineMeasure.css';
 import 'leaflet.control.opacity';
 import 'leaflet.nauticscale/dist/leaflet.nauticscale';
 import './leaflet-timeline-slider';
+import {LocateControl} from 'leaflet.locatecontrol';
+import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
+
 
 const params = new URLSearchParams(window.location.search);
 console.log(params.get('l'));
 
-if ('serviceWorker' in navigator && params.get('app')=='1') {
+if ('serviceWorker' in navigator && params.get('app') == '1') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('service-worker.js')
       .then(reg => console.log('SW registered', reg))
@@ -253,6 +256,10 @@ fetch('/updated').then(response => {
 
 new L.Hash(map);
 
+new LocateControl({
+  flyTo: true,
+}).addTo(map);
+
 map.addControl(new L.Control.ScaleNautic({
   metric: true, imperial: false, nautic: true
 }));
@@ -320,7 +327,7 @@ L.control.timelineSlider({
 const nightswitch = L.Control.extend({
   onAdd: (m) => {
     console.log('nightswitch');
-    var div = L.DomUtil.create('div','nightswitch');
+    var div = L.DomUtil.create('div', 'nightswitch');
     var button = L.DomUtil.create('button', 'nightswitch');
     button.innerHTML = '&#x1F319;'; // 🌙
     button.title = 'toggle night mode';
