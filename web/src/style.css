@@ -47,7 +47,7 @@ html, body, #map {
 
 @media (max-width: 600px) {
   .leaflet-control-attribution {
-    max-width: 50%;
+    max-width: 70%;
   }
 
   .control_container {
