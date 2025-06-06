@@ -320,9 +320,10 @@ L.control.timelineSlider({
 const nightswitch = L.Control.extend({
   onAdd: (m) => {
     console.log('nightswitch');
-    var div = L.DomUtil.create('div');
+    var div = L.DomUtil.create('div','nightswitch');
     var button = L.DomUtil.create('button', 'nightswitch');
-    button.textContent = 'nightmode';
+    button.innerHTML = '&#x1F319;'; // 🌙
+    button.title = 'toggle night mode';
     div.appendChild(button);
     button.addEventListener('click', () => {
       const map = document.querySelector('#map');
@@ -338,7 +339,7 @@ const nightswitch = L.Control.extend({
 });
 
 
-new nightswitch({position: 'bottomright'}).addTo(map);
+new nightswitch({position: 'topleft'}).addTo(map);
 
 
 function restoreActiveLayers(l) {

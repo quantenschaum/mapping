@@ -49,4 +49,14 @@ html, body, #map {
   .leaflet-control-attribution {
     max-width: 50%;
   }
+
+  .control_container {
+    transform: rotate(90deg);
+    transform-origin: 100% 0%;
+  }
 }
+
+.nightswitch {
+  padding: 5px;
+}
+
