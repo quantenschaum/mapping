@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, argv) => {
-  const isProd = argv.mode === 'production';
+  const isProd = false; //argv.mode === 'production';
 
   return {
     output: {
