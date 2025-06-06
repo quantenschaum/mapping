@@ -14,6 +14,7 @@ import 'leaflet.nauticscale/dist/leaflet.nauticscale';
 import './leaflet-timeline-slider';
 import {LocateControl} from 'leaflet.locatecontrol';
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
+import '@maplibre/maplibre-gl-leaflet';
 
 
 const params = new URLSearchParams(window.location.search);
@@ -236,6 +237,12 @@ for (let i = -6; i <= 6; i++) {
 overlays['Tide Figures'] = L.tileLayer.fallback(baseurl + '/tides/fig/{z}/{x}/{y}.webp', {
   attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
 });
+
+
+basemaps['Vector (experimental)'] = L.maplibreGL({
+  style: baseurl + '/style.json',
+});
+
 
 const map = L.map('map', {
   center: [54.264, 9.196],

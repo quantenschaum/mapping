@@ -23,6 +23,7 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
+    "@maplibre/maplibre-gl-leaflet": "^0.1.1",
     "leaflet": "^1.9.4",
     "leaflet-graticule": "^0.0.1",
     "leaflet-hash": "^0.2.1",
