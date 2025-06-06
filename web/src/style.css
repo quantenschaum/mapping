@@ -53,6 +53,7 @@ html, body, #map {
   .control_container {
     transform: rotate(90deg);
     transform-origin: 100% 0%;
+    display: none;
   }
 }
 
