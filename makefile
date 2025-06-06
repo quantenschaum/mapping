@@ -7,7 +7,7 @@ export PATH:=$(PWD)/scripts:$(PWD)/spreet/target/release:$(PWD)/tippecanoe:$(PAT
 export OGR_S57_OPTIONS=LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON
 # export S57_CSV="$(PWD)/scripts"
 
-.PHONY: icons obf vwm charts qgis mapproxy www
+.PHONY: icons obf vwm charts qgis mapproxy www web
 
 help:
 	cat README.md
@@ -206,7 +206,11 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
 
 zips: icons.zip qmap-data.zip qmap-de.tiles.zip soundg-de.tiles.zip qmap-nl.tiles.zip
 
-www:
+web:
+	cd $@ && npm install && npm run build
+	cp -rv $@/dist/* www
+
+www: web
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
