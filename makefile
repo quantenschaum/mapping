@@ -7,7 +7,7 @@ export PATH:=$(PWD)/scripts:$(PWD)/spreet/target/release:$(PWD)/tippecanoe:$(PAT
 export OGR_S57_OPTIONS=LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON
 # export S57_CSV="$(PWD)/scripts"
 
-.PHONY: icons obf vwm charts qgis mapproxy
+.PHONY: icons obf vwm charts qgis mapproxy www
 
 help:
 	cat README.md
@@ -18,7 +18,7 @@ build:
 	$(MAKE) qmap-de.obf qmap-de.zip qmap-nl.zip
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
-	$(MAKE) charts tiles zips upload
+	$(MAKE) charts tiles zips www
 
 vwm:
 	rm -rf data/vwm && mkdir -p data/vwm
@@ -206,7 +206,7 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
 
 zips: icons.zip qmap-data.zip qmap-de.tiles.zip soundg-de.tiles.zip qmap-nl.tiles.zip
 
-upload:
+www:
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
