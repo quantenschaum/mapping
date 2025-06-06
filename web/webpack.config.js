@@ -5,13 +5,14 @@ const TerserPlugin = require('terser-webpack-plugin');
 const {GenerateSW} = require('workbox-webpack-plugin');
 
 module.exports = (env, argv) => {
-  const isProd = false; //argv.mode === 'production';
+  const isProd = argv.mode === 'production';
 
   return {
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: isProd ? 'bundle.[contenthash].js' : 'bundle.js',
-       clean: true,
+      filename: 'bundle.js',
+      // filename: isProd ? 'bundle.[contenthash].js' : 'bundle.js',
+      clean: true,
     },
     module: {
       rules: [
@@ -26,7 +27,8 @@ module.exports = (env, argv) => {
         filename: 'index.html',
       }),
       new MiniCssExtractPlugin({
-        filename: isProd ? 'style.[contenthash].css' : 'style.css',
+        filename: 'style.css',
+        // filename: isProd ? 'style.[contenthash].css' : 'style.css',
       }),
       new GenerateSW({
         mode: isProd ? 'production' : 'development',
