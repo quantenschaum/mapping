@@ -223,7 +223,6 @@ const overlays = {
   }),
   'OpenSeaMap': L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
     attribution: '<a target="_blank" href="https://openseamap.org/">OpenSeaMap</a>',
-    bounds: boundsNL,
   }),
 };
 
