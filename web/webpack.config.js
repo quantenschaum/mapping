@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const {GenerateSW} = require('workbox-webpack-plugin');
 
@@ -18,6 +19,7 @@ module.exports = (env, argv) => {
       rules: [
         // {test: /\.css$/, use: ['style-loader', 'css-loader']},
         {test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader']},
+        {test: /\.less$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']},
         {test: /\.(json|png|jpe?g|gif|webp|svg)$/, type: 'asset/resource', generator: {filename: '[name][ext]'},},
       ],
     },
@@ -47,25 +49,29 @@ module.exports = (env, argv) => {
               },
             },
           },
-          // {
-          //   urlPattern: /https:\/\/freenauticalchart\.net\/.*\.webp$/,
-          //   handler: 'StaleWhileRevalidate',
-          //   options: {
-          //     cacheName: 'tiles',
-          //     expiration: {
-          //       maxAgeSeconds: 7 * 24 * 3600,
-          //     },
-          //   },
-          // },
+          {
+            urlPattern: /\.webp$/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'tiles',
+              expiration: {
+                maxEntries: 10000,
+                maxAgeSeconds: 7 * 24 * 3600,
+              },
+            },
+          },
         ],
       }),
     ],
     optimization: {
-      minimizer: [new TerserPlugin({
-        terserOptions: {
-          compress: {drop_console: isProd},
-        },
-      })],
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {drop_console: isProd},
+          },
+        }),
+        new CssMinimizerPlugin(),
+      ],
     },
     watchOptions: {
       ignored: /node_modules|dist/,

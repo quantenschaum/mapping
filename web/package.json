@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "frontend for freenauticalchart.net",
   "scripts": {
-    "build": "webpack --mode production",
-    "watch": "webpack --mode development --watch",
-    "serve": "http-server -p 3000 dist"
+    "build": "webpack build --mode production",
+    "watch": "webpack build --mode development --watch",
+    "serve": "webpack serve --mode development --static dist --no-client-overlay-warnings"
   },
   "keywords": [],
   "author": "quantenschaum",
@@ -16,14 +16,16 @@
   "devDependencies": {
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
-    "http-server": "^14.1.1",
+    "less-loader": "^12.3.0",
     "mini-css-extract-plugin": "^2.9.2",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2",
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
     "@maplibre/maplibre-gl-leaflet": "^0.1.1",
+    "css-minimizer-webpack-plugin": "^7.0.2",
     "leaflet": "^1.9.4",
     "leaflet-graticule": "^0.0.1",
     "leaflet-hash": "^0.2.1",
