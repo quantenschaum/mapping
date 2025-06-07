@@ -371,7 +371,7 @@ def mbtiles2mbtiles(inputs, output, args):
     for m in [f"minzoom={bbox['z']}",f"maxzoom={bbox['Z']}",
               f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']}"] + args.meta:
         k, v = m.split("=", 1)
-        dcur.execute(f"INSERT  OR REPLACE INTO metadata VALUES ('{k}','{v}')")
+        dcur.execute(f"INSERT OR REPLACE INTO metadata VALUES ('{k}','{v}')")
 
     dest.commit()
     dest.close()
@@ -539,7 +539,7 @@ def dir2mbtiles(inputs, output, args):
     for m in [f"minzoom={bbox['z']}",f"maxzoom={bbox['Z']}",
               f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']}"] + args.meta:
         k, v = m.split("=", 1)
-        dcur.execute(f"INSERT  OR REPLACE INTO metadata VALUES ('{k}','{v}')")
+        dcur.execute(f"INSERT OR REPLACE INTO metadata VALUES ('{k}','{v}')")
 
     dest.commit()
     dest.close()
