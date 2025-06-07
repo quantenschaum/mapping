@@ -156,6 +156,7 @@ stop-all:
 	pkill qgis_mapserve || true
 	pkill mapproxy-util || true
 	pkill mapproxy-seed || true
+	docker compose down
 
 clean-cache:
 	rm -rf cache_data

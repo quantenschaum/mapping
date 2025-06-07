@@ -4,6 +4,9 @@
   "description": "OpenData based charts",
   "start_url": "/?app=1",
   "display": "standalone",
+  "display_override": [
+    "window-controls-overlay"
+  ],
   "background_color": "#ffffff",
   "theme_color": "#317EFB",
   "orientation": "portrait",
