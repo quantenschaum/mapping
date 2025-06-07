@@ -1,5 +1,6 @@
 import './manifest.json';
 import './icon.png';
+import './icon.svg';
 import './style.css';
 
 import L from 'leaflet';
