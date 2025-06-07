@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QMAP</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
+  <script>window.devicePixelRatio=2;</script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-hash@0.2.1/leaflet-hash.js"></script>
+  <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
+  <style type="text/css">
+    body {
+       margin: 0;
+       padding: 0;
+    }
+    html, body, #map {
+       width: 100%;
+       height: 100%;
+    }
+    .grayscale {
+      filter: grayscale(100%) sepia(30%);
+      -webkit-filter: grayscale(100%) sepia(30%);
+    }
+    .invert {
+      filter: invert(100%);
+      -webkit-filter: invert(100%);
+    }
+    .night {
+      filter: invert(100%) hue-rotate(180deg) brightness(60%);
+      -webkit-filter: invert(100%) hue-rotate(180deg) brightness(60%);
+    }
+    #infobox {
+      background: white;
+      border-radius: 1em;
+      padding: 0.5em;
+      font-size: 120%;
+    }
+  </style>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  var map = L.map('map').setView([53.5, 9], 7);
+
+  L.control.polylineMeasure({
+      unit: 'nauticalmiles',
+      clearMeasurementsOnStop: false,
+      showBearings: true,
+      showClearControl: true,
+      showUnitControl: true,
+  }).addTo(map);
+
+  new L.Hash(map);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  L.tileLayer('./{z}/{x}/{y}.webp', {
+      attribution: '&copy; <a href="https://waddenzee.duckdns.org/download">QMAP</a>'
+  }).addTo(map);
+});
+  </script>
+</head>
+<body>
+<div id="map"></div>
+</body>
+</html>
