@@ -15,8 +15,8 @@ import 'leaflet.nauticscale/dist/leaflet.nauticscale';
 import './leaflet-timeline-slider';
 import {LocateControl} from 'leaflet.locatecontrol';
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
-import '@maplibre/maplibre-gl-leaflet';
 
+const debug = process.env.NODE_ENV === 'development';
 
 const params = new URLSearchParams(window.location.search);
 console.log(params.get('l'));
@@ -29,7 +29,6 @@ if ('serviceWorker' in navigator && params.get('app') == '1') {
   });
 }
 
-const debug = process.env.NODE_ENV === 'development';
 
 function d2dm(a, n) {
   const dec = params.get('dec');
@@ -238,12 +237,6 @@ overlays['Tide Figures'] = L.tileLayer.fallback(baseurl + '/tides/fig/{z}/{x}/{y
   attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
 });
 
-
-basemaps['Vector (experimental)'] = L.maplibreGL({
-  style: baseurl + '/style.json',
-});
-
-
 const map = L.map('map', {
   center: [54.264, 9.196],
   zoom: 8,
@@ -391,3 +384,13 @@ function storeActiveLayers() {
 storeActiveLayers();
 
 map.on('layeradd layerremove overlayadd overlayremove', storeActiveLayers);
+
+
+if (params.get('vector') == '1') {
+  import('@maplibre/maplibre-gl-leaflet').then(maplibre => {
+    console.log('maplibre', maplibre);
+    layers.addBaseLayer(L.maplibreGL({
+      style: baseurl + '/style.json',
+    }), 'Vector (experimental)');
+  });
+}
