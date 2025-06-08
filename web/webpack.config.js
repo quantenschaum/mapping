@@ -36,6 +36,7 @@ module.exports = (env, argv) => {
         mode: isProd ? 'production' : 'development',
         clientsClaim: true,
         skipWaiting: true,
+        navigateFallback: '/index.html',
         ignoreURLParametersMatching: [/.*/],
         runtimeCaching: [
           {

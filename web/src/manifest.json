@@ -2,11 +2,11 @@
   "name": "free nautical chart",
   "short_name": "QMAP",
   "description": "OpenData based charts",
-  "start_url": "/index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#317EFB",
-  "orientation": "portrait",
+  "orientation": "any",
   "icons": [
     {
       "src": "icon.png",
