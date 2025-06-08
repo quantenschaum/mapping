@@ -310,44 +310,59 @@ if (isDevMode||params.get('wattpaddler') == '1') {
   import('./routen.json');
   import('./ausstiegeA.json');
   import('./ausstiegeK.json');
+  import('./rot.json');
+  import('./gruen.json');
 
   (async () => {
     const attr = '<a target="_blank" href="https://www.nationalpark-wattenmeer.de/wissensbeitrag/befahrensverordnung-karte/">NordSBefV</a>';
     await addVectorLayer(layers, 'allg. Schutzgebiete', 'allgemeine.json', {
       active: false,
       color: 'green',
-      legend: 'Befahren erlaubt, Betreten verboten.',
+      legend: 'Befahren erlaubt, Betreten verboten. Diese Bereiche entsprechen den Kernzonen der Nationalparke, also der „Schutzzone I“ (Schleswig-Holstein), der „Ruhezone (Zone I)“ (Niedersachsen) bzw. der „Zone I“ (Hamburg).',
       attribution: attr,
     });
     await addVectorLayer(layers, 'bes. Schutzgebiete', 'besondere.json', {
       active: true,
       color: 'red',
-      legend: 'Befahren innerhalb der Schutzzeiten (dazu zoomen) nur in markierten Fahrwassern oder auf Schutzgebiets-Routen. Ohne angegebene Schutzzeiten gilt ganzj&auml;hriger Schutz. Au&szlig;erhalb der Schutzzeiten Befahren erlaubt. Betreten stets verboten.',
+      legend: 'Bereiche, die während der jeweiligen Schutzzeit – vom 15. April bis 1. Oktober eines Jahres oder ganzjährig – außerhalb der Fahrwasser grundsätzlich nicht befahren werden dürfen. Innerhalb der Fahrwasser darf ein maschinengetriebenes Wasserfahrzeug maximal mit 12 kn (Fahrt über Grund) fahren. Außerhalb der Fahrwasser – soweit außerhalb der jeweiligen Schutzzeit – gilt eine zulässige Höchstgeschwindigkeit von 8 kn (Fahrt über Grund). Das Trockenfallen ist in diesen Bereichen untersagt.',
       attribution: attr,
     });
     await addVectorLayer(layers, 'Kitesurf-Gebiete', 'kite.json', {
       active: false,
       color: 'orange',
-      legend: 'Kitesurfen innerhalb der angegebenen Zeit erlaubt.',
+      legend: 'Erlaubniszone, in der Kitesurfen und ähnliche Sportarten wie Wingsurfen erlaubt sind. Außerhalb der Kitesurfgebiete sind diese Sportarten bis auf Windsurfen nicht zulässig.',
       attribution: attr,
     });
     await addVectorLayer(layers, 'Schutzgebietsrouten', 'routen.json', {
       active: true,
       color: 'purple',
-      legend: 'Befahren in einem Korridor von 250m Breite erlaubt.',
+      legend: 'Zusätzliche Routen zum Befahren der Besonderen Schutzgebiete für muskelkraftbetriebene Wasserfahrzeuge (z.B. Kanadier, Kajaks) mit einer Breite von 250 m, die auch zum Aufenthalt genutzt werden können. Diese Wasserwanderwege sind im Gebiet nicht gekennzeichnet.',
       attribution: attr,
     });
     await addVectorLayer(layers, 'Ausstiegsstellen, allg.', 'ausstiegeA.json', {
       active: true,
       color: 'blue',
-      legend: 'Betreten des Watts im Radius von 200m erlaubt.',
+      legend: 'Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200 m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.',
       attribution: attr,
     });
     await addVectorLayer(layers, 'Ausstiegsstellen, Kayak', 'ausstiegeK.json', {
       active: true,
       color: '#09a9ff',
-      legend: 'Betreten des Watts im Radius von 200m erlaubt.',
+      legend: 'Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200 m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.',
       attribution: attr,
+    });
+
+    await addVectorLayer(layers, 'Rotzone', 'rot.json', {
+      active: true,
+      color: 'red',
+      legend: 'Gesperrt für alle - In der Rotzone liegen besonders sensible Lebensräume. Dort ist jegliches Befahren für Wasserfahrzeuge untersagt.',
+      attribution: '<a target="_blank" href="https://www.nationalpark-vorpommersche-boddenlandschaft.de/karte#&e=3000,3200&c=0,3201,3202">NPVB</a>',
+    });
+    await addVectorLayer(layers, 'Grünzone', 'gruen.json', {
+      active: true,
+      color: 'green',
+      legend: 'Gesperrt für Motoren - In der Grünzone ist ein Befahren mit motorgetriebenen Wasserfahrzeugen verboten. Dort darf sich mit Muskel- oder Windkraft fortbewegt werden.',
+      attribution: '<a target="_blank" href="https://www.nationalpark-vorpommersche-boddenlandschaft.de/karte#&e=3000,3200&c=0,3201,3202">NPVB</a>',
     });
 
     restoreLayers(layers, params.get('l'));

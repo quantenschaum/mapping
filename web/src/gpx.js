@@ -1,6 +1,5 @@
 import L from 'leaflet';
 import {log} from './utils';
-import {addVectorLayer} from './vector';
 
 function xlog(...args) {
   log('GPX', 'purple', ...args);
@@ -57,6 +56,7 @@ export async function addGPX(control, name, url, opts = {color: 'blue'}) {
 
     control.addOverlay(layer, name);
     layer.addTo(control._map);
+    control._map.fitBounds(layer.getBounds());
   });
 }
 
