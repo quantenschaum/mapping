@@ -53,7 +53,7 @@ module.exports = (env, argv) => {
             },
           },
           {
-            urlPattern: /\.webp$/,
+            urlPattern: /\.(webp|pbf)$/,
             handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'tiles',
