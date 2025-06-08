@@ -303,7 +303,7 @@ if (params.get('vector') == '1') {
   });
 }
 
-if (isDevMode) {
+if (isDevMode||params.get('wattpaddler') == '1') {
   import('./besondere.json');
   import('./allgemeine.json');
   import('./kite.json');
