@@ -294,7 +294,7 @@ new GPXbutton({position: 'topleft', layers: layers}).addTo(map);
 
 legend(layers);
 
-if (params.get('vector') == '1') {
+if (isDevMode||params.get('vector') == '1') {
   import('@maplibre/maplibre-gl-leaflet').then(maplibre => {
     console.log('maplibre', maplibre);
     layers.addBaseLayer(L.maplibreGL({
