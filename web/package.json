@@ -24,6 +24,7 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
+    "@mapbox/leaflet-omnivore": "^0.3.4",
     "@maplibre/maplibre-gl-leaflet": "^0.1.1",
     "css-minimizer-webpack-plugin": "^7.0.2",
     "leaflet": "^1.9.4",

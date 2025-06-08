@@ -1,6 +1,6 @@
 import L from 'leaflet';
 
-export function grid(dec=0) {
+export function grid(dec = 0) {
   function d2dm(a, n) {
     dec = parseInt(dec);
     if (dec) {

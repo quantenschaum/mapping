@@ -76,6 +76,7 @@ module.exports = (env, argv) => {
     },
     watchOptions: {
       ignored: /node_modules|dist/,
+      poll: 1000,
     },
   };
 };

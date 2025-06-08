@@ -5,9 +5,8 @@ function xlog(...args) {
   log('Vector', 'magenta', ...args);
 }
 
-export async function addVectorLayer(control, name, url, opts = {}) {
+export async function addVectorLayer(control, name, url, opts = {color: 'blue'}) {
   xlog('add', name, url);
-  const color = opts.color || 'blue';
   await fetch(url)
     .then(response => response.json())
     .then(json => {
@@ -21,12 +20,12 @@ export async function addVectorLayer(control, name, url, opts = {}) {
         },
         style: f => {
           if (f.geometry.type == 'Point') return {};
-          return {weight: 4, opacity: 0.8, color: color, fillOpacity: 0.1};
+          return {weight: 4, opacity: 0.8, color: opts.color, fillOpacity: 0.1};
         },
         pointToLayer: (f, latlng) =>
           L.circleMarker(latlng, {
             radius: 6,
-            fillColor: color,
+            fillColor: opts.color,
             weight: 0,
             fillOpacity: 1,
           }),

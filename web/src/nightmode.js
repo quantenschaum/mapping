@@ -10,7 +10,7 @@ export const NightSwitch = L.Control.extend({
     button.innerHTML = '&#x1F319;'; // 🌙
     button.title = 'toggle night mode';
     div.appendChild(button);
-    map=map.getContainer();
+    map = map.getContainer();
     button.addEventListener('click', () => {
       if (map.classList.contains('night')) {
         map.classList.remove('night');

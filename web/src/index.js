@@ -21,6 +21,7 @@ import {grid} from './grid';
 import {NightSwitch} from './nightmode';
 import {restoreLayers} from './store';
 import {addVectorLayer} from './vector';
+import {GPXbutton} from './gpx';
 
 const isDevMode = process.env.NODE_ENV === 'development';
 const isStandalone = !!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
@@ -209,7 +210,7 @@ function updateAttribution(offline = false) {
 
   map.attributionControl.setPrefix(attrib);
 
-  fetch('/updated').then(response => {
+  fetch(baseurl + '/updated').then(response => {
     let dateHeader = response.headers.get('Last-Modified');
     let date = new Date(dateHeader).toISOString().slice(0, 10);
     map.attributionControl.setPrefix(attrib.replace('(?)', `(${date})`));
@@ -217,7 +218,6 @@ function updateAttribution(offline = false) {
 }
 
 updateAttribution();
-
 window.addEventListener('online', () => updateAttribution());
 window.addEventListener('offline', () => updateAttribution(true));
 
@@ -289,6 +289,8 @@ L.control.timelineSlider({
 }).addTo(map);
 
 new NightSwitch({position: 'topleft'}).addTo(map);
+
+new GPXbutton({position: 'topleft', layers: layers}).addTo(map);
 
 legend(layers);
 
