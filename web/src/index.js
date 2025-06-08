@@ -1,8 +1,3 @@
-import './manifest.json';
-import './icon.png';
-import './icon.svg';
-import './style.css';
-
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-hash';
@@ -16,75 +11,36 @@ import './leaflet-timeline-slider';
 import {LocateControl} from 'leaflet.locatecontrol';
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
 
-const debug = process.env.NODE_ENV === 'development';
+import './manifest.json';
+import './icon.png';
+import './icon.svg';
+import './style.css';
+import {log} from './utils';
+import {legend} from './legend';
+import {grid} from './grid';
+import {NightSwitch} from './nightmode';
+import {restoreLayers} from './store';
+import {addVectorLayer} from './vector';
+
+const isDevMode = process.env.NODE_ENV === 'development';
+const isStandalone = !!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
+
+log('PWA', 'red', 'stanalone', isStandalone, 'dev', isDevMode);
 
 const params = new URLSearchParams(window.location.search);
-console.log(params.get('l'));
 
-if ('serviceWorker' in navigator && params.get('app') == '1') {
+if ('serviceWorker' in navigator && isStandalone) {
   window.addEventListener('load', () => {
+    log('PWA', 'red', 'registering service worker');
     navigator.serviceWorker.register('service-worker.js')
       .then(reg => console.log('SW registered', reg))
       .catch(err => console.error('SW registration failed', err));
   });
 }
 
-
-function d2dm(a, n) {
-  const dec = params.get('dec');
-  if (dec) {
-    var n = parseInt(dec);
-    var f = Math.pow(10, n);
-    return Math.round(a * f) / f;
-  }
-  var a = Math.abs(a);
-  var d = Math.floor(a);
-  var f = Math.pow(10, n);
-  var m = Math.round(((60 * a) % 60) * f) / f;
-  while (m >= 60) {
-    m -= 60;
-    d += 1;
-  }
-  var M = m == 0 ? "" : m.toFixed(n).replace(/\.?0+$/, "") + "'";
-  return d + '°' + M;
-}
-
-const grid = L.latlngGraticule({
-  showLabel: true,
-  color: '#222',
-  zoomInterval: [
-    {start: 2, end: 4, interval: 30},
-    {start: 5, end: 5, interval: 20},
-    {start: 6, end: 6, interval: 10},
-    {start: 7, end: 7, interval: 5},
-    {start: 8, end: 8, interval: 2},
-    {start: 9, end: 9, interval: 1},
-    {start: 10, end: 10, interval: 30 / 60},
-    {start: 11, end: 11, interval: 15 / 60},
-    {start: 12, end: 12, interval: 10 / 60},
-    {start: 13, end: 13, interval: 5 / 60},
-    {start: 14, end: 14, interval: 2 / 60},
-    {start: 15, end: 15, interval: 1 / 60},
-    {start: 16, end: 16, interval: 1 / 60 / 2},
-    {start: 17, end: 17, interval: 1 / 60 / 5},
-    {start: 18, end: 18, interval: 1 / 60 / 10},
-  ],
-  latFormatTickLabel: function (l) {
-    let s = l < 0 ? 'S' : l > 0 ? 'N' : '';
-    return s + d2dm(l, 2);
-  },
-  lngFormatTickLabel: function (l) {
-    l %= 360;
-    l -= Math.abs(l) > 180 ? Math.sign(l) * 360 : 0;
-    let s = l < 0 ? 'W' : l > 0 ? 'E' : '';
-    return s + d2dm(l, 2);
-  },
-});
-
+const baseurl = 'https://freenauticalchart.net';
 const boundsDE = L.latLngBounds([53.0, 3.3], [56.0, 14.4]);
 const boundsNL = L.latLngBounds([51.2, 3.0], [53.8, 7.3]);
-
-const baseurl = 'https://freenauticalchart.net';
 
 const basemaps = {
   'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -92,7 +48,7 @@ const basemaps = {
     class: 'grayscale',
   }),
   'OsmAnd Nautical': L.tileLayer('https://maptile.osmand.net/tile/nautical/{z}/{x}/{y}.png', {
-    attribution: '<a target="_blank" href="https://osmand.net/map">OsmAnd</a>'
+    attribution: '<a target="_blank" href="https://osmand.net/map">OsmAnd</a>',
   }),
   'ENC (RWS)': L.tileLayer.wms('https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/WMSServer', {
     layers: '0,2,3,4,5,6,7',
@@ -127,7 +83,7 @@ const basemaps = {
 };
 
 const overlays = {
-  'Grid': grid,
+  'Grid': grid(params.get('dec')),
   'QMAP DE': L.tileLayer.fallback(baseurl + '/qmap-de/{z}/{x}/{y}.webp', {
     attribution: '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
     bounds: boundsDE,
@@ -239,26 +195,23 @@ overlays['Tide Figures'] = L.tileLayer.fallback(baseurl + '/tides/fig/{z}/{x}/{y
 
 const map = L.map('map', {
   center: [54.264, 9.196],
-  zoom: 8,
+  zoom: 8, minZoom: 7, maxZoom: 18,
   layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP Soundings DE'], overlays['QMAP NL']],
-  // layers: [basemaps['OpenStreetMap'], overlays['Grid']],
-  minZoom: 7,
-  maxZoom: 18,
 });
 
-map.attributionControl.setPrefix('<a class="highlight" href="/download/">QMAP (download and more)</a>, <a href="https://leafletjs.com/">Leaflet</a>');
+const attrib = '<a class="highlight" href="/download/">&#x1F12F; free nautical chart ()</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>';
+
+map.attributionControl.setPrefix(attrib);
 
 fetch('/updated').then(response => {
   let dateHeader = response.headers.get('Last-Modified');
   let date = new Date(dateHeader).toISOString().slice(0, 10);
-  map.attributionControl.setPrefix('<a class="highlight" href="/download/">QMAP (download and more, last updated ' + date + ')</a>, <a href="https://leafletjs.com/">Leaflet</a>');
+  map.attributionControl.setPrefix(attrib.replace('()', `(${date})`));
 });
 
 new L.Hash(map);
 
-new LocateControl({
-  flyTo: true,
-}).addTo(map);
+new LocateControl({flyTo: true}).addTo(map);
 
 map.addControl(new L.Control.ScaleNautic({
   metric: true, imperial: false, nautic: true
@@ -323,68 +276,9 @@ L.control.timelineSlider({
   }
 }).addTo(map);
 
+new NightSwitch({position: 'topleft'}).addTo(map);
 
-const nightswitch = L.Control.extend({
-  onAdd: (m) => {
-    console.log('nightswitch');
-    var div = L.DomUtil.create('div', 'nightswitch');
-    var button = L.DomUtil.create('button', 'nightswitch');
-    button.innerHTML = '&#x1F319;'; // 🌙
-    button.title = 'toggle night mode';
-    div.appendChild(button);
-    button.addEventListener('click', () => {
-      const map = document.querySelector('#map');
-      if (map.classList.contains('night')) {
-        map.classList.remove('night');
-      } else {
-        map.classList.add('night');
-      }
-    });
-    return div;
-  },
-
-});
-
-
-new nightswitch({position: 'topleft'}).addTo(map);
-
-
-function restoreActiveLayers(l) {
-  var active = sessionStorage.getItem("activeLayers");
-  active = JSON.parse(active);
-  if (l) active = l.split(',');
-  console.log(active);
-  if (!active) return;
-  console.log("restore", active);
-  for (let i = 0; i < layers._layers.length; i++) {
-    let l = layers._layers[i];
-    if (active.includes(l.name)) {
-      map.addLayer(l.layer);
-    } else {
-      map.removeLayer(l.layer);
-    }
-  }
-}
-
-restoreActiveLayers(params.get('l'));
-
-function storeActiveLayers() {
-  var active = [];
-  for (let i = 0; i < layers._layers.length; i++) {
-    let l = layers._layers[i];
-//      console.log(i,l,map.hasLayer(l.layer));
-    if (map.hasLayer(l.layer)) {
-      active.push(l.name);
-    }
-  }
-  console.log("store", active);
-  sessionStorage.setItem("activeLayers", JSON.stringify(active));
-}
-
-storeActiveLayers();
-
-map.on('layeradd layerremove overlayadd overlayremove', storeActiveLayers);
-
+legend(layers);
 
 if (params.get('vector') == '1') {
   import('@maplibre/maplibre-gl-leaflet').then(maplibre => {
@@ -394,3 +288,57 @@ if (params.get('vector') == '1') {
     }), 'Vector (experimental)');
   });
 }
+
+if (isDevMode) {
+  import('./besondere.json');
+  import('./allgemeine.json');
+  import('./kite.json');
+  import('./routen.json');
+  import('./ausstiegeA.json');
+  import('./ausstiegeK.json');
+
+  (async () => {
+    const attr = '<a target="_blank" href="https://www.nationalpark-wattenmeer.de/wissensbeitrag/befahrensverordnung-karte/">NordSBefV</a>';
+    await addVectorLayer(layers, 'allg. Schutzgebiete', 'allgemeine.json', {
+      active: false,
+      color: 'green',
+      legend: 'Befahren erlaubt, Betreten verboten.',
+      attribution: attr,
+    });
+    await addVectorLayer(layers, 'bes. Schutzgebiete', 'besondere.json', {
+      active: true,
+      color: 'red',
+      legend: 'Befahren innerhalb der Schutzzeiten (dazu zoomen) nur in markierten Fahrwassern oder auf Schutzgebiets-Routen. Ohne angegebene Schutzzeiten gilt ganzj&auml;hriger Schutz. Au&szlig;erhalb der Schutzzeiten Befahren erlaubt. Betreten stets verboten.',
+      attribution: attr,
+    });
+    await addVectorLayer(layers, 'Kitesurf-Gebiete', 'kite.json', {
+      active: false,
+      color: 'orange',
+      legend: 'Kitesurfen innerhalb der angegebenen Zeit erlaubt.',
+      attribution: attr,
+    });
+    await addVectorLayer(layers, 'Schutzgebietsrouten', 'routen.json', {
+      active: true,
+      color: 'purple',
+      legend: 'Befahren in einem Korridor von 250m Breite erlaubt.',
+      attribution: attr,
+    });
+    await addVectorLayer(layers, 'Ausstiegsstellen, allg.', 'ausstiegeA.json', {
+      active: true,
+      color: 'blue',
+      legend: 'Betreten des Watts im Radius von 200m erlaubt.',
+      attribution: attr,
+    });
+    await addVectorLayer(layers, 'Ausstiegsstellen, Kayak', 'ausstiegeK.json', {
+      active: true,
+      color: '#09a9ff',
+      legend: 'Betreten des Watts im Radius von 200m erlaubt.',
+      attribution: attr,
+    });
+
+    restoreLayers(layers, params.get('l'));
+  })();
+} else {
+  restoreLayers(layers, params.get('l'));
+}
+

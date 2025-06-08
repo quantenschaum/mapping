@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack build --mode production",
     "watch": "webpack build --mode development --watch",
-    "serve": "webpack serve --mode development --static dist --no-client-overlay-warnings"
+    "serve": "webpack serve --mode development --static dist --no-client-overlay-warnings --allowed-hosts all"
   },
   "keywords": [],
   "author": "quantenschaum",

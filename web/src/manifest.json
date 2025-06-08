@@ -2,7 +2,7 @@
   "name": "free nautical chart",
   "short_name": "QMAP",
   "description": "OpenData based charts",
-  "start_url": "/?app=1",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#317EFB",

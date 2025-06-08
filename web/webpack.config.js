@@ -36,6 +36,7 @@ module.exports = (env, argv) => {
         mode: isProd ? 'production' : 'development',
         clientsClaim: true,
         skipWaiting: true,
+        ignoreURLParametersMatching: [/.*/],
         runtimeCaching: [
           {
             urlPattern: /\/download\/.*(html|js|xml|webp|png|jpe?g|json|\/)$/,

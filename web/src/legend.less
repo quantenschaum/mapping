@@ -1,0 +1,36 @@
+.legend {
+  background: white;
+  padding: 1ex;
+
+  h1 {
+    font-size: 1.1em;
+    margin: 0;
+  }
+
+  @media (max-width: 500px) {
+    h1 {
+      display: none;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style-type: none;
+  }
+
+  .symbol {
+    width: 1.3em;
+    height: 1.3em;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.5em;
+  }
+}
+
+.legend:empty {
+  display: none;
+}
