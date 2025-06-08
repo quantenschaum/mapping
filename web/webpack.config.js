@@ -37,6 +37,7 @@ module.exports = (env, argv) => {
         clientsClaim: true,
         skipWaiting: true,
         navigateFallback: '/index.html',
+        navigateFallbackAllowlist: [/^\/$/],
         ignoreURLParametersMatching: [/.*/],
         runtimeCaching: [
           {
