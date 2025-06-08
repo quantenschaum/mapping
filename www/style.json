@@ -997,8 +997,61 @@
         "source": "bsh",
         "source-layer": "SOUNDG",
         "layout": {
-         "text-field": "{VALSOU}",
-         "text-size": 12,
+         "text-field": [
+              "let", "val", ["get", "VALSOU"],
+              [
+                "let", "isNegative", ["<", ["var", "val"], 0],
+                [
+                  "let", "absVal", ["*", ["var", "val"], ["case", ["var", "isNegative"], -1, 1]],
+                  [
+                    "let", "valTimes10", ["floor", ["*", ["var", "absVal"], 10]],
+                    [
+                      "let", "valStr", ["to-string", ["var", "valTimes10"]],
+                      [
+                        "let", "len", ["length", ["var", "valStr"]],
+                        [
+                          "let", "intPart",
+                            [
+                              "case",
+                              ["<", ["var", "len"], 2],
+                              "0",
+                              ["slice", ["var", "valStr"], 0, ["-", ["var", "len"], 1]]
+                            ],
+                          [
+                            "let", "decDigit", ["slice", ["var", "valStr"], ["-", ["var", "len"], 1], ["var", "len"]],
+                            [
+                              "let", "subDigit",
+                                [
+                                  "match",
+                                  ["var", "decDigit"],
+                                  "0", "",
+                                  "1", "₁",
+                                  "2", "₂",
+                                  "3", "₃",
+                                  "4", "₄",
+                                  "5", "₅",
+                                  "6", "₆",
+                                  "7", "₇",
+                                  "8", "₈",
+                                  "9", "₉",
+                                  "x"
+                                ],
+                              [
+                                "concat",
+                                ["case", ["var", "isNegative"], "-", ""],
+                                ["var", "intPart"],
+                                ["var", "subDigit"]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+         "text-size": 14,
          "text-anchor": "center"
         },
         "paint": {
