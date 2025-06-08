@@ -199,15 +199,27 @@ const map = L.map('map', {
   layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP Soundings DE'], overlays['QMAP NL']],
 });
 
-const attrib = '<a class="highlight" href="/download/">&#x1F12F; free nautical chart ()</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>';
+function updateAttribution(offline = false) {
+  const attrib = '<a class="highlight" href="/download/">&#x1F12F; free nautical chart (?)</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>';
 
-map.attributionControl.setPrefix(attrib);
+  if (offline) {
+    map.attributionControl.setPrefix(attrib.replace('(?)', '(offline)'));
+    return;
+  }
 
-fetch('/updated').then(response => {
-  let dateHeader = response.headers.get('Last-Modified');
-  let date = new Date(dateHeader).toISOString().slice(0, 10);
-  map.attributionControl.setPrefix(attrib.replace('()', `(${date})`));
-});
+  map.attributionControl.setPrefix(attrib);
+
+  fetch('/updated').then(response => {
+    let dateHeader = response.headers.get('Last-Modified');
+    let date = new Date(dateHeader).toISOString().slice(0, 10);
+    map.attributionControl.setPrefix(attrib.replace('(?)', `(${date})`));
+  });
+}
+
+updateAttribution();
+
+window.addEventListener('online', () => updateAttribution());
+window.addEventListener('offline', () => updateAttribution(true));
 
 new L.Hash(map);
 
