@@ -83,23 +83,30 @@ const basemaps = {
   }),
 };
 
+const cors = window.location.hostname != 'freenauticalchart.net';
+log('CORS', 'blue', cors);
+
 const overlays = {
   'Grid': grid(params.get('dec')),
   'QMAP DE': L.tileLayer.fallback(baseurl + '/qmap-de/{z}/{x}/{y}.webp', {
     attribution: '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
     bounds: boundsDE,
+    crossOrigin: cors,
   }),
   'QMAP Contours DE': L.tileLayer.fallback(baseurl + '/contours-de/{z}/{x}/{y}.webp', {
     attribution: '<a href="/download/">QMAP Contours DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
     bounds: boundsDE,
+    crossOrigin: cors,
   }),
   'QMAP Soundings DE': L.tileLayer.fallback(baseurl + '/soundg-de/{z}/{x}/{y}.webp', {
     attribution: '<a href="/download/">QMAP Soundings DE</a> (<a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH</a>)',
     bounds: boundsDE,
+    crossOrigin: cors,
   }),
   'QMAP NL': L.tileLayer.fallback(baseurl + '/qmap-nl/{z}/{x}/{y}.webp', {
     attribution: '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
     bounds: boundsNL,
+    crossOrigin: cors,
   }),
   'EMODnet Bathymetry': L.tileLayer.wms('https://ows.emodnet-bathymetry.eu/wms', {
     version: '1.3.0',
@@ -193,6 +200,11 @@ for (let i = -6; i <= 6; i++) {
 overlays['Tide Figures'] = L.tileLayer.fallback(baseurl + '/tides/fig/{z}/{x}/{y}.webp', {
   attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
 });
+
+if (isDevMode) {
+  overlays['QMAP DE*'] = L.tileLayer('http://nas:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png');
+  overlays['QMAP NL*'] = L.tileLayer('http://nas:8001/tiles/qmap-nl/EPSG3857/{z}/{x}/{y}.png');
+}
 
 const map = L.map('map', {
   center: [54.264, 9.196],
@@ -294,7 +306,7 @@ new GPXbutton({position: 'topleft', layers: layers}).addTo(map);
 
 legend(layers);
 
-if (isDevMode||params.get('vector') == '1') {
+if (isDevMode || params.get('vector') == '1') {
   import('@maplibre/maplibre-gl-leaflet').then(maplibre => {
     console.log('maplibre', maplibre);
     layers.addBaseLayer(L.maplibreGL({
@@ -303,7 +315,7 @@ if (isDevMode||params.get('vector') == '1') {
   });
 }
 
-if (isDevMode||params.get('wattpaddler') == '1') {
+if (isDevMode || params.get('wattpaddler') == '1') {
   import('./besondere.json');
   import('./allgemeine.json');
   import('./kite.json');

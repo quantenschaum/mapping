@@ -58,7 +58,7 @@ module.exports = (env, argv) => {
             options: {
               cacheName: 'tiles',
               expiration: {
-                maxEntries: 10000,
+                maxEntries: 50000,
                 maxAgeSeconds: 7 * 24 * 3600,
               },
             },

@@ -1,11 +1,11 @@
 {
   "name": "free nautical chart",
   "short_name": "QMAP",
-  "description": "OpenData based charts",
+  "description": "free nautical chart based on open data",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#317EFB",
+  "background_color": "#F9ECC0",
+  "theme_color": "#3a65ff",
   "orientation": "any",
   "icons": [
     {
