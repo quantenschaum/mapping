@@ -596,7 +596,6 @@
         "layout": {
           "icon-image": ["concat","BOYSHP","/",["get","BOYSHP"],"/",["coalesce",["get","COLPAT"],0],"/",["coalesce",["get","color"],0]],
           "icon-overlap": "always",
-           "text-field": "{color}",
            "text-size": 10,
            "text-offset": [0,1],
            "text-optional": true
@@ -616,7 +615,6 @@
             ["all",["==",["get","BCNSHP"],2],["==",["get","CATLAM"],1],["!",["has","COLOUR"]]],"withy-port",
             ["concat","BCNSHP","/",["get","BCNSHP"],"/",["coalesce",["get","COLPAT"],0],"/",["coalesce",["get","color"],0]]],
           "icon-overlap": "always",
-           "text-field": "{color}",
            "text-size": 10,
            "text-offset": [0,1],
            "text-optional": true
@@ -638,6 +636,7 @@
           "icon-overlap": "always",
           "text-field": "{OBJNAM}",
           "text-size": 12,
+         "text-font": ["Open Sans Bold"],
           "text-anchor": "bottom-left",
           "text-offset": [1.2,-1.2],
           "text-optional": true
@@ -1110,6 +1109,7 @@
         "layout": {
          "text-field": "{OBJNAM}",
          "text-size": 12,
+         "text-font": ["Open Sans Bold"],
          "text-anchor": "bottom-left",
          "text-offset": [1.2,-1]
         },
@@ -1159,7 +1159,6 @@
             ["case",["has","VALNMR"],["concat"," ",["get","VALNMR"],"M"],""]
             ],
          "text-size": 12,
-         "text-font": ["Open Sans Bold"],
          "text-anchor": "top-left",
          "text-offset": ["case",["has","SECTR1"],["literal",[1.2,1.1]],["literal",[1.2,-0.5]]]
         }
