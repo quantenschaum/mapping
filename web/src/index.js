@@ -88,26 +88,6 @@ log('CORS', 'blue', cors);
 
 const overlays = {
   'Grid': grid(params.get('dec')),
-  'QMAP DE': L.tileLayer.fallback(baseurl + '/qmap-de/{z}/{x}/{y}.webp', {
-    attribution: '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
-    bounds: boundsDE,
-    crossOrigin: cors,
-  }),
-  'QMAP Contours DE': L.tileLayer.fallback(baseurl + '/contours-de/{z}/{x}/{y}.webp', {
-    attribution: '<a href="/download/">QMAP Contours DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
-    bounds: boundsDE,
-    crossOrigin: cors,
-  }),
-  'QMAP Soundings DE': L.tileLayer.fallback(baseurl + '/soundg-de/{z}/{x}/{y}.webp', {
-    attribution: '<a href="/download/">QMAP Soundings DE</a> (<a target="_blank" href="https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml">BSH</a>)',
-    bounds: boundsDE,
-    crossOrigin: cors,
-  }),
-  'QMAP NL': L.tileLayer.fallback(baseurl + '/qmap-nl/{z}/{x}/{y}.webp', {
-    attribution: '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
-    bounds: boundsNL,
-    crossOrigin: cors,
-  }),
   'EMODnet Bathymetry': L.tileLayer.wms('https://ows.emodnet-bathymetry.eu/wms', {
     version: '1.3.0',
     transparent: 'true',
@@ -117,78 +97,94 @@ const overlays = {
     attribution: '<a target="_blank" href="https://emodnet.ec.europa.eu/">EMODnet</a>',
     class: "invert"
   }),
-  'BSH Bathymetry': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/ELC_INSPIRE/ows', {
-    version: '1.3.0',
-    transparent: 'true',
-    format: 'image/png',
-    layers: 'EL.GridCoverage',
-    attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/5afbd3f9-8bd8-4bfc-a77c-ac3de4ace07f">BSH Bathymetry</a>',
+  'QMAP DE': L.tileLayer.fallback(baseurl + '/qmap-de/{z}/{x}/{y}.webp', {
+    attribution: '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
     bounds: boundsDE,
+    crossOrigin: cors,
   }),
-  'BSH SkinOfEarth': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
-    version: '1.3.0',
-    transparent: 'true',
-    format: 'image/png',
-    tiled: true,
-    layers: 'Coastal_Depth_area,Approach_Depth_area,Harbour_Depth_area',
-    attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
-    bounds: boundsDE,
-  }),
-  'BSH Hydro': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Hydrography/ows', {
-    version: '1.3.0',
-    transparent: 'true',
-    format: 'image/png',
-    tiled: true,
-    layers: 'Approach_Depths,Approach_Fishing_Facility_Marine_Farm_Areas,Approach_Offshore_Installations,Approach_Areas_Limits',
-    attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
-    bounds: boundsDE,
-  }),
-  'BSH NavAids': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows', {
-    version: '1.3.0',
-    transparent: 'true',
-    format: 'image/png',
-    tiled: true,
-    layers: 'Coastal_Lights,Coastal_Lateral_Beacons,Coastal_Cardinal_Beacons,Coastal_All_Other_Beacons,Coastal_Lateral_Buoys,Coastal_Cardinal_Buoys,Coastal_All_Other_Buoys,Coastal_Fog_Signals_Daymarks,Approach_Lights,Approach_Lateral_Beacons,Approach_Cardinal_Beacons,Approach_All_Other_Beacons,Approach_Lateral_Buoys,Approach_Cardinal_Buoys,Approach_All_Other_Buoys,Approach_Fog_Signals_Daymarks,Harbour_Lights,Harbour_Lateral_Beacons,Harbour_Cardinal_Beacons,Harbour_All_Other_Beacons,Harbour_Lateral_Buoys,Harbour_Cardinal_Buoys,Harbour_All_Other_Buoys,Harbour_Fog_Signals_Daymarks',
-    attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
-    bounds: boundsDE,
-  }),
-  'BSH Topo': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Topography/ows', {
-    version: '1.3.0',
-    transparent: 'true',
-    format: 'image/png',
-    tiled: true,
-    layers: '4_Approach,5_Harbour',
-    attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
-    bounds: boundsDE,
-  }),
-  'BSH Obstr': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_RocksWrecksObstructions/ows', {
-    version: '1.3.0',
-    transparent: 'true',
-    format: 'image/png',
-    tiled: true,
-    layers: '4_Approach,5_Harbour',
-    attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
-  }),
-  'BSH Contours': L.tileLayer.wms('https://gdi.bsh.de/en/mapservice/Elevation-depth-contours-WMS', {
-    version: '1.3.0',
-    transparent: 'true',
-    format: 'image/png',
-    layers: 'EL.ContourLine',
-    attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/cee22cf8-60c0-401b-8a98-e01959b66f9b">BSH Contours</a>',
-    bounds: boundsDE,
-  }),
-  'Vaarweg Markeringen': L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
-    layers: 'vaarweg_markering_drijvend,vaarweg_markering_vast',
-    version: '1.3.0',
-    transparent: 'true',
-    format: 'image/png',
-    tiled: true,
-    attribution: '<a target="_blank" href="https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5">RWS Buoys</a> <a target="_blank" href="https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c">RWS Beacons</a>'
+  'QMAP NL': L.tileLayer.fallback(baseurl + '/qmap-nl/{z}/{x}/{y}.webp', {
+    attribution: '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
+    bounds: boundsNL,
+    crossOrigin: cors,
   }),
   'OpenSeaMap': L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
     attribution: '<a target="_blank" href="https://openseamap.org/">OpenSeaMap</a>',
   }),
 };
+
+if (isDevMode || params.get('bsh') == '1') {
+  const bsh = {
+    'BSH Bathymetry': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/ELC_INSPIRE/ows', {
+      version: '1.3.0',
+      transparent: 'true',
+      format: 'image/png',
+      layers: 'EL.GridCoverage',
+      attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/5afbd3f9-8bd8-4bfc-a77c-ac3de4ace07f">BSH Bathymetry</a>',
+      bounds: boundsDE,
+    }),
+    'BSH SkinOfEarth': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_SkinOfTheEarth/ows', {
+      version: '1.3.0',
+      transparent: 'true',
+      format: 'image/png',
+      tiled: true,
+      layers: 'Coastal_Depth_area,Approach_Depth_area,Harbour_Depth_area',
+      attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
+      bounds: boundsDE,
+    }),
+    'BSH Hydro': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Hydrography/ows', {
+      version: '1.3.0',
+      transparent: 'true',
+      format: 'image/png',
+      tiled: true,
+      layers: 'Approach_Depths,Approach_Fishing_Facility_Marine_Farm_Areas,Approach_Offshore_Installations,Approach_Areas_Limits',
+      attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
+      bounds: boundsDE,
+    }),
+    'BSH NavAids': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows', {
+      version: '1.3.0',
+      transparent: 'true',
+      format: 'image/png',
+      tiled: true,
+      layers: 'Coastal_Lights,Coastal_Lateral_Beacons,Coastal_Cardinal_Beacons,Coastal_All_Other_Beacons,Coastal_Lateral_Buoys,Coastal_Cardinal_Buoys,Coastal_All_Other_Buoys,Coastal_Fog_Signals_Daymarks,Approach_Lights,Approach_Lateral_Beacons,Approach_Cardinal_Beacons,Approach_All_Other_Beacons,Approach_Lateral_Buoys,Approach_Cardinal_Buoys,Approach_All_Other_Buoys,Approach_Fog_Signals_Daymarks,Harbour_Lights,Harbour_Lateral_Beacons,Harbour_Cardinal_Beacons,Harbour_All_Other_Beacons,Harbour_Lateral_Buoys,Harbour_Cardinal_Buoys,Harbour_All_Other_Buoys,Harbour_Fog_Signals_Daymarks',
+      attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
+      bounds: boundsDE,
+    }),
+    'BSH Topo': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_Topography/ows', {
+      version: '1.3.0',
+      transparent: 'true',
+      format: 'image/png',
+      tiled: true,
+      layers: '4_Approach,5_Harbour',
+      attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>',
+      bounds: boundsDE,
+    }),
+    'BSH Obstr': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/NAUTHIS_RocksWrecksObstructions/ows', {
+      version: '1.3.0',
+      transparent: 'true',
+      format: 'image/png',
+      tiled: true,
+      layers: '4_Approach,5_Harbour',
+      attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH GeoSeaPortal</a>'
+    }),
+    'BSH Contours': L.tileLayer.wms('https://gdi.bsh.de/en/mapservice/Elevation-depth-contours-WMS', {
+      version: '1.3.0',
+      transparent: 'true',
+      format: 'image/png',
+      layers: 'EL.ContourLine',
+      attribution: '<a target="_blank" href="https://inspire-geoportal.ec.europa.eu/srv/api/records/cee22cf8-60c0-401b-8a98-e01959b66f9b">BSH Contours</a>',
+      bounds: boundsDE,
+    }),
+    'Vaarweg Markeringen': L.tileLayer.wms('https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows', {
+      layers: 'vaarweg_markering_drijvend,vaarweg_markering_vast',
+      version: '1.3.0',
+      transparent: 'true',
+      format: 'image/png',
+      tiled: true,
+      attribution: '<a target="_blank" href="https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5">RWS Buoys</a> <a target="_blank" href="https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c">RWS Beacons</a>'
+    }),
+  };
+  Object.assign(overlays, bsh);
+}
 
 for (let i = -6; i <= 6; i++) {
   let s = (i >= 0 ? '+' : '') + i;
@@ -270,7 +266,8 @@ var opacity = L.control.opacity();
 
 map.on('overlayadd overlayremove', function (e) {
   map.removeControl(opacity);
-  var activeOverlays = Object.fromEntries(Object.entries(overlays).filter(([k, v]) => !k.includes("Grid") && !v.options.tide && map.hasLayer(v)));
+  var activeOverlays = Object.fromEntries(Object.entries(overlays)
+    .filter(([k, v]) => !k.includes("Grid") && !v.options.tide && map.hasLayer(v)));
   console.log('active overlays', activeOverlays);
   if (Object.keys(activeOverlays).length) {
     opacity = L.control.opacity(activeOverlays, {collapsed: true});
@@ -315,7 +312,7 @@ if (isDevMode || params.get('vector') == '1') {
   });
 }
 
-if (isDevMode || params.get('wattpaddler') == '1') {
+if (isDevMode || params.get('zones') == '1') {
   import('./besondere.json');
   import('./allgemeine.json');
   import('./kite.json');
@@ -363,7 +360,6 @@ if (isDevMode || params.get('wattpaddler') == '1') {
       legend: 'Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200 m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.',
       attribution: attr,
     });
-
     await addVectorLayer(layers, 'Rotzone', 'rot.json', {
       active: true,
       color: 'red',
@@ -376,7 +372,6 @@ if (isDevMode || params.get('wattpaddler') == '1') {
       legend: 'Gesperrt für Motoren - In der Grünzone ist ein Befahren mit motorgetriebenen Wasserfahrzeugen verboten. Dort darf sich mit Muskel- oder Windkraft fortbewegt werden.',
       attribution: '<a target="_blank" href="https://www.nationalpark-vorpommersche-boddenlandschaft.de/karte#&e=3000,3200&c=0,3201,3202">NPVB</a>',
     });
-
     restoreLayers(layers, params.get('l'));
   })();
 } else {
