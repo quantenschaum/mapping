@@ -1,14 +1,14 @@
 seeds:
   overview:
-    caches: [ qmap-de, contours-de ]
+    caches: [ qmap-de ]
     levels: [ 7,8,9 ] # <=7
     coverages: [ overview ]
   general:
-    caches: [ qmap-de, contours-de, soundg-de ]
+    caches: [ qmap-de ]
     levels: [ 10 ] # 10
     coverages: [ general ]
   coastal:
-    caches: [ qmap-de, contours-de, soundg-de ]
+    caches: [ qmap-de ]
     levels: [ 11,12 ] # 11,13
     coverages: [ coastal ]
   # for following levels also seed lower level because there are
@@ -16,15 +16,15 @@ seeds:
   # 2 zoom levels blow are underlayed in the mapproxy config
   # so, a lower level map is shown in the background
   approach:
-    caches: [ qmap-de, contours-de, soundg-de ]
+    caches: [ qmap-de ]
     levels: [ 13,14,15 ] # 13,14
     coverages: [ approach ]
   harbour:
-    caches: [ qmap-de, contours-de, soundg-de ]
+    caches: [ qmap-de ]
     levels: [ 13,14,15,16,17 ] # 15,16
     coverages: [ harbour ]
   berthing:
-    caches: [ qmap-de, contours-de, soundg-de ]
+    caches: [ qmap-de ]
     levels: [ 13,14,15,16,17,18 ] # >=17
     coverages: [ berthing ]
   rws:

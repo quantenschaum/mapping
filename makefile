@@ -205,11 +205,11 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
-zips: icons.zip qmap-data.zip qmap-de.tiles.zip soundg-de.tiles.zip qmap-nl.tiles.zip
+zips: icons.zip qmap-data.zip qmap-de.tiles.zip qmap-nl.tiles.zip
 
 web:
 	cd $@ && npm install && npm run build
-	cd www && rm *bundle*.js workbox*.js 
+	cd www && rm *bundle*.js workbox*.js
 	cp -rv $@/dist/* www
 
 www: web
