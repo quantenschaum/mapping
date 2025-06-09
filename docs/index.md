@@ -38,7 +38,6 @@ Here you find precompiled charts for download in various formats usable in diffe
     
     - [Data Package (everything to render/print charts in one ZIP)](qmap-data.zip){:download}
     - [QMAP DE tiles](qmap-de.tiles.zip){:download}
-    - [QMAP DE Soundings tiles](soundg-de.tiles.zip){:download}
     - [QMAP NL tiles](qmap-nl.tiles.zip){:download}
     
     
@@ -65,7 +64,6 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 The charts are imported by opening the `sqlitedb` files with the app. (also see [usage](usage.md#raster-charts))
 
 - [:de: QMAP DE](qmap-de.sqlitedb){:download}
-- [:de: QMAP DE Soundings](soundg-de.sqlitedb){:download}
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
 - [:de: Tidal Atlas DE](tides.sqlitedb.zip){:download}
 
@@ -85,14 +83,10 @@ AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/
 
 - GEMF
     - [:de: QMAP DE](qmap-de.gemf){:download}
-    - [:de: QMAP DE Contours](contours-de.gemf){:download}
-    - [:de: QMAP DE Soundings](soundg-de.gemf){:download}
     - [:nl: QMAP NL](qmap-nl.gemf){:download}
     - [:de: Tidal Atlas DE](tides.gemf.zip){:download}
 - MBTILES
     - [:de: QMAP DE](qmap-de.mbtiles){:download}
-    - [:de: QMAP DE Contours](contours-de.mbtiles){:download}
-    - [:de: QMAP DE Soundings](soundg-de.mbtiles){:download}
     - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
     - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
 
@@ -111,8 +105,6 @@ The S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/sof
 OpenCPN and other applications can display raster charts from `mbtiles`.
 
 - [:de: QMAP DE](qmap-de.png.mbtiles){:download}
-- [:de: QMAP DE Contours](contours-de.png.mbtiles){:download}
-- [:de: QMAP DE Soundings](soundg-de.png.mbtiles){:download}
 - [:nl: QMAP NL](qmap-nl.png.mbtiles){:download}
 - Vector Charts: see above
 
