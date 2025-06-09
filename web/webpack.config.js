@@ -60,6 +60,7 @@ module.exports = (env, argv) => {
               expiration: {
                 maxEntries: 20000,
                 maxAgeSeconds: 7 * 24 * 3600,
+                purgeOnQuotaError: true,
               },
             },
           },
