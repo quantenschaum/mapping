@@ -70,16 +70,6 @@ caches:
     grids: [ GLOBAL_WEBMERCATOR ]
     cache:
       type: mbtiles
-  contours-de:
-    sources: [ 'qgis2:skin,hyd1','qgis1:skin,hyd1','qgis0:skin,hyd1' ]
-    grids: [ GLOBAL_WEBMERCATOR ]
-    cache:
-      type: mbtiles
-  soundg-de:
-    sources: [ 'qgis0:soundg-de' ]
-    grids: [ GLOBAL_WEBMERCATOR ]
-    cache:
-      type: mbtiles
   qmap-nl:
     sources: [ 'rws:enc,vwm' ]
     grids: [ GLOBAL_WEBMERCATOR ]
@@ -88,14 +78,8 @@ caches:
 
 layers:
   - name: qmap-de
-    title: "QMap DE"
+    title: "QMAP DE"
     sources: [ qmap-de ]
-  - name: contours-de
-    title: "QMap Contours DE"
-    sources: [ contours-de ]
-  - name: soundg-de
-    title: "QMap Soundings DE"
-    sources: [ soundg-de ]
   - name: qmap-nl
-    title: "QMap NL"
+    title: "QMAP NL"
     sources: [ qmap-nl ]
