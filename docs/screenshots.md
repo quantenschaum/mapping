@@ -24,7 +24,7 @@ Vector Charts via Ocharts(NG)
 
 ## OpenCPN
 
-Vectop Chart
+Raster Chart
 
 ![OpenCPN](img/opencpn.webp)
 
