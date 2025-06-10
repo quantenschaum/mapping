@@ -11,6 +11,8 @@ import './leaflet-timeline-slider';
 import {LocateControl} from 'leaflet.locatecontrol';
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
 
+// npx png-to-ico src/favicon.png >src/favicon.ico
+import './favicon.ico';
 import './manifest.json';
 import './icon.png';
 import './icon.svg';

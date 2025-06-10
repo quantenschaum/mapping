@@ -20,7 +20,10 @@ module.exports = (env, argv) => {
         // {test: /\.css$/, use: ['style-loader', 'css-loader']},
         {test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader']},
         {test: /\.less$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']},
-        {test: /\.(json|png|jpe?g|gif|webp|svg)$/, type: 'asset/resource', generator: {filename: '[name][ext]'},},
+        {
+          test: /\.(json|png|jpe?g|gif|webp|svg|ico)$/, type: 'asset/resource',
+          generator: {filename: '[name][ext]'},
+        },
       ],
     },
     plugins: [
