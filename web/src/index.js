@@ -185,16 +185,16 @@ if (isDevMode || params.get('bsh') == '1') {
   };
   Object.assign(overlays, bsh);
 }
-
+const attrTides = '<a href="/download/tides/">Tidal Atlas</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH</a>)';
 for (let i = -6; i <= 6; i++) {
   let s = (i >= 0 ? '+' : '') + i;
   overlays['Tide HW Helgoland ' + s + 'h'] = L.tileLayer.fallback(baseurl + '/tides/hw' + s + '/{z}/{x}/{y}.webp', {
-    attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>',
+    attribution: attrTides,
     tide: true
   });
 }
 overlays['Tide Figures'] = L.tileLayer.fallback(baseurl + '/tides/fig/{z}/{x}/{y}.webp', {
-  attribution: '<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH Tidal Atlas</a>'
+  attribution: attrTides,
 });
 
 if (isDevMode) {
