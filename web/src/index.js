@@ -224,7 +224,7 @@ function updateAttribution(offline = false) {
     let dateHeader = response.headers.get('Last-Modified');
     let date = new Date(dateHeader).toISOString().slice(0, 10);
     map.attributionControl.setPrefix(attrib.replace('(?)', `(${date})`));
-  });
+  }).catch(console.log);
 }
 
 updateAttribution();
