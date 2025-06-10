@@ -202,8 +202,8 @@ tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles))
 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.png.mbtiles,$(wildcard cache_data/*.mbtiles)) \
-        $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles)) \
-        $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
+        $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles))
+#         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
 zips: icons.zip qmap-data.zip qmap-de.tiles.zip qmap-nl.tiles.zip
 

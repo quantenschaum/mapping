@@ -79,16 +79,11 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 
 ### Raster Charts
 
-AvNav uses raster charts in form of [GEMF](https://www.wellenvogel.net/software/avnav/docs/charts.html#chartformats) files, but it also supports `mbtiles`, just not on Android. Simply drop the files into AvNav's `charts` folder.
+AvNav can read `mbtiles`. Simply drop the files into AvNav's `charts` folder.
 
-- GEMF
-    - [:de: QMAP DE](qmap-de.gemf){:download}
-    - [:nl: QMAP NL](qmap-nl.gemf){:download}
-    - [:de: Tidal Atlas DE](tides.gemf.zip){:download}
-- MBTILES
-    - [:de: QMAP DE](qmap-de.mbtiles){:download}
-    - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
-    - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
+- [:de: QMAP DE](qmap-de.mbtiles){:download}
+- [:nl: QMAP NL](qmap-nl.mbtiles){:download}
+- [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
 
 ### Vector Charts
 
