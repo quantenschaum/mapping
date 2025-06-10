@@ -32,7 +32,7 @@ log('PWA', 'red', 'stanalone', isStandalone, 'dev', isDevMode);
 
 const params = new URLSearchParams(window.location.search);
 
-if ('serviceWorker' in navigator && (isStandalone || isDevMode)) {
+if ('serviceWorker' in navigator && (isStandalone || isDevMode || params.get('sw') == '1')) {
   window.addEventListener('load', () => {
     log('PWA', 'red', 'registering service worker');
     navigator.serviceWorker.register('service-worker.js')
