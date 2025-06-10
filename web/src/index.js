@@ -32,7 +32,7 @@ log('PWA', 'red', 'stanalone', isStandalone, 'dev', isDevMode);
 
 const params = new URLSearchParams(window.location.search);
 
-if ('serviceWorker' in navigator && isStandalone) {
+if ('serviceWorker' in navigator && (isStandalone || isDevMode)) {
   window.addEventListener('load', () => {
     log('PWA', 'red', 'registering service worker');
     navigator.serviceWorker.register('service-worker.js')
@@ -261,12 +261,13 @@ L.control.polylineMeasure({
   showBearings: true,
   showClearControl: true,
   showUnitControl: true,
+  unitControlUnits: ["kilometres", "nauticalmiles"],
 }).addTo(map);
 
 
 var opacity = L.control.opacity();
 
-map.on('overlayadd overlayremove', function (e) {
+function updateOpacityControl() {
   map.removeControl(opacity);
   var activeOverlays = Object.fromEntries(Object.entries(overlays)
     .filter(([k, v]) => !k.includes("Grid") && !v.options.tide && map.hasLayer(v)));
@@ -275,7 +276,11 @@ map.on('overlayadd overlayremove', function (e) {
     opacity = L.control.opacity(activeOverlays, {collapsed: true});
     map.addControl(opacity);
   }
-});
+}
+
+updateOpacityControl();
+
+map.on('overlayadd overlayremove', updateOpacityControl);
 
 L.control.timelineSlider({
   timelineItems: ["off", "-6h", "-5h", "-4h", "-3h", "-2h", "-1h", "HW Helgoland", "+1h", "+2h", "+3h", "+4h", "+5h", "+6h"],
