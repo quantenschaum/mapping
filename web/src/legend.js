@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import {log, debounce} from './utils';
+import {log} from './utils';
 import './legend.less';
 
 function llog(...args) {
