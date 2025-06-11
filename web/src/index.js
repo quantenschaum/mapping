@@ -27,7 +27,7 @@ import {GPXbutton} from './gpx';
 const isDevMode = process.env.NODE_ENV === 'development';
 const isStandalone = !!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
 
-log('PWA', 'red', 'stanalone', isStandalone, 'dev', isDevMode);
+log('PWA', 'red', 'standalone', isStandalone, 'dev', isDevMode);
 
 const params = new URLSearchParams(window.location.search);
 
@@ -110,6 +110,7 @@ const overlays = {
   }),
   'OpenSeaMap': L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
     attribution: '<a target="_blank" href="https://openseamap.org/">OpenSeaMap</a>',
+    opacityControl: false,
   }),
 };
 
@@ -286,14 +287,12 @@ L.control.timelineSlider({
   labelWidth: "40px",
   betweenLabelAndRangeSpace: "10px",
   changeMap: function (p) {
-    var x = p.label.replace("HW Helgoland", "+0h");
-//          console.log(p,x);
+    let x = p.label.replace("HW Helgoland", "+0h");
     Object.entries(overlays).forEach(l => {
-      var name = l[0], layer = l[1];
+      let name = l[0], layer = l[1];
       if (!layer.options.tide) {
         return;
       }
-//            console.log(l);
       if (name.includes(x)) {
         map.addLayer(layer);
       } else if (layer.options.tide) {
