@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import {log} from './utils';
+import {log, debounce} from './utils';
 import './legend.less';
 
 function llog(...args) {
@@ -11,12 +11,10 @@ export function legend(layerControl, options = {
   position: 'bottomright'
 }) {
 
-  llog(layerControl._layers);
-
   const Legend = L.Control.extend({
     onAdd: function (map) {
       this._map = map;
-      llog('onAdd', this.options, map);
+      llog('onAdd', this.options);
       this._container = L.DomUtil.create('div', 'legend leaflet-bar');
       L.DomEvent.disableClickPropagation(this._container);
       this._onLayerChange = this._onLayerChange.bind(this);

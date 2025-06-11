@@ -3,7 +3,11 @@ import {log, debounce} from './utils';
 
 const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
-function xlog(...args) {
+function logStore(...args) {
+  log('Store', 'blue', ...args);
+}
+
+function logRestore(...args) {
   log('Restore', 'blue', ...args);
 }
 
@@ -22,7 +26,7 @@ export function restoreLayers(control, list) {
         active.push(l.name);
       }
     }
-    xlog("layers", active);
+    logStore("layers", active);
     storage.setItem(LAYERS, JSON.stringify(active));
   }
 
@@ -31,7 +35,7 @@ export function restoreLayers(control, list) {
     active = JSON.parse(active);
     if (list) active = list.split(',');
     if (!active) return;
-    xlog("layers", active);
+    logRestore("layers", active);
     for (let i = 0; i < control._layers.length; i++) {
       let l = control._layers[i];
       if (active.includes(l.name)) {
@@ -50,14 +54,14 @@ export function restoreLayers(control, list) {
   const VIEW = 'view';
 
   function storeView() {
-    xlog("view", map.getZoom(), map.getCenter());
+    logStore("view", map.getZoom(), map.getCenter());
     storage.setItem(VIEW, JSON.stringify({center: map.getCenter(), zoom: map.getZoom()}));
   }
 
   function restoreView() {
     const view = JSON.parse(storage.getItem(VIEW));
     if (!view) return;
-    xlog("view", view);
+    logRestore("view", view);
     map.setView(view.center, view.zoom);
   }
 
@@ -65,7 +69,7 @@ export function restoreLayers(control, list) {
     restoreView();
     map.on('moveend zoomend', debounce(storeView));
   } else {
-    xlog('use hash');
+    logRestore('use hash');
     new L.Hash(map);
   }
 }

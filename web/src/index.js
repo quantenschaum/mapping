@@ -27,7 +27,7 @@ import {GPXbutton} from './gpx';
 const isDevMode = process.env.NODE_ENV === 'development';
 const isStandalone = !!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
 
-log('PWA', 'red', 'standalone', isStandalone, 'dev', isDevMode);
+log('PWA', 'red', 'standalone', isStandalone, 'development', isDevMode);
 
 const params = new URLSearchParams(window.location.search);
 
@@ -43,12 +43,16 @@ if ('serviceWorker' in navigator && (isStandalone || params.get('sw') == '1')) {
 const baseurl = 'https://freenauticalchart.net';
 const boundsDE = L.latLngBounds([53.0, 3.3], [56.0, 14.4]);
 const boundsNL = L.latLngBounds([51.2, 3.0], [53.8, 7.3]);
+const cors = window.location.hostname != 'freenauticalchart.net';
+
+function grayscale(e) {
+  e.target.getContainer().classList.add('grayscale');
+}
 
 const basemaps = {
   'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '<a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    class: 'grayscale',
-  }),
+  }).on('add', grayscale),
   'ENC (RWS)': L.tileLayer.wms('https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/WMSServer', {
     layers: '0,2,3,4,5,6,7',
     version: '1.3.0',
@@ -81,9 +85,6 @@ const basemaps = {
   }),
 };
 
-const cors = window.location.hostname != 'freenauticalchart.net';
-log('CORS', 'blue', cors);
-
 const overlays = {
   'Grid': grid(params.get('dec')),
   'EMODnet Bathymetry': L.tileLayer.wms('https://ows.emodnet-bathymetry.eu/wms', {
@@ -111,7 +112,7 @@ const overlays = {
   }),
 };
 
-if (params.get('bsh') == '1') {
+if (isDevMode || params.get('bsh') == '1') {
   const bsh = {
     'BSH Bathymetry': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/ELC_INSPIRE/ows', {
       version: '1.3.0',
@@ -184,6 +185,7 @@ if (params.get('bsh') == '1') {
   };
   Object.assign(overlays, bsh);
 }
+
 const attrTides = '<a href="/download/tides/">Tidal Atlas</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH</a>)';
 for (let i = -6; i <= 6; i++) {
   let s = (i >= 0 ? '+' : '') + i;
@@ -209,10 +211,10 @@ const map = L.map('map', {
   layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP NL']],
 });
 
-function updateAttribution(offline = false) {
+function updateAttribution(online = true) {
   const attrib = '<a class="highlight" href="/download/">&#x1F12F; free nautical chart (?)</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>';
 
-  if (offline) {
+  if (!online) {
     map.attributionControl.setPrefix(attrib.replace('(?)', '(offline)'));
     return;
   }
@@ -227,30 +229,14 @@ function updateAttribution(offline = false) {
 }
 
 updateAttribution();
-window.addEventListener('online', () => updateAttribution());
-window.addEventListener('offline', () => updateAttribution(true));
+window.addEventListener('online', () => updateAttribution(true));
+window.addEventListener('offline', () => updateAttribution(false));
 
 new LocateControl({flyTo: true}).addTo(map);
 
-map.addControl(new L.Control.ScaleNautic({
-  metric: true, imperial: false, nautic: true
-}));
+map.addControl(new L.Control.ScaleNautic({metric: true, imperial: false, nautic: true}));
 
 const layers = L.control.layers(basemaps, overlays, {collapsed: true}).addTo(map);
-
-basemaps['OpenStreetMap'].getContainer().classList.add('grayscale');
-map.on('baselayerchange', function (evt) {
-  //console.log(evt);
-  if (evt.layer.options.class) {
-    evt.layer.getContainer().classList.add(evt.layer.options.class);
-  }
-});
-map.on('layeradd', function (evt) {
-//    console.log(evt);
-  if (evt.layer.options.class) {
-    evt.layer.getContainer().classList.add(evt.layer.options.class);
-  }
-});
 
 L.control.polylineMeasure({
   unit: 'nauticalmiles',
@@ -305,7 +291,7 @@ new GPXbutton({position: 'topleft', layers: layers}).addTo(map);
 
 legend(layers);
 
-if (params.get('vector') == '1') {
+if (isDevMode || params.get('vector') == '1') {
   import('@maplibre/maplibre-gl-leaflet').then(maplibre => {
     console.log('maplibre', maplibre);
     layers.addBaseLayer(L.maplibreGL({
@@ -314,7 +300,7 @@ if (params.get('vector') == '1') {
   });
 }
 
-if (params.get('zones') == '1') {
+if (isDevMode || params.get('zones') == '1') {
   import('./besondere.json');
   import('./allgemeine.json');
   import('./kite.json');
