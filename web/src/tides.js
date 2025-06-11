@@ -1,7 +1,7 @@
 import L from "leaflet";
 import 'leaflet.tilelayer.fallback';
 import {log, debounce} from './utils';
-import './leaflet-timeline-slider';
+import './slider';
 
 const baseurl = 'https://freenauticalchart.net';
 const attrTides = '<a href="/download/tides/">Tidal Atlas</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH</a>)';
@@ -21,6 +21,7 @@ export function addTides(map, params) {
   }));
 
   L.control.timelineSlider({
+    title: 'Tidal Atlas',
     timelineItems: ["off", "-6h", "-5h", "-4h", "-3h", "-2h", "-1h", "HW Helgoland", "+1h", "+2h", "+3h", "+4h", "+5h", "+6h", "fig"],
     labelWidth: "40px",
     betweenLabelAndRangeSpace: "10px",

@@ -19,9 +19,9 @@ import {log, debounce} from './utils';
 import {legend} from './legend';
 import {grid} from './grid';
 import {NightSwitch} from './nightmode';
+import {GPXbutton} from './gpx';
 import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
-import {GPXbutton} from './gpx';
 import {addTides} from "./tides";
 
 const isDevMode = process.env.NODE_ENV === 'development';

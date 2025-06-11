@@ -21,7 +21,7 @@ L.Control.TimeLineSlider = L.Control.extend({
     activeColor: "#37adbf",
     inactiveColor: "#8e8e8e",
 
-    backgroundOpacity: 0.75,
+    backgroundOpacity: 1,
     backgroundColor: "#ffffff",
 
     topBgPadding: "10px",
@@ -29,6 +29,7 @@ L.Control.TimeLineSlider = L.Control.extend({
     rightBgPadding: "30px",
     leftBgPadding: "30px",
 
+    title: "Timeline",
   },
 
   initialize: function (options) {
@@ -44,18 +45,20 @@ L.Control.TimeLineSlider = L.Control.extend({
 
     L.setOptions(this, options);
   },
+
   onAdd: function (map) {
     this.map = map;
     this.sheet = document.createElement('style');
     document.body.appendChild(this.sheet);
 
-    this.container = L.DomUtil.create('div', 'control_container');
+
+    this.container = L.DomUtil.create('div', 'slider_container leaflet-bar');
 
     /* Prevent click events propagation to map */
     L.DomEvent.disableClickPropagation(this.container);
 
     /* Prevent right click event propagation to map */
-    L.DomEvent.on(this.container, 'control_container', function (ev) {
+    L.DomEvent.on(this.container, 'slider_container', function (ev) {
       L.DomEvent.stopPropagation(ev);
     });
 
@@ -121,7 +124,6 @@ L.Control.TimeLineSlider = L.Control.extend({
 
       });
     }
-    ;
 
     // Initialize input change at start
     if (this.options.initializeChange) {
@@ -129,8 +131,28 @@ L.Control.TimeLineSlider = L.Control.extend({
       this.rangeInput.dispatchEvent(inputEvent);
     }
 
-    return this.container;
+    const menu = L.DomUtil.create('div', 'menu');
+    menu.innerHTML = this.options.title;
+    this.container.appendChild(menu);
+    this.container.addEventListener('mouseover', () => {
+      menu.classList.add('hide');
+      this.slider.classList.remove('hide');
+      this.rangeLabels.classList.remove('hide');
+      this.container.classList.add('slider_container');
+    });
+    this.container.addEventListener('mouseout', () => {
+      menu.classList.remove('hide');
+      this.slider.classList.add('hide');
+      this.rangeLabels.classList.add('hide');
+      this.container.classList.remove('slider_container');
+    });
+    menu.classList.remove('hide');
+    this.slider.classList.add('hide');
+    this.rangeLabels.classList.add('hide');
+    this.container.classList.remove('slider_container');
 
+
+    return this.container;
   },
 
   onRemove: function () {
@@ -154,9 +176,18 @@ L.Control.TimeLineSlider = L.Control.extend({
 
   setupStartStyles: function () {
     style = `
-            .control_container {
+            .slider_container {
                 background-color: ${that.backgroundRGBA};
                 padding: ${that.options.topBgPadding} ${that.options.rightBgPadding} ${that.options.bottomBgPadding} ${that.options.leftBgPadding};
+            }
+
+            .menu {
+                padding: 1ex;
+                background-color: ${that.backgroundRGBA};
+            }
+
+            .hide {
+                display: none;
             }
 
             .range {
