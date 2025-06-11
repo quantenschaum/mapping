@@ -8,7 +8,7 @@
 
 Adam Lucke  
 
-E-Mail: waddenzee@posteo.de
+E-Mail: freenauticalchart@posteo.de
 
 Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:  
 Adam Lucke, Anschrift wie oben.
