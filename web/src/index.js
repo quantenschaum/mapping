@@ -45,14 +45,16 @@ const boundsDE = L.latLngBounds([53.0, 3.3], [56.0, 14.4]);
 const boundsNL = L.latLngBounds([51.2, 3.0], [53.8, 7.3]);
 const cors = window.location.hostname != 'freenauticalchart.net';
 
-function grayscale(e) {
-  e.target.getContainer().classList.add('grayscale');
+function addClass(cls) {
+  return function (e) {
+    e.target.getContainer().classList.add(cls);
+  };
 }
 
 const basemaps = {
   'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '<a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).on('add', grayscale),
+  }).on('add', addClass('grayscale')),
   'ENC (RWS)': L.tileLayer.wms('https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/WMSServer', {
     layers: '0,2,3,4,5,6,7',
     version: '1.3.0',
@@ -94,8 +96,7 @@ const overlays = {
     tiled: true,
     layers: 'emodnet:mean_multicolour',
     attribution: '<a target="_blank" href="https://emodnet.ec.europa.eu/">EMODnet</a>',
-    class: "invert"
-  }),
+  }).on('add', addClass('invert')),
   'QMAP DE': L.tileLayer.fallback(baseurl + '/qmap-de/{z}/{x}/{y}.webp', {
     attribution: '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
     bounds: boundsDE,
