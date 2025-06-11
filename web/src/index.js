@@ -322,6 +322,7 @@ if (params.get('zones') == '1') {
   import('./allgemeine.json');
   import('./kite.json');
   import('./routen.json');
+  import('./wege.json');
   import('./ausstiegeA.json');
   import('./ausstiegeK.json');
   import('./rot.json');
@@ -338,7 +339,7 @@ if (params.get('zones') == '1') {
     await addVectorLayer(layers, 'bes. Schutzgebiete', 'besondere.json', {
       active: true,
       color: 'red',
-      legend: 'Bereiche, die während der jeweiligen Schutzzeit – vom 15. April bis 1. Oktober eines Jahres oder ganzjährig – außerhalb der Fahrwasser grundsätzlich nicht befahren werden dürfen. Innerhalb der Fahrwasser darf ein maschinengetriebenes Wasserfahrzeug maximal mit 12 kn (Fahrt über Grund) fahren. Außerhalb der Fahrwasser – soweit außerhalb der jeweiligen Schutzzeit – gilt eine zulässige Höchstgeschwindigkeit von 8 kn (Fahrt über Grund). Das Trockenfallen ist in diesen Bereichen untersagt.',
+      legend: 'Bereiche, die während der jeweiligen Schutzzeit – vom 15. April bis 1. Oktober eines Jahres oder ganzjährig – außerhalb der Fahrwasser grundsätzlich nicht befahren werden dürfen. Innerhalb der Fahrwasser darf ein maschinengetriebenes Wasserfahrzeug maximal mit 12kn (Fahrt über Grund) fahren. Außerhalb der Fahrwasser – soweit außerhalb der jeweiligen Schutzzeit – gilt eine zulässige Höchstgeschwindigkeit von 8kn (Fahrt über Grund). Das Trockenfallen ist in diesen Bereichen untersagt.',
       attribution: attr,
     });
     await addVectorLayer(layers, 'Kitesurf-Gebiete', 'kite.json', {
@@ -350,19 +351,25 @@ if (params.get('zones') == '1') {
     await addVectorLayer(layers, 'Schutzgebietsrouten', 'routen.json', {
       active: true,
       color: 'purple',
-      legend: 'Zusätzliche Routen zum Befahren der Besonderen Schutzgebiete für muskelkraftbetriebene Wasserfahrzeuge (z.B. Kanadier, Kajaks) mit einer Breite von 250 m, die auch zum Aufenthalt genutzt werden können. Diese Wasserwanderwege sind im Gebiet nicht gekennzeichnet.',
+      legend: 'Zusätzliche Routen zum Befahren der Besonderen Schutzgebiete für Wasserfahrzeuge mit einer Breite von 250m, die auch zum Aufenthalt genutzt werden können. Diese Wasserwanderwege sind im Gebiet nicht gekennzeichnet.',
+      attribution: attr,
+    });
+    await addVectorLayer(layers, 'Wasserwanderwege', 'wege.json', {
+      active: true,
+      color: 'purple',
+      legend: 'Zusätzliche Routen zum Befahren der Besonderen Schutzgebiete nur für muskelkraftbetriebene Wasserfahrzeuge (Kajaks) mit einer Breite von 250m, die auch zum Aufenthalt genutzt werden können. Diese Wasserwanderwege sind im Gebiet nicht gekennzeichnet.',
       attribution: attr,
     });
     await addVectorLayer(layers, 'Ausstiegsstellen, allg.', 'ausstiegeA.json', {
       active: true,
       color: 'blue',
-      legend: 'Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200 m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.',
+      legend: 'Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.',
       attribution: attr,
     });
     await addVectorLayer(layers, 'Ausstiegsstellen, Kayak', 'ausstiegeK.json', {
       active: true,
       color: '#09a9ff',
-      legend: 'Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200 m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.',
+      legend: 'Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.',
       attribution: attr,
     });
     await addVectorLayer(layers, 'Rotzone', 'rot.json', {

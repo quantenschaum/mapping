@@ -1,32 +1,1700 @@
 {
-"type": "FeatureCollection",
-"name": "routen",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route Martensplate (nur für nicht-maschinenangetriebene Wasserfahrzeuge)", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>0</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Wasserwanderweg</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>id</td>\r\r\n<td>1</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>POSKEY</td>\r\r\n<td>Martensplate</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 7.833647, 53.758527, 0.0 ], [ 7.859152, 53.756623, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route Blaue Balje", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Blaue Balje</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>2</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Blaue Balje</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 7.952987, 53.751964, 0.0 ], [ 7.972226, 53.768274, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route Blindes Ranzelgat", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Blindes Ranzelgat</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>1</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Blindes Ranzelgat</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 6.906258, 53.548808, 0.0 ], [ 6.905418, 53.548794, 0.0 ], [ 6.897786, 53.548619, 0.0 ], [ 6.884929, 53.548888, 0.0 ], [ 6.875583, 53.551373, 0.0 ], [ 6.8426, 53.557743, 0.0 ], [ 6.82603, 53.55751, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route Hechtsand", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Hechtsand</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>5</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Hechtsand</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.298378, 53.853878, 0.0 ], [ 8.302304, 53.84868, 0.0 ], [ 8.3012, 53.84249, 0.0 ], [ 8.298223, 53.83888, 0.0 ], [ 8.296077, 53.836277, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route Juister Balje", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Juister Balje</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>6</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Juister Balje</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 6.892287, 53.661293, 0.0 ], [ 6.89264, 53.661418, 0.0 ], [ 6.892823, 53.661479, 0.0 ], [ 6.893012, 53.661538, 0.0 ], [ 6.893206, 53.661597, 0.0 ], [ 6.893405, 53.661654, 0.0 ], [ 6.893609, 53.66171, 0.0 ], [ 6.893817, 53.661765, 0.0 ], [ 6.894031, 53.661819, 0.0 ], [ 6.894249, 53.661871, 0.0 ], [ 6.894471, 53.661922, 0.0 ], [ 6.894698, 53.661972, 0.0 ], [ 6.89493, 53.662021, 0.0 ], [ 6.895166, 53.662068, 0.0 ], [ 6.895406, 53.662114, 0.0 ], [ 6.89565, 53.662158, 0.0 ], [ 6.895899, 53.662201, 0.0 ], [ 6.896151, 53.662243, 0.0 ], [ 6.896408, 53.662283, 0.0 ], [ 6.896668, 53.662322, 0.0 ], [ 6.896931, 53.66236, 0.0 ], [ 6.897207, 53.662397, 0.0 ], [ 6.897486, 53.662432, 0.0 ], [ 6.897768, 53.662466, 0.0 ], [ 6.898054, 53.662498, 0.0 ], [ 6.898342, 53.662528, 0.0 ], [ 6.898633, 53.662557, 0.0 ], [ 6.898926, 53.662584, 0.0 ], [ 6.899222, 53.662609, 0.0 ], [ 6.899519, 53.662633, 0.0 ], [ 6.899818, 53.662655, 0.0 ], [ 6.900119, 53.662675, 0.0 ], [ 6.90042, 53.662693, 0.0 ], [ 6.900722, 53.662709, 0.0 ], [ 6.901024, 53.662723, 0.0 ], [ 6.901326, 53.662735, 0.0 ], [ 6.901628, 53.662746, 0.0 ], [ 6.901931, 53.662754, 0.0 ], [ 6.902232, 53.662761, 0.0 ], [ 6.902531, 53.662766, 0.0 ], [ 6.902828, 53.662768, 0.0 ], [ 6.903123, 53.662769, 0.0 ], [ 6.903415, 53.662768, 0.0 ], [ 6.903703, 53.662764, 0.0 ], [ 6.903986, 53.662759, 0.0 ], [ 6.904266, 53.662752, 0.0 ], [ 6.90454, 53.662742, 0.0 ], [ 6.904809, 53.662731, 0.0 ], [ 6.905071, 53.662718, 0.0 ], [ 6.905327, 53.662703, 0.0 ], [ 6.905576, 53.662686, 0.0 ], [ 6.905818, 53.662667, 0.0 ], [ 6.906052, 53.662647, 0.0 ], [ 6.906387, 53.662613, 0.0 ], [ 6.906728, 53.662574, 0.0 ], [ 6.907075, 53.662529, 0.0 ], [ 6.90743, 53.662479, 0.0 ], [ 6.907794, 53.662423, 0.0 ], [ 6.908168, 53.66236, 0.0 ], [ 6.908556, 53.662291, 0.0 ], [ 6.90896, 53.662215, 0.0 ], [ 6.909288, 53.662151, 0.0 ], [ 6.909632, 53.662081, 0.0 ], [ 6.909996, 53.662005, 0.0 ], [ 6.910386, 53.661921, 0.0 ], [ 6.911112, 53.661761, 0.0 ], [ 6.912993, 53.661339, 0.0 ], [ 6.91354, 53.661219, 0.0 ], [ 6.914039, 53.661112, 0.0 ], [ 6.914573, 53.661001, 0.0 ], [ 6.915083, 53.660899, 0.0 ], [ 6.915575, 53.660805, 0.0 ], [ 6.916054, 53.660717, 0.0 ], [ 6.91653, 53.660635, 0.0 ], [ 6.916998, 53.660558, 0.0 ], [ 6.91746, 53.660487, 0.0 ], [ 6.917917, 53.660422, 0.0 ], [ 6.918371, 53.660361, 0.0 ], [ 6.918822, 53.660306, 0.0 ], [ 6.919271, 53.660256, 0.0 ], [ 6.919718, 53.660212, 0.0 ], [ 6.920767, 53.660114, 0.0 ], [ 6.921762, 53.660023, 0.0 ], [ 6.922711, 53.65994, 0.0 ], [ 6.923622, 53.659864, 0.0 ], [ 6.9245, 53.659793, 0.0 ], [ 6.925353, 53.659727, 0.0 ], [ 6.926184, 53.659667, 0.0 ], [ 6.927001, 53.659611, 0.0 ], [ 6.927806, 53.65956, 0.0 ], [ 6.928607, 53.659513, 0.0 ], [ 6.929408, 53.659469, 0.0 ], [ 6.930215, 53.659428, 0.0 ], [ 6.931033, 53.659391, 0.0 ], [ 6.931869, 53.659356, 0.0 ], [ 6.93273, 53.659324, 0.0 ], [ 6.933623, 53.659294, 0.0 ], [ 6.93464, 53.659259, 0.0 ], [ 6.935683, 53.659217, 0.0 ], [ 6.936759, 53.659168, 0.0 ], [ 6.937885, 53.659112, 0.0 ], [ 6.938892, 53.659058, 0.0 ], [ 6.939989, 53.658996, 0.0 ], [ 6.943422, 53.65879, 0.0 ], [ 6.94458, 53.658723, 0.0 ], [ 6.945728, 53.65866, 0.0 ], [ 6.946739, 53.658611, 0.0 ], [ 6.947332, 53.658586, 0.0 ], [ 6.947896, 53.658565, 0.0 ], [ 6.948435, 53.658547, 0.0 ], [ 6.948952, 53.658534, 0.0 ], [ 6.949451, 53.658524, 0.0 ], [ 6.949933, 53.658518, 0.0 ], [ 6.950401, 53.658516, 0.0 ], [ 6.950855, 53.658517, 0.0 ], [ 6.950984, 53.65852, 0.0 ], [ 6.951114, 53.658524, 0.0 ], [ 6.951245, 53.658531, 0.0 ], [ 6.951375, 53.65854, 0.0 ], [ 6.951506, 53.658552, 0.0 ], [ 6.951636, 53.658566, 0.0 ], [ 6.951767, 53.658582, 0.0 ], [ 6.951898, 53.658601, 0.0 ], [ 6.95203, 53.658622, 0.0 ], [ 6.952161, 53.658645, 0.0 ], [ 6.952293, 53.658671, 0.0 ], [ 6.952425, 53.658699, 0.0 ], [ 6.952556, 53.658729, 0.0 ], [ 6.952689, 53.658762, 0.0 ], [ 6.952821, 53.658797, 0.0 ], [ 6.952953, 53.658834, 0.0 ], [ 6.953085, 53.658874, 0.0 ], [ 6.953218, 53.658916, 0.0 ], [ 6.953351, 53.658961, 0.0 ], [ 6.953483, 53.659008, 0.0 ], [ 6.953616, 53.659057, 0.0 ], [ 6.953749, 53.659108, 0.0 ], [ 6.953882, 53.659162, 0.0 ], [ 6.954015, 53.659218, 0.0 ], [ 6.954148, 53.659277, 0.0 ], [ 6.954281, 53.659337, 0.0 ], [ 6.954547, 53.659466, 0.0 ], [ 6.954812, 53.659603, 0.0 ], [ 6.955078, 53.65975, 0.0 ], [ 6.955348, 53.659908, 0.0 ], [ 6.955617, 53.660075, 0.0 ], [ 6.955885, 53.660252, 0.0 ], [ 6.956152, 53.660437, 0.0 ], [ 6.956419, 53.660632, 0.0 ], [ 6.956683, 53.660835, 0.0 ], [ 6.956946, 53.661046, 0.0 ], [ 6.957206, 53.661265, 0.0 ], [ 6.957468, 53.661495, 0.0 ], [ 6.957725, 53.661732, 0.0 ], [ 6.957979, 53.661976, 0.0 ], [ 6.958226, 53.662225, 0.0 ], [ 6.958469, 53.66248, 0.0 ], [ 6.958701, 53.662736, 0.0 ], [ 6.958919, 53.662989, 0.0 ], [ 6.959018, 53.663108, 0.0 ], [ 6.959098, 53.66321, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route Mellumriffe", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Mellumriffe</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>3</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Mellumriffe</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.102441, 53.719134, 0.0 ], [ 8.107784, 53.721578, 0.0 ], [ 8.110947, 53.725469, 0.0 ], [ 8.112837, 53.729791, 0.0 ], [ 8.123155, 53.735349, 0.0 ], [ 8.13248, 53.737923, 0.0 ], [ 8.139289, 53.74087, 0.0 ], [ 8.14353, 53.746695, 0.0 ], [ 8.146926, 53.755178, 0.0 ], [ 8.151575, 53.768442, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route Der Hohe Weg", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Mittelbalje</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>0</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Mittelbalje</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.275878, 53.654978, 0.0 ], [ 8.269582, 53.655414, 0.0 ], [ 8.232216, 53.659779, 0.0 ], [ 8.193088, 53.664965, 0.0 ], [ 8.16711, 53.668072, 0.0 ], [ 8.152532, 53.669941, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route Westertill", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Westertill</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>4</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Westertill</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.372257, 53.897527, 0.0 ], [ 8.369575, 53.895188, 0.0 ], [ 8.357189, 53.88894, 0.0 ], [ 8.321485, 53.881838, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>0</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.703308, 54.465196, 0.0 ], [ 8.697275, 54.460252, 0.0 ], [ 8.700186, 54.459, 0.0 ], [ 8.671102, 54.443303, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>1</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.687078, 54.436184, 0.0 ], [ 8.678785, 54.431897, 0.0 ], [ 8.650096, 54.432084, 0.0 ], [ 8.636263, 54.429756, 0.0 ], [ 8.619762, 54.422078, 0.0 ], [ 8.615757, 54.416617, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>2</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.649111, 54.431918, 0.0 ], [ 8.649241, 54.434017, 0.0 ], [ 8.649015, 54.439288, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>3</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.653958, 54.462938, 0.0 ], [ 8.653943, 54.462933, 0.0 ], [ 8.637004, 54.449413, 0.0 ], [ 8.635912, 54.444484, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>4</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.546167, 54.50977, 0.0 ], [ 8.546026, 54.51126, 0.0 ], [ 8.544782, 54.515849, 0.0 ], [ 8.544392, 54.522485, 0.0 ], [ 8.54424, 54.527796, 0.0 ], [ 8.542887, 54.530906, 0.0 ], [ 8.542268, 54.532328, 0.0 ], [ 8.541506, 54.534622, 0.0 ], [ 8.541478, 54.537119, 0.0 ], [ 8.541765, 54.538903, 0.0 ], [ 8.541705, 54.539776, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>5</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.478253, 54.491648, 0.0 ], [ 8.484134, 54.492315, 0.0 ], [ 8.495183, 54.49065, 0.0 ], [ 8.51098, 54.48855, 0.0 ], [ 8.525299, 54.487811, 0.0 ], [ 8.536167, 54.489316, 0.0 ], [ 8.542584, 54.492574, 0.0 ], [ 8.546128, 54.495821, 0.0 ], [ 8.547048, 54.500682, 0.0 ], [ 8.546167, 54.50977, 0.0 ], [ 8.562055, 54.513934, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>6</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.549833, 54.536331, 0.0 ], [ 8.549199, 54.535413, 0.0 ], [ 8.547259, 54.533408, 0.0 ], [ 8.542887, 54.530905, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>7</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.516461, 54.528895, 0.0 ], [ 8.527974, 54.530469, 0.0 ], [ 8.532448, 54.53108, 0.0 ], [ 8.532735, 54.532865, 0.0 ], [ 8.534033, 54.535545, 0.0 ], [ 8.535042, 54.536968, 0.0 ], [ 8.536146, 54.538525, 0.0 ], [ 8.538729, 54.541014, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>8</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.415542, 54.497858, 0.0 ], [ 8.437018, 54.491207, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>9</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.416025, 54.460488, 0.0 ], [ 8.445956, 54.486715, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>10</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.378506, 54.544933, 0.0 ], [ 8.368237, 54.559116, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>11</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.382675, 54.813592, 0.0 ], [ 8.465871, 54.813987, 0.0 ], [ 8.472973, 54.803898, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>12</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.462718, 54.614011, 0.0 ], [ 8.47238, 54.611438, 0.0 ], [ 8.477603, 54.611401, 0.0 ], [ 8.491269, 54.611426, 0.0 ], [ 8.492942, 54.61042, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>13</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.528538, 54.610582, 0.0 ], [ 8.521821, 54.608088, 0.0 ], [ 8.517032, 54.605729, 0.0 ], [ 8.512965, 54.60287, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>14</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.528543, 54.610584, 0.0 ], [ 8.506234, 54.612033, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Route", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>15</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.481929, 54.602097, 0.0 ], [ 8.487178, 54.60579, 0.0 ], [ 8.489406, 54.607214, 0.0 ], [ 8.491483, 54.608782, 0.0 ], [ 8.492942, 54.61042, 0.0 ], [ 8.4965, 54.610891, 0.0 ], [ 8.505396, 54.61182, 0.0 ], [ 8.511196, 54.613165, 0.0 ], [ 8.515653, 54.614825, 0.0 ], [ 8.518347, 54.616173, 0.0 ], [ 8.521063, 54.617797, 0.0 ], [ 8.522411, 54.618859, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "name": "Schutzgebiets-Wasserwanderweg", "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>0</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Wasserwanderweg</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n" }, "geometry": { "type": "LineString", "coordinates": [ [ 8.498732, 54.410318, 0.0 ], [ 8.444642, 54.431067, 0.0 ], [ 8.440193, 54.443293, 0.0 ], [ 8.440191, 54.458393, 0.0 ], [ 8.440411, 54.472186, 0.0 ], [ 8.440515, 54.479558, 0.0 ], [ 8.445956, 54.486715, 0.0 ], [ 8.444057, 54.489324, 0.0 ], [ 8.441354, 54.492878, 0.0 ], [ 8.430671, 54.497346, 0.0 ], [ 8.430529, 54.50757, 0.0 ], [ 8.44029, 54.510945, 0.0 ], [ 8.447923, 54.512373, 0.0 ], [ 8.455841, 54.514406, 0.0 ], [ 8.45961, 54.517929, 0.0 ], [ 8.459825, 54.524696, 0.0 ], [ 8.456711, 54.530161, 0.0 ], [ 8.452604, 54.53642, 0.0 ], [ 8.447226, 54.542217, 0.0 ], [ 8.441879, 54.547239, 0.0 ], [ 8.442192, 54.558686, 0.0 ], [ 8.445036, 54.567798, 0.0 ], [ 8.448644, 54.573379, 0.0 ], [ 8.45741, 54.580448, 0.0 ] ] } }
-]
+  "type": "FeatureCollection",
+  "name": "routen",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route Martensplate (nur für nicht-maschinenangetriebene Wasserfahrzeuge)",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>0</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Wasserwanderweg</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>id</td>\r\r\n<td>1</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>POSKEY</td>\r\r\n<td>Martensplate</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            7.833647,
+            53.758527,
+            0.0
+          ],
+          [
+            7.859152,
+            53.756623,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route Blaue Balje",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Blaue Balje</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>2</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Blaue Balje</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            7.952987,
+            53.751964,
+            0.0
+          ],
+          [
+            7.972226,
+            53.768274,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route Blindes Ranzelgat",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Blindes Ranzelgat</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>1</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Blindes Ranzelgat</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.906258,
+            53.548808,
+            0.0
+          ],
+          [
+            6.905418,
+            53.548794,
+            0.0
+          ],
+          [
+            6.897786,
+            53.548619,
+            0.0
+          ],
+          [
+            6.884929,
+            53.548888,
+            0.0
+          ],
+          [
+            6.875583,
+            53.551373,
+            0.0
+          ],
+          [
+            6.8426,
+            53.557743,
+            0.0
+          ],
+          [
+            6.82603,
+            53.55751,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route Hechtsand",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Hechtsand</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>5</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Hechtsand</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.298378,
+            53.853878,
+            0.0
+          ],
+          [
+            8.302304,
+            53.84868,
+            0.0
+          ],
+          [
+            8.3012,
+            53.84249,
+            0.0
+          ],
+          [
+            8.298223,
+            53.83888,
+            0.0
+          ],
+          [
+            8.296077,
+            53.836277,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route Juister Balje",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Juister Balje</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>6</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Juister Balje</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.892287,
+            53.661293,
+            0.0
+          ],
+          [
+            6.89264,
+            53.661418,
+            0.0
+          ],
+          [
+            6.892823,
+            53.661479,
+            0.0
+          ],
+          [
+            6.893012,
+            53.661538,
+            0.0
+          ],
+          [
+            6.893206,
+            53.661597,
+            0.0
+          ],
+          [
+            6.893405,
+            53.661654,
+            0.0
+          ],
+          [
+            6.893609,
+            53.66171,
+            0.0
+          ],
+          [
+            6.893817,
+            53.661765,
+            0.0
+          ],
+          [
+            6.894031,
+            53.661819,
+            0.0
+          ],
+          [
+            6.894249,
+            53.661871,
+            0.0
+          ],
+          [
+            6.894471,
+            53.661922,
+            0.0
+          ],
+          [
+            6.894698,
+            53.661972,
+            0.0
+          ],
+          [
+            6.89493,
+            53.662021,
+            0.0
+          ],
+          [
+            6.895166,
+            53.662068,
+            0.0
+          ],
+          [
+            6.895406,
+            53.662114,
+            0.0
+          ],
+          [
+            6.89565,
+            53.662158,
+            0.0
+          ],
+          [
+            6.895899,
+            53.662201,
+            0.0
+          ],
+          [
+            6.896151,
+            53.662243,
+            0.0
+          ],
+          [
+            6.896408,
+            53.662283,
+            0.0
+          ],
+          [
+            6.896668,
+            53.662322,
+            0.0
+          ],
+          [
+            6.896931,
+            53.66236,
+            0.0
+          ],
+          [
+            6.897207,
+            53.662397,
+            0.0
+          ],
+          [
+            6.897486,
+            53.662432,
+            0.0
+          ],
+          [
+            6.897768,
+            53.662466,
+            0.0
+          ],
+          [
+            6.898054,
+            53.662498,
+            0.0
+          ],
+          [
+            6.898342,
+            53.662528,
+            0.0
+          ],
+          [
+            6.898633,
+            53.662557,
+            0.0
+          ],
+          [
+            6.898926,
+            53.662584,
+            0.0
+          ],
+          [
+            6.899222,
+            53.662609,
+            0.0
+          ],
+          [
+            6.899519,
+            53.662633,
+            0.0
+          ],
+          [
+            6.899818,
+            53.662655,
+            0.0
+          ],
+          [
+            6.900119,
+            53.662675,
+            0.0
+          ],
+          [
+            6.90042,
+            53.662693,
+            0.0
+          ],
+          [
+            6.900722,
+            53.662709,
+            0.0
+          ],
+          [
+            6.901024,
+            53.662723,
+            0.0
+          ],
+          [
+            6.901326,
+            53.662735,
+            0.0
+          ],
+          [
+            6.901628,
+            53.662746,
+            0.0
+          ],
+          [
+            6.901931,
+            53.662754,
+            0.0
+          ],
+          [
+            6.902232,
+            53.662761,
+            0.0
+          ],
+          [
+            6.902531,
+            53.662766,
+            0.0
+          ],
+          [
+            6.902828,
+            53.662768,
+            0.0
+          ],
+          [
+            6.903123,
+            53.662769,
+            0.0
+          ],
+          [
+            6.903415,
+            53.662768,
+            0.0
+          ],
+          [
+            6.903703,
+            53.662764,
+            0.0
+          ],
+          [
+            6.903986,
+            53.662759,
+            0.0
+          ],
+          [
+            6.904266,
+            53.662752,
+            0.0
+          ],
+          [
+            6.90454,
+            53.662742,
+            0.0
+          ],
+          [
+            6.904809,
+            53.662731,
+            0.0
+          ],
+          [
+            6.905071,
+            53.662718,
+            0.0
+          ],
+          [
+            6.905327,
+            53.662703,
+            0.0
+          ],
+          [
+            6.905576,
+            53.662686,
+            0.0
+          ],
+          [
+            6.905818,
+            53.662667,
+            0.0
+          ],
+          [
+            6.906052,
+            53.662647,
+            0.0
+          ],
+          [
+            6.906387,
+            53.662613,
+            0.0
+          ],
+          [
+            6.906728,
+            53.662574,
+            0.0
+          ],
+          [
+            6.907075,
+            53.662529,
+            0.0
+          ],
+          [
+            6.90743,
+            53.662479,
+            0.0
+          ],
+          [
+            6.907794,
+            53.662423,
+            0.0
+          ],
+          [
+            6.908168,
+            53.66236,
+            0.0
+          ],
+          [
+            6.908556,
+            53.662291,
+            0.0
+          ],
+          [
+            6.90896,
+            53.662215,
+            0.0
+          ],
+          [
+            6.909288,
+            53.662151,
+            0.0
+          ],
+          [
+            6.909632,
+            53.662081,
+            0.0
+          ],
+          [
+            6.909996,
+            53.662005,
+            0.0
+          ],
+          [
+            6.910386,
+            53.661921,
+            0.0
+          ],
+          [
+            6.911112,
+            53.661761,
+            0.0
+          ],
+          [
+            6.912993,
+            53.661339,
+            0.0
+          ],
+          [
+            6.91354,
+            53.661219,
+            0.0
+          ],
+          [
+            6.914039,
+            53.661112,
+            0.0
+          ],
+          [
+            6.914573,
+            53.661001,
+            0.0
+          ],
+          [
+            6.915083,
+            53.660899,
+            0.0
+          ],
+          [
+            6.915575,
+            53.660805,
+            0.0
+          ],
+          [
+            6.916054,
+            53.660717,
+            0.0
+          ],
+          [
+            6.91653,
+            53.660635,
+            0.0
+          ],
+          [
+            6.916998,
+            53.660558,
+            0.0
+          ],
+          [
+            6.91746,
+            53.660487,
+            0.0
+          ],
+          [
+            6.917917,
+            53.660422,
+            0.0
+          ],
+          [
+            6.918371,
+            53.660361,
+            0.0
+          ],
+          [
+            6.918822,
+            53.660306,
+            0.0
+          ],
+          [
+            6.919271,
+            53.660256,
+            0.0
+          ],
+          [
+            6.919718,
+            53.660212,
+            0.0
+          ],
+          [
+            6.920767,
+            53.660114,
+            0.0
+          ],
+          [
+            6.921762,
+            53.660023,
+            0.0
+          ],
+          [
+            6.922711,
+            53.65994,
+            0.0
+          ],
+          [
+            6.923622,
+            53.659864,
+            0.0
+          ],
+          [
+            6.9245,
+            53.659793,
+            0.0
+          ],
+          [
+            6.925353,
+            53.659727,
+            0.0
+          ],
+          [
+            6.926184,
+            53.659667,
+            0.0
+          ],
+          [
+            6.927001,
+            53.659611,
+            0.0
+          ],
+          [
+            6.927806,
+            53.65956,
+            0.0
+          ],
+          [
+            6.928607,
+            53.659513,
+            0.0
+          ],
+          [
+            6.929408,
+            53.659469,
+            0.0
+          ],
+          [
+            6.930215,
+            53.659428,
+            0.0
+          ],
+          [
+            6.931033,
+            53.659391,
+            0.0
+          ],
+          [
+            6.931869,
+            53.659356,
+            0.0
+          ],
+          [
+            6.93273,
+            53.659324,
+            0.0
+          ],
+          [
+            6.933623,
+            53.659294,
+            0.0
+          ],
+          [
+            6.93464,
+            53.659259,
+            0.0
+          ],
+          [
+            6.935683,
+            53.659217,
+            0.0
+          ],
+          [
+            6.936759,
+            53.659168,
+            0.0
+          ],
+          [
+            6.937885,
+            53.659112,
+            0.0
+          ],
+          [
+            6.938892,
+            53.659058,
+            0.0
+          ],
+          [
+            6.939989,
+            53.658996,
+            0.0
+          ],
+          [
+            6.943422,
+            53.65879,
+            0.0
+          ],
+          [
+            6.94458,
+            53.658723,
+            0.0
+          ],
+          [
+            6.945728,
+            53.65866,
+            0.0
+          ],
+          [
+            6.946739,
+            53.658611,
+            0.0
+          ],
+          [
+            6.947332,
+            53.658586,
+            0.0
+          ],
+          [
+            6.947896,
+            53.658565,
+            0.0
+          ],
+          [
+            6.948435,
+            53.658547,
+            0.0
+          ],
+          [
+            6.948952,
+            53.658534,
+            0.0
+          ],
+          [
+            6.949451,
+            53.658524,
+            0.0
+          ],
+          [
+            6.949933,
+            53.658518,
+            0.0
+          ],
+          [
+            6.950401,
+            53.658516,
+            0.0
+          ],
+          [
+            6.950855,
+            53.658517,
+            0.0
+          ],
+          [
+            6.950984,
+            53.65852,
+            0.0
+          ],
+          [
+            6.951114,
+            53.658524,
+            0.0
+          ],
+          [
+            6.951245,
+            53.658531,
+            0.0
+          ],
+          [
+            6.951375,
+            53.65854,
+            0.0
+          ],
+          [
+            6.951506,
+            53.658552,
+            0.0
+          ],
+          [
+            6.951636,
+            53.658566,
+            0.0
+          ],
+          [
+            6.951767,
+            53.658582,
+            0.0
+          ],
+          [
+            6.951898,
+            53.658601,
+            0.0
+          ],
+          [
+            6.95203,
+            53.658622,
+            0.0
+          ],
+          [
+            6.952161,
+            53.658645,
+            0.0
+          ],
+          [
+            6.952293,
+            53.658671,
+            0.0
+          ],
+          [
+            6.952425,
+            53.658699,
+            0.0
+          ],
+          [
+            6.952556,
+            53.658729,
+            0.0
+          ],
+          [
+            6.952689,
+            53.658762,
+            0.0
+          ],
+          [
+            6.952821,
+            53.658797,
+            0.0
+          ],
+          [
+            6.952953,
+            53.658834,
+            0.0
+          ],
+          [
+            6.953085,
+            53.658874,
+            0.0
+          ],
+          [
+            6.953218,
+            53.658916,
+            0.0
+          ],
+          [
+            6.953351,
+            53.658961,
+            0.0
+          ],
+          [
+            6.953483,
+            53.659008,
+            0.0
+          ],
+          [
+            6.953616,
+            53.659057,
+            0.0
+          ],
+          [
+            6.953749,
+            53.659108,
+            0.0
+          ],
+          [
+            6.953882,
+            53.659162,
+            0.0
+          ],
+          [
+            6.954015,
+            53.659218,
+            0.0
+          ],
+          [
+            6.954148,
+            53.659277,
+            0.0
+          ],
+          [
+            6.954281,
+            53.659337,
+            0.0
+          ],
+          [
+            6.954547,
+            53.659466,
+            0.0
+          ],
+          [
+            6.954812,
+            53.659603,
+            0.0
+          ],
+          [
+            6.955078,
+            53.65975,
+            0.0
+          ],
+          [
+            6.955348,
+            53.659908,
+            0.0
+          ],
+          [
+            6.955617,
+            53.660075,
+            0.0
+          ],
+          [
+            6.955885,
+            53.660252,
+            0.0
+          ],
+          [
+            6.956152,
+            53.660437,
+            0.0
+          ],
+          [
+            6.956419,
+            53.660632,
+            0.0
+          ],
+          [
+            6.956683,
+            53.660835,
+            0.0
+          ],
+          [
+            6.956946,
+            53.661046,
+            0.0
+          ],
+          [
+            6.957206,
+            53.661265,
+            0.0
+          ],
+          [
+            6.957468,
+            53.661495,
+            0.0
+          ],
+          [
+            6.957725,
+            53.661732,
+            0.0
+          ],
+          [
+            6.957979,
+            53.661976,
+            0.0
+          ],
+          [
+            6.958226,
+            53.662225,
+            0.0
+          ],
+          [
+            6.958469,
+            53.66248,
+            0.0
+          ],
+          [
+            6.958701,
+            53.662736,
+            0.0
+          ],
+          [
+            6.958919,
+            53.662989,
+            0.0
+          ],
+          [
+            6.959018,
+            53.663108,
+            0.0
+          ],
+          [
+            6.959098,
+            53.66321,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route Mellumriffe",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Mellumriffe</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>3</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Mellumriffe</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.102441,
+            53.719134,
+            0.0
+          ],
+          [
+            8.107784,
+            53.721578,
+            0.0
+          ],
+          [
+            8.110947,
+            53.725469,
+            0.0
+          ],
+          [
+            8.112837,
+            53.729791,
+            0.0
+          ],
+          [
+            8.123155,
+            53.735349,
+            0.0
+          ],
+          [
+            8.13248,
+            53.737923,
+            0.0
+          ],
+          [
+            8.139289,
+            53.74087,
+            0.0
+          ],
+          [
+            8.14353,
+            53.746695,
+            0.0
+          ],
+          [
+            8.146926,
+            53.755178,
+            0.0
+          ],
+          [
+            8.151575,
+            53.768442,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route Der Hohe Weg",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Mittelbalje</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>0</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Mittelbalje</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.275878,
+            53.654978,
+            0.0
+          ],
+          [
+            8.269582,
+            53.655414,
+            0.0
+          ],
+          [
+            8.232216,
+            53.659779,
+            0.0
+          ],
+          [
+            8.193088,
+            53.664965,
+            0.0
+          ],
+          [
+            8.16711,
+            53.668072,
+            0.0
+          ],
+          [
+            8.152532,
+            53.669941,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route Westertill",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Westertill</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>4</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Westertill</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.372257,
+            53.897527,
+            0.0
+          ],
+          [
+            8.369575,
+            53.895188,
+            0.0
+          ],
+          [
+            8.357189,
+            53.88894,
+            0.0
+          ],
+          [
+            8.321485,
+            53.881838,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>0</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.703308,
+            54.465196,
+            0.0
+          ],
+          [
+            8.697275,
+            54.460252,
+            0.0
+          ],
+          [
+            8.700186,
+            54.459,
+            0.0
+          ],
+          [
+            8.671102,
+            54.443303,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>1</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.687078,
+            54.436184,
+            0.0
+          ],
+          [
+            8.678785,
+            54.431897,
+            0.0
+          ],
+          [
+            8.650096,
+            54.432084,
+            0.0
+          ],
+          [
+            8.636263,
+            54.429756,
+            0.0
+          ],
+          [
+            8.619762,
+            54.422078,
+            0.0
+          ],
+          [
+            8.615757,
+            54.416617,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>2</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.649111,
+            54.431918,
+            0.0
+          ],
+          [
+            8.649241,
+            54.434017,
+            0.0
+          ],
+          [
+            8.649015,
+            54.439288,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>3</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.653958,
+            54.462938,
+            0.0
+          ],
+          [
+            8.653943,
+            54.462933,
+            0.0
+          ],
+          [
+            8.637004,
+            54.449413,
+            0.0
+          ],
+          [
+            8.635912,
+            54.444484,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>4</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.546167,
+            54.50977,
+            0.0
+          ],
+          [
+            8.546026,
+            54.51126,
+            0.0
+          ],
+          [
+            8.544782,
+            54.515849,
+            0.0
+          ],
+          [
+            8.544392,
+            54.522485,
+            0.0
+          ],
+          [
+            8.54424,
+            54.527796,
+            0.0
+          ],
+          [
+            8.542887,
+            54.530906,
+            0.0
+          ],
+          [
+            8.542268,
+            54.532328,
+            0.0
+          ],
+          [
+            8.541506,
+            54.534622,
+            0.0
+          ],
+          [
+            8.541478,
+            54.537119,
+            0.0
+          ],
+          [
+            8.541765,
+            54.538903,
+            0.0
+          ],
+          [
+            8.541705,
+            54.539776,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>5</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.478253,
+            54.491648,
+            0.0
+          ],
+          [
+            8.484134,
+            54.492315,
+            0.0
+          ],
+          [
+            8.495183,
+            54.49065,
+            0.0
+          ],
+          [
+            8.51098,
+            54.48855,
+            0.0
+          ],
+          [
+            8.525299,
+            54.487811,
+            0.0
+          ],
+          [
+            8.536167,
+            54.489316,
+            0.0
+          ],
+          [
+            8.542584,
+            54.492574,
+            0.0
+          ],
+          [
+            8.546128,
+            54.495821,
+            0.0
+          ],
+          [
+            8.547048,
+            54.500682,
+            0.0
+          ],
+          [
+            8.546167,
+            54.50977,
+            0.0
+          ],
+          [
+            8.562055,
+            54.513934,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>6</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.549833,
+            54.536331,
+            0.0
+          ],
+          [
+            8.549199,
+            54.535413,
+            0.0
+          ],
+          [
+            8.547259,
+            54.533408,
+            0.0
+          ],
+          [
+            8.542887,
+            54.530905,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>7</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.516461,
+            54.528895,
+            0.0
+          ],
+          [
+            8.527974,
+            54.530469,
+            0.0
+          ],
+          [
+            8.532448,
+            54.53108,
+            0.0
+          ],
+          [
+            8.532735,
+            54.532865,
+            0.0
+          ],
+          [
+            8.534033,
+            54.535545,
+            0.0
+          ],
+          [
+            8.535042,
+            54.536968,
+            0.0
+          ],
+          [
+            8.536146,
+            54.538525,
+            0.0
+          ],
+          [
+            8.538729,
+            54.541014,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>8</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.415542,
+            54.497858,
+            0.0
+          ],
+          [
+            8.437018,
+            54.491207,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>9</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.416025,
+            54.460488,
+            0.0
+          ],
+          [
+            8.445956,
+            54.486715,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>10</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.378506,
+            54.544933,
+            0.0
+          ],
+          [
+            8.368237,
+            54.559116,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>11</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.382675,
+            54.813592,
+            0.0
+          ],
+          [
+            8.465871,
+            54.813987,
+            0.0
+          ],
+          [
+            8.472973,
+            54.803898,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>12</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.462718,
+            54.614011,
+            0.0
+          ],
+          [
+            8.47238,
+            54.611438,
+            0.0
+          ],
+          [
+            8.477603,
+            54.611401,
+            0.0
+          ],
+          [
+            8.491269,
+            54.611426,
+            0.0
+          ],
+          [
+            8.492942,
+            54.61042,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>13</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.528538,
+            54.610582,
+            0.0
+          ],
+          [
+            8.521821,
+            54.608088,
+            0.0
+          ],
+          [
+            8.517032,
+            54.605729,
+            0.0
+          ],
+          [
+            8.512965,
+            54.60287,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>14</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.528543,
+            54.610584,
+            0.0
+          ],
+          [
+            8.506234,
+            54.612033,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schutzgebiets-Route",
+        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>15</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>SH</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.481929,
+            54.602097,
+            0.0
+          ],
+          [
+            8.487178,
+            54.60579,
+            0.0
+          ],
+          [
+            8.489406,
+            54.607214,
+            0.0
+          ],
+          [
+            8.491483,
+            54.608782,
+            0.0
+          ],
+          [
+            8.492942,
+            54.61042,
+            0.0
+          ],
+          [
+            8.4965,
+            54.610891,
+            0.0
+          ],
+          [
+            8.505396,
+            54.61182,
+            0.0
+          ],
+          [
+            8.511196,
+            54.613165,
+            0.0
+          ],
+          [
+            8.515653,
+            54.614825,
+            0.0
+          ],
+          [
+            8.518347,
+            54.616173,
+            0.0
+          ],
+          [
+            8.521063,
+            54.617797,
+            0.0
+          ],
+          [
+            8.522411,
+            54.618859,
+            0.0
+          ]
+        ]
+      }
+    }
+  ]
 }
