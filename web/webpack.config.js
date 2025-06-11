@@ -84,5 +84,14 @@ module.exports = (env, argv) => {
       ignored: /node_modules|dist/,
       poll: 1000,
     },
+    devServer: {
+      proxy: [
+        {
+          context: ['/tides'],
+          target: 'https://gezeiten.bsh.de',
+          pathRewrite: {'^/tides': ''},
+          changeOrigin: true,
+        }],
+    },
   };
 };

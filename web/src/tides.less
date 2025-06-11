@@ -1,0 +1,39 @@
+.tides {
+  .HW {
+    background: #d2ebfb;
+  }
+
+  table {
+    border-collapse: collapse;
+    white-space: nowrap;
+
+    th {
+      text-align: center;
+    }
+
+    tr:nth-child(3) {
+      font-weight: bold;
+    }
+
+    td {
+      padding: 0 0.5ex;
+    }
+
+    .moon0::after {
+      content: "🌑";
+    }
+
+    .moon1::after {
+      content: "🌓";
+    }
+
+    .moon2::after {
+      content: "🌕";
+    }
+
+    .moon3::after {
+      content: "🌗";
+    }
+  }
+
+}

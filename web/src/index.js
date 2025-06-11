@@ -256,7 +256,7 @@ new NightSwitch({position: 'topleft'}).addTo(map);
 
 new GPXbutton({position: 'topleft', layers: layers}).addTo(map);
 
-addTides(map);
+addTides(map, params.get('tides') == '1');
 
 legend(layers);
 

@@ -7,6 +7,12 @@ export function log(label, color, ...args) {
     ...args);
 }
 
+export function logger(label, color) {
+  return function (...args) {
+    log(label, color, ...args);
+  }
+}
+
 export function debounce(func, delay = 1000) {
   let timer;
   return function (...args) {
