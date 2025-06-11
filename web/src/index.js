@@ -351,12 +351,12 @@ if (params.get('zones') == '1') {
     await addVectorLayer(layers, 'Schutzgebietsrouten', 'routen.json', {
       active: true,
       color: 'purple',
-      legend: 'Zusätzliche Routen zum Befahren der Besonderen Schutzgebiete für Wasserfahrzeuge mit einer Breite von 250m, die auch zum Aufenthalt genutzt werden können. Diese Wasserwanderwege sind im Gebiet nicht gekennzeichnet.',
+      legend: 'Routen zum Befahren der Besonderen Schutzgebiete für Wasserfahrzeuge mit einer Breite von 250m, die auch zum Aufenthalt genutzt werden können. Diese Wasserwanderwege sind im Gebiet nicht gekennzeichnet.',
       attribution: attr,
     });
     await addVectorLayer(layers, 'Wasserwanderwege', 'wege.json', {
       active: true,
-      color: 'purple',
+      color: 'brown',
       legend: 'Zusätzliche Routen zum Befahren der Besonderen Schutzgebiete nur für muskelkraftbetriebene Wasserfahrzeuge (Kajaks) mit einer Breite von 250m, die auch zum Aufenthalt genutzt werden können. Diese Wasserwanderwege sind im Gebiet nicht gekennzeichnet.',
       attribution: attr,
     });
