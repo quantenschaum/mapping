@@ -44,7 +44,7 @@ module.exports = (env, argv) => {
         ignoreURLParametersMatching: [/.*/],
         runtimeCaching: [
           {
-            urlPattern: /download.*(html|js|xml|webp|png|svg|jpe?g|json|css|\/)$/,
+            urlPattern: /(download|tides).*(html|js|xml|webp|png|svg|jpe?g|json|css|\/)$/,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'assets',
