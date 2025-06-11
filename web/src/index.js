@@ -6,7 +6,6 @@ import 'leaflet.polylinemeasure';
 import 'leaflet.polylinemeasure/Leaflet.PolylineMeasure.css';
 import 'leaflet.control.opacity';
 import 'leaflet.nauticscale/dist/leaflet.nauticscale';
-import './leaflet-timeline-slider';
 import {LocateControl} from 'leaflet.locatecontrol';
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
 
@@ -23,6 +22,7 @@ import {NightSwitch} from './nightmode';
 import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
 import {GPXbutton} from './gpx';
+import {addTides} from "./tides";
 
 const isDevMode = process.env.NODE_ENV === 'development';
 const isStandalone = !!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
@@ -113,6 +113,11 @@ const overlays = {
   }),
 };
 
+if (isDevMode) {
+  overlays['QMAP DE*'] = L.tileLayer('http://nas:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png');
+  overlays['QMAP NL*'] = L.tileLayer('http://nas:8001/tiles/qmap-nl/EPSG3857/{z}/{x}/{y}.png');
+}
+
 if (isDevMode || params.get('bsh') == '1') {
   const bsh = {
     'BSH Bathymetry': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/ELC_INSPIRE/ows', {
@@ -187,25 +192,6 @@ if (isDevMode || params.get('bsh') == '1') {
   Object.assign(overlays, bsh);
 }
 
-const attrTides = '<a href="/download/tides/">Tidal Atlas</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH</a>)';
-for (let i = -6; i <= 6; i++) {
-  let s = (i >= 0 ? '+' : '') + i;
-  overlays['Tide HW Helgoland ' + s + 'h'] = L.tileLayer.fallback(baseurl + '/tides/hw' + s + '/{z}/{x}/{y}.webp', {
-    attribution: attrTides,
-    tide: true,
-    opacityControl: false,
-  });
-}
-overlays['Tide Figures'] = L.tileLayer.fallback(baseurl + '/tides/fig/{z}/{x}/{y}.webp', {
-  attribution: attrTides,
-  opacityControl: false,
-});
-
-if (isDevMode) {
-  overlays['QMAP DE*'] = L.tileLayer('http://nas:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png');
-  overlays['QMAP NL*'] = L.tileLayer('http://nas:8001/tiles/qmap-nl/EPSG3857/{z}/{x}/{y}.png');
-}
-
 const map = L.map('map', {
   center: [54.264, 9.196],
   zoom: 8, minZoom: 7, maxZoom: 18,
@@ -266,29 +252,11 @@ updateOpacityControl();
 
 map.on('overlayadd overlayremove', debounce(updateOpacityControl));
 
-L.control.timelineSlider({
-  timelineItems: ["off", "-6h", "-5h", "-4h", "-3h", "-2h", "-1h", "HW Helgoland", "+1h", "+2h", "+3h", "+4h", "+5h", "+6h"],
-  labelWidth: "40px",
-  betweenLabelAndRangeSpace: "10px",
-  changeMap: function (p) {
-    let x = p.label.replace("HW Helgoland", "+0h");
-    Object.entries(overlays).forEach(l => {
-      let name = l[0], layer = l[1];
-      if (!layer.options.tide) {
-        return;
-      }
-      if (name.includes(x)) {
-        map.addLayer(layer);
-      } else if (layer.options.tide) {
-        map.removeLayer(layer);
-      }
-    });
-  }
-}).addTo(map);
-
 new NightSwitch({position: 'topleft'}).addTo(map);
 
 new GPXbutton({position: 'topleft', layers: layers}).addTo(map);
+
+addTides(map);
 
 legend(layers);
 
