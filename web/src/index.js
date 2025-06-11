@@ -49,9 +49,6 @@ const basemaps = {
     attribution: '<a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     class: 'grayscale',
   }),
-  'OsmAnd Nautical': L.tileLayer('https://maptile.osmand.net/tile/nautical/{z}/{x}/{y}.png', {
-    attribution: '<a target="_blank" href="https://osmand.net/map">OsmAnd</a>',
-  }),
   'ENC (RWS)': L.tileLayer.wms('https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/WMSServer', {
     layers: '0,2,3,4,5,6,7',
     version: '1.3.0',
