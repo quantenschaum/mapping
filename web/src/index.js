@@ -1,6 +1,5 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import 'leaflet-hash';
 import 'leaflet-graticule';
 import 'leaflet.tilelayer.fallback';
 import 'leaflet.polylinemeasure';
@@ -17,11 +16,11 @@ import './manifest.json';
 import './icon.png';
 import './icon.svg';
 import './style.css';
-import {log} from './utils';
+import {log, debounce} from './utils';
 import {legend} from './legend';
 import {grid} from './grid';
 import {NightSwitch} from './nightmode';
-import {restoreLayers} from './store';
+import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
 import {GPXbutton} from './gpx';
 
@@ -32,7 +31,7 @@ log('PWA', 'red', 'stanalone', isStandalone, 'dev', isDevMode);
 
 const params = new URLSearchParams(window.location.search);
 
-if ('serviceWorker' in navigator && (isStandalone || isDevMode || params.get('sw') == '1')) {
+if ('serviceWorker' in navigator && (isStandalone || params.get('sw') == '1')) {
   window.addEventListener('load', () => {
     log('PWA', 'red', 'registering service worker');
     navigator.serviceWorker.register('service-worker.js')
@@ -114,7 +113,7 @@ const overlays = {
   }),
 };
 
-if (isDevMode || params.get('bsh') == '1') {
+if (params.get('bsh') == '1') {
   const bsh = {
     'BSH Bathymetry': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/ELC_INSPIRE/ows', {
       version: '1.3.0',
@@ -192,11 +191,13 @@ for (let i = -6; i <= 6; i++) {
   let s = (i >= 0 ? '+' : '') + i;
   overlays['Tide HW Helgoland ' + s + 'h'] = L.tileLayer.fallback(baseurl + '/tides/hw' + s + '/{z}/{x}/{y}.webp', {
     attribution: attrTides,
-    tide: true
+    tide: true,
+    opacityControl: false,
   });
 }
 overlays['Tide Figures'] = L.tileLayer.fallback(baseurl + '/tides/fig/{z}/{x}/{y}.webp', {
   attribution: attrTides,
+  opacityControl: false,
 });
 
 if (isDevMode) {
@@ -230,8 +231,6 @@ function updateAttribution(offline = false) {
 updateAttribution();
 window.addEventListener('online', () => updateAttribution());
 window.addEventListener('offline', () => updateAttribution(true));
-
-new L.Hash(map);
 
 new LocateControl({flyTo: true}).addTo(map);
 
@@ -270,8 +269,8 @@ var opacity = L.control.opacity();
 function updateOpacityControl() {
   map.removeControl(opacity);
   var activeOverlays = Object.fromEntries(Object.entries(overlays)
-    .filter(([k, v]) => !k.includes("Grid") && !v.options.tide && map.hasLayer(v)));
-  console.log('active overlays', activeOverlays);
+    .filter(([k, v]) => v.options.opacityControl !== false && map.hasLayer(v)));
+  log('opacity', 'cyan', activeOverlays);
   if (Object.keys(activeOverlays).length) {
     opacity = L.control.opacity(activeOverlays, {collapsed: true});
     map.addControl(opacity);
@@ -280,7 +279,7 @@ function updateOpacityControl() {
 
 updateOpacityControl();
 
-map.on('overlayadd overlayremove', updateOpacityControl);
+map.on('overlayadd overlayremove', debounce(updateOpacityControl));
 
 L.control.timelineSlider({
   timelineItems: ["off", "-6h", "-5h", "-4h", "-3h", "-2h", "-1h", "HW Helgoland", "+1h", "+2h", "+3h", "+4h", "+5h", "+6h"],
@@ -310,7 +309,7 @@ new GPXbutton({position: 'topleft', layers: layers}).addTo(map);
 
 legend(layers);
 
-if (isDevMode || params.get('vector') == '1') {
+if (params.get('vector') == '1') {
   import('@maplibre/maplibre-gl-leaflet').then(maplibre => {
     console.log('maplibre', maplibre);
     layers.addBaseLayer(L.maplibreGL({
@@ -319,7 +318,7 @@ if (isDevMode || params.get('vector') == '1') {
   });
 }
 
-if (isDevMode || params.get('zones') == '1') {
+if (params.get('zones') == '1') {
   import('./besondere.json');
   import('./allgemeine.json');
   import('./kite.json');

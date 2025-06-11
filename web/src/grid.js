@@ -23,6 +23,7 @@ export function grid(dec = 0) {
   return L.latlngGraticule({
     showLabel: true,
     color: '#222',
+    opacityControl: false,
     zoomInterval: [
       {start: 2, end: 4, interval: 30},
       {start: 5, end: 5, interval: 20},
