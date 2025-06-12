@@ -44,7 +44,7 @@ module.exports = (env, argv) => {
         ignoreURLParametersMatching: [/.*/],
         runtimeCaching: [
           {
-            urlPattern: /(download|tides).*(html|js|xml|webp|png|svg|jpe?g|json|css|\/)$/,
+            urlPattern: /(download|tides\/data).*(html|js|xml|webp|png|svg|jpe?g|json|css|\/)$/,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'assets',
@@ -91,7 +91,14 @@ module.exports = (env, argv) => {
           target: 'https://gezeiten.bsh.de',
           pathRewrite: {'^/tides': ''},
           changeOrigin: true,
-        }],
+        },
+        {
+          context: ['/forecast'],
+          target: 'https://wasserstand-nordsee.bsh.de',
+          pathRewrite: {'^/forecast': ''},
+          changeOrigin: true,
+        },
+      ],
     },
   };
 };
