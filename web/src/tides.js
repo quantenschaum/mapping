@@ -44,7 +44,6 @@ export function addTidealAtlas(map, gauges = false) {
 
 async function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
   const proj4 = (await import('proj4')).default;
-  clog('proj4', proj4);
   proj4.defs("EPSG:25831", "+proj=utm +zone=31 +ellps=GRS80 +units=m +no_defs");
 
   function reprojectCoord(coord) {
@@ -220,8 +219,14 @@ export async function addTideGauges(map) {
             const now = new Date();
             const start = new Date(now);
             start.setHours(now.getHours() - 7);
+            start.setMinutes(0);
+            start.setSeconds(0);
+            start.setMilliseconds(0);
             const end = new Date(now);
             end.setHours(now.getHours() + 43);
+            end.setMinutes(0);
+            end.setSeconds(0);
+            end.setMilliseconds(0);
 
             fetch(`/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&timeZone=GMT&startDate=${start.toISOString()}&endDate=${end.toISOString()}`, {
               headers: {
