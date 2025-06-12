@@ -1,7 +1,5 @@
 import L from "leaflet";
 import 'leaflet.tilelayer.fallback';
-import proj4 from 'proj4';
-import Papa from 'papaparse';
 import './slider';
 import {logger} from './utils';
 import './tides.less';
@@ -44,7 +42,11 @@ export function addTidealAtlas(map, gauges = false) {
   }).addTo(map);
 }
 
-function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
+async function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
+  const proj4 = (await import('proj4')).default;
+  clog('proj4', proj4);
+  proj4.defs("EPSG:25831", "+proj=utm +zone=31 +ellps=GRS80 +units=m +no_defs");
+
   function reprojectCoord(coord) {
     return proj4(fromCRS, toCRS, coord);
   }
@@ -85,11 +87,11 @@ export async function addTideGauges(map) {
     const tidedata = await fetch(`/tides/de/data/DE_${g.bshnr.padStart(5, '_')}_tides.json`).then(r => r.json());
     clog('tidedata', tidedata);
 
-    const forecast_map = await fetch('/forecast/data/map.json').then(r => r.json()).catch(e => {
+    const forecast_map = await fetch('/forecast/de/data/map.json').then(r => r.json()).catch(e => {
     });
     clog('forecast_map', forecast_map);
 
-    const forecastdata = await fetch(`/forecast/data/DE_${g.bshnr.padStart(5, '_')}.json`).then(r => r.json()).catch(e => {
+    const forecastdata = await fetch(`/forecast/de/data/DE_${g.bshnr.padStart(5, '_')}.json`).then(r => r.json()).catch(e => {
     });
     clog('forecastdata', forecastdata);
 
@@ -139,7 +141,7 @@ export async function addTideGauges(map) {
     }
 
     let date0;
-    let rows = `<tr><th>📅</th><th>${tz}</th><th>m (SKN)</th><th class="moon${moon}"></th></tr>\n`;
+    let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th><th class="moon${moon}"></th></tr>\n`;
     for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
       clog(prediction[k]);
       const d = prediction[k];
@@ -194,11 +196,7 @@ export async function addTideGauges(map) {
 
   fetch('/tides/nl/api/point/latestmeasurement?parameterId=astronomische-getij')
     .then(r => r.json())
-    .then(data => {
-      clog(data);
-      proj4.defs("EPSG:25831", "+proj=utm +zone=31 +ellps=GRS80 +units=m +no_defs");
-      return reproject(data);
-    })
+    .then(data => reproject(data))
     .then(data => {
       L.geoJSON(data, {
         pointToLayer: function (feature, latlng) {
@@ -221,51 +219,41 @@ export async function addTideGauges(map) {
             clog(p);
             const now = new Date();
             const start = new Date(now);
-            start.setHours(now.getHours() - 24);
+            start.setHours(now.getHours() - 7);
             const end = new Date(now);
-            end.setHours(now.getHours() + 36);
-            clog(now, start, end);
-            fetch(`/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&timeZone=GMT&startDate=${start.toISOString()}&endDate=${end.toISOString()}`)
-              .then(r => r.text())
-              .then(csv =>
-                Papa.parse(csv, {
-                  header: true,
-                  skipEmptyLines: true
-                }))
-              .then(csv => {
-                clog(csv);
+            end.setHours(now.getHours() + 43);
+
+            fetch(`/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&timeZone=GMT&startDate=${start.toISOString()}&endDate=${end.toISOString()}`, {
+              headers: {
+                'Accept': 'application/json',
+              }
+            })
+              .then(r => r.json())
+              .then(data => {
+                clog(data);
 
                 const locale = undefined;
                 const tform = new Intl.DateTimeFormat(locale, {timeZoneName: 'short'});
                 const parts = tform.formatToParts(now);
                 const tz = parts.find(part => part.type === 'timeZoneName')?.value;
 
+                const extremes = data.series[0].extremes;
+
                 let date0, height0;
-                const ref = p.measurements[0].qualityCode.replace('NAP', 'LAT');
-                let rows = `<tr><th>📅</th><th>${tz}</th><th>m (${ref})</th></tr>\n`;
-                csv.data.forEach(r => {
-                  if (r.Extremen) {
-                    clog(r);
-                    const ts = new Date(`${r.Datum.substring(6, 10)}-${r.Datum.substring(3, 5)}-${r.Datum.substring(0, 2)}T${r['Tijd (GMT)']}Z`);
-                    clog(ts);
-                    let date = ts.toLocaleString(locale, {
-                      month: '2-digit', day: '2-digit', weekday: 'short', // year: 'numeric',
-                    }).replace(',', '');
-                    if (date0 === date) date = '';
-                    else date0 = date;
-                    const time = ts.toLocaleString(locale, {
-                      hour: '2-digit', minute: '2-digit',
-                    });
-                    const height = r.Extremen / 100;
-                    if (!height0) {
-                      height0 = height;
-                      return;
-                    }
-                    const type = height > height0 ? 'HW' : 'NW';
-                    height0 = height;
-                    const deviation = 'X';
-                    rows += `<tr class="${type}"><td>${date}</td><td>${time}</td><td>${height}</td></tr>\n`;
-                  }
+                const ref = p.measurements[0].qualityCode == 'MSL' ? ' (MSL)' : '';
+                let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m${ref}</th></tr>\n`;
+                extremes.forEach(r => {
+                  clog(r);
+                  const ts = new Date(r.dateTime);
+                  let date = ts.toLocaleString(locale, {
+                    month: '2-digit', day: '2-digit', weekday: 'short', // year: 'numeric',
+                  }).replace(',', '');
+                  if (date0 === date) date = '';
+                  else date0 = date;
+                  const time = ts.toLocaleString(locale, {
+                    hour: '2-digit', minute: '2-digit',
+                  });
+                  rows += `<tr class="${r.sign}"><td>${date}</td><td>${time}</td><td>${r.value / 100}</td></tr>\n`;
                 });
                 const table = `<table>\n${rows}</table>`;
                 // clog(table);

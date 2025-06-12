@@ -44,7 +44,7 @@ module.exports = (env, argv) => {
         ignoreURLParametersMatching: [/.*/],
         runtimeCaching: [
           {
-            urlPattern: /(download|tides\/data).*(html|js|xml|webp|png|svg|jpe?g|json|css|\/)$/,
+            urlPattern: /\/(download|tides\/de\/).*(html|js|xml|webp|png|svg|jpe?g|json|css|\/)$/,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'assets',
@@ -93,9 +93,9 @@ module.exports = (env, argv) => {
           changeOrigin: true,
         },
         {
-          context: ['/forecast'],
+          context: ['/forecast/de'],
           target: 'https://wasserstand-nordsee.bsh.de',
-          pathRewrite: {'^/forecast': ''},
+          pathRewrite: {'^/forecast/de': ''},
           changeOrigin: true,
         },
         {
