@@ -43,14 +43,16 @@ export function addTidealAtlas(map, gauges = false) {
 }
 
 export async function addTideGauges(map) {
-  const gaugesLayer = L.layerGroup();
-  gaugesLayer.addTo(map);
-  const group_colors = {1: 'white', 2: 'lightblue', 3: 'gray'};
 
-  async function showPopup(marker, g, forecast_map) {
+  async function showPopup(marker, g) {
     // clog(g);
     const tidedata = await fetch(`/tides/data/DE_${g.bshnr.padStart(5, '_')}_tides.json`).then(r => r.json());
     clog('tidedata', tidedata);
+
+    const forecast_map = await fetch('/forecast/data/map.json').then(r => r.json()).catch(e => {
+    });
+    clog('forecast_map', forecast_map);
+
     const forecastdata = await fetch(`/forecast/data/DE_${g.bshnr.padStart(5, '_')}.json`).then(r => r.json()).catch(e => {
     });
     clog('forecastdata', forecastdata);
@@ -101,7 +103,7 @@ export async function addTideGauges(map) {
     }
 
     let date0;
-    let tab = `<tr><th>📅</th><th>${tz}</th><th>🌊</th><th>m</th><th>↝</th><th class="moon${moon}"></th></tr>`;
+    let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊</th><th>m</th><th>↝</th><th class="moon${moon}"></th></tr>\n`;
     for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
       clog(prediction[k]);
       const d = prediction[k];
@@ -115,52 +117,21 @@ export async function addTideGauges(map) {
       });
       const height = d.height != null ? (d.height + offsets[level]) / 100 : '-';
       const deviation = getForcast(d.timestamp);
-      tab += `<tr class="${d.type}"><td>${date}</td><td>${time}</td><td>${d.type}</td><td>${height}</td><td class="forecast">${deviation}</td><td class="${d.phase} moon${d.moon}">${d.phase}</td></tr>\n`;
+      rows += `<tr class="${d.type}"><td>${date}</td><td>${time}</td><td>${d.type}</td><td>${height}</td><td class="forecast">${deviation}</td><td class="${d.phase} moon${d.moon}">${d.phase}</td></tr>\n`;
     }
-    tab = `<table>${tab}</table>`;
-    // clog(tab);
+    const table = `<table>\n${rows}</table>`;
+    // clog(table);
 
 
     const forecast_link = curve ? `target="_blank" href="https://wasserstand-nordsee.bsh.de/${g.seo_id}?zeitraum=tag1bis2"` : '';
 
     marker
-      .bindPopup(`<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${tab}<div class="forecast"><a ${forecast_link}>${forecast_text || ''}</a></div><div id="plot"></div><div class="source">data source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`)
-      // .on('popupopen', e => {
-      //   if (!curve) return;
-      //   clog('plot', curve);
-      //   import('plotly.js-dist-min').then(Plotly => {
-      //     const x = [], y = [];
-      //     for (let i = 0; i <= 360; i++) {
-      //       const rad = i * Math.PI / 180;
-      //       x.push(i);
-      //       y.push(Math.sin(rad));
-      //     }
-      //
-      //     const data = [{
-      //       x,
-      //       y,
-      //       type: 'scatter',
-      //       mode: 'lines',
-      //       name: 'sin(x)',
-      //       line: {color: 'blue'}
-      //     }];
-      //
-      //     const layout = {
-      //       margin: {t: 10, r: 10, b: 30, l: 40},
-      //       xaxis: {title: 'Degrees'},
-      //       yaxis: {title: 'sin(x)'},
-      //     };
-      //
-      //     Plotly.newPlot('plot', data, layout, {displayModeBar: false});
-      //
-      //   });
-      // })
+      .bindPopup(`<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${table}<div class="forecast"><a ${forecast_link}>${forecast_text || ''}</a></div><div id="plot"></div><div class="source">data source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`)
       .openPopup();
   }
 
-  let forecast = await fetch('/forecast/data/map.json').then(r => r.json()).catch(e => {
-  });
-  clog(forecast);
+  const gaugesLayer = L.layerGroup().addTo(map);
+  const group_colors = {1: 'white', 2: 'lightblue', 3: 'gray'};
 
   fetch('/tides/data/tides_overview.json')
     .then(r => r.json())
@@ -168,6 +139,7 @@ export async function addTideGauges(map) {
       // clog(data);
       data.gauges.some(g => {
         // clog(g);
+        if (g.gauge_group == 3) return;
         let m = L.circleMarker([g.latitude, g.longitude], {
           radius: 4,
           weight: 3,
@@ -176,7 +148,7 @@ export async function addTideGauges(map) {
           fillOpacity: 1,
         })
           .bindPopup(`<a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}">${g.station_name}</a>`)
-          .on('click', e => showPopup(e.target, g, forecast))
+          .on('click', e => showPopup(e.target, g))
           .addTo(gaugesLayer);
         // showPopup(m, g);
         // return false;
