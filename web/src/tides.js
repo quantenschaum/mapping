@@ -1,5 +1,7 @@
 import L from "leaflet";
 import 'leaflet.tilelayer.fallback';
+import proj4 from 'proj4';
+import Papa from 'papaparse';
 import './slider';
 import {logger} from './utils';
 import './tides.less';
@@ -42,11 +44,45 @@ export function addTidealAtlas(map, gauges = false) {
   }).addTo(map);
 }
 
+function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
+  function reprojectCoord(coord) {
+    return proj4(fromCRS, toCRS, coord);
+  }
+
+  function processGeometry(geom) {
+    if (geom.type === "Point") {
+      geom.coordinates = reprojectCoord(geom.coordinates);
+    } else if (geom.type === "LineString" || geom.type === "MultiPoint") {
+      geom.coordinates = geom.coordinates.map(reprojectCoord);
+    } else if (geom.type === "Polygon" || geom.type === "MultiLineString") {
+      geom.coordinates = geom.coordinates.map(ring => ring.map(reprojectCoord));
+    } else if (geom.type === "MultiPolygon") {
+      geom.coordinates = geom.coordinates.map(
+        poly => poly.map(ring => ring.map(reprojectCoord))
+      );
+    } else if (geom.type === "GeometryCollection") {
+      geom.geometries.forEach(processGeometry);
+    }
+    return geom;
+  }
+
+  let converted = JSON.parse(JSON.stringify(geojson)); // Deep clone
+  if (converted.type === "FeatureCollection") {
+    converted.features.forEach(f => processGeometry(f.geometry));
+  } else if (converted.type === "Feature") {
+    processGeometry(converted.geometry);
+  } else {
+    processGeometry(converted);
+  }
+
+  return converted;
+}
+
 export async function addTideGauges(map) {
 
   async function showPopup(marker, g) {
     // clog(g);
-    const tidedata = await fetch(`/tides/data/DE_${g.bshnr.padStart(5, '_')}_tides.json`).then(r => r.json());
+    const tidedata = await fetch(`/tides/de/data/DE_${g.bshnr.padStart(5, '_')}_tides.json`).then(r => r.json());
     clog('tidedata', tidedata);
 
     const forecast_map = await fetch('/forecast/data/map.json').then(r => r.json()).catch(e => {
@@ -103,21 +139,22 @@ export async function addTideGauges(map) {
     }
 
     let date0;
-    let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊</th><th>m</th><th>↝</th><th class="moon${moon}"></th></tr>\n`;
+    let rows = `<tr><th>📅</th><th>${tz}</th><th>m (SKN)</th><th class="moon${moon}"></th></tr>\n`;
     for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
       clog(prediction[k]);
       const d = prediction[k];
-      let date = new Date(d.timestamp).toLocaleString(locale, {
+      const ts = new Date(d.timestamp);
+      let date = ts.toLocaleString(locale, {
         month: '2-digit', day: '2-digit', weekday: 'short', // year: 'numeric',
       }).replace(',', '');
       if (date0 === date) date = '';
       else date0 = date;
-      const time = new Date(d.timestamp).toLocaleString(locale, {
+      const time = ts.toLocaleString(locale, {
         hour: '2-digit', minute: '2-digit',
       });
       const height = d.height != null ? (d.height + offsets[level]) / 100 : '-';
       const deviation = getForcast(d.timestamp);
-      rows += `<tr class="${d.type}"><td>${date}</td><td>${time}</td><td>${d.type}</td><td>${height}</td><td class="forecast">${deviation}</td><td class="${d.phase} moon${d.moon}">${d.phase}</td></tr>\n`;
+      rows += `<tr class="${d.type}"><td>${date}</td><td>${time}</td><td>${height} <span class="forecast">${deviation}</span></td><td class="${d.phase} moon${d.moon}">${d.phase}</td></tr>\n`;
     }
     const table = `<table>\n${rows}</table>`;
     // clog(table);
@@ -133,7 +170,7 @@ export async function addTideGauges(map) {
   const gaugesLayer = L.layerGroup().addTo(map);
   const group_colors = {1: 'white', 2: 'lightblue', 3: 'gray'};
 
-  fetch('/tides/data/tides_overview.json')
+  fetch('/tides/de/data/tides_overview.json')
     .then(r => r.json())
     .then(data => {
       // clog(data);
@@ -153,5 +190,95 @@ export async function addTideGauges(map) {
         // showPopup(m, g);
         // return false;
       });
+    });
+
+  fetch('/tides/nl/api/point/latestmeasurement?parameterId=astronomische-getij')
+    .then(r => r.json())
+    .then(data => {
+      clog(data);
+      proj4.defs("EPSG:25831", "+proj=utm +zone=31 +ellps=GRS80 +units=m +no_defs");
+      return reproject(data);
+    })
+    .then(data => {
+      L.geoJSON(data, {
+        pointToLayer: function (feature, latlng) {
+          // clog(feature.properties)
+          return L.circleMarker(latlng, {
+            radius: 4,
+            weight: 3,
+            color: '#4e91ea',
+            fillColor: feature.properties.locationColor,
+            fillOpacity: 1,
+          })
+        },
+        onEachFeature: (feature, layer) => {
+          const p = feature.properties;
+          const link = `https://waterinfo.rws.nl/publiek/astronomische-getij/${p.locationCode}/details`;
+          if (feature.properties.name) {
+            layer.bindPopup(`<a href="${link}" target="_blank">${feature.properties.name}</a>`);
+          }
+          layer.on('click', e => {
+            clog(p);
+            const now = new Date();
+            const start = new Date(now);
+            start.setHours(now.getHours() - 24);
+            const end = new Date(now);
+            end.setHours(now.getHours() + 36);
+            clog(now, start, end);
+            fetch(`/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&timeZone=GMT&startDate=${start.toISOString()}&endDate=${end.toISOString()}`)
+              .then(r => r.text())
+              .then(csv =>
+                Papa.parse(csv, {
+                  header: true,
+                  skipEmptyLines: true
+                }))
+              .then(csv => {
+                clog(csv);
+
+                const locale = undefined;
+                const tform = new Intl.DateTimeFormat(locale, {timeZoneName: 'short'});
+                const parts = tform.formatToParts(now);
+                const tz = parts.find(part => part.type === 'timeZoneName')?.value;
+
+                let date0, height0;
+                const ref = p.measurements[0].qualityCode.replace('NAP', 'LAT');
+                let rows = `<tr><th>📅</th><th>${tz}</th><th>m (${ref})</th></tr>\n`;
+                csv.data.forEach(r => {
+                  if (r.Extremen) {
+                    clog(r);
+                    const ts = new Date(`${r.Datum.substring(6, 10)}-${r.Datum.substring(3, 5)}-${r.Datum.substring(0, 2)}T${r['Tijd (GMT)']}Z`);
+                    clog(ts);
+                    let date = ts.toLocaleString(locale, {
+                      month: '2-digit', day: '2-digit', weekday: 'short', // year: 'numeric',
+                    }).replace(',', '');
+                    if (date0 === date) date = '';
+                    else date0 = date;
+                    const time = ts.toLocaleString(locale, {
+                      hour: '2-digit', minute: '2-digit',
+                    });
+                    const height = r.Extremen / 100;
+                    if (!height0) {
+                      height0 = height;
+                      return;
+                    }
+                    const type = height > height0 ? 'HW' : 'NW';
+                    height0 = height;
+                    const deviation = 'X';
+                    rows += `<tr class="${type}"><td>${date}</td><td>${time}</td><td>${height}</td></tr>\n`;
+                  }
+                });
+                const table = `<table>\n${rows}</table>`;
+                // clog(table);
+
+
+                layer
+                  .bindPopup(`<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div class="source">data source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`)
+                  .openPopup();
+
+
+              });
+          });
+        }
+      }).addTo(map);
     });
 }

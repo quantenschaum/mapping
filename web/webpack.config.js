@@ -87,15 +87,21 @@ module.exports = (env, argv) => {
     devServer: {
       proxy: [
         {
-          context: ['/tides'],
+          context: ['/tides/de'],
           target: 'https://gezeiten.bsh.de',
-          pathRewrite: {'^/tides': ''},
+          pathRewrite: {'^/tides/de': ''},
           changeOrigin: true,
         },
         {
           context: ['/forecast'],
           target: 'https://wasserstand-nordsee.bsh.de',
           pathRewrite: {'^/forecast': ''},
+          changeOrigin: true,
+        },
+        {
+          context: ['/tides/nl'],
+          target: 'https://waterinfo.rws.nl',
+          pathRewrite: {'^/tides/nl': ''},
           changeOrigin: true,
         },
       ],

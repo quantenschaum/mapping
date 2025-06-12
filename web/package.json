@@ -34,6 +34,8 @@
     "leaflet.locatecontrol": "^0.84.2",
     "leaflet.nauticscale": "^1.1.0",
     "leaflet.polylinemeasure": "^3.0.0",
-    "leaflet.tilelayer.fallback": "^1.0.4"
+    "leaflet.tilelayer.fallback": "^1.0.4",
+    "papaparse": "^5.5.3",
+    "proj4": "^2.17.0"
   }
 }
