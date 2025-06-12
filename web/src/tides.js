@@ -95,6 +95,11 @@ export async function addTideGauges(map) {
     clog('forecastdata', forecastdata);
 
     const now = new Date();
+    const today = new Date(now)
+    today.setHours(0);
+    today.setMinutes(0);
+    today.setSeconds(0);
+    today.setMilliseconds(0);
     const year = now.getFullYear().toString();
     let ydata;
     tidedata.years.every(y => {
@@ -120,10 +125,9 @@ export async function addTideGauges(map) {
       // clog(pred.data[i], now, ts, ts >= now);
       let m = prediction[i].moon;
       if (m != undefined) moon = m;
-      if (ts > now) break;
+      if (ts > today) break;
     }
     clog('moon', moon);
-    i = Math.max(0, i - 1);
 
     const locale = undefined;
     const tform = new Intl.DateTimeFormat(locale, {timeZoneName: 'short'});
@@ -155,7 +159,8 @@ export async function addTideGauges(map) {
       });
       const height = d.height != null ? (d.height + offsets[level]) / 100 : '-';
       const deviation = getForcast(d.timestamp);
-      rows += `<tr class="${d.type}"><td>${date}</td><td>${time}</td><td>${height} <span class="forecast">${deviation}</span></td><td class="${d.phase} moon${d.moon}">${d.phase}</td></tr>\n`;
+      const when = ts > now ? 'future' : 'past';
+      rows += `<tr class="${d.type} ${when}"><td>${date}</td><td>${time}</td><td>${height} <span class="forecast">${deviation}</span></td><td class="${d.phase} moon${d.moon}">${d.phase}</td></tr>\n`;
     }
     const table = `<table>\n${rows}</table>`;
     // clog(table);
@@ -218,12 +223,12 @@ export async function addTideGauges(map) {
             clog(p);
             const now = new Date();
             const start = new Date(now);
-            start.setHours(now.getHours() - 7);
+            start.setHours(0);
             start.setMinutes(0);
             start.setSeconds(0);
             start.setMilliseconds(0);
-            const end = new Date(now);
-            end.setHours(now.getHours() + 43);
+            const end = new Date(start);
+            end.setHours(48);
             end.setMinutes(0);
             end.setSeconds(0);
             end.setMilliseconds(0);
@@ -258,7 +263,8 @@ export async function addTideGauges(map) {
                   const time = ts.toLocaleString(locale, {
                     hour: '2-digit', minute: '2-digit',
                   });
-                  rows += `<tr class="${r.sign}"><td>${date}</td><td>${time}</td><td>${r.value / 100}</td></tr>\n`;
+                  const when = ts > now ? 'future' : 'past';
+                  rows += `<tr class="${r.sign} ${when}"><td>${date}</td><td>${time}</td><td>${r.value / 100}</td></tr>\n`;
                 });
                 const table = `<table>\n${rows}</table>`;
                 // clog(table);
