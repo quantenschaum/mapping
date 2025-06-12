@@ -22,7 +22,7 @@ import {NightSwitch} from './nightmode';
 import {GPXbutton} from './gpx';
 import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
-import {addTides} from "./tides";
+import {addTidealAtlas, addTideGauges} from "./tides";
 
 const isDevMode = process.env.NODE_ENV === 'development';
 const isStandalone = !!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
@@ -256,7 +256,8 @@ new NightSwitch({position: 'topleft'}).addTo(map);
 
 new GPXbutton({position: 'topleft', layers: layers}).addTo(map);
 
-addTides(map, params.get('tides') == '1');
+addTidealAtlas(map);
+if (isDevMode || params.get('tides') == '1') addTideGauges(map);
 
 legend(layers);
 

@@ -1,11 +1,36 @@
 .tides {
+  a {
+    text-decoration: none;
+  }
+
+  .stationname {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
   .HW {
     background: #d2ebfb;
+  }
+
+  div.forecast {
+    margin-top: 1ex;
+  }
+
+  td .forecast {
+    font-style: italic;
+  }
+
+  .source {
+    font-size: 0.8em;
+    text-align: right;
+    margin-top: 1ex;
   }
 
   table {
     border-collapse: collapse;
     white-space: nowrap;
+    width: 100%;
+
 
     th {
       text-align: center;
@@ -20,19 +45,19 @@
     }
 
     .moon0::after {
-      content: "🌑";
+      content: "🌚"; // new
     }
 
     .moon1::after {
-      content: "🌓";
+      content: "🌛"; // first quarter
     }
 
     .moon2::after {
-      content: "🌕";
+      content: "🌝"; // full
     }
 
-    .moon3::after {
-      content: "🌗";
+    .moon3::after { // last quarter
+      content: "🌜";
     }
   }
 
