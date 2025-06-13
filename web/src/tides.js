@@ -214,7 +214,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     const layout = {
       title: 'Time Series from Object Array',
       margin: {l: 15, r: 0, t: 0, b: 0,},
-      xaxis: {title: 'Date', type: 'date', fixedrange: !true, tickformat: '%H:%M', range: [t0, t1],},
+      xaxis: {title: 'Date', type: 'date', fixedrange: !true, tickformat: '%a %H:%M', range: [t0, t1],},
       yaxis: {title: 'Height', fixedrange: true, tickangle: -90},
       dragmode: 'pan',
       showlegend: true,
