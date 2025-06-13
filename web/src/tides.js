@@ -4,6 +4,7 @@ import './slider';
 import {logger} from './utils';
 import './tides.less';
 
+const isDevMode = process.env.NODE_ENV === 'development';
 const clog = logger('tides', 'lightblue');
 
 const baseurl = 'https://freenauticalchart.net';
@@ -127,6 +128,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
       PNP: -ydata['SKN (ueber PNP)'],
       SKN: 0,
     };
+    const offset = offsets[level];
 
     let i = 0;
     var moon;
@@ -156,8 +158,8 @@ export async function addTideGaugesDE(map, preFetch = false) {
     let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th><th class="moon${moon}"></th></tr>\n`;
     for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
       clog(prediction[k]);
-      const d = prediction[k];
-      const ts = new Date(d.timestamp);
+      const r = prediction[k];
+      const ts = new Date(r.timestamp);
       let date = ts.toLocaleString(locale, {
         month: '2-digit', day: '2-digit', weekday: 'short', // year: 'numeric',
       }).replace(',', '');
@@ -166,20 +168,66 @@ export async function addTideGaugesDE(map, preFetch = false) {
       const time = ts.toLocaleString(locale, {
         hour: '2-digit', minute: '2-digit',
       });
-      const height = d.height != null ? (d.height + offsets[level]) / 100 : '-';
-      const deviation = getForcast(d.timestamp);
+      const height = r.height != null ? ((r.height + offset) / 100).toFixed(2) : '-';
+      const deviation = getForcast(r.timestamp);
       const when = ts > now ? 'future' : 'past';
-      rows += `<tr class="${d.type} ${when}"><td>${date}</td><td>${time}</td><td>${height.toFixed(2)} <span class="forecast">${deviation}</span></td><td class="${d.phase} moon${d.moon}">${d.phase}</td></tr>\n`;
+      rows += `<tr class="${r.type} ${when}"><td>${date}</td><td>${time}</td><td>${height} <span class="forecast">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}</td></tr>\n`;
     }
     const table = `<table>\n${rows}</table>`;
     // clog(table);
 
-    marker
+    await marker
       .bindPopup(`<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${table}<div class="forecast"><a ${forecast_link}>${forecast_text}</a></div><div id="plot"></div><div class="source">data source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`)
-      .on('popupopen', e => {
-        clog('popupopen', e);
-      })
       .openPopup();
+
+    if (!curve) return;
+
+    const Plotly = await import('plotly.js-dist-min');
+    clog(curve[0]);
+
+    const t0 = new Date(now.getTime() - 6 * 3600_000);
+    const t1 = new Date(now.getTime() + 18 * 3600_000);
+    const curve1 = curve.filter(d => {
+      return true;
+      const t = new Date(d.timestamp);
+      return t0 < t && t < t1
+    });
+    const x = curve1.map(d => new Date(d.timestamp));
+    const trace1 = {
+      name: 'astro',
+      x: x, y: curve1.map(d => (d.astro + offset) / 100),
+      type: 'scatter', mode: 'lines',
+      line: {color: 'green'},
+    };
+    const trace2 = {
+      name: 'forecast',
+      x: x, y: curve1.map(d => (d.curveforecast + offset) / 100).map(v => v > 0 ? v : null),
+      type: 'scatter', mode: 'lines',
+      line: {color: 'orange'},
+    };
+    const trace3 = {
+      name: 'measured',
+      x: x, y: curve1.map(d => (d.measurement + offset) / 100).map(v => v > 0 ? v : null),
+      type: 'scatter', mode: 'lines',
+      line: {color: 'red'},
+    };
+    const layout = {
+      title: 'Time Series from Object Array',
+      margin: {l: 15, r: 0, t: 0, b: 0,},
+      xaxis: {title: 'Date', type: 'date', fixedrange: !true, tickformat: '%H:%M', range: [t0, t1],},
+      yaxis: {title: 'Height', fixedrange: true, tickangle: -90},
+      dragmode: 'pan',
+      showlegend: true,
+      legend: {
+        x: 0, y: -0.05,
+        orientation: 'h',
+        bgcolor: 'rgba(255,255,255,0)',
+      },
+    };
+    const config = {
+      scrollZoom: true,
+    };
+    Plotly.newPlot('plot', [trace1, trace2, trace3], layout, config);
   }
 
   const gaugesLayer = L.layerGroup().addTo(map);
@@ -189,7 +237,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     .then(r => r.json())
     .then(data => {
       // clog(data);
-      data.gauges.some(g => {
+      data.gauges.forEach(g => {
         // clog(g);
         if (g.gauge_group == 3) return;
         if (preFetch) fetch(`/tides/de/data/DE_${g.bshnr.padStart(5, '_')}_tides.json`);
@@ -200,11 +248,10 @@ export async function addTideGaugesDE(map, preFetch = false) {
           fillColor: group_colors[g.gauge_group],
           fillOpacity: 1,
         })
-          // .bindPopup(`<a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}">${g.station_name}</a>`)
+          .bindPopup(`<a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}">${g.station_name}</a>`)
           .on('click', e => showPopup(e.target, g))
           .addTo(gaugesLayer);
-        // showPopup(m, g);
-        // return false;
+        if (isDevMode && g.station_name.includes('Helgoland')) showPopup(m, g);
       });
     });
 }
@@ -262,8 +309,7 @@ export function addTideGaugesNL(map) {
                 const extremes = data.series[0].extremes;
 
                 let date0, height0;
-                const ref = p.measurements[0].qualityCode == 'MSL' ? ' (MSL)' : '';
-                let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m${ref}</th></tr>\n`;
+                let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th></tr>\n`;
                 extremes.forEach(r => {
                   clog(r);
                   const ts = new Date(r.dateTime);
@@ -277,9 +323,10 @@ export function addTideGaugesNL(map) {
                   });
                   const when = ts > now ? 'future' : 'past';
                   const height = r.value / 100;
-                  rows += `<tr class="${r.sign} ${when}"><td>${date}</td><td>${time}</td><td>${height.toFixed(2)}</td></tr>\n`;
+                  rows += `<tr class="${r.sign} ${when}"><td>${date}</td><td>${time}</td><td>${height?.toFixed(2)}</td></tr>\n`;
                 });
-                const table = `<table>\n${rows}</table>`;
+                const ref = p.measurements[0].qualityCode == 'MSL' ? 'reference=MSL' : '';
+                const table = `<table>\n${rows}</table>${ref}`;
                 // clog(table);
 
 

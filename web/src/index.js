@@ -19,7 +19,6 @@ import {log, debounce} from './utils';
 import {legend} from './legend';
 import {grid} from './grid';
 import {NightSwitch} from './nightmode';
-import {GPXbutton} from './gpx';
 import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
 import {addTidealAtlas, addTideGauges} from "./tides";
@@ -254,7 +253,9 @@ map.on('overlayadd overlayremove', debounce(updateOpacityControl));
 
 new NightSwitch({position: 'topleft'}).addTo(map);
 
-new GPXbutton({position: 'topleft', layers: layers}).addTo(map);
+if (params.get('gpx') == '1') {
+  import('./gpx').then(({GPXbutton}) => new GPXbutton({position: 'topleft', layers: layers}).addTo(map));
+}
 
 addTidealAtlas(map);
 if (isDevMode || params.get('tides') == '1') {
