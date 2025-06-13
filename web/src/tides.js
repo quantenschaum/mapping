@@ -120,7 +120,9 @@ export async function addTideGaugesDE(map, preFetch = false) {
     const level = ydata.hwnw_prediction.level;
     const forecast = forecastdata?.hwnw_forecast?.data;
     const curve = forecastdata?.curve_forecast?.data;
-    const forecast_date = new Date(forecast_map?.creation_forecast).toLocaleString(locale);
+    const forecast_date = new Date(forecast_map?.creation_forecast).toLocaleString(locale, {
+      month: '2-digit', day: '2-digit', weekday: 'short', hour: '2-digit', minute: '2-digit',
+    });
     const forecast_text = forecast_map?.forecast_text + ` (${forecast_date})`;
     const forecast_link = curve ? `target="_blank" href="https://wasserstand-nordsee.bsh.de/${g.seo_id}?zeitraum=tag1bis2"` : '';
 
@@ -197,7 +199,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
       name: 'astro',
       x: x, y: curve1.map(d => (d.astro + offset) / 100),
       type: 'scatter', mode: 'lines',
-      line: {color: 'green'},
+      line: {color: '#3a99e8'},
     };
     const trace2 = {
       name: 'forecast',
@@ -213,16 +215,16 @@ export async function addTideGaugesDE(map, preFetch = false) {
     };
     const layout = {
       title: 'Time Series from Object Array',
-      margin: {l: 15, r: 0, t: 0, b: 0,},
+      margin: {l: 15, r: 0, t: 0, b: 15,},
       xaxis: {title: 'Date', type: 'date', fixedrange: !true, tickformat: '%a %H:%M', range: [t0, t1],},
       yaxis: {title: 'Height', fixedrange: true, tickangle: -90},
       dragmode: 'pan',
-      showlegend: true,
       legend: {
         x: 0, y: -0.05,
         orientation: 'h',
         bgcolor: 'rgba(255,255,255,0)',
       },
+      hovermode: 'x unified',
     };
     const config = {
       scrollZoom: true,
