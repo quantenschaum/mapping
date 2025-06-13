@@ -257,7 +257,9 @@ new NightSwitch({position: 'topleft'}).addTo(map);
 new GPXbutton({position: 'topleft', layers: layers}).addTo(map);
 
 addTidealAtlas(map);
-if (isDevMode || params.get('tides') == '1') addTideGauges(map);
+if (isDevMode || params.get('tides') == '1') {
+  addTideGauges(map);
+}
 
 legend(layers);
 
