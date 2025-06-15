@@ -1,24 +1,26 @@
 import L from 'leaflet';
 
-export function grid(dec = 0) {
-  function d2dm(a, n) {
-    dec = parseInt(dec);
-    if (dec) {
-      var n = dec;
-      var f = Math.pow(10, n);
-      return Math.round(a * f) / f;
-    }
-    var a = Math.abs(a);
-    var d = Math.floor(a);
-    var f = Math.pow(10, n);
-    var m = Math.round(((60 * a) % 60) * f) / f;
-    while (m >= 60) {
-      m -= 60;
-      d += 1;
-    }
-    var M = m == 0 ? "" : m.toFixed(n).replace(/\.?0+$/, "") + "'";
-    return d + '°' + M;
+export function degmin(v, n = 2, lat = true) {
+  var a = Math.abs(v);
+  var d = Math.floor(a);
+  var f = Math.pow(10, n);
+  var m = Math.round(((60 * a) % 60) * f) / f;
+  while (m >= 60) {
+    m -= 60;
+    d += 1;
   }
+  var M = m == 0 ? "" : m.toFixed(n).replace(/\.?0+$/, "") + "'";
+  if (lat) {
+    var s = v < 0 ? 'S' : v > 0 ? 'N' : '';
+  } else {
+    v %= 360;
+    v -= Math.abs(v) > 180 ? Math.sign(v) * 360 : 0;
+    var s = v < 0 ? 'W' : v > 0 ? 'E' : '';
+  }
+  return `${s} ${d}° ${M}`;
+}
+
+export function grid() {
 
   return L.latlngGraticule({
     showLabel: true,
@@ -41,15 +43,7 @@ export function grid(dec = 0) {
       {start: 17, end: 17, interval: 1 / 60 / 5},
       {start: 18, end: 18, interval: 1 / 60 / 10},
     ],
-    latFormatTickLabel: function (l) {
-      let s = l < 0 ? 'S' : l > 0 ? 'N' : '';
-      return s + d2dm(l, 2);
-    },
-    lngFormatTickLabel: function (l) {
-      l %= 360;
-      l -= Math.abs(l) > 180 ? Math.sign(l) * 360 : 0;
-      let s = l < 0 ? 'W' : l > 0 ? 'E' : '';
-      return s + d2dm(l, 2);
-    },
+    latFormatTickLabel: v => degmin(v, 2, true),
+    lngFormatTickLabel: v => degmin(v, 2, false),
   });
 }
