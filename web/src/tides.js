@@ -91,15 +91,17 @@ export async function addTideGaugesDE(map, preFetch = false) {
 
   async function showPopup(marker, g) {
     // clog(g);
-    const tidedata = await fetch(`/tides/de/data/DE_${g.bshnr.padStart(5, '_')}_tides.json`).then(r => r.json());
+    const tidedata = await fetch(`/tides/de/data/DE_${g.bshnr.padStart(5, '_')}_tides.json`)
+      .then(r => r.json()).catch(clog);
     clog('tidedata', tidedata);
+    if (!tidedata) return;
 
-    const forecast_map = await fetch('/forecast/de/data/map.json').then(r => r.json()).catch(e => {
-    });
+    const forecast_map = await fetch('/forecast/de/data/map.json')
+      .then(r => r.json()).catch(clog);
     clog('forecast_map', forecast_map);
 
-    const forecastdata = await fetch(`/forecast/de/data/DE_${g.bshnr.padStart(5, '_')}.json`).then(r => r.json()).catch(e => {
-    });
+    const forecastdata = await fetch(`/forecast/de/data/DE_${g.bshnr.padStart(5, '_')}.json`)
+      .then(r => r.json()).catch(clog);
     clog('forecastdata', forecastdata);
 
     const now = new Date();
@@ -134,7 +136,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     };
     const offset = offsets[level];
 
-    const basevalues = ydata.MHW ? `MHW=${(ydata.MHW + offset) / 100}m MNW=${(ydata.MNW + offset) / 100}m MTH=${ydata.MTH / 100}m` : '';
+    const basevalues = ydata.MHW ? `MHW=${(ydata.MHW + offset) / 100} MNW=${(ydata.MNW + offset) / 100} MTH=${ydata.MTH / 100}` : '';
 
     let i = 0;
     var moon;
@@ -222,6 +224,14 @@ export async function addTideGaugesDE(map, preFetch = false) {
       margin: {l: 15, r: 0, t: 0, b: 15,},
       xaxis: {title: 'Date', type: 'date', fixedrange: !true, tickformat: '%a %H:%M', range: [t0, t1],},
       yaxis: {title: 'Height', fixedrange: true, tickangle: -90},
+      shapes: [
+        {
+          type: 'line',
+          x0: now, x1: now, xref: 'x',
+          y0: 0, y1: 1, yref: 'paper',
+          line: {color: 'gray', width: 1},
+        }
+      ],
       dragmode: 'pan',
       legend: {
         x: 0, y: -0.05,
@@ -259,7 +269,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
           .addTo(gaugesLayer);
         // if (isDevMode && g.station_name.includes('Helgoland')) showPopup(m, g);
       });
-    });
+    }).catch(clog);
 }
 
 export function addTideGaugesNL(map) {
@@ -338,9 +348,9 @@ export function addTideGaugesNL(map) {
                 layer
                   .bindPopup(`<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`)
                   .openPopup();
-              });
+              }).catch(clog);
           });
         }
       }).addTo(map);
-    });
+    }).catch(clog);
 }

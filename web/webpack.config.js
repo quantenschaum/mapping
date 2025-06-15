@@ -42,13 +42,13 @@ module.exports = (env, argv) => {
         navigateFallback: '/index.html',
         navigateFallbackAllowlist: [/^\/$/],
         ignoreURLParametersMatching: [/.*/],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         runtimeCaching: [
           {
-            urlPattern: /\/(download|tides\/de\/).*(html|js|xml|webp|png|svg|jpe?g|json|css|\/)$/,
-            handler: 'NetworkFirst',
+            urlPattern: /\/download.*(html|js|xml|webp|png|svg|jpe?g|json|css|\/)$/,
+            handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'assets',
-              networkTimeoutSeconds: 5,
               expiration: {
                 maxEntries: 100,
                 maxAgeSeconds: 7 * 24 * 3600,
@@ -64,6 +64,18 @@ module.exports = (env, argv) => {
                 maxEntries: 20000,
                 maxAgeSeconds: 7 * 24 * 3600,
                 purgeOnQuotaError: true,
+              },
+            },
+          },
+          {
+            urlPattern: /\/(tides|forecast)\//,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'tides',
+              networkTimeoutSeconds: 10,
+              expiration: {
+                maxEntries: 1000,
+                maxAgeSeconds: 7 * 24 * 3600,
               },
             },
           },
@@ -85,7 +97,15 @@ module.exports = (env, argv) => {
       poll: 1000,
     },
     devServer: {
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+      },
       proxy: [
+        {
+          context: ['/qmap-de', '/qmap-nl', '/download'],
+          target: 'https://freenauticalchart.net',
+          changeOrigin: true,
+        },
         {
           context: ['/tides/de'],
           target: 'https://gezeiten.bsh.de',

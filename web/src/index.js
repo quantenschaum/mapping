@@ -25,6 +25,7 @@ import {NightSwitch} from './nightmode';
 import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
 import {addTidealAtlas, addTideGauges} from "./tides";
+import {addLotungen} from './lotungen';
 
 const isDevMode = process.env.NODE_ENV === 'development';
 const isStandalone = !!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
@@ -42,7 +43,8 @@ if ('serviceWorker' in navigator && (isStandalone || params.get('sw') == '1')) {
   });
 }
 
-const baseurl = 'https://freenauticalchart.net';
+const baseurl = '';
+// const baseurl = 'https://freenauticalchart.net';
 const boundsDE = L.latLngBounds([53.0, 3.3], [56.0, 14.4]);
 const boundsNL = L.latLngBounds([51.2, 3.0], [53.8, 7.3]);
 const cors = window.location.hostname != 'freenauticalchart.net';
@@ -282,6 +284,7 @@ if (params.get('gpx') == '1') {
 addTidealAtlas(map);
 if (isDevMode || params.get('tides') == '1') {
   addTideGauges(map);
+  addLotungen(map);
 }
 
 legend(layers);
@@ -368,6 +371,3 @@ if (params.get('zones') == '1') {
   restoreLayers(layers, params.get('l'));
 }
 
-import {addLotungen} from './lotungen';
-
-if (isDevMode) addLotungen(map);
