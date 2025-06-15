@@ -1,0 +1,413 @@
+{
+  "url": "https://www.wattsegler.de/toernplanung/lotungen.html",
+  "locations": {
+    "Oldersum": [
+      53.323696,
+      7.335348
+    ],
+    "Ditzum": [
+      53.317262,
+      7.282219
+    ],
+    "Petkum": [
+      53.329976,
+      7.270374
+    ],
+    "Nieuwe Statenzijl": [
+      53.235318,
+      7.206441
+    ],
+    "Termunterzijl": [
+      53.309301,
+      7.039490
+    ],
+    "Bocht van Watum": [
+      53.334256,
+      6.957865
+    ],
+    "Osterems": [
+      53.492897,
+      6.945720
+    ],
+    "Osterems, Emshörnrinne": [
+      53.485211,
+      6.935678
+    ],
+    "Borkumer Wattfahrwasser": [
+      53.589499,
+      6.793456
+    ],
+    "Hornsbalje": [
+      53.599662,
+      6.826930
+    ],
+    "Lagune Borkum, Weststrand": [
+      53.590671,
+      6.650677
+    ],
+    "Randzel": [
+      53.553057,
+      6.860104
+    ],
+    "Manslagter Nacken": [
+      53.455400,
+      6.995459
+    ],
+    "Nordland / Juister-Balje": [
+      53.660458,
+      6.964817
+    ],
+    "Juist- Zufahrt": [
+      53.665468,
+      6.996703
+    ],
+    "Juister Wattfahrwasser": [
+      53.660713,
+      7.033653
+    ],
+    "Kopersand": [
+      53.595663,
+      6.990223
+    ],
+    "Bantsbalje": [
+      53.602539,
+      7.033525
+    ],
+    "Ley Fahrwasser": [
+      53.548111,
+      7.013912
+    ],
+    "Ausfahrt Greetsiel / Übergang Legde": [
+      53.549245,
+      7.034254
+    ],
+    "Greestieler Legde": [
+      53.560590,
+      7.030327
+    ],
+    "Brandergat": [
+      53.659848,
+      7.109013
+    ],
+    "Norddeicher-Wattfahrwasser": [
+      53.643620,
+      7.107468
+    ],
+    "Nördliches Busetief": [
+      53.696757,
+      7.131286
+    ],
+    "Mittleres Busetief": [
+      53.676400,
+      7.133517
+    ],
+    "Südliches Busetief": [
+      53.657788,
+      7.144632
+    ],
+    "Dovetief": [
+      53.733126,
+      7.201452
+    ],
+    "Schluchter": [
+      53.721701,
+      7.125664
+    ],
+    "Wagengat": [
+      53.667578,
+      7.203341
+    ],
+    "Norderneyer-Wattfahrwasser": [
+      53.699196,
+      7.329855
+    ],
+    "Neßmersiel": [
+      53.691853,
+      7.361183
+    ],
+    "Baltrumer Wattfahrwasser": [
+      53.700009,
+      7.407188
+    ],
+    "Dornumersiel / Accumersiel": [
+      53.685881,
+      7.489929
+    ],
+    "Accumer Ee": [
+      53.771037,
+      7.453623
+    ],
+    "Bensersiel": [
+      53.688397,
+      7.558422
+    ],
+    "Langeoog": [
+      53.724570,
+      7.498856
+    ],
+    "Langeooger Wattfahrwasser": [
+      53.731146,
+      7.608032
+    ],
+    "Neuharlingersieler Wattfahrwasser / Bakledge": [
+      53.710831,
+      7.678242
+    ],
+    "Neuharlingersiel": [
+      53.710679,
+      7.704849
+    ],
+    "Otzumer Balje Seegat": [
+      53.790663,
+      7.629404
+    ],
+    "Spiekerooger Wattfahrwasser": [
+      53.744295,
+      7.794456
+    ],
+    "Spiekerooger Hafenpriel": [
+      53.754496,
+      7.691374
+    ],
+    "Alte Harle": [
+      53.763275,
+      7.825098
+    ],
+    "Alte Harle Wattfahrwasser (Muschelbalje)": [
+      53.770022,
+      7.817373
+    ],
+    "Harlesieler Wattfahrwasser": [
+      53.739473,
+      7.812481
+    ],
+    "Wangerooge Hafeneinfahrt": [
+      53.771227,
+      7.866039
+    ],
+    "Carolinensieler Balje (Harlesiel)": [
+      53.745437,
+      7.847629
+    ],
+    "Harle": [
+      53.803794,
+      7.812309
+    ],
+    "Telegraphenbalje": [
+      53.766623,
+      7.906723
+    ],
+    "Neues Brack": [
+      53.732669,
+      7.985945
+    ],
+    "Blaue Balje": [
+      53.784579,
+      7.987146
+    ],
+    "Minsener Oog Wattfahrwasser": [
+      53.743889,
+      8.012938
+    ],
+    "Mittelrinne": [
+      53.762463,
+      8.101645
+    ],
+    "Horumersieler Hafenpriel": [
+      53.684483,
+      8.035641
+    ],
+    "Hooksiel": [
+      53.643525,
+      8.091309
+    ],
+    "Hohe Weg": [
+      53.666561,
+      8.220606
+    ],
+    "Mellum Balje": [
+      53.692641,
+      8.214855
+    ],
+    "Rüstersiel / Maade": [
+      53.561622,
+      8.153315
+    ],
+    "Kaiserbalje West": [
+      53.631560,
+      8.256311
+    ],
+    "Wilhelmshaven Fluthafen (Nassau)": [
+      53.513534,
+      8.154130
+    ],
+    "Dangaster Außentief": [
+      53.462785,
+      8.114133
+    ],
+    "Vareler Tief\nVareler Stadthafen\nLiegelplätze vom WSV Varel": [
+      53.415466,
+      8.203354
+    ],
+    "Eckwarderziel": [
+      0,
+      0
+    ],
+    "Kaiserbalje Ost": [
+      0,
+      0
+    ],
+    "Mittelpriel": [
+      0,
+      0
+    ],
+    "Tegeler Rinne": [
+      0,
+      0
+    ],
+    "Wurster Arm": [
+      0,
+      0
+    ],
+    "Bakenloch / Meyers Legde": [
+      0,
+      0
+    ],
+    "Dorumer Tief": [
+      0,
+      0
+    ],
+    "Spiekaer Barre": [
+      0,
+      0
+    ],
+    "Spiekaer Tief": [
+      0,
+      0
+    ],
+    "Wremer Tief": [
+      0,
+      0
+    ],
+    "Hunte": [
+      0,
+      0
+    ],
+    "Neuwerker Loch": [
+      0,
+      0
+    ],
+    "Elbe-Neuwerk-Fahrwasser": [
+      0,
+      0
+    ],
+    "Weser-Elbe-Wattfahrwasser": [
+      0,
+      0
+    ],
+    "Klotzenloch": [
+      0,
+      0
+    ],
+    "Norderelbe": [
+      0,
+      0
+    ],
+    "Glücksstädter Nebenelbe": [
+      0,
+      0
+    ],
+    "Pagensand": [
+      0,
+      0
+    ],
+    "Lühesander Süderelbe": [
+      0,
+      0
+    ],
+    "Hanhhöfer Nebenelbe": [
+      0,
+      0
+    ],
+    "Este": [
+      0,
+      0
+    ],
+    "Oste": [
+      0,
+      0
+    ],
+    "Trischenflinge": [
+      0,
+      0
+    ],
+    "Neufahrwasser": [
+      0,
+      0
+    ],
+    "Buschsand Fahrwasser": [
+      0,
+      0
+    ],
+    "Bielshövener Loch": [
+      0,
+      0
+    ],
+    "Meldorfer Hafenpriel": [
+      0,
+      0
+    ],
+    "Büsum": [
+      0,
+      0
+    ],
+    "Dwarsloch": [
+      0,
+      0
+    ],
+    "Rummelloch": [
+      0,
+      0
+    ],
+    "Nordmarsch": [
+      0,
+      0
+    ],
+    "Pellworm Hafenpriel": [
+      0,
+      0
+    ],
+    "Hooge (Hafeneinfahrt)Hooge (vor dem Hafen)": [
+      0,
+      0
+    ],
+    "Langeness Fahrwasser": [
+      0,
+      0
+    ],
+    "Amrum-Odde": [
+      0,
+      0
+    ],
+    "Föhrer Ley": [
+      0,
+      0
+    ],
+    "Vortrapptief": [
+      0,
+      0
+    ],
+    "Holtknobsloch": [
+      0,
+      0
+    ],
+    "Sylt / Hörnum Hafeneinfahrt": [
+      0,
+      0
+    ],
+    "Sylt / Rantum Hafenzufahrtim Hafen": [
+      0,
+      0
+    ]
+  }
+}

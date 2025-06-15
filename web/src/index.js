@@ -2,12 +2,15 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-graticule';
 import 'leaflet.tilelayer.fallback';
-import 'leaflet.polylinemeasure';
-import 'leaflet.polylinemeasure/Leaflet.PolylineMeasure.css';
+import '@kvforksorg/leaflet.polylinemeasure';
+import '@kvforksorg/leaflet.polylinemeasure/Leaflet.PolylineMeasure.css';
 import 'leaflet.control.opacity';
 import 'leaflet.nauticscale/dist/leaflet.nauticscale';
 import {LocateControl} from 'leaflet.locatecontrol';
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
+import 'leaflet-mouse-position';
+import 'leaflet-mouse-position/src/L.Control.MousePosition.css';
+import {OpenLocationCode} from 'open-location-code';
 
 // npx png-to-ico src/favicon.png >src/favicon.ico
 import './favicon.ico';
@@ -15,9 +18,9 @@ import './manifest.json';
 import './icon.png';
 import './icon.svg';
 import './style.css';
-import {log, debounce} from './utils';
+import {log, debounce, logger} from './utils';
 import {legend} from './legend';
-import {grid} from './grid';
+import {grid, degmin} from './grid';
 import {NightSwitch} from './nightmode';
 import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
@@ -117,7 +120,7 @@ if (isDevMode) {
   overlays['QMAP NL*'] = L.tileLayer('http://nas:8001/tiles/qmap-nl/EPSG3857/{z}/{x}/{y}.png');
 }
 
-if (isDevMode || params.get('bsh') == '1') {
+if (params.get('bsh') == '1') {
   const bsh = {
     'BSH Bathymetry': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/ELC_INSPIRE/ows', {
       version: '1.3.0',
@@ -220,6 +223,12 @@ window.addEventListener('offline', () => updateAttribution(false));
 
 new LocateControl({flyTo: true}).addTo(map);
 
+L.control.mousePosition({
+  separator: ' ',
+  latFormatter: v => degmin(v, 3, true),
+  lngFormatter: v => degmin(v, 3, false),
+}).addTo(map);
+
 map.addControl(new L.Control.ScaleNautic({metric: true, imperial: false, nautic: true}));
 
 const layers = L.control.layers(basemaps, overlays, {collapsed: true}).addTo(map);
@@ -232,6 +241,19 @@ L.control.polylineMeasure({
   showUnitControl: true,
   unitControlUnits: ["kilometres", "nauticalmiles"],
 }).addTo(map);
+
+
+map.on('contextmenu', (e) => {
+  const lat = e.latlng.lat.toFixed(6);
+  const lng = e.latlng.lng.toFixed(6);
+  const coords = `${lat}, ${lng}`;
+  if (isDevMode) navigator.clipboard.writeText(coords);
+  const olc = new OpenLocationCode();
+  L.popup()
+    .setLatLng(e.latlng)
+    .setContent(`${degmin(e.latlng.lat, 3, true)} ${degmin(e.latlng.lng, 3, false)}<br/>${coords}<br/>${olc.encode(e.latlng.lat, e.latlng.lng)}`)
+    .openOn(map);
+});
 
 
 var opacity = L.control.opacity();
@@ -264,7 +286,7 @@ if (isDevMode || params.get('tides') == '1') {
 
 legend(layers);
 
-if (isDevMode || params.get('vector') == '1') {
+if (params.get('vector') == '1') {
   import('@maplibre/maplibre-gl-leaflet').then(maplibre => {
     console.log('maplibre', maplibre);
     layers.addBaseLayer(L.maplibreGL({
@@ -273,7 +295,7 @@ if (isDevMode || params.get('vector') == '1') {
   });
 }
 
-if (isDevMode || params.get('zones') == '1') {
+if (params.get('zones') == '1') {
   import('./besondere.json');
   import('./allgemeine.json');
   import('./kite.json');
@@ -346,3 +368,6 @@ if (isDevMode || params.get('zones') == '1') {
   restoreLayers(layers, params.get('l'));
 }
 
+import {addLotungen} from './lotungen';
+
+addLotungen(map);

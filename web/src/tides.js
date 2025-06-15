@@ -132,6 +132,8 @@ export async function addTideGaugesDE(map, preFetch = false) {
     };
     const offset = offsets[level];
 
+    const basevalues = ydata.MHW ? `MHW=${(ydata.MHW + offset) / 100}m MNW=${(ydata.MNW + offset) / 100}m MTH=${ydata.MTH / 100}m` : '';
+
     let i = 0;
     var moon;
     for (; i < prediction.length; i++) {
@@ -179,7 +181,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     // clog(table);
 
     await marker
-      .bindPopup(`<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${table}<div class="forecast"><a ${forecast_link}>${forecast_text}</a></div><div id="plot"></div><div class="source">data source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`)
+      .bindPopup(`<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${table}<div class="basevalues">${basevalues}</div><div class="forecast"><a ${forecast_link}>${forecast_text}</a></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`)
       .openPopup();
 
     if (!curve) return;
@@ -253,7 +255,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
           .bindPopup(`<a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}">${g.station_name}</a>`)
           .on('click', e => showPopup(e.target, g))
           .addTo(gaugesLayer);
-        if (isDevMode && g.station_name.includes('Helgoland')) showPopup(m, g);
+        // if (isDevMode && g.station_name.includes('Helgoland')) showPopup(m, g);
       });
     });
 }
@@ -331,9 +333,8 @@ export function addTideGaugesNL(map) {
                 const table = `<table>\n${rows}</table>${ref}`;
                 // clog(table);
 
-
                 layer
-                  .bindPopup(`<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div class="source">data source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`)
+                  .bindPopup(`<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`)
                   .openPopup();
               });
           });

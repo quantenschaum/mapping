@@ -104,6 +104,12 @@ module.exports = (env, argv) => {
           pathRewrite: {'^/tides/nl': ''},
           changeOrigin: true,
         },
+        {
+          context: ['/wattsegler'],
+          target: 'https://www.wattsegler.de',
+          pathRewrite: {'^/wattsegler': ''},
+          changeOrigin: true,
+        },
       ],
     },
   };

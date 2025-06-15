@@ -8,6 +8,10 @@ html, body, #map {
   height: 100%;
 }
 
+#map {
+  cursor: crosshair;
+}
+
 .grayscale {
   filter: grayscale(100%);
 }
@@ -45,4 +49,3 @@ html, body, #map {
     /*display: none;*/
   }
 }
-

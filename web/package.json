@@ -24,17 +24,20 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
+    "@kvforksorg/leaflet.polylinemeasure": "^3.0.1",
     "@mapbox/leaflet-omnivore": "^0.3.4",
     "@maplibre/maplibre-gl-leaflet": "^0.1.1",
     "css-minimizer-webpack-plugin": "^7.0.2",
+    "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
     "leaflet-graticule": "^0.0.1",
     "leaflet-hash": "^0.2.1",
+    "leaflet-mouse-position": "^1.2.0",
     "leaflet.control.opacity": "^1.6.0",
     "leaflet.locatecontrol": "^0.84.2",
     "leaflet.nauticscale": "^1.1.0",
-    "leaflet.polylinemeasure": "^3.0.0",
     "leaflet.tilelayer.fallback": "^1.0.4",
+    "open-location-code": "^1.0.3",
     "plotly.js-dist-min": "^3.0.1",
     "proj4": "^2.17.0"
   }
