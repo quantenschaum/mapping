@@ -68,7 +68,7 @@ module.exports = (env, argv) => {
             },
           },
           {
-            urlPattern: /\/(tides|forecast)\//,
+            urlPattern: /\/(tides|forecast|wattsegler)\//,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'tides',
