@@ -370,4 +370,4 @@ if (params.get('zones') == '1') {
 
 import {addLotungen} from './lotungen';
 
-addLotungen(map);
+if (isDevMode) addLotungen(map);
