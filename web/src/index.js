@@ -278,12 +278,13 @@ map.on('overlayadd overlayremove', debounce(updateOpacityControl));
 if (isDevMode || isStandalone) {
   const lc = new LocateControl({
     flyTo: true,
-    // keepCurrentZoomLevel: true,
+    keepCurrentZoomLevel: true,
     cacheLocation: false,
     locateOptions: {
+      watch: true,
       enableHighAccuracy: true,
       maximumAge: 1000,
-      maxZoom: 15,
+      // maxZoom: 15,
     }
   }).addTo(map);
 
