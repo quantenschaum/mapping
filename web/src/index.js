@@ -1,6 +1,5 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import 'leaflet-graticule';
 import 'leaflet.tilelayer.fallback';
 import '@kvforksorg/leaflet.polylinemeasure';
 import '@kvforksorg/leaflet.polylinemeasure/Leaflet.PolylineMeasure.css';

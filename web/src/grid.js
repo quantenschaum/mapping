@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import 'leaflet-graticule';
 
 export function degmin(v, n = 2, lat = true) {
   var a = Math.abs(v);
