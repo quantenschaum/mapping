@@ -25,7 +25,7 @@ import {NightSwitch} from './nightmode';
 import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
 import {addTidealAtlas, addTideGauges} from "./tides";
-import {addLotungen} from './lotungen';
+import {addWattSegler} from './wattsegler';
 
 const isDevMode = process.env.NODE_ENV === 'development';
 const isStandalone = !!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
@@ -284,7 +284,7 @@ if (params.get('gpx') == '1') {
 addTidealAtlas(map);
 if (isDevMode || params.get('tides') == '1') {
   addTideGauges(map);
-  addLotungen(map);
+  addWattSegler(map);
 }
 
 legend(layers);
