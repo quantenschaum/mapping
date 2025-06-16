@@ -576,7 +576,7 @@ L.LatLngGraticule = L.Layer.extend({
         const ppm = size / (lmax - lmin) / 60; // px per minute
         // console.log('zebras', side, lmin, lmax, size, ppm);
         const interval = lat ? latInterval : lngInterval;
-        const minutes = interval < 2;
+        const minutes = interval < 1;
         const step = minutes ? 60 : 1;
         const l0 = minutes ? Math.floor(lmin * step) / step : Math.floor(lmin);
         const n = Math.floor(lmin * step) % 2 == 0 ? 0 : 1;
