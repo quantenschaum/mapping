@@ -287,33 +287,34 @@ if (isDevMode || isStandalone) {
       // maxZoom: 15,
     }
   }).addTo(map);
+  /*
+    const NavData = L.Control.extend({
+      options: {position: 'bottomleft'},
+      onAdd: function (map) {
+        var div = L.DomUtil.create('div', 'navdata leaflet-bar');
+        L.DomEvent.disableClickPropagation(div);
 
-  const NavData = L.Control.extend({
-    options: {position: 'bottomleft'},
-    onAdd: function (map) {
-      var div = L.DomUtil.create('div', 'navdata leaflet-bar');
-      L.DomEvent.disableClickPropagation(div);
+        function hide() {
+          div.innerHTML = '';
+        }
 
-      function hide() {
-        div.innerHTML = '';
-      }
+        let timer;
 
-      let timer;
-
-      map.on('locationfound', e => {
-        const lat = degmin(e.latitude, 3, true);
-        const lng = degmin(e.longitude, 3, false);
-        const sog = e.speed != null ? `SOG ${(e.speed * 3600 / 1852).toFixed(1)}kn` : '';
-        const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
-        div.innerHTML = `<div>${lat} ${lng}</div><div>${sog} ${cog}</div>`;
-        log('location', 'magenta', lat, lng, sog, cog);
-        clearTimeout(timer);
-        timer = setTimeout(hide, 60000);
-      });
-      return div;
-    },
-  });
-  new NavData().addTo(map);
+        map.on('locationfound', e => {
+          const lat = degmin(e.latitude, 3, true);
+          const lng = degmin(e.longitude, 3, false);
+          const sog = e.speed != null ? `SOG ${(e.speed * 3600 / 1852).toFixed(1)}kn` : '';
+          const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
+          div.innerHTML = `<div>${lat} ${lng}</div><div>${sog} ${cog}</div>`;
+          log('location', 'magenta', lat, lng, sog, cog);
+          clearTimeout(timer);
+          timer = setTimeout(hide, 60000);
+        });
+        return div;
+      },
+    });
+    new NavData().addTo(map);
+  */
 
   new NightSwitch({position: 'topleft'}).addTo(map);
 }
