@@ -204,7 +204,7 @@ const map = L.map('map', {
 });
 
 function updateAttribution(online = true) {
-  const attrib = '<a class="highlight" href="/download/">free nautical chart (?)</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>';
+  const attrib = '<a class="highlight" href="/download/">freenauticalchart.net (?)</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>';
 
   if (!online) {
     map.attributionControl.setPrefix(attrib.replace('(?)', '(offline)'));
