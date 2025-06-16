@@ -560,11 +560,14 @@ L.LatLngGraticule = L.Layer.extend({
         }
       }
 
-      function border(inset = 0, width = 1) {
+      function border(inset = 0, width = 1, corners = false) {
         ctx.lineWidth = width;
         ctx.beginPath();
         const o = (ctx.lineWidth / 2) % 1;
         ctx.rect(inset + o, inset + o, ww - 2 * inset - o, hh - 2 * inset - o);
+        ctx.stroke();
+        if (!corners) return;
+        ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.lineTo(inset, inset);
         ctx.moveTo(ww, 0);
@@ -629,13 +632,12 @@ L.LatLngGraticule = L.Layer.extend({
         divisions(6, ppm > 100 ? 600 : ppm > 30 ? 300 : minutes ? 120 : 6);
       }
 
-
       ctx.strokeStyle = 'white';
       border(6, 12);
       ctx.strokeStyle = this.options.color;
       border(0);
       border(6);
-      border(12);
+      border(12, 1, true);
       zebras(3, 3, 'W');
       zebras(3, 3, 'N');
       zebras(3, 3, 'E');
