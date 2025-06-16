@@ -195,27 +195,22 @@ export async function addTideGaugesDE(map, preFetch = false) {
 
     const t0 = new Date(now.getTime() - 6 * 3600_000);
     const t1 = new Date(now.getTime() + 18 * 3600_000);
-    const curve1 = curve.filter(d => {
-      return true;
-      const t = new Date(d.timestamp);
-      return t0 < t && t < t1
-    });
-    const x = curve1.map(d => new Date(d.timestamp));
+    const x = curve.map(d => new Date(d.timestamp));
     const trace1 = {
       name: 'astro',
-      x: x, y: curve1.map(d => (d.astro + offset) / 100),
+      x: x, y: curve.map(d => (d.astro + offset) / 100),
       type: 'scatter', mode: 'lines',
       line: {color: '#3a99e8'},
     };
     const trace2 = {
       name: 'forecast',
-      x: x, y: curve1.map(d => (d.curveforecast + offset) / 100).map(v => v > 0 ? v : null),
+      x: x, y: curve.map(d => (d.curveforecast + offset) / 100).map(v => v > 0 ? v : null),
       type: 'scatter', mode: 'lines',
       line: {color: 'orange'},
     };
     const trace3 = {
       name: 'measured',
-      x: x, y: curve1.map(d => (d.measurement + offset) / 100).map(v => v > 0 ? v : null),
+      x: x, y: curve.map(d => (d.measurement + offset) / 100).map(v => v > 0 ? v : null),
       type: 'scatter', mode: 'lines',
       line: {color: 'red'},
     };
