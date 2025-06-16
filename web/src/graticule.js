@@ -194,10 +194,10 @@ L.LatLngGraticule = L.Layer.extend({
 // 	},
 
   _reset: function () {
-    var container = this._container,
-      canvas = this._canvas,
-      size = this._map.getSize(),
-      lt = this._map.containerPointToLayerPoint([0, 0]);
+    var container = this._container;
+    var canvas = this._canvas;
+    var size = this._map.getSize();
+    var lt = this._map.containerPointToLayerPoint([0, 0]);
 
     L.DomUtil.setPosition(container, lt);
 

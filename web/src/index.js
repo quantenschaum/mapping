@@ -16,11 +16,12 @@ import './favicon.ico';
 import './manifest.json';
 import './icon.png';
 import './icon.svg';
-import './style.css';
+import './style.less';
 import {log, debounce, logger} from './utils';
 import {legend} from './legend';
 import {degmin} from './graticule';
 import {NightSwitch} from './nightmode';
+import {PrintButton} from './print';
 import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
 import {addTidealAtlas, addTideGauges} from "./tides";
@@ -316,8 +317,10 @@ if (isDevMode || isStandalone) {
     new NavData().addTo(map);
   */
 
-  new NightSwitch({position: 'topleft'}).addTo(map);
+  new NightSwitch().addTo(map);
 }
+
+if (isDevMode || !isStandalone) new PrintButton().addTo(map);
 
 if (params.get('gpx') == '1') {
   import('./gpx').then(({GPXbutton}) => new GPXbutton({position: 'topleft', layers: layers}).addTo(map));

@@ -3,6 +3,7 @@ import {log} from './utils';
 import './nightmode.css';
 
 export const NightSwitch = L.Control.extend({
+  options: {position: 'topleft'},
   onAdd: function (map) {
     log('NightSwitch', 'brown', 'added');
     var div = L.DomUtil.create('div', 'nightswitch leaflet-bar');

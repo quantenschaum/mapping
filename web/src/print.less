@@ -1,0 +1,30 @@
+@media print {
+  #map, body {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  //.leaflet-control-container {
+  .leaflet-top, .leaflet-left, .leaflet-bar {
+    display: none;
+  }
+
+  .leaflet-control-attribution {
+    display: block !important;
+    //transform: translateY(-15px) translateX(-15px);
+    transform: translate(-15px, -15px);
+  }
+
+}
+
+.print {
+  width: 282mm !important;
+  height: 195mm !important;
+}
+
