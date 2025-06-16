@@ -565,6 +565,14 @@ L.LatLngGraticule = L.Layer.extend({
         ctx.beginPath();
         const o = (ctx.lineWidth / 2) % 1;
         ctx.rect(inset + o, inset + o, ww - 2 * inset - o, hh - 2 * inset - o);
+        ctx.moveTo(0, 0);
+        ctx.lineTo(inset, inset);
+        ctx.moveTo(ww, 0);
+        ctx.lineTo(ww - inset, inset);
+        ctx.moveTo(ww, hh);
+        ctx.lineTo(ww - inset, hh - inset);
+        ctx.moveTo(0, hh);
+        ctx.lineTo(inset, hh - inset);
         ctx.stroke();
       }
 
@@ -590,7 +598,8 @@ L.LatLngGraticule = L.Layer.extend({
         for (let i = 0, l = l0; l < lmax; i++) {
           l = l0 + i / step;
           const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
-          const p = lat ? [inset, c.y] : [c.x, inset];
+          const x = Math.min(Math.max(lat ? c.y : c.x, width), (lat ? hh : ww) - width);
+          const p = lat ? [inset, x] : [x, inset];
           if (i % 2 == n) ctx.moveTo(...p);
           else ctx.lineTo(...p);
         }
@@ -604,11 +613,13 @@ L.LatLngGraticule = L.Layer.extend({
           for (let i = 0, l = l0; l < lmax; i++) {
             l = l0 + i / interval;
             const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
+            const x = (lat ? c.y : c.x) + o;
+            if (x < width || x > (lat ? hh : ww) - width) continue;
             const a = opposite ? (lat ? ww : hh) - inset : inset;
-            const p0 = lat ? [a, c.y + o] : [c.x + o, a];
+            const p0 = lat ? [a, x] : [x, a];
             ctx.moveTo(...p0);
             const b = opposite ? (lat ? ww : hh) - width : width;
-            const p1 = lat ? [b, c.y + o] : [c.x + o, b];
+            const p1 = lat ? [b, x] : [x, b];
             ctx.lineTo(...p1);
           }
           ctx.stroke();
