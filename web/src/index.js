@@ -203,7 +203,7 @@ const map = L.map('map', {
 });
 
 function updateAttribution(online = true) {
-  const attrib = '<a class="highlight" href="/download/">&#x1F12F; free nautical chart (?)</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>';
+  const attrib = '<a class="highlight" href="/download/">free nautical chart (?)</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>';
 
   if (!online) {
     map.attributionControl.setPrefix(attrib.replace('(?)', '(offline)'));
@@ -213,8 +213,9 @@ function updateAttribution(online = true) {
   map.attributionControl.setPrefix(attrib);
 
   fetch(baseurl + '/updated').then(response => {
-    let dateHeader = response.headers.get('Last-Modified');
-    let date = new Date(dateHeader).toISOString().slice(0, 10);
+    console.log('updated', response);
+    if (!response.ok) return;
+    const date = new Date(response.headers.get('Last-Modified')).toISOString().slice(0, 10);
     map.attributionControl.setPrefix(attrib.replace('(?)', `(${date})`));
   }).catch(console.log);
 }
