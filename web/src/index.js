@@ -303,12 +303,12 @@ if (isDevMode || isStandalone) {
       map.on('locationfound', e => {
         const lat = degmin(e.latitude, 3, true);
         const lng = degmin(e.longitude, 3, false);
-        const sog = e.speed != null ? `SOG ${e.speed.toFixed(1) * 3600 / 1852}kn` : '';
+        const sog = e.speed != null ? `SOG ${(e.speed * 3600 / 1852).toFixed(1)}kn` : '';
         const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
         div.innerHTML = `<div>${lat} ${lng}</div><div>${sog} ${cog}</div>`;
         log('location', 'magenta', lat, lng, sog, cog);
         clearTimeout(timer);
-        timer = setTimeout(hide, 10000);
+        timer = setTimeout(hide, 60000);
       });
       return div;
     },
