@@ -276,7 +276,25 @@ updateOpacityControl();
 map.on('overlayadd overlayremove', debounce(updateOpacityControl));
 
 if (isDevMode || isStandalone) {
-  new LocateControl({flyTo: true}).addTo(map);
+  new LocateControl({
+    flyTo: true,
+    keepCurrentZoomLevel: true,
+    cacheLocation: false,
+    locateOptions: {
+      enableHighAccuracy: true,
+      maximumAge: 1000,
+    }
+  }).addTo(map);
+
+  map.on('locationfound', e => {
+    const lat = degmin(e.latitude, 3, true);
+    const lng = degmin(e.longitude, 3, false);
+    const sog = e.speed != null ? `SOG ${e.speed.toFixed(1) * 3600 / 1852}kn` : '';
+    const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
+
+    log('location', 'magenta', lat, lng, sog, cog);
+  });
+
   new NightSwitch({position: 'topleft'}).addTo(map);
 }
 
