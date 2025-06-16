@@ -199,7 +199,7 @@ if (params.get('bsh') == '1') {
 
 const map = L.map('map', {
   center: [54.264, 9.196],
-  zoom: 8, minZoom: 7, maxZoom: 18,
+  zoom: 8, minZoom: 6, maxZoom: 18,
   layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP NL']],
 });
 

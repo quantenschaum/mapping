@@ -34,24 +34,22 @@ L.LatLngGraticule = L.Layer.extend({
     color: '#333',
     fontColor: 'black',
     font: '12px Verdana',
-    lngLineCurved: 0,
-    latLineCurved: 0,
     zoomInterval: [
-      {start: 2, end: 4, interval: 30},
-      {start: 5, end: 5, interval: 20},
-      {start: 6, end: 6, interval: 10},
-      {start: 7, end: 7, interval: 5},
-      {start: 8, end: 8, interval: 2},
-      {start: 9, end: 9, interval: 1},
-      {start: 10, end: 10, interval: 30 / 60},
-      {start: 11, end: 11, interval: 15 / 60},
-      {start: 12, end: 12, interval: 10 / 60},
-      {start: 13, end: 13, interval: 5 / 60},
-      {start: 14, end: 14, interval: 2 / 60},
-      {start: 15, end: 15, interval: 1 / 60},
-      {start: 16, end: 16, interval: 1 / 60 / 2},
-      {start: 17, end: 17, interval: 1 / 60 / 5},
-      {start: 18, end: 18, interval: 1 / 60 / 10},
+      {start: 2, interval: 30},
+      {start: 5, interval: 20},
+      {start: 6, interval: 10},
+      {start: 7, interval: 5},
+      {start: 8, interval: 2},
+      {start: 9, interval: 1},
+      {start: 10, interval: 30 / 60},
+      {start: 11, interval: 15 / 60},
+      {start: 12, interval: 10 / 60},
+      {start: 13, interval: 5 / 60},
+      {start: 14, interval: 2 / 60},
+      {start: 15, interval: 1 / 60},
+      {start: 16, interval: 1 / 60 / 2},
+      {start: 17, interval: 1 / 60 / 5},
+      {start: 18, interval: 1 / 60 / 10},
     ],
     latFormatTickLabel: v => degmin(v, 2, true),
     lngFormatTickLabel: v => degmin(v, 2, false),
@@ -223,60 +221,28 @@ L.LatLngGraticule = L.Layer.extend({
   },
 
   __format_lat: function (lat) {
-    if (this.options.latFormatTickLabel) {
-      return this.options.latFormatTickLabel(lat);
-    }
-
-    // todo: format type of float
-    if (lat < 0) {
-      return '' + (lat * -1) + 'S';
-    } else if (lat > 0) {
-      return '' + lat + 'N';
-    }
-    return '' + lat;
+    return this.options.latFormatTickLabel(lat);
   },
 
   __format_lng: function (lng) {
-    if (this.options.lngFormatTickLabel) {
-      return this.options.lngFormatTickLabel(lng);
-    }
-
-    // todo: format type of float
-    if (lng > 180) {
-      return '' + (360 - lng) + 'W';
-    } else if (lng > 0 && lng < 180) {
-      return '' + lng + 'E';
-    } else if (lng < 0 && lng > -180) {
-      return '' + (lng * -1) + 'W';
-    } else if (lng == -180) {
-      return '' + (lng * -1);
-    } else if (lng < -180) {
-      return '' + (360 + lng) + 'W';
-    }
-    return '' + lng;
+    return this.options.lngFormatTickLabel(lng);
   },
 
   __calcInterval: function () {
     var zoom = this._map.getZoom();
-    if (this._currZoom != zoom) {
+    if (1 || this._currZoom != zoom) {
       this._currLngInterval = 0;
       this._currLatInterval = 0;
       this._currZoom = zoom;
     }
 
-    var interv;
-
     if (!this._currLngInterval) {
       try {
-        for (var idx in this.options.lngInterval) {
-          var dict = this.options.lngInterval[idx];
-          if (dict.start <= zoom) {
-            if (dict.end && dict.end >= zoom) {
-              this._currLngInterval = dict.interval;
-              break;
-            }
+        this.options.lngInterval.forEach(i => {
+          if (i.start <= zoom) {
+            this._currLngInterval = i.interval;
           }
-        }
+        });
       } catch (e) {
         this._currLngInterval = 0;
       }
@@ -284,15 +250,13 @@ L.LatLngGraticule = L.Layer.extend({
 
     if (!this._currLatInterval) {
       try {
-        for (var idx in this.options.latInterval) {
-          var dict = this.options.latInterval[idx];
-          if (dict.start <= zoom) {
-            if (dict.end && dict.end >= zoom) {
-              this._currLatInterval = dict.interval;
-              break;
-            }
+        var f = 1 / Math.cos(this._map.getCenter().lat * Math.PI / 180);
+        console.log(f, Math.log2(f));
+        this.options.latInterval.forEach(i => {
+          if (i.start <= zoom + Math.log2(f) + 0.3) {
+            this._currLatInterval = i.interval;
           }
-        }
+        });
       } catch (e) {
         this._currLatInterval = 0;
       }
@@ -314,335 +278,239 @@ L.LatLngGraticule = L.Layer.extend({
       return 0;
     };
 
-    var canvas = this._canvas,
-      map = this._map,
-      curvedLon = this.options.lngLineCurved,
-      curvedLat = this.options.latLineCurved;
+    const canvas = this._canvas;
+    const map = this._map;
 
-    if (L.Browser.canvas && map) {
-      if (!this._currLngInterval || !this._currLatInterval) {
-        this.__calcInterval();
-      }
-
-      var latInterval = this._currLatInterval, lngInterval = this._currLngInterval;
-
-      var ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.lineWidth = this.options.weight;
-      ctx.strokeStyle = this.options.color;
-      ctx.fillStyle = this.options.fontColor;
-
-      const shift = 15;
-
-      if (this.options.font) {
-        ctx.font = this.options.font;
-      }
-      var txtWidth = ctx.measureText('0').width;
-      var txtHeight = 12;
-      try {
-        var _font_size = ctx.font.split(' ')[0];
-        txtHeight = _parse_px_to_int(_font_size);
-      } catch (e) {
-      }
-
-      const ww = canvas.width;
-      const hh = canvas.height;
-
-      const lt = map.containerPointToLatLng(L.point(0, 0));
-      const rt = map.containerPointToLatLng(L.point(ww, 0));
-      const rb = map.containerPointToLatLng(L.point(ww, hh));
-
-      var _lat_b = rb.lat, _lat_t = lt.lat;
-      var _lon_l = lt.lng, _lon_r = rt.lng;
-
-      var _point_per_lat = (_lat_t - _lat_b) / (hh * 0.2);
-      if (_point_per_lat < 1) {
-        _point_per_lat = 1;
-      }
-      if (_lat_b < -90) {
-        _lat_b = -90;
-      } else {
-        _lat_b = parseInt(_lat_b - _point_per_lat, 10);
-      }
-
-      if (_lat_t > 90) {
-        _lat_t = 90;
-      } else {
-        _lat_t = parseInt(_lat_t + _point_per_lat, 10);
-      }
-
-      var _point_per_lon = (_lon_r - _lon_l) / (ww * 0.2);
-      if (_point_per_lon < 1) {
-        _point_per_lon = 1;
-      }
-      if (_lon_l > 0 && _lon_r < 0) {
-        _lon_r += 360;
-      }
-      _lon_r = parseInt(_lon_r + _point_per_lon, 10);
-      _lon_l = parseInt(_lon_l - _point_per_lon, 10);
-
-      var ll, latstr, lngstr, _lon_delta = 0.5;
-
-      function __draw_lat_line(self, lat_tick) {
-        ll = map.latLngToContainerPoint(L.latLng(lat_tick, _lon_l));
-        latstr = self.__format_lat(lat_tick);
-        txtWidth = ctx.measureText(latstr).width;
-
-        if (curvedLat) {
-          if (typeof (curvedLat) == 'number') {
-            _lon_delta = curvedLat;
-          }
-
-          var __lon_left = _lon_l, __lon_right = _lon_r;
-          if (ll.x > 0) {
-            var __lon_left = map.containerPointToLatLng(L.point(0, ll.y));
-            __lon_left = __lon_left.lng - _point_per_lon;
-            ll.x = 0;
-          }
-          var rr = map.latLngToContainerPoint(L.latLng(lat_tick, __lon_right));
-          if (rr.x < ww) {
-            __lon_right = map.containerPointToLatLng(L.point(ww, rr.y));
-            __lon_right = __lon_right.lng + _point_per_lon;
-            if (__lon_left > 0 && __lon_right < 0) {
-              __lon_right += 360;
-            }
-          }
-
-          ctx.beginPath();
-          ctx.moveTo(ll.x, ll.y);
-          var _prev_p = null;
-          for (var j = __lon_left; j <= __lon_right; j += _lon_delta) {
-            rr = map.latLngToContainerPoint(L.latLng(lat_tick, j));
-            ctx.lineTo(rr.x, rr.y);
-
-            if (self.options.showLabel && label && _prev_p != null) {
-              if (_prev_p.x < 0 && rr.x >= 0) {
-                var _s = (rr.x - 0) / (rr.x - _prev_p.x);
-                var _y = rr.y - ((rr.y - _prev_p.y) * _s);
-                ctx.fillText(latstr, 0, _y + (txtHeight / 2));
-              } else if (_prev_p.x <= (ww - txtWidth) && rr.x > (ww - txtWidth)) {
-                var _s = (rr.x - ww) / (rr.x - _prev_p.x);
-                var _y = rr.y - ((rr.y - _prev_p.y) * _s);
-                ctx.fillText(latstr, ww - txtWidth, _y + (txtHeight / 2) - 2);
-              }
-            }
-
-            _prev_p = {x: rr.x, y: rr.y, lon: j, lat: i};
-          }
-          ctx.stroke();
-        } else {
-          var __lon_right = _lon_r;
-          var rr = map.latLngToContainerPoint(L.latLng(lat_tick, __lon_right));
-          if (curvedLon) {
-            __lon_right = map.containerPointToLatLng(L.point(0, rr.y));
-            __lon_right = __lon_right.lng;
-            rr = map.latLngToContainerPoint(L.latLng(lat_tick, __lon_right));
-
-            var __lon_left = map.containerPointToLatLng(L.point(ww, rr.y));
-            __lon_left = __lon_left.lng;
-            ll = map.latLngToContainerPoint(L.latLng(lat_tick, __lon_left));
-          }
-
-          ctx.beginPath();
-          const o = (ctx.lineWidth / 2) % 1;
-          ctx.moveTo(ll.x - 1, ll.y + o);
-          ctx.lineTo(rr.x + 1, rr.y + o);
-          ctx.stroke();
-          if (self.options.showLabel && label) {
-            const _yy = ll.y + (txtHeight / 2) - 2;
-            ctx.fillText(latstr, 0 + shift, _yy);
-            ctx.fillText(latstr, ww - txtWidth - shift, _yy);
-            const w = ctx.lineWidth;
-            const s = ctx.strokeStyle;
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = 'white';
-            ctx.strokeText(latstr, 0 + shift, _yy);
-            ctx.strokeText(latstr, ww - txtWidth - shift, _yy);
-            ctx.lineWidth = w;
-            ctx.strokeStyle = s;
-            ctx.fillText(latstr, 0 + shift, _yy);
-            ctx.fillText(latstr, ww - txtWidth - shift, _yy);
-          }
-        }
-      }
-
-      if (latInterval > 0) {
-        for (var i = latInterval; i <= _lat_t; i += latInterval) {
-          if (i >= _lat_b) {
-            __draw_lat_line(this, i);
-          }
-        }
-        for (var i = 0; i >= _lat_b; i -= latInterval) {
-          if (i <= _lat_t) {
-            __draw_lat_line(this, i);
-          }
-        }
-      }
-
-      function __draw_lon_line(self, lon_tick) {
-        lngstr = self.__format_lng(lon_tick);
-        txtWidth = ctx.measureText(lngstr).width;
-        var bb = map.latLngToContainerPoint(L.latLng(_lat_b, lon_tick));
-
-        if (curvedLon) {
-          if (typeof (curvedLon) == 'number') {
-            _lat_delta = curvedLon;
-          }
-
-          ctx.beginPath();
-          ctx.moveTo(bb.x, bb.y);
-          var _prev_p = null;
-          for (var j = _lat_b; j < _lat_t; j += _lat_delta) {
-            var tt = map.latLngToContainerPoint(L.latLng(j, lon_tick));
-            ctx.lineTo(tt.x, tt.y);
-
-            if (self.options.showLabel && label && _prev_p != null) {
-              if (_prev_p.y > 8 && tt.y <= 8) {
-                ctx.fillText(lngstr, tt.x - (txtWidth / 2), txtHeight);
-              } else if (_prev_p.y >= hh && tt.y < hh) {
-                ctx.fillText(lngstr, tt.x - (txtWidth / 2), hh - 2);
-              }
-            }
-
-            _prev_p = {x: tt.x, y: tt.y, lon: lon_tick, lat: j};
-          }
-          ctx.stroke();
-        } else {
-          var __lat_top = _lat_t;
-          var tt = map.latLngToContainerPoint(L.latLng(__lat_top, lon_tick));
-          if (curvedLat) {
-            __lat_top = map.containerPointToLatLng(L.point(tt.x, 0));
-            __lat_top = __lat_top.lat;
-            if (__lat_top > 90) {
-              __lat_top = 90;
-            }
-            tt = map.latLngToContainerPoint(L.latLng(__lat_top, lon_tick));
-
-            var __lat_bottom = map.containerPointToLatLng(L.point(bb.x, hh));
-            __lat_bottom = __lat_bottom.lat;
-            if (__lat_bottom < -90) {
-              __lat_bottom = -90;
-            }
-            bb = map.latLngToContainerPoint(L.latLng(__lat_bottom, lon_tick));
-          }
-
-          ctx.beginPath();
-          const o = (ctx.lineWidth / 2) % 1;
-          ctx.moveTo(tt.x + o, tt.y + 1);
-          ctx.lineTo(bb.x + o, bb.y - 1);
-          ctx.stroke();
-
-          if (self.options.showLabel && label) {
-            const w = ctx.lineWidth;
-            const s = ctx.strokeStyle;
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = 'white';
-            ctx.strokeText(lngstr, tt.x - (txtWidth / 2), txtHeight - 1 + shift);
-            ctx.strokeText(lngstr, bb.x - (txtWidth / 2), hh - 1 - shift);
-            ctx.lineWidth = w;
-            ctx.strokeStyle = s;
-            ctx.fillText(lngstr, tt.x - (txtWidth / 2), txtHeight - 1 + shift);
-            ctx.fillText(lngstr, bb.x - (txtWidth / 2), hh - 1 - shift);
-          }
-        }
-      }
-
-      if (lngInterval > 0) {
-        for (var i = lngInterval; i <= _lon_r; i += lngInterval) {
-          if (i >= _lon_l) {
-            __draw_lon_line(this, i);
-          }
-        }
-        for (var i = 0; i >= _lon_l; i -= lngInterval) {
-          if (i <= _lon_r) {
-            __draw_lon_line(this, i);
-          }
-        }
-      }
-
-      function border(inset = 0, width = 1, corners = false) {
-        ctx.lineWidth = width;
-        ctx.beginPath();
-        const o = (ctx.lineWidth / 2) % 1;
-        ctx.rect(inset + o, inset + o, ww - 2 * inset - o, hh - 2 * inset - o);
-        ctx.stroke();
-        if (!corners) return;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(inset, inset);
-        ctx.moveTo(ww, 0);
-        ctx.lineTo(ww - inset, inset);
-        ctx.moveTo(ww, hh);
-        ctx.lineTo(ww - inset, hh - inset);
-        ctx.moveTo(0, hh);
-        ctx.lineTo(inset, hh - inset);
-        ctx.stroke();
-      }
-
-      function zebras(inset, weight, side, width = 12) {
-        const lat = side == 'W' || side == 'E';
-        const opposite = side == 'E' || side == 'S';
-        if (lat) var lmin = rb.lat, lmax = lt.lat, size = hh;
-        else var lmin = lt.lng, lmax = rb.lng, size = ww;
-        const ppm = size / (lmax - lmin) / 60; // px per minute
-        // console.log('zebras', side, lmin, lmax, size, ppm);
-        const interval = lat ? latInterval : lngInterval;
-        const minutes = interval < 1;
-        const step = minutes ? 60 : 1;
-        const l0 = minutes ? Math.floor(lmin * step) / step : Math.floor(lmin);
-        const n = Math.floor(lmin * step) % 2 == 0 ? 0 : 1;
-
-        // minute zebra bars
-        ctx.lineWidth = weight;
-        ctx.beginPath();
-        // ctx.moveTo(...p);
-        var o = (opposite ? -1 : +1) * ((ctx.lineWidth / 2) % 1);
-        inset = opposite ? (lat ? ww : hh) - inset - o : inset + o;
-        for (let i = 0, l = l0; l < lmax; i++) {
-          l = l0 + i / step;
-          const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
-          const x = Math.min(Math.max(lat ? c.y : c.x, width), (lat ? hh : ww) - width);
-          const p = lat ? [inset, x] : [x, inset];
-          if (i % 2 == n) ctx.moveTo(...p);
-          else ctx.lineTo(...p);
-        }
-        ctx.stroke();
-
-        // minute divisions
-        function divisions(inset, interval) {
-          ctx.lineWidth = 1;
-          o = ((ctx.lineWidth / 2) % 1);
-          ctx.beginPath();
-          for (let i = 0, l = l0; l < lmax; i++) {
-            l = l0 + i / interval;
-            const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
-            const x = (lat ? c.y : c.x) + o;
-            if (x < width || x > (lat ? hh : ww) - width) continue;
-            const a = opposite ? (lat ? ww : hh) - inset : inset;
-            const p0 = lat ? [a, x] : [x, a];
-            ctx.moveTo(...p0);
-            const b = opposite ? (lat ? ww : hh) - width : width;
-            const p1 = lat ? [b, x] : [x, b];
-            ctx.lineTo(...p1);
-          }
-          ctx.stroke();
-        }
-
-        divisions(0, ppm > 100 ? 120 : minutes ? 60 : 2);
-        divisions(6, ppm > 100 ? 600 : ppm > 30 ? 300 : minutes ? 120 : 6);
-      }
-
-      ctx.strokeStyle = 'white';
-      border(6, 12);
-      ctx.strokeStyle = this.options.color;
-      border(0);
-      border(6);
-      border(12, 1, true);
-      zebras(3, 3, 'W');
-      zebras(3, 3, 'N');
-      zebras(3, 3, 'E');
-      zebras(3, 3, 'S');
+    if (!L.Browser.canvas || !map) return;
+    if (!this._currLngInterval || !this._currLatInterval) {
+      this.__calcInterval();
     }
+
+    const latInterval = this._currLatInterval, lngInterval = this._currLngInterval;
+
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.lineWidth = this.options.weight;
+    ctx.strokeStyle = this.options.color;
+    ctx.fillStyle = this.options.fontColor;
+
+    const shift = 15;
+
+    if (this.options.font) {
+      ctx.font = this.options.font;
+    }
+    var txtWidth = ctx.measureText('0').width;
+    var txtHeight = 12;
+    try {
+      var _font_size = ctx.font.split(' ')[0];
+      txtHeight = _parse_px_to_int(_font_size);
+    } catch (e) {
+    }
+
+    const ww = canvas.width;
+    const hh = canvas.height;
+
+    const lt = map.containerPointToLatLng(L.point(0, 0));
+    const rt = map.containerPointToLatLng(L.point(ww, 0));
+    const rb = map.containerPointToLatLng(L.point(ww, hh));
+
+    var _lat_b = rb.lat, _lat_t = lt.lat;
+    var _lon_l = lt.lng, _lon_r = rt.lng;
+
+    var _point_per_lat = (_lat_t - _lat_b) / (hh * 0.2);
+    if (_point_per_lat < 1) {
+      _point_per_lat = 1;
+    }
+    if (_lat_b < -90) {
+      _lat_b = -90;
+    } else {
+      _lat_b = parseInt(_lat_b - _point_per_lat, 10);
+    }
+
+    if (_lat_t > 90) {
+      _lat_t = 90;
+    } else {
+      _lat_t = parseInt(_lat_t + _point_per_lat, 10);
+    }
+
+    var _point_per_lon = (_lon_r - _lon_l) / (ww * 0.2);
+    if (_point_per_lon < 1) {
+      _point_per_lon = 1;
+    }
+    if (_lon_l > 0 && _lon_r < 0) {
+      _lon_r += 360;
+    }
+    _lon_r = parseInt(_lon_r + _point_per_lon, 10);
+    _lon_l = parseInt(_lon_l - _point_per_lon, 10);
+
+    var ll, latstr, lngstr, _lon_delta = 0.5;
+
+    function __draw_lat_line(self, lat_tick) {
+      ll = map.latLngToContainerPoint(L.latLng(lat_tick, _lon_l));
+      latstr = self.__format_lat(lat_tick);
+      txtWidth = ctx.measureText(latstr).width;
+
+      var __lon_right = _lon_r;
+      var rr = map.latLngToContainerPoint(L.latLng(lat_tick, __lon_right));
+
+      ctx.beginPath();
+      const o = (ctx.lineWidth / 2) % 1;
+      ctx.moveTo(ll.x - 1, ll.y + o);
+      ctx.lineTo(rr.x + 1, rr.y + o);
+      ctx.stroke();
+      if (self.options.showLabel && label) {
+        const _yy = ll.y + (txtHeight / 2) - 2;
+        ctx.fillText(latstr, 0 + shift, _yy);
+        ctx.fillText(latstr, ww - txtWidth - shift, _yy);
+        const w = ctx.lineWidth;
+        const s = ctx.strokeStyle;
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'white';
+        ctx.strokeText(latstr, 0 + shift, _yy);
+        ctx.strokeText(latstr, ww - txtWidth - shift, _yy);
+        ctx.lineWidth = w;
+        ctx.strokeStyle = s;
+        ctx.fillText(latstr, 0 + shift, _yy);
+        ctx.fillText(latstr, ww - txtWidth - shift, _yy);
+      }
+    }
+
+    if (latInterval > 0) {
+      for (var i = latInterval; i <= _lat_t; i += latInterval) {
+        if (i >= _lat_b) {
+          __draw_lat_line(this, i);
+        }
+      }
+      for (var i = 0; i >= _lat_b; i -= latInterval) {
+        if (i <= _lat_t) {
+          __draw_lat_line(this, i);
+        }
+      }
+    }
+
+    function __draw_lon_line(self, lon_tick) {
+      lngstr = self.__format_lng(lon_tick);
+      txtWidth = ctx.measureText(lngstr).width;
+      var bb = map.latLngToContainerPoint(L.latLng(_lat_b, lon_tick));
+
+      var __lat_top = _lat_t;
+      var tt = map.latLngToContainerPoint(L.latLng(__lat_top, lon_tick));
+
+      ctx.beginPath();
+      const o = (ctx.lineWidth / 2) % 1;
+      ctx.moveTo(tt.x + o, tt.y + 1);
+      ctx.lineTo(bb.x + o, bb.y - 1);
+      ctx.stroke();
+
+      if (self.options.showLabel && label) {
+        const w = ctx.lineWidth;
+        const s = ctx.strokeStyle;
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'white';
+        ctx.strokeText(lngstr, tt.x - (txtWidth / 2), txtHeight - 1 + shift);
+        ctx.strokeText(lngstr, bb.x - (txtWidth / 2), hh - 1 - shift);
+        ctx.lineWidth = w;
+        ctx.strokeStyle = s;
+        ctx.fillText(lngstr, tt.x - (txtWidth / 2), txtHeight - 1 + shift);
+        ctx.fillText(lngstr, bb.x - (txtWidth / 2), hh - 1 - shift);
+      }
+    }
+
+    if (lngInterval > 0) {
+      for (var i = lngInterval; i <= _lon_r; i += lngInterval) {
+        if (i >= _lon_l) {
+          __draw_lon_line(this, i);
+        }
+      }
+      for (var i = 0; i >= _lon_l; i -= lngInterval) {
+        if (i <= _lon_r) {
+          __draw_lon_line(this, i);
+        }
+      }
+    }
+
+    function border(inset = 0, width = 1, corners = false) {
+      ctx.lineWidth = width;
+      ctx.beginPath();
+      const o = (ctx.lineWidth / 2) % 1;
+      ctx.rect(inset + o, inset + o, ww - 2 * inset - o, hh - 2 * inset - o);
+      ctx.stroke();
+      if (!corners) return;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(inset, inset);
+      ctx.moveTo(ww, 0);
+      ctx.lineTo(ww - inset, inset);
+      ctx.moveTo(ww, hh);
+      ctx.lineTo(ww - inset, hh - inset);
+      ctx.moveTo(0, hh);
+      ctx.lineTo(inset, hh - inset);
+      ctx.stroke();
+    }
+
+    function zebras(inset, weight, side, width = 12) {
+      const lat = side == 'W' || side == 'E';
+      const opposite = side == 'E' || side == 'S';
+      if (lat) var lmin = rb.lat, lmax = lt.lat, size = hh;
+      else var lmin = lt.lng, lmax = rb.lng, size = ww;
+      const ppm = size / (lmax - lmin) / 60; // px per minute
+      const interval = lat ? latInterval : lngInterval;
+      const minutes = interval < 1;
+      // console.log('zebras', side, lmin, lmax, size, ppm, interval, minutes);
+      const step = minutes ? 60 : 1;
+      const l0 = minutes ? Math.floor(lmin * step) / step : Math.floor(lmin);
+      const n = Math.floor(lmin * step) % 2 == 0 ? 0 : 1;
+
+      // minute zebra bars
+      ctx.lineWidth = weight;
+      ctx.beginPath();
+      // ctx.moveTo(...p);
+      var o = (opposite ? -1 : +1) * ((ctx.lineWidth / 2) % 1);
+      inset = opposite ? (lat ? ww : hh) - inset - o : inset + o;
+      for (let i = 0, l = l0; l < lmax; i++) {
+        l = l0 + i / step;
+        const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
+        const x = Math.min(Math.max(lat ? c.y : c.x, width), (lat ? hh : ww) - width);
+        const p = lat ? [inset, x] : [x, inset];
+        if (i % 2 == n) ctx.moveTo(...p);
+        else ctx.lineTo(...p);
+      }
+      ctx.stroke();
+
+      // minute divisions
+      function divisions(inset, interval) {
+        ctx.lineWidth = 1;
+        o = ((ctx.lineWidth / 2) % 1);
+        ctx.beginPath();
+        for (let i = 0, l = l0; l < lmax; i++) {
+          l = l0 + i / interval;
+          const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
+          const x = (lat ? c.y : c.x) + o;
+          if (x < width || x > (lat ? hh : ww) - width) continue;
+          const a = opposite ? (lat ? ww : hh) - inset : inset;
+          const p0 = lat ? [a, x] : [x, a];
+          ctx.moveTo(...p0);
+          const b = opposite ? (lat ? ww : hh) - width : width;
+          const p1 = lat ? [b, x] : [x, b];
+          ctx.lineTo(...p1);
+        }
+        ctx.stroke();
+      }
+
+      divisions(0, ppm > 100 ? 120 : minutes ? 60 : 2);
+      divisions(6, ppm > 100 ? 600 : ppm > 30 ? 300 : minutes ? 120 : 6);
+    }
+
+    ctx.strokeStyle = 'white';
+    border(6, 12);
+    ctx.strokeStyle = this.options.color;
+    border(0);
+    border(6);
+    border(12, 1, true);
+    zebras(3, 3, 'W');
+    zebras(3, 3, 'N');
+    zebras(3, 3, 'E');
+    zebras(3, 3, 'S');
   }
 
 });
