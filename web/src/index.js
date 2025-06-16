@@ -224,7 +224,6 @@ updateAttribution();
 window.addEventListener('online', () => updateAttribution(true));
 window.addEventListener('offline', () => updateAttribution(false));
 
-new LocateControl({flyTo: true}).addTo(map);
 
 L.control.mousePosition({
   separator: ' ',
@@ -276,7 +275,10 @@ updateOpacityControl();
 
 map.on('overlayadd overlayremove', debounce(updateOpacityControl));
 
-new NightSwitch({position: 'topleft'}).addTo(map);
+if (isDevMode || isStandalone) {
+  new LocateControl({flyTo: true}).addTo(map);
+  new NightSwitch({position: 'topleft'}).addTo(map);
+}
 
 if (params.get('gpx') == '1') {
   import('./gpx').then(({GPXbutton}) => new GPXbutton({position: 'topleft', layers: layers}).addTo(map));
