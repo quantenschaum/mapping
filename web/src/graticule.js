@@ -31,7 +31,7 @@ L.LatLngGraticule = L.Layer.extend({
     showLabel: true,
     opacity: 1,
     weight: 1,
-    color: 'gray',
+    color: '#333',
     fontColor: 'black',
     font: '12px Verdana',
     lngLineCurved: 0,
@@ -300,6 +300,7 @@ L.LatLngGraticule = L.Layer.extend({
   },
 
   __draw: function (label) {
+
     function _parse_px_to_int(txt) {
       if (txt.length > 2) {
         if (txt.charAt(txt.length - 2) == 'p') {
@@ -323,14 +324,15 @@ L.LatLngGraticule = L.Layer.extend({
         this.__calcInterval();
       }
 
-      var latInterval = this._currLatInterval,
-        lngInterval = this._currLngInterval;
+      var latInterval = this._currLatInterval, lngInterval = this._currLngInterval;
 
       var ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.lineWidth = this.options.weight;
       ctx.strokeStyle = this.options.color;
       ctx.fillStyle = this.options.fontColor;
+
+      const shift = 15;
 
       if (this.options.font) {
         ctx.font = this.options.font;
@@ -343,17 +345,15 @@ L.LatLngGraticule = L.Layer.extend({
       } catch (e) {
       }
 
-      var ww = canvas.width,
-        hh = canvas.height;
+      const ww = canvas.width;
+      const hh = canvas.height;
 
-      var lt = map.containerPointToLatLng(L.point(0, 0));
-      var rt = map.containerPointToLatLng(L.point(ww, 0));
-      var rb = map.containerPointToLatLng(L.point(ww, hh));
+      const lt = map.containerPointToLatLng(L.point(0, 0));
+      const rt = map.containerPointToLatLng(L.point(ww, 0));
+      const rb = map.containerPointToLatLng(L.point(ww, hh));
 
-      var _lat_b = rb.lat,
-        _lat_t = lt.lat;
-      var _lon_l = lt.lng,
-        _lon_r = rt.lng;
+      var _lat_b = rb.lat, _lat_t = lt.lat;
+      var _lon_l = lt.lng, _lon_r = rt.lng;
 
       var _point_per_lat = (_lat_t - _lat_b) / (hh * 0.2);
       if (_point_per_lat < 1) {
@@ -384,7 +384,6 @@ L.LatLngGraticule = L.Layer.extend({
       var ll, latstr, lngstr, _lon_delta = 0.5;
 
       function __draw_lat_line(self, lat_tick) {
-        console.log('draw lat line', self, lat_tick);
         ll = map.latLngToContainerPoint(L.latLng(lat_tick, _lon_l));
         latstr = self.__format_lat(lat_tick);
         txtWidth = ctx.measureText(latstr).width;
@@ -450,9 +449,19 @@ L.LatLngGraticule = L.Layer.extend({
           ctx.lineTo(rr.x + 1, rr.y + o);
           ctx.stroke();
           if (self.options.showLabel && label) {
-            var _yy = ll.y + (txtHeight / 2) - 2;
-            ctx.fillText(latstr, 0, _yy);
-            ctx.fillText(latstr, ww - txtWidth, _yy);
+            const _yy = ll.y + (txtHeight / 2) - 2;
+            ctx.fillText(latstr, 0 + shift, _yy);
+            ctx.fillText(latstr, ww - txtWidth - shift, _yy);
+            const w = ctx.lineWidth;
+            const s = ctx.strokeStyle;
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = 'white';
+            ctx.strokeText(latstr, 0 + shift, _yy);
+            ctx.strokeText(latstr, ww - txtWidth - shift, _yy);
+            ctx.lineWidth = w;
+            ctx.strokeStyle = s;
+            ctx.fillText(latstr, 0 + shift, _yy);
+            ctx.fillText(latstr, ww - txtWidth - shift, _yy);
           }
         }
       }
@@ -524,11 +533,19 @@ L.LatLngGraticule = L.Layer.extend({
           ctx.stroke();
 
           if (self.options.showLabel && label) {
-            ctx.fillText(lngstr, tt.x - (txtWidth / 2), txtHeight + 1);
-            ctx.fillText(lngstr, bb.x - (txtWidth / 2), hh - 3);
+            const w = ctx.lineWidth;
+            const s = ctx.strokeStyle;
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = 'white';
+            ctx.strokeText(lngstr, tt.x - (txtWidth / 2), txtHeight - 1 + shift);
+            ctx.strokeText(lngstr, bb.x - (txtWidth / 2), hh - 1 - shift);
+            ctx.lineWidth = w;
+            ctx.strokeStyle = s;
+            ctx.fillText(lngstr, tt.x - (txtWidth / 2), txtHeight - 1 + shift);
+            ctx.fillText(lngstr, bb.x - (txtWidth / 2), hh - 1 - shift);
           }
         }
-      };
+      }
 
       if (lngInterval > 0) {
         for (var i = lngInterval; i <= _lon_r; i += lngInterval) {
@@ -542,6 +559,76 @@ L.LatLngGraticule = L.Layer.extend({
           }
         }
       }
+
+      function border(inset = 0, width = 1) {
+        ctx.lineWidth = width;
+        ctx.beginPath();
+        const o = (ctx.lineWidth / 2) % 1;
+        ctx.rect(inset + o, inset + o, ww - 2 * inset - o, hh - 2 * inset - o);
+        ctx.stroke();
+      }
+
+      function zebras(inset, weight, side, width = 12) {
+        const lat = side == 'W' || side == 'E';
+        const opposite = side == 'E' || side == 'S';
+        if (lat) var lmin = rb.lat, lmax = lt.lat, size = hh;
+        else var lmin = lt.lng, lmax = rb.lng, size = ww;
+        const ppm = size / (lmax - lmin) / 60; // px per minute
+        // console.log('zebras', side, lmin, lmax, size, ppm);
+        const interval = lat ? latInterval : lngInterval;
+        const minutes = interval < 2;
+        const step = minutes ? 60 : 1;
+        const l0 = minutes ? Math.floor(lmin * step) / step : Math.floor(lmin);
+        const n = Math.floor(lmin * step) % 2 == 0 ? 0 : 1;
+
+        // minute zebra bars
+        ctx.lineWidth = weight;
+        ctx.beginPath();
+        // ctx.moveTo(...p);
+        var o = (opposite ? -1 : +1) * ((ctx.lineWidth / 2) % 1);
+        inset = opposite ? (lat ? ww : hh) - inset - o : inset + o;
+        for (let i = 0, l = l0; l < lmax; i++) {
+          l = l0 + i / step;
+          const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
+          const p = lat ? [inset, c.y] : [c.x, inset];
+          if (i % 2 == n) ctx.moveTo(...p);
+          else ctx.lineTo(...p);
+        }
+        ctx.stroke();
+
+        // minute divisions
+        function divisions(inset, interval) {
+          ctx.lineWidth = 1;
+          o = ((ctx.lineWidth / 2) % 1);
+          ctx.beginPath();
+          for (let i = 0, l = l0; l < lmax; i++) {
+            l = l0 + i / interval;
+            const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
+            const a = opposite ? (lat ? ww : hh) - inset : inset;
+            const p0 = lat ? [a, c.y + o] : [c.x + o, a];
+            ctx.moveTo(...p0);
+            const b = opposite ? (lat ? ww : hh) - width : width;
+            const p1 = lat ? [b, c.y + o] : [c.x + o, b];
+            ctx.lineTo(...p1);
+          }
+          ctx.stroke();
+        }
+
+        divisions(0, ppm > 100 ? 120 : minutes ? 60 : 2);
+        divisions(6, ppm > 100 ? 600 : ppm > 30 ? 300 : minutes ? 120 : 6);
+      }
+
+
+      ctx.strokeStyle = 'white';
+      border(6, 12);
+      ctx.strokeStyle = this.options.color;
+      border(0);
+      border(6);
+      border(12);
+      zebras(3, 3, 'W');
+      zebras(3, 3, 'N');
+      zebras(3, 3, 'E');
+      zebras(3, 3, 'S');
     }
   }
 

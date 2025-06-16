@@ -30,14 +30,6 @@ html, body, #map {
   /*animation-fill-mode: both;*/
 }
 
-@keyframes blink {
-  0%, 100% {
-  }
-  50% {
-    background-color: blue;
-  }
-}
-
 @media (max-width: 600px) {
   .leaflet-control-attribution {
     max-width: 70%;
@@ -49,3 +41,22 @@ html, body, #map {
     /*display: none;*/
   }
 }
+
+@media print {
+  html, body {
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  #map {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .leaflet-control-container {
+    display: none !important;
+  }
+
+}
+

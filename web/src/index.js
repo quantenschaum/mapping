@@ -4,11 +4,11 @@ import 'leaflet.tilelayer.fallback';
 import '@kvforksorg/leaflet.polylinemeasure';
 import '@kvforksorg/leaflet.polylinemeasure/Leaflet.PolylineMeasure.css';
 import 'leaflet.control.opacity';
-import 'leaflet.nauticscale/dist/leaflet.nauticscale';
+// import 'leaflet.nauticscale/dist/leaflet.nauticscale';
 import {LocateControl} from 'leaflet.locatecontrol';
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
-import 'leaflet-mouse-position';
-import 'leaflet-mouse-position/src/L.Control.MousePosition.css';
+// import 'leaflet-mouse-position';
+// import 'leaflet-mouse-position/src/L.Control.MousePosition.css';
 import {OpenLocationCode} from 'open-location-code';
 
 // npx png-to-ico src/favicon.png >src/favicon.ico
@@ -19,7 +19,7 @@ import './icon.svg';
 import './style.css';
 import {log, debounce, logger} from './utils';
 import {legend} from './legend';
-import {grid, degmin} from './grid';
+import {degmin} from './graticule';
 import {NightSwitch} from './nightmode';
 import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
@@ -90,8 +90,9 @@ const basemaps = {
   }),
 };
 
+
 const overlays = {
-  'Grid': grid(params.get('dec')),
+  'Grid': L.latlngGraticule({opacityControl: false}),
   'EMODnet Bathymetry': L.tileLayer.wms('https://ows.emodnet-bathymetry.eu/wms', {
     version: '1.3.0',
     transparent: 'true',
@@ -224,13 +225,13 @@ window.addEventListener('online', () => updateAttribution(true));
 window.addEventListener('offline', () => updateAttribution(false));
 
 
-L.control.mousePosition({
-  separator: ' ',
-  latFormatter: v => degmin(v, 3, true),
-  lngFormatter: v => degmin(v, 3, false),
-}).addTo(map);
+// L.control.mousePosition({
+//   separator: ' ',
+//   latFormatter: v => degmin(v, 3, true),
+//   lngFormatter: v => degmin(v, 3, false),
+// }).addTo(map);
 
-map.addControl(new L.Control.ScaleNautic({metric: true, imperial: false, nautic: true}));
+// map.addControl(new L.Control.ScaleNautic({metric: true, imperial: false, nautic: true}));
 
 const layers = L.control.layers(basemaps, overlays, {collapsed: true}).addTo(map);
 
@@ -372,4 +373,3 @@ if (params.get('zones') == '1') {
 } else {
   restoreLayers(layers, params.get('l'));
 }
-
