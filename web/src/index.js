@@ -276,24 +276,43 @@ updateOpacityControl();
 map.on('overlayadd overlayremove', debounce(updateOpacityControl));
 
 if (isDevMode || isStandalone) {
-  new LocateControl({
+  const lc = new LocateControl({
     flyTo: true,
-    keepCurrentZoomLevel: true,
+    // keepCurrentZoomLevel: true,
     cacheLocation: false,
     locateOptions: {
       enableHighAccuracy: true,
       maximumAge: 1000,
+      maxZoom: 15,
     }
   }).addTo(map);
 
-  map.on('locationfound', e => {
-    const lat = degmin(e.latitude, 3, true);
-    const lng = degmin(e.longitude, 3, false);
-    const sog = e.speed != null ? `SOG ${e.speed.toFixed(1) * 3600 / 1852}kn` : '';
-    const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
+  const NavData = L.Control.extend({
+    options: {position: 'bottomleft'},
+    onAdd: function (map) {
+      var div = L.DomUtil.create('div', 'navdata leaflet-bar');
+      L.DomEvent.disableClickPropagation(div);
 
-    log('location', 'magenta', lat, lng, sog, cog);
+      function hide() {
+        div.innerHTML = '';
+      }
+
+      let timer;
+
+      map.on('locationfound', e => {
+        const lat = degmin(e.latitude, 3, true);
+        const lng = degmin(e.longitude, 3, false);
+        const sog = e.speed != null ? `SOG ${e.speed.toFixed(1) * 3600 / 1852}kn` : '';
+        const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
+        div.innerHTML = `<div>${lat} ${lng}</div><div>${sog} ${cog}</div>`;
+        log('location', 'magenta', lat, lng, sog, cog);
+        clearTimeout(timer);
+        timer = setTimeout(hide, 10000);
+      });
+      return div;
+    },
   });
+  new NavData().addTo(map);
 
   new NightSwitch({position: 'topleft'}).addTo(map);
 }

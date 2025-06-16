@@ -30,6 +30,15 @@ html, body, #map {
   /*animation-fill-mode: both;*/
 }
 
+.navdata {
+  background: white;
+  padding: 1ex;
+}
+
+.navdata:empty {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .leaflet-control-attribution {
     max-width: 70%;
