@@ -11,28 +11,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Schutzgebiets-Route Martensplate (nur für nicht-maschinenangetriebene Wasserfahrzeuge)",
-        "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>0</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Wasserwanderweg</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>id</td>\r\r\n<td>1</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>POSKEY</td>\r\r\n<td>Martensplate</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            7.833647,
-            53.758527,
-            0.0
-          ],
-          [
-            7.859152,
-            53.756623,
-            0.0
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "Schutzgebiets-Route Blaue Balje",
         "description": "<html xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">\r\r\n<head>\r\r\n<META http-equiv=\"Content-Type\" content=\"text/html\">\r\r\n<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\r\n</head>\r\r\n<body style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\">\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\">\r\r\n<tr style=\"text-align:center;font-weight:bold;background:#9CBCE2\">\r\r\n<td>Blaue Balje</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>\r\r\n<table style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\">\r\r\n<tr>\r\r\n<td>FID</td>\r\r\n<td>2</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Typ</td>\r\r\n<td>Schutzgebiets-Route</td>\r\r\n</tr>\r\r\n<tr>\r\r\n<td>Bundesland</td>\r\r\n<td>NDS</td>\r\r\n</tr>\r\r\n<tr bgcolor=\"#D4E4F3\">\r\r\n<td>Name</td>\r\r\n<td>Blaue Balje</td>\r\r\n</tr>\r\r\n</table>\r\r\n</td>\r\r\n</tr>\r\r\n</table>\r\r\n</body>\r\r\n</html>\r\r\n"
       },
