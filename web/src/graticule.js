@@ -23,7 +23,7 @@ export function degmin(v, n = 2, lat = true) {
 L.LatLngGraticule = L.Layer.extend({
   options: {
     showLabel: true,
-    borders: true,
+    borders: 10,
     opacity: 1,
     weight: 1,
     color: '#333',
@@ -188,7 +188,7 @@ L.LatLngGraticule = L.Layer.extend({
     ctx.strokeStyle = this.options.color;
     ctx.fillStyle = this.options.fontColor;
 
-    const textShift = this.options.borders ? 15 : 2;
+    const textShift = (this.options.borders || 0) + 2;
 
     const txtHeight = this.options.fontSize;
     ctx.font = `${this.options.fontSize}px ${this.options.fontFamily}`;
@@ -345,7 +345,7 @@ L.LatLngGraticule = L.Layer.extend({
     }
 
     if (!this.options.borders) return;
-    const border_width = 10;
+    const border_width = this.options.borders;
     ctx.strokeStyle = 'white';
     border(border_width / 2, border_width);
     ctx.strokeStyle = this.options.color;
