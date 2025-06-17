@@ -345,7 +345,7 @@ L.LatLngGraticule = L.Layer.extend({
     }
 
     if (!this.options.borders) return;
-    const border_width = 12;
+    const border_width = 10;
     ctx.strokeStyle = 'white';
     border(border_width / 2, border_width);
     ctx.strokeStyle = this.options.color;
