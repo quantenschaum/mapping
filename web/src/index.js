@@ -311,7 +311,7 @@ if (isDevMode || isStandalone) {
         const lng = degmin(e.longitude, 3, false);
         const sog = e.speed != null ? `SOG ${(e.speed * 3600 / 1852).toFixed(1)}kn` : '';
         const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
-        div.innerHTML = `${lat}<br/>${lng}<br/>${sog}<br/>${cog}`;
+        div.innerHTML = `<div></div>${lat}<br/>${lng}</div><div>${sog}</div><div>${cog}</div>`;
         div.style.display = '';
         log('location', 'magenta', lat, lng, sog, cog);
         clearTimeout(timer);
