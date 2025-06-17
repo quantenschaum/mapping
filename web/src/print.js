@@ -33,6 +33,7 @@ export const PrintButton = L.Control.extend({
           delete map.options.zoomDelta;
           delete map.options.zoomSnap;
           delete map.options.wheelPxPerZoomLevel;
+          map.setZoom(map.getZoom());
         }
       });
       return b;
