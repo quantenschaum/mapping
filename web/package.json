@@ -28,6 +28,7 @@
     "@mapbox/leaflet-omnivore": "^0.3.4",
     "@maplibre/maplibre-gl-leaflet": "^0.1.1",
     "css-minimizer-webpack-plugin": "^7.0.2",
+    "dom-to-image": "^2.6.0",
     "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
     "leaflet-hash": "^0.2.1",

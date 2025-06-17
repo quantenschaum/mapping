@@ -14,12 +14,33 @@
   .leaflet-top, .leaflet-left, .leaflet-bar {
     display: none;
   }
+
+  @page {
+    //size: A4;
+    margin: 0;
+  }
+}
+
+.landscape {
+  width: 282mm !important;
+  height: 195mm !important;;
+}
+
+.portrait {
+  width: 195mm !important;
+  height: 282mm !important;
+}
+
+.print, .image {
+  .leaflet-control-attribution {
+    display: block !important;
+    //transform: translateY(-15px) translateX(-15px);
+    transform: translate(-10px, -10px);
+  }
+
 }
 
 .print {
-  width: 282mm !important;
-  height: 195mm !important;
-
   .leaflet-control-attribution {
     display: block !important;
     //transform: translateY(-15px) translateX(-15px);
@@ -27,3 +48,8 @@
   }
 }
 
+.image {
+  .leaflet-top, .leaflet-left, .leaflet-bar {
+    display: none;
+  }
+}
