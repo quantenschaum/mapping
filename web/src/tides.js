@@ -127,7 +127,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
       month: '2-digit', day: '2-digit', weekday: 'short', hour: '2-digit', minute: '2-digit',
     });
     const forecast_text = forecast_map?.forecast_text ? forecast_map?.forecast_text + ` (${forecast_date})` : '';
-    const forecast_link = curve ? `target="_blank" href="https://wasserstand-nordsee.bsh.de/${g.seo_id}?zeitraum=tag1bis2"` : '';
+    const forecast_link = curve ? `https://wasserstand-nordsee.bsh.de/${g.seo_id}?zeitraum=tag1bis2` : 'https://wasserstand-nordsee.bsh.de';
     const forecast_cls = (now - fc_date) > 8 * 3600_000 ? 'old' : 'new';
 
     const offsets = {
@@ -185,7 +185,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     // clog(table);
 
     await marker
-      .bindPopup(`<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${table}<div class="basevalues">${basevalues}</div><div class="forecast"><a ${forecast_link} class="${forecast_cls}">${forecast_text}</a></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`)
+      .bindPopup(`<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${table}<div class="basevalues">${basevalues}</div><div class="forecast"><a href="${forecast_link}" target="_blank" class="${forecast_cls}">${forecast_text}</a></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`)
       .openPopup();
 
     if (!curve) return;
