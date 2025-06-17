@@ -1,9 +1,3 @@
-/**
- *  Create a Canvas as ImageOverlay to draw the Lat/Lon Graticule,
- *  and show the axis tick label on the edge of the map.
- *  Author: lanwei@cloudybay.com.tw
- */
-
 // based on https://github.com/Leaflet/Leaflet.Graticule
 
 export function degmin(v, n = 2, lat = true) {
@@ -32,9 +26,10 @@ L.LatLngGraticule = L.Layer.extend({
     opacity: 1,
     weight: 1,
     color: '#333',
+    fontFamily: 'Open Sans, Verdana, sans-serif',
+    fontSize: 12,
     fontColor: 'black',
-    font: '12px Verdana',
-    zoomInterval: [
+    intervals: [
       {start: 2, interval: 30},
       {start: 5, interval: 20},
       {start: 6, interval: 10},
@@ -57,69 +52,23 @@ L.LatLngGraticule = L.Layer.extend({
 
   initialize: function (options) {
     L.setOptions(this, options);
-
-    var defaultFontName = 'Verdana';
-    var _ff = this.options.font.split(' ');
-    if (_ff.length < 2) {
-      this.options.font += ' ' + defaultFontName;
-    }
-
-    if (!this.options.fontColor) {
-      this.options.fontColor = this.options.color;
-    }
-
-    if (this.options.zoomInterval) {
-      if (this.options.zoomInterval.latitude) {
-        this.options.latInterval = this.options.zoomInterval.latitude;
-        if (!this.options.zoomInterval.longitude) {
-          this.options.lngInterval = this.options.zoomInterval.latitude;
-        }
-      }
-      if (this.options.zoomInterval.longitude) {
-        this.options.lngInterval = this.options.zoomInterval.longitude;
-        if (!this.options.zoomInterval.latitude) {
-          this.options.latInterval = this.options.zoomInterval.longitude;
-        }
-      }
-      if (!this.options.latInterval) {
-        this.options.latInterval = this.options.zoomInterval;
-      }
-      if (!this.options.lngInterval) {
-        this.options.lngInterval = this.options.zoomInterval;
-      }
-    }
   },
 
   onAdd: function (map) {
     this._map = map;
-
-    if (!this._container) {
-      this._initCanvas();
-    }
-
-    map._panes.overlayPane.appendChild(this._container);
-
+    if (!this._container) this._initCanvas();
+    map.getPanes().overlayPane.appendChild(this._container);
     map.on('viewreset', this._reset, this);
     map.on('move', this._reset, this);
     map.on('moveend', this._reset, this);
-
-// 		if (map.options.zoomAnimation && L.Browser.any3d) {
-// 			map.on('zoom', this._animateZoom, this);
-// 		}
-
     this._reset();
   },
 
   onRemove: function (map) {
     map.getPanes().overlayPane.removeChild(this._container);
-
     map.off('viewreset', this._reset, this);
     map.off('move', this._reset, this);
     map.off('moveend', this._reset, this);
-
-// 		if (map.options.zoomAnimation) {
-// 			map.off('zoom', this._animateZoom, this);
-// 		}
   },
 
   addTo: function (map) {
@@ -154,7 +103,6 @@ L.LatLngGraticule = L.Layer.extend({
 
   _initCanvas: function () {
     this._container = L.DomUtil.create('div', 'leaflet-image-layer');
-
     this._canvas = L.DomUtil.create('canvas', '');
 
     if (this._map.options.zoomAnimation && L.Browser.any3d) {
@@ -173,23 +121,6 @@ L.LatLngGraticule = L.Layer.extend({
       onload: L.bind(this._onCanvasLoad, this)
     });
   },
-
-// 	_animateZoom: function (e) {
-// 		var map = this._map,
-// 			container = this._container,
-// 			canvas = this._canvas,
-// 			zoom = map.getZoom(),
-// 			center = map.getCenter(),
-// 			scale = map.getZoomScale(zoom),
-// 			nw = map.containerPointToLatLng([0, 0]),
-// 			se = map.containerPointToLatLng([canvas.width, canvas.height]),
-//
-// 			topLeft = map._latLngToNewLayerPoint(nw, zoom, center),
-// 			size = map._latLngToNewLayerPoint(se, zoom, center)._subtract(topLeft),
-// 			origin = topLeft._add(size._multiplyBy((1 / 2) * (1 - 1 / scale)));
-//
-// 		L.DomUtil.setTransform(container, origin, scale);
-// 	},
 
   _reset: function () {
     var container = this._container;
@@ -229,63 +160,25 @@ L.LatLngGraticule = L.Layer.extend({
   },
 
   __calcInterval: function () {
-    var zoom = this._map.getZoom();
-    if (1 || this._currZoom != zoom) {
-      this._currLngInterval = 0;
-      this._currLatInterval = 0;
-      this._currZoom = zoom;
-    }
-
-    if (!this._currLngInterval) {
-      try {
-        this.options.lngInterval.forEach(i => {
-          if (i.start <= zoom) {
-            this._currLngInterval = i.interval;
-          }
-        });
-      } catch (e) {
-        this._currLngInterval = 0;
+    this._currLngInterval = 0;
+    this._currLatInterval = 0;
+    const zoom = this._map.getZoom();
+    const latScale = 1 / Math.cos(this._map.getCenter().lat * Math.PI / 180);
+    this.options.intervals.forEach(i => {
+      if (i.start <= zoom) {
+        this._currLngInterval = i.interval;
       }
-    }
-
-    if (!this._currLatInterval) {
-      try {
-        var f = 1 / Math.cos(this._map.getCenter().lat * Math.PI / 180);
-        console.log(f, Math.log2(f));
-        this.options.latInterval.forEach(i => {
-          if (i.start <= zoom + Math.log2(f) + 0.3) {
-            this._currLatInterval = i.interval;
-          }
-        });
-      } catch (e) {
-        this._currLatInterval = 0;
+      if (i.start <= zoom + Math.log2(latScale) + 0.3) {
+        this._currLatInterval = i.interval;
       }
-    }
+    });
   },
 
   __draw: function (label) {
-
-    function _parse_px_to_int(txt) {
-      if (txt.length > 2) {
-        if (txt.charAt(txt.length - 2) == 'p') {
-          txt = txt.substr(0, txt.length - 2);
-        }
-      }
-      try {
-        return parseInt(txt, 10);
-      } catch (e) {
-      }
-      return 0;
-    };
-
     const canvas = this._canvas;
     const map = this._map;
-
     if (!L.Browser.canvas || !map) return;
-    if (!this._currLngInterval || !this._currLatInterval) {
-      this.__calcInterval();
-    }
-
+    this.__calcInterval();
     const latInterval = this._currLatInterval, lngInterval = this._currLngInterval;
 
     const ctx = canvas.getContext('2d');
@@ -294,191 +187,140 @@ L.LatLngGraticule = L.Layer.extend({
     ctx.strokeStyle = this.options.color;
     ctx.fillStyle = this.options.fontColor;
 
-    const shift = 15;
+    const textShift = 15;
 
-    if (this.options.font) {
-      ctx.font = this.options.font;
-    }
-    var txtWidth = ctx.measureText('0').width;
-    var txtHeight = 12;
-    try {
-      var _font_size = ctx.font.split(' ')[0];
-      txtHeight = _parse_px_to_int(_font_size);
-    } catch (e) {
-    }
+    const txtHeight = this.options.fontSize;
+    ctx.font = `${this.options.fontSize}px ${this.options.fontFamily}`;
 
-    const ww = canvas.width;
-    const hh = canvas.height;
+    const width = canvas.width;
+    const height = canvas.height;
+    // console.log('width', width, 'height', height);
 
-    const lt = map.containerPointToLatLng(L.point(0, 0));
-    const rt = map.containerPointToLatLng(L.point(ww, 0));
-    const rb = map.containerPointToLatLng(L.point(ww, hh));
+    const north_west = map.containerPointToLatLng(L.point(0, 0));
+    const south_east = map.containerPointToLatLng(L.point(width, height));
+    // console.log('north_west', north_west, 'south_east', south_east);
 
-    var _lat_b = rb.lat, _lat_t = lt.lat;
-    var _lon_l = lt.lng, _lon_r = rt.lng;
+    const north = north_west.lat;
+    const west = north_west.lng;
+    const south = south_east.lat;
+    const east = south_east.lng;
 
-    var _point_per_lat = (_lat_t - _lat_b) / (hh * 0.2);
-    if (_point_per_lat < 1) {
-      _point_per_lat = 1;
-    }
-    if (_lat_b < -90) {
-      _lat_b = -90;
-    } else {
-      _lat_b = parseInt(_lat_b - _point_per_lat, 10);
-    }
+    // console.log('north', north, 'west', west, 'south', south, 'east', east);
 
-    if (_lat_t > 90) {
-      _lat_t = 90;
-    } else {
-      _lat_t = parseInt(_lat_t + _point_per_lat, 10);
-    }
-
-    var _point_per_lon = (_lon_r - _lon_l) / (ww * 0.2);
-    if (_point_per_lon < 1) {
-      _point_per_lon = 1;
-    }
-    if (_lon_l > 0 && _lon_r < 0) {
-      _lon_r += 360;
-    }
-    _lon_r = parseInt(_lon_r + _point_per_lon, 10);
-    _lon_l = parseInt(_lon_l - _point_per_lon, 10);
-
-    var ll, latstr, lngstr, _lon_delta = 0.5;
-
-    function __draw_lat_line(self, lat_tick) {
-      ll = map.latLngToContainerPoint(L.latLng(lat_tick, _lon_l));
-      latstr = self.__format_lat(lat_tick);
-      txtWidth = ctx.measureText(latstr).width;
-
-      var __lon_right = _lon_r;
-      var rr = map.latLngToContainerPoint(L.latLng(lat_tick, __lon_right));
-
-      ctx.beginPath();
+    function lat_line(latitude) {
+      const y = map.latLngToContainerPoint(L.latLng(latitude, 0)).y;
       const o = (ctx.lineWidth / 2) % 1;
-      ctx.moveTo(ll.x - 1, ll.y + o);
-      ctx.lineTo(rr.x + 1, rr.y + o);
+      ctx.beginPath();
+      ctx.moveTo(-1, y + o);
+      ctx.lineTo(width + 1, y + o);
       ctx.stroke();
-      if (self.options.showLabel && label) {
-        const _yy = ll.y + (txtHeight / 2) - 2;
-        ctx.fillText(latstr, 0 + shift, _yy);
-        ctx.fillText(latstr, ww - txtWidth - shift, _yy);
-        const w = ctx.lineWidth;
-        const s = ctx.strokeStyle;
+      if (this.options.showLabel) {
+        const label = this.__format_lat(latitude);
+        const txtWidth = ctx.measureText(label).width;
+        const yt = y + (txtHeight / 2) - 2;
+        const w = ctx.lineWidth, s = ctx.strokeStyle;
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'white';
-        ctx.strokeText(latstr, 0 + shift, _yy);
-        ctx.strokeText(latstr, ww - txtWidth - shift, _yy);
+        ctx.strokeText(label, 0 + textShift, yt);
+        ctx.strokeText(label, width - txtWidth - textShift, yt);
         ctx.lineWidth = w;
         ctx.strokeStyle = s;
-        ctx.fillText(latstr, 0 + shift, _yy);
-        ctx.fillText(latstr, ww - txtWidth - shift, _yy);
+        ctx.fillText(label, 0 + textShift, yt);
+        ctx.fillText(label, width - txtWidth - textShift, yt);
       }
     }
+
+    lat_line = lat_line.bind(this);
 
     if (latInterval > 0) {
-      for (var i = latInterval; i <= _lat_t; i += latInterval) {
-        if (i >= _lat_b) {
-          __draw_lat_line(this, i);
-        }
-      }
-      for (var i = 0; i >= _lat_b; i -= latInterval) {
-        if (i <= _lat_t) {
-          __draw_lat_line(this, i);
-        }
+      const l0 = Math.floor(south / latInterval) * latInterval;
+      for (let i = 0, l = l0; l < north; i++) {
+        lat_line(l = l0 + i * latInterval);
       }
     }
 
-    function __draw_lon_line(self, lon_tick) {
-      lngstr = self.__format_lng(lon_tick);
-      txtWidth = ctx.measureText(lngstr).width;
-      var bb = map.latLngToContainerPoint(L.latLng(_lat_b, lon_tick));
-
-      var __lat_top = _lat_t;
-      var tt = map.latLngToContainerPoint(L.latLng(__lat_top, lon_tick));
-
-      ctx.beginPath();
+    function lon_line(longitude) {
+      const x = map.latLngToContainerPoint(L.latLng(0, longitude)).x;
       const o = (ctx.lineWidth / 2) % 1;
-      ctx.moveTo(tt.x + o, tt.y + 1);
-      ctx.lineTo(bb.x + o, bb.y - 1);
+      ctx.beginPath();
+      ctx.moveTo(x + o, -1);
+      ctx.lineTo(x + o, height + 1);
       ctx.stroke();
-
-      if (self.options.showLabel && label) {
+      if (this.options.showLabel) {
+        const label = this.__format_lng(longitude);
+        const txtWidth = ctx.measureText(label).width;
         const w = ctx.lineWidth;
         const s = ctx.strokeStyle;
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'white';
-        ctx.strokeText(lngstr, tt.x - (txtWidth / 2), txtHeight - 1 + shift);
-        ctx.strokeText(lngstr, bb.x - (txtWidth / 2), hh - 1 - shift);
+        ctx.strokeText(label, x - (txtWidth / 2), txtHeight - 1 + textShift);
+        ctx.strokeText(label, x - (txtWidth / 2), height - 1 - textShift);
         ctx.lineWidth = w;
         ctx.strokeStyle = s;
-        ctx.fillText(lngstr, tt.x - (txtWidth / 2), txtHeight - 1 + shift);
-        ctx.fillText(lngstr, bb.x - (txtWidth / 2), hh - 1 - shift);
+        ctx.fillText(label, x - (txtWidth / 2), txtHeight - 1 + textShift);
+        ctx.fillText(label, x - (txtWidth / 2), height - 1 - textShift);
       }
     }
+
+    lon_line = lon_line.bind(this);
 
     if (lngInterval > 0) {
-      for (var i = lngInterval; i <= _lon_r; i += lngInterval) {
-        if (i >= _lon_l) {
-          __draw_lon_line(this, i);
-        }
-      }
-      for (var i = 0; i >= _lon_l; i -= lngInterval) {
-        if (i <= _lon_r) {
-          __draw_lon_line(this, i);
-        }
+      const l0 = Math.floor(west / lngInterval) * lngInterval;
+      for (let i = 0, l = l0; l < east; i++) {
+        lon_line(l = l0 + i * lngInterval);
       }
     }
 
-    function border(inset = 0, width = 1, corners = false) {
-      ctx.lineWidth = width;
+    function border(inset = 0, weight = 1, corners = false) {
+      ctx.lineWidth = weight;
       ctx.beginPath();
       const o = (ctx.lineWidth / 2) % 1;
-      ctx.rect(inset + o, inset + o, ww - 2 * inset - o, hh - 2 * inset - o);
+      ctx.rect(inset + o, inset + o, width - 2 * inset - o, height - 2 * inset - o);
       ctx.stroke();
       if (!corners) return;
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(inset, inset);
-      ctx.moveTo(ww, 0);
-      ctx.lineTo(ww - inset, inset);
-      ctx.moveTo(ww, hh);
-      ctx.lineTo(ww - inset, hh - inset);
-      ctx.moveTo(0, hh);
-      ctx.lineTo(inset, hh - inset);
+      ctx.moveTo(width, 0);
+      ctx.lineTo(width - inset, inset);
+      ctx.moveTo(width, height);
+      ctx.lineTo(width - inset, height - inset);
+      ctx.moveTo(0, height);
+      ctx.lineTo(inset, height - inset);
       ctx.stroke();
     }
 
-    function zebras(inset, weight, side, width = 12) {
-      const lat = side == 'W' || side == 'E';
-      const opposite = side == 'E' || side == 'S';
-      if (lat) var lmin = rb.lat, lmax = lt.lat, size = hh;
-      else var lmin = lt.lng, lmax = rb.lng, size = ww;
+    function zebras(border, bwidth = 12) {
+      const lat = border == 'W' || border == 'E';
+      const opposite = border == 'E' || border == 'S';
+      if (lat) var lmin = south, lmax = north, size = height;
+      else var lmin = west, lmax = east, size = width;
       const ppm = size / (lmax - lmin) / 60; // px per minute
       const interval = lat ? latInterval : lngInterval;
       const minutes = interval < 1;
-      // console.log('zebras', side, lmin, lmax, size, ppm, interval, minutes);
+      // console.log('zebras', border, lmin, lmax, size, ppm, interval, minutes);
       const step = minutes ? 60 : 1;
       const l0 = minutes ? Math.floor(lmin * step) / step : Math.floor(lmin);
       const n = Math.floor(lmin * step) % 2 == 0 ? 0 : 1;
 
       // minute zebra bars
-      ctx.lineWidth = weight;
+      ctx.lineWidth = bwidth / 6;
       ctx.beginPath();
       // ctx.moveTo(...p);
       var o = (opposite ? -1 : +1) * ((ctx.lineWidth / 2) % 1);
-      inset = opposite ? (lat ? ww : hh) - inset - o : inset + o;
+      const z = opposite ? (lat ? width : height) - bwidth / 4 - o : bwidth / 4 + o;
       for (let i = 0, l = l0; l < lmax; i++) {
         l = l0 + i / step;
         const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
-        const x = Math.min(Math.max(lat ? c.y : c.x, width), (lat ? hh : ww) - width);
-        const p = lat ? [inset, x] : [x, inset];
+        const x = Math.min(Math.max(lat ? c.y : c.x, bwidth), (lat ? height : width) - bwidth);
+        const p = lat ? [z, x] : [x, z];
         if (i % 2 == n) ctx.moveTo(...p);
         else ctx.lineTo(...p);
       }
       ctx.stroke();
 
       // minute divisions
-      function divisions(inset, interval) {
+      function divisions(start, interval) {
         ctx.lineWidth = 1;
         o = ((ctx.lineWidth / 2) % 1);
         ctx.beginPath();
@@ -486,11 +328,11 @@ L.LatLngGraticule = L.Layer.extend({
           l = l0 + i / interval;
           const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
           const x = (lat ? c.y : c.x) + o;
-          if (x < width || x > (lat ? hh : ww) - width) continue;
-          const a = opposite ? (lat ? ww : hh) - inset : inset;
+          if (x < bwidth || x > (lat ? height : width) - bwidth) continue;
+          const a = opposite ? (lat ? width : height) - start : start;
           const p0 = lat ? [a, x] : [x, a];
           ctx.moveTo(...p0);
-          const b = opposite ? (lat ? ww : hh) - width : width;
+          const b = opposite ? (lat ? width : height) - bwidth : bwidth;
           const p1 = lat ? [b, x] : [x, b];
           ctx.lineTo(...p1);
         }
@@ -498,19 +340,21 @@ L.LatLngGraticule = L.Layer.extend({
       }
 
       divisions(0, ppm > 100 ? 120 : minutes ? 60 : 2);
-      divisions(6, ppm > 100 ? 600 : ppm > 30 ? 300 : minutes ? 120 : 6);
+      divisions(bwidth / 2, ppm > 100 ? 600 : ppm > 30 ? 300 : minutes ? 120 : 6);
     }
 
+    const border_width = 12;
+
     ctx.strokeStyle = 'white';
-    border(6, 12);
+    border(border_width / 2, border_width);
     ctx.strokeStyle = this.options.color;
     border(0);
-    border(6);
-    border(12, 1, true);
-    zebras(3, 3, 'W');
-    zebras(3, 3, 'N');
-    zebras(3, 3, 'E');
-    zebras(3, 3, 'S');
+    border(border_width / 2);
+    border(border_width, 1, true);
+    zebras('W', border_width);
+    zebras('N', border_width);
+    zebras('E', border_width);
+    zebras('S', border_width);
   }
 
 });
