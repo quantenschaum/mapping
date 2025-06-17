@@ -41,5 +41,14 @@ export function addWattSegler(map) {
               .addTo(layer);
           });
         }).catch(log);
+
+
+      map.on('zoomend', () => {
+        if (map.getZoom() >= 9) {
+          if (!map.hasLayer(layer)) map.addLayer(layer);
+        } else {
+          if (map.hasLayer(layer)) map.removeLayer(layer);
+        }
+      });
     });
 }

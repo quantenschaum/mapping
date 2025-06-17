@@ -241,8 +241,8 @@ export async function addTideGaugesDE(map, preFetch = false) {
     Plotly.newPlot('plot', [trace1, trace2, trace3], layout, config);
   }
 
-  const gaugesLayer = L.layerGroup().addTo(map);
-  const group_colors = {1: 'white', 2: 'lightblue', 3: 'gray'};
+  const layer = L.layerGroup().addTo(map);
+  const colors = {1: 'white', 2: 'lightblue', 3: 'gray'};
 
   fetch('/tides/de/data/tides_overview.json')
     .then(r => r.json())
@@ -256,15 +256,23 @@ export async function addTideGaugesDE(map, preFetch = false) {
           radius: 4,
           weight: 3,
           color: g.station_name.includes('Helgoland') ? 'darkred' : 'blue',
-          fillColor: group_colors[g.gauge_group],
+          fillColor: colors[g.gauge_group],
           fillOpacity: 1,
         })
           .bindPopup(`<a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}">${g.station_name}</a>`)
           .on('click', e => showPopup(e.target, g))
-          .addTo(gaugesLayer);
+          .addTo(layer);
         // if (isDevMode && g.station_name.includes('Helgoland')) showPopup(m, g);
       });
     }).catch(clog);
+
+  map.on('zoomend', () => {
+    if (map.getZoom() >= 8) {
+      if (!map.hasLayer(layer)) map.addLayer(layer);
+    } else {
+      if (map.hasLayer(layer)) map.removeLayer(layer);
+    }
+  });
 }
 
 export function addTideGaugesNL(map) {
@@ -272,7 +280,7 @@ export function addTideGaugesNL(map) {
     .then(r => r.json())
     .then(data => reproject(data))
     .then(data => {
-      L.geoJSON(data, {
+      const layer = L.geoJSON(data, {
         pointToLayer: function (feature, latlng) {
           // clog(feature.properties)
           return L.circleMarker(latlng, {
@@ -347,5 +355,13 @@ export function addTideGaugesNL(map) {
           });
         }
       }).addTo(map);
+
+      map.on('zoomend', () => {
+        if (map.getZoom() >= 8) {
+          if (!map.hasLayer(layer)) map.addLayer(layer);
+        } else {
+          if (map.hasLayer(layer)) map.removeLayer(layer);
+        }
+      });
     }).catch(clog);
 }
