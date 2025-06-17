@@ -4,7 +4,7 @@ import './print.less';
 export const PrintButton = L.Control.extend({
   options: {position: 'topleft'},
   onAdd: function (map) {
-    var div = L.DomUtil.create('div', 'nightswitch leaflet-bar');
+    var div = L.DomUtil.create('div', 'printmode leaflet-bar');
     var button = L.DomUtil.create('a');
     button.innerHTML = '&#x1F5B6;'; // 🖶
     button.title = 'toggle print layout';
