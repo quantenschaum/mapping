@@ -309,8 +309,6 @@ if (isDevMode || isStandalone) {
       map.on('locationfound', e => {
         const lat = degmin(e.latitude, 3, true);
         const lng = degmin(e.longitude, 3, false);
-        e.speed = 3;
-        e.heading = 123;
         const sog = e.speed != null ? `SOG ${(e.speed * 3600 / 1852).toFixed(1)}kn` : '';
         const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
         div.innerHTML = `${lat}<br/>${lng}<br/>${sog}<br/>${cog}`;
