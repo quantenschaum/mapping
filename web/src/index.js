@@ -291,34 +291,38 @@ if (isDevMode || isStandalone) {
 
   // map.on('locationfound', console.log);
 
-  /*
-    const NavData = L.Control.extend({
-      options: {position: 'bottomleft'},
-      onAdd: function (map) {
-        var div = L.DomUtil.create('div', 'navdata leaflet-bar');
-        L.DomEvent.disableClickPropagation(div);
+  const NavDataWidget = L.Control.extend({
+    options: {position: 'bottomleft'},
+    onAdd: function (map) {
+      const div = L.DomUtil.create('div', 'navdata leaflet-bar');
+      L.DomEvent.disableClickPropagation(div);
 
-        function hide() {
-          div.innerHTML = '';
-        }
+      function hide() {
+        div.innerHTML = '';
+        div.style.display = 'none';
+      }
 
-        let timer;
+      hide();
 
-        map.on('locationfound', e => {
-          const lat = degmin(e.latitude, 3, true);
-          const lng = degmin(e.longitude, 3, false);
-          const sog = e.speed != null ? `SOG ${(e.speed * 3600 / 1852).toFixed(1)}kn` : '';
-          const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
-          div.innerHTML = `<div>${lat} ${lng}</div><div>${sog} ${cog}</div>`;
-          log('location', 'magenta', lat, lng, sog, cog);
-          clearTimeout(timer);
-          timer = setTimeout(hide, 60000);
-        });
-        return div;
-      },
-    });
-    new NavData().addTo(map);
-  */
+      let timer;
+
+      map.on('locationfound', e => {
+        const lat = degmin(e.latitude, 3, true);
+        const lng = degmin(e.longitude, 3, false);
+        e.speed = 3;
+        e.heading = 123;
+        const sog = e.speed != null ? `SOG ${(e.speed * 3600 / 1852).toFixed(1)}kn` : '';
+        const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
+        div.innerHTML = `${lat}<br/>${lng}<br/>${sog}<br/>${cog}`;
+        div.style.display = '';
+        log('location', 'magenta', lat, lng, sog, cog);
+        clearTimeout(timer);
+        timer = setTimeout(hide, 10000);
+      });
+      return div;
+    },
+  });
+  new NavDataWidget().addTo(map);
 
   new NightSwitch().addTo(map);
 }
