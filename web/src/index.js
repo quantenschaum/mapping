@@ -218,7 +218,7 @@ function updateAttribution(online = true) {
     if (!response.ok) return;
     const date = new Date(response.headers.get('Last-Modified')).toISOString().slice(0, 10);
     map.attributionControl.setPrefix(attrib.replace('(?)', `(${date})`));
-  }).catch(console.log);
+  }).catch(console.error);
 }
 
 updateAttribution();

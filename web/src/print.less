@@ -21,31 +21,46 @@
   }
 }
 
-.landscape {
-  width: 282mm !important;
-  height: 195mm !important;;
+.printmode {
+  background: white;
 }
 
-.portrait {
+.printbuttons {
+  a {
+    display: inline-block;
+  }
+}
+
+.hidebuttons .format {
+  display: none;
+}
+
+.print.A4landscape {
+  width: 282mm !important;
+  height: 195mm !important;
+}
+
+.print.A4portrait {
   width: 195mm !important;
   height: 282mm !important;
+}
+
+.print.A3landscape {
+  width: 405mm !important;
+  height: 282mm !important;
+}
+
+.print.A3portrait {
+  width: 282mm !important;
+  height: 405mm !important;
 }
 
 .print, .image {
   .leaflet-control-attribution {
     display: block !important;
-    //transform: translateY(-15px) translateX(-15px);
     transform: translate(-10px, -10px);
   }
 
-}
-
-.print {
-  .leaflet-control-attribution {
-    display: block !important;
-    //transform: translateY(-15px) translateX(-15px);
-    transform: translate(-10px, -10px);
-  }
 }
 
 .image {
