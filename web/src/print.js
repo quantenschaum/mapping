@@ -15,11 +15,12 @@ export const PrintButton = L.Control.extend({
       const b = L.DomUtil.create('a', cls ? 'format' : '');
       b.innerHTML = name;
       b.title = title;
+      const body = document.body;
       const cont = map.getContainer();
       b.addEventListener('click', () => {
         const cl = cont.classList;
         if (cls) {
-          cl.add('print');
+          body.classList.add('print');
           classes.forEach(c => cl.remove(c));
           cl.add(cls);
           map.invalidateSize();
@@ -27,7 +28,7 @@ export const PrintButton = L.Control.extend({
           map.options.zoomSnap = 0.5;
           map.options.wheelPxPerZoomLevel = 100;
         } else {
-          cl.remove('print');
+          body.classList.remove('print');
           classes.forEach(c => cl.remove(c));
           map.invalidateSize();
           delete map.options.zoomDelta;

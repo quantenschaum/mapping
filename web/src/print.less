@@ -10,7 +10,6 @@
     justify-content: center;
   }
 
-  //.leaflet-control-container {
   .leaflet-top, .leaflet-left, .leaflet-bar {
     display: none;
   }
@@ -35,24 +34,32 @@
   display: none;
 }
 
-.print.A4landscape {
-  width: 282mm !important;
-  height: 195mm !important;
+.print {
+  .A4landscape {
+    width: 282mm !important;
+    height: 195mm !important;
+  }
+
+  .A4portrait {
+    width: 195mm !important;
+    height: 282mm !important;
+  }
+
+  .A3landscape {
+    width: 405mm !important;
+    height: 282mm !important;
+  }
+
+  .A3portrait {
+    width: 282mm !important;
+    height: 405mm !important;
+  }
 }
 
-.print.A4portrait {
-  width: 195mm !important;
-  height: 282mm !important;
-}
-
-.print.A3landscape {
-  width: 405mm !important;
-  height: 282mm !important;
-}
-
-.print.A3portrait {
-  width: 282mm !important;
-  height: 405mm !important;
+.image {
+  .leaflet-top, .leaflet-left, .leaflet-bar {
+    display: none;
+  }
 }
 
 .print, .image {
@@ -61,10 +68,4 @@
     transform: translate(-10px, -10px);
   }
 
-}
-
-.image {
-  .leaflet-top, .leaflet-left, .leaflet-bar {
-    display: none;
-  }
 }

@@ -289,38 +289,36 @@ if (isDevMode || isStandalone) {
     }
   }).addTo(map);
 
-  // map.on('locationfound', console.log);
-
-  const NavDataWidget = L.Control.extend({
-    options: {position: 'bottomleft'},
-    onAdd: function (map) {
-      const div = L.DomUtil.create('div', 'navdata leaflet-bar');
-      L.DomEvent.disableClickPropagation(div);
-
-      function hide() {
-        div.innerHTML = '';
-        div.style.display = 'none';
-      }
-
-      hide();
-
-      let timer;
-
-      map.on('locationfound', e => {
-        const lat = degmin(e.latitude, 3, true);
-        const lng = degmin(e.longitude, 3, false);
-        const sog = e.speed != null ? `SOG ${(e.speed * 3600 / 1852).toFixed(1)}kn` : '';
-        const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
-        div.innerHTML = `<div></div>${lat}<br/>${lng}</div><div>${sog}</div><div>${cog}</div>`;
-        div.style.display = '';
-        log('location', 'magenta', lat, lng, sog, cog);
-        clearTimeout(timer);
-        timer = setTimeout(hide, 10000);
-      });
-      return div;
-    },
-  });
-  new NavDataWidget().addTo(map);
+  // const NavDataWidget = L.Control.extend({
+  //   options: {position: 'bottomleft'},
+  //   onAdd: function (map) {
+  //     const div = L.DomUtil.create('div', 'navdata leaflet-bar');
+  //     L.DomEvent.disableClickPropagation(div);
+  //
+  //     function hide() {
+  //       div.innerHTML = '';
+  //       div.style.display = 'none';
+  //     }
+  //
+  //     hide();
+  //
+  //     let timer;
+  //
+  //     map.on('locationfound', e => {
+  //       const lat = degmin(e.latitude, 3, true);
+  //       const lng = degmin(e.longitude, 3, false);
+  //       const sog = e.speed != null ? `SOG ${(e.speed * 3600 / 1852).toFixed(1)}kn` : '';
+  //       const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
+  //       div.innerHTML = `<div></div>${lat}<br/>${lng}</div><div>${sog}</div><div>${cog}</div>`;
+  //       div.style.display = '';
+  //       log('location', 'magenta', lat, lng, sog, cog);
+  //       clearTimeout(timer);
+  //       timer = setTimeout(hide, 10000);
+  //     });
+  //     return div;
+  //   },
+  // });
+  // new NavDataWidget().addTo(map);
 
   new NightSwitch().addTo(map);
 }
