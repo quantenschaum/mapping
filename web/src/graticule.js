@@ -67,7 +67,7 @@ L.LatLngGraticule = L.Layer.extend({
     if (this.options.borders) {
       var css = document.createElement('style');
       const m = this.options.borders + 1;
-      css.innerHTML = `.leaflet-control-attribution { margin-bottom: ${m}px !important; margin-right: ${m}px !important; }`;
+      css.innerHTML = `.leaflet-control-attribution { margin-bottom: ${m}px !important; margin-right: ${m}px !important; } .leaflet-control-scale { margin-bottom: ${m + 5}px !important; margin-left: ${m + 5}px !important; }`;
       document.head.appendChild(css);
     }
   },
