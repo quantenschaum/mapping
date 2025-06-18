@@ -10,9 +10,10 @@ export const PrintButton = L.Control.extend({
 
     const classes = [];
 
-    function button(name, title, cls) {
-      classes.push(cls);
-      const b = L.DomUtil.create('a', cls ? 'format' : '');
+    function button(name, title, cls = '') {
+      const clss = cls.split(' ').filter(c => c);
+      clss.forEach(c => classes.push(c));
+      const b = L.DomUtil.create('a', cls ? 'format ' + clss.at(-1) : 'button');
       b.innerHTML = name;
       b.title = title;
       const body = document.body;
@@ -22,7 +23,7 @@ export const PrintButton = L.Control.extend({
         if (cls) {
           body.classList.add('print');
           classes.forEach(c => cl.remove(c));
-          cl.add(cls);
+          clss.forEach(c => cl.add(c));
           map.invalidateSize();
           map.options.zoomDelta = 0.5;
           map.options.zoomSnap = 0.5;
@@ -42,11 +43,11 @@ export const PrintButton = L.Control.extend({
 
     const pb = L.DomUtil.create('div', 'printbuttons hidebuttons');
     div.appendChild(pb);
-    pb.appendChild(button('&#x1F5B6;', 'reset print layout'));
-    pb.appendChild(button('A4L', 'A4 landscape', 'A4landscape'));
-    pb.appendChild(button('A4P', 'A4 portrait', 'A4portrait'));
-    pb.appendChild(button('A3L', 'A3 landscape', 'A3landscape'));
-    pb.appendChild(button('A3P', 'A3 portrait', 'A3portrait'));
+    pb.appendChild(button('&nbsp;', 'reset print layout'));
+    pb.appendChild(button('A4', 'A4 landscape', 'A4 landscape'));
+    pb.appendChild(button('A4', 'A4 portrait', 'A4 portrait'));
+    pb.appendChild(button('A3', 'A3 landscape', 'A3 landscape'));
+    pb.appendChild(button('A3', 'A3 portrait', 'A3 portrait'));
     pb.addEventListener('mouseover', () => {
       pb.classList.remove('hidebuttons');
     });
@@ -54,23 +55,23 @@ export const PrintButton = L.Control.extend({
       pb.classList.add('hidebuttons');
     });
 
-    const imgButton = L.DomUtil.create('a');
+    const imgButton = L.DomUtil.create('a', 'imagebutton');
     imgButton.innerHTML = '&#x1F5BC;'; // 🖼
     imgButton.title = 'save image';
     div.appendChild(imgButton);
     imgButton.addEventListener('click', async () => {
       const size = map.getSize();
-      const cont = map.getContainer();
-      cont.classList.add('image');
+      const body = document.body;
+      body.classList.add('image');
       // await new Promise(r => setTimeout(r, 500));
-      await domtoimage.toPng(cont, {height: size.y, width: size.x})
+      await domtoimage.toPng(map.getContainer(), {height: size.y, width: size.x})
         .then(function (dataUrl) {
           const link = L.DomUtil.create('a');
           link.download = `freenauticalchart-${map.getZoom()}-${map.getCenter().lat.toFixed(3)}-${map.getCenter().lng.toFixed(3)}.png`;
           link.href = dataUrl;
           link.click();
         }).catch(console.error);
-      cont.classList.remove('image');
+      body.classList.remove('image');
     });
 
     return div;
