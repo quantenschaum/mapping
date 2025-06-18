@@ -16,8 +16,10 @@ There are multiple ways to print a chart. You can print the raster data directly
 !!! tip "zoom level and symbol size"
     With an active print layout you may zoom out half a zoom step to fit some more content of the map and make the text and symbols appear smaller without actually switching to another zoom level.
     
-!!! tip "print to PDF"
+!!! hint "print to PDF"
     You may print to PDF instead of printing directly on paper. This way you can save chart for printing it again later. It also allows you to print the chart to an A3 PDF, which can be printed downscaled onto A4. This makes a higher resolution print, but with smaller text and symbols.
+    
+    Printing PDFs is generally more reliable than printing directly from apps. Often there is better control of the printer and more options available. So, if printing directly from the browser fails, try to print to PDF and then print the PDF from your PDF viewer.
 
 ### Image export
 
