@@ -56,8 +56,8 @@ export const PrintButton = L.Control.extend({
     });
 
     const imgButton = L.DomUtil.create('a', 'imagebutton');
-    imgButton.innerHTML = '&#x1F5BC;'; // 🖼
-    imgButton.title = 'save image';
+    imgButton.innerHTML = '&nbsp;';
+    imgButton.title = 'download image';
     div.appendChild(imgButton);
     imgButton.addEventListener('click', async () => {
       const size = map.getSize();
