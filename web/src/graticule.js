@@ -63,6 +63,13 @@ L.LatLngGraticule = L.Layer.extend({
     map.on('move', this._reset, this);
     map.on('moveend', this._reset, this);
     this._reset();
+
+    if (this.options.borders) {
+      var css = document.createElement('style');
+      const m = this.options.borders + 1;
+      css.innerHTML = `.leaflet-control-attribution { margin-bottom: ${m}px !important; margin-right: ${m}px !important; }`;
+      document.head.appendChild(css);
+    }
   },
 
   onRemove: function (map) {
