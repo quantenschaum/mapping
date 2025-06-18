@@ -35,7 +35,6 @@
     "leaflet-mouse-position": "^1.2.0",
     "leaflet.control.opacity": "^1.6.0",
     "leaflet.locatecontrol": "^0.84.2",
-    "leaflet.nauticscale": "^1.1.0",
     "leaflet.tilelayer.fallback": "^1.0.4",
     "open-location-code": "^1.0.3",
     "plotly.js-dist-min": "^3.0.1",

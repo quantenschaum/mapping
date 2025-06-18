@@ -4,7 +4,6 @@ import 'leaflet.tilelayer.fallback';
 import '@kvforksorg/leaflet.polylinemeasure';
 import '@kvforksorg/leaflet.polylinemeasure/Leaflet.PolylineMeasure.css';
 import 'leaflet.control.opacity';
-// import 'leaflet.nauticscale/dist/leaflet.nauticscale';
 import {LocateControl} from 'leaflet.locatecontrol';
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
 // import 'leaflet-mouse-position';
@@ -20,6 +19,7 @@ import './style.less';
 import {log, debounce, logger} from './utils';
 import {legend} from './legend';
 import {degmin} from './graticule';
+// import './scale';
 import {NightSwitch} from './nightmode';
 import {PrintButton} from './print';
 import {restoreLayers} from './restore';
@@ -232,7 +232,7 @@ window.addEventListener('offline', () => updateAttribution(false));
 //   lngFormatter: v => degmin(v, 3, false),
 // }).addTo(map);
 
-// map.addControl(new L.Control.ScaleNautic({metric: true, imperial: false, nautic: true}));
+// map.addControl(new L.Control.ScaleNautic());
 
 const layers = L.control.layers(basemaps, overlays, {collapsed: true}).addTo(map);
 
