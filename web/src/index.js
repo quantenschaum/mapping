@@ -17,6 +17,7 @@ import './icon1.png';
 import './icon1m.png';
 import './icon5.png';
 import './icon5m.png';
+import './icon.svg';
 import './style.less';
 import {log, debounce, logger} from './utils';
 import {legend} from './legend';
