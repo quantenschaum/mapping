@@ -2,6 +2,8 @@
 
 Es gibt mehrere Möglichkeiten, Karten zu drucken. Sie können die Rasterdaten direkt aus Ihrem Browser heraus drucken (schnell und einfach) oder Vektordaten aus QGIS drucken (bessere Qualität, aber komplizierter).
 
+![exported chart image](img/chartimage.webp)
+
 ## Drucken aus dem Browser
 
 1. Öffnen Sie die Karte im Browser (funktioniert am besten in Chrome-basierten Browsern).
@@ -25,15 +27,11 @@ Es gibt mehrere Möglichkeiten, Karten zu drucken. Sie können die Rasterdaten d
 
 Mit der unteren der beiden Schaltflächen im Druck-Widget oben links können Sie die aktuell angezeigte Karte als Bilddatei exportieren. Sie können die Größe des Browserfensters vor dem Export auf die gewünschte Größe anpassen oder ein Drucklayout auswählen.
 
-Dies ist nützlich, um Screenshots der Karte ohne die Steuerelemente, aber mit dem Seekartenrand zu erstellen.
-
-![exported chart image](print/img-export.webp)
+Dies ist nützlich, um Screenshots der Karte wie oben ohne die Steuerelemente, aber mit dem Seekartenrand zu erstellen.
  
 ## Drucken aus QGIS
 
-Sie können mit QGIS eine Karte [wie diese](print/Juist.pdf) erstellen.
-
-![printed chart](print/chart.webp)
+Sie können mit QGIS eine Karte [wie diese](paperchart.pdf) erstellen.
 
 Sie können Ihre eigenen benutzerdefinierten Karten mit dem klassischen Seekartenrand wie folgt drucken.
 
@@ -43,7 +41,6 @@ Sie können Ihre eigenen benutzerdefinierten Karten mit dem klassischen Seekarte
 4. Öffnen Sie `bsh.qgs` mit QGIS.
 5. Wählen Sie `Projekt > Layout Manager`.
 6. Doppelklicken Sie auf das Layout `paperchart` und der Layout-Editor wird geöffnet.
-   ![Layout-Editor](print/layout.webp)
 7. Passen Sie das Layout nach Ihren Wünschen an, wählen Sie den Teil der Karte aus, den Sie drucken möchten (verwenden Sie das Werkzeug zum Verschieben des Karteninhalts (C)).
 8. Exportieren Sie die Karte als PDF.
 9. Drucken Sie das PDF aus (direktes Drucken aus QGIS kann funktionieren, aber PDFs zu drucken, ist normalerweise zuverlässiger und Sie können es speichern, um es erneut zu drucken).

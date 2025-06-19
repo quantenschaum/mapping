@@ -2,7 +2,9 @@
 
 There are multiple ways to print a chart. You can print the raster data directly from your browser (quick and easy) or print vector data from QGIS (better quality but more complicated).
 
-## Print from Browser
+![exported chart image](img/chartimage.webp)
+
+## Printing from Browser
 
 1. Open the chart in the browser (works best in Chrome based browsers).
 2. Click on the print layout button somewhere at the top left and select the desired target paper format and orientation.
@@ -25,15 +27,11 @@ There are multiple ways to print a chart. You can print the raster data directly
 
 With the lower of the two buttons in the print widget on the top left you can export the currently shown map as an image file. You can resize the browser window to the desired size before the export, or you can select a print layout.
 
-This is useful for creating screenshots of the map without the control elements but including the lat/lon borders.
-
-![exported chart image](print/img-export.webp)
+This is useful for creating screenshots of the map like above without the control elements but including the lat/lon borders.
  
-## Print from QGIS
+## Printing from QGIS
 
-You can use QGIS to create a chart [like this one](print/Juist.pdf).
-
-![printed chart](print/chart.webp)
+You can use QGIS to create a chart [like this one](paperchart.pdf).
 
 You can print your own custom charts with the classical lat/lon zebra border as follows.
 
@@ -43,7 +41,6 @@ You can print your own custom charts with the classical lat/lon zebra border as 
 4. Open `bsh.qgs` with QGIS.
 5. Select `Project > Layout Manager`.
 6. Doubleclick the `paperchart` layout and the layout editor will open.
-   ![layout editor](print/layout.webp)
 7. Adjust the layout to your liking, select the part of the map you want to print (use the move content tool (C)).
 8. Export as PDF.
 9. Print the PDF (direct printing from QGIS may work, but printing PDF is usually more reliable and you can save it to print it again).

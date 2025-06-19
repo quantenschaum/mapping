@@ -2,6 +2,8 @@
 
 Er zijn meerdere manieren om een kaart af te drukken. Je kunt de rastergegevens direct vanuit je browser afdrukken (snel en eenvoudig) of vectorgegevens vanuit QGIS afdrukken (betere kwaliteit maar ingewikkelder).
 
+![exported chart image](img/chartimage.webp)
+
 ## Afdrukken vanuit browser
 
 1. Open de kaart in de browser (werkt het beste in browsers op basis van Chrome).
@@ -27,13 +29,9 @@ Met de onderste van de twee knoppen in de printwidget linksboven kun je de momen
 
 Dit is handig voor het maken van schermafbeeldingen van de kaart zonder de bedieningselementen, maar met de lat/lon randen.
 
-![exported chart image](print/img-export.webp)
- 
 ## Afdrukken vanuit QGIS
 
-Je kunt QGIS gebruiken om een grafiek te maken [zoals deze](print/Juist.pdf).
-
-![printed chart](print/chart.webp)
+Je kunt QGIS gebruiken om een kaart te maken [zoals deze](paperchart.pdf).
 
 Je kunt als volgt je eigen aangepaste kaarten afdrukken met de klassieke lat/lon zebrarand.
 
@@ -43,7 +41,6 @@ Je kunt als volgt je eigen aangepaste kaarten afdrukken met de klassieke lat/lon
 4. Open `rws.qgs` met QGIS.
 5. Selecteer `Project > Layout Manager`.
 6. Dubbelklik op de `paperchart` layout en de layout editor wordt geopend.
-   ![layout editor](print/layout.webp)
 7. Pas de lay-out naar wens aan, selecteer het deel van de kaart dat je wilt afdrukken (gebruik het verplaatsgereedschap (C)).
 8. Exporteer als PDF.
 9. Druk de PDF af (rechtstreeks afdrukken vanuit QGIS kan werken, maar PDF afdrukken is meestal betrouwbaarder en je kunt het opslaan om het opnieuw af te drukken).
