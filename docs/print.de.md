@@ -13,10 +13,10 @@ Es gibt mehrere Möglichkeiten, Karten zu drucken. Sie können die Rasterdaten d
      - Das Diagramm sollte auf einer einzelnen Seite zentriert sein
 5. Drucken!
 
-!!! tip "zoom level and symbol size"
+!!! tip "Zoomstufe und Symbolgröße"
     Bei aktivem Drucklayout können Sie eine halbe Zoomstufe herauszoomen, um mehr Inhalt in die Karte einzupassen und den Text und die Symbole kleiner erscheinen zu lassen, ohne tatsächlich in eine andere Zoomstufe zu wechseln.
     
-!!! hint "print to PDF"
+!!! hint "in PDF drucken"
     Sie können in eine PDF-Datei drucken, anstatt direkt auf Papier zu drucken. Auf diese Weise können Sie die Karte speichern, um sie später erneut zu drucken. Sie können die Karte auch als A3-PDF drucken und dieses dann auf A4 verkleinert ausdrucken. So erhalten Sie einen Ausdruck mit höherer Auflösung, aber kleinerem Text und Symbolen.
 
     Das Drucken von PDFs ist im Allgemeinen zuverlässiger als das Drucken direkt aus Anwendungen. Oft lässt sich der Drucker besser steuern und es stehen mehr Optionen zur Verfügung. Wenn also das Drucken direkt aus dem Browser fehlschlägt, versuchen Sie, in eine PDF-Datei zu drucken, und drucken Sie dann die PDF-Datei aus Ihrem PDF-Viewer.
