@@ -13,10 +13,10 @@ import {OpenLocationCode} from 'open-location-code';
 // npx png-to-ico src/favicon.png >src/favicon.ico
 import './favicon.ico';
 import './manifest.json';
-import './icon.png';
-import './icon-m.png';
-import './icon.svg';
-import './icon-m.svg';
+import './icon1.png';
+import './icon1m.png';
+import './icon5.png';
+import './icon5m.png';
 import './style.less';
 import {log, debounce, logger} from './utils';
 import {legend} from './legend';
