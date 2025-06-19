@@ -117,6 +117,14 @@ plugins:
             Screenshots: Bildschirmfotos
             Tidal Atlas: Gezeitenstromatlas
             Nautical Almanac: Nautisches Jahrbuch
+        - locale: nl
+          name: '🇳🇱 Nederlands'
+          nav_translations:
+            Chart: Kaart
+            Printing: Afdrukken
+            Screenshots: Schermfoto's
+            Tidal Atlas: Getijdenatlas
+            Nautical Almanac: Nautische almanak
   - search:
       lang: en
   - git-revision-date-localized:
