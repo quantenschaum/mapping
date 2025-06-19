@@ -27,7 +27,7 @@ Here you find precompiled charts for download in various formats usable in diffe
         - [Bathymetry](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [SKN Seekartenull](https://gdi.bsh.de/de/feed/Chart-datum-for-the-German-Bight-2021.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [Tidal Currents North Sea](https://gdi.bsh.de/de/feed/Tidal-currents-North-Sea.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
-        - [Tidal Currents Coastal](https://gdi.bsh.de/de/feed/Tidal-currents-German-coastal-waters-and-neighbouring-regions.xml ) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
+        - [Tidal Currents Coastal](https://gdi.bsh.de/de/feed/Tidal-currents-German-coastal-waters-and-neighbouring-regions.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
     - :nl: [RWS](https://www.rijkswaterstaat.nl/)
         - [ENC](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc) (?)
         - [Vaarwegmarkeringen drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
@@ -45,7 +45,7 @@ Here you find precompiled charts for download in various formats usable in diffe
 
 ### Vector Charts
 
-Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". (also see [usage](usage.md#vector-charts))
+Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". 
 
 - [:de: Depth Data DE](depth-de.obf){:download}
 - [:nl: Depth Data NL](depth-nl.obf){:download}
@@ -61,7 +61,7 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 
 ### Raster Charts
 
-The charts are imported by opening the `sqlitedb` files with the app. (also see [usage](usage.md#raster-charts))
+The charts are imported by opening the `sqlitedb` files with the app. 
 
 - [:de: QMAP DE](qmap-de.sqlitedb){:download}
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
@@ -69,11 +69,14 @@ The charts are imported by opening the `sqlitedb` files with the app. (also see 
 
 #### Online Charts
 
+The raster charts can also be added to OsmAnd as online tile sources, chart tiles are downloaded on demand.
+
 - :de: QMAP DE online [`https://freenauticalchart.net/qmap-de/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-DE&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.webp)
 - :nl: QMAP NL online [`https://freenauticalchart.net/qmap-nl/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-NL&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.webp)
 
 !!! tip
-    Select `sqlitedb` as storage format. This will store the tiles more efficiently into a single database file.
+    Select `sqlitedb` as storage format. This will store the tiles more efficiently into a single database file.  
+    If you set an expiration time, the tiles will be redownloaded after they have expired, so you get automatic updates.
 
 ## [AvNav](https://www.wellenvogel.net/software/avnav/docs/beschreibung.html?lang=en)
 

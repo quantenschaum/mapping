@@ -8,7 +8,7 @@ const isDevMode = process.env.NODE_ENV === 'development';
 const clog = logger('tides', 'lightblue');
 
 const baseurl = 'https://freenauticalchart.net';
-const attrTides = '<a href="/download/tides/">Tidal Atlas</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH</a>)';
+const attrTides = '<a href="/download/tides/">Tidal Atlas *</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH</a>)';
 
 export function addTidealAtlas(map, gauges = false) {
 
@@ -17,11 +17,11 @@ export function addTidealAtlas(map, gauges = false) {
   for (let i = -6; i <= 6; i++) {
     let s = (i >= 0 ? '+' : '') + i;
     layers.push(L.tileLayer.fallback(baseurl + '/tides/hw' + s + '/{z}/{x}/{y}.webp', {
-      attribution: attrTides,
+      attribution: attrTides.replace('*', `HW Helgoland ${s}h`.replace('+0h', '')),
     }));
   }
   layers.push(L.tileLayer.fallback(baseurl + '/tides/fig/{z}/{x}/{y}.webp', {
-    attribution: attrTides,
+    attribution: attrTides.replace('*', 'Figures'),
   }));
 
   L.control.timelineSlider({

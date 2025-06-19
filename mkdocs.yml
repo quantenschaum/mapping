@@ -11,7 +11,7 @@ nav:
   - Download: index.md
   - Screenshots: screenshots.md
   - Printing: print.md
-#  - Usage: usage.md
+  #  - Usage: usage.md
   - Tidal Atlas: tides.md
   - Nautical Almanac: almanac.md
 #  - Creation: creation.md
@@ -102,10 +102,24 @@ markdown_extensions:
         #  - https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css
 
 plugins:
+  - i18n:
+      docs_structure: suffix
+      redirect_root: true
+      languages:
+        - locale: en
+          name: '🇬🇧 English'
+          default: true
+        - locale: de
+          name: '🇩🇪 Deutsch'
+          nav_translations:
+            Chart: Karte
+            Printing: Drucken
+            Screenshots: Bildschirmfotos
+            Tidal Atlas: Gezeitenstromatlas
+            Nautical Almanac: Nautisches Jahrbuch
   - search:
       lang: en
   - git-revision-date-localized:
-      #      enable_creation_date: true
       type: iso_date
       fallback_to_build_date: true
 

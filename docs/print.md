@@ -46,4 +46,4 @@ You can print your own custom charts with the classical lat/lon zebra border as 
    ![layout editor](print/layout.webp)
 7. Adjust the layout to your liking, select the part of the map you want to print (use the move content tool (C)).
 8. Export as PDF.
-9. Print the PDF (direct printing from QGIS may work, but PDF is usually more reliable and you can save it to print it again).
+9. Print the PDF (direct printing from QGIS may work, but printing PDF is usually more reliable and you can save it to print it again).
