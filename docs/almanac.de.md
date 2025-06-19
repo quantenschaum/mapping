@@ -1,6 +1,6 @@
 # Nautisches Jahrbuch
 
-Für diejenigen, die sich für die astronomische Navigation interessieren, habe ich einen [Nautisches Jahrbuch in einem eigenen Projekt](https://github.com/quantenschaum/nautical_almanac) erstellt.
+Für diejenigen, die sich für die astronomische Navigation interessieren, habe ich ein [Nautisches Jahrbuch in einem eigenen Projekt](https://github.com/quantenschaum/nautical_almanac) erstellt.
 
 Das aktuelle Jahrbuch kann hier heruntergeladen werden.
 
