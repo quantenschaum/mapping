@@ -2,6 +2,12 @@
 
 Wie sehen die Karten in verschiedenen Anwendungen aus?
 
+## Browser
+
+Aus dem Browser exportiertes Bild
+
+![image export](img/chartimage.webp)
+
 ## OsmAnd
 
 Vektor-Karte

@@ -2,6 +2,12 @@
 
 How do these charts look like in various applications?
 
+## Browser
+
+Image exported from the browser
+
+![image export](img/chartimage.webp)
+
 ## OsmAnd
 
 Vector Chart
