@@ -194,9 +194,9 @@ L.Control.Boating = L.Control.extend({
     const lat = degmin(e.latlng.lat, 3, true);
     const lng = degmin(e.latlng.lng, 3, false);
     let html = '';
-    let heading = e.speedVector.heading;
+    let heading = e.speedVector.heading || e.heading || NaN;
     if (!isNaN(heading)) html += `<div class="heading">${heading.toFixed(0)}&ThinSpace;&deg;</div>`;
-    let speed = e.speedVector.speed * 3600 / 1852;
+    let speed = (e.speedVector.speed || e.speed || NaN) * 3600 / 1852;
     if (!isNaN(speed)) html += `<div class="speed">${speed.toFixed(1)}&ThinSpace;kn</div>`;
     html += `<div class="position">${lat}<br/>${lng}</div>`;
     this.legend.container.innerHTML = html;
