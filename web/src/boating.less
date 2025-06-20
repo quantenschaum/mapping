@@ -1,0 +1,45 @@
+.leaflet-control-boating-arrow {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-image: url("data:image/svg+xml,%0A%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cg transform='translate(256 256) scale(0.5) rotate(45) translate(-256 -256)'%3E%3Cpath d='M 128 512 C 128 512 128 128 256 0 C 384 128 384 512 384 512 Z' fill='red'/%3E%3C/g%3E%3C/svg%3E%0A");
+  filter: saturate(0);
+  background-repeat: no-repeat;
+  background-size: 40px;
+  background-position: center;
+}
+
+.leaflet-control-boating-arrow.following {
+  filter: hue-rotate(60deg) saturate(20);
+}
+
+.leaflet-control-boating-arrow.locating {
+  filter: hue-rotate(200deg);
+}
+
+.leaflet-control-boating-arrow.requesting {
+  background-image: url("data:image/svg+xml,%0A%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cg transform='translate(256 256) scale(0.6) translate(-256 -256)'%3E%3Cpath fill='black' d='M304 48a48 48 0 1 1-96 0 48 48 0 0 1 96 0zm-48 368a48 48 0 1 0 0 96 48 48 0 0 0 0-96zm208-208a48 48 0 1 0 0 96 48 48 0 0 0 0-96zM96 256a48 48 0 1 0-96 0 48 48 0 0 0 96 0zm13 99a48 48 0 1 0 0 96 48 48 0 0 0 0-96zm294 0a48 48 0 1 0 0 96 48 48 0 0 0 0-96zM109 61a48 48 0 1 0 0 96 48 48 0 0 0 0-96z'/%3E%3C/g%3E%3C/svg%3E");
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.leaflet-control-boating-legend {
+  padding: 1ex;
+  background: white;
+  text-wrap: nowrap;
+
+  .speed, .heading {
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+
+}

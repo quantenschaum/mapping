@@ -4,8 +4,8 @@ import 'leaflet.tilelayer.fallback';
 import '@kvforksorg/leaflet.polylinemeasure';
 import '@kvforksorg/leaflet.polylinemeasure/Leaflet.PolylineMeasure.css';
 import 'leaflet.control.opacity';
-import {LocateControl} from 'leaflet.locatecontrol';
-import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
+// import {LocateControl} from 'leaflet.locatecontrol';
+// import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
 // import 'leaflet-mouse-position';
 // import 'leaflet-mouse-position/src/L.Control.MousePosition.css';
 import {OpenLocationCode} from 'open-location-code';
@@ -29,6 +29,7 @@ import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
 import {addTidealAtlas, addTideGauges} from "./tides";
 import {addWattSegler} from './wattsegler';
+import './boating';
 
 const isDevMode = process.env.NODE_ENV === 'development';
 const isStandalone = !!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
@@ -279,49 +280,21 @@ updateOpacityControl();
 
 map.on('overlayadd overlayremove', debounce(updateOpacityControl));
 
-if (isDevMode || isStandalone) {
-  const lc = new LocateControl({
-    flyTo: true,
-    // keepCurrentZoomLevel: true,
-    cacheLocation: false,
-    locateOptions: {
-      watch: true,
-      maxZoom: 15,
-      maximumAge: 1000,
-      enableHighAccuracy: true,
-    }
-  }).addTo(map);
+if (isDevMode || params.get('loc') == '1')
+  L.control.boating().addTo(map);
 
-  // const NavDataWidget = L.Control.extend({
-  //   options: {position: 'bottomleft'},
-  //   onAdd: function (map) {
-  //     const div = L.DomUtil.create('div', 'navdata leaflet-bar');
-  //     L.DomEvent.disableClickPropagation(div);
-  //
-  //     function hide() {
-  //       div.innerHTML = '';
-  //       div.style.display = 'none';
-  //     }
-  //
-  //     hide();
-  //
-  //     let timer;
-  //
-  //     map.on('locationfound', e => {
-  //       const lat = degmin(e.latitude, 3, true);
-  //       const lng = degmin(e.longitude, 3, false);
-  //       const sog = e.speed != null ? `SOG ${(e.speed * 3600 / 1852).toFixed(1)}kn` : '';
-  //       const cog = e.heading != null ? `COG ${e.heading.toFixed(0)}°` : '';
-  //       div.innerHTML = `<div></div>${lat}<br/>${lng}</div><div>${sog}</div><div>${cog}</div>`;
-  //       div.style.display = '';
-  //       log('location', 'magenta', lat, lng, sog, cog);
-  //       clearTimeout(timer);
-  //       timer = setTimeout(hide, 10000);
-  //     });
-  //     return div;
-  //   },
-  // });
-  // new NavDataWidget().addTo(map);
+if (isDevMode || isStandalone) {
+  // new LocateControl({
+  //   flyTo: true,
+  //   // keepCurrentZoomLevel: true,
+  //   cacheLocation: false,
+  //   locateOptions: {
+  //     watch: true,
+  //     maxZoom: 15,
+  //     maximumAge: 1000,
+  //     enableHighAccuracy: true,
+  //   }
+  // }).addTo(map);
 
   new NightSwitch().addTo(map);
 }
