@@ -280,9 +280,6 @@ updateOpacityControl();
 
 map.on('overlayadd overlayremove', debounce(updateOpacityControl));
 
-if (isDevMode || params.get('loc') == '1')
-  L.control.boating().addTo(map);
-
 if (isDevMode || isStandalone) {
   // new LocateControl({
   //   flyTo: true,
@@ -296,6 +293,7 @@ if (isDevMode || isStandalone) {
   //   }
   // }).addTo(map);
 
+  L.control.boating().addTo(map);
   new NightSwitch().addTo(map);
 }
 

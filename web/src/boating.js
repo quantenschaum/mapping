@@ -21,6 +21,7 @@ L.Control.Boating = L.Control.extend({
   options: {
     position: 'topleft',
     legendPosition: 'bottomleft',
+    smoothing: 0.8,
   },
 
   onAdd: function (map) {
@@ -218,7 +219,7 @@ L.Control.Boating = L.Control.extend({
         (e.speed) * sinDeg(e.heading),
       ];
       if (isNaN(velocity[0]) || isNaN(velocity[1])) velocity = v;
-      const a = 0.9;
+      const a = this.options.smoothing;
       velocity = [
         velocity[0] += (v[0] - velocity[0]) * a,
         velocity[1] += (v[1] - velocity[1]) * a,
