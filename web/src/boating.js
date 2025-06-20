@@ -21,12 +21,13 @@ L.Control.Boating = L.Control.extend({
   options: {
     position: 'topleft',
     legendPosition: 'bottomleft',
-    smoothing: 0.8,
+    smoothing: 0.5,
   },
 
   onAdd: function (map) {
     const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
     const link = L.DomUtil.create('a', 'leaflet-bar-part leaflet-bar-part-single', container);
+    link.title = 'track position';
     this.icon = L.DomUtil.create('span', 'leaflet-control-boating-arrow', link);
 
     L.DomEvent.disableClickPropagation(container);
@@ -180,7 +181,7 @@ L.Control.Boating = L.Control.extend({
       this.line.setLatLngs([[0, 0], [0, 0]]);
       return;
     }
-    const length = speed * 3600 / 1852 / 60 / 6;
+    const length = speed * 3600 / 1852 / 60 / 4;
     const p0 = e.latlng;
     const p1 = L.latLng(
       p0.lat + (length * cosDeg(heading)),
@@ -209,8 +210,8 @@ L.Control.Boating = L.Control.extend({
         const t = this;
         const ee = {
           ...e,
-          speed: 5 + Math.random(),
-          heading: 45 + Math.random() * 20,
+          speed: 1852 / 3600 + Math.random() * 0,
+          heading: 45 + Math.random() * 0,
         };
         setTimeout(() => t.onLocationFound(ee), 1000);
       }
