@@ -2,19 +2,19 @@
   width: 30px;
   height: 30px;
   display: inline-block;
-  background-image: url("data:image/svg+xml,%0A%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cg transform='translate(256 256) scale(0.5) rotate(45) translate(-256 -256)'%3E%3Cpath d='M 128 512 C 128 512 128 128 256 0 C 384 128 384 512 384 512 Z' fill='red'/%3E%3C/g%3E%3C/svg%3E%0A");
-  filter: saturate(0);
+  background-image: url("data:image/svg+xml,%0A%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cg transform='translate(256 256) scale(0.5) rotate(45) translate(-256 -256)'%3E%3Cpath d='M 128 512 C 128 512 128 128 256 0 C 384 128 384 512 384 512 Z' fill='orange'/%3E%3C/g%3E%3C/svg%3E%0A");
   background-repeat: no-repeat;
   background-size: 40px;
   background-position: center;
+  filter: saturate(0);
 }
 
 .leaflet-control-boating-arrow.following {
-  filter: hue-rotate(60deg) saturate(20);
+  filter: none;
 }
 
 .leaflet-control-boating-arrow.locating {
-  filter: hue-rotate(200deg);
+  filter: invert();
 }
 
 .leaflet-control-boating-arrow.requesting {
