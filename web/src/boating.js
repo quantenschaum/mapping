@@ -184,7 +184,7 @@ L.Control.Boating = L.Control.extend({
       this.line.setLatLngs([[0, 0], [0, 0]]);
       return;
     }
-    const length = speed * 3600 / 1852 / 60 / 4;
+    const length = speed * 3600 / 1852 / 60 / 6; // distance covered in 10 minutes
     const p0 = e.latlng;
     const p1 = L.latLng(
       p0.lat + (length * cosDeg(heading)),
