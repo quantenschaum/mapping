@@ -92,6 +92,7 @@ L.Control.Boating = L.Control.extend({
     this.icon.classList.remove('following');
     this.icon.classList.remove('locating');
     this.icon.classList.add('requesting');
+    this._map.getContainer().classList.add('boating');
   },
 
   follow: function () {
@@ -125,6 +126,7 @@ L.Control.Boating = L.Control.extend({
     this._map.removeLayer(this.circle);
     this._map.removeLayer(this.line);
     this._map.removeLayer(this.boat);
+    this._map.getContainer().classList.remove('boating');
   },
 
   onLocationFound: function (e) {
@@ -191,11 +193,11 @@ L.Control.Boating = L.Control.extend({
   },
 
   updateLegend: function (e) {
-    const lat = degmin(e.latlng.lat, 3, true);
-    const lng = degmin(e.latlng.lng, 3, false);
+    const lat = degmin(e.latlng.lat, 2, true, true);
+    const lng = degmin(e.latlng.lng, 2, false, true);
     let html = '';
     let heading = e.speedVector.heading || e.heading || NaN;
-    if (!isNaN(heading)) html += `<div class="heading">${heading.toFixed(0)}&ThinSpace;&deg;</div>`;
+    if (!isNaN(heading)) html += `<div class="heading">${heading.toFixed(0)}&deg;</div>`;
     let speed = (e.speedVector.speed || e.speed || NaN) * 3600 / 1852;
     if (!isNaN(speed)) html += `<div class="speed">${speed.toFixed(1)}&ThinSpace;kn</div>`;
     html += `<div class="position">${lat}<br/>${lng}</div>`;

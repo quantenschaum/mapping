@@ -254,11 +254,13 @@ map.on('contextmenu', (e) => {
   const lat = e.latlng.lat.toFixed(6);
   const lng = e.latlng.lng.toFixed(6);
   const coords = `${lat}, ${lng}`;
-  if (isDevMode) navigator.clipboard.writeText(coords);
   const olc = new OpenLocationCode();
+  const latDM = degmin(e.latlng.lat, 3, true, true);
+  const lngDM = degmin(e.latlng.lng, 3, false, true);
+  if (isDevMode) navigator.clipboard.writeText(coords);
   L.popup()
     .setLatLng(e.latlng)
-    .setContent(`${degmin(e.latlng.lat, 3, true)} ${degmin(e.latlng.lng, 3, false)}<br/>${coords}<br/>${olc.encode(e.latlng.lat, e.latlng.lng)}`)
+    .setContent(`${latDM} ${lngDM}<br/>${coords}<br/>${olc.encode(e.latlng.lat, e.latlng.lng)}`)
     .openOn(map);
 });
 

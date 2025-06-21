@@ -1,6 +1,6 @@
 // based on https://github.com/Leaflet/Leaflet.Graticule
 
-export function degmin(v, n = 2, lat = true) {
+export function degmin(v, n = 2, lat = true, pad = false) {
   var a = Math.abs(v);
   var d = Math.floor(a);
   var f = Math.pow(10, n);
@@ -9,13 +9,18 @@ export function degmin(v, n = 2, lat = true) {
     m -= 60;
     d += 1;
   }
-  var M = m == 0 ? "" : m.toFixed(n).replace(/\.?0+$/, "") + "'";
+  var M = m == 0 ? '' : m.toFixed(n).replace(/\.0+$/, "") + "'";
   if (lat) {
     var s = v < 0 ? 'S' : v > 0 ? 'N' : '';
   } else {
     v %= 360;
     v -= Math.abs(v) > 180 ? Math.sign(v) * 360 : 0;
     var s = v < 0 ? 'W' : v > 0 ? 'E' : '';
+  }
+  if (pad) {
+    s += lat ? ' ' : '';
+    d = d.toString().padStart(lat ? 2 : 3, '0');
+    M = m == 0 ? '' : m.toFixed(n).padStart(n + (n ? 3 : 2), '0') + "'";
   }
   return `${s} ${d}° ${M}`;
 }
