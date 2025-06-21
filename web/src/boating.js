@@ -24,6 +24,7 @@ L.Control.Boating = L.Control.extend({
     legendPosition: 'bottomleft',
     smoothing: 0.5,
     vectorLength: 10, // minutes
+    shiftSpeed: 5,
   },
 
   onAdd: function (map) {
@@ -227,7 +228,7 @@ L.Control.Boating = L.Control.extend({
     const bounds = this._map.getBounds();
     const sw = bounds.getSouthWest();
     const ne = bounds.getNorthEast();
-    const f = Math.min(speed * 3600 / 1852 / 2, 1) / 2 * 0.7;
+    const f = Math.min(speed * 3600 / 1852 / this.options.shiftSpeed, 1) / 2 * 0.7;
     const width = (ne.lng - sw.lng) * f;
     const height = (ne.lat - sw.lat) * f;
     console.log(sw, ne, width, height, heading);
