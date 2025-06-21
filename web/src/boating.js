@@ -205,10 +205,10 @@ L.Control.Boating = L.Control.extend({
   updateLegend: function (e) {
     const lat = degmin(e.latlng.lat, 2, true, true);
     const lng = degmin(e.latlng.lng, 2, false, true);
-    let html = '';
     let heading = e.speedVector.heading || e.heading || NaN;
-    if (!isNaN(heading)) html += `<div class="heading">${heading.toFixed(0).padStart(3, '0')}&deg;</div>`;
     let speed = (e.speedVector.speed || e.speed || NaN) * 3600 / 1852;
+    let html = '';
+    if (!isNaN(heading)) html += `<div class="heading">${heading.toFixed(0).padStart(3, '0')}&deg;</div>`;
     if (!isNaN(speed)) html += `<div class="speed">${speed.toFixed(1)}&ThinSpace;kn</div>`;
     html += `<div class="position">${lat}<br/>${lng}<br/>${this.olc.encode(e.latlng.lat, e.latlng.lng)}</div>`;
     if (!isNaN(speed) && !isNaN(heading)) html += `<div class="line-legend">${this.options.vectorLength}&ThinSpace;min</div>`;
