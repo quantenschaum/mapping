@@ -211,7 +211,7 @@ L.Control.Boating = L.Control.extend({
     if (!isNaN(heading)) html += `<div class="heading">${heading.toFixed(0).padStart(3, '0')}&deg;</div>`;
     if (!isNaN(speed)) html += `<div class="speed">${speed.toFixed(1)}&ThinSpace;kn</div>`;
     html += `<div class="position">${lat}<br/>${lng}<br/>${this.olc.encode(e.latlng.lat, e.latlng.lng)}</div>`;
-    if (!isNaN(speed) && !isNaN(heading)) html += `<div class="line-legend">${this.options.vectorLength}&ThinSpace;min</div>`;
+    html += `<div class="line-legend">${this.options.vectorLength}&ThinSpace;min</div>`;
     this.legend.container.innerHTML = html;
   },
 
