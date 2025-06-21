@@ -93,7 +93,6 @@ L.Control.Boating = L.Control.extend({
     this.icon.classList.remove('following');
     this.icon.classList.remove('locating');
     this.icon.classList.add('requesting');
-    this._map.getContainer().classList.add('boating');
   },
 
   follow: function () {
@@ -102,6 +101,7 @@ L.Control.Boating = L.Control.extend({
     this.icon.classList.remove('requesting');
     this.icon.classList.remove('locating');
     this.icon.classList.add('following');
+    this._map.getContainer().classList.add('boating');
   },
 
   unfollow: function () {
@@ -132,7 +132,6 @@ L.Control.Boating = L.Control.extend({
 
   onLocationFound: function (e) {
     e.speedVector = this.smoothSpeed(e)
-
     if (this.isRequesting()) {
       this._map.addControl(this.legend);
       this._map.addLayer(this.circle);
@@ -148,6 +147,8 @@ L.Control.Boating = L.Control.extend({
     this.updateLine(e);
     this.updateBoat(e);
     this.lastPosition = e;
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.stop(), 60_000);
   },
 
   onLocationError: function (e) {
@@ -164,8 +165,13 @@ L.Control.Boating = L.Control.extend({
   },
 
   updateBoat: function (e) {
-    const heading = e.speedVector.heading;
-    let svg = `<svg transform="rotate(${heading})" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M 128 512 C 128 512 128 128 256 0 C 384 128 384 512 384 512 Z" fill="#3388ff"/></svg>`;
+    const heading = e.speedVector.heading || e.heading || NaN;
+    let svg;
+    if (isNaN(heading)) {
+      svg = '<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path style="fill:#3a65ff;stroke-width:0;stroke-linecap:round;stroke-linejoin:bevel;paint-order:stroke fill markers" d="M 253.33441,95.638684 A 160.38347,160.38347 0 0 1 416.34461,252.46992 160.38347,160.38347 0 0 1 260.39448,416.32325 160.38347,160.38347 0 0 1 95.702768,261.25874 160.38347,160.38347 0 0 1 249.87715,95.733448"/></svg>';
+    } else {
+      svg = `<svg transform="rotate(${heading})" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M 128 512 C 128 512 128 128 256 0 C 384 128 384 512 384 512 Z" fill="#3388ff"/></svg>`;
+    }
     this.boat.setLatLng(e.latlng);
     this.boat.setIcon(
       L.divIcon({
@@ -173,8 +179,7 @@ L.Control.Boating = L.Control.extend({
         iconSize: [25, 25],
         className: 'boat',
         html: svg,
-      })
-    );
+      }));
   },
 
   updateLine: function (e) {
@@ -214,7 +219,7 @@ L.Control.Boating = L.Control.extend({
         const ee = {
           ...e,
           speed: 1852 / 3600 * (5 + Math.random() * 1),
-          heading: 45 + Math.random() * 5,
+          heading: 45 + Math.random() * 15,
         };
         setTimeout(() => t.onLocationFound(ee), 1000);
       }
