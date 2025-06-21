@@ -210,7 +210,7 @@ L.Control.Boating = L.Control.extend({
     let speed = (e.speedVector.speed || e.speed || NaN) * 3600 / 1852;
     if (!isNaN(speed)) html += `<div class="speed">${speed.toFixed(1)}&ThinSpace;kn</div>`;
     html += `<div class="position">${lat}<br/>${lng}<br/>${this.olc.encode(e.latlng.lat, e.latlng.lng)}</div>`;
-    html += `<div class="line-legend">10&ThinSpace;min</div>`;
+    if (!isNaN(speed) && !isNaN(heading)) html += `<div class="line-legend">10&ThinSpace;min</div>`;
     this.legend.container.innerHTML = html;
   },
 
