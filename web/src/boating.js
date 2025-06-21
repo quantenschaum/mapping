@@ -75,7 +75,7 @@ L.Control.Boating = L.Control.extend({
     if (this.isFollowing() || this.isRequesting()) {
       this.stop();
     } else if (this.isLocating()) {
-      this._map.panTo(this.lastPosition.latlng, {animate: true});
+      this.panTo(this.lastPosition.latlng, this.lastPosition.heading, this.lastPosition.speed);
       this.follow();
     } else if (!this.isRequesting()) {
       this.request();
@@ -134,6 +134,26 @@ L.Control.Boating = L.Control.extend({
     this._map.getContainer().classList.remove('boating');
   },
 
+  panTo: function (pos, heading = NaN, speed) {
+    // if (heading === undefined || isNaN(heading) || !(speed * 3600 / 1852 > 1)) {
+    this._map.panTo(pos, {animate: true});
+    return;
+    // }
+    const bounds = this._map.getBounds();
+    const sw = bounds.getSouthWest();
+    const ne = bounds.getNorthEast();
+    const width = (ne.lng - sw.lng) / 3;
+    const height = (ne.lat - sw.lat) / 3;
+    heading = Math.round(heading / 30) * 30;
+    console.log(sw, ne, width, height, heading);
+    const p0 = pos;
+    const p1 = [
+      p0.lat + (height * cosDeg(heading)),
+      p0.lng + (width * sinDeg(heading)),
+    ];
+    this._map.panTo(p1, {animate: true});
+  },
+
   onLocationFound: function (e) {
     e.speedVector = this.smoothSpeed(e)
     if (this.isRequesting()) {
@@ -144,7 +164,9 @@ L.Control.Boating = L.Control.extend({
       this.follow();
     }
     if (this.isFollowing()) {
-      this._map.panTo(e.latlng, {animate: true});
+      this.panTo(e.latlng,
+        e.speedVector.heading || e.heading,
+        e.speedVector.speed || e.speed);
     }
     this.updateLegend(e);
     this.updateCircle(e);
@@ -152,7 +174,7 @@ L.Control.Boating = L.Control.extend({
     this.updateBoat(e);
     this.lastPosition = e;
     clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.stop(), 60_000);
+    this.timer = setTimeout(() => this.stop(), 120_000);
   },
 
   onLocationError: function (e) {
@@ -222,8 +244,8 @@ L.Control.Boating = L.Control.extend({
         const t = this;
         const ee = {
           ...e,
-          speed: 1852 / 3600 * (5 + Math.random() * 1),
-          heading: 45 + Math.random() * 15,
+          speed: 1852 / 3600 * (0.5 + Math.random() * 1),
+          heading: 45 + Math.random() * 10,
         };
         setTimeout(() => t.onLocationFound(ee), 1000);
       }
