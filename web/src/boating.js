@@ -45,8 +45,9 @@ L.Control.Boating = L.Control.extend({
     });
 
     this.line = L.polyline([[0, 0], [0, 0]], {
-      lineCap: 'square',
       color: 'purple',
+      weight: 2,
+      dashArray: [6, 6],
     });
 
     this.boat = L.marker([0, 0]);
@@ -212,8 +213,8 @@ L.Control.Boating = L.Control.extend({
         const t = this;
         const ee = {
           ...e,
-          speed: 1852 / 3600 + Math.random() * 0,
-          heading: 45 + Math.random() * 0,
+          speed: 1852 / 3600 * (5 + Math.random() * 1),
+          heading: 45 + Math.random() * 5,
         };
         setTimeout(() => t.onLocationFound(ee), 1000);
       }
