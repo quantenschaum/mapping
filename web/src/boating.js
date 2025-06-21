@@ -75,7 +75,7 @@ L.Control.Boating = L.Control.extend({
     if (this.isFollowing() || this.isRequesting()) {
       this.stop();
     } else if (this.isLocating()) {
-      this.panTo(this.lastPosition.latlng, this.lastPosition.heading, this.lastPosition.speed);
+      this.panTo(this.lastPosition);
       this.follow();
     } else if (!this.isRequesting()) {
       this.request();
@@ -134,27 +134,8 @@ L.Control.Boating = L.Control.extend({
     this._map.getContainer().classList.remove('boating');
   },
 
-  panTo: function (pos, heading = NaN, speed) {
-    // if (heading === undefined || isNaN(heading) || !(speed * 3600 / 1852 > 1)) {
-    this._map.panTo(pos, {animate: true});
-    return;
-    // }
-    const bounds = this._map.getBounds();
-    const sw = bounds.getSouthWest();
-    const ne = bounds.getNorthEast();
-    const width = (ne.lng - sw.lng) / 3;
-    const height = (ne.lat - sw.lat) / 3;
-    heading = Math.round(heading / 30) * 30;
-    console.log(sw, ne, width, height, heading);
-    const p0 = pos;
-    const p1 = [
-      p0.lat + (height * cosDeg(heading)),
-      p0.lng + (width * sinDeg(heading)),
-    ];
-    this._map.panTo(p1, {animate: true});
-  },
-
   onLocationFound: function (e) {
+    if (isDevMode) this._map.stopLocate();
     e.speedVector = this.smoothSpeed(e)
     if (this.isRequesting()) {
       this._map.addControl(this.legend);
@@ -164,9 +145,7 @@ L.Control.Boating = L.Control.extend({
       this.follow();
     }
     if (this.isFollowing()) {
-      this.panTo(e.latlng,
-        e.speedVector.heading || e.heading,
-        e.speedVector.speed || e.speed);
+      this.panTo(e);
     }
     this.updateLegend(e);
     this.updateCircle(e);
@@ -237,21 +216,55 @@ L.Control.Boating = L.Control.extend({
     this.legend.container.innerHTML = html;
   },
 
+  panTo: function (e) {
+    const pos = e.latlng;
+    const heading = e.speedVector.heading || e.heading || NaN;
+    const speed = e.speedVector.speed || e.speed || NaN;
+    if (isNaN(heading) || isNaN(speed)) {
+      this._map.panTo(pos, {animate: true});
+      return;
+    }
+    const bounds = this._map.getBounds();
+    const sw = bounds.getSouthWest();
+    const ne = bounds.getNorthEast();
+    const f = Math.min(speed * 3600 / 1852 / 2, 1) / 2 * 0.7;
+    const width = (ne.lng - sw.lng) * f;
+    const height = (ne.lat - sw.lat) * f;
+    console.log(sw, ne, width, height, heading);
+    const p0 = pos;
+    const p1 = [
+      p0.lat + (height * cosDeg(heading)),
+      p0.lng + (width * sinDeg(heading)),
+    ];
+    this._map.panTo(p1, {animate: true});
+  },
+
   smoothSpeed: (function () {
     let velocity = [NaN, NaN];
     return function (e) {
+/////////////////////////////////////////////////////////////////////////////////////////
       if (isDevMode) {
         const t = this;
         const ee = {
           ...e,
-          speed: 1852 / 3600 * (0.5 + Math.random() * 1),
-          heading: 45 + Math.random() * 10,
+          // speed: 1852 / 3600 * (5 + Math.random() * 0.5),
+          speed: (e.speed || 0) + 0.02,
+          heading: ((e.heading || 0) + 3) % 360,
         };
+        const v = [
+          ee.speed * cosDeg(ee.heading),
+          ee.speed * sinDeg(ee.heading),
+        ];
+        ee.latlng = L.latLng(
+          ee.latlng.lat + v[0] * 0.001,
+          ee.latlng.lng + v[1] * 0.001 / cosDeg(ee.latlng.lat),
+        );
         setTimeout(() => t.onLocationFound(ee), 1000);
       }
+/////////////////////////////////////////////////////////////////////////////////////////
       const v = [
-        (e.speed) * cosDeg(e.heading),
-        (e.speed) * sinDeg(e.heading),
+        e.speed * cosDeg(e.heading),
+        e.speed * sinDeg(e.heading),
       ];
       if (isNaN(velocity[0]) || isNaN(velocity[1])) velocity = v;
       const a = Math.max(0, Math.min(1 - this.options.smoothing, 1));
