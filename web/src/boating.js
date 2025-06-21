@@ -23,6 +23,7 @@ L.Control.Boating = L.Control.extend({
     position: 'topleft',
     legendPosition: 'bottomleft',
     smoothing: 0.5,
+    vectorLength: 10, // minutes
   },
 
   onAdd: function (map) {
@@ -192,7 +193,7 @@ L.Control.Boating = L.Control.extend({
       this.line.setLatLngs([[0, 0], [0, 0]]);
       return;
     }
-    const length = speed * 3600 / 1852 / 60 / 6; // distance covered in 10 minutes
+    const length = speed * 3600 / 1852 / 60 * this.options.vectorLength / 60; // distance covered in 10 minutes
     const p0 = e.latlng;
     const p1 = L.latLng(
       p0.lat + (length * cosDeg(heading)),
@@ -210,7 +211,7 @@ L.Control.Boating = L.Control.extend({
     let speed = (e.speedVector.speed || e.speed || NaN) * 3600 / 1852;
     if (!isNaN(speed)) html += `<div class="speed">${speed.toFixed(1)}&ThinSpace;kn</div>`;
     html += `<div class="position">${lat}<br/>${lng}<br/>${this.olc.encode(e.latlng.lat, e.latlng.lng)}</div>`;
-    if (!isNaN(speed) && !isNaN(heading)) html += `<div class="line-legend">10&ThinSpace;min</div>`;
+    if (!isNaN(speed) && !isNaN(heading)) html += `<div class="line-legend">${this.options.vectorLength}&ThinSpace;min</div>`;
     this.legend.container.innerHTML = html;
   },
 
