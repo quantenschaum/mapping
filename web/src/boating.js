@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import {OpenLocationCode} from 'open-location-code';
 import './boating.less';
 import {degmin} from "./graticule";
 
@@ -51,6 +52,8 @@ L.Control.Boating = L.Control.extend({
     });
 
     this.boat = L.marker([0, 0]);
+
+    this.olc = new OpenLocationCode();
 
     return container;
   },
@@ -206,11 +209,10 @@ L.Control.Boating = L.Control.extend({
     if (!isNaN(heading)) html += `<div class="heading">${heading.toFixed(0).padStart(3, '0')}&deg;</div>`;
     let speed = (e.speedVector.speed || e.speed || NaN) * 3600 / 1852;
     if (!isNaN(speed)) html += `<div class="speed">${speed.toFixed(1)}&ThinSpace;kn</div>`;
-    html += `<div class="position">${lat}<br/>${lng}</div>`;
+    html += `<div class="position">${lat}<br/>${lng}<br/>${this.olc.encode(e.latlng.lat, e.latlng.lng)}</div>`;
     html += `<div class="line-legend">10&ThinSpace;min</div>`;
     this.legend.container.innerHTML = html;
   },
-
 
   smoothSpeed: (function () {
     let velocity = [NaN, NaN];
@@ -229,10 +231,10 @@ L.Control.Boating = L.Control.extend({
         (e.speed) * sinDeg(e.heading),
       ];
       if (isNaN(velocity[0]) || isNaN(velocity[1])) velocity = v;
-      const a = this.options.smoothing;
+      const a = Math.max(0, Math.min(1 - this.options.smoothing, 1));
       velocity = [
-        velocity[0] += (v[0] - velocity[0]) * a,
-        velocity[1] += (v[1] - velocity[1]) * a,
+        velocity[0] += a * (v[0] - velocity[0]),
+        velocity[1] += a * (v[1] - velocity[1]),
       ];
       console.log(e, v, velocity);
       return {
