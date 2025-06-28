@@ -9,7 +9,7 @@ export function degmin(v, n = 2, lat = true, pad = false) {
     m -= 60;
     d += 1;
   }
-  var M = m == 0 ? '' : m.toFixed(n).replace(/\.0+$/, "") + "'";
+  var M = m == 0 ? '' : m.toFixed(n).replace(/\.?0+$/, "") + "'";
   if (lat) {
     var s = v < 0 ? 'S' : v > 0 ? 'N' : '';
   } else {
