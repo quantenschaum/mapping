@@ -306,9 +306,11 @@ if (params.get('gpx') == '1') {
 }
 
 addTidealAtlas(map);
-if (isDevMode || isStandalone || params.get('tides') == '1') {
+if (isDevMode || isStandalone || params.get('tides')) {
   addTideGauges(map);
-  addWattSegler(map);
+  if (isDevMode || params.get('tides') == '2') {
+    addWattSegler(map);
+  }
 }
 
 legend(layers);
