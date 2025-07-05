@@ -24,6 +24,7 @@ import {legend} from './legend';
 import {degmin} from './graticule';
 // import './scale';
 import {NightSwitch} from './nightmode';
+import {WeatherForecast} from './weather';
 import {PrintButton} from './print';
 import {restoreLayers} from './restore';
 import {addVectorLayer} from './vector';
@@ -297,6 +298,7 @@ if (isDevMode || isStandalone) {
 
   L.control.boating().addTo(map);
   new NightSwitch().addTo(map);
+  new WeatherForecast().addTo(map);
 }
 
 if (isDevMode || !isStandalone) new PrintButton().addTo(map);
