@@ -15,7 +15,7 @@ export function legend(layerControl, options = {
     onAdd: function (map) {
       this._map = map;
       llog('onAdd', this.options);
-      this._container = L.DomUtil.create('div', 'legend leaflet-bar');
+      this._container = L.DomUtil.create('div', 'legend leaflet-bar leaflet-control');
       L.DomEvent.disableClickPropagation(this._container);
       this._onLayerChange = this._onLayerChange.bind(this);
       map.on('layeradd', this._onLayerChange);

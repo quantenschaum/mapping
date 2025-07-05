@@ -52,7 +52,7 @@ L.Control.TimeLineSlider = L.Control.extend({
     document.body.appendChild(this.sheet);
 
 
-    this.container = L.DomUtil.create('div', 'slider_container leaflet-bar');
+    this.container = L.DomUtil.create('div', 'slider_container leaflet-bar leaflet-control');
 
     /* Prevent click events propagation to map */
     L.DomEvent.disableClickPropagation(this.container);

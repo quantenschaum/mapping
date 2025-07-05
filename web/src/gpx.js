@@ -73,7 +73,7 @@ export const GPXbutton = L.Control.extend({
   onAdd: function (map) {
     xlog('add button');
 
-    const div = L.DomUtil.create('div', 'addgpx leaflet-bar');
+    const div = L.DomUtil.create('div', 'addgpx leaflet-bar leaflet-control');
     L.DomEvent.disableClickPropagation(div);
 
     const button = L.DomUtil.create('a');

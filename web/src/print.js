@@ -5,7 +5,7 @@ import './print.less';
 export const PrintButton = L.Control.extend({
   options: {position: 'topleft'},
   onAdd: function (map) {
-    const div = L.DomUtil.create('div', 'printmode leaflet-bar');
+    const div = L.DomUtil.create('div', 'printmode leaflet-bar leaflet-control');
     L.DomEvent.disableClickPropagation(div);
 
     const classes = [];
