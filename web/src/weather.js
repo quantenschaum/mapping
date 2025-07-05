@@ -3,7 +3,7 @@ import L from 'leaflet';
 export const WeatherForecast = L.Control.extend({
   options: {position: 'topleft'},
   onAdd: function (map) {
-    const div = L.DomUtil.create('div', 'weather-forecast leaflet-bar leaflet-control xhidebuttons');
+    const div = L.DomUtil.create('div', 'weather-forecast leaflet-bar leaflet-control hidebuttons');
 
     const css = document.createElement('style');
     css.innerHTML = '.weather-forecast.hidebuttons a:not(:first-child) { display: none; border: none; } .weather-forecast img { margin-top: 3px; width: 24px; height: 24px; }';
