@@ -126,7 +126,6 @@ plugins:
             Nautical Almanac: Nautische almanak
   - search:
       lang: en
-  - meta
   - git-revision-date-localized:
       type: iso_date
       fallback_to_build_date: true
