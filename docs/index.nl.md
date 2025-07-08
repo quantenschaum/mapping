@@ -1,3 +1,6 @@
+---
+description: gratis te gebruiken zeekaarten voor duitse en nederlandse wateren gebaseerd op open data, achtergrondinformatie, gegevensbronnen en vooraf samengestelde zeekaarten om te downloaden
+---
 # Download
 
 Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formaten die bruikbaar zijn in verschillende applicaties.

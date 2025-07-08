@@ -1,3 +1,6 @@
+---
+description: frei verwendbare Seekarten für deutsche und niederländische Gewässer auf Basis offener Daten, Hintergrundinformationen, Datenquellen und vorgefertigte Seekarten zum Download
+---
 # Download
 
 Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formaten, die in unterschiedlichen Anwendungen verwendet werden können.
