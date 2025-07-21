@@ -510,7 +510,7 @@ rws_racon = {
 }
 
 
-def load_rws_beacons(filename):
+def load_rws_beacons(filename, skip_errors):
     data = load_json(filename)
     points = []
     for f in data["features"]:
@@ -526,6 +526,8 @@ def load_rws_beacons(filename):
                 p[t] = l[t]
             if i == 0:
                 p["beacon_type"] = 1
+            for k,v in dict(p).items():
+                if v=='L': del p[k]
             if p:
                 add_tags(tags, p)
         # add_generic_topmark(tags)
