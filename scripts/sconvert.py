@@ -536,6 +536,7 @@ def read_features(filename):
         p=f['properties']
         p=f['properties']={k: v for k, v in p.items() if v is not None} # drop empty fields
         p=f['properties']={k: ','.join(map(str,v)) if isinstance(v,list) else v for k, v in p.items()} # merge lists into strings
+        if not f['geometry'] or not f['geometry']['coordinates']: continue # drop w/o geometry
         p['layer']=p.get('layer',layer)
         features.append(f)
     return features
