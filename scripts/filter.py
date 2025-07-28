@@ -408,7 +408,7 @@ def main():
   # remove old and HD charts - https://linchart60.bsh.de/chartserver/katalog.xml
   # features=data['features']=[f for f in features if re.match(r'DE\d(NO|OS)...',f['properties'].get('chart','DE0NOxxx'))]
   if args.bsh:
-    features=data['features']=[f for f in features if f['properties'].get('chart','DE2NO000') in CATALOG or 'VALSOU' in f['properties']]
+    features=data['features']=[f for f in features if re.match(r'DE\d(NO|OS)...',f['properties'].get('chart','DE2NO000'))]
     assert features
 
   if ofile:
