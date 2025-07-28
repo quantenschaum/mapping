@@ -601,7 +601,7 @@ def main():
           return w<=lon<=e and s<=lat<=n
 
         data2=list(filter(filt,features))
-        if data2: print('added points:',len(data2))
+        # if data2: print('added points:',len(data2))
         features2senc(join(out,c+'.S57'),data1+data2,args.jitter)
       return
 
