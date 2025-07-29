@@ -19,9 +19,6 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
     - De downloadbare bestanden op deze pagina zijn gelicenseerd onder [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
     - De code van dit project die wordt gebruikt om de kaarten en andere gegevens te genereren is gelicenseerd onder [GPL](https://www.gnu.org/licenses/gpl-3.0.de.html).
 
-??? info "Dieptegegevens"
-    De Duitse kaart bevat peilingen uit <https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml> die van 2018 is en voor het laatst is bijgewerkt op 2023-05! Dit is experimenteel, gegevens kunnen fout zijn of ontbreken. Peilingen en hoogtelijnen komen uit verschillende datasets, dus ze kunnen in bepaalde gebieden niet overeenkomen.
-
 ??? note "Gegevensbronnen"    
     De kaarten van dit project zijn gebaseerd op gegevens van
     

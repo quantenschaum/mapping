@@ -19,9 +19,6 @@ Here you find precompiled charts for download in various formats usable in diffe
     - The downloadable files on this page are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
     - The code of this project used to generate the charts an other data is licensed under [GPL](https://www.gnu.org/licenses/gpl-3.0.de.html).
 
-??? info "Depth Data"
-    The german chart includes spot soundings extracted from <https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml> which is from 2018 and was last updated 2023-05! This is experimental, data can be wrong or missing. Spot soundings and contour lines are from different datasets, so they may mismatch in certain areas.  
-
 ??? note "Data Sources"
     The charts provided by this project are based on data by
     

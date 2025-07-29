@@ -19,9 +19,6 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
     - Die herunterladbaren Dateien auf dieser Seite sind lizenziert unter [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
     - Der Code dieses Projekts, der zur Erstellung der Karten und anderer Daten verwendet wird, ist lizenziert unter [GPL](https://www.gnu.org/licenses/gpl-3.0.de.html).
 
-??? info "Tiefendaten"
-    Die deutsche Karte enthält Lotungen aus <https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml>, die aus dem Jahr 2018 stammen und zuletzt 2023-05 aktualisiert wurden! Dies ist experimentell, Daten können falsch sein oder fehlen. Lotungen und Höhenlinien stammen aus unterschiedlichen Datensätzen, daher können sie in bestimmten Bereichen nicht übereinstimmen.
-
 ??? note "Datenquellen"
     Die im Rahmen dieses Projekts erstellten Karten beruhen auf Daten von
     
