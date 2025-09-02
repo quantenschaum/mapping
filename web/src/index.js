@@ -401,6 +401,6 @@ if (params.get('zones') == '1') {
 
 if (isDevMode || params.get('ais') == '1') {
   import('./ais').then(({init_ais}) => {
-    init_ais(map, 'https://navcharts.duckdns.org/ais');
+    init_ais(map, 'wss://navcharts.duckdns.org/ais');
   });
 }
