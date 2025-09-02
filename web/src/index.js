@@ -398,3 +398,9 @@ if (params.get('zones') == '1') {
 } else {
   restoreLayers(layers, params.get('l'));
 }
+
+if (isDevMode || params.get('ais') == '1') {
+  import('./ais').then(({init_ais}) => {
+    init_ais(map, 'https://navcharts.duckdns.org/ais');
+  });
+}

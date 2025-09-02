@@ -31,6 +31,7 @@
     "dom-to-image": "^2.6.0",
     "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
+    "leaflet-geometryutil": "^0.10.3",
     "leaflet-hash": "^0.2.1",
     "leaflet-mouse-position": "^1.2.0",
     "leaflet.control.opacity": "^1.6.0",
