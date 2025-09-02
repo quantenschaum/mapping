@@ -21,14 +21,14 @@ export function init_ais(map, wsurl) {
     } catch (e) {
       console.error("AIS bounds error:", e);
     }
-  }, isDevMode ? 1000 : 5000);
+  }, 5000);
 
   map.on("moveend zoomend", updateBounds);
 
   const aisLayer = L.layerGroup().addTo(map);
 
-  function boatIcon(hdt, color = 'green') {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-20 -20 40 40">  <polygon points="0,-15 8,15 -8,15" fill="${color}" fill-opacity="0.3" stroke="black" stroke-width="1.5" transform="rotate(${hdt})"/></svg>`;
+  function boatIcon(hdt, color = 'blue', scale = 1) {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-20 -20 40 40">  <polygon points="0,-15 8,15 -8,15" fill="${color}" fill-opacity="0.3" stroke="black" stroke-width="1.5" transform="rotate(${hdt}) scale(${scale})"/></svg>`;
     const svgUrl = "data:image/svg+xml;base64," + btoa(svg);
     return L.icon({
       iconUrl: svgUrl,
@@ -36,71 +36,83 @@ export function init_ais(map, wsurl) {
     });
   }
 
+  const aisStatus = {
+    0: 'Under way using engine',
+    1: 'At anchor',
+    2: 'Not under command',
+    3: 'Restricted manoeuverability',
+    4: 'Constrained by her draught',
+    5: 'Moored',
+    6: 'Aground',
+    7: 'Engaged in Fishing',
+    8: 'Under way sailing',
+  }
+
+  const aisColor = {
+    0: 'blue',
+    1: 'black',
+    2: 'red',
+    3: 'orange',
+    4: 'purple',
+    5: 'gray',
+    6: 'yellow',
+    7: 'green',
+    8: 'white',
+  }
+
+
   function addAIS(data) {
     // xlog(data);
-    if (data.MessageType == 'PositionReport') {
-      const pr = data.Message.PositionReport;
-      const meta = data.MetaData;
-      const mmsi = meta.MMSI;
-      const now = new Date();
-      const time = new Date(meta.time_utc);
-      const name = meta.ShipName.trim();
+    const type = data.MessageType;
+    const meta = data.MetaData;
+    const mmsi = meta.MMSI;
+    const name = meta.ShipName.trim();
+    const time = new Date(meta.time_utc);
+    const now = new Date();
+
+    aisLayer.eachLayer(l => {
+      if (now - l.options.time > 10 * 60 * 1000) {
+        l.remove();
+      }
+    });
+
+    if (type == 'PositionReport'
+      || type == 'StandardClassBPositionReport'
+      || type == 'ExtendedClassBPositionReport') {
+      const classB = type != 'PositionReport';
+      const pr = data.Message.PositionReport ?? data.Message.StandardClassBPositionReport ?? data.Message.ExtendedClassBPositionReport;
+      const status = pr.NavigationalStatus;
       const lat = pr.Latitude, lng = pr.Longitude;
-      const cog = pr.Cog, sog = pr.Sog, hdt = pr.TrueHeading;
-      xlog(mmsi, name, time, cog, sog, hdt, data);
+      const pos = [lat, lng];
+      const cog = pr.Cog, sog = pr.Sog;
+      const hdt = classB && pr.TrueHeading > 360 ? cog : pr.TrueHeading;
+      xlog(mmsi, name, cog, sog, hdt, aisStatus[status]);
 
       aisLayer.eachLayer(l => {
-        // xlog(l);
         if (l.options.mmsi == mmsi) {
-          l.remove();
-          // if (l instanceof L.Polyline) {
-          //   l.remove();
-          // }
-          // l.setStyle({fillColor: 'gray'});
-        }
-        if (now - l.options.time > 5 * 60 * 1000) {
-          // l.remove();
-          // l.setStyle({
-          //   color: 'gray',
-          //   fillColor: 'gray'
-          // });
-        }
-        if (now - l.options.time > 10 * 60 * 1000) {
           l.remove();
         }
       });
 
-      const marker = L.marker([lat, lng], {
-        icon: boatIcon(hdt, sog >= 10 ? 'red' : 'blue'),
+      const m = L.marker(pos, {
+        icon: boatIcon(hdt, aisColor[status] ?? 'blue', classB ? 0.6 : 1),
         mmsi: mmsi,
         time: time,
-        data: data,
-      }).addTo(aisLayer).bindPopup(`${name}<br/>${mmsi}<br/>${cog}° ${sog}kn`);
+        pr: pr,
+        meta: meta,
+      }).addTo(aisLayer).bindPopup(`${name}<br/>${mmsi}<br/>COG ${cog}° SOG ${sog}kn<br/>${aisStatus[status] ?? ''}`);
 
       if (sog > 0) {
         const src = L.latLng(lat, lng);
         const dest = L.GeometryUtil.destination(src, cog, sog * 1852 / 6);
         const vector = L.polyline([src, dest], {
-          color: 'blue',
-          weight: 1.8,
+          color: sog >= 10 ? 'darkred' : 'blue',
+          weight: classB ? 1.2 : 1.8,
           mmsi: mmsi,
           time: time,
-          data: data,
         }).addTo(aisLayer);
       }
 
-      if (0) {
-        L.circleMarker([lat, lng], {
-          radius: 5,
-          color: sog >= 8 ? 'red' : 'blue',
-          weight: 2,
-          fillColor: 'blue',
-          fillOpacity: 0.6,
-          mmsi: mmsi,
-          time: time,
-          data: data,
-        }).addTo(aisLayer);
-      }
     }
   }
 
