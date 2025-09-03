@@ -99,8 +99,6 @@ export function init_ais(map, wsurl) {
         icon: boatIcon(hdt, aisColor[status] ?? 'blue', classB ? 0.6 : 1),
         mmsi: mmsi,
         time: time,
-        pr: pr,
-        meta: meta,
       }).addTo(aisLayer).bindPopup(`<b>${name}</b><br/><a href="https://www.vesselfinder.com/vessels/details/${mmsi}" target="_blank">${mmsi}</a><br/>COG ${cog}° SOG ${sog}kn<br/>${aisStatus[status] ?? ''}<br/>${time.toISOString()}`);
 
       if (sog > 0) {
