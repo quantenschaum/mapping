@@ -84,8 +84,9 @@ export function init_ais(map, wsurl) {
       const status = pr.NavigationalStatus;
       const lat = pr.Latitude, lng = pr.Longitude;
       const pos = [lat, lng];
-      const cog = pr.Cog, sog = pr.Sog;
-      const hdt = classB && pr.TrueHeading > 360 ? cog : pr.TrueHeading;
+      let cog = pr.Cog, sog = pr.Sog;
+      sog = sog > 100 ? 0 : sog;
+      let hdt = pr.TrueHeading > 360 ? cog : pr.TrueHeading;
       xlog(mmsi, name, cog, sog, hdt, aisStatus[status]);
 
       aisLayer.eachLayer(l => {
@@ -100,7 +101,7 @@ export function init_ais(map, wsurl) {
         time: time,
         pr: pr,
         meta: meta,
-      }).addTo(aisLayer).bindPopup(`${name}<br/>${mmsi}<br/>COG ${cog}° SOG ${sog}kn<br/>${aisStatus[status] ?? ''}`);
+      }).addTo(aisLayer).bindPopup(`<b>${name}</b><br/><a href="https://www.vesselfinder.com/vessels/details/${mmsi}" target="_blank">${mmsi}</a><br/>COG ${cog}° SOG ${sog}kn<br/>${aisStatus[status] ?? ''}<br/>${time.toISOString()}`);
 
       if (sog > 0) {
         const src = L.latLng(lat, lng);
