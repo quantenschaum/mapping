@@ -60,6 +60,12 @@ export function init_ais(map, wsurl) {
     8: 'white',
   }
 
+  function formatMMSS(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  }
 
   function addAIS(data) {
     // xlog(data);
@@ -71,7 +77,7 @@ export function init_ais(map, wsurl) {
     const now = new Date();
 
     aisLayer.eachLayer(l => {
-      if (now - l.options.time > 10 * 60 * 1000) {
+      if (now - l.options.time > 10 * 60000) {
         l.remove();
       }
     });
@@ -99,7 +105,8 @@ export function init_ais(map, wsurl) {
         icon: boatIcon(hdt, aisColor[status] ?? 'blue', classB ? 0.6 : 1),
         mmsi: mmsi,
         time: time,
-      }).addTo(aisLayer).bindPopup(`<b>${name}</b><br/><a href="https://www.vesselfinder.com/vessels/details/${mmsi}" target="_blank">${mmsi}</a><br/>COG ${cog}° SOG ${sog}kn<br/>${aisStatus[status] ?? ''}<br/>${time.toISOString()}`);
+      }).addTo(aisLayer)
+        .bindPopup(() => `<b>${name}</b><br/><a href="https://www.vesselfinder.com/vessels/details/${mmsi}" target="_blank">${mmsi}</a><br/>COG ${cog}° SOG ${sog}kn<br/><i>${aisStatus[status] ?? ''}</i><br/>age ${formatMMSS(new Date() - time)}`);
 
       if (sog > 0) {
         const src = L.latLng(lat, lng);
