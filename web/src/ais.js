@@ -166,7 +166,11 @@ export function init_ais(map, wsurl) {
         mmsi: mmsi,
         time: time,
       }).addTo(aisLayer)
-        .bindPopup(() => `<b>${name} <span title="${country}">${flag}</span></b><br/><a href="https://www.vesselfinder.com/vessels/details/${mmsi}" target="_blank">${mmsi}</a><br/>COG ${cog}° SOG ${sog}kn<br/><i>${aisStatus[status] ?? ''}</i><br/>age ${formatMMSS(new Date() - time)}`);
+        .bindPopup(() => `<b>${name} <span title="${country}">${flag}</span></b><br/><a href="https://www.vesselfinder.com/vessels/details/${mmsi}" target="_blank">${mmsi}</a><br/>COG ${cog}° SOG ${sog}kn<br/><i>${aisStatus[status] ?? ''}</i><br/>age ${formatMMSS(new Date() - time)}`)
+        .bindTooltip(() => `${name}`, {
+          // permanent: true,
+          className: 'ais-tooltip',
+        });
 
       if (sog > 0) {
         const src = L.latLng(lat, lng);

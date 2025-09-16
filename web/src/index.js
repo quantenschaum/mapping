@@ -32,14 +32,18 @@ import {addTidealAtlas, addTideGauges} from "./tides";
 import {addWattSegler} from './wattsegler';
 import './boating';
 
+const params = new URLSearchParams(window.location.search);
 const isDevMode = process.env.NODE_ENV === 'development';
 const isStandalone = !!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
 
+function isSet(name) {
+  return params.get(name) == '1';
+}
+
 log('PWA', 'red', 'standalone', isStandalone, 'development', isDevMode);
 
-const params = new URLSearchParams(window.location.search);
 
-if ('serviceWorker' in navigator && (isStandalone || params.get('sw') == '1')) {
+if ('serviceWorker' in navigator && (isStandalone || isSet('sw'))) {
   window.addEventListener('load', () => {
     log('PWA', 'red', 'registering service worker');
     navigator.serviceWorker.register('service-worker.js')
@@ -128,7 +132,7 @@ if (isDevMode) {
   overlays['QMAP NL*'] = L.tileLayer('http://nas:8001/tiles/qmap-nl/EPSG3857/{z}/{x}/{y}.png');
 }
 
-if (params.get('bsh') == '1') {
+if (isSet('bsh')) {
   const bsh = {
     'BSH Bathymetry': L.tileLayer.wms('https://gdi.bsh.de/mapservice_gs/ELC_INSPIRE/ows', {
       version: '1.3.0',
@@ -303,7 +307,7 @@ if (isDevMode || isStandalone) {
 
 if (isDevMode || !isStandalone) new PrintButton().addTo(map);
 
-if (params.get('gpx') == '1') {
+if (isSet('gpx')) {
   import('./gpx').then(({GPXbutton}) => new GPXbutton({position: 'topleft', layers: layers}).addTo(map));
 }
 
@@ -317,7 +321,7 @@ if (isDevMode || isStandalone || params.get('tides')) {
 
 legend(layers);
 
-if (params.get('vector') == '1') {
+if (isSet('vector')) {
   import('@maplibre/maplibre-gl-leaflet').then(maplibre => {
     console.log('maplibre', maplibre);
     layers.addBaseLayer(L.maplibreGL({
@@ -326,7 +330,7 @@ if (params.get('vector') == '1') {
   });
 }
 
-if (params.get('zones') == '1') {
+if (isSet('zones')) {
   import('./besondere.json');
   import('./allgemeine.json');
   import('./kite.json');
@@ -399,8 +403,30 @@ if (params.get('zones') == '1') {
   restoreLayers(layers, params.get('l'));
 }
 
-if (isDevMode || params.get('ais') == '1') {
+if (isSet('ais')) {
   import('./ais').then(({init_ais}) => {
     init_ais(map, 'wss://navcharts.duckdns.org/ais');
   });
+}
+
+async function requestWakeLock() {
+  try {
+    if ('wakeLock' in navigator) {
+      const wakeLock = await navigator.wakeLock.request('screen');
+      console.log('Wake Lock is active');
+
+      // Listen for release (e.g., system or user action)
+      wakeLock.addEventListener('release', () => {
+        console.log('Wake Lock was released');
+      });
+    } else {
+      console.warn('Wake Lock API not supported in this browser.');
+    }
+  } catch (err) {
+    console.error(`Failed to acquire Wake Lock: ${err.name}, ${err.message}`);
+  }
+}
+
+if (isDevMode || isStandalone) {
+  requestWakeLock();
 }
