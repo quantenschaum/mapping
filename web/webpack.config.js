@@ -130,6 +130,12 @@ module.exports = (env, argv) => {
           pathRewrite: {'^/wattsegler': ''},
           changeOrigin: true,
         },
+        {
+          context: ['/brightsky'],
+          target: 'https://api.brightsky.dev',
+          pathRewrite: {'^/brightsky': ''},
+          changeOrigin: true,
+        },
       ],
     },
   };
