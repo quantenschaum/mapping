@@ -299,10 +299,21 @@ if (isDevMode || isStandalone) {
   //     enableHighAccuracy: true,
   //   }
   // }).addTo(map);
-
   L.control.boating().addTo(map);
   new NightSwitch().addTo(map);
   new WeatherForecast().addTo(map);
+}
+
+if (isSet('ais')) {
+  import('./ais').then(({AISButton}) => {
+    new AISButton().addTo(map);
+  });
+}
+
+if (isSet('dwd')) {
+  import('./brightsky').then(({WeatherButton}) => {
+    new WeatherButton(map).addTo(map);
+  });
 }
 
 if (isDevMode || !isStandalone) new PrintButton().addTo(map);
@@ -312,7 +323,7 @@ if (isSet('gpx')) {
 }
 
 addTidealAtlas(map);
-if (isDevMode || isStandalone || params.get('tides')) {
+if (isStandalone || params.get('tides')) {
   addTideGauges(map);
   if (isDevMode || params.get('tides') == '2') {
     addWattSegler(map);
@@ -401,12 +412,6 @@ if (isSet('zones')) {
   })();
 } else {
   restoreLayers(layers, params.get('l'));
-}
-
-if (isSet('ais')) {
-  import('./ais').then(({init_ais}) => {
-    init_ais(map, 'wss://navcharts.duckdns.org/ais');
-  });
 }
 
 async function requestWakeLock() {
