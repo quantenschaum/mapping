@@ -4,9 +4,9 @@ import './brightsky.less';
 import {init_ais} from "./ais";
 
 const log = logger('BSky', 'lightblue');
-const apibase = 'https://api.brightsky.dev/';
+// const apibase = 'https://api.brightsky.dev/';
 // const apibase = 'https://freenauticalchart.net/brightsky/';
-// const apibase = '/brightsky/';
+const apibase = '/brightsky/';
 
 const colors = {
   forecast: 'green',
