@@ -1,12 +1,10 @@
 import L from "leaflet";
 import 'leaflet-geometryutil';
-import {debounce, log} from "./utils";
+import {debounce, logger} from "./utils";
 
 const isDevMode = process.env.NODE_ENV === 'development';
 
-function xlog(...args) {
-  log('AIS', 'purple', ...args);
-}
+const log = logger('AIS', 'purple');
 
 const aisStatus = {
   0: 'Under way using engine',
@@ -72,13 +70,13 @@ const MID_TO_COUNTRY = {
   770: 'UY', 775: 'VE',
 };
 
-export function init_ais(map, wsurl) {
-  xlog('init');
+export function init_ais(map, wsurl, layer) {
+  log('init');
   var ws;
 
   const updateBounds = debounce(() => {
     const bounds = map.getBounds();
-    xlog("bounds:", bounds.toBBoxString());
+    log("bounds:", bounds.toBBoxString());
     try {
       var nw = bounds.getNorthWest(), se = bounds.getSouthEast();
       ws.send(JSON.stringify({bbox: [[nw.lat, nw.lng], [se.lat, se.lng]]}));
@@ -89,7 +87,7 @@ export function init_ais(map, wsurl) {
 
   map.on("moveend zoomend", updateBounds);
 
-  const aisLayer = L.layerGroup().addTo(map);
+  layer = layer || L.layerGroup().addTo(map);
 
   function boatIcon(hdt, color = 'blue', scale = 1) {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-20 -20 40 40">  <polygon points="0,-15 8,15 -8,15" fill="${color}" fill-opacity="0.3" stroke="black" stroke-width="1.5" transform="rotate(${hdt}) scale(${scale})"/></svg>`;
@@ -125,7 +123,7 @@ export function init_ais(map, wsurl) {
   }
 
   function addAIS(data) {
-    // xlog(data);
+    // log(data);
     const type = data.MessageType;
     const meta = data.MetaData;
     const mmsi = meta.MMSI;
@@ -135,7 +133,7 @@ export function init_ais(map, wsurl) {
     const time = new Date(meta.time_utc);
     const now = new Date();
 
-    aisLayer.eachLayer(l => {
+    layer.eachLayer(l => {
       if (now - l.options.time > 10 * 60000) {
         l.remove();
       }
@@ -152,9 +150,9 @@ export function init_ais(map, wsurl) {
       let cog = pr.Cog, sog = pr.Sog;
       sog = sog > 100 ? 0 : sog;
       let hdt = pr.TrueHeading > 360 ? cog : pr.TrueHeading;
-      xlog(mmsi, name, cog, sog, hdt, aisStatus[status], flag);
+      log(mmsi, name, cog, sog, hdt, aisStatus[status], flag);
 
-      aisLayer.eachLayer(l => {
+      layer.eachLayer(l => {
         if (l.options.mmsi == mmsi) {
           l.remove();
         }
@@ -165,7 +163,7 @@ export function init_ais(map, wsurl) {
         icon: boatIcon(hdt, aisColor[status] ?? 'blue', classB ? 0.6 : 1),
         mmsi: mmsi,
         time: time,
-      }).addTo(aisLayer)
+      }).addTo(layer)
         .bindPopup(() => `<b>${name} <span title="${country}">${flag}</span></b><br/><a href="https://www.vesselfinder.com/vessels/details/${mmsi}" target="_blank">${mmsi}</a><br/>COG ${cog}° SOG ${sog}kn<br/><i>${aisStatus[status] ?? ''}</i><br/>age ${formatMMSS(new Date() - time)}`)
         .bindTooltip(() => `${name}`, {
           // permanent: true,
@@ -180,7 +178,7 @@ export function init_ais(map, wsurl) {
           weight: classB ? 1.2 : 1.8,
           mmsi: mmsi,
           time: time,
-        }).addTo(aisLayer);
+        }).addTo(layer);
       }
 
     }
@@ -188,22 +186,22 @@ export function init_ais(map, wsurl) {
 
 
   function connect(url) {
-    xlog('connect:', url);
+    log('connect:', url);
 
     ws = new WebSocket(url);
 
     ws.onopen = () => {
-      xlog("connected");
+      log("connected");
       updateBounds();
     };
 
     ws.onmessage = (e) => {
-      // xlog("AIS:", e.data);
+      // log("AIS:", e.data);
       addAIS(JSON.parse(e.data))
     };
 
     ws.onclose = () => {
-      xlog("closed");
+      log("closed");
       debounce(connect, isDevMode ? 1000 : 5000)(url);
     };
 
@@ -213,5 +211,46 @@ export function init_ais(map, wsurl) {
   }
 
   connect(wsurl);
+
+  function stop() {
+    ws.onclose = null;
+    ws.close();
+    // layer.clearLayers();
+  }
+
+  return stop;
 }
 
+export const AISButton = L.Control.extend({
+  options: {
+    wsurl: 'wss://navcharts.duckdns.org/ais',
+    position: 'topleft',
+  },
+  onAdd: function (map) {
+    log('button added');
+    var div = L.DomUtil.create('div', 'nightswitch leaflet-bar leaflet-control');
+    var button = L.DomUtil.create('a');
+    button.innerHTML = '<span>&#x1F4E1;</span>'; // 📡
+    button.title = 'toggle AIS';
+    div.appendChild(button);
+    const icon = button.querySelector('span');
+    this._layer = L.layerGroup([], {attribution: '<a href="https://aisstream.io/" target="_blank">aistream</a>'});
+    this._stop_ais = null;
+    map.on('click', () => {
+    })
+    button.addEventListener('click', () => {
+      if (this._stop_ais) {
+        this._stop_ais();
+        this._stop_ais = null;
+        this._layer.remove();
+        icon.classList.remove('flashing');
+      } else {
+        this._layer.addTo(map);
+        this._stop_ais = init_ais(map, this.options.wsurl, this._layer);
+        icon.classList.add('flashing');
+      }
+    });
+    L.DomEvent.disableClickPropagation(div);
+    return div;
+  },
+});
