@@ -325,7 +325,7 @@ if (isSet('gpx')) {
 addTidealAtlas(map);
 if (isStandalone || params.get('tides')) {
   addTideGauges(map);
-  if (isDevMode || params.get('tides') == '2') {
+  if (params.get('tides') == '2') {
     addWattSegler(map);
   }
 }

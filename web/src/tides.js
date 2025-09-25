@@ -5,10 +5,15 @@ import {logger} from './utils';
 import './tides.less';
 
 const isDevMode = process.env.NODE_ENV === 'development';
-const clog = logger('tides', 'lightblue');
+const log = logger('tides', 'lightblue');
 
 const baseurl = 'https://freenauticalchart.net';
 const attrTides = '<a href="/download/tides/">Tidal Atlas *</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH</a>)';
+const locale = navigator.language || navigator.userLanguage;
+const german = locale.startsWith('de');
+const lang = german ? 'de' : 'en';
+log('locale', locale, 'german', german, 'lang', lang);
+
 
 export function addTidealAtlas(map, gauges = false) {
 
@@ -90,19 +95,16 @@ export async function addTideGauges(map) {
 export async function addTideGaugesDE(map, preFetch = false) {
 
   async function showPopup(marker, g) {
-    // clog(g);
-    const tidedata = await fetch(`/tides/de/data/DE_${g.bshnr.padStart(5, '_')}_tides.json`)
-      .then(r => r.json()).catch(clog);
-    clog('tidedata', tidedata);
+    // log(g);
+    const tidedata = await fetch(`/tides/de/data/DE_${g.bshnr.padStart(5, '_')}_tides.json`).then(r => r.json()).catch(log);
+    log('tidedata', tidedata);
     if (!tidedata) return;
 
-    const forecast_map = await fetch('/forecast/de/data/map.json')
-      .then(r => r.json()).catch(clog);
-    clog('forecast_map', forecast_map);
+    const forecast_map = await fetch('/forecast/de/data/map.json').then(r => r.json()).catch(log);
+    log('forecast_map', forecast_map);
 
-    const forecastdata = await fetch(`/forecast/de/data/DE_${g.bshnr.padStart(5, '_')}.json`)
-      .then(r => r.json()).catch(clog);
-    clog('forecastdata', forecastdata);
+    const forecastdata = await fetch(`/forecast/de/data/DE_${g.bshnr.padStart(5, '_')}.json`).then(r => r.json()).catch(log);
+    log('forecastdata', forecastdata);
 
     const now = new Date();
     const today = new Date(now)
@@ -117,7 +119,6 @@ export async function addTideGaugesDE(map, preFetch = false) {
       return !ydata;
     });
 
-    const locale = undefined;
     const prediction = ydata.hwnw_prediction.data;
     const level = ydata.hwnw_prediction.level;
     const forecast = forecastdata?.hwnw_forecast?.data;
@@ -126,7 +127,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     const forecast_date = fc_date.toLocaleString(locale, {
       month: '2-digit', day: '2-digit', weekday: 'short', hour: '2-digit', minute: '2-digit',
     });
-    const forecast_text = forecast_map?.forecast_text ? forecast_map?.forecast_text + ` (${forecast_date})` : '';
+    const forecast_text = forecast_map?.forecast_text ? forecast_map?.forecast_text[lang] + ` (${forecast_date})` : '';
     const forecast_link = curve ? `https://wasserstand-nordsee.bsh.de/${g.seo_id}?zeitraum=tag1bis2` : 'https://wasserstand-nordsee.bsh.de';
     const forecast_cls = (now - fc_date) > 8 * 3600_000 ? 'old' : 'new';
 
@@ -142,12 +143,12 @@ export async function addTideGaugesDE(map, preFetch = false) {
     var moon;
     for (; i < prediction.length; i++) {
       const ts = new Date(prediction[i].timestamp);
-      // clog(pred.data[i], now, ts, ts >= now);
+      // log(pred.data[i], now, ts, ts >= now);
       let m = prediction[i].moon;
       if (m != undefined) moon = m;
       if (ts > today) break;
     }
-    clog('moon', moon);
+    log('moon', moon);
 
     const tform = new Intl.DateTimeFormat(locale, {timeZoneName: 'short'});
     const parts = tform.formatToParts(now);
@@ -157,7 +158,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
       if (!forecast) return '';
       const ts = new Date(timestamp).getTime();
       const fc = forecast.find(f => new Date(f.timestamp).getTime() === ts);
-      clog(fc);
+      log(fc);
       if (fc?.forecast) return `${fc.forecast.replace(' m', '')}`;
       return '';
     }
@@ -165,7 +166,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     let date0;
     let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th><th class="moon${moon}"></th></tr>\n`;
     for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
-      clog(prediction[k]);
+      log(prediction[k]);
       const r = prediction[k];
       const ts = new Date(r.timestamp);
       let date = ts.toLocaleString(locale, {
@@ -182,7 +183,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
       rows += `<tr class="${r.type} ${when}"><td>${date}</td><td>${time}</td><td>${height} <span class="forecast">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}</td></tr>\n`;
     }
     const table = `<table>\n${rows}</table>`;
-    // clog(table);
+    // log(table);
 
     await marker
       .bindPopup(`<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${table}<div class="basevalues">${basevalues}</div><div class="forecast"><a href="${forecast_link}" target="_blank" class="${forecast_cls}">${forecast_text}</a></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`)
@@ -191,7 +192,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     if (!curve) return;
 
     const Plotly = await import('plotly.js-dist-min');
-    clog(curve[0]);
+    log(curve[0]);
 
     const t0 = new Date(now.getTime() - 6 * 3600_000);
     const t1 = new Date(now.getTime() + 18 * 3600_000);
@@ -247,9 +248,9 @@ export async function addTideGaugesDE(map, preFetch = false) {
   fetch('/tides/de/data/tides_overview.json')
     .then(r => r.json())
     .then(data => {
-      // clog(data);
+      // log(data);
       data.gauges.forEach(g => {
-        // clog(g);
+        // log(g);
         if (g.gauge_group == 3) return;
         if (preFetch) fetch(`/tides/de/data/DE_${g.bshnr.padStart(5, '_')}_tides.json`);
         let m = L.circleMarker([g.latitude, g.longitude], {
@@ -264,7 +265,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
           .addTo(layer);
         // if (isDevMode && g.station_name.includes('Helgoland')) showPopup(m, g);
       });
-    }).catch(clog);
+    }).catch(log);
 
   map.on('zoomend', () => {
     if (map.getZoom() >= 8) {
@@ -282,7 +283,7 @@ export function addTideGaugesNL(map) {
     .then(data => {
       const layer = L.geoJSON(data, {
         pointToLayer: function (feature, latlng) {
-          // clog(feature.properties)
+          // log(feature.properties)
           return L.circleMarker(latlng, {
             radius: 4,
             weight: 3,
@@ -298,7 +299,7 @@ export function addTideGaugesNL(map) {
             layer.bindPopup(`<a href="${link}" target="_blank">${feature.properties.name}</a>`);
           }
           layer.on('click', e => {
-            clog(p);
+            log(p);
             const now = new Date();
             const start = new Date(now);
             start.setHours(0);
@@ -318,9 +319,8 @@ export function addTideGaugesNL(map) {
             })
               .then(r => r.json())
               .then(data => {
-                clog(data);
+                log(data);
 
-                const locale = undefined;
                 const tform = new Intl.DateTimeFormat(locale, {timeZoneName: 'short'});
                 const parts = tform.formatToParts(now);
                 const tz = parts.find(part => part.type === 'timeZoneName')?.value;
@@ -330,7 +330,7 @@ export function addTideGaugesNL(map) {
                 let date0, height0;
                 let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th></tr>\n`;
                 extremes.forEach(r => {
-                  clog(r);
+                  log(r);
                   const ts = new Date(r.dateTime);
                   let date = ts.toLocaleString(locale, {
                     month: '2-digit', day: '2-digit', weekday: 'short', // year: 'numeric',
@@ -346,12 +346,12 @@ export function addTideGaugesNL(map) {
                 });
                 const ref = p.measurements[0].qualityCode == 'MSL' ? 'reference=MSL' : '';
                 const table = `<table>\n${rows}</table>${ref}`;
-                // clog(table);
+                // log(table);
 
                 layer
                   .bindPopup(`<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`)
                   .openPopup();
-              }).catch(clog);
+              }).catch(log);
           });
         }
       }).addTo(map);
@@ -363,5 +363,5 @@ export function addTideGaugesNL(map) {
           if (map.hasLayer(layer)) map.removeLayer(layer);
         }
       });
-    }).catch(clog);
+    }).catch(log);
 }
