@@ -212,6 +212,11 @@ const map = L.map('map', {
   layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP NL']],
 });
 
+if (isSet('stepless')) {
+  map.options.zoomStep = 0.1;
+  map.options.zoomSnap = 0;
+}
+
 function updateAttribution(online = true) {
   const attrib = '<a class="highlight" href="/download/">freenauticalchart.net (?)</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>';
 
