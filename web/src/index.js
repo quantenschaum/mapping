@@ -212,10 +212,40 @@ const map = L.map('map', {
   layers: [basemaps['OpenStreetMap'], overlays['Grid'], overlays['QMAP DE'], overlays['QMAP NL']],
 });
 
-if (isSet('stepless')) {
-  map.options.zoomStep = 0.1;
-  map.options.zoomSnap = 0;
-}
+const SteplessControl = L.Control.extend({
+  onAdd: function (map) {
+    const div = L.DomUtil.create('div', 'zoom-step-toggle leaflet-bar leaflet-control');
+    var button = L.DomUtil.create('a');
+    button.innerHTML = '&#x1f512;'; // 🔒
+    button.title = "toggle stepless zoom";
+    div.appendChild(button);
+
+    L.DomEvent.on(button, "click", function (e) {
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+
+      const isStepless = map.options.zoomSnap === 0;
+
+      if (isStepless) {
+        map.options.zoomSnap = 1;
+        map.options.zoomDelta = 1;
+        button.innerHTML = '&#x1f512;'; // 🔒
+        map.setZoom(map.getZoom());
+      } else {
+        map.options.zoomSnap = 0;
+        map.options.zoomDelta = 0.1;
+        button.innerHTML = '&#x1f513;'; // 🔓
+      }
+    });
+
+    L.DomEvent.disableClickPropagation(div);
+    return div;
+  },
+});
+
+// --- Add control to map ---
+map.addControl(new SteplessControl({position: "topleft"}));
+
 
 function updateAttribution(online = true) {
   const attrib = '<a class="highlight" href="/download/">freenauticalchart.net (?)</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>';
