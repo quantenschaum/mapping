@@ -87,7 +87,7 @@ export function init_ais(map, wsurl, layer) {
 
   map.on("moveend zoomend", updateBounds);
 
-  layer = layer || L.layerGroup().addTo(map);
+  layer = (layer || L.layerGroup()).addTo(map);
 
   function boatIcon(hdt, color = 'blue', scale = 1) {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-20 -20 40 40">  <polygon points="0,-15 8,15 -8,15" fill="${color}" fill-opacity="0.3" stroke="black" stroke-width="1.5" transform="rotate(${hdt}) scale(${scale})"/></svg>`;
@@ -242,10 +242,10 @@ export const AISButton = L.Control.extend({
       if (this._stop_ais) {
         this._stop_ais();
         this._stop_ais = null;
+        this._layer.clearLayers();
         this._layer.remove();
         icon.classList.remove('flashing');
       } else {
-        this._layer.addTo(map);
         this._stop_ais = init_ais(map, this.options.wsurl, this._layer);
         icon.classList.add('flashing');
       }
