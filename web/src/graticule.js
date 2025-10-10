@@ -321,7 +321,7 @@ L.LatLngGraticule = L.Layer.extend({
       const n = Math.floor(lmin * step) % 2 == 0 ? 0 : 1;
 
       // minute zebra bars
-      ctx.lineWidth = bwidth / 6;
+      ctx.lineWidth = bwidth / 4;
       ctx.beginPath();
       // ctx.moveTo(...p);
       var o = (opposite ? -1 : +1) * ((ctx.lineWidth / 2) % 1);
@@ -338,6 +338,7 @@ L.LatLngGraticule = L.Layer.extend({
 
       // minute divisions
       function divisions(start, interval) {
+        // console.log('interval', interval);
         ctx.lineWidth = 1;
         o = ((ctx.lineWidth / 2) % 1);
         ctx.beginPath();
@@ -356,8 +357,9 @@ L.LatLngGraticule = L.Layer.extend({
         ctx.stroke();
       }
 
+      // console.log(ppm, minutes);
       divisions(0, ppm > 100 ? 120 : minutes ? 60 : 2);
-      divisions(bwidth / 2, ppm > 100 ? 600 : ppm > 30 ? 300 : minutes ? 120 : 6);
+      divisions(bwidth / 2, ppm > 1000 ? 3000 : ppm > 100 ? 600 : ppm > 30 ? 300 : minutes ? 120 : 6);
     }
 
     if (!this.options.borders) return;
