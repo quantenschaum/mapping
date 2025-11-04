@@ -12,7 +12,8 @@
   "license": "GPLv3",
   "devDependencies": {
     "less": "^4.4.2",
-    "vite": "^7.1.12"
+    "vite": "^7.1.12",
+    "vite-plugin-pwa": "^1.1.0"
   },
   "dependencies": {
     "@kvforksorg/leaflet.polylinemeasure": "^3.0.1",
@@ -27,7 +28,7 @@
     "leaflet.control.opacity": "^1.6.0",
     "leaflet.tilelayer.fallback": "^1.0.4",
     "open-location-code": "^1.0.3",
-    "plotly.js-dist-min": "^3.2.0",
+    "plotly.js-basic-dist": "^3.2.0",
     "proj4": "^2.19.10"
   }
 }

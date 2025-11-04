@@ -241,7 +241,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
 
     if (!curve) return;
 
-    const Plotly = await import("plotly.js-dist-min");
+    const Plotly = await import("plotly.js-basic-dist");
     log(curve[0]);
 
     const t0 = new Date(now.getTime() - 6 * 3600_000);
