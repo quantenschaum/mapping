@@ -21,9 +21,9 @@ import { WeatherForecast } from "./weather";
 import { PrintButton } from "./print";
 import { restoreLayers } from "./restore";
 import { addVectorLayer } from "./vector";
-import { addTidealAtlas, addTideGauges } from "./tides";
 import { addWattSegler } from "./wattsegler";
 import "./boating";
+import { registerSW } from "virtual:pwa-register";
 
 const params = new URLSearchParams(window.location.search);
 const isDevMode = process.env.NODE_ENV === "development";
@@ -38,13 +38,11 @@ function isSet(name) {
 
 log("PWA", "red", "standalone", isStandalone, "development", isDevMode);
 
-if ("serviceWorker" in navigator && (isStandalone || isSet("sw"))) {
-  window.addEventListener("load", () => {
-    log("PWA", "red", "registering service worker");
-    navigator.serviceWorker
-      .register("service-worker.js")
-      .then((reg) => console.log("SW registered", reg))
-      .catch((err) => console.error("SW registration failed", err));
+if (isStandalone || isSet("sw")) {
+  log("PWA", "red", "registering service worker");
+  registerSW({
+    onNeedRefresh() {},
+    onOfflineReady() {},
   });
 }
 
@@ -400,17 +398,6 @@ updateOpacityControl();
 map.on("overlayadd overlayremove", debounce(updateOpacityControl));
 
 if (isDevMode || isStandalone) {
-  // new LocateControl({
-  //   flyTo: true,
-  //   // keepCurrentZoomLevel: true,
-  //   cacheLocation: false,
-  //   locateOptions: {
-  //     watch: true,
-  //     maxZoom: 15,
-  //     maximumAge: 1000,
-  //     enableHighAccuracy: true,
-  //   }
-  // }).addTo(map);
   L.control.boating().addTo(map);
   new NightSwitch().addTo(map);
   new WeatherForecast().addTo(map);
@@ -436,6 +423,7 @@ if (isSet("gpx")) {
   );
 }
 
+import { addTidealAtlas, addTideGauges } from "./tides";
 addTidealAtlas(map);
 if (isStandalone || params.get("tides")) {
   addTideGauges(map);
@@ -459,69 +447,79 @@ if (isSet("vector")) {
 }
 
 if (isSet("zones")) {
-  import("./besondere.json");
-  import("./allgemeine.json");
-  import("./kite.json");
-  import("./routen.json");
-  import("./wege.json");
-  import("./ausstiegeA.json");
-  import("./ausstiegeK.json");
-  import("./rot.json");
-  import("./gruen.json");
-
   (async () => {
     const attr =
       '<a target="_blank" href="https://www.nationalpark-wattenmeer.de/wissensbeitrag/befahrensverordnung-karte/">NordSBefV</a>';
-    await addVectorLayer(layers, "allg. Schutzgebiete", "allgemeine.json", {
-      active: false,
-      color: "green",
-      legend:
-        "Befahren erlaubt, Betreten verboten. Diese Bereiche entsprechen den Kernzonen der Nationalparke, also der „Schutzzone I“ (Schleswig-Holstein), der „Ruhezone (Zone I)“ (Niedersachsen) bzw. der „Zone I“ (Hamburg).",
-      attribution: attr,
-    });
-    await addVectorLayer(layers, "bes. Schutzgebiete", "besondere.json", {
-      active: true,
-      color: "red",
-      legend:
-        "Bereiche, die während der jeweiligen Schutzzeit – vom 15. April bis 1. Oktober eines Jahres oder ganzjährig – außerhalb der Fahrwasser grundsätzlich nicht befahren werden dürfen. Innerhalb der Fahrwasser darf ein maschinengetriebenes Wasserfahrzeug maximal mit 12kn (Fahrt über Grund) fahren. Außerhalb der Fahrwasser – soweit außerhalb der jeweiligen Schutzzeit – gilt eine zulässige Höchstgeschwindigkeit von 8kn (Fahrt über Grund). Das Trockenfallen ist in diesen Bereichen untersagt.",
-      attribution: attr,
-    });
-    await addVectorLayer(layers, "Kitesurf-Gebiete", "kite.json", {
+    await addVectorLayer(
+      layers,
+      "allg. Schutzgebiete",
+      "/zones/allgemeine.json",
+      {
+        active: false,
+        color: "green",
+        legend:
+          "Befahren erlaubt, Betreten verboten. Diese Bereiche entsprechen den Kernzonen der Nationalparke, also der „Schutzzone I“ (Schleswig-Holstein), der „Ruhezone (Zone I)“ (Niedersachsen) bzw. der „Zone I“ (Hamburg).",
+        attribution: attr,
+      },
+    );
+    await addVectorLayer(
+      layers,
+      "bes. Schutzgebiete",
+      "/zones/besondere.json",
+      {
+        active: true,
+        color: "red",
+        legend:
+          "Bereiche, die während der jeweiligen Schutzzeit – vom 15. April bis 1. Oktober eines Jahres oder ganzjährig – außerhalb der Fahrwasser grundsätzlich nicht befahren werden dürfen. Innerhalb der Fahrwasser darf ein maschinengetriebenes Wasserfahrzeug maximal mit 12kn (Fahrt über Grund) fahren. Außerhalb der Fahrwasser – soweit außerhalb der jeweiligen Schutzzeit – gilt eine zulässige Höchstgeschwindigkeit von 8kn (Fahrt über Grund). Das Trockenfallen ist in diesen Bereichen untersagt.",
+        attribution: attr,
+      },
+    );
+    await addVectorLayer(layers, "Kitesurf-Gebiete", "/zones/kite.json", {
       active: false,
       color: "orange",
       legend:
         "Erlaubniszone, in der Kitesurfen und ähnliche Sportarten wie Wingsurfen erlaubt sind. Außerhalb der Kitesurfgebiete sind diese Sportarten bis auf Windsurfen nicht zulässig.",
       attribution: attr,
     });
-    await addVectorLayer(layers, "Schutzgebietsrouten", "routen.json", {
+    await addVectorLayer(layers, "Schutzgebietsrouten", "/zones/routen.json", {
       active: true,
       color: "purple",
       legend:
         "Routen zum Befahren der Besonderen Schutzgebiete für Wasserfahrzeuge mit einer Breite von 250m, die auch zum Aufenthalt genutzt werden können. Diese Wasserwanderwege sind im Gebiet nicht gekennzeichnet.",
       attribution: attr,
     });
-    await addVectorLayer(layers, "Wasserwanderwege", "wege.json", {
+    await addVectorLayer(layers, "Wasserwanderwege", "/zones/wege.json", {
       active: true,
       color: "brown",
       legend:
         "Zusätzliche Routen zum Befahren der Besonderen Schutzgebiete nur für muskelkraftbetriebene Wasserfahrzeuge (Kajaks) mit einer Breite von 250m, die auch zum Aufenthalt genutzt werden können. Diese Wasserwanderwege sind im Gebiet nicht gekennzeichnet.",
       attribution: attr,
     });
-    await addVectorLayer(layers, "Ausstiegsstellen, allg.", "ausstiegeA.json", {
-      active: true,
-      color: "blue",
-      legend:
-        "Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.",
-      attribution: attr,
-    });
-    await addVectorLayer(layers, "Ausstiegsstellen, Kayak", "ausstiegeK.json", {
-      active: true,
-      color: "#09a9ff",
-      legend:
-        "Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.",
-      attribution: attr,
-    });
-    await addVectorLayer(layers, "Rotzone", "rot.json", {
+    await addVectorLayer(
+      layers,
+      "Ausstiegsstellen, allg.",
+      "/zones/ausstiegeA.json",
+      {
+        active: true,
+        color: "blue",
+        legend:
+          "Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.",
+        attribution: attr,
+      },
+    );
+    await addVectorLayer(
+      layers,
+      "Ausstiegsstellen, Kayak",
+      "/zones/ausstiegeK.json",
+      {
+        active: true,
+        color: "#09a9ff",
+        legend:
+          "Das Trockenfallen und der sonstige Aufenthalt sind in diesen Bereichen in einem Radius von 200m um einen durch Koordinaten bestimmten Punkt erlaubt. Einige Ausstiegs- und Aufenthaltsstellen sind nur für Kanuten und ähnliche muskelkraftbetriebene Kleinfahrzeuge bestimmt. Die Ausstiegs- und Aufenthaltsstellen sind im Gebiet nicht gekennzeichnet.",
+        attribution: attr,
+      },
+    );
+    await addVectorLayer(layers, "Rotzone", "/zones/rot.json", {
       active: true,
       color: "red",
       legend:
@@ -529,7 +527,7 @@ if (isSet("zones")) {
       attribution:
         '<a target="_blank" href="https://www.nationalpark-vorpommersche-boddenlandschaft.de/karte#&e=3000,3200&c=0,3201,3202">NPVB</a>',
     });
-    await addVectorLayer(layers, "Grünzone", "gruen.json", {
+    await addVectorLayer(layers, "Grünzone", "/zones/gruen.json", {
       active: true,
       color: "green",
       legend:
