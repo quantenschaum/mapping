@@ -209,7 +209,7 @@ zips: icons.zip qmap-data.zip qmap-de.tiles.zip qmap-nl.tiles.zip
 
 web:
 	cd $@ && npm install && npm run build
-	cd www && rm *bundle*.js workbox*.js
+	cd www && rm -rf assets workbox*.js
 	cp -rv $@/dist/* www
 
 www: web
