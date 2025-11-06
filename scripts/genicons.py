@@ -69,8 +69,8 @@ color_types={ # to reduce numer of combinations
   'circle sphere_over_rhombus':
   'black white red green',
 
-  'triangle_point_up square rhombus triangle_point_down flag':
-  'black white red green yellow',
+  'triangle_point_up triangle_point_down square rhombus flag':
+  'black white red green yellow grey',
 }
 
 def colors_for(s):
