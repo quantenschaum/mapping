@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="QMAP Germany" saveUserFull="Adam" saveUser="al" version="3.40.8-Bratislava" saveDateTime="2025-11-06T16:32:44">
+<qgis projectname="QMAP Germany" saveUserFull="Adam" saveUser="al" version="3.40.8-Bratislava" saveDateTime="2025-11-06T16:45:29">
   <homePath path=""/>
   <title>QMAP Germany</title>
   <transaction mode="Disabled"/>
@@ -185,10 +185,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>484947.47826180933043361</xmin>
-      <ymin>6800527.24890225287526846</ymin>
-      <xmax>1673084.64592633722350001</xmax>
-      <ymax>7594179.62300579901784658</ymax>
+      <xmin>554658.04805787606164813</xmin>
+      <ymin>6702262.67172740213572979</ymin>
+      <xmax>1742795.21572240395471454</xmax>
+      <ymax>7495915.04583094827830791</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -15400,7 +15400,7 @@ def my_form_open(dialog, layer, feature):
       <renderer-v2 type="RuleRenderer" symbollevels="0" referencescale="-1" enableorderby="0" forceraster="0">
         <rules key="{5b8694f5-521c-4629-9f6d-59a499511353}">
           <rule filter="if(@uband,uband=@uband or @uband&lt;0,&#xa;if(@zoom_level+1>=@zlevel6,6,&#xa;if(@zoom_level+1>=@zlevel5,5,&#xa;if(@zoom_level+1>=@zlevel4,4,&#xa;if(@zoom_level+1>=@zlevel3,3,&#xa;if(@zoom_level+1>=@zlevel2,2,&#xa;1)))))=uband+@ushift)" key="{6f5c2f21-af47-4dfc-918f-70d3e2df6451}">
-            <rule label="dump ground" symbol="0" filter="catdpg" key="{70d04262-a768-43ed-9cfb-7f8009e55b89}"/>
+            <rule label="dump ground" symbol="0" filter="catdpg is not null" key="{70d04262-a768-43ed-9cfb-7f8009e55b89}"/>
             <rule label="traffic lane" symbol="1" filter="zone_type in (1,7) and orient" key="{72a7f392-3c8f-410f-af77-60b85c40e7f7}"/>
             <rule label="TSS lane" symbol="2" filter="zone_type=9 and orient" key="{da0abf42-b7d7-4afc-8667-3504287a867b}"/>
             <rule label="TSS separation" symbol="3" filter="zone_type=11 and cattss" key="{6dd7bcd7-d8f7-4cf2-ad62-5a2de7ab4a09}"/>
@@ -18111,7 +18111,7 @@ def my_form_open(dialog, layer, feature):
       </customproperties>
       <blendMode>0</blendMode>
       <featureBlendMode>0</featureBlendMode>
-      <layerOpacity>1</layerOpacity>
+      <layerOpacity>0.5</layerOpacity>
       <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
         <DiagramCategory stackedDiagramSpacingUnit="MM" stackedDiagramSpacing="0" lineSizeType="MM" diagramOrientation="Up" minScaleDenominator="0" sizeType="MM" penWidth="0" backgroundColor="#ffffff" spacingUnitScale="3x:0,0,0,0,0,0" sizeScale="3x:0,0,0,0,0,0" barWidth="5" backgroundAlpha="255" showAxis="1" width="15" maxScaleDenominator="1e+08" direction="0" penColor="#000000" lineSizeScale="3x:0,0,0,0,0,0" rotationOffset="270" height="15" opacity="1" spacing="5" labelPlacementMethod="XHeight" minimumSize="0" spacingUnit="MM" enabled="0" penAlpha="255" scaleBasedVisibility="0" stackedDiagramSpacingUnitScale="3x:0,0,0,0,0,0" stackedDiagramMode="Horizontal" scaleDependency="Area">
           <fontProperties strikethrough="0" bold="0" underline="0" italic="0" style="" description="Ubuntu,10,-1,5,50,0,0,0,0,0"/>
@@ -34889,7 +34889,7 @@ def my_form_open(dialog, layer, feature):
           </rule>
         </rules>
         <symbols>
-          <symbol type="line" clip_to_extent="1" force_rhr="0" frame_rate="10" name="0" alpha="1" is_animated="0">
+          <symbol type="line" clip_to_extent="1" force_rhr="0" frame_rate="10" name="0" alpha="0.5" is_animated="0">
             <data_defined_properties>
               <Option type="Map">
                 <Option value="" type="QString" name="name"/>
@@ -35002,7 +35002,7 @@ def my_form_open(dialog, layer, feature):
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol type="line" clip_to_extent="1" force_rhr="0" frame_rate="10" name="1" alpha="1" is_animated="0">
+          <symbol type="line" clip_to_extent="1" force_rhr="0" frame_rate="10" name="1" alpha="0.5" is_animated="0">
             <data_defined_properties>
               <Option type="Map">
                 <Option value="" type="QString" name="name"/>
@@ -35115,7 +35115,7 @@ def my_form_open(dialog, layer, feature):
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol type="line" clip_to_extent="1" force_rhr="0" frame_rate="10" name="2" alpha="1" is_animated="0">
+          <symbol type="line" clip_to_extent="1" force_rhr="0" frame_rate="10" name="2" alpha="0.5" is_animated="0">
             <data_defined_properties>
               <Option type="Map">
                 <Option value="" type="QString" name="name"/>
@@ -37661,7 +37661,7 @@ def my_form_open(dialog, layer, feature):
         <rules key="{76c55e91-43c8-4f2c-a233-105e567b02bc}">
           <rule filter="if(@uband,uband=@uband or @uband&lt;0,&#xa;if(@zoom_level+1>=@zlevel6,6,&#xa;if(@zoom_level+1>=@zlevel5,5,&#xa;if(@zoom_level+1>=@zlevel4,4,&#xa;if(@zoom_level+1>=@zlevel3,3,&#xa;if(@zoom_level+1>=@zlevel2,2,&#xa;1)))))=uband+@ushift)" key="{b0e14789-749e-46b0-b458-0ccfe98a45eb}">
             <settings calloutType="simple">
-              <text-style textOpacity="1" fontSize="10" isExpression="1" tabStopDistance="80" fontFamily="Open Sans" fontUnderline="0" fontWeight="50" multilineHeightUnit="Percentage" namedStyle="Regular" tabStopDistanceUnit="Point" fontKerning="1" fontLetterSpacing="0" previewBkgrdColor="255,255,255,255,rgb:1,1,1,1" useSubstitutions="0" capitalization="0" multilineHeight="1" fontSizeUnit="Point" fontSizeMapUnitScale="3x:0,0,0,0,0,0" blendMode="0" allowHtml="1" legendString="Aa" textOrientation="horizontal" tabStopDistanceMapUnitScale="3x:0,0,0,0,0,0" forcedBold="0" fieldName="with_variable('D',if(VALSOU&lt;10,floor(VALSOU*10)/10,floor(VALSOU)),&#xa;with_variable('M',floor(abs(@D)),&#xa;with_variable('F',round(10*(abs(@D)-floor(abs(@D)))),&#xa;if(VALSOU&lt;0,'&lt;u>','')+to_string(@M)+if(VALSOU&lt;0,'&lt;/u>','')+if(@F>0,'&lt;sub>'+to_string(@F)+'&lt;/sub>','')&#xa;)))" fontWordSpacing="0" fontStrikeout="0" textColor="0,0,0,255,rgb:0,0,0,1" forcedItalic="0" fontItalic="0">
+              <text-style textOpacity="1" fontSize="11" isExpression="1" tabStopDistance="80" fontFamily="Open Sans" fontUnderline="0" fontWeight="63" multilineHeightUnit="Percentage" namedStyle="Semibold" tabStopDistanceUnit="Point" fontKerning="1" fontLetterSpacing="0" previewBkgrdColor="255,255,255,255,rgb:1,1,1,1" useSubstitutions="0" capitalization="0" multilineHeight="1" fontSizeUnit="Point" fontSizeMapUnitScale="3x:0,0,0,0,0,0" blendMode="0" allowHtml="1" legendString="Aa" textOrientation="horizontal" tabStopDistanceMapUnitScale="3x:0,0,0,0,0,0" forcedBold="0" fieldName="with_variable('D',if(VALSOU&lt;10,floor(VALSOU*10)/10,floor(VALSOU)),&#xa;with_variable('M',floor(abs(@D)),&#xa;with_variable('F',round(10*(abs(@D)-floor(abs(@D)))),&#xa;if(VALSOU&lt;0,'&lt;u>','')+to_string(@M)+if(VALSOU&lt;0,'&lt;/u>','')+if(@F>0,'&lt;sub>'+to_string(@F)+'&lt;/sub>','')&#xa;)))" fontWordSpacing="0" fontStrikeout="0" textColor="0,0,0,255,rgb:0,0,0,1" forcedItalic="0" fontItalic="0">
                 <families/>
                 <text-buffer bufferDraw="0" bufferSize="1" bufferBlendMode="0" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferOpacity="1" bufferJoinStyle="128" bufferColor="250,250,250,255,rgb:0.98039215686274506,0.98039215686274506,0.98039215686274506,1" bufferSizeUnits="MM" bufferNoFill="0"/>
                 <text-mask maskSizeUnits="MM" maskSizeMapUnitScale="3x:0,0,0,0,0,0" maskSize="20" maskSize2="20" maskType="0" maskOpacity="1" maskJoinStyle="128" maskEnabled="0" maskedSymbolLayers=""/>
@@ -42751,7 +42751,7 @@ concat(@ub,' ',@name,' [',@z0,'-',@z1,']')
   <Sensors/>
   <ProjectViewSettings UseProjectScales="0" rotation="0">
     <Scales/>
-    <DefaultViewExtent xmin="484947.47826180933043361" xmax="1673084.64592633722350001" ymax="7786835.79808918014168739" ymin="6607871.07381887175142765">
+    <DefaultViewExtent xmin="554658.04805787606164813" xmax="1742795.21572240395471454" ymax="7688571.22091432940214872" ymin="6509606.49664402101188898">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
@@ -42816,7 +42816,7 @@ concat(@ub,' ',@name,' [',@z0,'-',@z1,']')
       </spatialrefsys>
     </CoordinateCustomCrs>
   </ProjectDisplaySettings>
-  <ProjectGpsSettings destinationLayerProvider="ogr" destinationFollowsActiveLayer="1" destinationLayerName="aids to navigation" autoCommitFeatures="0" destinationLayer="AidsAndServices_c539a993_fc55_4968_8ba9_e316973f2570" autoAddTrackVertices="0" destinationLayerSource="/home/al/Projekte/mapping/data/bsh.gpkg|layername=AidsAndServices|geometrytype=Point">
+  <ProjectGpsSettings destinationLayerProvider="ogr" destinationFollowsActiveLayer="1" destinationLayerName="cables, tracks" autoCommitFeatures="0" destinationLayer="contours__cables__tracks_25be93d7_155c_44b9_adfb_1e8afd94ec81" autoAddTrackVertices="0" destinationLayerSource="/home/al/Projekte/mapping/data/bsh.gpkg|layername=Hydrography|geometrytype=LineString|subset=valdco is null">
     <timeStampFields/>
   </ProjectGpsSettings>
 </qgis>
