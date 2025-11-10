@@ -58,7 +58,7 @@ export default defineConfig({
         navigateFallback: "/index.html",
         navigateFallbackAllowlist: [/^\/$/],
         ignoreURLParametersMatching: [/.*/],
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        // maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         runtimeCaching: [
           {
             urlPattern:
