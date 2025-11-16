@@ -215,7 +215,7 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
 zips: icons.zip qmap-data.zip qmap-de.tiles.zip qmap-nl.tiles.zip
 
 web:
-	cd $@ && pnpm install && npm run build
+	cd $@ && npm install && npm run build
 	cd www && rm -rf assets workbox*.js
 	cp -rv $@/dist/* www
 
