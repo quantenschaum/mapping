@@ -22,15 +22,15 @@ build:
 
 vwm:
 	rm -rf data/vwm && mkdir -p data/vwm
-	# wget -O data/vwm/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend_detail&outputFormat=json"
-	# wget -O data/vwm/vast.json     "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast_detail&outputFormat=json"
-	C=0; for I in $$(seq 0 1000 12000); do \
-		wget -O data/vwm/drijvend-$${C}.json "https://geo.rijkswaterstaat.nl/arcgis/rest/services/GDR/vaarweg_markeringen/FeatureServer/1/query?where=1=1&outFields=*&f=geojson&resultOffset=$$I&resultRecordCount=1000"; \
-		wget -O data/vwm/vast-$$((C++)).json "https://geo.rijkswaterstaat.nl/arcgis/rest/services/GDR/vaarweg_markeringen/FeatureServer/3/query?where=1=1&outFields=*&f=geojson&resultOffset=$$I&resultRecordCount=1000"; \
-	done
-	jq -s '{type: "FeatureCollection", features: [.[]|.features.[]]}' data/vwm/drijvend-*.json > data/vwm/drijvend.json
-	jq -s '{type: "FeatureCollection", features: [.[]|.features.[]]}' data/vwm/vast-*.json > data/vwm/vast.json
-	rm data/vwm/*-*.json
+	wget -O data/vwm/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
+	wget -O data/vwm/vast.json     "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
+	# C=0; for I in $$(seq 0 1000 12000); do \
+		# wget -O data/vwm/drijvend-$${C}.json "https://geo.rijkswaterstaat.nl/arcgis/rest/services/GDR/vaarweg_markeringen/FeatureServer/1/query?where=1=1&outFields=*&f=geojson&resultOffset=$$I&resultRecordCount=1000"; \
+		# wget -O data/vwm/vast-$$((C++)).json "https://geo.rijkswaterstaat.nl/arcgis/rest/services/GDR/vaarweg_markeringen/FeatureServer/3/query?where=1=1&outFields=*&f=geojson&resultOffset=$$I&resultRecordCount=1000"; \
+	# done
+	# jq -s '{type: "FeatureCollection", features: [.[]|.features.[]]}' data/vwm/drijvend-*.json > data/vwm/drijvend.json
+	# jq -s '{type: "FeatureCollection", features: [.[]|.features.[]]}' data/vwm/vast-*.json > data/vwm/vast.json
+	# rm data/vwm/*-*.json
 
 	vconvert.py data/vwm/drijvend.json data/vwm/drijvend.s57.json
 	vconvert.py data/vwm/vast.json data/vwm/vast.s57.json
@@ -215,7 +215,7 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
 zips: icons.zip qmap-data.zip qmap-de.tiles.zip qmap-nl.tiles.zip
 
 web:
-	cd $@ && npm install && npm run build
+	cd $@ && pnpm install && npm run build
 	cd www && rm -rf assets workbox*.js
 	cp -rv $@/dist/* www
 
