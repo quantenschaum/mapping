@@ -59,31 +59,34 @@ function addClass(cls) {
 }
 
 const basemaps = {
-  OpenStreetMap: L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution:
-      '<a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).on("add", addClass("grayscale")),
-  "Worldy Imagery": L.tileLayer(
+  "🌍 OpenStreetMap": L.tileLayer(
+    "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      attribution:
+        '<a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    },
+  ).on("add", addClass("grayscale")),
+  "🌍 Worldy Imagery": L.tileLayer(
     "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     {
       attribution:
         '<a target="_blank" href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">World Imagery</a>',
     },
   ),
-  "ENC (RWS)": L.tileLayer.wms(
-    "https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/WMSServer",
-    {
-      layers: "0,2,3,4,5,6,7",
-      version: "1.3.0",
-      transparent: "true",
-      format: "image/png",
-      tiled: true,
-      attribution:
-        '<a target="_blank" href="https://rijkswaterstaat.nl/">RWS</a> <a target="_blank" href="https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/">Chart Server</a>',
-      bounds: boundsNL,
-    },
-  ),
-  "Luchtfoto 25cm": L.tileLayer.wms(
+  // "🇳🇱 ENC (RWS)": L.tileLayer.wms(
+  //   "https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/WMSServer",
+  //   {
+  //     layers: "0,2,3,4,5,6,7",
+  //     version: "1.3.0",
+  //     transparent: "true",
+  //     format: "image/png",
+  //     tiled: true,
+  //     attribution:
+  //       '<a target="_blank" href="https://rijkswaterstaat.nl/">RWS</a> <a target="_blank" href="https://geo.rijkswaterstaat.nl/arcgis/rest/services/ENC/mcs_inland/MapServer/exts/MaritimeChartService/">Chart Server</a>',
+  //     bounds: boundsNL,
+  //   },
+  // ),
+  "🇳🇱 Luchtfoto 25cm": L.tileLayer.wms(
     "https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0",
     {
       layers: "Actueel_ortho25",
@@ -95,7 +98,7 @@ const basemaps = {
       bounds: boundsNL,
     },
   ),
-  "Luchtfoto 8cm": L.tileLayer.wms(
+  "🇳🇱 Luchtfoto 8cm": L.tileLayer.wms(
     "https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0",
     {
       layers: "Actueel_orthoHR",
@@ -111,7 +114,7 @@ const basemaps = {
 
 const overlays = {
   Grid: L.latlngGraticule({ opacityControl: false }),
-  "EMODnet Bathymetry": L.tileLayer
+  "🇪🇺 EMODnet Bathymetry": L.tileLayer
     .wms("https://ows.emodnet-bathymetry.eu/wms", {
       version: "1.3.0",
       transparent: "true",
@@ -122,19 +125,19 @@ const overlays = {
         '<a target="_blank" href="https://emodnet.ec.europa.eu/">EMODnet</a>',
     })
     .on("add", addClass("invert")),
-  "QMAP DE": L.tileLayer.fallback(baseurl + "/qmap-de/{z}/{x}/{y}.webp", {
+  "🇩🇪 QMAP DE": L.tileLayer.fallback(baseurl + "/qmap-de/{z}/{x}/{y}.webp", {
     attribution:
       '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
     bounds: boundsDE,
     crossOrigin: cors,
   }),
-  "QMAP NL": L.tileLayer.fallback(baseurl + "/qmap-nl/{z}/{x}/{y}.webp", {
+  "🇳🇱 QMAP NL": L.tileLayer.fallback(baseurl + "/qmap-nl/{z}/{x}/{y}.webp", {
     attribution:
       '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
     bounds: boundsNL,
     crossOrigin: cors,
   }),
-  OpenSeaMap: L.tileLayer(
+  "🌍 OpenSeaMap": L.tileLayer(
     "https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png",
     {
       attribution:
@@ -267,10 +270,10 @@ const map = L.map("map", {
   minZoom: 6,
   maxZoom: 18,
   layers: [
-    basemaps["OpenStreetMap"],
+    basemaps["🌍 OpenStreetMap"],
     overlays["Grid"],
-    overlays["QMAP DE"],
-    overlays["QMAP NL"],
+    overlays["🇩🇪 QMAP DE"],
+    overlays["🇳🇱 QMAP NL"],
   ],
 });
 
