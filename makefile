@@ -219,7 +219,7 @@ web:
 	cd www && rm -rf assets workbox*.js
 	cp -rv $@/dist/* www
 
-www: web
+www:
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
