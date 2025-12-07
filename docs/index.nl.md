@@ -5,9 +5,6 @@ description: gratis te gebruiken zeekaarten voor duitse en nederlandse wateren g
 
 Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formaten die bruikbaar zijn in verschillende applicaties.
 
-!!! warning "Nieuwe URL"
-    Dit project is verplaatst naar de nieuwe locatie <https://freenauticalchart.net> en maakt nu gebruik van Cloudflare CDN voor verbeterde prestaties.
-
 ??? danger "Disclaimer"
     De geleverde kaarten en gegevensbestanden zijn alleen bedoeld voor informatieve en referentiedoeleinden. Ze zijn niet bedoeld voor navigatie, officiële maritieme operaties of andere activiteiten die precieze geografische, hydrografische gegevens vereisen. Gebruikers moeten officiële bronnen raadplegen, zoals overheidsinstanties of gecertificeerde navigatieleveranciers, voor gezaghebbende en actuele navigatie-informatie.
 

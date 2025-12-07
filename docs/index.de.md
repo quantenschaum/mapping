@@ -5,9 +5,6 @@ description: frei verwendbare Seekarten für deutsche und niederländische Gewä
 
 Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formaten, die in unterschiedlichen Anwendungen verwendet werden können.
  
-!!! warning "Neue URL"
-    Dieses Projekt wurde an den neuen Standort <https://freenauticalchart.net> verschoben und verwendet nun Cloudflare CDN für eine verbesserte Leistung.
-
 ??? danger "Haftungsausschluss"
     Die zur Verfügung gestellten Karten und Datendateien dienen nur zu Informations- und Referenzzwecken. Sie sind nicht für die Navigation, den offiziellen Schiffsbetrieb oder andere Aktivitäten gedacht, die präzise geografische und hydrografische Daten erfordern. Benutzer sollten offizielle Quellen, wie z. B. Regierungsbehörden oder zertifizierte Navigationsanbieter, für maßgebliche und aktuelle Navigationsinformationen konsultieren.
 
