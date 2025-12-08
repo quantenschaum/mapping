@@ -135,6 +135,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/tides\/nl/, ""),
       },
+      "/tides/uk": {
+        target: "https://easytide.admiralty.co.uk/Home/",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/tides\/uk/, ""),
+      },
       "/wattsegler": {
         target: "https://www.wattsegler.de",
         changeOrigin: true,

@@ -112,7 +112,11 @@ async function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
 }
 
 export async function addTideGauges(map) {
-  await Promise.all([addTideGaugesDE(map), addTideGaugesNL(map)]);
+  await Promise.all([
+    addTideGaugesDE(map),
+    addTideGaugesNL(map),
+    addTideGaugesUK(map),
+  ]);
 }
 
 export async function addTideGaugesDE(map, preFetch = false) {
@@ -244,9 +248,9 @@ export async function addTideGaugesDE(map, preFetch = false) {
     const Plotly = await import("plotly.js-basic-dist");
     log(curve[0]);
 
-    const t0 = new Date(now.getTime() - 6 * 3600_000);
-    const t1 = new Date(now.getTime() + 18 * 3600_000);
-    const x = curve.map((d) => new Date(d.timestamp));
+    const t0 = new Date(now.getTime() - 6 * 3600_000).toISOString();
+    const t1 = new Date(now.getTime() + 18 * 3600_000).toISOString();
+    const x = curve.map((d) => d.timestamp);
     const trace1 = {
       name: "astro",
       x: x,
@@ -289,8 +293,8 @@ export async function addTideGaugesDE(map, preFetch = false) {
       shapes: [
         {
           type: "line",
-          x0: now,
-          x1: now,
+          x0: now.toISOString(),
+          x1: now.toISOString(),
           xref: "x",
           y0: 0,
           y1: 1,
@@ -440,9 +444,88 @@ export function addTideGaugesNL(map) {
 
                 layer
                   .bindPopup(
-                    `<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`,
+                    `<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div id="plot"></div><div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`,
                   )
                   .openPopup();
+
+                async function plot(data) {
+                  const Plotly = await import("plotly.js-basic-dist");
+                  const t0 = new Date(
+                    now.getTime() - 6 * 3600_000,
+                  ).toISOString();
+                  const t1 = new Date(
+                    now.getTime() + 18 * 3600_000,
+                  ).toISOString();
+                  const lines = data.split(/\r?\n/);
+                  const x = lines.map((l) => {
+                    const fields = l.split(";");
+                    const d = fields[0];
+                    fields[0] =
+                      d.substring(6) +
+                      "-" +
+                      d.substring(3, 5) +
+                      "-" +
+                      d.substring(0, 2);
+                    return fields[0] + "T" + fields[1] + ":00+01:00";
+                  });
+                  const trace1 = {
+                    name: "astro",
+                    x: x,
+                    y: lines.map((l) => {
+                      const fields = l.split(";");
+                      return parseFloat(fields[3]) / 100;
+                    }),
+                    type: "scatter",
+                    mode: "lines",
+                    line: { color: "#3a99e8" },
+                  };
+                  const layout = {
+                    title: "Time Series from Object Array",
+                    margin: { l: 15, r: 0, t: 0, b: 15 },
+                    xaxis: {
+                      title: "Date",
+                      type: "date",
+                      fixedrange: !true,
+                      tickformat: "%a %H:%M",
+                      range: [t0, t1],
+                    },
+                    yaxis: {
+                      title: "Height",
+                      fixedrange: true,
+                      tickangle: -90,
+                    },
+                    shapes: [
+                      {
+                        type: "line",
+                        x0: now.toISOString(),
+                        x1: now.toISOString(),
+                        xref: "x",
+                        y0: 0,
+                        y1: 1,
+                        yref: "paper",
+                        line: { color: "gray", width: 1 },
+                      },
+                    ],
+                    dragmode: "pan",
+                    legend: {
+                      x: 0,
+                      y: -0.05,
+                      orientation: "h",
+                      bgcolor: "rgba(255,255,255,0)",
+                    },
+                    hovermode: "x unified",
+                  };
+                  const config = {
+                    scrollZoom: true,
+                  };
+                  Plotly.newPlot("plot", [trace1], layout, config);
+                }
+
+                fetch(
+                  `/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&values=-48%2C48`,
+                )
+                  .then((r) => r.text())
+                  .then(plot);
               })
               .catch(log);
           });
@@ -458,4 +541,163 @@ export function addTideGaugesNL(map) {
       });
     })
     .catch(log);
+}
+
+export async function addTideGaugesUK(map, preFetch = false) {
+  const layer = L.layerGroup().addTo(map);
+
+  async function showPopup(marker, f) {
+    // log(marker, f);
+    const ID = f.properties.Id;
+    const name = f.properties.Name;
+    const data = await fetch(`/tides/uk/GetPredictionData?stationId=${ID}`)
+      .then((r) => r.json())
+      .catch(log);
+    if (!data) return;
+    // log(data);
+    const note = data.footerNote;
+    const events = data.tidalEventList;
+    const curve = data.tidalHeightOccurrenceList;
+    const lunar = data.lunarPhaseList;
+    log(lunar);
+    const ldate1 = new Date(lunar[0]?.dateTime + "Z");
+    const ldate2 = new Date(ldate1.getTime() + 6 * 3600_000);
+    const phase = (lunar[0]?.lunarPhaseType || 0) - 1;
+
+    const now = new Date();
+    const now0 = new Date();
+    now0.setUTCHours(0, 0, 0, 0);
+
+    const tz = "UTC";
+    const moon = 2;
+
+    let date0;
+    let approx = false;
+    let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th><th class="moon${moon}"></th></tr>\n`;
+    events.forEach((e) => {
+      // log(e);
+      const ts = new Date(e.dateTime + "Z");
+      if (ts - now0 < 0) return;
+      if (ts - now0 > 2 * 86400_000) return;
+      const type = e.eventType ? "" : "HW";
+      const when = ts > now ? "future" : "past";
+      let date = ts
+        .toLocaleString(locale, {
+          timeZone: tz,
+          month: "2-digit",
+          day: "2-digit",
+          weekday: "short", // year: 'numeric',
+        })
+        .replace(",", "");
+      if (date0 === date) date = "";
+      else date0 = date;
+      const tapprox = e.isApproximateTime ? "*" : "";
+      const time =
+        ts.toLocaleString(locale, {
+          timeZone: tz,
+          hour: "2-digit",
+          minute: "2-digit",
+        }) + tapprox;
+      const happrox = e.isApproximateHeight ? "*" : "";
+      const height = e.height?.toFixed(1) + happrox;
+      const moon = ldate1 < ts && ts < ldate2 ? phase : -1;
+      approx = approx || tapprox || happrox;
+      rows += `<tr class="${type} ${when}"><td>${date}</td><td title="${ts}">${time}</td><td>${height}</td><td class="${phase} moon${moon}"></td></tr>\n`;
+    });
+
+    const table = `<table>\n${rows}</table>`;
+    approx = approx ? "* approximated" : "";
+    // log(table);
+
+    await marker
+      .bindPopup(
+        `<div class="tides"><a target="_blank" href="https://easytide.admiralty.co.uk/?PortID=${ID}" class="stationname">${name}</a>${table}<div class="basevalues">above chart datum${approx}</div><div class="forecast">${note}</div><div id="plot"></div><div class="source">source <a target="_blank" href="https://easytide.admiralty.co.uk/">UKHO</a></div></div>`,
+      )
+      .openPopup();
+
+    if (!curve || !curve[0]) return;
+
+    const Plotly = await import("plotly.js-basic-dist");
+    const t0 = new Date(now.getTime() - 6 * 3600_000).toISOString();
+    const t1 = new Date(now.getTime() + 18 * 3600_000).toISOString();
+    const x = curve.map((d) => d.dateTime);
+    const trace1 = {
+      name: "astro",
+      x: x,
+      y: curve.map((d) => d.height),
+      type: "scatter",
+      mode: "lines",
+      line: { color: "#3a99e8" },
+    };
+    const layout = {
+      title: "Time Series from Object Array",
+      margin: { l: 15, r: 0, t: 0, b: 15 },
+      xaxis: {
+        title: "Date",
+        type: "date",
+        fixedrange: !true,
+        tickformat: "%a %H:%M",
+        range: [t0, t1],
+      },
+      yaxis: { title: "Height", fixedrange: true, tickangle: -90 },
+      shapes: [
+        {
+          type: "line",
+          x0: now.toISOString(),
+          x1: now.toISOString(),
+          xref: "x",
+          y0: 0,
+          y1: 1,
+          yref: "paper",
+          line: { color: "gray", width: 1 },
+        },
+      ],
+      dragmode: "pan",
+      legend: {
+        x: 0,
+        y: -0.05,
+        orientation: "h",
+        bgcolor: "rgba(255,255,255,0)",
+      },
+      hovermode: "x unified",
+    };
+    const config = {
+      scrollZoom: true,
+    };
+    Plotly.newPlot("plot", [trace1], layout, config);
+  }
+
+  fetch("/tides/uk/GetStations")
+    .then((r) => r.json())
+    .then((data) => {
+      // log(data);
+      data.features.forEach((f) => {
+        // log(f);
+        const ID = f.properties.Id;
+        const name = f.properties.Name;
+        const [lon, lat] = f.geometry.coordinates;
+        const continuous = f.properties.ContinuousHeightsAvailable;
+        let m = L.circleMarker([lat, lon], {
+          radius: 4,
+          weight: 3,
+          color: "darkblue",
+          fillColor: continuous ? "white" : "gray",
+          fillOpacity: 1,
+        })
+          .bindPopup(
+            `<a target="_blank" href="https://easytide.admiralty.co.uk/?PortID=${ID}">${name}</a>`,
+          )
+          .on("click", (e) => showPopup(e.target, f))
+          .addTo(layer);
+      });
+    })
+    .catch(log);
+
+  map.on("zoomend", () => {
+    if (map.getZoom() >= 8) {
+      if (!map.hasLayer(layer)) map.addLayer(layer);
+    } else {
+      if (map.hasLayer(layer)) map.removeLayer(layer);
+    }
+  });
 }

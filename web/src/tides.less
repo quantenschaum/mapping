@@ -34,6 +34,7 @@
 
   #plot {
     max-height: 250px;
+    min-width: 40ex;
   }
 
   .basevalues {
@@ -55,9 +56,8 @@
     white-space: nowrap;
     width: 100%;
 
-
     th {
-      text-align: center;
+      /* text-align: center; */
     }
 
     .past {
@@ -84,10 +84,10 @@
       content: "🌝"; // full
     }
 
-    .moon3::after { // last quarter
+    .moon3::after {
+      // last quarter
       content: "🌜";
     }
-
   }
 }
 
