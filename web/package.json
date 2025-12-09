@@ -27,6 +27,7 @@
     "plotly.js-basic-dist": "^3.3.0",
     "proj4": "^2.20.2",
     "vite": "^7.2.7",
-    "vite-plugin-pwa": "^1.2.0"
+    "vite-plugin-pwa": "^1.2.0",
+    "workbox-window": "^7.4.0"
   }
 }

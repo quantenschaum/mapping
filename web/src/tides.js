@@ -111,6 +111,76 @@ async function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
   return converted;
 }
 
+async function tidePlot(time, astro, forecast, measured) {
+  const Plotly = await import("plotly.js-basic-dist");
+  const now = new Date();
+  const t0 = new Date(now.getTime() - 6 * 3600_000).toISOString();
+  const t1 = new Date(now.getTime() + 18 * 3600_000).toISOString();
+  const trace1 = {
+    name: "astro",
+    x: time,
+    y: astro,
+    type: "scatter",
+    mode: "lines",
+    line: { color: "#3a99e8" },
+  };
+  const trace2 = {
+    name: "forecast",
+    x: time,
+    y: forecast,
+    type: "scatter",
+    mode: "lines",
+    line: { color: "orange" },
+  };
+  const trace3 = {
+    name: "measured",
+    x: time,
+    y: measured,
+    type: "scatter",
+    mode: "lines",
+    line: { color: "red" },
+  };
+  const layout = {
+    title: "Tide Forecast",
+    margin: { l: 15, r: 0, t: 0, b: 15 },
+    xaxis: {
+      title: "Date",
+      type: "date",
+      fixedrange: !true,
+      tickformat: "%a %H:%M",
+      range: [t0, t1],
+    },
+    yaxis: { title: "Height", fixedrange: true, tickangle: -90 },
+    shapes: [
+      {
+        type: "line",
+        x0: now.toISOString(),
+        x1: now.toISOString(),
+        xref: "x",
+        y0: 0,
+        y1: 1,
+        yref: "paper",
+        line: { color: "gray", width: 1 },
+      },
+    ],
+    dragmode: "pan",
+    legend: {
+      x: 0,
+      y: -0.05,
+      orientation: "h",
+      bgcolor: "rgba(255,255,255,0)",
+    },
+    hovermode: "x unified",
+  };
+  const config = {
+    scrollZoom: true,
+  };
+  const traces = [trace1];
+  if (forecast) traces.push(trace2);
+  if (measured) traces.push(trace3);
+  Plotly.newPlot("plot", traces, layout, config);
+}
+
 export async function addTideGauges(map) {
   await Promise.all([
     addTideGaugesDE(map),
@@ -236,7 +306,6 @@ export async function addTideGaugesDE(map, preFetch = false) {
     }
     const table = `<table>\n${rows}</table>`;
     // log(table);
-
     await marker
       .bindPopup(
         `<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${table}<div class="basevalues">${basevalues}</div><div class="forecast"><a href="${forecast_link}" target="_blank" class="${forecast_cls}">${forecast_text}</a></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`,
@@ -245,76 +314,16 @@ export async function addTideGaugesDE(map, preFetch = false) {
 
     if (!curve) return;
 
-    const Plotly = await import("plotly.js-basic-dist");
-    log(curve[0]);
-
-    const t0 = new Date(now.getTime() - 6 * 3600_000).toISOString();
-    const t1 = new Date(now.getTime() + 18 * 3600_000).toISOString();
-    const x = curve.map((d) => d.timestamp);
-    const trace1 = {
-      name: "astro",
-      x: x,
-      y: curve.map((d) => (d.astro + offset) / 100),
-      type: "scatter",
-      mode: "lines",
-      line: { color: "#3a99e8" },
-    };
-    const trace2 = {
-      name: "forecast",
-      x: x,
-      y: curve
+    tidePlot(
+      curve.map((d) => d.timestamp),
+      curve.map((d) => (d.astro + offset) / 100),
+      curve
         .map((d) => (d.curveforecast + offset) / 100)
         .map((v) => (v > 0 ? v : null)),
-      type: "scatter",
-      mode: "lines",
-      line: { color: "orange" },
-    };
-    const trace3 = {
-      name: "measured",
-      x: x,
-      y: curve
+      curve
         .map((d) => (d.measurement + offset) / 100)
         .map((v) => (v > 0 ? v : null)),
-      type: "scatter",
-      mode: "lines",
-      line: { color: "red" },
-    };
-    const layout = {
-      title: "Time Series from Object Array",
-      margin: { l: 15, r: 0, t: 0, b: 15 },
-      xaxis: {
-        title: "Date",
-        type: "date",
-        fixedrange: !true,
-        tickformat: "%a %H:%M",
-        range: [t0, t1],
-      },
-      yaxis: { title: "Height", fixedrange: true, tickangle: -90 },
-      shapes: [
-        {
-          type: "line",
-          x0: now.toISOString(),
-          x1: now.toISOString(),
-          xref: "x",
-          y0: 0,
-          y1: 1,
-          yref: "paper",
-          line: { color: "gray", width: 1 },
-        },
-      ],
-      dragmode: "pan",
-      legend: {
-        x: 0,
-        y: -0.05,
-        orientation: "h",
-        bgcolor: "rgba(255,255,255,0)",
-      },
-      hovermode: "x unified",
-    };
-    const config = {
-      scrollZoom: true,
-    };
-    Plotly.newPlot("plot", [trace1, trace2, trace3], layout, config);
+    );
   }
 
   const layer = L.layerGroup().addTo(map);
@@ -355,192 +364,121 @@ export async function addTideGaugesDE(map, preFetch = false) {
   });
 }
 
-export function addTideGaugesNL(map) {
-  fetch("/tides/nl/api/point/latestmeasurement?parameterId=astronomische-getij")
+export async function addTideGaugesNL(map) {
+  const data = await fetch(
+    "/tides/nl/api/point/latestmeasurement?parameterId=astronomische-getij",
+  )
     .then((r) => r.json())
     .then((data) => reproject(data))
-    .then((data) => {
-      const layer = L.geoJSON(data, {
-        pointToLayer: function (feature, latlng) {
-          // log(feature.properties)
-          return L.circleMarker(latlng, {
-            radius: 4,
-            weight: 3,
-            color: "#4e91ea",
-            fillColor: feature.properties.locationColor,
-            fillOpacity: 1,
-          });
-        },
-        onEachFeature: (feature, layer) => {
-          const p = feature.properties;
-          const link = `https://waterinfo.rws.nl/publiek/astronomische-getij/${p.locationCode}/details`;
-          if (feature.properties.name) {
-            layer.bindPopup(
-              `<a href="${link}" target="_blank">${feature.properties.name}</a>`,
-            );
-          }
-          layer.on("click", (e) => {
-            log(p);
-            const now = new Date();
-            const start = new Date(now);
-            start.setHours(0);
-            start.setMinutes(0);
-            start.setSeconds(0);
-            start.setMilliseconds(0);
-            const end = new Date(start);
-            end.setHours(48);
-            end.setMinutes(0);
-            end.setSeconds(0);
-            end.setMilliseconds(0);
-
-            fetch(
-              `/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&timeZone=GMT&startDate=${start.toISOString()}&endDate=${end.toISOString()}`,
-              {
-                headers: {
-                  Accept: "application/json",
-                },
-              },
-            )
-              .then((r) => r.json())
-              .then((data) => {
-                log(data);
-
-                const tform = new Intl.DateTimeFormat(locale, {
-                  timeZoneName: "short",
-                });
-                const parts = tform.formatToParts(now);
-                const tz = parts.find(
-                  (part) => part.type === "timeZoneName",
-                )?.value;
-
-                const extremes = data.series[0].extremes;
-
-                let date0, height0;
-                let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th></tr>\n`;
-                extremes.forEach((r) => {
-                  log(r);
-                  const ts = new Date(r.dateTime);
-                  let date = ts
-                    .toLocaleString(locale, {
-                      month: "2-digit",
-                      day: "2-digit",
-                      weekday: "short", // year: 'numeric',
-                    })
-                    .replace(",", "");
-                  if (date0 === date) date = "";
-                  else date0 = date;
-                  const time = ts.toLocaleString(locale, {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  });
-                  const when = ts > now ? "future" : "past";
-                  const height = r.value / 100;
-                  rows += `<tr class="${r.sign} ${when}"><td>${date}</td><td>${time}</td><td>${height?.toFixed(2)}</td></tr>\n`;
-                });
-                const ref =
-                  p.measurements[0].qualityCode == "MSL" ? "reference=MSL" : "";
-                const table = `<table>\n${rows}</table>${ref}`;
-                // log(table);
-
-                layer
-                  .bindPopup(
-                    `<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div id="plot"></div><div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`,
-                  )
-                  .openPopup();
-
-                async function plot(data) {
-                  const Plotly = await import("plotly.js-basic-dist");
-                  const t0 = new Date(
-                    now.getTime() - 6 * 3600_000,
-                  ).toISOString();
-                  const t1 = new Date(
-                    now.getTime() + 18 * 3600_000,
-                  ).toISOString();
-                  const lines = data.split(/\r?\n/);
-                  const x = lines.map((l) => {
-                    const fields = l.split(";");
-                    const d = fields[0];
-                    fields[0] =
-                      d.substring(6) +
-                      "-" +
-                      d.substring(3, 5) +
-                      "-" +
-                      d.substring(0, 2);
-                    return fields[0] + "T" + fields[1] + ":00+01:00";
-                  });
-                  const trace1 = {
-                    name: "astro",
-                    x: x,
-                    y: lines.map((l) => {
-                      const fields = l.split(";");
-                      return parseFloat(fields[3]) / 100;
-                    }),
-                    type: "scatter",
-                    mode: "lines",
-                    line: { color: "#3a99e8" },
-                  };
-                  const layout = {
-                    title: "Time Series from Object Array",
-                    margin: { l: 15, r: 0, t: 0, b: 15 },
-                    xaxis: {
-                      title: "Date",
-                      type: "date",
-                      fixedrange: !true,
-                      tickformat: "%a %H:%M",
-                      range: [t0, t1],
-                    },
-                    yaxis: {
-                      title: "Height",
-                      fixedrange: true,
-                      tickangle: -90,
-                    },
-                    shapes: [
-                      {
-                        type: "line",
-                        x0: now.toISOString(),
-                        x1: now.toISOString(),
-                        xref: "x",
-                        y0: 0,
-                        y1: 1,
-                        yref: "paper",
-                        line: { color: "gray", width: 1 },
-                      },
-                    ],
-                    dragmode: "pan",
-                    legend: {
-                      x: 0,
-                      y: -0.05,
-                      orientation: "h",
-                      bgcolor: "rgba(255,255,255,0)",
-                    },
-                    hovermode: "x unified",
-                  };
-                  const config = {
-                    scrollZoom: true,
-                  };
-                  Plotly.newPlot("plot", [trace1], layout, config);
-                }
-
-                fetch(
-                  `/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&values=-48%2C48`,
-                )
-                  .then((r) => r.text())
-                  .then(plot);
-              })
-              .catch(log);
-          });
-        },
-      }).addTo(map);
-
-      map.on("zoomend", () => {
-        if (map.getZoom() >= 8) {
-          if (!map.hasLayer(layer)) map.addLayer(layer);
-        } else {
-          if (map.hasLayer(layer)) map.removeLayer(layer);
-        }
-      });
-    })
     .catch(log);
+
+  const layer = L.geoJSON(data, {
+    pointToLayer: function (feature, latlng) {
+      // log(feature.properties)
+      return L.circleMarker(latlng, {
+        radius: 4,
+        weight: 3,
+        color: "#4e91ea",
+        fillColor: feature.properties.locationColor,
+        fillOpacity: 1,
+      });
+    },
+    onEachFeature: (feature, layer) => {
+      const p = feature.properties;
+      const link = `https://waterinfo.rws.nl/publiek/astronomische-getij/${p.locationCode}/details`;
+      if (feature.properties.name) {
+        layer.bindPopup(
+          `<a href="${link}" target="_blank">${feature.properties.name}</a>`,
+        );
+      }
+      layer.on("click", (e) => {
+        log(p);
+        const now = new Date();
+        const start = new Date(now);
+        start.setHours(0);
+        start.setMinutes(0);
+        start.setSeconds(0);
+        start.setMilliseconds(0);
+        const end = new Date(start);
+        end.setHours(48);
+        end.setMinutes(0);
+        end.setSeconds(0);
+        end.setMilliseconds(0);
+
+        fetch(
+          `/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&timeZone=GMT&startDate=${start.toISOString()}&endDate=${end.toISOString()}`,
+          // `/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&timeZone=GMT&values=-48%2C48`,
+          {
+            headers: {
+              Accept: "application/json",
+            },
+          },
+        )
+          .then((r) => r.json())
+          .then((data) => {
+            log(data);
+
+            const tform = new Intl.DateTimeFormat(locale, {
+              timeZoneName: "short",
+            });
+            const parts = tform.formatToParts(now);
+            const tz = parts.find(
+              (part) => part.type === "timeZoneName",
+            )?.value;
+
+            const extremes = data.series[0].extremes;
+
+            let date0, height0;
+            let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th></tr>\n`;
+            extremes.forEach((r) => {
+              log(r);
+              const ts = new Date(r.dateTime);
+              let date = ts
+                .toLocaleString(locale, {
+                  month: "2-digit",
+                  day: "2-digit",
+                  weekday: "short", // year: 'numeric',
+                })
+                .replace(",", "");
+              if (date0 === date) date = "";
+              else date0 = date;
+              const time = ts.toLocaleString(locale, {
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+              const when = ts > now ? "future" : "past";
+              const height = r.value / 100;
+              rows += `<tr class="${r.sign} ${when}"><td>${date}</td><td>${time}</td><td>${height?.toFixed(2)}</td></tr>\n`;
+            });
+            const ref =
+              p.measurements[0].qualityCode == "MSL" ? "reference=MSL" : "";
+            const table = `<table>\n${rows}</table>${ref}`;
+            // log(table);
+
+            layer
+              .bindPopup(
+                `<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div id="plot"></div><div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`,
+              )
+              .openPopup();
+
+            const curve = data.series[0].data;
+            tidePlot(
+              curve.map((d) => d.dateTime),
+              curve.map((d) => d.value / 100),
+            );
+          })
+          .catch(log);
+      });
+    },
+  }).addTo(map);
+
+  map.on("zoomend", () => {
+    if (map.getZoom() >= 8) {
+      if (!map.hasLayer(layer)) map.addLayer(layer);
+    } else {
+      if (map.hasLayer(layer)) map.removeLayer(layer);
+    }
+  });
 }
 
 export async function addTideGaugesUK(map, preFetch = false) {
@@ -617,54 +555,10 @@ export async function addTideGaugesUK(map, preFetch = false) {
 
     if (!curve || !curve[0]) return;
 
-    const Plotly = await import("plotly.js-basic-dist");
-    const t0 = new Date(now.getTime() - 6 * 3600_000).toISOString();
-    const t1 = new Date(now.getTime() + 18 * 3600_000).toISOString();
-    const x = curve.map((d) => d.dateTime);
-    const trace1 = {
-      name: "astro",
-      x: x,
-      y: curve.map((d) => d.height),
-      type: "scatter",
-      mode: "lines",
-      line: { color: "#3a99e8" },
-    };
-    const layout = {
-      title: "Time Series from Object Array",
-      margin: { l: 15, r: 0, t: 0, b: 15 },
-      xaxis: {
-        title: "Date",
-        type: "date",
-        fixedrange: !true,
-        tickformat: "%a %H:%M",
-        range: [t0, t1],
-      },
-      yaxis: { title: "Height", fixedrange: true, tickangle: -90 },
-      shapes: [
-        {
-          type: "line",
-          x0: now.toISOString(),
-          x1: now.toISOString(),
-          xref: "x",
-          y0: 0,
-          y1: 1,
-          yref: "paper",
-          line: { color: "gray", width: 1 },
-        },
-      ],
-      dragmode: "pan",
-      legend: {
-        x: 0,
-        y: -0.05,
-        orientation: "h",
-        bgcolor: "rgba(255,255,255,0)",
-      },
-      hovermode: "x unified",
-    };
-    const config = {
-      scrollZoom: true,
-    };
-    Plotly.newPlot("plot", [trace1], layout, config);
+    tidePlot(
+      curve.map((d) => d.dateTime),
+      curve.map((d) => d.height),
+    );
   }
 
   fetch("/tides/uk/GetStations")
