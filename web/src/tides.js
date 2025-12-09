@@ -111,35 +111,45 @@ async function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
   return converted;
 }
 
-async function tidePlot(time, astro, forecast, measured) {
+function mergeNoClobber(target, source) {
+  for (const [key, value] of Object.entries(source)) {
+    if (!(key in target)) {
+      target[key] = value;
+    }
+  }
+  return target;
+}
+
+const plotNames = ["astro", "forecast", "measured"];
+const plotColors = ["blue", "red", "green"];
+
+async function tidePlot(traces) {
   const Plotly = await import("plotly.js-basic-dist");
   const now = new Date();
   const t0 = new Date(now.getTime() - 6 * 3600_000).toISOString();
   const t1 = new Date(now.getTime() + 18 * 3600_000).toISOString();
-  const trace1 = {
-    name: "astro",
-    x: time,
-    y: astro,
-    type: "scatter",
-    mode: "lines",
-    line: { color: "#3a99e8" },
-  };
-  const trace2 = {
-    name: "forecast",
-    x: time,
-    y: forecast,
-    type: "scatter",
-    mode: "lines",
-    line: { color: "orange" },
-  };
-  const trace3 = {
-    name: "measured",
-    x: time,
-    y: measured,
-    type: "scatter",
-    mode: "lines",
-    line: { color: "red" },
-  };
+
+  if (Array.isArray(traces[0])) {
+    traces = traces.slice(1).map((t, i) => {
+      return {
+        name: plotNames[i] || `trace_${i}`,
+        x: traces[0],
+        y: t,
+        type: "scatter",
+        mode: "lines",
+        line: { color: plotColors[i] || "black" },
+      };
+    });
+  } else {
+    traces = traces.map((t, i) =>
+      mergeNoClobber(t, {
+        name: plotNames[i] || `trace_${i}`,
+        type: "scatter",
+        mode: "lines",
+        line: { color: plotColors[i] || "black" },
+      }),
+    );
+  }
   const layout = {
     title: "Tide Forecast",
     margin: { l: 15, r: 0, t: 0, b: 15 },
@@ -175,9 +185,6 @@ async function tidePlot(time, astro, forecast, measured) {
   const config = {
     scrollZoom: true,
   };
-  const traces = [trace1];
-  if (forecast) traces.push(trace2);
-  if (measured) traces.push(trace3);
   Plotly.newPlot("plot", traces, layout, config);
 }
 
@@ -185,6 +192,7 @@ export async function addTideGauges(map) {
   await Promise.all([
     addTideGaugesDE(map),
     addTideGaugesNL(map),
+    addTideGaugesNL(map, "waterhoogte"),
     addTideGaugesUK(map),
   ]);
 }
@@ -314,7 +322,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
 
     if (!curve) return;
 
-    tidePlot(
+    tidePlot([
       curve.map((d) => d.timestamp),
       curve.map((d) => (d.astro + offset) / 100),
       curve
@@ -323,7 +331,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
       curve
         .map((d) => (d.measurement + offset) / 100)
         .map((v) => (v > 0 ? v : null)),
-    );
+    ]);
   }
 
   const layer = L.layerGroup().addTo(map);
@@ -364,9 +372,10 @@ export async function addTideGaugesDE(map, preFetch = false) {
   });
 }
 
-export async function addTideGaugesNL(map) {
+export async function addTideGaugesNL(map, kind = "astronomische-getij") {
+  const iswh = kind == "waterhoogte";
   const data = await fetch(
-    "/tides/nl/api/point/latestmeasurement?parameterId=astronomische-getij",
+    `/tides/nl/api/point/latestmeasurement?parameterId=${kind}`,
   )
     .then((r) => r.json())
     .then((data) => reproject(data))
@@ -374,25 +383,24 @@ export async function addTideGaugesNL(map) {
 
   const layer = L.geoJSON(data, {
     pointToLayer: function (feature, latlng) {
-      // log(feature.properties)
+      const props = feature.properties;
+      // log(props);
       return L.circleMarker(latlng, {
         radius: 4,
         weight: 3,
-        color: "#4e91ea",
-        fillColor: feature.properties.locationColor,
+        color: iswh ? props.locationColor : "#4e91ea",
+        fillColor: "white",
         fillOpacity: 1,
       });
     },
     onEachFeature: (feature, layer) => {
       const p = feature.properties;
-      const link = `https://waterinfo.rws.nl/publiek/astronomische-getij/${p.locationCode}/details`;
-      if (feature.properties.name) {
-        layer.bindPopup(
-          `<a href="${link}" target="_blank">${feature.properties.name}</a>`,
-        );
+      const link = `https://waterinfo.rws.nl/publiek/${kind}/${p.locationCode}/details`;
+      if (p.name) {
+        layer.bindPopup(`<a href="${link}" target="_blank">${p.name}</a>`);
       }
       layer.on("click", (e) => {
-        log(p);
+        // log(p);
         const now = new Date();
         const start = new Date(now);
         start.setHours(0);
@@ -406,8 +414,7 @@ export async function addTideGaugesNL(map) {
         end.setMilliseconds(0);
 
         fetch(
-          `/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&timeZone=GMT&startDate=${start.toISOString()}&endDate=${end.toISOString()}`,
-          // `/tides/nl/api/chart/get?mapType=astronomische-getij&locationCodes=${p.locationCode}&getijReference=LAT&timeZone=GMT&values=-48%2C48`,
+          `/tides/nl/api/chart/get?mapType=${kind}&locationCodes=${p.locationCode}&getijReference=LAT&timeZone=GMT&startDate=${start.toISOString()}&endDate=${end.toISOString()}`,
           {
             headers: {
               Accept: "application/json",
@@ -428,44 +435,81 @@ export async function addTideGaugesNL(map) {
 
             const extremes = data.series[0].extremes;
 
-            let date0, height0;
-            let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th></tr>\n`;
-            extremes.forEach((r) => {
-              log(r);
-              const ts = new Date(r.dateTime);
-              let date = ts
-                .toLocaleString(locale, {
-                  month: "2-digit",
-                  day: "2-digit",
-                  weekday: "short", // year: 'numeric',
-                })
-                .replace(",", "");
-              if (date0 === date) date = "";
-              else date0 = date;
-              const time = ts.toLocaleString(locale, {
-                hour: "2-digit",
-                minute: "2-digit",
+            let table = "";
+            if (extremes) {
+              let date0;
+              let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th></tr>\n`;
+              extremes.forEach((r) => {
+                // log(r);
+                const ts = new Date(r.dateTime);
+                let date = ts
+                  .toLocaleString(locale, {
+                    month: "2-digit",
+                    day: "2-digit",
+                    weekday: "short", // year: 'numeric',
+                  })
+                  .replace(",", "");
+                if (date0 === date) date = "";
+                else date0 = date;
+                const time = ts.toLocaleString(locale, {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
+                const when = ts > now ? "future" : "past";
+                const height = r.value / 100;
+                rows += `<tr class="${r.sign} ${when}"><td>${date}</td><td>${time}</td><td>${height?.toFixed(2)}</td></tr>\n`;
               });
-              const when = ts > now ? "future" : "past";
-              const height = r.value / 100;
-              rows += `<tr class="${r.sign} ${when}"><td>${date}</td><td>${time}</td><td>${height?.toFixed(2)}</td></tr>\n`;
-            });
-            const ref =
-              p.measurements[0].qualityCode == "MSL" ? "reference=MSL" : "";
-            const table = `<table>\n${rows}</table>${ref}`;
-            // log(table);
+              const ref =
+                p.measurements[0].qualityCode == "MSL" ? "reference=MSL" : "";
+              table = `<table>\n${rows}</table>${ref}`;
+              // log(table);
+            } else table = `<div>${p.locationLabel} (NAP)</div>`;
 
             layer
               .bindPopup(
-                `<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div id="plot"></div><div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`,
+                `<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div class="basevalues"></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`,
               )
               .openPopup();
 
-            const curve = data.series[0].data;
-            tidePlot(
-              curve.map((d) => d.dateTime),
-              curve.map((d) => d.value / 100),
-            );
+            if (!iswh) {
+              tidePlot([
+                data.series[0].data.map((d) => d.dateTime),
+                data.series[0].data.map((d) => d.value / 100),
+              ]);
+            } else {
+              function sname(name) {
+                if (name.includes("astro")) return "astro";
+                if (name.includes("verwacht")) return "forecast";
+                return "measured";
+              }
+              function scolor(name) {
+                if (name.includes("astro")) return "blue";
+                if (name.includes("verwacht")) return "red";
+                return "green";
+              }
+              fetch(
+                `/tides/nl/api/chart/get?mapType=waterhoogte&locationCodes=${p.locationCode}&values=-48%2C48`,
+                {
+                  headers: {
+                    Accept: "application/json",
+                  },
+                },
+              )
+                .then((r) => r.json())
+                .then((d) => {
+                  log(d);
+                  tidePlot(
+                    d.series.map((s) => {
+                      return {
+                        name: sname(s.meta.displayName),
+                        x: s.data.map((d) => d.dateTime),
+                        y: s.data.map((d) => d.value / 100),
+                        line: { color: scolor(s.meta.displayName) },
+                      };
+                    }),
+                  );
+                });
+            }
           })
           .catch(log);
       });
@@ -555,10 +599,7 @@ export async function addTideGaugesUK(map, preFetch = false) {
 
     if (!curve || !curve[0]) return;
 
-    tidePlot(
-      curve.map((d) => d.dateTime),
-      curve.map((d) => d.height),
-    );
+    tidePlot([curve.map((d) => d.dateTime), curve.map((d) => d.height)]);
   }
 
   fetch("/tides/uk/GetStations")
