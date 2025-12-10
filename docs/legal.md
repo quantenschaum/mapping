@@ -76,11 +76,15 @@ Die Verarbeitung erfolgt auf Grundlage von **Art. 6 Abs. 1 lit. f DSGVO** (berec
 
 Weitere Informationen findest du in der [Datenschutzerklärung von Cloudflare](https://www.cloudflare.com/privacypolicy/).
 
-### 5. Cookies
+### 5. Tracking
 
-Diese Webseite verwendet Cookies und Tracking in Form eines eigenen [Ackee](https://ackee.electerious.com/) Tracking Servers, um Informationen über die Nutzung der Seite zu erhalten. Das Tracking ist vollkommen anonym und speichert keine personenbezogenen Daten oder IP-Adressen.
+Diese Webseite verwendet Tracking in Form eines eigenen [Ackee](https://ackee.electerious.com/) Tracking Servers, um Informationen über die Nutzung der Seite zu erhalten. Das Tracking ist vollkommen anonym und speichert keine personenbezogenen Daten oder IP-Adressen und verwendet keine Cookies.
 
-### 6. Ihre Rechte
+### 6. Cookies
+
+Diese Webseite verwendet selbst keine Cookies. Der eingesetzte Cloudflare-Proxy nutzt jedoch Cookies, unter anderem zum Zweck der Botabwehr.
+
+### 7. Ihre Rechte
 
 Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Wenden sie sich an die im Impressum genannte Adresse.
 
