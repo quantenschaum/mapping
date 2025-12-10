@@ -54,7 +54,7 @@ theme:
 
 copyright: |
   &#x1F12F; quantenschaum - <a href="/download/legal/">Impressum / Datenschutz / Haftungsauschluss</a>
-  <script async src="https://a.freenauticalchart.net/tracker.js" data-ackee-server="https://a.freenauticalchart.net" data-ackee-domain-id="36783494-ed32-40a5-9404-1d429fb6d4b8" data-ackee-opts='{ "detailed": true }'></script>
+  <script async src="/tracker.js" data-ackee-server="/" data-ackee-domain-id="36783494-ed32-40a5-9404-1d429fb6d4b8" data-ackee-opts='{ "detailed": true }'></script>
 
 markdown_extensions:
   - admonition
