@@ -4,9 +4,9 @@
 
 ## Impressum
 
-**Angaben gemäß § 5 TMG**  
+**Angaben gemäß § 5 TMG**
 
-Adam Lucke  
+Adam Lucke
 
 E-Mail: freenauticalchart@posteo.de
 
@@ -17,13 +17,13 @@ Adam Lucke, Anschrift wie oben.
 
 ## Datenschutzerklärung
 
-### 1. Allgemeine Hinweise  
+### 1. Allgemeine Hinweise
 
 Diese Datenschutzerklärung informiert Sie über die Art, den Umfang und den Zweck der Verarbeitung personenbezogener Daten auf der Webseite `freenauticalchart.net` (zuvor `waddenzee.duckdns.org`).
 
 Diese Webseite dient der Bereitstellung von Karteninhalten im Rahmen eines privaten, nicht-kommerziellen, Open-Source-Projekts.
 
-### 2. Zugriffsdaten und Server-Logs  
+### 2. Zugriffsdaten und Server-Logs
 
 Beim Aufruf dieser Webseite werden durch den Server automatisch folgende Daten protokolliert:
 
@@ -36,23 +36,23 @@ Beim Aufruf dieser Webseite werden durch den Server automatisch folgende Daten p
 
 Diese Daten dienen ausschließlich der technischen Absicherung und Fehleranalyse. Eine personenbezogene Auswertung findet nicht statt. Die Daten werden regelmäßig gelöscht.
 
-### 3. Kontaktaufnahme  
+### 3. Kontaktaufnahme
 
 Wenn Sie per E-Mail Kontakt aufnehmen, wird Ihre Nachricht inklusive Ihrer Absenderadresse gespeichert. Diese Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet.
 
 ### 4. Externe Dienste und Inhalte
 
-#### OpenStreetMap  
+#### OpenStreetMap
 
 Zur Darstellung von Karten verwenden wir Dienste der OpenStreetMap Foundation. Beim Laden der Karten werden Verbindungsdaten an Server von OpenStreetMap übertragen.  
 Mehr Infos: [OSMF Privacy Policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy)
 
-#### Google Fonts  
+#### Google Fonts
 
 Diese Seite verwendet Web-Schriftarten von Google Fonts. Beim Laden der Seite werden Schriftdateien von Google-Servern nachgeladen. Dabei kann Ihre IP-Adresse übertragen werden.  
 Mehr Infos: [Google Datenschutzerklärung](https://policies.google.com/privacy)
 
-#### unpkg CDN  
+#### unpkg CDN
 
 Für das Laden von JavaScript-Bibliotheken wird das CDN `unpkg.com` verwendet. Dabei wird Ihre IP-Adresse an den CDN-Anbieter übermittelt.
 
@@ -76,11 +76,11 @@ Die Verarbeitung erfolgt auf Grundlage von **Art. 6 Abs. 1 lit. f DSGVO** (berec
 
 Weitere Informationen findest du in der [Datenschutzerklärung von Cloudflare](https://www.cloudflare.com/privacypolicy/).
 
-### 5. Cookies  
+### 5. Cookies
 
-Diese Webseite verwendet **keine Cookies** und keine Tracking-Technologien.
+Diese Webseite verwendet Cookies und Tracking in Form eines eigenen [Ackee](https://ackee.electerious.com/) Tracking Servers, um Informationen über die Nutzung der Seite zu erhalten. Das Tracking ist vollkommen anonym und speichert keine personenbezogenen Daten oder IP-Adressen.
 
-### 6. Ihre Rechte  
+### 6. Ihre Rechte
 
 Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Wenden sie sich an die im Impressum genannte Adresse.
 

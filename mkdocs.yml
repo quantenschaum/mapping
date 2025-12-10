@@ -52,7 +52,9 @@ theme:
     - toc.integrate
     - search.highlight
 
-copyright: '&#x1F12F; quantenschaum - <a href="/download/legal/">Impressum / Datenschutz / Haftungsauschluss</a>'
+copyright: |
+  &#x1F12F; quantenschaum - <a href="/download/legal/">Impressum / Datenschutz / Haftungsauschluss</a>
+  <script async src="https://a.freenauticalchart.net/tracker.js" data-ackee-server="https://a.freenauticalchart.net" data-ackee-domain-id="36783494-ed32-40a5-9404-1d429fb6d4b8" data-ackee-opts='{ "detailed": true }'></script>
 
 markdown_extensions:
   - admonition
@@ -100,16 +102,17 @@ markdown_extensions:
         #extra_css:
         #  - https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css
 
+
 plugins:
   - i18n:
       docs_structure: suffix
       redirect_root: true
       languages:
         - locale: en
-          name: '🇬🇧 English'
+          name: "🇬🇧 English"
           default: true
         - locale: de
-          name: '🇩🇪 Deutsch'
+          name: "🇩🇪 Deutsch"
           nav_translations:
             Chart: Karte
             Printing: Drucken
@@ -117,7 +120,7 @@ plugins:
             Tidal Atlas: Gezeitenstromatlas
             Nautical Almanac: Nautisches Jahrbuch
         - locale: nl
-          name: '🇳🇱 Nederlands'
+          name: "🇳🇱 Nederlands"
           nav_translations:
             Chart: Kaart
             Printing: Afdrukken
@@ -129,5 +132,3 @@ plugins:
   - git-revision-date-localized:
       type: iso_date
       fallback_to_build_date: true
-
-
