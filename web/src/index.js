@@ -9,7 +9,6 @@ import "leaflet.control.opacity";
 // import 'leaflet-mouse-position';
 // import 'leaflet-mouse-position/src/L.Control.MousePosition.css';
 import { OpenLocationCode } from "open-location-code";
-
 // npx png-to-ico src/favicon.png >src/favicon.ico
 import "./style.less";
 import { log, debounce, logger } from "./utils";
@@ -24,6 +23,7 @@ import { addVectorLayer } from "./vector";
 import { addWattSegler } from "./wattsegler";
 import "./boating";
 import { registerSW } from "virtual:pwa-register";
+import { ackee } from "./ackee";
 
 const params = new URLSearchParams(window.location.search);
 const isDevMode = process.env.NODE_ENV === "development";
@@ -40,10 +40,13 @@ log("PWA", "red", "standalone", isStandalone, "development", isDevMode);
 
 if (isStandalone || isSet("sw")) {
   log("PWA", "red", "registering service worker");
+  ackee.record("aed13eec-f7d3-43f5-8483-b12753abd188");
   registerSW({
     onNeedRefresh() {},
     onOfflineReady() {},
   });
+} else {
+  ackee.record("f1a69ffa-afc4-4085-9c7d-044315d27165");
 }
 
 const baseurl = "";

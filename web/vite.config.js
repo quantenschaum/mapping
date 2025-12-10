@@ -140,6 +140,16 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/tides\/uk/, ""),
       },
+      "/tides/fr": {
+        target: "https://services.data.shom.fr",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/tides\/fr/, ""),
+        configure: (proxy, options) => {
+          proxy.on("proxyReq", (proxyReq, req, res) => {
+            proxyReq.setHeader("Referer", "https://maree.shom.fr/");
+          });
+        },
+      },
       "/wattsegler": {
         target: "https://www.wattsegler.de",
         changeOrigin: true,

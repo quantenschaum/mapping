@@ -3,6 +3,14 @@ import "leaflet.tilelayer.fallback";
 import "./slider";
 import { logger } from "./utils";
 import "./tides.less";
+import { ackee } from "./ackee";
+
+function track(x) {
+  ackee.action("378af0c9-00ff-46c2-9eac-d16f2ad7bb36", {
+    key: "popup_" + x,
+    value: 1,
+  });
+}
 
 const isDevMode = process.env.NODE_ENV === "development";
 const log = logger("tides", "lightblue");
@@ -111,6 +119,12 @@ async function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
   return converted;
 }
 
+function localTZ() {
+  const tform = new Intl.DateTimeFormat(locale, { timeZoneName: "short" });
+  const parts = tform.formatToParts(new Date());
+  return parts.find((part) => part.type === "timeZoneName")?.value;
+}
+
 function mergeNoClobber(target, source) {
   for (const [key, value] of Object.entries(source)) {
     if (!(key in target)) {
@@ -192,8 +206,9 @@ export async function addTideGauges(map) {
   await Promise.all([
     addTideGaugesDE(map),
     addTideGaugesNL(map),
-    addTideGaugesNL(map, "waterhoogte"),
+    // addTideGaugesNL(map, "waterhoogte"),
     addTideGaugesUK(map),
+    addTideGaugesFR(map),
   ]);
 }
 
@@ -274,9 +289,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     }
     log("moon", moon);
 
-    const tform = new Intl.DateTimeFormat(locale, { timeZoneName: "short" });
-    const parts = tform.formatToParts(now);
-    const tz = parts.find((part) => part.type === "timeZoneName")?.value;
+    const tz = localTZ();
 
     function getForcast(timestamp) {
       if (!forecast) return "";
@@ -314,6 +327,8 @@ export async function addTideGaugesDE(map, preFetch = false) {
     }
     const table = `<table>\n${rows}</table>`;
     // log(table);
+    //
+    track("de");
     await marker
       .bindPopup(
         `<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${table}<div class="basevalues">${basevalues}</div><div class="forecast"><a href="${forecast_link}" target="_blank" class="${forecast_cls}">${forecast_text}</a></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`,
@@ -425,13 +440,7 @@ export async function addTideGaugesNL(map, kind = "astronomische-getij") {
           .then((data) => {
             log(data);
 
-            const tform = new Intl.DateTimeFormat(locale, {
-              timeZoneName: "short",
-            });
-            const parts = tform.formatToParts(now);
-            const tz = parts.find(
-              (part) => part.type === "timeZoneName",
-            )?.value;
+            const tz = localTZ();
 
             const extremes = data.series[0].extremes;
 
@@ -465,6 +474,7 @@ export async function addTideGaugesNL(map, kind = "astronomische-getij") {
               // log(table);
             } else table = `<div>${p.locationLabel} (NAP)</div>`;
 
+            track("nl");
             layer
               .bindPopup(
                 `<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div class="basevalues"></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`,
@@ -550,6 +560,7 @@ export async function addTideGaugesUK(map, preFetch = false) {
     const now0 = new Date();
     now0.setUTCHours(0, 0, 0, 0);
 
+    // const tz = localTZ();
     const tz = "UTC";
     const moon = 2;
 
@@ -584,13 +595,13 @@ export async function addTideGaugesUK(map, preFetch = false) {
       const height = e.height?.toFixed(1) + happrox;
       const moon = ldate1 < ts && ts < ldate2 ? phase : -1;
       approx = approx || tapprox || happrox;
-      rows += `<tr class="${type} ${when}"><td>${date}</td><td title="${ts}">${time}</td><td>${height}</td><td class="${phase} moon${moon}"></td></tr>\n`;
+      rows += `<tr class="${type} ${when}"><td>${date}</td><td title="${ts}">${time}</td><td>${height || ""}</td><td class="${phase} moon${moon}"></td></tr>\n`;
     });
 
     const table = `<table>\n${rows}</table>`;
     approx = approx ? "* approximated" : "";
     // log(table);
-
+    track("uk");
     await marker
       .bindPopup(
         `<div class="tides"><a target="_blank" href="https://easytide.admiralty.co.uk/?PortID=${ID}" class="stationname">${name}</a>${table}<div class="basevalues">above chart datum${approx}</div><div class="forecast">${note}</div><div id="plot"></div><div class="source">source <a target="_blank" href="https://easytide.admiralty.co.uk/">UKHO</a></div></div>`,
@@ -621,6 +632,131 @@ export async function addTideGaugesUK(map, preFetch = false) {
         })
           .bindPopup(
             `<a target="_blank" href="https://easytide.admiralty.co.uk/?PortID=${ID}">${name}</a>`,
+          )
+          .on("click", (e) => showPopup(e.target, f))
+          .addTo(layer);
+      });
+    })
+    .catch(log);
+
+  map.on("zoomend", () => {
+    if (map.getZoom() >= 8) {
+      if (!map.hasLayer(layer)) map.addLayer(layer);
+    } else {
+      if (map.hasLayer(layer)) map.removeLayer(layer);
+    }
+  });
+}
+
+export async function addTideGaugesFR(map, preFetch = false) {
+  const layer = L.layerGroup().addTo(map);
+
+  async function showPopup(marker, f) {
+    log(f);
+    const ID = f.properties.cst;
+    const name = f.properties.toponyme;
+    const today = new Date().toISOString().split("T")[0];
+    const data = await fetch(
+      `/tides/fr/b2q8lrcdl4s04cbabsj4nhcb/hdm/spm/hlt?harborName=${ID}&duration=2&date=${today}&utc=0&correlation=1`,
+    )
+      .then((r) => r.json())
+      .catch(log);
+    if (!data) return;
+    // log(data);
+
+    const events = [];
+    Object.entries(data).forEach(([k, v]) => {
+      // log(k, v);
+      v.forEach((e) => {
+        if (e[0].includes("none")) return;
+        events.push({
+          datetime: k + "T" + e[1] + "Z",
+          event: e[0].includes("high") ? "HW" : "LW",
+          height: parseFloat(e[2]),
+          coeff: e[3] == "---" ? null : parseInt(e[3]),
+        });
+      });
+    });
+
+    const now = new Date();
+    const tz = localTZ();
+
+    let date0;
+    let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th><th>coeff</th></tr>\n`;
+    events.forEach((e) => {
+      // log(e);
+      const ts = new Date(e.datetime);
+      const type = e.event;
+      const when = ts > now ? "future" : "past";
+      let date = ts
+        .toLocaleString(locale, {
+          month: "2-digit",
+          day: "2-digit",
+          weekday: "short", // year: 'numeric',
+        })
+        .replace(",", "");
+      if (date0 === date) date = "";
+      else date0 = date;
+      const time = ts.toLocaleString(locale, {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      const height = e.height?.toFixed(1);
+      rows += `<tr class="${type} ${when}"><td>${date}</td><td title="${ts}">${time}</td><td>${height}</td><td>${e.coeff || ""}</td></tr>\n`;
+    });
+
+    const table = `<table>\n${rows}</table>`;
+    // log(table);
+
+    track("fr");
+    await marker
+      .bindPopup(
+        `<div class="tides"><a target="_blank" href="https://maree.shom.fr/harbor/${ID}" class="stationname">${name}</a>${table}<div class="basevalues"></div><div class="forecast"></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://maree.shom.fr/">SHOM</a></div></div>`,
+      )
+      .openPopup();
+
+    const curve = await fetch(
+      `/tides/fr/b2q8lrcdl4s04cbabsj4nhcb/hdm/spm/wl?harborName=${ID}&duration=2&date=${today}&utc=0&nbWaterLevels=288`,
+    ).then((r) => r.json());
+    // log(curve);
+
+    if (!curve) return;
+
+    const curve1 = [];
+    Object.entries(curve).forEach(([k, v]) => {
+      // log(k, v);
+      v.forEach((e) => {
+        curve1.push({
+          datetime: k + "T" + e[0] + "Z",
+          height: e[1],
+        });
+      });
+    });
+
+    tidePlot([curve1.map((d) => d.datetime), curve1.map((d) => d.height)]);
+  }
+
+  fetch(
+    "/tides/fr/x13f1b4faeszdyinv9zqxmx1/wfs?service=WFS&version=1.0.0&srsName=EPSG:4326&request=GetFeature&typeName=SPM_PORTS_WFS:liste_ports_spm_h2m&outputFormat=application/json",
+  )
+    .then((r) => r.json())
+    .then((data) => {
+      // log(data);
+      data.features.forEach((f) => {
+        // log(f);
+        if (!f.properties.official) return;
+        const ID = f.properties.cst;
+        const name = f.properties.toponyme;
+        const [lon, lat] = f.geometry.coordinates;
+        let m = L.circleMarker([lat, lon], {
+          radius: 4,
+          weight: 3,
+          color: "purple",
+          fillColor: "white",
+          fillOpacity: 1,
+        })
+          .bindPopup(
+            `<a target="_blank" href="https://maree.shom.fr/harbor/${ID}">${name}</a>`,
           )
           .on("click", (e) => showPopup(e.target, f))
           .addTo(layer);
