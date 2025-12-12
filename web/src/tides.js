@@ -213,6 +213,7 @@ export async function addTideGauges(map) {
     // addTideGaugesNL(map, "waterhoogte"),
     addTideGaugesUK(map),
     addTideGaugesFR(map),
+    addTideGaugesBaltic(map),
   ]);
 }
 
@@ -776,3 +777,221 @@ export async function addTideGaugesFR(map, preFetch = false) {
     }
   });
 }
+
+export async function addTideGaugesBaltic(map) {
+  const layer = L.layerGroup().addTo(map);
+
+  gauges_baltic.forEach((g) => {
+    const name = g.id.charAt(0).toUpperCase() + g.id.slice(1);
+    L.circleMarker(g.pos, {
+      radius: 4,
+      weight: 3,
+      color: "blue",
+      fillColor: "gray",
+      fillOpacity: 1,
+    })
+      .bindPopup(
+        `<div class="tides"><a target="_blank" href="https://www.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/${g.id}" class="stationname">${name}<br />
+        <img src="/forecast/balt/${g.id}-wasserstand-mobile.png" style="max-width: 100%;" /></a>
+        <div id="plot">
+        <div class="source">source <a target="_blank" href="https://www.bsh.de/DE/DATEN/Vorhersagen/Wasserstand_Ostsee/wasserstand_ostsee_node.html">BSH</a></div>
+        </div>`,
+      )
+      .addTo(layer);
+  });
+
+  map.on("zoomend", () => {
+    if (map.getZoom() >= 8) {
+      if (!map.hasLayer(layer)) map.addLayer(layer);
+    } else {
+      if (map.hasLayer(layer)) map.removeLayer(layer);
+    }
+  });
+}
+
+const gauges_baltic = [
+  {
+    pos: [53.8436648730873, 13.858494243912],
+    id: "karnin",
+  },
+  {
+    pos: [53.750310387515, 14.0664775589393],
+    id: "ueckermuende",
+  },
+  {
+    pos: [54.3717574942496, 12.4189604829756],
+    id: "althagen",
+  },
+  {
+    pos: [54.4345393131129, 13.0322210328025],
+    id: "barhoeft",
+  },
+  {
+    pos: [54.1697309881668, 12.1033882570632],
+    id: "warnemuende",
+  },
+  {
+    pos: [54.3712205767312, 12.7232205648675],
+    id: "barth",
+  },
+  {
+    pos: [54.3056821786853, 13.1190147979804],
+    id: "stralsund",
+  },
+  {
+    pos: [54.2344610993266, 13.2897144931285],
+    id: "stahlbrode",
+  },
+  {
+    pos: [54.0417373644072, 13.7703795207791],
+    id: "wolgast",
+  },
+  {
+    pos: [54.5244936484629, 13.0935551573537],
+    id: "neuendorf",
+  },
+  {
+    pos: [54.5847664432537, 13.1113622406783],
+    id: "kloster",
+  },
+  {
+    pos: [54.5575935956121, 13.2451345829697],
+    id: "wittower-faehre",
+  },
+  {
+    pos: [54.3416033935843, 13.4996964003141],
+    id: "lauterbach",
+  },
+  {
+    pos: [54.5082930590658, 13.6366513556098],
+    id: "sassnitz",
+  },
+  {
+    pos: [54.280666589378, 13.7097569727335],
+    id: "thiessow",
+  },
+  {
+    pos: [54.2043478526933, 13.7719056374206],
+    id: "ruden",
+  },
+  {
+    pos: [54.2413133375738, 13.9072081427742],
+    id: "greifswalder-oie",
+  },
+  {
+    pos: [54.1078601243791, 13.8076220385415],
+    id: "karlshagen",
+  },
+  {
+    pos: [54.0603783352471, 14.0008229194429],
+    id: "koserow",
+  },
+  {
+    pos: [54.0977113519667, 13.4571529234706],
+    id: "greifswald-wieck",
+  },
+  {
+    pos: [54.795056780405, 9.43301766621292],
+    id: "flensburg",
+  },
+  {
+    pos: [54.8232672918699, 9.65414099231528],
+    id: "langballigau",
+  },
+  {
+    pos: [54.672736033682, 10.0366885843959],
+    id: "schleimuende",
+  },
+  {
+    pos: [53.9919967667161, 11.3756421426989],
+    id: "timmendorf-poel",
+  },
+  {
+    pos: [53.8987616054927, 11.4579177844637],
+    id: "wismar",
+  },
+  {
+    pos: [54.3729593653957, 11.0056641681444],
+    id: "heiligenhafen",
+  },
+  {
+    pos: [54.3720866822911, 10.1570496121807],
+    id: "kiel-holtenau",
+  },
+  {
+    pos: [54.4995887917968, 10.2732678650434],
+    id: "kiel-leuchtturm",
+  },
+  {
+    pos: [54.0965230966469, 10.8049878297893],
+    id: "neustadt",
+  },
+  {
+    pos: [54.4966302631479, 11.23887433814],
+    id: "marienleuchte",
+  },
+  {
+    pos: [54.6643839117666, 9.93793813426306],
+    id: "kappeln",
+  },
+  {
+    pos: [54.5114316939266, 9.56905851883919],
+    id: "schleswig",
+  },
+  {
+    pos: [54.474702770338, 9.83600726774434],
+    id: "eckernfoerde",
+  },
+  {
+    pos: [53.8930077557352, 10.7030650688505],
+    id: "luebeck",
+  },
+  {
+    pos: [53.9580237174946, 10.8721815274298],
+    id: "travemuende",
+  },
+  {
+    pos: [54.0830643023035, 12.1551089607214],
+    id: "rostock",
+  },
+  {
+    pos: [54.45899747, 12.57181925],
+    id: "prerow",
+  },
+  {
+    pos: [54.3722, 12.62228],
+    id: "bodstedt",
+  },
+  {
+    pos: [54.24741, 12.4669],
+    id: "ribnitz",
+  },
+  {
+    pos: [54.43144, 12.68975],
+    id: "zingst",
+  },
+  {
+    pos: [54.47516, 13.44748],
+    id: "ralswiek",
+  },
+  {
+    pos: [53.9805, 14.04969],
+    id: "pudagla",
+  },
+  {
+    pos: [53.75316, 14.02415],
+    id: "grambin",
+  },
+  {
+    pos: [54.226108, 11.090759],
+    id: "dahme-seebruecke",
+  },
+  {
+    pos: [54.336143, 10.645835],
+    id: "lippe",
+  },
+  {
+    pos: [54.535813, 9.642506],
+    id: "fuesing",
+  },
+];

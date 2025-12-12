@@ -123,6 +123,15 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/forecast\/de/, ""),
       },
+      "/forecast/balt": {
+        target: "https://www2.bsh.de",
+        changeOrigin: true,
+        rewrite: (path) =>
+          path.replace(
+            /^\/forecast\/balt/,
+            "/aktdat/wvd/ostsee/pegelkurve/de/figures",
+          ),
+      },
       "/tides/nl": {
         target: "https://waterinfo.rws.nl",
         changeOrigin: true,
