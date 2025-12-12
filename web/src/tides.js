@@ -797,6 +797,7 @@ export async function addTideGaugesBaltic(map) {
         <div class="source">source <a target="_blank" href="https://www.bsh.de/DE/DATEN/Vorhersagen/Wasserstand_Ostsee/wasserstand_ostsee_node.html">BSH</a></div>
         </div>`,
       )
+      .on("click", (e) => track("baltic"))
       .addTo(layer);
   });
 
