@@ -5,13 +5,6 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: [
-        "icon.svg",
-        "icon1.png",
-        "icon1m.png",
-        "icon5.png",
-        "icon5m.png",
-      ],
       manifest: {
         name: "freenauticalchart",
         short_name: "QMAP",

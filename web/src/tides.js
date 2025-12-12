@@ -71,6 +71,10 @@ export function addTidealAtlas(map, gauges = false) {
           if (l._url.includes(x)) {
             map.addLayer(l);
             l.bringToFront();
+            ackee.action("378af0c9-00ff-46c2-9eac-d16f2ad7bb36", {
+              key: "atlas",
+              value: 1,
+            });
           } else {
             map.removeLayer(l);
           }
