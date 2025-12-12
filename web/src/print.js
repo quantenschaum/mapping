@@ -23,10 +23,12 @@ export const PrintButton = L.Control.extend({
       const body = document.body;
       const cont = map.getContainer();
       b.addEventListener("click", () => {
-        ackee.action("4e923284-945c-45fd-97d6-4c0d351205ec", {
-          key: "print " + title,
-          value: 1,
-        });
+        if (!title.includes("reset")) {
+          ackee.action("4e923284-945c-45fd-97d6-4c0d351205ec", {
+            key: "print " + title,
+            value: 1,
+          });
+        }
         const cl = cont.classList;
         if (cls) {
           body.classList.add("print");
