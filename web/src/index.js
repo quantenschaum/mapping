@@ -283,18 +283,10 @@ const map = L.map("map", {
 
 if (!isStandalone) {
   showDialog({
-    title: "Free Nautical Chart",
-    text: `
-    <ul>
-      <li>What are the data sources?</li>
-      <li>Want to know more about this project?</li>
-      <li>Want to download these charts for your plotter?</li>
-      <li>How to print a chart?</li>
-      <li>What is the tidal atlas?</li>
-    </ul>
-    <a href="download/" style="font-size: 120%; font-weight: bold;">Find it out in the docs!</a>
-    <p>You find a link to the docs in the attribution in bottom right corner.</p>
-    `,
+    title: "FreeNauticalChart.net",
+    text: `<p>is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It uses official data that is available as opan data.</p>
+    <p>For more details and downloadable packages, <a href="download/">look into the docs</a></p>
+    <p style="font-size:0.5em;">(also available via the link in the attribution in lower right)</p>`,
   });
 }
 

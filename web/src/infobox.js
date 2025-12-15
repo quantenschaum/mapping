@@ -1,5 +1,6 @@
-import L from "leaflet";
 import "./infobox.less";
+
+const isDevMode = process.env.NODE_ENV === "development";
 
 function createElementFromHTML(htmlString) {
   const template = document.createElement("template");
@@ -25,12 +26,12 @@ function getSessionBoolCookie(name) {
 }
 
 export function showDialog(options = { title: "Title", text: "lorem ipsum" }) {
-  if (getSessionBoolCookie("infoshown")) return;
+  if (!isDevMode && getSessionBoolCookie("infoshown")) return;
   const el = createElementFromHTML(`
     <dialog class="modal">
       <form method="dialog">
         <h2>${options.title}</h2>
-        <p>${options.text}</p>
+        ${options.text}
         <button id="closebutton">Close</button>
       </form>
     </dialog>
