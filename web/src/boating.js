@@ -254,8 +254,8 @@ L.Control.Boating = L.Control.extend({
     const bounds = this._map.getBounds();
     const sw = bounds.getSouthWest();
     const ne = bounds.getNorthEast();
-    const f =
-      (Math.min((speed * 3600) / 1852 / this.options.shiftSpeed, 1) / 2) * 0.7;
+    const f = 0;
+    // (Math.min((speed * 3600) / 1852 / this.options.shiftSpeed, 1) / 2) * 0.7;
     const width = (ne.lng - sw.lng) * f;
     const height = (ne.lat - sw.lat) * f;
     console.log(sw, ne, width, height, heading);
