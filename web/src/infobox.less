@@ -14,4 +14,14 @@ dialog {
   border: 2px solid gray;
   border-radius: 1em;
   width: 40em;
+  overflow: hidden;
+
+  img:first-child {
+    margin: -1em;
+    border-bottom: 1px solid black;
+  }
+}
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
 }

@@ -283,10 +283,11 @@ const map = L.map("map", {
 
 if (!isStandalone) {
   showDialog({
+    img: "helgoland.png",
     title: "FreeNauticalChart.net",
-    text: `<p>is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It uses official data that is available as opan data.</p>
-    <p>For more details and downloadable packages, <a href="download/">look into the docs</a></p>
-    <p style="font-size:0.5em;">(also available via the link in the attribution in lower right)</p>`,
+    text: `<p>is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It uses official data that is available as open data.</p>
+    <p>For more details and downloadable packages, <a href="download/">look into the docs</a>!</p>
+    <p style="font-size:0.5em;">(The docs also accessible via the link in the attribution in lower right.)</p>`,
   });
 }
 
