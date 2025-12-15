@@ -23,7 +23,7 @@ import { addVectorLayer } from "./vector";
 import { addWattSegler } from "./wattsegler";
 import "./boating";
 import { registerSW } from "virtual:pwa-register";
-import { InfoBox } from "./infobox";
+import { showDialog } from "./infobox";
 import { ackee } from "./ackee";
 
 const params = new URLSearchParams(window.location.search);
@@ -282,10 +282,20 @@ const map = L.map("map", {
 });
 
 if (!isStandalone) {
-  new InfoBox({
-    text: '<div style="font-size: 120%;"><div style="font-size: 150%; font-weight: bold; color: blue;">The Free Nautical Chart</div><ul><li>Want to know more about this project?</li><li>What are the data sources?</li><li>Want to download these charts for your plotter?</li><li>How to print a chart?</li><li>What is the tidal atlas?</li></ul><a href="download/" style="font-size: 120%; font-weight: bold; color: red;">Find it out in the docs!</a></div>',
-    timeout: 30,
-  }).addTo(map);
+  showDialog({
+    title: "Free Nautical Chart",
+    text: `
+    <ul>
+      <li>What are the data sources?</li>
+      <li>Want to know more about this project?</li>
+      <li>Want to download these charts for your plotter?</li>
+      <li>How to print a chart?</li>
+      <li>What is the tidal atlas?</li>
+    </ul>
+    <a href="download/" style="font-size: 120%; font-weight: bold;">Find it out in the docs!</a>
+    <p>You find a link to the docs in the attribution in bottom right corner.</p>
+    `,
+  });
 }
 
 const SteplessControl = L.Control.extend({

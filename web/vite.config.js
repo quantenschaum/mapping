@@ -113,6 +113,10 @@ export default defineConfig({
         target: "https://freenauticalchart.net",
         changeOrigin: true,
       },
+      "^/updated$": {
+        target: "https://freenauticalchart.net",
+        changeOrigin: true,
+      },
       "/tides/de": {
         target: "https://gezeiten.bsh.de",
         changeOrigin: true,
