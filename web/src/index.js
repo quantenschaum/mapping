@@ -288,6 +288,7 @@ if (!isStandalone) {
     text: `<p>is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It uses official data that is available as open data.</p>
     <p>For more details and downloadable packages, <a href="download/">look into the docs</a>!</p>
     <p style="font-size:0.5em;">(The docs also accessible via the link in the attribution in lower right.)</p>`,
+    button: "Take me to the chart!",
   });
 }
 
@@ -557,26 +558,4 @@ if (isSet("zones")) {
   })();
 } else {
   restoreLayers(layers, params.get("l"));
-}
-
-async function requestWakeLock() {
-  try {
-    if ("wakeLock" in navigator) {
-      const wakeLock = await navigator.wakeLock.request("screen");
-      console.log("Wake Lock is active");
-
-      // Listen for release (e.g., system or user action)
-      wakeLock.addEventListener("release", () => {
-        console.log("Wake Lock was released");
-      });
-    } else {
-      console.warn("Wake Lock API not supported in this browser.");
-    }
-  } catch (err) {
-    console.error(`Failed to acquire Wake Lock: ${err.name}, ${err.message}`);
-  }
-}
-
-if (isDevMode || isStandalone) {
-  requestWakeLock();
 }
