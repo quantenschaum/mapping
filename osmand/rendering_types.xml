@@ -6889,7 +6889,6 @@
     <entity_convert pattern="tag_transform" from_tag="seamark:notice:1:addition" to_tag1="seamark:notice:addition"/>
     <entity_convert pattern="tag_transform" from_tag="seamark:notice:1:orientation" to_tag1="seamark:notice:orientation"/>
     <entity_convert pattern="tag_transform" from_tag="seamark:notice:1:impact" to_tag1="seamark:notice:impact"/>
-    <entity_convert pattern="tag_transform" from_tag="seamark:notice:1:direction" to_tag1="seamark:notice:impact"/>
     <type tag="seamark:notice:2:function" minzoom="13" additional="true"/>
     <type tag="seamark:mooring:category" minzoom="13" additional="true"/>
     <type tag="seamark:mooring:colour" minzoom="13" additional="true"/>
@@ -6909,9 +6908,7 @@
     <type tag="seamark:restricted_area:category" minzoom="10" additional="true"/>
     <entity_convert pattern="tag_transform" from_tag="seamark:restricted_area:category" from_value="foul_ground" to_tag1="seamark:type" to_value1="obstruction" to_tag2="seamark:obstruction:category" to_value2="foul_ground"/>
     <entity_convert pattern="tag_transform" from_tag="seamark:restricted_area:category" from_value="military_area" to_tag1="seamark:restricted_area:category" to_value1="military"/>
-    <entity_convert pattern="tag_transform" from_tag="seamark:restricted_area:category" from_value="waterskiing" to_tag1="seamark:restricted_area:category" to_value1="water_skiing"/>
     <type tag="seamark:restricted_area:restriction" minzoom="10" additional="true"/>
-    <entity_convert pattern="tag_transform" from_tag="seamark:restricted_area:restriction" from_value="restricted fairway depth" to_tag1="seamark:restricted_area:restriction" to_value1="restricted_fairway_depth"/>
     <entity_convert pattern="tag_transform" from_tag="seamark:restricted_area:restriction" from_value="berthing prohibited" to_tag1="seamark:restricted_area:restriction" to_value1="no_berthing"/>
     <entity_convert pattern="tag_transform" from_tag="seamark:restricted_area:restriction" from_value="berthing restricted" to_tag1="seamark:restricted_area:restriction" to_value1="restricted_berthing"/>
     <entity_convert pattern="tag_transform" from_tag="seamark:restricted_area:restriction" from_value="no_making_fast" to_tag1="seamark:restricted_area:restriction" to_value1="restricted_speed"/>
