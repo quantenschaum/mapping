@@ -45,7 +45,7 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
 Vectorkaarten en stijlen voor OsmAnd kunnen geïnstalleerd worden door simpelweg het `obf` of `xml` bestand te openen met de OsmAnd app. Het bestand wordt dan automatisch geïmporteerd en gebruikt als onderdeel van de “offline vectorkaart”.
 
 - [:de: Dieptegegevens DE](depth-de.obf){:download}
-- [:de: Dieptegegevens DE](depth+de.obf){:download} (volledige resolutie)
+- [:de: Dieptegegevens DE (volledige resolutie)](depth+de.obf){:download}
 - [:nl: Dieptegegevens NL](depth-nl.obf){:download}
 - [:globe_with_meridians: Lichtsectoren wereldwijd](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
