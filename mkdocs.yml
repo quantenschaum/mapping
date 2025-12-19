@@ -53,7 +53,7 @@ theme:
     - search.highlight
 
 copyright: |
-  &#x1F12F; quantenschaum - <a href="/download/legal/">Impressum / Datenschutz / Haftungsauschluss</a>
+  <a href="/download/legal/">Impressum / Datenschutz / Haftungsauschluss</a> - &#x1F12F; quantenschaum
   <script src="/tracker.js" data-ackee-server="/" data-ackee-domain-id="36783494-ed32-40a5-9404-1d429fb6d4b8" data-ackee-opts='{ "detailed": true }'></script>
   <script>
   const ackee=ackeeTracker.create('/');

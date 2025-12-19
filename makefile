@@ -376,11 +376,6 @@ lightsectors.obf:
 
 depth-de.obf:
 	rm -rf obf
-# 	rm -rf osm && mkdir -p osm
-# 	cp data/depth-de-6.osm osm
-# 	$(MAKE) obf
-# 	cp obf/depth-de-6.obf charts/$@
-
 	rm -rf osm && mkdir -p osm
 	cp data/depth-de-2.osm osm
 	$(MAKE) obf BLEVEL=0
@@ -396,6 +391,16 @@ depth-de.obf:
 	rm -rf osm && mkdir -p osm
 	cp data/depth-de-6.osm osm
 	$(MAKE) obf BLEVEL=3
+
+	mkdir -p charts
+	data/omc/inspector.sh -c charts/$@ obf/*.obf
+
+depth+de.obf:
+	rm -rf obf
+	rm -rf osm && mkdir -p osm
+	cp data/depth-de-6.osm osm
+	$(MAKE) obf
+	cp obf/depth-de-6.obf charts/$@
 
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/$@ obf/*.obf

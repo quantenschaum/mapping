@@ -82,7 +82,7 @@ Diese Webseite verwendet Tracking in Form eines eigenen [Ackee](https://ackee.el
 
 ### 6. Cookies
 
-Diese Webseite verwendet selbst keine Cookies. Der eingesetzte Cloudflare-Proxy nutzt jedoch Cookies, unter anderem zum Zweck der Botabwehr.
+Diese Webseite verwendet selbst keine persistenten Cookies. Der eingesetzte Cloudflare-Proxy nutzt jedoch Cookies, unter anderem zum Zweck der Botabwehr.
 
 ### 7. Ihre Rechte
 

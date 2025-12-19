@@ -45,16 +45,24 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
 Vektorkarten und Stile für OsmAnd können durch einfaches Öffnen der `obf`- oder `xml`-Datei mit der OsmAnd-App installiert werden. Die Datei wird dann automatisch importiert und als Teil des „Offline-Vektordiagramms“ verwendet. 
 
 - [:de: Tiefendaten DE](depth-de.obf){:download}
+- [:de: Tiefendaten DE](depth+de.obf){:download} (volle Auflösung)
 - [:nl: Tiefendaten NL](depth-nl.obf){:download}
 - [:globe_with_meridians: Feuersektoren, weltweit](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
 - [:de: QMAP DE (Seezeichen)*](qmap-de.obf){:download}
 
+!!! failure "Marine Rendering Style verwenden!"
+    Die Vektorkarte wird ohne den Marine Rendering Style und Renderengine 2 (OpenGL) nicht korrekt dargestellt!  
+    **Die Darstellung funktioniert ausschließlich mit dem Marine Rendering Style!**
+
+!!! info "Depth DE Varianten"
+    Die Depth DE OBF-Dateien sind in zwei Varianten verfügbar.  
+
+    - **Standard-Version**: Die Auflösung der Tiefenkonturen variiert je nach Zoomstufe (usange band)
+    - **Volle Auflösung**: Vollständige Auflösung auf allen Zoomstufen (höchstes verfügbares usage band)
+  
 !!! warning "* QMAP DE"
     Die QMAP DE Vektorkarte enthält Seezeichen, Felsen und andere punktförmige Objekte. Sie ist dafür gedacht, *anstelle* der OSM-Daten verwendet zu werden, nicht in Kombination mit ihnen. Wenn Sie beide aktivieren, erhalten Sie doppelte Objekte, was verwirrend sein kann.
-
-!!! warning "Rendering Style"
-    Die Vektorkarte wird ohne den Rendering-Stil „Marine“ und die Render-Engine 2 (OpenGL) nicht korrekt dargestellt!
 
 ### Raster-Karten
 

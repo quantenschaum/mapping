@@ -45,16 +45,24 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
 Vectorkaarten en stijlen voor OsmAnd kunnen geïnstalleerd worden door simpelweg het `obf` of `xml` bestand te openen met de OsmAnd app. Het bestand wordt dan automatisch geïmporteerd en gebruikt als onderdeel van de “offline vectorkaart”.
 
 - [:de: Dieptegegevens DE](depth-de.obf){:download}
+- [:de: Dieptegegevens DE](depth+de.obf){:download} (volledige resolutie)
 - [:nl: Dieptegegevens NL](depth-nl.obf){:download}
 - [:globe_with_meridians: Lichtsectoren wereldwijd](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
 - [:de: QMAP DE (zeeteken)*](qmap-de.obf){:download}
 
+!!! failure "Gebruik de Marine Rendering Style!"
+    De vectorkaart wordt niet correct weergegeven zonder de Marine Rendering Style en render engine 2 (OpenGL)!  
+    **Het werkt alleen bij gebruik van de Marine Rendering Style!**
+
+!!! info "Diepte DE varianten"
+    De Depth DE OBF-bestanden zijn er in twee varianten.
+
+    - **standaard versie**: resolutie van de dieptelijnen hangt af van het zoomniveau (usage band)
+    - **volledige resolutie**: volledige resolutie op alle zoomniveaus (hoogste beschikbare usage band)
+  
 !!! warning "* QMAP DE"
     De QMAP DE vectorkaart bevat zeeteken, rotsen en andere puntvormige objecten. Deze kaart is bedoeld om te gebruiken *in plaats van* de OSM-gegevens, niet in combinatie ermee. Als je beide activeert, krijg je dubbele objecten, wat verwarrend kan zijn.
-
-!!! warning "Weergavestijl"
-    De vectorkaart wordt niet goed weergegeven zonder de maritieme renderstijl en renderengine 2 (OpenGL)!
 
 ### Rasterkaarten
 

@@ -97,16 +97,20 @@ for u in range(1,7):
     print(f'uband {u}')
     select_uband(u)
     if u>1:
+        # cut holes into previous layers at current uband coverage
         a1=diff(a,coverage,f'a{u}*')
         c1=diff(c,coverage,f'c{u}*')
         #s1=diff(s,coverage,f's{u}*')
+        # fill in data from current uband
         a=merge(a1,depthareas,f'a{u}')
         c=merge(c1,contours,f'c{u}')
+        #s=merge(s1,soundings,f's{u}')
         s=merge(soundings,None,f's{u}')
     else:
+        # start with whole layer at uband=1
         a=merge(a,None,f'a{u}')
         c=merge(c,None,f'c{u}')
-        s=merge(soundings,None,f's{u}')
+        s=merge(s,None,f's{u}')
     gpkg=f'{datadir}/depth-de-{u}.gpkg'
     strip_fields(a)
     strip_fields(c)

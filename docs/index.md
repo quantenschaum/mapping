@@ -45,16 +45,24 @@ Here you find precompiled charts for download in various formats usable in diffe
 Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". 
 
 - [:de: Depth Data DE](depth-de.obf){:download}
+- [:de: Depth Data DE](depth+de.obf){:download} (full resolution)
 - [:nl: Depth Data NL](depth-nl.obf){:download}
 - [:globe_with_meridians: Light Sectors Worldwide](lightsectors.obf){:download}
-- [:material-xml: Marine Rendering Style](marine.render.xml){:download}
+- [:material-xml: Marine Rendering Style](marine.render.xml){:download} (**important!**)
 - [:de: QMAP DE (nav aids)*](qmap-de.obf){:download}
 
+!!! failure "Use the Marine Rendering Style!"
+    The vector chart will not be rendered properly without the marine rendering style and render engine 2 (OpenGL)!  
+    **It will only work when using the Marine Rendering Style!**
+
+!!! info "Depth DE variants"
+    The Depth DE OBFs come in two flavours.  
+  
+    - **standard version**: resolution of contours depends on the zoom level (usage band)
+    - **full resolution**: full resolution at all zoom levels (highest usage band available)
+  
 !!! warning "* QMAP DE"
     The QMAP DE vector chart contains navaids, rocks and other point like objects. It is meant to be used *instead* of the OSM data, not in combination with it. If you activate both, you will get duplicate objects, which can be confusing.
-
-!!! warning "Rendering Style"
-    The vector chart will not be rendered properly without the marine rendering style and render engine 2 (OpenGL)!
 
 ### Raster Charts
 
