@@ -195,8 +195,12 @@ www/%/: charts/%.mbtiles charts/%.png.mbtiles
 	cp www/map.html $@/index.html
 	chmod +rX -R $@
 
-www/%.pmtiles: charts/%.mbtiles
+www/%.pmtiles: charts/%.mbtiles pmtiles
 	go-pmtiles convert $< $@
+
+pmtiles:
+	git clone https://github.com/protomaps/go-pmtiles.git $@
+	cd $@ && go build
 
 data/chartconvert:
 	mkdir -p data
@@ -408,7 +412,3 @@ depth+de.obf:
 
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/$@ obf/*.obf
-
-pmtiles:
-	git clone https://github.com/protomaps/go-pmtiles.git $@
-	cd $@ && go build
