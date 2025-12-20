@@ -479,7 +479,7 @@ if (isStandalone || params.get("tides")) {
 if (params.get("bfs")) {
   addBfS(map, params.get("bfs") == "1");
 }
-if (params.get("nfs")) {
+if (params.get("nfs") == "1") {
   addNfS(map);
 }
 
