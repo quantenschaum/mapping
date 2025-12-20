@@ -109,7 +109,11 @@ export default defineConfig({
     // https: true,
     headers: { "Cache-Control": "no-cache, no-store, must-revalidate" },
     proxy: {
-      "^/(qmap-de|qmap-nl|download)/.*": {
+      "^/(qmap-de|qmap-nl|download|bfs|nfs)/.*": {
+        target: "https://freenauticalchart.net",
+        changeOrigin: true,
+      },
+      "^.*\.pmtiles$": {
         target: "https://freenauticalchart.net",
         changeOrigin: true,
       },

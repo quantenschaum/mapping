@@ -3,7 +3,7 @@
 # https://www.teledynecaris.com/s-57/frames/S57catalog.htm
 
 SHELL=/bin/bash
-export PATH:=$(PWD)/scripts:$(PWD)/spreet/target/release:$(PWD)/tippecanoe:$(PATH)
+export PATH:=$(PWD)/scripts:$(PWD)/spreet/target/release:$(PWD)/tippecanoe:$(PWD)/pmtiles:$(PATH)
 export OGR_S57_OPTIONS=LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON
 # export S57_CSV="$(PWD)/scripts"
 
@@ -195,6 +195,9 @@ www/%/: charts/%.mbtiles charts/%.png.mbtiles
 	cp www/map.html $@/index.html
 	chmod +rX -R $@
 
+www/%.pmtiles: charts/%.mbtiles
+	go-pmtiles convert $< $@
+
 data/chartconvert:
 	mkdir -p data
 	wget -O data/avnav.zip https://github.com/wellenvogel/avnav/archive/refs/heads/master.zip
@@ -204,7 +207,8 @@ data/chartconvert:
 charts/%.gemf: charts/%.mbtiles data/chartconvert
 	data/chartconvert/convert_mbtiles.py tms $@ $<
 
-tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles))
+tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles)) \
+       $(patsubst cache_data/%.mbtiles,www/%.pmtiles,$(wildcard cache_data/*.mbtiles))
 	touch www/updated
 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
@@ -404,3 +408,7 @@ depth+de.obf:
 
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/$@ obf/*.obf
+
+pmtiles:
+	git clone https://github.com/protomaps/go-pmtiles.git $@
+	cd $@ && go build

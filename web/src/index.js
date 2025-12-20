@@ -25,6 +25,9 @@ import "./boating";
 import { registerSW } from "virtual:pwa-register";
 import { showDialog } from "./infobox";
 import { ackee } from "./ackee";
+import { addTidealAtlas, addTideGauges } from "./tides";
+import { addBfS, addNfS } from "./bfs";
+import { PMTiles, leafletRasterLayer } from "pmtiles";
 
 const params = new URLSearchParams(window.location.search);
 const isDevMode = process.env.NODE_ENV === "development";
@@ -150,6 +153,30 @@ const overlays = {
     },
   ),
 };
+
+if (isDevMode || params.get("pm") == "1") {
+  let pm = {
+    "🇩🇪 QMAP DE (pmtiles)": leafletRasterLayer(
+      new PMTiles("/qmap-de.pmtiles"),
+      {
+        attribution:
+          '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
+        bounds: boundsDE,
+        crossOrigin: cors,
+      },
+    ),
+    "🇳🇱 QMAP NL (pmtiles)": leafletRasterLayer(
+      new PMTiles("/qmap-nl.pmtiles"),
+      {
+        attribution:
+          '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
+        bounds: boundsNL,
+        crossOrigin: cors,
+      },
+    ),
+  };
+  Object.assign(overlays, pm);
+}
 
 if (isDevMode) {
   overlays["QMAP DE*"] = L.tileLayer(
@@ -441,14 +468,19 @@ if (isSet("gpx")) {
   );
 }
 
-import { addTidealAtlas, addTideGauges } from "./tides";
-
 addTidealAtlas(map);
 if (isStandalone || params.get("tides")) {
   addTideGauges(map);
   if (params.get("tides") == "2") {
     addWattSegler(map);
   }
+}
+
+if (params.get("bfs")) {
+  addBfS(map, params.get("bfs") == "1");
+}
+if (params.get("nfs")) {
+  addNfS(map);
 }
 
 legend(layers);
