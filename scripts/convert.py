@@ -23,11 +23,12 @@ from functools import partial
 from rich.console import Console
 from rich.progress import track
 from rich.traceback import install
-console=Console()
-if console.is_terminal:
-  print=console.log
-  track=partial(track,console=console)
-  install()
+from rich import print
+# console=Console()
+# if console.is_terminal:
+#   print=console.log
+#   track=partial(track,console=console)
+#   install()
 
 def main():
     parser = ArgumentParser(
@@ -38,6 +39,7 @@ def main():
     parser.add_argument("input", help="input files", nargs="*")
     parser.add_argument("output", help="output file")
     parser.add_argument("-f", "--force", action="store_true", help="overwrite output")
+    parser.add_argument("-C", "--reencode", action="store_true", help="reencode tiles")
     parser.add_argument("-a", "--append", action="store_true", help="append to output")
     # parser.add_argument("-t", "--time", action="store_true", help="add time column")
     parser.add_argument("-z", "--min-zoom", type=int, help="min zoom level", default=5)
@@ -240,7 +242,8 @@ def img2bytes(img,format="png",**kwargs):
     return b.read()
 
 
-def recode(tile,format,transparent=None):
+def recode(tile,format,transparent=None,reencode=False):
+    'reencode tile in given format, optionally make `transparent` color transparent'
     assert format or not transparent, 'need format when setting transparency'
     if not format: return tile
     if format=="jpg": format="jpeg"
@@ -248,8 +251,10 @@ def recode(tile,format,transparent=None):
         assert format!='jpeg', 'jpeg does not support transparency'
         transparent=ImageColor.getcolor('#'+transparent,'RGB')
     with Image.open(BytesIO(tile)) as img:
-        if not transparent and img.format==format.upper(): return tile
+        if not transparent and img.format==format.upper() and not reencode:
+          return tile
         # print(img.format,img.size,img.info)
+        img=img.convert("RGB")
         if img.mode!="RGBA" and "transparency" in img.info:
             img=img.convert("RGBA")
         if transparent:
@@ -263,6 +268,7 @@ def recode(tile,format,transparent=None):
 
 
 def make_transparent(img,col):
+    'make color `col` transparent'
     import numpy as np
     if img.mode!='RGBA': img=img.convert("RGBA")
     data = np.array(img)   # "data" is a height x width x 4 numpy array
@@ -354,7 +360,7 @@ def mbtiles2mbtiles(inputs, output, args):
                 y = 2**z - 1 - y
             if skip(z, x, -y, row[3], args):
                 continue
-            tile=recode(row[3],format,args.transparent)
+            tile=recode(row[3],format,args.transparent,args.reencode)
             b += len(tile)
             update_bbox(bbox,z,x,-y)
             dcur.execute(
@@ -434,7 +440,7 @@ def mbtiles2sqlitedb(inputs, output, args):
                 y = 2**z - 1 - y
             if skip(z, x, -y, row[3], args):
                 continue
-            tile=recode(row[3],format,args.transparent)
+            tile=recode(row[3],format,args.transparent,args.reencode)
             b += len(tile)
             data = [x, y, z, 0, sqlite3.Binary(tile)]
             if timecol:
@@ -473,7 +479,7 @@ def mbtiles2dir(inputs, output, args):
                 y = 2**z - 1 - y
             if skip(z, x, -y, row[3], args):
                 continue
-            tile=recode(row[3],format,args.transparent)
+            tile=recode(row[3],format,args.transparent,args.reencode)
             b += len(tile)
             dir = f"{output}/{z}/{x}"
             makedirs(dir, exist_ok=1)
@@ -521,7 +527,7 @@ def dir2mbtiles(inputs, output, args):
                 # print(f, z, x, y, len(tile), lat_lon(z, x, y))
                 if skip(z, x, y, tile, args):
                     continue
-                tile=recode(tile,format,args.transparent)
+                tile=recode(tile,format,args.transparent,args.reencode)
                 b += len(tile)
                 if not args.invert_y:
                     y = 2**z - 1 - y
