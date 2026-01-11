@@ -40,6 +40,7 @@ def main():
     parser.add_argument("output", help="output file")
     parser.add_argument("-f", "--force", action="store_true", help="overwrite output")
     parser.add_argument("-C", "--reencode", action="store_true", help="reencode tiles")
+    parser.add_argument("-O", "--remove-transparency", action="store_true", help="remove transparency")
     parser.add_argument("-a", "--append", action="store_true", help="append to output")
     # parser.add_argument("-t", "--time", action="store_true", help="add time column")
     parser.add_argument("-z", "--min-zoom", type=int, help="min zoom level", default=5)
@@ -242,8 +243,9 @@ def img2bytes(img,format="png",**kwargs):
     return b.read()
 
 
-def recode(tile,format,transparent=None,reencode=False):
-    'reencode tile in given format, optionally make `transparent` color transparent'
+def recode(tile,format,args):
+    'reencode tile in given format'
+    transparent=args.transparent
     assert format or not transparent, 'need format when setting transparency'
     if not format: return tile
     if format=="jpg": format="jpeg"
@@ -251,10 +253,11 @@ def recode(tile,format,transparent=None,reencode=False):
         assert format!='jpeg', 'jpeg does not support transparency'
         transparent=ImageColor.getcolor('#'+transparent,'RGB')
     with Image.open(BytesIO(tile)) as img:
-        if not transparent and img.format==format.upper() and not reencode:
+        if not transparent and img.format==format.upper() and not args.reencode:
           return tile
         # print(img.format,img.size,img.info)
-        img=img.convert("RGB")
+        if args.remove_transparency:
+            img=img.convert("RGB")
         if img.mode!="RGBA" and "transparency" in img.info:
             img=img.convert("RGBA")
         if transparent:
@@ -264,6 +267,7 @@ def recode(tile,format,transparent=None,reencode=False):
         if img.mode=="RGBA" and img.getextrema()[3][0]==255:
             img=img.convert("RGB") # remove unused transparency
         # print(img.format,"->",format,len(tile),len(img2bytes(img,format,**kwargs)))
+        # print(img.info,img.mode)
         return img2bytes(img,format)
 
 
@@ -360,7 +364,7 @@ def mbtiles2mbtiles(inputs, output, args):
                 y = 2**z - 1 - y
             if skip(z, x, -y, row[3], args):
                 continue
-            tile=recode(row[3],format,args.transparent,args.reencode)
+            tile=recode(row[3],format,args)
             b += len(tile)
             update_bbox(bbox,z,x,-y)
             dcur.execute(
@@ -440,7 +444,7 @@ def mbtiles2sqlitedb(inputs, output, args):
                 y = 2**z - 1 - y
             if skip(z, x, -y, row[3], args):
                 continue
-            tile=recode(row[3],format,args.transparent,args.reencode)
+            tile=recode(row[3],format,args)
             b += len(tile)
             data = [x, y, z, 0, sqlite3.Binary(tile)]
             if timecol:
@@ -479,7 +483,7 @@ def mbtiles2dir(inputs, output, args):
                 y = 2**z - 1 - y
             if skip(z, x, -y, row[3], args):
                 continue
-            tile=recode(row[3],format,args.transparent,args.reencode)
+            tile=recode(row[3],format,args)
             b += len(tile)
             dir = f"{output}/{z}/{x}"
             makedirs(dir, exist_ok=1)
@@ -527,7 +531,7 @@ def dir2mbtiles(inputs, output, args):
                 # print(f, z, x, y, len(tile), lat_lon(z, x, y))
                 if skip(z, x, y, tile, args):
                     continue
-                tile=recode(tile,format,args.transparent,args.reencode)
+                tile=recode(tile,format,args)
                 b += len(tile)
                 if not args.invert_y:
                     y = 2**z - 1 - y
