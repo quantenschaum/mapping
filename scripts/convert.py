@@ -76,6 +76,7 @@ def main():
         help="set inverted y flag for sqlitedb (sets flag only, -y causes actual inversion)",
     )
     parser.add_argument("-F","--format", help="tile format for mbtiles")
+    parser.add_argument("-I","--indexed", help="used indexed palette 256 color",action='store_true')
     parser.add_argument(
         "-e",
         "--elliptic",
@@ -253,7 +254,7 @@ def recode(tile,format,args):
         assert format!='jpeg', 'jpeg does not support transparency'
         transparent=ImageColor.getcolor('#'+transparent,'RGB')
     with Image.open(BytesIO(tile)) as img:
-        if not transparent and img.format==format.upper() and not args.reencode:
+        if img.format==format.upper() and not transparent and not args.reencode and not args.indexed:
           return tile
         # print(img.format,img.size,img.info)
         if args.remove_transparency:
@@ -266,6 +267,8 @@ def recode(tile,format,args):
             img=img.convert("RGB")
         if img.mode=="RGBA" and img.getextrema()[3][0]==255:
             img=img.convert("RGB") # remove unused transparency
+        if args.indexed:
+          img=img.quantize(colors=256)
         # print(img.format,"->",format,len(tile),len(img2bytes(img,format,**kwargs)))
         # print(img.info,img.mode)
         return img2bytes(img,format)
