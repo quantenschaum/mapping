@@ -183,7 +183,7 @@ charts/%.mbtiles: cache_data/%.mbtiles
 
 charts/%.png.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fpng #$(TRANSPARENT)
+	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -IFpng #$(TRANSPARENT)
 
 charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts
