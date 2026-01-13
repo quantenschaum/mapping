@@ -6,7 +6,7 @@
   "sources": {
     "bsh": {
       "type": "vector",
-      "tiles": ["https://freenauticalchart.net/pbf/{z}/{x}/{y}.pbf"],
+      "url": "pmtiles://https://freenauticalchart.net/vector.pmtiles",
       "minzoom": 6,
       "maxzoom": 16,
       "attribution": "<a href=\"https://freenauticalchart.net/download/\">QMAP</a>"

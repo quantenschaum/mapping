@@ -24,6 +24,9 @@ async function mergeStyles(styleUrl1, styleUrl2) {
   return mergedStyle;
 }
 
+const protocol = new pmtiles.Protocol();
+maplibregl.addProtocol('pmtiles', protocol.tile);
+
 mergeStyles('https://api.maptiler.com/maps/openstreetmap/style.json?key=L8FrrrJGE2n415wJo8BL', style)
   .then(mergedStyle => {
     const map = new maplibregl.Map({
