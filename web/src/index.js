@@ -132,13 +132,13 @@ const overlays = {
         '<a target="_blank" href="https://emodnet.ec.europa.eu/">EMODnet</a>',
     })
     .on("add", addClass("invert")),
-  "🇩🇪 QMAP DE": L.tileLayer.fallback(baseurl + "/qmap-de/{z}/{x}/{y}.png", {
+  "🇩🇪 QMAP DE": L.tileLayer.fallback(baseurl + "/qmap-de/{z}/{x}/{y}", {
     attribution:
       '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
     bounds: boundsDE,
     crossOrigin: cors,
   }),
-  "🇳🇱 QMAP NL": L.tileLayer.fallback(baseurl + "/qmap-nl/{z}/{x}/{y}.png", {
+  "🇳🇱 QMAP NL": L.tileLayer.fallback(baseurl + "/qmap-nl/{z}/{x}/{y}", {
     attribution:
       '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
     bounds: boundsNL,
