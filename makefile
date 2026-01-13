@@ -209,7 +209,6 @@ tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles)) 
 	touch www/updated
 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
-        $(patsubst cache_data/%.mbtiles,charts/%.png.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles))
 #         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
@@ -233,7 +232,7 @@ www:
 	chmod +rX -R www
 
 %.tiles.zip:
-	cd www && zip - -q -r $(patsubst %.tiles.zip,%/,$@) -x '*.png' >../charts/$@
+	cd www && zip - -q -r $(patsubst %.tiles.zip,%/,$@) -x '*.webp' >../charts/$@
 
 qmap-data.zip:
 	rm -f charts/$@
