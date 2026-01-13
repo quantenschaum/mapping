@@ -78,7 +78,7 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: /\.(webp|pbf|json)$/,
+            urlPattern: /\.(png|webp|pbf|json)$/,
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "tiles",
