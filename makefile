@@ -109,8 +109,8 @@ sprites: icons
 	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 2/g' www/icons@2x.json -i
 
 vector:
-	rm -f www/vector.pmtiles
-	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/filtered/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9]], ["all",["==","uband",3],["in","$$zoom",10,11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]],        ["all",["has","MARSYS"], ["any", ["all",["==","uband",2],["<=","$$zoom",8]], ["all",["==","uband",3],["in","$$zoom",9]], ["all",["==","uband",4],["in","$$zoom",10,11]], ["all",["==","uband",5],["in","$$zoom",12,13]], ["all",["==","uband",6],["in","$$zoom",14,15]]] ] ]}' --no-tile-compression -x lnam -o www/vector.pmtiles
+	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/filtered/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9]], ["all",["==","uband",3],["in","$$zoom",10,11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]],        ["all",["has","MARSYS"], ["any", ["all",["==","uband",2],["<=","$$zoom",8]], ["all",["==","uband",3],["in","$$zoom",9]], ["all",["==","uband",4],["in","$$zoom",10,11]], ["all",["==","uband",5],["in","$$zoom",12,13]], ["all",["==","uband",6],["in","$$zoom",14,15]]] ] ]}' --no-tile-compression -x lnam -o vector.pmtiles -f
+	mv -v vector.pmtiles www/
 
 data/Elevation-Bathymetry.zip:
 	# https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml
