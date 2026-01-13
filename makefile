@@ -175,23 +175,16 @@ docker-seed: docker
 	docker compose exec -T qgis make seed
 	docker compose down
 
-TRANSPARENT=-cf9ecc0
-
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -Fwebp #$(TRANSPARENT)
-
-charts/%.png.mbtiles: cache_data/%.mbtiles
-	mkdir -p charts
-	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -IFpng #$(TRANSPARENT)
+	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -IFpng
 
 charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts
 	convert.py -f $< $@ -t "$(basename $(notdir $@)) `date +%F`"
 
-www/%/: charts/%.mbtiles charts/%.png.mbtiles
+www/%/: charts/%.mbtiles
 	convert.py -f $< $@
-	convert.py -a $(word 2,$^) $@
 	cp www/map.html $@/index.html
 	chmod +rX -R $@
 

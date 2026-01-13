@@ -132,13 +132,13 @@ const overlays = {
         '<a target="_blank" href="https://emodnet.ec.europa.eu/">EMODnet</a>',
     })
     .on("add", addClass("invert")),
-  "🇩🇪 QMAP DE": L.tileLayer.fallback(baseurl + "/qmap-de/{z}/{x}/{y}.webp", {
+  "🇩🇪 QMAP DE": L.tileLayer.fallback(baseurl + "/qmap-de/{z}/{x}/{y}.png", {
     attribution:
       '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
     bounds: boundsDE,
     crossOrigin: cors,
   }),
-  "🇳🇱 QMAP NL": L.tileLayer.fallback(baseurl + "/qmap-nl/{z}/{x}/{y}.webp", {
+  "🇳🇱 QMAP NL": L.tileLayer.fallback(baseurl + "/qmap-nl/{z}/{x}/{y}.png", {
     attribution:
       '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
     bounds: boundsNL,
@@ -309,14 +309,18 @@ const map = L.map("map", {
 });
 
 if (!isStandalone) {
-  showDialog({
-    img: "helgoland.png",
-    title: "FreeNauticalChart.net",
-    text: `<p>is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It uses official data that is available as open data.</p>
+  setTimeout(
+    () =>
+      showDialog({
+        img: "helgoland.png",
+        title: "FreeNauticalChart.net",
+        text: `<p>is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It uses official data that is available as open data.</p>
     <p>For more details and downloadable packages, <a href="download/">look into the docs</a>!</p>
     <p style="font-size:0.5em;">(The docs also accessible via the link in the attribution in lower right.)</p>`,
-    button: "Take me to the chart!",
-  });
+        button: "Take me to the chart!",
+      }),
+    5000,
+  );
 }
 
 const SteplessControl = L.Control.extend({

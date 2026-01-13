@@ -76,8 +76,8 @@ The charts are imported by opening the `sqlitedb` files with the app.
 
 The raster charts can also be added to OsmAnd as online tile sources, chart tiles are downloaded on demand.
 
-- :de: QMAP DE online [`https://freenauticalchart.net/qmap-de/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-DE&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.webp)
-- :nl: QMAP NL online [`https://freenauticalchart.net/qmap-nl/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-NL&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.webp)
+- :de: QMAP DE online [`https://freenauticalchart.net/qmap-de/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=QMAP-DE&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.png)
+- :nl: QMAP NL online [`https://freenauticalchart.net/qmap-nl/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=QMAP-NL&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.png)
 
 !!! tip
     Select `sqlitedb` as storage format. This will store the tiles more efficiently into a single database file.  
@@ -107,12 +107,8 @@ The S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/sof
 
 OpenCPN and other applications can display raster charts from `mbtiles`.
 
-- [:de: QMAP DE](qmap-de.png.mbtiles){:download}
-- [:nl: QMAP NL](qmap-nl.png.mbtiles){:download}
-- Vector Charts: see above
-
-!!! info
-    OpenCPN does not support WebP, so there are separate `mbtiles` files containing png tiles.
+- Raster Charts: see [AvNav](#avnav)
+- Vector Charts: see [AvNav](#avnav)
 
 ## [JOSM](https://josm.openstreetmap.de/)
 

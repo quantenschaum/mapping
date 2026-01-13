@@ -76,8 +76,8 @@ Die Rasterkarten werden importiert, indem die `sqlitedb`-Dateien mit der App ge�
 
 Die Rasterkarten können auch als Online-Kacheln zu OsmAnd hinzugefügt werden, die Kartenkacheln werden bei Bedarf heruntergeladen.
 
-- :de: QMAP DE online [`https://freenauticalchart.net/qmap-de/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-DE&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.webp)
-- :nl: QMAP NL online [`https://freenauticalchart.net/qmap-nl/{0}/{1}/{2}.webp`](http://osmand.net/add-tile-source?name=QMAP-NL&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.webp)
+- :de: QMAP DE online [`https://freenauticalchart.net/qmap-de/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=QMAP-DE&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.png)
+- :nl: QMAP NL online [`https://freenauticalchart.net/qmap-nl/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=QMAP-NL&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.png)
 
 !!! tip
     Wählen Sie „sqlitedb“ als Speicherformat. Dadurch werden die Kacheln effizienter in einer einzigen Datenbankdatei gespeichert.  
@@ -107,12 +107,8 @@ Die S57-Dateien können mit dem [Ocharts(NG)](https://www.wellenvogel.net/softwa
 
 OpenCPN und andere Anwendungen können Rasterkarten aus `mbtiles` anzeigen.
 
-- [:de: QMAP DE](qmap-de.png.mbtiles){:download}
-- [:nl: QMAP NL](qmap-nl.png.mbtiles){:download}
-- Vektor-Karten: siehe oben
-
-!!! info
-    OpenCPN unterstützt WebP nicht, daher gibt es separate `mbtiles`-Dateien, die png-Kacheln enthalten.
+- Raster Charts: siehe [AvNav](#avnav)
+- Vector Charts: siehe [AvNav](#avnav)
 
 ## [JOSM](https://josm.openstreetmap.de/)
 
