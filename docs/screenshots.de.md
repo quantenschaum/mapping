@@ -34,6 +34,10 @@ Raster-Karte
 
 ![OpenCPN](img/opencpn.webp)
 
+Vektor-Karte
+
+![OpenCPN](img/opencpnvector.webp)
+
 ## JOSM
 
 Hintergrund-Layer

@@ -34,6 +34,10 @@ Raster Chart
 
 ![OpenCPN](img/opencpn.webp)
 
+Vector Chart
+
+![OpenCPN](img/opencpnvector.webp)
+
 ## JOSM
 
 Imagery Layer
