@@ -994,7 +994,8 @@
         "id": "spot-soundings",
         "type": "symbol",
         "source": "bsh",
-        "source-layer": "SOUNDG",
+        "source-layer": "Hydrography",
+        "filter": ["all",["has","VALSOU"],["==","layer","SOUNDG"]],
         "layout": {
          "text-field": [
               "let", "val", ["get", "VALSOU"],
