@@ -4,7 +4,7 @@ Für diejenigen, die sich für die astronomische Navigation interessieren, habe 
 
 Das aktuelle Jahrbuch kann hier heruntergeladen werden.
 
-- [Nautisches Jahrbuch 2025 PDF](Nautical-Almanac-2025.pdf)
-- [Tagensseiten 2025 TXT](daily-pages-2025.txt)
+- [Nautisches Jahrbuch 2026 PDF](Nautical-Almanac-2026.pdf)
+- [Tagensseiten 2026 TXT](daily-pages-2026.txt)
 
 ![Nautical Alamanac sample page](img/almanac.webp)
