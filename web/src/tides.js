@@ -29,7 +29,7 @@ export function addTidealAtlas(map, gauges = false) {
   for (let i = -6; i <= 6; i++) {
     let s = (i >= 0 ? "+" : "") + i;
     layers.push(
-      L.tileLayer.fallback(baseurl + "/tides/hw" + s + "/{z}/{x}/{y}.webp", {
+      L.tileLayer.fallback(baseurl + "/tides/hw" + s + "/{z}/{x}/{y}.png", {
         attribution: attrTides.replace(
           "*",
           `HW Helgoland ${s}h`.replace("+0h", ""),
@@ -38,7 +38,7 @@ export function addTidealAtlas(map, gauges = false) {
     );
   }
   layers.push(
-    L.tileLayer.fallback(baseurl + "/tides/fig/{z}/{x}/{y}.webp", {
+    L.tileLayer.fallback(baseurl + "/tides/fig/{z}/{x}/{y}.png", {
       attribution: attrTides.replace("*", "Figures"),
     }),
   );
