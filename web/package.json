@@ -24,12 +24,12 @@
     "leaflet-mouse-position": "^1.2.0",
     "leaflet.control.opacity": "^1.6.0",
     "leaflet.tilelayer.fallback": "^1.0.4",
-    "less": "^4.4.2",
+    "less": "^4.5.1",
     "open-location-code": "^1.0.3",
-    "plotly.js-basic-dist": "^3.3.0",
-    "pmtiles": "^4.3.0",
+    "plotly.js-basic-dist": "^3.3.1",
+    "pmtiles": "^4.3.2",
     "proj4": "^2.20.2",
-    "vite": "^7.2.7",
+    "vite": "^7.3.1",
     "vite-plugin-pwa": "^1.2.0",
     "workbox-window": "^7.4.0"
   }
