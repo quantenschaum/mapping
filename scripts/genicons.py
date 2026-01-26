@@ -1,34 +1,41 @@
 #!/usr/bin/env python3
 # coding: utf-8
 import re
-
-from os import listdir, makedirs, symlink, remove
-from os.path import isfile, basename, splitext, dirname, islink, exists, relpath
-from itertools import product, pairwise
-from re import findall
 from glob import glob
+from itertools import pairwise, product
+from os import listdir, makedirs, remove, symlink
+from os.path import basename, dirname, exists, isfile, islink, relpath, splitext
+from re import findall
 from typing import Iterable
+
 from s57 import S57, abbr_color
 
 outpath = "gen"
 
-patterns = None, "horizontal", "vertical", "squared", "border", "cross", #"saltire"
+patterns = (
+    None,
+    "horizontal",
+    "vertical",
+    "squared",
+    "border",
+    "cross",
+)  # "saltire"
 
 object_colors = {
     "": None,
-    "white": "#ffffff", # 1
-    "black": "#000000", # 2
-    "red": "#ed1c24", # 3
-    "green": "#00a650", # 4
-    "blue": "#10508c", # 5
-    "yellow": "#fab20b", # 6
-    "grey": "#808080", # 7
-    "brown": "#A52A2A", # 8
-    "amber": "#FFBF00", # 9
-    "violet": "#EE82EE", # 10
-    "orange": "#F7A837", # 11
-    "magenta": "#ec008c", # 12
-    "pink": "#FFC0CB", # 13
+    "white": "#ffffff",  # 1
+    "black": "#000000",  # 2
+    "red": "#ed1c24",  # 3
+    "green": "#00a650",  # 4
+    "blue": "#10508c",  # 5
+    "yellow": "#fab20b",  # 6
+    "grey": "#808080",  # 7
+    "brown": "#A52A2A",  # 8
+    "amber": "#FFBF00",  # 9
+    "violet": "#EE82EE",  # 10
+    "orange": "#F7A837",  # 11
+    "magenta": "#ec008c",  # 12
+    "pink": "#FFC0CB",  # 13
 }
 
 light_colors = {
@@ -39,7 +46,7 @@ light_colors = {
     "blue": "#10508c",
     "yellow": "#fab20b",
     "orange": "#fa870b",
-    "amber": "#FFBF00", # 9
+    "amber": "#FFBF00",  # 9
 }
 
 lights = {
@@ -47,70 +54,63 @@ lights = {
     "floodlight",
 }
 
-color_types={ # to reduce numer of combinations
-  'pillar spar can spherical barrel super-buoy conical light_float':
-  'white black red green yellow',
-
-  'tower lattice pile stake cairn':
-  'white black red green yellow brown grey',
-
-  'sphere':
-  'black white red green',
-
-  'x-shape cross':
-  'black yellow',
-
-  '2_spheres 2_cones_up 2_cones_down 2_cones_base_together 2_cones_point_together':
-  'black red green',
-
-  'cylinder cone_point_down cone_point_up':
-  'black white red green',
-
-  'circle sphere_over_rhombus':
-  'black white red green',
-
-  'triangle_point_up triangle_point_down square rhombus flag':
-  'black white red green yellow grey',
+color_types = {  # to reduce numer of combinations
+    "pillar spar can spherical barrel super-buoy conical light_float": "white black red green yellow",
+    "tower lattice pile stake cairn": "white black red green yellow brown grey",
+    "sphere": "black white red green",
+    "x-shape cross": "black yellow",
+    "2_spheres 2_cones_up 2_cones_down 2_cones_base_together 2_cones_point_together": "black red green",
+    "cylinder cone_point_down cone_point_up": "black white red green",
+    "circle sphere_over_rhombus": "black white red green",
+    "triangle_point_up triangle_point_down square rhombus flag": "black white red green yellow grey",
 }
 
+
 def colors_for(s):
-  if s in lights:
-    return light_colors.keys()
+    if s in lights:
+        return light_colors.keys()
 
-  colors=None
-  for types,cols in color_types.items():
-    types=types.split()
-    cols=['']+cols.split()
-    if s in types:
-      return cols
+    colors = None
+    for types, cols in color_types.items():
+        types = types.split()
+        cols = [""] + cols.split()
+        if s in types:
+            return cols
 
-  return object_colors.keys()
+    return object_colors.keys()
 
 
 def patterns_for(s):
-  return patterns
+    return patterns
 
 
-S57data={k:v for k,v in S57.items() if k in 'COLOUR COLPAT TOPSHP BOYSHP BCNSHP CATLMK'}
+S57data = {
+    k: v for k, v in S57.items() if k in "COLOUR COLPAT TOPSHP BOYSHP BCNSHP CATLMK"
+}
+
 
 def s57id(value):
-  if not value: return
-  for n,d in S57data.items():
-    if not isinstance(d,dict): continue
-    for k,v in d.items():
-      if v==value:
-        # return f'{n}_{k}'
-        return k
+    if not value:
+        return
+    for n, d in S57data.items():
+        if not isinstance(d, dict):
+            continue
+        for k, v in d.items():
+            if v == value:
+                # return f'{n}_{k}'
+                return k
 
 
 def read(f):
     with open(f) as f:
         return f.read()
 
+
 def alt_name(svg):
-  m=re.search(r'"([A-Z]{6}_\d+)"',svg)
-  if m:
-    return m[1].replace('_','/')
+    m = re.search(r'"([A-Z]{6}_\d+)"', svg)
+    if m:
+        return m[1].replace("_", "/")
+
 
 # for f in object_colors.keys():
 #   id=s57id(f)
@@ -126,38 +126,39 @@ def alt_name(svg):
 # xxx
 
 
-
 def write(f, c):
     print(f)
     # assert not exists(f), f
     makedirs(dirname(f), exist_ok=True)
     with open(f, "w") as f:
-        if isinstance(c,list):
-          f.writelines(l+'\n' for l in c)
+        if isinstance(c, list):
+            f.writelines(l + "\n" for l in c)
         else:
-          f.write(c)
+            f.write(c)
 
 
-def link(src,dst):
-    makedirs(dirname(dst),exist_ok=1)
-    try: remove(dst)
-    except: pass
-    symlink(relpath(src,dirname(dst)),dst)
+def link(src, dst):
+    makedirs(dirname(dst), exist_ok=1)
+    try:
+        remove(dst)
+    except:
+        pass
+    symlink(relpath(src, dirname(dst)), dst)
 
 
 def main():
-    for f in glob('*.svg'):
+    for f in glob("*.svg"):
         svg = read(f)
         icon = splitext(f)[0]
 
         if "COLORING{}" not in svg:
-            out="/".join((outpath, f"{icon}.svg"))
+            out = "/".join((outpath, f"{icon}.svg"))
             write(out, svg)
-            alt=alt_name(svg)
+            alt = alt_name(svg)
             if alt:
-                alt='/'.join((outpath,alt+'.svg'))
-                print('>',alt)
-                link(out,alt)
+                alt = "/".join((outpath, alt + ".svg"))
+                print(">", alt)
+                link(out, alt)
             continue
         # continue
 
@@ -165,15 +166,21 @@ def main():
 
         for p in patterns_for(icon):
             matches = findall(rf" {p}\d(\d)", svg) if p else 1
-            if not matches: continue
+            if not matches:
+                continue
             sections = {int(m[0]) for m in matches} if p else {1}
             # print(icon, p, sections)
 
             for s in sections:
                 colors = colors_for(icon)
 
-                cols=list(filter(lambda l: len(set(l))<=2 and all(len(set(p))==2 for p in pairwise(l)),
-                    product(filter(lambda c: c or s == 1, colors), repeat=s)))
+                cols = list(
+                    filter(
+                        lambda l: len(set(l)) <= 2
+                        and all(len(set(p)) == 2 for p in pairwise(l)),
+                        product(filter(lambda c: c or s == 1, colors), repeat=s),
+                    )
+                )
 
                 # print(cols)
 
@@ -230,31 +237,89 @@ def main():
                     # svg_lines = svg_lines.replace("COLORING{}", "\n".join(styles))
                     # print(svg_lines)
 
-                    out = "/".join(filter(bool,(outpath,icon,p,"_".join([c or "generic" for c in cs]))))+".svg"
+                    out = (
+                        "/".join(
+                            filter(
+                                bool,
+                                (
+                                    outpath,
+                                    icon,
+                                    p,
+                                    "_".join([c or "generic" for c in cs]),
+                                ),
+                            )
+                        )
+                        + ".svg"
+                    )
                     write(out, svg_lines)
 
-                    aname=alt_name(svg)
+                    aname = alt_name(svg)
                     if aname:
-                      alt = "/".join((outpath,aname,str(s57id(p) or 0),','.join(list(map(lambda i:str(i or 0),map(s57id,cs)))) or '0'))+".svg"
-                      print('>',alt)
-                      link(out,alt)
+                        alt = (
+                            "/".join(
+                                (
+                                    outpath,
+                                    aname,
+                                    str(s57id(p) or 0),
+                                    ",".join(
+                                        list(map(lambda i: str(i or 0), map(s57id, cs)))
+                                    )
+                                    or "0",
+                                )
+                            )
+                            + ".svg"
+                        )
+                        print(">", alt)
+                        link(out, alt)
 
-                      alt = "/".join((outpath,aname,str(s57id(p) or 0),''.join(list(map(lambda i:abbr_color(i) if i else '_',map(s57id,cs)))) or '0'))+".svg"
-                      print('>',alt)
-                      link(out,alt)
+                        alt = (
+                            "/".join(
+                                (
+                                    outpath,
+                                    aname,
+                                    str(s57id(p) or 0),
+                                    "".join(
+                                        list(
+                                            map(
+                                                lambda i: abbr_color(i) if i else "_",
+                                                map(s57id, cs),
+                                            )
+                                        )
+                                    )
+                                    or "0",
+                                )
+                            )
+                            + ".svg"
+                        )
+                        print(">", alt)
+                        link(out, alt)
 
                     if icon in lights:
-                      alt='/'.join((outpath,icon,str(s57id(cs[0]) if cs[0]!='generic' else 0)))+'.svg'
-                      print('>',alt)
-                      link(out,alt)
+                        alt = (
+                            "/".join(
+                                (
+                                    outpath,
+                                    icon,
+                                    str(s57id(cs[0]) if cs[0] != "generic" else 0),
+                                )
+                            )
+                            + ".svg"
+                        )
+                        print(">", alt)
+                        link(out, alt)
 
-                      alt='/'.join((outpath,icon,abbr_color(cs[0]) if cs[0]!='generic' else '_'))+'.svg'
-                      print('>',alt)
-                      link(out,alt)
-
-
-
-
+                        alt = (
+                            "/".join(
+                                (
+                                    outpath,
+                                    icon,
+                                    abbr_color(cs[0]) if cs[0] != "generic" else "_",
+                                )
+                            )
+                            + ".svg"
+                        )
+                        print(">", alt)
+                        link(out, alt)
 
 
 def param(line):

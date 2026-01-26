@@ -4,32 +4,35 @@
 import json
 import os
 import re
+from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 from functools import reduce
-from math import inf, isnan, log, pi, pow, sqrt, tan, isfinite
-from os.path import basename, splitext
-from os.path import isfile
+from math import inf, isfinite, isnan, log, pi, pow, sqrt, tan
+from os.path import basename, isfile, splitext
 
 import pendulum
 import requests
 from lxml import etree
 from pyquery import PyQuery as pq
-
 from s57 import *
 
-from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 try:
-  from rich_argparse import ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter
-except: pass
+    from rich_argparse import (
+        ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter,
+    )
+except:
+    pass
 
 from functools import partial
+
 from rich.console import Console
 from rich.progress import track
 from rich.traceback import install
-console=Console()
+
+console = Console()
 if console.is_terminal:
-  print=console.print
-  track=partial(track,console=console)
-  install()
+    print = console.print
+    track = partial(track, console=console)
+    install()
 
 dx = 0.01
 dy = dx
@@ -365,7 +368,10 @@ def load_bsh_lights(filename):
             ll = latlon(f)
             if str(ll) in other:
                 # continue
-                if any(any(x in g["id"] for x in ("Buoy","Beac","Facil")) for g in other[str(ll)]):
+                if any(
+                    any(x in g["id"] for x in ("Buoy", "Beac", "Facil"))
+                    for g in other[str(ll)]
+                ):
                     continue
             tags = {"ll": ll}
             add_tags(tags, f)
@@ -477,11 +483,12 @@ def load_rws_buoys(filename, skip_errors=0):
 
             for i, l in enumerate((rws_buoy, rws_topmark, rws_light)):
                 p = f["properties"]
-                p = {b: p[a] for a, b in l.items() if p.get(a,'#') != '#'}
+                p = {b: p[a] for a, b in l.items() if p.get(a, "#") != "#"}
                 if i == 0:
                     p["buoy_type"] = 1
-                for k,v in dict(p).items():
-                    if v=='L': del p[k]
+                for k, v in dict(p).items():
+                    if v == "L":
+                        del p[k]
                 if p:
                     add_tags(tags, p)
                     fix_tags(tags)
@@ -490,7 +497,7 @@ def load_rws_buoys(filename, skip_errors=0):
             points.append(tags)
         except Exception as x:
             print(x)
-            assert skip_errors, (x,f)
+            assert skip_errors, (x, f)
 
     print("buoys", len(points))
 
@@ -526,8 +533,9 @@ def load_rws_beacons(filename, skip_errors):
                 p[t] = l[t]
             if i == 0:
                 p["beacon_type"] = 1
-            for k,v in dict(p).items():
-                if v=='L': del p[k]
+            for k, v in dict(p).items():
+                if v == "L":
+                    del p[k]
             if p:
                 add_tags(tags, p)
         # add_generic_topmark(tags)
@@ -704,7 +712,7 @@ def update_osm(
 
     matches = {}
     modifications = []
-    for e in track(list(x("node")),'updating nodes'):
+    for e in track(list(x("node")), "updating nodes"):
         n = pq(e)
         if not n.find("tag[k='seamark:type']"):
             continue
@@ -763,7 +771,7 @@ def update_osm(
                 distance(ll, p[1]["ll"]),
                 match,
                 name,
-                josm_zoom(ll)
+                josm_zoom(ll),
                 # json.dumps(p, indent=2),
             )
 
@@ -799,7 +807,7 @@ def update_osm(
 
     added = 0
     if add:
-        for i, p in track(enumerate(data, 1),'adding points',total=len(data)):
+        for i, p in track(enumerate(data, 1), "adding points", total=len(data)):
             n = pq(f'<node id="{-i}" visible="true" lat="nan" lon="nan"/>')
             m = update_node(n, p, s_dist)
             m.insert(0, "ADDED")
@@ -825,19 +833,20 @@ def update_osm(
             pass
 
         if review:
+
             def sortkey(e):
-              name=str(e[1][1] or '')
-              name=name.replace(' ','')
-              m=re.match(r'(.*?)(\d+)',name)
-              if m:
-                name=f'{m.group(1)}{int(m.group(2)):06}'
-              return name
+                name = str(e[1][1] or "")
+                name = name.replace(" ", "")
+                m = re.match(r"(.*?)(\d+)", name)
+                if m:
+                    name = f"{m.group(1)}{int(m.group(2)):06}"
+                return name
 
             modifications.sort(key=sortkey)
 
             for i, m in enumerate(modifications, 1):
                 for j, l in enumerate(m):
-                    print(f"{'  'if j>1 else ''}{l}", end=" " if j == 0 else "\n")
+                    print(f"{'  ' if j > 1 else ''}{l}", end=" " if j == 0 else "\n")
                 if len(m) <= 4 and "seamark:lnam" in str(m):
                     continue
                 # if all(x not in str(m) for x in ("'POS'", "'MOD'")):

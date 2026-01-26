@@ -1,5 +1,5 @@
 import re
-from math import sin, cos, radians, degrees, sqrt, atan2
+from math import atan2, cos, degrees, radians, sin, sqrt
 
 
 class CourseData:

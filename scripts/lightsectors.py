@@ -1,30 +1,32 @@
 #!/usr/bin/env python3
 
-from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+
 try:
-  from rich_argparse import ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter
-except: pass
+    from rich_argparse import (
+        ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter,
+    )
+except:
+    pass
 
 import os
+from functools import partial
 from itertools import chain
-from math import ceil
-from math import radians, degrees, sin, cos, tan, asin, atan2, atan, exp, log, pi
+from math import asin, atan, atan2, ceil, cos, degrees, exp, log, pi, radians, sin, tan
 from sys import stderr
 
 import requests
 from pyquery import PyQuery as pq
-
-from s57 import *
-
-from functools import partial
 from rich.console import Console
 from rich.progress import track
 from rich.traceback import install
-console=Console()
+from s57 import *
+
+console = Console()
 if console.is_terminal:
-  print=console.print
-  track=partial(track,console=console)
-  install()
+    print = console.print
+    track = partial(track, console=console)
+    install()
 
 
 def linspace(start, stop, num=10):
@@ -159,7 +161,7 @@ def nformat(v):
     return f"{v:.1f}".replace(".0", "")
 
 
-def label(sector, height_range=False, sep="\u00A0"):
+def label(sector, height_range=False, sep="\u00a0"):
     l = ""
     c = sector.get("character")
     if c and c != "?":
@@ -302,14 +304,15 @@ def generate_sectors(infile, outfile, config={}):
     osm_objects = list(chain(osm("node"), osm("way")))
     N = len(osm_objects)
 
-    for i, n in track(enumerate(osm_objects, 1),'processing',total=N):
+    for i, n in track(enumerate(osm_objects, 1), "processing", total=N):
         n = pq(n)
 
         seamark_type = get_tag("seamark:type", n)
         sectors = get_sectors(n)
 
         if (
-            not sectors or seamark_type not in major
+            not sectors
+            or seamark_type not in major
             and not any(s.get("range", range0) >= min_range for s in sectors)
         ):
             continue
@@ -327,7 +330,7 @@ def generate_sectors(infile, outfile, config={}):
             f"{i}/{N}",
             seamark_type,
             name,
-            merged_label.replace(" ", " + ").replace("\u00A0", " "),
+            merged_label.replace(" ", " + ").replace("\u00a0", " "),
         )
         ll = get_ll(n, osm)
 
@@ -343,11 +346,10 @@ def generate_sectors(infile, outfile, config={}):
         set_tag("seamark:light:colour", colors(sectors), center)
 
         if add_sector_data:
-            for i,s in enumerate(sectors,0 if len(sectors)==1 else 1):
-                for k,v in s.items():
+            for i, s in enumerate(sectors, 0 if len(sectors) == 1 else 1):
+                for k, v in s.items():
                     # print(f"seamark:light:{i}:{k}","=",v)
                     set_tag(f"seamark:light:{i}:{k}", v, center)
-
 
         out.append(center)
 
@@ -362,7 +364,7 @@ def generate_sectors(infile, outfile, config={}):
             is_leading = len(sectors) == 1 and any(
                 k in s.get("category", "") for k in leading_lights
             )
-            is_low = any(k in str(s) for k in low_light if k!="low")
+            is_low = any(k in str(s) for k in low_light if k != "low")
 
             # directional line
             if r1 and is_ori:
