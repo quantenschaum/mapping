@@ -12,7 +12,7 @@ from s57 import S57, abbr_color
 
 outpath = "gen"
 
-patterns = None, "horizontal", "vertical", "squared", "border"#, "cross", "saltire"
+patterns = None, "horizontal", "vertical", "squared", "border", "cross", #"saltire"
 
 object_colors = {
     "": None,
@@ -55,13 +55,13 @@ color_types={ # to reduce numer of combinations
   'white black red green yellow brown grey',
 
   'sphere':
-  ' black white red green',
+  'black white red green',
 
   'x-shape cross':
-  ' black yellow',
+  'black yellow',
 
   '2_spheres 2_cones_up 2_cones_down 2_cones_base_together 2_cones_point_together':
-  ' black red green',
+  'black red green',
 
   'cylinder cone_point_down cone_point_up':
   'black white red green',
