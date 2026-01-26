@@ -1,34 +1,44 @@
 #!/usr/bin/env python3
 
-from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+
 try:
-  from rich_argparse import ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter
-except: pass
+    from rich_argparse import (
+        ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter,
+    )
+except:
+    pass
 
 import glob
 import re
 import sqlite3
 from datetime import datetime
-from math import atan, sinh, pi, degrees
-from os import remove, makedirs
+from io import BytesIO
+from math import atan, degrees, pi, sinh
+from os import makedirs, remove
 from os.path import exists, isdir
 from shutil import rmtree
-from io import BytesIO
+
 from PIL import Image, ImageColor
+
 try:
     import pillow_avif
-except: pass
+except:
+    pass
 
 from functools import partial
+
+from rich import print
 from rich.console import Console
 from rich.progress import track
 from rich.traceback import install
-from rich import print
+
 # console=Console()
 # if console.is_terminal:
 #   print=console.log
 #   track=partial(track,console=console)
 #   install()
+
 
 def main():
     parser = ArgumentParser(
@@ -40,7 +50,9 @@ def main():
     parser.add_argument("output", help="output file")
     parser.add_argument("-f", "--force", action="store_true", help="overwrite output")
     parser.add_argument("-C", "--reencode", action="store_true", help="reencode tiles")
-    parser.add_argument("-O", "--remove-transparency", action="store_true", help="remove transparency")
+    parser.add_argument(
+        "-O", "--remove-transparency", action="store_true", help="remove transparency"
+    )
     parser.add_argument("-a", "--append", action="store_true", help="append to output")
     # parser.add_argument("-t", "--time", action="store_true", help="add time column")
     parser.add_argument("-z", "--min-zoom", type=int, help="min zoom level", default=5)
@@ -75,8 +87,10 @@ def main():
         action="store_true",
         help="set inverted y flag for sqlitedb (sets flag only, -y causes actual inversion)",
     )
-    parser.add_argument("-F","--format", help="tile format for mbtiles")
-    parser.add_argument("-I","--indexed", help="used indexed palette 256 color",action='store_true')
+    parser.add_argument("-F", "--format", help="tile format for mbtiles")
+    parser.add_argument(
+        "-I", "--indexed", help="used indexed palette 256 color", action="store_true"
+    )
     parser.add_argument(
         "-e",
         "--elliptic",
@@ -91,7 +105,8 @@ def main():
         "-M",
         "--meta",
         help="additional metadata for mbtiles (key=value)",
-        action="append", default=[]
+        action="append",
+        default=[],
     )
     parser.add_argument(
         "-s",
@@ -109,7 +124,7 @@ def main():
     parser.add_argument(
         "-c",
         "--transparent",
-        metavar='RRGGBB',
+        metavar="RRGGBB",
         help="color to replace with transparency",
     )
     parser.add_argument("--west", help="western limit", type=float)
@@ -135,8 +150,8 @@ def main():
     assert output not in inputs, "output=input"
 
     if args.info:
-      info(output,args)
-      return
+        info(output, args)
+        return
 
     assert (
         not all(x is not None for x in [args.west, args.east]) or args.west < args.east
@@ -153,9 +168,9 @@ def main():
         else:
             remove(output)
 
-    assert (
-        not exists(output) or args.append
-    ), f"{output} exists, overwrite with -f or append with -a (directory only)"
+    assert not exists(output) or args.append, (
+        f"{output} exists, overwrite with -f or append with -a (directory only)"
+    )
 
     if args.invert_y:
         print("invert y")
@@ -186,7 +201,8 @@ def read(filename):
 def lat_lon(z, x, y):
     n = 2**z
     lon = x / n * 360 - 180
-    if y<0: y = 2**z - 1 + y
+    if y < 0:
+        y = 2**z - 1 + y
     lat = degrees(atan(sinh(pi * (1 - 2 * y / n))))
     return lat, lon
 
@@ -210,11 +226,11 @@ def in_bbox(z, x, y, args):
     return True
 
 
-def update_bbox(bbox,z,x,y):
+def update_bbox(bbox, z, x, y):
     lat, lon = lat_lon(z, x, y)
-    for k,v in [('z',z),('x',lon),('y',lat)]:
-      for c,f in [(str.lower,min),(str.upper,max)]:
-        bbox[c(k)]=f(bbox.get(c(k),v),v)
+    for k, v in [("z", z), ("x", lon), ("y", lat)]:
+        for c, f in [(str.lower, min), (str.upper, max)]:
+            bbox[c(k)] = f(bbox.get(c(k), v), v)
     return bbox
 
 
@@ -222,67 +238,78 @@ def is_transparent(data, args):
     if not args.exclude_transparent:
         return False
     with Image.open(BytesIO(data)) as img:
-        if not img.mode.startswith("RGB"): return False
+        if not img.mode.startswith("RGB"):
+            return False
         # assert img.mode == "RGBA", img.mode
-        extrema=img.getextrema()
+        extrema = img.getextrema()
         # return img.mode == "RGBA" and extrema[3][1] == 0
         # print(img.mode,img.size,extrema)
-        return (img.mode == "RGBA" and extrema[3][1] == 0) # transparent
-             # or all(extrema[i][0]==255 for i in range(3)) # white
-             # or all(extrema[i][1]==0 for i in range(3))) # black
+        return img.mode == "RGBA" and extrema[3][1] == 0  # transparent
+        # or all(extrema[i][0]==255 for i in range(3)) # white
+        # or all(extrema[i][1]==0 for i in range(3))) # black
         # all(extrema[i][0]==extrema[i][1] for i in range(len(img.mode))) # uniform
 
 
-def img2bytes(img,format="png",**kwargs):
-    b=BytesIO()
-    if format=="avif":
-        img.save(b,format=format,**kwargs)
+def img2bytes(img, format="png", **kwargs):
+    b = BytesIO()
+    if format == "avif":
+        img.save(b, format=format, **kwargs)
         # img.save(b,format=format,codec="svt",**kwargs) # export SVT_LOG=1
     else:
-        img.save(b,format=format,lossless=True,optimize=True,**kwargs)
+        img.save(b, format=format, lossless=True, optimize=True, **kwargs)
     b.seek(0)
     return b.read()
 
 
-def recode(tile,format,args):
-    'reencode tile in given format'
-    transparent=args.transparent
-    assert format or not transparent, 'need format when setting transparency'
-    if not format: return tile
-    if format=="jpg": format="jpeg"
+def recode(tile, format, args):
+    "reencode tile in given format"
+    transparent = args.transparent
+    assert format or not transparent, "need format when setting transparency"
+    if not format:
+        return tile
+    if format == "jpg":
+        format = "jpeg"
     if transparent:
-        assert format!='jpeg', 'jpeg does not support transparency'
-        transparent=ImageColor.getcolor('#'+transparent,'RGB')
+        assert format != "jpeg", "jpeg does not support transparency"
+        transparent = ImageColor.getcolor("#" + transparent, "RGB")
     with Image.open(BytesIO(tile)) as img:
-        if img.format==format.upper() and not transparent and not args.reencode and not args.indexed:
-          return tile
+        if (
+            img.format == format.upper()
+            and not transparent
+            and not args.reencode
+            and not args.indexed
+        ):
+            return tile
         # print(img.format,img.size,img.info)
         if args.remove_transparency:
-            img=img.convert("RGB")
-        if img.mode!="RGBA" and "transparency" in img.info:
-            img=img.convert("RGBA")
+            img = img.convert("RGB")
+        if img.mode != "RGBA" and "transparency" in img.info:
+            img = img.convert("RGBA")
         if transparent:
-            img=make_transparent(img,transparent)
-        if format=="jpeg" and img.mode!="RGB":
-            img=img.convert("RGB")
-        if img.mode=="RGBA" and img.getextrema()[3][0]==255:
-            img=img.convert("RGB") # remove unused transparency
+            img = make_transparent(img, transparent)
+        if format == "jpeg" and img.mode != "RGB":
+            img = img.convert("RGB")
+        if img.mode == "RGBA" and img.getextrema()[3][0] == 255:
+            img = img.convert("RGB")  # remove unused transparency
         if args.indexed:
-          img=img.quantize(colors=256)
+            img = img.quantize(colors=256)
         # print(img.format,"->",format,len(tile),len(img2bytes(img,format,**kwargs)))
         # print(img.info,img.mode)
-        return img2bytes(img,format)
+        return img2bytes(img, format)
 
 
-def make_transparent(img,col):
-    'make color `col` transparent'
+def make_transparent(img, col):
+    "make color `col` transparent"
     import numpy as np
-    if img.mode!='RGBA': img=img.convert("RGBA")
-    data = np.array(img)   # "data" is a height x width x 4 numpy array
-    r,g,b,a = data.T # Temporarily unpack the bands for readability
+
+    if img.mode != "RGBA":
+        img = img.convert("RGBA")
+    data = np.array(img)  # "data" is a height x width x 4 numpy array
+    r, g, b, a = data.T  # Temporarily unpack the bands for readability
     mask = (r == col[0]) & (g == col[1]) & (b == col[2])
-    if not mask.any(): return img
-    data[...,-1][mask.T] = 0 # Transpose back needed
+    if not mask.any():
+        return img
+    data[..., -1][mask.T] = 0  # Transpose back needed
     return Image.fromarray(data)
 
 
@@ -299,10 +326,11 @@ MOZILLA = "Mozilla/5.0 AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
 
 def mbtiles_format(filename):
     db = sqlite3.connect(filename)
-    cur=db.cursor()
-    r=cur.execute("SELECT value FROM metadata WHERE name = 'format'").fetchone()
+    cur = db.cursor()
+    r = cur.execute("SELECT value FROM metadata WHERE name = 'format'").fetchone()
     db.close()
     return r[0] if r else None
+
 
 def fmt(tile):
     with Image.open(BytesIO(tile)) as img:
@@ -311,25 +339,29 @@ def fmt(tile):
 
 def info(filename, args):
     db = sqlite3.connect(filename)
-    cur=db.cursor()
+    cur = db.cursor()
     print("METADATA")
     for r in cur.execute("SELECT * FROM metadata"):
-      print(r[0],"=",r[1])
+        print(r[0], "=", r[1])
     print("TILES")
     print("  z    count        size")
-    for r in cur.execute("SELECT zoom_level,COUNT(zoom_level),SUM(LENGTH(tile_data)) FROM tiles GROUP BY zoom_level"):
-      print(f"{r[0]:3} {r[1]:8} {r[2]/1e6:8.2f} MB")
-    for r in cur.execute("SELECT 'sum',COUNT(zoom_level),SUM(LENGTH(tile_data)),AVG(LENGTH(tile_data)) FROM tiles"):
-      print(f"{r[0]:3} {r[1]:8} {r[2]/1e6:8.2f} MB {r[3]/1e3:8.2f} kB/tile")
+    for r in cur.execute(
+        "SELECT zoom_level,COUNT(zoom_level),SUM(LENGTH(tile_data)) FROM tiles GROUP BY zoom_level"
+    ):
+        print(f"{r[0]:3} {r[1]:8} {r[2] / 1e6:8.2f} MB")
+    for r in cur.execute(
+        "SELECT 'sum',COUNT(zoom_level),SUM(LENGTH(tile_data)),AVG(LENGTH(tile_data)) FROM tiles"
+    ):
+        print(f"{r[0]:3} {r[1]:8} {r[2] / 1e6:8.2f} MB {r[3] / 1e3:8.2f} kB/tile")
     db.close()
 
 
-def pbar(iter,m=0):
+def pbar(iter, m=0):
     if isinstance(m, sqlite3.Connection):
-        m=m.execute("SELECT COUNT(zoom_level) FROM tiles").fetchone()[0]
+        m = m.execute("SELECT COUNT(zoom_level) FROM tiles").fetchone()[0]
     else:
-        m=len(iter)
-    return track(iter,'[green]converting[/]',total=m)
+        m = len(iter)
+    return track(iter, "[green]converting[/]", total=m)
     # return tqdm(iter,total=m,unit='T',unit_scale=True,dynamic_ncols=True)
 
 
@@ -350,26 +382,31 @@ def mbtiles2mbtiles(inputs, output, args):
     )
     name = args.title or inputs[0]
     dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
-    format=args.format or mbtiles_format(inputs[0])
-    print("format",format)
+    format = args.format or mbtiles_format(inputs[0])
+    print("format", format)
     if format:
         dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
 
     i, n, b = 0, 0, 0
-    bbox={}
+    bbox = {}
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
-        for row in pbar(source.execute("SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"), source):
+        for row in pbar(
+            source.execute(
+                "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
+            ),
+            source,
+        ):
             n += 1
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if args.invert_y:
                 y = 2**z - 1 - y
             if skip(z, x, -y, row[3], args):
                 continue
-            tile=recode(row[3],format,args)
+            tile = recode(row[3], format, args)
             b += len(tile)
-            update_bbox(bbox,z,x,-y)
+            update_bbox(bbox, z, x, -y)
             dcur.execute(
                 "INSERT OR REPLACE INTO tiles VALUES (?,?,?,?)",
                 [z, x, y, sqlite3.Binary(tile)],
@@ -379,10 +416,15 @@ def mbtiles2mbtiles(inputs, output, args):
         source.close()
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
-        print(f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}")
+        print(
+            f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}"
+        )
 
-    for m in [f"minzoom={bbox['z']}",f"maxzoom={bbox['Z']}",
-              f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']}"] + args.meta:
+    for m in [
+        f"minzoom={bbox['z']}",
+        f"maxzoom={bbox['Z']}",
+        f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']}",
+    ] + args.meta:
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT OR REPLACE INTO metadata VALUES ('{k}','{v}')")
 
@@ -430,24 +472,27 @@ def mbtiles2sqlitedb(inputs, output, args):
         else None
     )
 
-    format=args.format or (mbtiles_format(inputs[0]) if inputs else None)
-    print("format",format)
+    format = args.format or (mbtiles_format(inputs[0]) if inputs else None)
+    print("format", format)
 
     i, n, b = 0, 0, 0
-    bbox={}
+    bbox = {}
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
-        for row in pbar(source.execute(
-            "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
-        ),source):
+        for row in pbar(
+            source.execute(
+                "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
+            ),
+            source,
+        ):
             n += 1
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
             if skip(z, x, -y, row[3], args):
                 continue
-            tile=recode(row[3],format,args)
+            tile = recode(row[3], format, args)
             b += len(tile)
             data = [x, y, z, 0, sqlite3.Binary(tile)]
             if timecol:
@@ -459,7 +504,9 @@ def mbtiles2sqlitedb(inputs, output, args):
         source.close()
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
-        print(f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}")
+        print(
+            f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}"
+        )
 
     dest.commit()
     dest.close()
@@ -469,24 +516,27 @@ def mbtiles2dir(inputs, output, args):
     assert output.endswith("/")
     print("writing", output)
 
-    format=args.format or mbtiles_format(inputs[0])
-    print("format",format)
+    format = args.format or mbtiles_format(inputs[0])
+    print("format", format)
 
     i, n, b = 0, 0, 0
-    bbox={}
+    bbox = {}
     for input in inputs:
         print("reading", input)
         source = sqlite3.connect(input)
-        for row in pbar(source.execute(
-            "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
-        ),source):
+        for row in pbar(
+            source.execute(
+                "SELECT zoom_level, tile_column, tile_row, tile_data FROM tiles"
+            ),
+            source,
+        ):
             n += 1
             z, x, y = int(row[0]), int(row[1]), int(row[2])
             if not args.invert_y:  # negate due to TMS scheme in mbtiles
                 y = 2**z - 1 - y
             if skip(z, x, -y, row[3], args):
                 continue
-            tile=recode(row[3],format,args)
+            tile = recode(row[3], format, args)
             b += len(tile)
             dir = f"{output}/{z}/{x}"
             makedirs(dir, exist_ok=1)
@@ -496,7 +546,9 @@ def mbtiles2dir(inputs, output, args):
         source.close()
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
-        print(f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}")
+        print(
+            f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}"
+        )
 
 
 def dir2mbtiles(inputs, output, args):
@@ -514,17 +566,17 @@ def dir2mbtiles(inputs, output, args):
     )
     name = args.title or inputs[0]
     dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
-    format=args.format
-    print("format",format)
+    format = args.format
+    print("format", format)
     if format:
         dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
 
     i, n, b = 0, 0, 0
-    bbox={}
+    bbox = {}
     for input in inputs:
         print("reading", input)
         assert isdir(input)
-        files=glob.glob(f"{input}*/*/*.*")
+        files = glob.glob(f"{input}*/*/*.*")
         for f in pbar(glob.glob(f"{input}*/*/*.*")):
             m = re.match(r".*/(\d+)/(\d+)/(\d+)\..+", f)
             if m:
@@ -534,7 +586,7 @@ def dir2mbtiles(inputs, output, args):
                 # print(f, z, x, y, len(tile), lat_lon(z, x, y))
                 if skip(z, x, y, tile, args):
                     continue
-                tile=recode(tile,format,args)
+                tile = recode(tile, format, args)
                 b += len(tile)
                 if not args.invert_y:
                     y = 2**z - 1 - y
@@ -547,10 +599,15 @@ def dir2mbtiles(inputs, output, args):
 
     if i:
         print(f"copied {i}/{n} tiles, {b:,} bytes")
-        print(f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}")
+        print(
+            f"bounds z={bbox['z']}..{bbox['Z']} x={bbox['x']:.5f}..{bbox['X']:.5f} z={bbox['y']:.5f}..{bbox['Y']:.5f}"
+        )
 
-    for m in [f"minzoom={bbox['z']}",f"maxzoom={bbox['Z']}",
-              f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']}"] + args.meta:
+    for m in [
+        f"minzoom={bbox['z']}",
+        f"maxzoom={bbox['Z']}",
+        f"bounds={bbox['x']},{bbox['y']},{bbox['X']},{bbox['Y']}",
+    ] + args.meta:
         k, v = m.split("=", 1)
         dcur.execute(f"INSERT OR REPLACE INTO metadata VALUES ('{k}','{v}')")
 
