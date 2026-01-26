@@ -3,47 +3,83 @@
 
 import csv
 import json
+from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 from datetime import datetime
-from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+
 try:
-  from rich_argparse import ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter
-except: pass
+    from rich_argparse import (
+        ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter,
+    )
+except:
+    pass
 from collections import defaultdict
 from itertools import accumulate
 from os import makedirs
-from os.path import basename, splitext, dirname, join
+from os.path import basename, dirname, join, splitext
 
 if __name__ == "__main__":
-  from functools import partial
-  from rich.console import Console
-  from rich.progress import track
-  console=Console()
-  if console.is_terminal:
-    print=console.print
-    track=partial(track,console=console)
+    from functools import partial
+
+    from rich.console import Console
+    from rich.progress import track
+
+    console = Console()
+    if console.is_terminal:
+        print = console.print
+        track = partial(track, console=console)
 
 from geojson import (
-    Point,
-    LineString,
-    Polygon,
-    MultiPoint,
-    MultiLineString,
-    MultiPolygon,
     Feature,
     FeatureCollection,
+    LineString,
+    MultiLineString,
+    MultiPoint,
+    MultiPolygon,
+    Point,
+    Polygon,
 )
 
 try:
-  import shapely
-  import numpy as np
-  import mapbox_earcut as earcut
-except: pass
+    import mapbox_earcut as earcut
+    import numpy as np
+    import shapely
+except:
+    pass
 
-from senc import SENC, grid2ll, ll2grid, S57_RECORD_TYPES, HEADER_CELL_NAME, HEADER_CELL_PUBLISHDATE, HEADER_CELL_EDITION, HEADER_CELL_UPDATEDATE, HEADER_CELL_UPDATE, HEADER_CELL_NATIVESCALE, HEADER_CELL_SENCCREATEDATE, CELL_EXTENT_RECORD, HEADER_CELL_SOUNDINGDATUM, FEATURE_ID_RECORD, FEATURE_GEOMETRY_RECORD_POINT, VECTOR_CONNECTED_NODE_TABLE_RECORD, VECTOR_EDGE_NODE_TABLE_RECORD, FEATURE_ATTRIBUTE_RECORD, CELL_COVR_RECORD, CELL_NOCOVR_RECORD, FEATURE_GEOMETRY_RECORD_MULTIPOINT, FEATURE_GEOMETRY_RECORD_LINE, FEATURE_GEOMETRY_RECORD_AREA, write_txt, senc2s57
+from senc import (
+    CELL_COVR_RECORD,
+    CELL_EXTENT_RECORD,
+    CELL_NOCOVR_RECORD,
+    FEATURE_ATTRIBUTE_RECORD,
+    FEATURE_GEOMETRY_RECORD_AREA,
+    FEATURE_GEOMETRY_RECORD_LINE,
+    FEATURE_GEOMETRY_RECORD_MULTIPOINT,
+    FEATURE_GEOMETRY_RECORD_POINT,
+    FEATURE_ID_RECORD,
+    HEADER_CELL_EDITION,
+    HEADER_CELL_NAME,
+    HEADER_CELL_NATIVESCALE,
+    HEADER_CELL_PUBLISHDATE,
+    HEADER_CELL_SENCCREATEDATE,
+    HEADER_CELL_SOUNDINGDATUM,
+    HEADER_CELL_UPDATE,
+    HEADER_CELL_UPDATEDATE,
+    S57_RECORD_TYPES,
+    SENC,
+    VECTOR_CONNECTED_NODE_TABLE_RECORD,
+    VECTOR_EDGE_NODE_TABLE_RECORD,
+    grid2ll,
+    ll2grid,
+    senc2s57,
+    write_txt,
+)
+
 
 def to(typ, val):
-    try: return typ(val)
-    except: return val
+    try:
+        return typ(val)
+    except:
+        return val
 
 
 def read_csv(filename):
@@ -63,563 +99,682 @@ def read_csv(filename):
         # print(table)
         return table
 
+
 # https://github.com/OpenCPN/OpenCPN/tree/master/data/s57data
-csvdir=dirname(__file__)
-s57obj = read_csv(csvdir+"/s57objectclasses.csv")
-s57attr = read_csv(csvdir+"/s57attributes.csv")
+csvdir = dirname(__file__)
+s57obj = read_csv(csvdir + "/s57objectclasses.csv")
+s57attr = read_csv(csvdir + "/s57attributes.csv")
+
 
 def catalog():
-  try:
-    with open(dirname(__file__)+'/../data/bsh/catalog.json') as f:
-          return json.load(f)
-  except: return {}
+    try:
+        with open(dirname(__file__) + "/../data/bsh/catalog.json") as f:
+            return json.load(f)
+    except:
+        return {}
 
-CATALOG=catalog()
+
+CATALOG = catalog()
 # print(CATALOG)
 
-def layer_name(c): return s57obj[c][1]
 
-def attr_name(c): return s57attr[c][1]
+def layer_name(c):
+    return s57obj[c][1]
+
+
+def attr_name(c):
+    return s57attr[c][1]
+
 
 def acronym_code(name):
-    name=name.upper()
-    for k,v in s57attr.items():
-        if name==v[1].upper():
+    name = name.upper()
+    for k, v in s57attr.items():
+        if name == v[1].upper():
             return k
-    for k,v in s57obj.items():
-        if name==v[1].upper():
+    for k, v in s57obj.items():
+        if name == v[1].upper():
             return k
+
 
 def get_uband(chart):
-  if chart.startswith("OC"):
-    return int(chart[-1])
-  elif chart.startswith("DE"):
-    return int(chart[2])
-  else:
-    return 0
+    if chart.startswith("OC"):
+        return int(chart[-1])
+    elif chart.startswith("DE"):
+        return int(chart[2])
+    else:
+        return 0
 
-CHART='chart'
+
+CHART = "chart"
+
 
 def senc2features(filename, txtdir=None, multipoints=False):
-  'convert SENC records to GeoJSON features'
-  recs=SENC(filename).records()
+    "convert SENC records to GeoJSON features"
+    recs = SENC(filename).records()
 
-  features=[]
-  node_table,edge_table={},{}
+    features = []
+    node_table, edge_table = {}, {}
 
-  chart=splitext(basename(filename))[0]
-  uband=get_uband(chart)
+    chart = splitext(basename(filename))[0]
+    uband = get_uband(chart)
 
-  for r in recs: # first pass
-    if r['name']=='cell_native_scale':
-      scale=r['scale']
-      continue
+    for r in recs:  # first pass
+        if r["name"] == "cell_native_scale":
+            scale = r["scale"]
+            continue
 
-    if r['name']=='cell_name':
-      chart=r['cellname'] or chart
-      uband=get_uband(chart)
-      continue
+        if r["name"] == "cell_name":
+            chart = r["cellname"] or chart
+            uband = get_uband(chart)
+            continue
 
-    if r['name']=='cell_extent':
-      cs,cw=r['sw']
-      cn,ce=r['ne']
-      clat,clon=(cs+cn)/2,(cw+ce)/2
-      cx,cy=ll2grid(clon,clat)
-      continue
+        if r["name"] == "cell_extent":
+            cs, cw = r["sw"]
+            cn, ce = r["ne"]
+            clat, clon = (cs + cn) / 2, (cw + ce) / 2
+            cx, cy = ll2grid(clon, clat)
+            continue
 
-    if r['name']=='node_table':
-      s=r.get('scale',1)
-      for i,n in r['nodes'].items():
-        assert i not in node_table, f'duplicate node {i}'
-        node_table[i]=grid2ll(cx+n[0]/s,cy+n[1]/s)
-      continue
+        if r["name"] == "node_table":
+            s = r.get("scale", 1)
+            for i, n in r["nodes"].items():
+                assert i not in node_table, f"duplicate node {i}"
+                node_table[i] = grid2ll(cx + n[0] / s, cy + n[1] / s)
+            continue
 
-    if r['name']=='edge_table':
-      s=r.get('scale',1)
-      for i,e in r['edges'].items():
-        assert i not in edge_table, f'duplicate edge {i}'
-        edge_table[i]=[grid2ll(cx+n[0]/s,cy+n[1]/s) for n in e]
-      continue
+        if r["name"] == "edge_table":
+            s = r.get("scale", 1)
+            for i, e in r["edges"].items():
+                assert i not in edge_table, f"duplicate edge {i}"
+                edge_table[i] = [grid2ll(cx + n[0] / s, cy + n[1] / s) for n in e]
+            continue
 
-    if r['name']=='text' and txtdir:
-      with open(join(txtdir,r['file']),'w') as f:
-        f.write(r['text'])
-      continue
+        if r["name"] == "text" and txtdir:
+            with open(join(txtdir, r["file"]), "w") as f:
+                f.write(r["text"])
+            continue
 
-  props0={CHART:chart, 'uband':uband, 'scale':scale}
+    props0 = {CHART: chart, "uband": uband, "scale": scale}
 
-  for r in recs: # second pass
-    if r['name']=='feature':
-      layer=layer_name(r['ftype'])
-      ptype=r['primitive']+1
-      props=props0.copy()
-      props['layer']=layer
-      continue
+    for r in recs:  # second pass
+        if r["name"] == "feature":
+            layer = layer_name(r["ftype"])
+            ptype = r["primitive"] + 1
+            props = props0.copy()
+            props["layer"] = layer
+            continue
 
-    if r['name']=='attribute':
-      props[attr_name(r['atype'])]=r['value']
-      continue
+        if r["name"] == "attribute":
+            props[attr_name(r["atype"])] = r["value"]
+            continue
 
-    if r['name']=='point':
-      assert ptype==1
-      p=Point((r['lon'],r['lat']))
-      f=Feature(geometry=p, properties=props)
-      features.append(f)
-      continue
+        if r["name"] == "point":
+            assert ptype == 1
+            p = Point((r["lon"], r["lat"]))
+            f = Feature(geometry=p, properties=props)
+            features.append(f)
+            continue
 
-    if r['name']=='multipoint':
-      assert ptype==1
-      if multipoints:
-        p=MultiPoint([grid2ll(cx+p[0],cy+p[1])+(round(p[2],1),) for p in r['points']])
-        f = Feature(geometry=p, properties=props)
-        features.append(f)
-      else:
-        for x, y, depth in r['points']:
-          props['VALSOU'] = round(depth,1)
-          p = Point(grid2ll(cx+x,cy+y))
-          f = Feature(geometry=p, properties=props.copy())
-          features.append(f)
-      continue
+        if r["name"] == "multipoint":
+            assert ptype == 1
+            if multipoints:
+                p = MultiPoint(
+                    [
+                        grid2ll(cx + p[0], cy + p[1]) + (round(p[2], 1),)
+                        for p in r["points"]
+                    ]
+                )
+                f = Feature(geometry=p, properties=props)
+                features.append(f)
+            else:
+                for x, y, depth in r["points"]:
+                    props["VALSOU"] = round(depth, 1)
+                    p = Point(grid2ll(cx + x, cy + y))
+                    f = Feature(geometry=p, properties=props.copy())
+                    features.append(f)
+            continue
 
-    def contours(edgelist,pc=None):
-      line,lines,s,e = None,[],None,None
-      for n0, ed, n1, flip in edgelist:
-        if n0 != e: # start of new segment
-        # if e is None: # start of new segment
-          if line: lines.append(line)
-          line = []
-          s=n0
-          line.append(node_table[n0])
-          # print('\nline',end=' ')
-        # print((n0,ed,n1),end=' ')
-        if ed in edge_table:
-          line += (reversed(edge_table[ed]) if flip else edge_table[ed]) if ed else []
-        elif ed: print('[red]skipped invalid edge[/]')
-        line.append(node_table[n1])
-        e = None if n1==s else n1 # e=None if closed loop
-        # if pc and len(line)>=pc[len(lines)]: e=None
-      lines.append(line)
-      # print()
-      for l in lines:
-        for a,b in zip(l[:-1],l[1:]):
-          if a==b: print('[red]repeated nodes[/]')
-      return lines
+        def contours(edgelist, pc=None):
+            line, lines, s, e = None, [], None, None
+            for n0, ed, n1, flip in edgelist:
+                if n0 != e:  # start of new segment
+                    # if e is None: # start of new segment
+                    if line:
+                        lines.append(line)
+                    line = []
+                    s = n0
+                    line.append(node_table[n0])
+                    # print('\nline',end=' ')
+                # print((n0,ed,n1),end=' ')
+                if ed in edge_table:
+                    line += (
+                        (reversed(edge_table[ed]) if flip else edge_table[ed])
+                        if ed
+                        else []
+                    )
+                elif ed:
+                    print("[red]skipped invalid edge[/]")
+                line.append(node_table[n1])
+                e = None if n1 == s else n1  # e=None if closed loop
+                # if pc and len(line)>=pc[len(lines)]: e=None
+            lines.append(line)
+            # print()
+            for l in lines:
+                for a, b in zip(l[:-1], l[1:]):
+                    if a == b:
+                        print("[red]repeated nodes[/]")
+            return lines
 
-    if r['name']=='line':
-      assert ptype==2
-      lines=contours(r['edges'])
-      l = LineString(lines[0]) if len(lines)==1 else MultiLineString(lines)
-      f = Feature(geometry=l, properties=props)
-      features.append(f)
-      continue
+        if r["name"] == "line":
+            assert ptype == 2
+            lines = contours(r["edges"])
+            l = LineString(lines[0]) if len(lines) == 1 else MultiLineString(lines)
+            f = Feature(geometry=l, properties=props)
+            features.append(f)
+            continue
 
-    if r['name']=='area':
-      assert ptype==3
-      assert r['contours']==len(r['pointcount']),(r['contours'],len(r['pointcount']))
-      # print(r['contours'])
-      lines=contours(r['edges'],r['pointcount'])
-      # assert len(lines)==r['contours'],(len(lines),r['contours'])
-      for i,l in enumerate(lines):
-        assert l[0]==l[-1],'polygon not closed'
-        # assert len(l)==r['pointcount'][i],(len(l),r['pointcount'][i])
-      l = Polygon(lines)
-      f = Feature(geometry=l, properties=props)
-      features.append(f)
-      continue
+        if r["name"] == "area":
+            assert ptype == 3
+            assert r["contours"] == len(r["pointcount"]), (
+                r["contours"],
+                len(r["pointcount"]),
+            )
+            # print(r['contours'])
+            lines = contours(r["edges"], r["pointcount"])
+            # assert len(lines)==r['contours'],(len(lines),r['contours'])
+            for i, l in enumerate(lines):
+                assert l[0] == l[-1], "polygon not closed"
+                # assert len(l)==r['pointcount'][i],(len(l),r['pointcount'][i])
+            l = Polygon(lines)
+            f = Feature(geometry=l, properties=props)
+            features.append(f)
+            continue
 
-  return features
-
-
-
-
-def write_json(filename,data,**kwargs):
-  with open(filename,'w') as f:
-    try:
-      assert data['type']=='FeatureCollection'
-      f.write('{"type":"FeatureCollection","features":[\n')
-      n=len(data['features'])
-      for i,e in enumerate(data['features'],1):
-        f.write(json.dumps(e)+(',' if i<n else '')+'\n')
-      f.write(']}\n')
-    except:
-      return json.dump(data,f,**kwargs)
-
-
+    return features
 
 
+def write_json(filename, data, **kwargs):
+    with open(filename, "w") as f:
+        try:
+            assert data["type"] == "FeatureCollection"
+            f.write('{"type":"FeatureCollection","features":[\n')
+            n = len(data["features"])
+            for i, e in enumerate(data["features"], 1):
+                f.write(json.dumps(e) + ("," if i < n else "") + "\n")
+            f.write("]}\n")
+        except:
+            return json.dump(data, f, **kwargs)
 
-PRIMITIVES={'Point':1,'MultiPoint':1,
-            'Line':2,'LineString':2,'MultiLineString':2,
-            'Area':3,'Polygon':3,'MultiPolygon':3}
+
+PRIMITIVES = {
+    "Point": 1,
+    "MultiPoint": 1,
+    "Line": 2,
+    "LineString": 2,
+    "MultiLineString": 2,
+    "Area": 3,
+    "Polygon": 3,
+    "MultiPolygon": 3,
+}
 
 
 # https://www.bsh.de/DE/PUBLIKATIONEN/Naut_Produktkatalog/naut_produktkatalog_node.html
-SCALES={1:1500000, 2:180000, 3:90000, 4:22000, 5:12000, 6:4000}
+SCALES = {1: 1500000, 2: 180000, 3: 90000, 4: 22000, 5: 12000, 6: 4000}
 
 
 def bounds(coords):
-  if isinstance(coords[0],dict):
-    snwe=None
-    for f in coords:
-      b=bounds(f['geometry']['coordinates'])
-      snwe=[m(a,b) for m,a,b in zip((min,max)*2,snwe or b,b)]
-    return snwe
+    if isinstance(coords[0], dict):
+        snwe = None
+        for f in coords:
+            b = bounds(f["geometry"]["coordinates"])
+            snwe = [m(a, b) for m, a, b in zip((min, max) * 2, snwe or b, b)]
+        return snwe
 
-  while True:
-    try: iter(coords[0])
-    except: break
-    coords=[x for l in coords for x in l]
-  coords = coords[:len(coords)-len(coords)%2]
-  assert len(coords)%2==0,coords
-  # print('coords',coords)
-  lons,lats=coords[::2],coords[1::2]
-  # print('lons',lons,'lats',lats)
-  return min(lats),max(lats),min(lons),max(lons)
+    while True:
+        try:
+            iter(coords[0])
+        except:
+            break
+        coords = [x for l in coords for x in l]
+    coords = coords[: len(coords) - len(coords) % 2]
+    assert len(coords) % 2 == 0, coords
+    # print('coords',coords)
+    lons, lats = coords[::2], coords[1::2]
+    # print('lons',lons,'lats',lats)
+    return min(lats), max(lats), min(lons), max(lons)
 
 
-def find_keys(dic,val):
-  return [k for k,v in dic.items() if v==val]
+def find_keys(dic, val):
+    return [k for k, v in dic.items() if v == val]
 
-def find_key(dic,val):
-  keys=find_keys(dic,val)
-  if len(keys)==1: return keys[0]
 
+def find_key(dic, val):
+    keys = find_keys(dic, val)
+    if len(keys) == 1:
+        return keys[0]
 
 
 def sort_key(feature):
-  p=PRIMITIVES[feature['geometry']['type']]
-  if p==1: return 2
-  if p==2: return 1
-  c=feature['geometry']['coordinates']
-  if 'Multi' in feature['geometry']['type']: c=c[0] # first polygon
-  p=shapely.Polygon(c[0]) # outer contour
-  return -abs(p.area) # sort by area, to get polygons big first, small last
+    p = PRIMITIVES[feature["geometry"]["type"]]
+    if p == 1:
+        return 2
+    if p == 2:
+        return 1
+    c = feature["geometry"]["coordinates"]
+    if "Multi" in feature["geometry"]["type"]:
+        c = c[0]  # first polygon
+    p = shapely.Polygon(c[0])  # outer contour
+    return -abs(p.area)  # sort by area, to get polygons big first, small last
 
 
+def features2senc(filename, features, scale_jitter=100):
+    features = sorted(features, key=sort_key)
 
-def features2senc(filename,features,scale_jitter=100):
-    features=sorted(features, key=sort_key)
+    S, N, W, E = bounds(features)  # cell/chart bounds
+    assert S < N and W < E
+    clon, clat = (W + E) / 2, (S + N) / 2  # cell center lon, lat
+    cx, cy = ll2grid(clon, clat)  # cell center in grid coordinates
 
-    S,N,W,E=bounds(features) # cell/chart bounds
-    assert S<N and W<E
-    clon,clat=(W+E)/2,(S+N)/2 # cell center lon, lat
-    cx,cy=ll2grid(clon,clat) # cell center in grid coordinates
-
-    version=201 if filename.endswith('.senc') else 200
-    chart=cell=min(o['properties'].get(CHART,'chart') for o in features)
-    uband=min(o['properties'].get('uband',0) for o in features)
-    scamax=min(o['properties'].get('SCAMAX',999999) for o in features)
-    scamin=max(o['properties'].get('SCAMIN',0) for o in features)
-    scale=max(o['properties'].get('scale',0) for o in features) or SCALES.get(uband,0) or scamin
-    sdatum=''
-    edition=1
-    published=''
-    update=0
-    updated=''
+    version = 201 if filename.endswith(".senc") else 200
+    chart = cell = min(o["properties"].get(CHART, "chart") for o in features)
+    uband = min(o["properties"].get("uband", 0) for o in features)
+    scamax = min(o["properties"].get("SCAMAX", 999999) for o in features)
+    scamin = max(o["properties"].get("SCAMIN", 0) for o in features)
+    scale = (
+        max(o["properties"].get("scale", 0) for o in features)
+        or SCALES.get(uband, 0)
+        or scamin
+    )
+    sdatum = ""
+    edition = 1
+    published = ""
+    update = 0
+    updated = ""
 
     # give overlapping cells not exactly the same scale
     # to prevent duplicate data to be rendered
     if scale_jitter:
-      scale+=hash(chart)%scale_jitter
+        scale += hash(chart) % scale_jitter
 
-    meta=CATALOG.get(cell)
+    meta = CATALOG.get(cell)
     if meta:
-      cell=meta['c_title']
-      scale=int(meta['c_scale'])
-      edition=int(meta['editionNumber'])
-      update=int(meta['updateNumber'])
-      published=meta.get('editionDate','')
-      updated=meta.get('issueDate','')
+        cell = meta["c_title"]
+        scale = int(meta["c_scale"])
+        edition = int(meta["editionNumber"])
+        update = int(meta["updateNumber"])
+        published = meta.get("editionDate", "")
+        updated = meta.get("issueDate", "")
     # else: return
 
-    print(f'[yellow]{chart} [magenta]u{uband} [green]1:{scale:,} [blue]ed{edition} [red]up{update} [grey]{cell}')
-    assert edition>0,edition
+    print(
+        f"[yellow]{chart} [magenta]u{uband} [green]1:{scale:,} [blue]ed{edition} [red]up{update} [white]{cell}"
+    )
+    assert edition > 0, edition
 
-    with SENC(filename,'w') as senc:
-      senc.add_record(type=HEADER_CELL_NAME, cellname=cell)
-      senc.add_record(type=HEADER_CELL_PUBLISHDATE, published=published)
-      senc.add_record(type=HEADER_CELL_EDITION, edition=edition)
-      senc.add_record(type=HEADER_CELL_UPDATEDATE, updated=updated)
-      senc.add_record(type=HEADER_CELL_UPDATE, update=update)
-      senc.add_record(type=HEADER_CELL_NATIVESCALE, scale=scale)
-      senc.add_record(type=HEADER_CELL_SENCCREATEDATE, created=datetime.now().strftime('%Y%m%d'))
-      # senc.add_record(type=HEADER_CELL_SOUNDINGDATUM, datum=sdatum)
+    with SENC(filename, "w") as senc:
+        senc.add_record(type=HEADER_CELL_NAME, cellname=cell)
+        senc.add_record(type=HEADER_CELL_PUBLISHDATE, published=published)
+        senc.add_record(type=HEADER_CELL_EDITION, edition=edition)
+        senc.add_record(type=HEADER_CELL_UPDATEDATE, updated=updated)
+        senc.add_record(type=HEADER_CELL_UPDATE, update=update)
+        senc.add_record(type=HEADER_CELL_NATIVESCALE, scale=scale)
+        senc.add_record(
+            type=HEADER_CELL_SENCCREATEDATE, created=datetime.now().strftime("%Y%m%d")
+        )
+        # senc.add_record(type=HEADER_CELL_SOUNDINGDATUM, datum=sdatum)
 
-      senc.add_record(type=CELL_EXTENT_RECORD,sw=(S,W),se=(S,E),ne=(N,E),nw=(N,W))
+        senc.add_record(
+            type=CELL_EXTENT_RECORD, sw=(S, W), se=(S, E), ne=(N, E), nw=(N, W)
+        )
 
-      def coverage(features):
-        k=0
-        for f in filter(lambda f:f['properties'].get('layer','').upper()=='M_COVR',features):
-          g=f['geometry']
-          assert g['type']=='Polygon',g
-          c=g['coordinates']
-          # assert len(c)==1,'coverage has holes'
-          # verts=[y[i] for x in c for y in x for i in (1,0)]
-          if len(c)>1: print('[red]skipping holes in coverage[/]')
-          verts=[x[i] for x in c[0] for i in (1,0)]
-          catcov=f['properties'].get('CATCOV',1)==1
-          ctype=CELL_COVR_RECORD if catcov else CELL_NOCOVR_RECORD
-          # print('coverage',catcov)
-          senc.add_record(type=ctype,array=verts)
-          k+=1
-        return k
+        def coverage(features):
+            k = 0
+            for f in filter(
+                lambda f: f["properties"].get("layer", "").upper() == "M_COVR", features
+            ):
+                g = f["geometry"]
+                assert g["type"] == "Polygon", g
+                c = g["coordinates"]
+                # assert len(c)==1,'coverage has holes'
+                # verts=[y[i] for x in c for y in x for i in (1,0)]
+                if len(c) > 1:
+                    print("[red]skipping holes in coverage[/]")
+                verts = [x[i] for x in c[0] for i in (1, 0)]
+                catcov = f["properties"].get("CATCOV", 1) == 1
+                ctype = CELL_COVR_RECORD if catcov else CELL_NOCOVR_RECORD
+                # print('coverage',catcov)
+                senc.add_record(type=ctype, array=verts)
+                k += 1
+            return k
 
-      if not coverage(features): # set coverage to bbox if no M_COVR present
-        coverage([{'type':'Feature',
-                   'properties':{'layer':'M_COVR','CATCOV':1},
-                   'geometry':{'type':'Polygon','coordinates':[[(W,S),(E,S),(E,N),(W,N),(W,S)]]}}])
+        if not coverage(features):  # set coverage to bbox if no M_COVR present
+            coverage(
+                [
+                    {
+                        "type": "Feature",
+                        "properties": {"layer": "M_COVR", "CATCOV": 1},
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [[(W, S), (E, S), (E, N), (W, N), (W, S)]],
+                        },
+                    }
+                ]
+            )
 
-      nodes,edges={},{}
+        nodes, edges = {}, {}
 
-      def contours(coordinates, ptype):
-        assert ptype in (2,3), ptype
-        conts=[]
-        edge_ids=[]
-        for c in coordinates:
-          edge=[(x-cx,y-cy) for x,y in map(lambda x:ll2grid(*x),c)]
-          conts.append(edge)
-          assert len(edge)>=2, edge
+        def contours(coordinates, ptype):
+            assert ptype in (2, 3), ptype
+            conts = []
+            edge_ids = []
+            for c in coordinates:
+                edge = [(x - cx, y - cy) for x, y in map(lambda x: ll2grid(*x), c)]
+                conts.append(edge)
+                assert len(edge) >= 2, edge
 
-          # first/last node of edge
-          node0,node1=edge[0],edge[-1]
+                # first/last node of edge
+                node0, node1 = edge[0], edge[-1]
 
-          node0_id=find_key(nodes,node0)
-          if not node0_id:
-            node0_id=len(nodes)+1
-            nodes[node0_id]=node0
-          # else: print('node',node0_id)
+                node0_id = find_key(nodes, node0)
+                if not node0_id:
+                    node0_id = len(nodes) + 1
+                    nodes[node0_id] = node0
+                # else: print('node',node0_id)
 
-          if ptype==3:
-            assert node0==node1, 'polygon not closed'
-            node1_id=node0_id
-          else:
-            node1_id=find_key(nodes,node1)
-            if not node1_id:
-              node1_id=len(nodes)+1
-              nodes[node1_id]=node1
+                if ptype == 3:
+                    assert node0 == node1, "polygon not closed"
+                    node1_id = node0_id
+                else:
+                    node1_id = find_key(nodes, node1)
+                    if not node1_id:
+                        node1_id = len(nodes) + 1
+                        nodes[node1_id] = node1
 
-          edge=edge[1:-1] # inner nodes of edge
-          edge_id=0
-          if edge:
-            edge_id=find_key(edges,edge)
-            if not edge_id:
-              edge_id=len(edges)+1
-              edges[edge_id]=edge
-            # else: print('edge',edge_id)
-          edge_ids.append((node0_id,edge_id,node1_id,0))
+                edge = edge[1:-1]  # inner nodes of edge
+                edge_id = 0
+                if edge:
+                    edge_id = find_key(edges, edge)
+                    if not edge_id:
+                        edge_id = len(edges) + 1
+                        edges[edge_id] = edge
+                    # else: print('edge',edge_id)
+                edge_ids.append((node0_id, edge_id, node1_id, 0))
 
-        bbox=bounds(coordinates) # feature bounds
+            bbox = bounds(coordinates)  # feature bounds
 
-        if ptype==2:
-          senc.add_record(type=FEATURE_GEOMETRY_RECORD_LINE, bbox=bbox, edges=edge_ids)
+            if ptype == 2:
+                senc.add_record(
+                    type=FEATURE_GEOMETRY_RECORD_LINE, bbox=bbox, edges=edge_ids
+                )
 
-        if ptype==3:
-          def triangulate(polygon):
-            verts=np.array([v for c in polygon for v in c]).reshape(-1,2)
-            rings=list(accumulate(len(c) for c in polygon))
-            indices=earcut.triangulate_float32(verts, rings)
-            return [verts[i] for i in indices]
+            if ptype == 3:
 
-          # ttype: 4=tris 5=strip 6=fan
-          senc.add_record(type=FEATURE_GEOMETRY_RECORD_AREA, bbox=bbox,
-                          contours=len(conts), pointcount=[len(c) for c in conts], edges=edge_ids,
-                          triangles=[{'ttype':4, 'bbox':bbox[2:4]+bbox[:2], 'vertices':triangulate(conts)}])
+                def triangulate(polygon):
+                    verts = np.array([v for c in polygon for v in c]).reshape(-1, 2)
+                    rings = list(accumulate(len(c) for c in polygon))
+                    indices = earcut.triangulate_float32(verts, rings)
+                    return [verts[i] for i in indices]
 
+                # ttype: 4=tris 5=strip 6=fan
+                senc.add_record(
+                    type=FEATURE_GEOMETRY_RECORD_AREA,
+                    bbox=bbox,
+                    contours=len(conts),
+                    pointcount=[len(c) for c in conts],
+                    edges=edge_ids,
+                    triangles=[
+                        {
+                            "ttype": 4,
+                            "bbox": bbox[2:4] + bbox[:2],
+                            "vertices": triangulate(conts),
+                        }
+                    ],
+                )
 
-      def attributes(p):
-        for a,v in p.items():
-          atype=acronym_code(a)
-          if v is None: continue
-          if atype is None:
-            # print('skipped',a)
-            continue
-          # print(s57attr[atype])
-          if s57attr[atype][2]=='E': v=int(v)
-          if s57attr[atype][2]=='F': v=float(v)
-          if s57attr[atype][2]=='L': v=str(v)
-          # print(a,v,acronym_code(a),vtype,type(v))
-          senc.add_record(type=FEATURE_ATTRIBUTE_RECORD,atype=atype,value=v)
+        def attributes(p):
+            for a, v in p.items():
+                atype = acronym_code(a)
+                if v is None:
+                    continue
+                if atype is None:
+                    # print('skipped',a)
+                    continue
+                # print(s57attr[atype])
+                if s57attr[atype][2] == "E":
+                    v = int(v)
+                if s57attr[atype][2] == "F":
+                    v = float(v)
+                if s57attr[atype][2] == "L":
+                    v = str(v)
+                # print(a,v,acronym_code(a),vtype,type(v))
+                senc.add_record(type=FEATURE_ATTRIBUTE_RECORD, atype=atype, value=v)
 
-      for f in features:
-        p=f['properties']
-        l=p['layer']
-        if l.upper()=='SOUNDG': continue
-        g=f['geometry']
-        gtype=g['type']
-        ptype=PRIMITIVES[gtype]
-        c=g['coordinates']
-        if len(l)!=6: continue
-        ftype=acronym_code(l)
-        if ftype is None:
-          print('[red]skipped[/]',l)
-          continue
-        # print(l,ftype)
-        primitives={PRIMITIVES[v] for v in s57obj[ftype][6]}
-        if ptype not in primitives:
-          if ptype==2 and 3 in primitives:
-            print('[yellow]line -> polygon[/]',l,gtype)
-            assert 'Line' in gtype
-            if 'Multi' in gtype:
-              gtype='MultiPolygon'
-              c=[[l] for l in c] # lines as outer contours
+        for f in features:
+            p = f["properties"]
+            l = p["layer"]
+            if l.upper() == "SOUNDG":
+                continue
+            g = f["geometry"]
+            gtype = g["type"]
+            ptype = PRIMITIVES[gtype]
+            c = g["coordinates"]
+            if len(l) != 6:
+                continue
+            ftype = acronym_code(l)
+            if ftype is None:
+                print("[red]skipped[/]", l)
+                continue
+            # print(l,ftype)
+            primitives = {PRIMITIVES[v] for v in s57obj[ftype][6]}
+            if ptype not in primitives:
+                if ptype == 2 and 3 in primitives:
+                    print("[yellow]line -> polygon[/]", l, gtype)
+                    assert "Line" in gtype
+                    if "Multi" in gtype:
+                        gtype = "MultiPolygon"
+                        c = [[l] for l in c]  # lines as outer contours
+                    else:
+                        gtype = "Polygon"
+                        c = [c]  # line as outer contour
+                elif ptype == 3 and 2 in primitives:
+                    print("[yellow]polygon -> line[/]", l, gtype)
+                    assert "Polygon" in gtype
+                    if "Multi" in gtype:
+                        gtype = "MultiLineString"
+                        c = [p[0] for p in c]  # outer contours as lines
+                    else:
+                        gtype = "LineString"
+                        c = c[0]  # outer contour as line
+                else:
+                    print("[red]skipped invalid primitive[/]", l, gtype)
+                    continue
+
+            senc.add_record(type=FEATURE_ID_RECORD, ftype=ftype, primitive=ptype - 1)
+            attributes(p)
+
+            if gtype == "Point":
+                senc.add_record(type=FEATURE_GEOMETRY_RECORD_POINT, lat=c[1], lon=c[0])
+
+            elif "Line" in gtype:
+                if "Multi" not in gtype:
+                    c = [c]
+                contours(c, ptype)
+
+            elif "Polygon" in gtype:
+                if "Multi" in gtype:
+                    for p in c:
+                        contours(p, ptype)
+                else:
+                    contours(c, ptype)
             else:
-              gtype='Polygon'
-              c=[c] # line as outer contour
-          elif ptype==3 and 2 in primitives:
-            print('[yellow]polygon -> line[/]',l,gtype)
-            assert 'Polygon' in gtype
-            if 'Multi' in gtype:
-              gtype='MultiLineString'
-              c=[p[0] for p in c] # outer contours as lines
-            else:
-              gtype='LineString'
-              c=c[0] # outer contour as line
-          else:
-            print('[red]skipped invalid primitive[/]',l,gtype)
-            continue
+                print("[red]skipped[/]", l, gtype, ptype)
 
-        senc.add_record(type=FEATURE_ID_RECORD,ftype=ftype,primitive=ptype-1)
-        attributes(p)
+        if nodes:
+            # print('nodes',len(nodes))
+            senc.add_record(type=VECTOR_CONNECTED_NODE_TABLE_RECORD, nodes=nodes)
 
-        if gtype=='Point':
-          senc.add_record(type=FEATURE_GEOMETRY_RECORD_POINT,lat=c[1],lon=c[0])
+        if edges:
+            # print('edges',len(edges))
+            senc.add_record(type=VECTOR_EDGE_NODE_TABLE_RECORD, edges=edges)
 
-        elif 'Line' in gtype:
-          if 'Multi' not in gtype: c=[c]
-          contours(c,ptype)
+        # convert soundings to 3D multipoints
+        soundings = defaultdict(list)  # group by attributes
+        for s in filter(
+            lambda o: o["properties"]["layer"].upper() == "SOUNDG", features
+        ):
+            p = str(
+                {
+                    k: v
+                    for k, v in s["properties"].items()
+                    if k.upper() not in ("VALSOU", "DEPTH")
+                }
+            )
+            soundings[p].append(s)
 
-        elif 'Polygon' in gtype:
-          if 'Multi' in gtype:
-            for p in c: contours(p,ptype)
-          else:
-            contours(c,ptype)
-        else: print('[red]skipped[/]',l,gtype,ptype)
-
-      if nodes:
-        # print('nodes',len(nodes))
-        senc.add_record(type=VECTOR_CONNECTED_NODE_TABLE_RECORD,nodes=nodes)
-
-      if edges:
-        # print('edges',len(edges))
-        senc.add_record(type=VECTOR_EDGE_NODE_TABLE_RECORD,edges=edges)
-
-
-      # convert soundings to 3D multipoints
-      soundings=defaultdict(list) # group by attributes
-      for s in filter(lambda o:o['properties']['layer'].upper()=='SOUNDG',features):
-        p=str({k:v for k,v in s['properties'].items() if k.upper() not in ('VALSOU','DEPTH')})
-        soundings[p].append(s)
-
-      ftype=acronym_code('SOUNDG')
-      # print('SOUNDGs',len(soundings))
-      for sdgs in soundings.values():
-        s=sdgs[0]
-        props={k:v for k,v in s['properties'].items() if k.upper() not in ('VALSOU','DEPTH')}
-        senc.add_record(type=FEATURE_ID_RECORD, ftype=ftype, primitive=0)
-        attributes(props)
-        bbox=bounds([s['geometry']['coordinates'] for s in sdgs])
-        points=[]
-        for s in sdgs:
-          c=s['geometry']['coordinates'][:2]
-          x,y=[a-b for a,b in zip(ll2grid(*c),(cx,cy))]
-          p=s['properties']
-          d=p.get('VALSOU',p.get('DEPTH'))
-          if d is not None: points.append((x,y,d))
-        senc.add_record(type=FEATURE_GEOMETRY_RECORD_MULTIPOINT, bbox=bbox, points=points)
+        ftype = acronym_code("SOUNDG")
+        # print('SOUNDGs',len(soundings))
+        for sdgs in soundings.values():
+            s = sdgs[0]
+            props = {
+                k: v
+                for k, v in s["properties"].items()
+                if k.upper() not in ("VALSOU", "DEPTH")
+            }
+            senc.add_record(type=FEATURE_ID_RECORD, ftype=ftype, primitive=0)
+            attributes(props)
+            bbox = bounds([s["geometry"]["coordinates"] for s in sdgs])
+            points = []
+            for s in sdgs:
+                c = s["geometry"]["coordinates"][:2]
+                x, y = [a - b for a, b in zip(ll2grid(*c), (cx, cy))]
+                p = s["properties"]
+                d = p.get("VALSOU", p.get("DEPTH"))
+                if d is not None:
+                    points.append((x, y, d))
+            senc.add_record(
+                type=FEATURE_GEOMETRY_RECORD_MULTIPOINT, bbox=bbox, points=points
+            )
 
 
 def read_features(filename):
-    features=[]
-    layer=splitext(basename(filename))[0]
+    features = []
+    layer = splitext(basename(filename))[0]
     with open(filename) as g:
-      for f in json.load(g)['features']:
-        p=f['properties']
-        p=f['properties']={k: v for k, v in p.items() if v is not None} # drop empty fields
-        p=f['properties']={k: ','.join(map(str,v)) if isinstance(v,list) else v for k, v in p.items()} # merge lists into strings
-        if not f['geometry'] or not f['geometry']['coordinates']: continue # drop w/o geometry
-        p['layer']=p.get('layer',layer)
-        features.append(f)
+        for f in json.load(g)["features"]:
+            p = f["properties"]
+            p = f["properties"] = {
+                k: v for k, v in p.items() if v is not None
+            }  # drop empty fields
+            p = f["properties"] = {
+                k: ",".join(map(str, v)) if isinstance(v, list) else v
+                for k, v in p.items()
+            }  # merge lists into strings
+            if not f["geometry"] or not f["geometry"]["coordinates"]:
+                continue  # drop w/o geometry
+            p["layer"] = p.get("layer", layer)
+            features.append(f)
     return features
 
 
-
 def main():
-    parser = ArgumentParser(description="chart converter: S57/SENC <--> GeoJSON and SENC --> S57", formatter_class=ArgumentDefaultsHelpFormatter)
+    parser = ArgumentParser(
+        description="chart converter: S57/SENC <--> GeoJSON and SENC --> S57",
+        formatter_class=ArgumentDefaultsHelpFormatter,
+    )
     parser.add_argument("input", help="input files (senc/json)", nargs="+")
-    parser.add_argument('-o',"--output", help="output dir", default='.')
-    parser.add_argument('-s',"--s57", help="convert SENC to S57", action='store_true')
-    parser.add_argument('-t',"--title", help="S57 chart title")
-    parser.add_argument('-u',"--uband", help="override usage band (1-6), sets native scale", type=int)
-    parser.add_argument('-c',"--chart", help="override chart field")
-    parser.add_argument('-j',"--jitter", help="scale jitter to prevent duplicate data on same scale", type=int, default=0)
+    parser.add_argument("-o", "--output", help="output dir", default=".")
+    parser.add_argument("-s", "--s57", help="convert SENC to S57", action="store_true")
+    parser.add_argument("-t", "--title", help="S57 chart title")
+    parser.add_argument(
+        "-u", "--uband", help="override usage band (1-6), sets native scale", type=int
+    )
+    parser.add_argument("-c", "--chart", help="override chart field")
+    parser.add_argument(
+        "-j",
+        "--jitter",
+        help="scale jitter to prevent duplicate data on same scale",
+        type=int,
+        default=0,
+    )
     args = parser.parse_args()
 
     files = args.input
     out = args.output
     makedirs(out, exist_ok=True)
 
-
     # SENC --> S57
     if args.s57:
-      write_txt(join(out,'Chartinfo.txt'),f'ChartInfo:{basename(out)}\n')
-      for fi in track(files,'SENC --> S57'):
-        fo=join(out,basename(fi).replace('.senc','.S57'))
-        print(fi,'-->',fo)
-        senc2s57(fi,fo,scale=SCALES.get(args.uband))
-      return
+        write_txt(join(out, "Chartinfo.txt"), f"ChartInfo:{basename(out)}\n")
+        for fi in track(files, "SENC --> S57"):
+            fo = join(out, basename(fi).replace(".senc", ".S57"))
+            print(fi, "-->", fo)
+            senc2s57(fi, fo, scale=SCALES.get(args.uband))
+        return
 
     # GeoJSON --> SENC
-    if files[0].endswith('json'):
-      title = args.title or basename(out)
-      write_txt(join(out,'Chartinfo.txt'),f'ChartInfo:{title}\n')
-      features=[]
-      for fi in track(files,'reading GeoJSON'):
-        print(fi)
-        features+=read_features(fi)
+    if files[0].endswith("json"):
+        title = args.title or basename(out)
+        write_txt(join(out, "Chartinfo.txt"), f"ChartInfo:{title}\n")
+        features = []
+        for fi in track(files, "reading GeoJSON"):
+            print(fi)
+            features += read_features(fi)
 
-      if args.uband:
-        for f in features:
-          f['properties']['uband']=args.uband
+        if args.uband:
+            for f in features:
+                f["properties"]["uband"] = args.uband
 
-      if args.chart:
-        for f in features:
-          f['properties'][CHART]=args.chart
+        if args.chart:
+            for f in features:
+                f["properties"][CHART] = args.chart
 
-      charts=set(filter(lambda f:f,(f['properties'].get(CHART) for f in features)))
-      print(len(charts),'charts')
-      for c in track(sorted(charts),'writing S57'):
-        data1=list(filter(lambda f:f['geometry'] and f['properties'].get(CHART)==c,features))
-        s,n,w,e=bounds(data1)
-        uband=min(o['properties'].get('uband',0) for o in data1)
+        charts = set(
+            filter(lambda f: f, (f["properties"].get(CHART) for f in features))
+        )
+        print(len(charts), "charts")
+        for c in track(sorted(charts), "writing S57"):
+            data1 = list(
+                filter(
+                    lambda f: f["geometry"] and f["properties"].get(CHART) == c,
+                    features,
+                )
+            )
+            s, n, w, e = bounds(data1)
+            uband = min(o["properties"].get("uband", 0) for o in data1)
 
-        def filt(f):
-          if CHART in f['properties']: return
-          if not f['geometry']: return
-          if f['geometry']['type']!='Point': return
-          if f['properties'].get('uband')!=uband: return
-          lon,lat=f['geometry']['coordinates']
-          return w<=lon<=e and s<=lat<=n
+            def filt(f):
+                if CHART in f["properties"]:
+                    return
+                if not f["geometry"]:
+                    return
+                if f["geometry"]["type"] != "Point":
+                    return
+                if f["properties"].get("uband") != uband:
+                    return
+                lon, lat = f["geometry"]["coordinates"]
+                return w <= lon <= e and s <= lat <= n
 
-        data2=list(filter(filt,features))
-        # if data2: print('added points:',len(data2))
-        features2senc(join(out,c+'.S57'),data1+data2,args.jitter)
-      return
-
+            data2 = list(filter(filt, features))
+            # if data2: print('added points:',len(data2))
+            features2senc(join(out, c + ".S57"), data1 + data2, args.jitter)
+        return
 
     # SENC --> GeoJSON
     features = []
-    for f in track(files,'reading SENCs'):
-      print(f)
-      features+=senc2features(f,out)
+    for f in track(files, "reading SENCs"):
+        print(f)
+        features += senc2features(f, out)
 
-    for l in track(sorted({f.properties['layer'] for f in features}),'writing GeoJSON'):
-        fs = list(filter(lambda f: f.properties['layer'] == l, features))
-        if l=='text':
-          for f in fs:
-            filename,text=f.properties['filename'],f.properties['text']
-            print(filename)
-            write_txt(join(out,filename),text)
-          continue
+    for l in track(
+        sorted({f.properties["layer"] for f in features}), "writing GeoJSON"
+    ):
+        fs = list(filter(lambda f: f.properties["layer"] == l, features))
+        if l == "text":
+            for f in fs:
+                filename, text = f.properties["filename"], f.properties["text"]
+                print(filename)
+                write_txt(join(out, filename), text)
+            continue
         print(l, len(fs))
         write_json(f"{out}/{l}.json", FeatureCollection(fs))
 
