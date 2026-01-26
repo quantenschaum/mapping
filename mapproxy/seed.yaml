@@ -1,65 +1,65 @@
 seeds:
   overview:
-    caches: [ qmap-de ]
-    levels: [ 7,8,9 ] # <=7
-    coverages: [ overview ]
+    caches: [qmap-de]
+    levels: [7, 8, 9] # <=7
+    coverages: [overview]
   general:
-    caches: [ qmap-de ]
-    levels: [ 10 ] # 10
-    coverages: [ general ]
+    caches: [qmap-de]
+    levels: [10] # 10
+    coverages: [general]
   coastal:
-    caches: [ qmap-de ]
-    levels: [ 11,12 ] # 11,13
-    coverages: [ coastal ]
+    caches: [qmap-de]
+    levels: [11, 12] # 11,13
+    coverages: [coastal]
   # for following levels also seed lower level because there are
   # "holes" in the coverage and allow 2 steps overzoom,
   # 2 zoom levels blow are underlayed in the mapproxy config
   # so, a lower level map is shown in the background
   approach:
-    caches: [ qmap-de ]
-    levels: [ 13,14,15 ] # 13,14
-    coverages: [ approach ]
+    caches: [qmap-de]
+    levels: [13, 14, 15] # 13,14
+    coverages: [approach]
   harbour:
-    caches: [ qmap-de ]
-    levels: [ 13,14,15,16,17 ] # 15,16
-    coverages: [ harbour ]
+    caches: [qmap-de]
+    levels: [13, 14, 15, 16, 17] # 15,16
+    coverages: [harbour]
   berthing:
-    caches: [ qmap-de ]
-    levels: [ 13,14,15,16,17,18 ] # >=17
-    coverages: [ berthing ]
+    caches: [qmap-de]
+    levels: [13, 14, 15, 16, 17, 18] # >=17
+    coverages: [berthing]
   rws:
-    caches: [ qmap-nl ]
+    caches: [qmap-nl]
     levels:
-      from: 6
+      from: 9
       to: 16
-    coverages: [ rws ]
+    coverages: [rws]
 
 coverages:
   overview:
     datasource: ../data/bsh.gpkg
     where: RECIND="Overview"
-    srs: 'EPSG:4326'
+    srs: "EPSG:4326"
   general:
     datasource: ../data/bsh.gpkg
     where: RECIND="General"
-    srs: 'EPSG:4326'
+    srs: "EPSG:4326"
   coastal:
     datasource: ../data/bsh.gpkg
     where: RECIND="Coastal"
-    srs: 'EPSG:4326'
+    srs: "EPSG:4326"
   approach:
     datasource: ../data/bsh.gpkg
     where: RECIND="Approach"
-    srs: 'EPSG:4326'
+    srs: "EPSG:4326"
   harbour:
     datasource: ../data/bsh.gpkg
     where: RECIND="Harbour"
-    srs: 'EPSG:4326'
+    srs: "EPSG:4326"
   berthing:
     datasource: ../data/bsh.gpkg
     where: RECIND="Berthing"
-    srs: 'EPSG:4326'
+    srs: "EPSG:4326"
   rws:
     datasource: ../data/rws-covr.gpkg
     where: CATCOV=1
-    srs: 'EPSG:4326'
+    srs: "EPSG:4326"
