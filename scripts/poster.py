@@ -33,7 +33,7 @@ TEX = r"""\documentclass{article}
 \usepackage[cam,a4,center,pdflatex]{crop}
 \begin{document}
 % Globals: include all pages, don't auto scale
-\includepdf[pages=-,pagecommand={\thispagestyle{plain}}]{pages.pdf}
+\includepdf[pages=-,pagecommand={\thispagestyle{empty}}]{pages.pdf}
 \end{document}
 """
 
@@ -56,9 +56,12 @@ def main():
         "-m", "--media", help="media size, printable area", default="190x277mm"
     )
     parser.add_argument("-o", "--open", help="open resulting pdf", action="store_true")
+    parser.add_argument(
+        "-C", "--no-cleanup", help="keep intermediate files", action="store_true"
+    )
     args = parser.parse_args()
 
-    output = args.output or args.input.replace(".pdf", ".sheets.pdf")
+    output = args.output or args.input.replace(".pdf", f".{args.pages}.pdf")
 
     if args.scale:
         opts = f"-s{args.scale}"
@@ -73,9 +76,11 @@ def main():
     with open("sheets.tex", "w") as f:
         f.write(TEX)
     run("latexmk -pdf -interaction=nonstopmode sheets.tex")
-    os.rename("sheets.pdf", output)
-    os.remove("pages.pdf")
-    run("latexmk -C")
+    if not args.no_cleanup:
+        os.rename("sheets.pdf", output)
+        run("latexmk -C")
+        os.remove("pages.pdf")
+        os.remove("sheets.tex")
     if args.open:
         run(f'xdg-open "{output}"')
 
