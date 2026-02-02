@@ -103,6 +103,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
+    include: ["leaflet"],
     exclude: ["leaflet.control.opacity"],
   },
   server: {

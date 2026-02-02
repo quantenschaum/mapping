@@ -28,6 +28,8 @@ import { ackee } from "./ackee";
 import { addTidealAtlas, addTideGauges } from "./tides";
 import { addBfS, addNfS } from "./bfs";
 import { PMTiles, leafletRasterLayer } from "pmtiles";
+import "leaflet-mouse-position";
+import "leaflet-mouse-position/src/L.Control.MousePosition.css";
 
 const params = new URLSearchParams(window.location.search);
 const isDevMode = process.env.NODE_ENV === "development";
@@ -451,6 +453,16 @@ if (isDevMode || isStandalone) {
   new NightSwitch().addTo(map);
   new WeatherForecast().addTo(map);
 }
+
+L.control
+  .mousePosition({
+    latFormatter: (v) => degmin(v, 3, 1, 1),
+    lngFormatter: (v) => degmin(v, 3, 0, 1),
+    prefix: "",
+    separator: "\n ",
+    emptyString: "",
+  })
+  .addTo(map);
 
 if (isSet("ais")) {
   import("./ais").then(({ AISButton }) => {

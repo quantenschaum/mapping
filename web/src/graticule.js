@@ -9,18 +9,18 @@ export function degmin(v, n = 2, lat = true, pad = false) {
     m -= 60;
     d += 1;
   }
-  var M = m == 0 ? '' : m.toFixed(n).replace(/\.?0+$/, "") + "'";
+  var M = m == 0 ? "" : m.toFixed(n).replace(/\.?0+$/, "") + "'";
   if (lat) {
-    var s = v < 0 ? 'S' : v > 0 ? 'N' : '';
+    var s = v < 0 ? "S" : v > 0 ? "N" : "";
   } else {
     v %= 360;
     v -= Math.abs(v) > 180 ? Math.sign(v) * 360 : 0;
-    var s = v < 0 ? 'W' : v > 0 ? 'E' : '';
+    var s = v < 0 ? "W" : v > 0 ? "E" : "";
   }
   if (pad) {
-    s += lat ? ' ' : '';
-    d = d.toString().padStart(lat ? 2 : 3, '0');
-    M = m == 0 ? '' : m.toFixed(n).padStart(n + (n ? 3 : 2), '0') + "'";
+    s += lat ? " " : "";
+    d = d.toString().padStart(lat ? 2 : 3, "0");
+    M = m == 0 ? "" : m.toFixed(n).padStart(n + (n ? 3 : 2), "0") + "'";
   }
   return `${s} ${d}° ${M}`;
 }
@@ -31,36 +31,36 @@ L.LatLngGraticule = L.Layer.extend({
     borders: 10,
     opacity: 1,
     weight: 1,
-    color: '#333',
-    fontFamily: 'Open Sans, Verdana, sans-serif',
+    color: "#333",
+    fontFamily: "Open Sans, Verdana, sans-serif",
     fontSize: 12,
-    fontColor: 'black',
+    fontColor: "black",
     intervals: [
-      {start: 2, interval: 30},
-      {start: 5, interval: 20},
-      {start: 6, interval: 10},
-      {start: 7, interval: 5},
-      {start: 8, interval: 2},
-      {start: 9, interval: 1},
-      {start: 10, interval: 30 / 60},
-      {start: 11, interval: 15 / 60},
-      {start: 12, interval: 10 / 60},
-      {start: 13, interval: 5 / 60},
-      {start: 14, interval: 2 / 60},
-      {start: 15, interval: 1 / 60},
-      {start: 16, interval: 1 / 60 / 2},
-      {start: 17, interval: 1 / 60 / 5},
-      {start: 18, interval: 1 / 60 / 10},
+      { start: 2, interval: 30 },
+      { start: 5, interval: 20 },
+      { start: 6, interval: 10 },
+      { start: 7, interval: 5 },
+      { start: 8, interval: 2 },
+      { start: 9, interval: 1 },
+      { start: 10, interval: 30 / 60 },
+      { start: 11, interval: 15 / 60 },
+      { start: 12, interval: 10 / 60 },
+      { start: 13, interval: 5 / 60 },
+      { start: 14, interval: 2 / 60 },
+      { start: 15, interval: 1 / 60 },
+      { start: 16, interval: 1 / 60 / 2 },
+      { start: 17, interval: 1 / 60 / 5 },
+      { start: 18, interval: 1 / 60 / 10 },
     ],
-    latFormatTickLabel: v => degmin(v, 2, true),
-    lngFormatTickLabel: v => degmin(v, 2, false),
+    latFormatTickLabel: (v) => degmin(v, 2, true),
+    lngFormatTickLabel: (v) => degmin(v, 2, false),
   },
 
   initialize: function (options) {
     // console.log('init graticule');
     L.setOptions(this, options);
     if (this.options.borders) {
-      var css = document.createElement('style');
+      var css = document.createElement("style");
       const m = this.options.borders + 1;
       css.innerHTML = `.grid .leaflet-control-attribution { margin-bottom: ${m}px !important; margin-left: ${m}px !important; margin-right: ${m}px !important; } .grid .leaflet-control-scale { margin-bottom: ${m + 5}px !important; margin-left: ${m + 5}px !important; }`;
       document.head.appendChild(css);
@@ -72,20 +72,20 @@ L.LatLngGraticule = L.Layer.extend({
     this._map = map;
     if (!this._container) this._initCanvas();
     map.getPanes().overlayPane.appendChild(this._container);
-    map.on('viewreset', this._reset, this);
-    map.on('move', this._reset, this);
-    map.on('moveend', this._reset, this);
-    map.getContainer().classList.add('grid');
+    map.on("viewreset", this._reset, this);
+    map.on("move", this._reset, this);
+    map.on("moveend", this._reset, this);
+    map.getContainer().classList.add("grid");
     this._reset();
   },
 
   onRemove: function (map) {
     // console.log('remove graticule');
     map.getPanes().overlayPane.removeChild(this._container);
-    map.off('viewreset', this._reset, this);
-    map.off('move', this._reset, this);
-    map.off('moveend', this._reset, this);
-    map.getContainer().classList.remove('grid');
+    map.off("viewreset", this._reset, this);
+    map.off("move", this._reset, this);
+    map.off("moveend", this._reset, this);
+    map.getContainer().classList.remove("grid");
   },
 
   addTo: function (map) {
@@ -119,13 +119,13 @@ L.LatLngGraticule = L.Layer.extend({
   },
 
   _initCanvas: function () {
-    this._container = L.DomUtil.create('div', 'leaflet-image-layer');
-    this._canvas = L.DomUtil.create('canvas', '');
+    this._container = L.DomUtil.create("div", "leaflet-image-layer");
+    this._canvas = L.DomUtil.create("canvas", "");
 
     if (this._map.options.zoomAnimation && L.Browser.any3d) {
-      L.DomUtil.addClass(this._canvas, 'leaflet-zoom-animated');
+      L.DomUtil.addClass(this._canvas, "leaflet-zoom-animated");
     } else {
-      L.DomUtil.addClass(this._canvas, 'leaflet-zoom-hide');
+      L.DomUtil.addClass(this._canvas, "leaflet-zoom-hide");
     }
 
     this._updateOpacity();
@@ -135,7 +135,7 @@ L.LatLngGraticule = L.Layer.extend({
     L.extend(this._canvas, {
       onselectstart: L.Util.falseFn,
       onmousemove: L.Util.falseFn,
-      onload: L.bind(this._onCanvasLoad, this)
+      onload: L.bind(this._onCanvasLoad, this),
     });
   },
 
@@ -147,13 +147,13 @@ L.LatLngGraticule = L.Layer.extend({
 
     L.DomUtil.setPosition(container, lt);
 
-    container.style.width = size.x + 'px';
-    container.style.height = size.y + 'px';
+    container.style.width = size.x + "px";
+    container.style.height = size.y + "px";
 
     canvas.width = size.x;
     canvas.height = size.y;
-    canvas.style.width = size.x + 'px';
-    canvas.style.height = size.y + 'px';
+    canvas.style.width = size.x + "px";
+    canvas.style.height = size.y + "px";
 
     this.__calcInterval();
 
@@ -161,7 +161,7 @@ L.LatLngGraticule = L.Layer.extend({
   },
 
   _onCanvasLoad: function () {
-    this.fire('load');
+    this.fire("load");
   },
 
   _updateOpacity: function () {
@@ -180,8 +180,8 @@ L.LatLngGraticule = L.Layer.extend({
     this._currLngInterval = 0;
     this._currLatInterval = 0;
     const zoom = this._map.getZoom();
-    const latScale = 1 / Math.cos(this._map.getCenter().lat * Math.PI / 180);
-    this.options.intervals.forEach(i => {
+    const latScale = 1 / Math.cos((this._map.getCenter().lat * Math.PI) / 180);
+    this.options.intervals.forEach((i) => {
       if (i.start <= zoom) {
         this._currLngInterval = i.interval;
       }
@@ -196,9 +196,10 @@ L.LatLngGraticule = L.Layer.extend({
     const map = this._map;
     if (!L.Browser.canvas || !map) return;
     this.__calcInterval();
-    const latInterval = this._currLatInterval, lngInterval = this._currLngInterval;
+    const latInterval = this._currLatInterval,
+      lngInterval = this._currLngInterval;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.lineWidth = this.options.weight;
     ctx.strokeStyle = this.options.color;
@@ -234,10 +235,11 @@ L.LatLngGraticule = L.Layer.extend({
       if (this.options.showLabel) {
         const label = this.__format_lat(latitude);
         const txtWidth = ctx.measureText(label).width;
-        const yt = y + (txtHeight / 2) - 2;
-        const w = ctx.lineWidth, s = ctx.strokeStyle;
+        const yt = y + txtHeight / 2 - 2;
+        const w = ctx.lineWidth,
+          s = ctx.strokeStyle;
         ctx.lineWidth = 3;
-        ctx.strokeStyle = 'white';
+        ctx.strokeStyle = "white";
         ctx.strokeText(label, 0 + textShift, yt);
         ctx.strokeText(label, width - txtWidth - textShift, yt);
         ctx.lineWidth = w;
@@ -252,7 +254,7 @@ L.LatLngGraticule = L.Layer.extend({
     if (latInterval > 0) {
       const l0 = Math.floor(south / latInterval) * latInterval;
       for (let i = 0, l = l0; l < north; i++) {
-        lat_line(l = l0 + i * latInterval);
+        lat_line((l = l0 + i * latInterval));
       }
     }
 
@@ -269,13 +271,13 @@ L.LatLngGraticule = L.Layer.extend({
         const w = ctx.lineWidth;
         const s = ctx.strokeStyle;
         ctx.lineWidth = 3;
-        ctx.strokeStyle = 'white';
-        ctx.strokeText(label, x - (txtWidth / 2), txtHeight - 1 + textShift);
-        ctx.strokeText(label, x - (txtWidth / 2), height - 1 - textShift);
+        ctx.strokeStyle = "white";
+        ctx.strokeText(label, x - txtWidth / 2, txtHeight - 1 + textShift);
+        ctx.strokeText(label, x - txtWidth / 2, height - 1 - textShift);
         ctx.lineWidth = w;
         ctx.strokeStyle = s;
-        ctx.fillText(label, x - (txtWidth / 2), txtHeight - 1 + textShift);
-        ctx.fillText(label, x - (txtWidth / 2), height - 1 - textShift);
+        ctx.fillText(label, x - txtWidth / 2, txtHeight - 1 + textShift);
+        ctx.fillText(label, x - txtWidth / 2, height - 1 - textShift);
       }
     }
 
@@ -284,7 +286,7 @@ L.LatLngGraticule = L.Layer.extend({
     if (lngInterval > 0) {
       const l0 = Math.floor(west / lngInterval) * lngInterval;
       for (let i = 0, l = l0; l < east; i++) {
-        lon_line(l = l0 + i * lngInterval);
+        lon_line((l = l0 + i * lngInterval));
       }
     }
 
@@ -292,7 +294,12 @@ L.LatLngGraticule = L.Layer.extend({
       ctx.lineWidth = weight;
       ctx.beginPath();
       const o = (ctx.lineWidth / 2) % 1;
-      ctx.rect(inset + o, inset + o, width - 2 * inset - o, height - 2 * inset - o);
+      ctx.rect(
+        inset + o,
+        inset + o,
+        width - 2 * inset - o,
+        height - 2 * inset - o,
+      );
       ctx.stroke();
       if (!corners) return;
       ctx.beginPath();
@@ -308,10 +315,16 @@ L.LatLngGraticule = L.Layer.extend({
     }
 
     function zebras(border, bwidth = 12) {
-      const lat = border == 'W' || border == 'E';
-      const opposite = border == 'E' || border == 'S';
-      if (lat) var lmin = south, lmax = north, size = height;
-      else var lmin = west, lmax = east, size = width;
+      const lat = border == "W" || border == "E";
+      const opposite = border == "E" || border == "S";
+      if (lat)
+        var lmin = south,
+          lmax = north,
+          size = height;
+      else
+        var lmin = west,
+          lmax = east,
+          size = width;
       const ppm = size / (lmax - lmin) / 60; // px per minute
       const interval = lat ? latInterval : lngInterval;
       const minutes = interval < 1;
@@ -325,11 +338,16 @@ L.LatLngGraticule = L.Layer.extend({
       ctx.beginPath();
       // ctx.moveTo(...p);
       var o = (opposite ? -1 : +1) * ((ctx.lineWidth / 2) % 1);
-      const z = opposite ? (lat ? width : height) - bwidth / 4 - o : bwidth / 4 + o;
+      const z = opposite
+        ? (lat ? width : height) - bwidth / 4 - o
+        : bwidth / 4 + o;
       for (let i = 0, l = l0; l < lmax; i++) {
         l = l0 + i / step;
         const c = map.latLngToContainerPoint(lat ? [l, 0] : [0, l]);
-        const x = Math.min(Math.max(lat ? c.y : c.x, bwidth), (lat ? height : width) - bwidth);
+        const x = Math.min(
+          Math.max(lat ? c.y : c.x, bwidth),
+          (lat ? height : width) - bwidth,
+        );
         const p = lat ? [z, x] : [x, z];
         if (i % 2 == n) ctx.moveTo(...p);
         else ctx.lineTo(...p);
@@ -340,7 +358,7 @@ L.LatLngGraticule = L.Layer.extend({
       function divisions(start, interval) {
         // console.log('interval', interval);
         ctx.lineWidth = 1;
-        o = ((ctx.lineWidth / 2) % 1);
+        o = (ctx.lineWidth / 2) % 1;
         ctx.beginPath();
         for (let i = 0, l = l0; l < lmax; i++) {
           l = l0 + i / interval;
@@ -359,23 +377,33 @@ L.LatLngGraticule = L.Layer.extend({
 
       // console.log(ppm, minutes);
       divisions(0, ppm > 100 ? 120 : minutes ? 60 : 2);
-      divisions(bwidth / 2, ppm > 1000 ? 3000 : ppm > 100 ? 600 : ppm > 30 ? 300 : minutes ? 120 : 6);
+      divisions(
+        bwidth / 2,
+        ppm > 1000
+          ? 3000
+          : ppm > 100
+            ? 600
+            : ppm > 30
+              ? 300
+              : minutes
+                ? 120
+                : 6,
+      );
     }
 
     if (!this.options.borders) return;
     const border_width = this.options.borders;
-    ctx.strokeStyle = 'white';
+    ctx.strokeStyle = "white";
     border(border_width / 2, border_width);
     ctx.strokeStyle = this.options.color;
     border(0);
     border(border_width / 2);
     border(border_width, 1, true);
-    zebras('W', border_width);
-    zebras('N', border_width);
-    zebras('E', border_width);
-    zebras('S', border_width);
-  }
-
+    zebras("W", border_width);
+    zebras("N", border_width);
+    zebras("E", border_width);
+    zebras("S", border_width);
+  },
 });
 
 L.latlngGraticule = function (options) {

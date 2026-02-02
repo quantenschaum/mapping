@@ -1,4 +1,6 @@
-html, body, #map {
+html,
+body,
+#map {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -41,4 +43,15 @@ html, body, #map {
 
 .ais-tooltip::before {
   content: none;
+}
+
+.leaflet-control-mouseposition {
+  font-family: Consolas, "Courier New", Courier, monospace !important;
+  white-space: pre;
+  background: white !important;
+}
+
+.grid .leaflet-control-mouseposition {
+  left: 12px;
+  bottom: 11px;
 }
