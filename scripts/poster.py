@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
+import os
+import re
+import subprocess
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 
 try:
@@ -9,18 +12,6 @@ try:
     )
 except:
     pass
-
-import os
-import re
-import subprocess
-
-from rich.console import Console
-from rich.traceback import install
-
-console = Console()
-if console.is_terminal:
-    print = console.print
-    install()
 
 TEX = r"""\documentclass{article}
 % Support for PDF inclusion
@@ -31,8 +22,24 @@ TEX = r"""\documentclass{article}
 \usepackage[dvips=false,pdftex=false,vtex=false]{geometry}
 \geometry{paperwidth=190mm, paperheight=277mm}
 \usepackage[cam,a4,center,pdflatex]{crop}
+
+\makeatletter
+\newcommand*\@cropmark{
+  \begin{picture}(0,0)
+  \unitlength\p@\thinlines
+  \put(-20,0){\line(1,0){40}}
+  \put(0,20){\line(0,-1){40}}
+  \end{picture}
+}
+\renewcommand*\CROP@@ulc{\@cropmark}
+\renewcommand*\CROP@@urc{\@cropmark}
+\renewcommand*\CROP@@llc{\@cropmark}
+\renewcommand*\CROP@@lrc{\@cropmark}
+\makeatother
+
 \begin{document}
 % Globals: include all pages, don't auto scale
+\crop[cam]
 \includepdf[pages=-,pagecommand={\thispagestyle{empty}}]{pages.pdf}
 \end{document}
 """
