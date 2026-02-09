@@ -176,7 +176,7 @@ docker-seed: docker
 
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -IFpng
+	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -IFpng -P000000,ffffff,f9ecc0,cadbc1,afcce3,cadeef,f1f6fc,800080,fab20b,ed1c24,00a650,fab20b,fa870b
 
 charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts

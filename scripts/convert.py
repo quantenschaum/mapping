@@ -1,17 +1,9 @@
 #!/usr/bin/env python3
 
-from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
-
-try:
-    from rich_argparse import (
-        ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter,
-    )
-except:
-    pass
-
 import glob
 import re
 import sqlite3
+from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 from datetime import datetime
 from io import BytesIO
 from math import atan, degrees, pi, sinh
@@ -33,6 +25,12 @@ from rich.console import Console
 from rich.progress import track
 from rich.traceback import install
 
+try:
+    from rich_argparse import (
+        ArgumentDefaultsRichHelpFormatter as ArgumentDefaultsHelpFormatter,
+    )
+except:
+    pass
 # console=Console()
 # if console.is_terminal:
 #   print=console.log
@@ -90,6 +88,12 @@ def main():
     parser.add_argument("-F", "--format", help="tile format for mbtiles")
     parser.add_argument(
         "-I", "--indexed", help="used indexed palette 256 color", action="store_true"
+    )
+    parser.add_argument(
+        "-P",
+        "--palette",
+        help="predefined colors in palette for indexed mode",
+        type=lambda s: s.split(","),
     )
     parser.add_argument(
         "-e",
@@ -261,6 +265,29 @@ def img2bytes(img, format="png", **kwargs):
     return b.read()
 
 
+def hex_to_rgb(h):
+    h = h.lstrip("#")
+    return tuple(int(h[i : i + 2], 16) for i in (0, 2, 4))
+
+
+def palette(colors):
+    pal = Image.new("P", (1, 1))
+    pal.putpalette([v for c in colors for v in hex_to_rgb(c)])
+    # return pal.palette.colors
+    return pal
+
+
+def quantize(img, fixed_colors=[], colors=256):
+    if not fixed_colors or "A" in img.mode:
+        return img.quantize(colors)
+    n = len(fixed_colors)
+    pal = palette(fixed_colors)
+    if colors - n:
+        imq = img.quantize(colors - n)
+        pal.putpalette(pal.getpalette() + imq.getpalette())
+    return img.quantize(colors, palette=pal)
+
+
 def recode(tile, format, args):
     "reencode tile in given format"
     transparent = args.transparent
@@ -292,7 +319,7 @@ def recode(tile, format, args):
         if img.mode == "RGBA" and img.getextrema()[3][0] == 255:
             img = img.convert("RGB")  # remove unused transparency
         if args.indexed:
-            img = img.quantize(colors=256)
+            img = quantize(img, args.palette)
         # print(img.format,"->",format,len(tile),len(img2bytes(img,format,**kwargs)))
         # print(img.info,img.mode)
         return img2bytes(img, format)
