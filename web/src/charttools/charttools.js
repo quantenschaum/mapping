@@ -3,21 +3,14 @@ import "leaflet-rotatedmarker";
 import "./charttools.less";
 import { degmin } from "../graticule";
 import { deg, rad, to180, to360 } from "../utils";
-import geomagnetism from "geomagnetism";
+import { declination } from "./declination";
 const icons = import.meta.glob("./charttools-*.svg", { eager: true });
 
 const isDevMode = process.env.NODE_ENV === "development";
 const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 console.log("touch device", isTouch);
 
-const magModel = geomagnetism.model(new Date());
-console.log("magModel", magModel);
 let DEC = 0;
-function declination(pos) {
-  if (pos.lat < 46.5 && pos.lat > 45.6 && pos.lng > -6.42 && pos.lng < -5.57)
-    return -7;
-  return magModel.point([pos.lat, pos.lng]).decl;
-}
 
 function icon(name, size = 32) {
   if (name == "a3" && size == 32) size = 64;

@@ -31,6 +31,7 @@ import { PMTiles, leafletRasterLayer } from "pmtiles";
 import "leaflet-mouse-position";
 import "leaflet-mouse-position/src/L.Control.MousePosition.css";
 import { ChartTools } from "./charttools/charttools";
+import { declination } from "./charttools/declination";
 
 const params = new URLSearchParams(window.location.search);
 const isDevMode = process.env.NODE_ENV === "development";
@@ -421,16 +422,19 @@ map.on("contextmenu", (e) => {
   const lat = e.latlng.lat.toFixed(6);
   const lng = e.latlng.lng.toFixed(6);
   const coords = `${lat}, ${lng}`;
-  const olc = new OpenLocationCode();
+  const olc = new OpenLocationCode().encode(e.latlng.lat, e.latlng.lng);
   const latDM = degmin(e.latlng.lat, 3, true, true);
   const lngDM = degmin(e.latlng.lng, 3, false, true);
+  const VAR = declination(e.latlng);
   if (isDevMode) navigator.clipboard.writeText(coords);
   L.popup()
     .setLatLng(e.latlng)
     .setContent(
-      `${latDM} ${lngDM}<br/>${coords}<br/>${olc.encode(e.latlng.lat, e.latlng.lng)}`,
+      `${latDM} ${lngDM}<br/>${coords}<br/>${olc}<br/>VAR ${degmin(VAR, 0, 0)} (${VAR.toFixed(1)}°)`,
     )
     .openOn(map);
+  if (isDevMode && navigator.clipboard)
+    navigator.clipboard.writeText(e.originalEvent.shiftKey ? olc : coords);
 });
 
 var opacity = L.control.opacity();
