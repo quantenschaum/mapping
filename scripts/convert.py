@@ -48,9 +48,6 @@ def main():
     parser.add_argument("output", help="output file")
     parser.add_argument("-f", "--force", action="store_true", help="overwrite output")
     parser.add_argument("-C", "--reencode", action="store_true", help="reencode tiles")
-    parser.add_argument(
-        "-O", "--remove-transparency", action="store_true", help="remove transparency"
-    )
     parser.add_argument("-a", "--append", action="store_true", help="append to output")
     # parser.add_argument("-t", "--time", action="store_true", help="add time column")
     parser.add_argument("-z", "--min-zoom", type=int, help="min zoom level", default=5)
@@ -99,6 +96,19 @@ def main():
         type=lambda s: s.split(","),
     )
     parser.add_argument(
+        "-O",
+        "--transparency",
+        help="transparency threshold (0=transparent, 255=opaque), alpha channel is removed if all pixels are >= threshold",
+        type=int,
+        default=255,
+    )
+    parser.add_argument(
+        "-c",
+        "--transparent",
+        metavar="RRGGBB",
+        help="color to replace with transparency",
+    )
+    parser.add_argument(
         "-e",
         "--elliptic",
         action="store_true",
@@ -127,12 +137,6 @@ def main():
         "--exclude-transparent",
         help="exclude fully transparent tiles",
         action="store_true",
-    )
-    parser.add_argument(
-        "-c",
-        "--transparent",
-        metavar="RRGGBB",
-        help="color to replace with transparency",
     )
     parser.add_argument("--west", help="western limit", type=float)
     parser.add_argument("--east", help="eastern limit", type=float)
@@ -311,16 +315,14 @@ def recode(tile, format, args):
         ):
             return tile
         # print(img.format,img.size,img.info)
-        if args.remove_transparency:
-            img = img.convert("RGB")
         if img.mode != "RGBA" and "transparency" in img.info:
             img = img.convert("RGBA")
         if transparent:
             img = make_transparent(img, transparent)
         if format == "jpeg" and img.mode != "RGB":
             img = img.convert("RGB")
-        if img.mode == "RGBA" and img.getextrema()[3][0] == 255:
-            img = img.convert("RGB")  # remove unused transparency
+        if img.mode == "RGBA" and img.getextrema()[3][0] >= args.transparency:
+            img = img.convert("RGB")  # remove (unused) transparency
         if args.indexed:
             img = quantize(img, args.palette)
         # print(img.format,"->",format,len(tile),len(img2bytes(img,format,**kwargs)))
