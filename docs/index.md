@@ -3,6 +3,8 @@ description: free to use nautical chars for german and dutch waters based on ope
 ---
 # Download
 
+![freenauticalchart update](https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg)
+
 Here you find precompiled charts for download in various formats usable in different applications.
 
 ??? danger "Disclaimer"
@@ -53,7 +55,9 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 
 !!! failure "Use the Marine Rendering Style!"
     The vector chart will not be rendered properly without the marine rendering style and render engine 2 (OpenGL)!  
-    **It will only work when using the Marine Rendering Style!**
+    **It will only work when using the Marine Rendering Style!**  
+    The Marine Rendering Style is now included in OsmAnd by default.
+    
 
 !!! info "Depth DE variants"
     The Depth DE OBFs come in two flavours.  

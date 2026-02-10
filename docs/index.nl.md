@@ -3,6 +3,8 @@ description: gratis te gebruiken zeekaarten voor duitse en nederlandse wateren g
 ---
 # Download
 
+![freenauticalchart update](https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg)
+
 Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formaten die bruikbaar zijn in verschillende applicaties.
 
 ??? danger "Disclaimer"
@@ -53,7 +55,8 @@ Vectorkaarten en stijlen voor OsmAnd kunnen geïnstalleerd worden door simpelweg
 
 !!! failure "Gebruik de Marine Rendering Style!"
     De vectorkaart wordt niet correct weergegeven zonder de Marine Rendering Style en render engine 2 (OpenGL)!  
-    **Het werkt alleen bij gebruik van de Marine Rendering Style!**
+    **Het werkt alleen bij gebruik van de Marine Rendering Style!**  
+    De Marine Rendering Style is nu standaard opgenomen in OsmAnd.
 
 !!! info "Diepte DE varianten"
     De Depth DE OBF-bestanden zijn er in twee varianten.

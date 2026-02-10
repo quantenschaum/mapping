@@ -3,6 +3,8 @@ description: frei verwendbare Seekarten für deutsche und niederländische Gewä
 ---
 # Download
 
+![freenauticalchart update](https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg)
+
 Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formaten, die in unterschiedlichen Anwendungen verwendet werden können.
  
 ??? danger "Haftungsausschluss"
@@ -53,7 +55,8 @@ Vektorkarten und Stile für OsmAnd können durch einfaches Öffnen der `obf`- od
 
 !!! failure "Marine Rendering Style verwenden!"
     Die Vektorkarte wird ohne den Marine Rendering Style und Renderengine 2 (OpenGL) nicht korrekt dargestellt!  
-    **Die Darstellung funktioniert ausschließlich mit dem Marine Rendering Style!**
+    **Die Darstellung funktioniert ausschließlich mit dem Marine Rendering Style!**  
+    Der Marine Rendering Style ist jetzt in OsmAnd bereits enthalten.
 
 !!! info "Depth DE Varianten"
     Die Depth DE OBF-Dateien sind in zwei Varianten verfügbar.  

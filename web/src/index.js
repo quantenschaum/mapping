@@ -317,6 +317,7 @@ if (!isStandalone) {
         img: "helgoland.png",
         title: "FreeNauticalChart.net",
         text: `<p>is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It uses official data that is available as open data.</p>
+    <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
     <p>For more details and downloadable packages, <a href="download/">look into the docs</a>!</p>
     <p style="font-size:0.5em;">(The docs also accessible via the link in the attribution in lower right.)</p>`,
         button: "Take me to the chart!",
