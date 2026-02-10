@@ -55,7 +55,7 @@ lights = {
 }
 
 color_types = {  # to reduce numer of combinations
-    "pillar spar can spherical barrel super-buoy conical light_float": "white black red green yellow",
+    "pillar spar can spherical barrel super-buoy conical light_float": "white black red green yellow grey",
     "tower lattice pile stake cairn": "white black red green yellow brown grey",
     "sphere": "black white red green",
     "x-shape cross": "black yellow",
@@ -176,8 +176,10 @@ def main():
 
                 cols = list(
                     filter(
-                        lambda l: len(set(l)) <= 2
-                        and all(len(set(p)) == 2 for p in pairwise(l)),
+                        lambda l: (
+                            len(set(l)) <= 2
+                            and all(len(set(p)) == 2 for p in pairwise(l))
+                        ),
                         product(filter(lambda c: c or s == 1, colors), repeat=s),
                     )
                 )
