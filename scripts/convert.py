@@ -87,7 +87,10 @@ def main():
     )
     parser.add_argument("-F", "--format", help="tile format for mbtiles")
     parser.add_argument(
-        "-I", "--indexed", help="used indexed palette 256 color", action="store_true"
+        "-I",
+        "--indexed",
+        help="used indexed mode (8 bit)",
+        action="store_true",
     )
     parser.add_argument(
         "-P",
@@ -277,15 +280,15 @@ def palette(colors):
     return pal
 
 
-def quantize(img, fixed_colors=[], colors=256):
+def quantize(img, fixed_colors=[], colors=256, method=Image.Quantize.LIBIMAGEQUANT):
     if not fixed_colors or "A" in img.mode:
-        return img.quantize(colors)
+        return img.quantize(colors, method=method)
     n = len(fixed_colors)
     pal = palette(fixed_colors)
     if colors - n:
-        imq = img.quantize(colors - n)
+        imq = img.quantize(colors - n, method=method)
         pal.putpalette(pal.getpalette() + imq.getpalette())
-    return img.quantize(colors, palette=pal)
+    return img.quantize(colors, palette=pal, method=method)
 
 
 def recode(tile, format, args):
