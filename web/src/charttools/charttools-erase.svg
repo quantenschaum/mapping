@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="32"
+   viewBox="0 0 8.4666665 8.4666666"
+   version="1.1"
+   id="svg59485"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="charttools-erase.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview59487"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="48.5"
+     inkscape:cx="16"
+     inkscape:cy="15.989691"
+     inkscape:window-width="2564"
+     inkscape:window-height="1935"
+     inkscape:window-x="26"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     showguides="true">
+    <sodipodi:guide
+       position="4.2333333,6.2302506"
+       orientation="-1,0"
+       id="guide1"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="15.575519,4.2333333"
+       orientation="0,1"
+       id="guide2"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
+  <defs
+     id="defs59482" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       fill="none"
+       d="M 0.3040207,0.30402187 H 8.1626455 V 8.1626443 H 0.3040207 Z"
+       id="path2"
+       style="stroke-width:8.81943" />
+    <path
+       d="M 7.1441477,6.8307247 H 4.3895756 l 1.1168335,-1.1168335 5.34e-4,-4.694e-4 4.695e-4,-5.34e-4 1.8186583,-1.8186271 a 0.77274626,0.77274626 0 0 0 0,-1.0914904 L 5.8707626,1.3474594 a 0.77181623,0.77181623 0 0 0 -1.0914903,0 l -1.818831,1.8188311 -3.306e-4,2.994e-4 -2.994e-4,3.307e-4 -1.818831,1.8188309 a 0.77181495,0.77181495 0 0 0 0,1.09149 l 1.1927065,1.1926751 a 0.25733919,0.25733919 0 0 0 0.1819253,0.075339 h 4.6285342 a 0.25726458,0.25726458 0 0 0 0,-0.5145291 z M 5.1431236,1.7113107 a 0.25717068,0.25717068 0 0 1 0.3637881,0 l 1.4553098,1.4553097 a 0.25755014,0.25755014 0 0 1 0,0.3638194 L 5.3250176,5.1676439 3.505904,3.3485303 Z"
+       id="path1"
+       style="stroke-width:0.826818" />
+  </g>
+</svg>

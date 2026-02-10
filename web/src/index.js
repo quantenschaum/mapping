@@ -30,6 +30,7 @@ import { addBfS, addNfS } from "./bfs";
 import { PMTiles, leafletRasterLayer } from "pmtiles";
 import "leaflet-mouse-position";
 import "leaflet-mouse-position/src/L.Control.MousePosition.css";
+import { ChartTools } from "./charttools/charttools";
 
 const params = new URLSearchParams(window.location.search);
 const isDevMode = process.env.NODE_ENV === "development";
@@ -302,6 +303,7 @@ const map = L.map("map", {
   zoom: 8,
   minZoom: 6,
   maxZoom: 18,
+  zoomControl: false,
   layers: [
     basemaps["🌍 OpenStreetMap"],
     overlays["Grid"],
@@ -309,6 +311,8 @@ const map = L.map("map", {
     overlays["🇳🇱 QMAP NL"],
   ],
 });
+
+new ChartTools().addTo(map);
 
 if (!isStandalone) {
   setTimeout(

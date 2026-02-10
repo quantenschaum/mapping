@@ -58,7 +58,7 @@ L.Control.TimeLineSlider = L.Control.extend({
 
     this.container = L.DomUtil.create(
       "div",
-      "slider_container leaflet-bar leaflet-control",
+      "slider slider_container leaflet-bar leaflet-control",
     );
 
     /* Prevent click events propagation to map */
@@ -204,132 +204,121 @@ L.Control.TimeLineSlider = L.Control.extend({
 
   setupStartStyles: function () {
     const style = `
-            .slider_container {
-                background-color: ${this.backgroundRGBA};
-                padding: ${this.options.topBgPadding} ${this.options.rightBgPadding} ${this.options.bottomBgPadding} ${this.options.leftBgPadding};
-            }
-
-            .menu {
-                padding: 1ex;
-                background-color: ${this.backgroundRGBA};
-            }
-
-            .hide {
-                display: none;
-            }
-
-            .range {
-                position: relative;
-                left: -${this.thumbSize}px;
-                height: 5px;
-                width: ${this.rangeWidthCSS}px;
-            }
-
-            .range input {
-                width: 100%;
-                position: absolute;
-                height: 0;
-                -webkit-appearance: none;
-            }
-
-            /* -1 because the height is 2 (half the height) */
-            .range input::-webkit-slider-thumb {
-                background: ${this.options.activeColor};
-                margin: -${this.thumbSize - 1}px 0 0;
-                width: ${this.activeThumbSize}px;
-                height: ${this.activeThumbSize}px;
-                -webkit-appearance: none;
-                border-radius: 50%;
-                cursor: pointer;
-                border: 0 !important;
-            }
-            .range input::-moz-range-thumb {
-                background: ${this.options.activeColor};
-                margin: -${this.thumbSize - 1}px 0 0;
-                width: ${this.activeThumbSize}px;
-                height: ${this.activeThumbSize}px;
-                border-radius: 50%;
-                cursor: pointer;
-                border: 0 !important;
-            }
-            .range input::-ms-thumb {
-                background: ${this.options.activeColor};
-                margin: -${this.thumbSize - 1}px 0 0;
-                width: ${this.activeThumbSize}px;
-                height: ${this.activeThumbSize}px;
-                border-radius: 50%;
-                cursor: pointer;
-                border: 0 !important;
-            }
-
-
-            .range input::-webkit-slider-runnable-track {
-                background: ${this.options.backgroundColor};
-                width: 100%;
-                height: 2px;
-                cursor: pointer;
-            }
-            .range input::-moz-range-track {
-                background: ${this.options.backgroundColor};
-                width: 100%;
-                height: 2px;
-                cursor: pointer;
-            }
-            .range input::-ms-track {
-                background: ${this.options.backgroundColor};
-                width: 100%;
-                height: 2px;
-                cursor: pointer;
-                background: transparent;
-                border-color: transparent;
-                color: transparent;
-            }
-
-            .range input:focus {
-                background: none;
-                outline: none;
-            }
-
-            . range input[type=range]::-moz-focus-outer {
-                border: 0;
-            }
-
-            .range-labels {
-                margin: ${this.topLabelMargin}px -${this.rlLabelMargin}px 0;
-                padding: 0;
-                list-style: none;
-            }
-
-            .range-labels li {
-                color: ${this.options.inactiveColor};
-                width: ${this.options.labelWidth};
-                font-size: ${this.options.labelFontSize};
-                position: relative;
-                float: left;
-                text-align: center;
-                cursor: pointer;
-            }
-            .range-labels li::before {
-                background: ${this.options.inactiveColor};
-                width: ${this.thumbSize}px;
-                height: ${this.thumbSize}px;
-                position: absolute;
-                top: -${this.options.betweenLabelAndRangeSpace};
-                right: 0;
-                left: 0;
-                content: "";
-                margin: 0 auto;
-                border-radius: 50%;
-            }
-            .range-labels .active {
-                color: ${this.options.activeColor};
-            }
-            .range-labels .selected::before {
-                background: ${this.options.activeColor};
-            }
-            .range-labels .active.selected::before {
-                display: none;
-            }`;
+      .slider .slider_container {
+          background-color: ${this.backgroundRGBA};
+          padding: ${this.options.topBgPadding} ${this.options.rightBgPadding} ${this.options.bottomBgPadding} ${this.options.leftBgPadding};
+      }
+      .slider .menu {
+          padding: 1ex;
+          background-color: ${this.backgroundRGBA};
+      }
+      .slider .hide {
+          display: none;
+      }
+      .slider .range {
+          position: relative;
+          left: -${this.thumbSize}px;
+          height: 5px;
+          width: ${this.rangeWidthCSS}px;
+      }
+      .slider .range input {
+          width: 100%;
+          position: absolute;
+          height: 0;
+          -webkit-appearance: none;
+      }
+      /* -1 because the height is 2 (half the height) */
+      .slider .range input::-webkit-slider-thumb {
+          background: ${this.options.activeColor};
+          margin: -${this.thumbSize - 1}px 0 0;
+          width: ${this.activeThumbSize}px;
+          height: ${this.activeThumbSize}px;
+          -webkit-appearance: none;
+          border-radius: 50%;
+          cursor: pointer;
+          border: 0 !important;
+      }
+      .slider .range input::-moz-range-thumb {
+          background: ${this.options.activeColor};
+          margin: -${this.thumbSize - 1}px 0 0;
+          width: ${this.activeThumbSize}px;
+          height: ${this.activeThumbSize}px;
+          border-radius: 50%;
+          cursor: pointer;
+          border: 0 !important;
+      }
+      .slider .range input::-ms-thumb {
+          background: ${this.options.activeColor};
+          margin: -${this.thumbSize - 1}px 0 0;
+          width: ${this.activeThumbSize}px;
+          height: ${this.activeThumbSize}px;
+          border-radius: 50%;
+          cursor: pointer;
+          border: 0 !important;
+      }
+      .slider .range input::-webkit-slider-runnable-track {
+          background: ${this.options.backgroundColor};
+          width: 100%;
+          height: 2px;
+          cursor: pointer;
+      }
+      .slider .range input::-moz-range-track {
+          background: ${this.options.backgroundColor};
+          width: 100%;
+          height: 2px;
+          cursor: pointer;
+      }
+      .slider .range input::-ms-track {
+          background: ${this.options.backgroundColor};
+          width: 100%;
+          height: 2px;
+          cursor: pointer;
+          background: transparent;
+          border-color: transparent;
+          color: transparent;
+      }
+      .slider .range input:focus {
+          background: none;
+          outline: none;
+      }
+      .slider .range input[type=range]::-moz-focus-outer {
+          border: 0;
+      }
+      .slider .range-labels {
+          margin: ${this.topLabelMargin}px -${this.rlLabelMargin}px 0;
+          padding: 0;
+          list-style: none;
+      }
+      .slider .range-labels li {
+          color: ${this.options.inactiveColor};
+          width: ${this.options.labelWidth};
+          font-size: ${this.options.labelFontSize};
+          position: relative;
+          float: left;
+          text-align: center;
+          cursor: pointer;
+      }
+      .slider .range-labels li::before {
+          background: ${this.options.inactiveColor};
+          width: ${this.thumbSize}px;
+          height: ${this.thumbSize}px;
+          position: absolute;
+          top: -${this.options.betweenLabelAndRangeSpace};
+          right: 0;
+          left: 0;
+          content: "";
+          margin: 0 auto;
+          border-radius: 50%;
+      }
+      .slider .range-labels .active {
+          color: ${this.options.activeColor};
+      }
+      .slider .range-labels .selected::before {
+          background: ${this.options.activeColor};
+      }
+      .slider .range-labels .active.selected::before {
+          display: none;
+      }`;
 
     return style;
   },
