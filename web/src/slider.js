@@ -32,7 +32,7 @@ L.Control.TimeLineSlider = L.Control.extend({
 
     button: "Timeline",
     heading: "Timeline",
-    collapsed: !true,
+    collapsed: true,
   },
 
   initialize: function (options) {
@@ -216,7 +216,6 @@ L.Control.TimeLineSlider = L.Control.extend({
       .slider_container .menu {
           padding: 1ex;
           background-color: ${this.backgroundRGBA};
-          font-size: ${this.options.labelFontSize};
       }
       .slider_container .hide {
           display: none;
