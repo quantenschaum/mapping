@@ -19,7 +19,7 @@ L.Control.TimeLineSlider = L.Control.extend({
     betweenLabelAndRangeSpace: 15,
 
     labelFontSize: "1.2em",
-    activeColor: "#37adbf",
+    activeColor: "#1862b8",
     inactiveColor: "#555555",
 
     backgroundOpacity: 1,
@@ -271,19 +271,19 @@ L.Control.TimeLineSlider = L.Control.extend({
           border: 0 !important;
       }
       .slider .range input::-webkit-slider-runnable-track {
-          background: ${this.options.backgroundColor};
+          background: ${this.options.inactiveColor};
           width: 100%;
           height: 2px;
           cursor: pointer;
       }
       .slider .range input::-moz-range-track {
-          background: ${this.options.backgroundColor};
+          background: ${this.options.inactiveColor};
           width: 100%;
           height: 2px;
           cursor: pointer;
       }
       .slider .range input::-ms-track {
-          background: ${this.options.backgroundColor};
+          background: ${this.options.inactiveColor};
           width: 100%;
           height: 2px;
           cursor: pointer;
@@ -325,6 +325,7 @@ L.Control.TimeLineSlider = L.Control.extend({
       }
       .slider .range-labels .active {
           color: ${this.options.activeColor};
+          font-weight: bold;
       }
       .slider .range-labels .active::before {
           display: none;
