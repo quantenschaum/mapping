@@ -45,7 +45,8 @@ export function addTidealAtlas(map, gauges = false) {
 
   L.control
     .timelineSlider({
-      title: "Tidal Atlas",
+      title: "tidal current relative to HW Helgoland",
+      button: "Tidal Atlas",
       timelineItems: [
         "off",
         "-6h",
@@ -54,7 +55,7 @@ export function addTidealAtlas(map, gauges = false) {
         "-3h",
         "-2h",
         "-1h",
-        "HW Helgoland",
+        "HW",
         "+1h",
         "+2h",
         "+3h",
@@ -63,10 +64,8 @@ export function addTidealAtlas(map, gauges = false) {
         "+6h",
         "fig",
       ],
-      labelWidth: "40px",
-      betweenLabelAndRangeSpace: "10px",
       changeMap: (p) => {
-        let x = p.label.replace("HW Helgoland", "+0h").replace("h", "");
+        let x = p.label.replace("HW", "+0h").replace("h", "");
         layers.forEach((l) => {
           if (l._url.includes(x)) {
             map.addLayer(l);

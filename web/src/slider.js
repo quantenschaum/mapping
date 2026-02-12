@@ -14,23 +14,25 @@ L.Control.TimeLineSlider = L.Control.extend({
     extraChangeMapParams: {},
     initializeChange: true,
 
-    thumbHeight: "4.5px",
-    labelWidth: "80px",
-    betweenLabelAndRangeSpace: "20px",
+    knobSize: 4,
+    labelWidth: 40,
+    betweenLabelAndRangeSpace: 15,
 
-    labelFontSize: "14px",
+    labelFontSize: "1.2em",
     activeColor: "#37adbf",
-    inactiveColor: "#8e8e8e",
+    inactiveColor: "#555555",
 
     backgroundOpacity: 1,
     backgroundColor: "#ffffff",
 
-    topBgPadding: "10px",
-    bottomBgPadding: "0px",
-    rightBgPadding: "30px",
-    leftBgPadding: "30px",
+    topBgPadding: "1em",
+    bottomBgPadding: "2em",
+    rightBgPadding: "2em",
+    leftBgPadding: "2em",
 
-    title: "Timeline",
+    button: "Timeline",
+    heading: "Timeline",
+    collapsed: !true,
   },
 
   initialize: function (options) {
@@ -42,7 +44,7 @@ L.Control.TimeLineSlider = L.Control.extend({
       };
     }
 
-    if (parseFloat(options.thumbHeight) <= 2) {
+    if (parseFloat(options.knobSize) <= 2) {
       console.log(
         "The nodes on the timeline will not appear properly if its radius is less than 2px.",
       );
@@ -58,38 +60,38 @@ L.Control.TimeLineSlider = L.Control.extend({
 
     this.container = L.DomUtil.create(
       "div",
-      "slider slider_container leaflet-bar leaflet-control",
+      "slider_container leaflet-bar leaflet-control",
     );
 
     /* Prevent click events propagation to map */
     L.DomEvent.disableClickPropagation(this.container);
 
     /* Prevent right click event propagation to map */
-    L.DomEvent.on(this.container, "slider_container", function (ev) {
-      L.DomEvent.stopPropagation(ev);
-    });
+    // L.DomEvent.on(this.container, "slider_container", function (ev) {
+    //   L.DomEvent.stopPropagation(ev);
+    // });
 
     /* Prevent scroll events propagation to map when cursor on the div */
     L.DomEvent.disableScrollPropagation(this.container);
 
     /* Create html elements for input and labels */
-    this.slider = L.DomUtil.create("div", "range", this.container);
-    this.slider.innerHTML = `<input id="rangeinputslide" type="range" min="1" max="${this.options.timelineItems.length}" steps="1" value="1"></input>`;
+    this.slider = L.DomUtil.create("div", "slider", this.container);
+    this.title = L.DomUtil.create("div", "title", this.slider);
+    this.title.innerHTML = this.options.title;
+    this.range = L.DomUtil.create("div", "range", this.slider);
+    this.range.innerHTML = `<input id="rangeinputslide" type="range" min="1" max="${this.options.timelineItems.length}" steps="1" value="1"></input>`;
 
-    this.rangeLabels = L.DomUtil.create("ul", "range-labels", this.container);
+    this.rangeLabels = L.DomUtil.create("ul", "range-labels", this.slider);
     this.rangeLabels.innerHTML = this.options.timelineItems
-      .map((item) => {
-        return "<li>" + item + "</li>";
-      })
+      .map((item) => "<li><span>" + item + "</span></li>")
       .join("");
 
-    this.rangeInput = L.DomUtil.get(this.slider).children[0];
     this.rangeLabelArray = Array.from(
       this.rangeLabels.getElementsByTagName("li"),
     );
     this.sliderLength = this.rangeLabelArray.length;
 
-    this.thumbSize = parseFloat(this.options.thumbHeight) * 2;
+    this.thumbSize = parseFloat(this.options.knobSize) * 2;
     // double the thumb size when its active
     this.activeThumbSize = this.thumbSize * 2;
 
@@ -98,17 +100,20 @@ L.Control.TimeLineSlider = L.Control.extend({
       parseFloat(this.options.labelWidth) *
         (this.options.timelineItems.length - 1) +
       this.thumbSize * 2;
+    console.log("rangeWidthCSS", this.rangeWidthCSS);
 
     // move labels over to the left so they line up; move half the width of the label and adjust for thumb radius
     this.rlLabelMargin =
       parseFloat(this.options.labelWidth) / 2 -
-      parseFloat(this.options.thumbHeight) / 2;
+      parseFloat(this.options.knobSize) / 2;
+    console.log("rlLabelMargin", this.rlLabelMargin);
 
     // 2.5 because that is half the height of the range input
     this.topLabelMargin =
       parseFloat(this.options.betweenLabelAndRangeSpace) -
-      parseFloat(this.options.thumbHeight) -
+      parseFloat(this.options.knobSize) -
       2.5;
+    console.log("topLabelMargin", this.topLabelMargin);
 
     this.backgroundRGBA = this.hexToRGBA(
       this.options.backgroundColor,
@@ -121,11 +126,12 @@ L.Control.TimeLineSlider = L.Control.extend({
     this.sheet.textContent = this.setupStartStyles();
 
     /* When input gets changed change styles on slider and trigger user's changeMap function */
+    this.rangeInput = this.range.children[0];
     L.DomEvent.on(this.rangeInput, "input", function () {
       let curValue = this.value;
 
       that.sheet.textContent += that.getTrackStyle(this, that.sliderLength);
-      let curLabel = that.rangeLabelArray[curValue - 1].innerHTML;
+      let curLabel = that.rangeLabelArray[curValue - 1].textContent;
 
       // Change map according to either current label or value chosen
       let mapParams = { value: curValue, label: curLabel, map: map };
@@ -137,16 +143,12 @@ L.Control.TimeLineSlider = L.Control.extend({
     });
 
     // Add click event to each label so it triggers input change for corresponding value
-    for (let li of this.rangeLabelArray) {
+    this.rangeLabelArray.forEach((li, index) => {
       L.DomEvent.on(li, "click", function (e) {
-        var targetli = e.target;
-        var index = that.rangeLabelArray.indexOf(targetli);
         that.rangeInput.value = index + 1;
-
-        var inputEvent = new Event("input");
-        that.rangeInput.dispatchEvent(inputEvent);
+        that.rangeInput.dispatchEvent(new Event("input"));
       });
-    }
+    });
 
     // Initialize input change at start
     if (this.options.initializeChange) {
@@ -154,26 +156,22 @@ L.Control.TimeLineSlider = L.Control.extend({
       this.rangeInput.dispatchEvent(inputEvent);
     }
 
-    const menu = L.DomUtil.create("div", "menu");
-    menu.innerHTML = this.options.title;
-    this.container.appendChild(menu);
-    this.container.addEventListener("mouseover", () => {
-      menu.classList.add("hide");
+    this.menu = L.DomUtil.create("div", "menu hide", this.container);
+    this.menu.innerHTML = this.options.button;
+    this.container.addEventListener("mouseenter", () => {
+      console.log("show");
+      this.menu.classList.add("hide");
       this.slider.classList.remove("hide");
-      this.rangeLabels.classList.remove("hide");
-      this.container.classList.add("slider_container");
     });
-    this.container.addEventListener("mouseout", () => {
-      menu.classList.remove("hide");
+    this.container.addEventListener("mouseleave", () => {
+      console.log("hide");
+      this.menu.classList.remove("hide");
       this.slider.classList.add("hide");
-      this.rangeLabels.classList.add("hide");
-      this.container.classList.remove("slider_container");
     });
-    menu.classList.remove("hide");
-    this.slider.classList.add("hide");
-    this.rangeLabels.classList.add("hide");
-    this.container.classList.remove("slider_container");
-
+    if (this.options.collapsed) {
+      this.menu.classList.remove("hide");
+      this.slider.classList.add("hide");
+    }
     return this.container;
   },
 
@@ -204,16 +202,33 @@ L.Control.TimeLineSlider = L.Control.extend({
 
   setupStartStyles: function () {
     const style = `
-      .slider .slider_container {
-          background-color: ${this.backgroundRGBA};
-          padding: ${this.options.topBgPadding} ${this.options.rightBgPadding} ${this.options.bottomBgPadding} ${this.options.leftBgPadding};
+      @media (max-width: 660px) {
+          .slider {
+              transform: translateY(100%) rotate(90deg);
+              transform-origin: 100% 0%;
+          }
+          .slider .range-labels li span {
+              display: inline-block;
+              transform: rotate(-90deg);
+              transform-origin: 50% 50%;
+          }
       }
-      .slider .menu {
+      .slider_container .menu {
           padding: 1ex;
           background-color: ${this.backgroundRGBA};
+          font-size: ${this.options.labelFontSize};
       }
-      .slider .hide {
+      .slider_container .hide {
           display: none;
+      }
+      .slider {
+          background-color: ${this.backgroundRGBA};
+          padding: ${this.options.topBgPadding} ${this.options.rightBgPadding} ${this.options.bottomBgPadding} ${this.options.leftBgPadding};
+          font-size: ${this.options.labelFontSize};
+      }
+      .slider .title {
+          text-align: center;
+          margin: 0 ${this.rlLabelMargin}px 0.5em 0;
       }
       .slider .range {
           position: relative;
@@ -224,7 +239,7 @@ L.Control.TimeLineSlider = L.Control.extend({
       .slider .range input {
           width: 100%;
           position: absolute;
-          height: 0;
+          height: 0px;
           -webkit-appearance: none;
       }
       /* -1 because the height is 2 (half the height) */
@@ -282,7 +297,7 @@ L.Control.TimeLineSlider = L.Control.extend({
           outline: none;
       }
       .slider .range input[type=range]::-moz-focus-outer {
-          border: 0;
+          border: none;
       }
       .slider .range-labels {
           margin: ${this.topLabelMargin}px -${this.rlLabelMargin}px 0;
@@ -291,8 +306,7 @@ L.Control.TimeLineSlider = L.Control.extend({
       }
       .slider .range-labels li {
           color: ${this.options.inactiveColor};
-          width: ${this.options.labelWidth};
-          font-size: ${this.options.labelFontSize};
+          width: ${this.options.labelWidth}px;
           position: relative;
           float: left;
           text-align: center;
@@ -303,7 +317,7 @@ L.Control.TimeLineSlider = L.Control.extend({
           width: ${this.thumbSize}px;
           height: ${this.thumbSize}px;
           position: absolute;
-          top: -${this.options.betweenLabelAndRangeSpace};
+          top: -${this.options.betweenLabelAndRangeSpace}px;
           right: 0;
           left: 0;
           content: "";
@@ -313,10 +327,7 @@ L.Control.TimeLineSlider = L.Control.extend({
       .slider .range-labels .active {
           color: ${this.options.activeColor};
       }
-      .slider .range-labels .selected::before {
-          background: ${this.options.activeColor};
-      }
-      .slider .range-labels .active.selected::before {
+      .slider .range-labels .active::before {
           display: none;
       }`;
 
@@ -332,30 +343,15 @@ L.Control.TimeLineSlider = L.Control.extend({
       coverVal = (parseFloat(this.thumbSize) / this.rangeWidthCSS) * 100;
     let style = "";
 
-    // Remove active and selected classes from all labels
     for (let li of this.rangeLabelArray) {
       L.DomUtil.removeClass(li, "active");
-      L.DomUtil.removeClass(li, "selected");
     }
 
     // Find label that should be active and give it appropriate classes
     var curLabel = this.rangeLabelArray[labelIndex];
     L.DomUtil.addClass(curLabel, "active");
-    L.DomUtil.addClass(curLabel, "selected");
 
-    // For labels before active label, add selected class
-    for (i = 0; i < curVal; i++) {
-      L.DomUtil.addClass(this.rangeLabelArray[i], "selected");
-    }
-
-    // Change background gradient
-    for (var i = 0; i < prefs.length; i++) {
-      style += `.range {background: linear-gradient(to right, ${this.coverBackgroundRGBA} 0%, ${this.coverBackgroundRGBA} ${coverVal}%, ${this.options.activeColor} ${coverVal}%, ${this.options.activeColor} ${val}%,  ${this.coverBackgroundRGBA} 0%, ${this.coverBackgroundRGBA} 100%)}`;
-      style +=
-        ".range input::-" +
-        prefs[i] +
-        `{background: linear-gradient(to right, ${this.coverBackgroundRGBA} 0%, ${this.coverBackgroundRGBA} ${coverVal}%, ${this.options.activeColor} 0%, ${this.options.activeColor} ${val}%, ${this.options.inactiveColor} ${val}%, ${this.options.inactiveColor} ${100 - coverVal}%, ${this.coverBackgroundRGBA} ${100 - coverVal}%, ${this.coverBackgroundRGBA} 100%)}`;
-    }
+    console.log(style);
 
     return style;
   },
