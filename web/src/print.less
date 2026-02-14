@@ -22,7 +22,7 @@
 .printmode {
   background: white;
 
-  .hidebuttons .format {
+  .hide .format {
     display: none;
   }
 }
@@ -38,12 +38,22 @@
     background-repeat: no-repeat;
   }
 
+  .button:hover {
+    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjE2cHgiIHZpZXdCb3g9IjAgMCA0MzMuNSA0MzMuNSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDMzLjUgNDMzLjU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHBhdGggZD0iTTM5NS4yNSwxNTNoLTEwMlYwaC0xNTN2MTUzaC0xMDJsMTc4LjUsMTc4LjVMMzk1LjI1LDE1M3ogTTM4LjI1LDM4Mi41djUxaDM1N3YtNTFIMzguMjV6IiBmaWxsPSIjMDAwMDAwIi8+Cjwvc3ZnPgo=);
+  }
+
   .format {
     color: red;
     font-weight: bold;
     border: none;
     background-size: 24px;
     background-repeat: no-repeat;
+  }
+  .format.selected {
+    border: 1px solid blue;
+  }
+  .format:hover {
+    background-color: yellow;
   }
 
   .portrait {
@@ -83,7 +93,7 @@
   }
 }
 
-.image {
+.imagemode {
   .leaflet-control-layers,
   .leaflet-control-mouseposition,
   .leaflet-bar {
