@@ -1,5 +1,5 @@
 import L from "leaflet";
-import domtoimage from "dom-to-image";
+// import domtoimage from "dom-to-image";
 import "./print.less";
 import { ackee } from "./ackee";
 
@@ -16,30 +16,13 @@ export const PrintButton = L.Control.extend({
       const size = map.getSize();
       const body = document.body;
       body.classList.add("imagemode");
-      await domtoimage
+      const htmlToImage = await import("html-to-image");
+      await htmlToImage
         .toPng(map.getContainer(), {
           height: size.y,
           width: size.x,
-          // filter: function (node) {
-          //   if (node.tagName === "IMG") {
-          //     const img = node;
-          //     if (img.complete && img.naturalWidth === 0) {
-          //       console.log("Excluding failed/CORS image:", img.src);
-          //       return false;
-          //     }
-          //     const isSameOrigin =
-          //       img.src.startsWith(window.location.origin) ||
-          //       img.src.startsWith("data:") ||
-          //       img.src.startsWith("blob:");
-          //     if (!isSameOrigin && !img.crossOrigin) {
-          //       console.log("Excluding external image without CORS:", img.src);
-          //       return false;
-          //     }
-          //   }
-          //   return true;
-          // },
+          pixelRatio: 1,
         })
-        // .catch(console.error)
         .then(function (dataUrl) {
           const link = L.DomUtil.create("a");
           link.download = `freenauticalchart-${map.getZoom()}-${map.getCenter().lat.toFixed(3)}-${map.getCenter().lng.toFixed(3)}.png`;
@@ -102,7 +85,7 @@ export const PrintButton = L.Control.extend({
 
     const pb = L.DomUtil.create("div", "printbuttons hide");
     div.appendChild(pb);
-    pb.appendChild(button("&nbsp;", "print/download image"));
+    pb.appendChild(button("&nbsp;", "print mode/download image"));
     pb.appendChild(button("A4", "A4 landscape", "A4 landscape"));
     pb.appendChild(button("A4", "A4 portrait", "A4 portrait"));
     pb.appendChild(button("A3", "A3 landscape", "A3 landscape"));
