@@ -2,6 +2,46 @@ import L from "leaflet";
 import "./print.less";
 import { ackee } from "./ackee";
 
+const isDevMode = process.env.NODE_ENV === "development";
+
+const FALLBACK_TILE = 
+  "data:image/png;base64," +
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+
+async function markFailedTiles(mapElement) {
+  function applyFallbackTile(tile) {
+    tile.dataset.skip = "true";
+    if (isDevMode) tile.src = FALLBACK_TILE;
+  }
+  const tiles = Array.from(mapElement.querySelectorAll(".leaflet-tile"));
+  const checks = tiles.map(
+    (tile) =>
+      new Promise((resolve) => {
+        if (tile.complete) {
+          if (tile.naturalWidth === 0) applyFallbackTile(tile);
+          resolve();
+        } else {
+          tile.addEventListener(
+            "load",
+            () => {
+              if (tile.naturalWidth === 0) applyFallbackTile(tile);
+              resolve();
+            },
+            { once: true },
+          );
+          tile.addEventListener(
+            "error",
+            () => {
+              applyFallbackTile(tile);
+              resolve();
+            },
+            { once: true },
+          );
+        }
+      }),
+  );
+  await Promise.all(checks);
+}
 export const PrintButton = L.Control.extend({
   options: { position: "topleft" },
   onAdd: function (map) {
@@ -12,6 +52,7 @@ export const PrintButton = L.Control.extend({
     L.DomEvent.disableClickPropagation(div);
 
     async function getImage() {
+      await markFailedTiles(map.getContainer());
       const size = map.getSize();
       const body = document.body;
       body.classList.add("imagemode");
@@ -20,6 +61,7 @@ export const PrintButton = L.Control.extend({
         .toPng(map.getContainer(), {
           height: size.y,
           width: size.x,
+          filter: (node) => !(node.dataset && node.dataset.skip === "true"),
           pixelRatio: 1,
         })
         .then(function (dataUrl) {
@@ -54,7 +96,7 @@ export const PrintButton = L.Control.extend({
           });
         } else {
           ackee.action("4e923284-945c-45fd-97d6-4c0d351205ec", {
-            key: "export image",
+            key: "print image",
             value: 1,
           });
         }
