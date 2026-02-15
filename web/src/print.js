@@ -1,5 +1,4 @@
 import L from "leaflet";
-// import domtoimage from "dom-to-image";
 import "./print.less";
 import { ackee } from "./ackee";
 
@@ -48,9 +47,14 @@ export const PrintButton = L.Control.extend({
       const body = document.body;
       const cont = map.getContainer();
       b.addEventListener("click", () => {
-        if (!title.includes("reset")) {
+        if (!title.includes("print")) {
           ackee.action("4e923284-945c-45fd-97d6-4c0d351205ec", {
             key: "print " + title,
+            value: 1,
+          });
+        } else {
+          ackee.action("4e923284-945c-45fd-97d6-4c0d351205ec", {
+            key: "export image",
             value: 1,
           });
         }

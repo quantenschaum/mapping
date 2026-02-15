@@ -141,7 +141,6 @@ const plotNames = ["astro", "forecast", "measured"];
 const plotColors = ["blue", "red", "green"];
 
 async function tidePlot(traces) {
-  const Plotly = await import("plotly.js-basic-dist");
   const now = new Date();
   const t0 = new Date(now.getTime() - 6 * 3600_000).toISOString();
   const t1 = new Date(now.getTime() + 18 * 3600_000).toISOString();
@@ -202,6 +201,7 @@ async function tidePlot(traces) {
   const config = {
     scrollZoom: true,
   };
+  const Plotly = await import("plotly.js-basic-dist");
   Plotly.newPlot("plot", traces, layout, config);
 }
 
