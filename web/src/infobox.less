@@ -1,16 +1,4 @@
-.infobox {
-  background: white;
-  padding: 1em;
-  padding-bottom: 3em;
-  max-width: 40em;
-  a {
-    width: unset !important;
-    height: unset !important;
-    line-height: unset !important;
-  }
-}
-
-dialog {
+dialog.infobox {
   border: 2px solid gray;
   border-radius: 1em;
   width: 40em;
@@ -23,10 +11,11 @@ dialog {
 
   #closebutton {
     padding: 1ex;
+    width: 100%;
   }
-}
 
-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(3px);
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+  }
 }

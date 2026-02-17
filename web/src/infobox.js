@@ -16,12 +16,16 @@ function getSessionBool(name) {
   return sessionStorage.getItem(name) == "true";
 }
 
-export function showDialog(
-  options = { title: "Title", text: "lorem ipsum", button: "Close" },
-) {
+export function showDialog(options = {}) {
   if (getSessionBool("infoshown")) return;
+  options = {
+    title: "Title",
+    text: "lorem ipsum",
+    button: "Close",
+    ...options,
+  };
   const el = createElementFromHTML(`
-    <dialog class="modal">
+    <dialog class="infobox modal">
       <form method="dialog">
         ${options.img ? '<img src="' + options.img + '" />' : ""}
         <h2>${options.title}</h2>

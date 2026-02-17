@@ -325,7 +325,6 @@ if (!isStandalone) {
     <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
     <p>For more details and downloadable packages, <a href="download/">look into the docs</a>!</p>
     <p style="font-size:0.5em;">(The docs also accessible via the link in the attribution in lower right.)</p>`,
-        button: "Take me to the chart!",
       }),
     5000,
   );
@@ -394,14 +393,6 @@ function updateAttribution(online = true) {
 updateAttribution();
 window.addEventListener("online", () => updateAttribution(true));
 window.addEventListener("offline", () => updateAttribution(false));
-
-// L.control.mousePosition({
-//   separator: ' ',
-//   latFormatter: v => degmin(v, 3, true),
-//   lngFormatter: v => degmin(v, 3, false),
-// }).addTo(map);
-
-// map.addControl(new L.Control.ScaleNautic());
 
 const layers = L.control
   .layers(basemaps, overlays, { collapsed: true })
@@ -472,6 +463,8 @@ L.control
     emptyString: "",
   })
   .addTo(map);
+
+// map.addControl(new L.Control.ScaleNautic());
 
 if (isSet("ais")) {
   import("./ais").then(({ AISButton }) => {
