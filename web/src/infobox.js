@@ -1,7 +1,5 @@
 import "./infobox.less";
 
-const isDevMode = process.env.NODE_ENV === "development";
-
 function createElementFromHTML(htmlString) {
   const template = document.createElement("template");
   template.innerHTML = htmlString.trim();

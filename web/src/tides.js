@@ -12,7 +12,6 @@ function track(x) {
   });
 }
 
-const isDevMode = process.env.NODE_ENV === "development";
 const log = logger("tides", "lightblue");
 
 const baseurl = "https://freenauticalchart.net";

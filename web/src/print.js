@@ -2,9 +2,9 @@ import L from "leaflet";
 import "./print.less";
 import { ackee } from "./ackee";
 
-const isDevMode = process.env.NODE_ENV === "development";
+const isDevMode = import.meta.env.DEV;
 
-const FALLBACK_TILE = 
+const FALLBACK_TILE =
   "data:image/png;base64," +
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 

@@ -4,7 +4,7 @@ import "./boating.less";
 import { degmin } from "./graticule";
 import { ackee } from "./ackee";
 
-const isDevMode = process.env.NODE_ENV === "development";
+const isDevMode = import.meta.env.DEV;
 
 function cosDeg(deg) {
   return Math.cos((deg * Math.PI) / 180);

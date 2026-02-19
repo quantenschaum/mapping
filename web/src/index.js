@@ -27,7 +27,6 @@ import { showDialog } from "./infobox";
 import { ackee } from "./ackee";
 import { addTidealAtlas, addTideGauges } from "./tides";
 import { addBfS, addNfS } from "./bfs";
-import { PMTiles, leafletRasterLayer } from "pmtiles";
 import "leaflet-mouse-position";
 import "leaflet-mouse-position/src/L.Control.MousePosition.css";
 import { ChartTools } from "./charttools/charttools";
@@ -37,7 +36,7 @@ const params = new URLSearchParams(window.location.search);
 function isSet(name) {
   return params.get(name) == "1";
 }
-const isDevMode = process.env.NODE_ENV === "development";
+const isDevMode = import.meta.env.DEV;
 const isStandalone = !!(
   window.matchMedia("(display-mode: standalone)").matches ||
   window.navigator.standalone ||
@@ -159,6 +158,7 @@ const overlays = {
 };
 
 if (isDevMode || params.get("pm") == "1") {
+  const { PMTiles, leafletRasterLayer } = await import("pmtiles");
   let pm = {
     "🇩🇪 QMAP DE (pmtiles)": leafletRasterLayer(
       new PMTiles("/qmap-de.pmtiles"),
