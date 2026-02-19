@@ -279,7 +279,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     const offset = offsets[level];
 
     const basevalues = ydata.MHW
-      ? `MHW=${(ydata.MHW + offset) / 100} MNW=${(ydata.MNW + offset) / 100} MTH=${ydata.MTH / 100}`
+      ? `MHW: ${(ydata.MHW + offset) / 100} MNW: ${(ydata.MNW + offset) / 100} MTH: ${ydata.MTH / 100}`
       : "";
 
     let i = 0;
