@@ -333,7 +333,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
           .map((s) => parseFloat(s.replace(",", ".")))
           .filter((v) => !isNaN(v));
         const mean_height = (hi_lo == "HW" ? ydata.MHW : ydata.MNW) / 100;
-        const dev2 = dev.map((d) => d - (height_astro - mean_height));
+        const dev2 = dev.map((d) => d + mean_height - height_astro);
         deviation = dev2.map((d) => d.toFixed(1)).join(" bis ");
       }
       const height =
