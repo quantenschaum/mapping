@@ -34,15 +34,15 @@ import { ChartTools } from "./charttools/charttools";
 import { declination } from "./charttools/declination";
 
 const params = new URLSearchParams(window.location.search);
-const isDevMode = process.env.NODE_ENV === "development";
-const isStandalone = !!(
-  window.matchMedia("(display-mode: standalone)").matches ||
-  window.navigator.standalone
-);
-
 function isSet(name) {
   return params.get(name) == "1";
 }
+const isDevMode = process.env.NODE_ENV === "development";
+const isStandalone = !!(
+  window.matchMedia("(display-mode: standalone)").matches ||
+  window.navigator.standalone ||
+  isSet("app")
+);
 
 log("PWA", "red", "standalone", isStandalone, "development", isDevMode);
 

@@ -305,10 +305,10 @@ export async function addTideGaugesDE(map, preFetch = false) {
     }
 
     let date0;
-    let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th><th class="moon${moon}"></th></tr>\n`;
+    let rows = `<tr><th>Datum</th><th>${tz}</th><th>HdG [m]</th><th class="moon${moon}"></th></tr>\n`;
     for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
-      log(prediction[k]);
       const r = prediction[k];
+      log("prediction", r);
       const ts = new Date(r.timestamp);
       let date = ts
         .toLocaleString(locale, {
@@ -323,9 +323,21 @@ export async function addTideGaugesDE(map, preFetch = false) {
         hour: "2-digit",
         minute: "2-digit",
       });
+      const hi_lo = r.type;
+      const height_astro = r.height / 100;
+      let deviation = getForcast(r.timestamp);
+      if (deviation) {
+        // make forecasted deviation relative to astronomical forecast
+        const dev = deviation
+          .split(/\s+/)
+          .map((s) => parseFloat(s.replace(",", ".")))
+          .filter((v) => !isNaN(v));
+        const mean_height = (hi_lo == "HW" ? ydata.MHW : ydata.MNW) / 100;
+        const dev2 = dev.map((d) => d - (height_astro - mean_height));
+        deviation = dev2.map((d) => d.toFixed(1)).join(" bis ");
+      }
       const height =
         r.height != null ? ((r.height + offset) / 100).toFixed(2) : "-";
-      const deviation = getForcast(r.timestamp);
       const when = ts > now ? "future" : "past";
       rows += `<tr class="${r.type} ${when}"><td>${date}</td><td>${time}</td><td>${height} <span class="forecast">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}</td></tr>\n`;
     }
