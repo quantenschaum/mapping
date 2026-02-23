@@ -277,9 +277,13 @@ export async function addTideGaugesDE(map, preFetch = false) {
     };
     const offset = offsets[level];
 
+    log("ydata", ydata);
     const basevalues = ydata.MHW
-      ? `MHW: ${(ydata.MHW + offset) / 100} MNW: ${(ydata.MNW + offset) / 100} MTH: ${ydata.MTH / 100}`
-      : "";
+      ? `<span>MHW ${(ydata.MHW + offset) / 100}</span><span>MNW ${(ydata.MNW + offset) / 100}</span><span>MTH ${ydata.MTH / 100}</span>`
+      : // +        `<span>MSpHW ${(ydata.MSpHW + offset) / 100}</span><span>MSpNW ${(ydata.MSpNW + offset) / 100}</span><span>MSpTh ${ydata.MSpTh / 100}</span>` +
+        // `<span>MNpHW ${(ydata.MNpHW + offset) / 100}</span><span>MNpNW ${(ydata.MNpNW + offset) / 100}</span><span>MNpTh ${ydata.MNpTh / 100}</span>` +
+        // `<span>NpC ${((100 * ydata.MNpTh) / ydata.MSpTh).toFixed(0)}</span>`
+        "";
 
     let i = 0;
     var moon;
@@ -298,13 +302,13 @@ export async function addTideGaugesDE(map, preFetch = false) {
       if (!forecast) return "";
       const ts = new Date(timestamp).getTime();
       const fc = forecast.find((f) => new Date(f.timestamp).getTime() === ts);
-      log(fc);
       if (fc?.forecast) return `${fc.forecast.replace(" m", "")}`;
       return "";
     }
 
-    let date0;
-    let rows = `<tr><th>Datum</th><th>${tz}</th><th>HdG [m]</th><th class="moon${moon}"></th></tr>\n`;
+    let date0,
+      hdg0 = null;
+    let rows = `<tr><th>Datum</th><th>${tz}</th><th title="Höhe der Gezeit in Metern ± Abweichung K durch Wettereinfluss">HdG K</th><th title="Alter der Gezeit und C = 100 × (Tidenstieg bzw. -fall)/(mitt. Springtidenhub)">AdG C</th></tr>\n`;
     for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
       const r = prediction[k];
       log("prediction", r);
@@ -333,20 +337,33 @@ export async function addTideGaugesDE(map, preFetch = false) {
           .filter((v) => !isNaN(v));
         const mean_height = (hi_lo == "HW" ? ydata.MHW : ydata.MNW) / 100;
         const dev2 = dev.map((d) => d + mean_height - height_astro);
-        deviation = dev2.map((d) => d.toFixed(1)).join(" bis ");
+        deviation = dev2
+          .map((d) => (d > 0 ? "+" : "") + d.toFixed(1))
+          .join(" bis ");
+      }
+      if (ydata.MSpTh && hdg0) {
+        // calculate local coefficient
+        const range = r.height - hdg0;
+        const coeff = (100 * Math.abs(range)) / ydata.MSpTh;
+        // if (range > 0)
+        r.phase += " " + coeff.toFixed(0).padStart(3, "\u2007");
       }
       const height =
         r.height != null ? ((r.height + offset) / 100).toFixed(2) : "-";
+      hdg0 = r.height;
       const when = ts > now ? "future" : "past";
       rows += `<tr class="${r.type} ${when}"><td>${date}</td><td>${time}</td><td>${height} <span class="forecast">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}</td></tr>\n`;
     }
     const table = `<table>\n${rows}</table>`;
-    // log(table);
-    //
     track("de");
     await marker
       .bindPopup(
-        `<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>${table}<div class="basevalues">${basevalues}</div><div class="forecast"><a href="${forecast_link}" target="_blank" class="${forecast_cls}">${forecast_text}</a></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`,
+        `<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>
+        ${table}
+        <div class="basevalues">${basevalues}</div>
+        <div class="forecast"><a href="${forecast_link}" target="_blank" class="${forecast_cls}">${forecast_text}</a></div>
+        <div id="plot"></div>
+        <div class="source">source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`,
       )
       .openPopup();
 

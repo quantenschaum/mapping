@@ -13,15 +13,15 @@
   }
 
   .SP {
-    color: green;
+    color: darkred;
   }
 
   .MT {
-    color: blue;
+    color: mediumblue;
   }
 
   .NP {
-    color: orange;
+    color: darkgreen;
   }
 
   div.forecast {
@@ -38,7 +38,16 @@
   }
 
   .basevalues {
-    text-align: center;
+    margin: 0.2em 0;
+    font-weight: bold;
+    display: flex;
+    flex-wrap: wrap;
+    /* border: 1px solid red; */
+    span {
+      /* flex-grow: 1;  */
+      flex: 0 0 calc(33.333%);
+      text-align: center;
+    }
   }
 
   .source {
@@ -68,25 +77,32 @@
       //font-weight: bold;
     }
 
+    th,
     td {
       padding: 0 0.5ex;
+      text-align: left;
     }
 
-    .moon0::after {
-      content: "🌚"; // new
+    th:nth-child(4),
+    td:nth-child(4) {
+      text-align: right;
     }
 
-    .moon1::after {
-      content: "🌛"; // first quarter
+    .moon0::before {
+      content: "🌚 "; // new
     }
 
-    .moon2::after {
-      content: "🌝"; // full
+    .moon1::before {
+      content: "🌛 "; // first quarter
     }
 
-    .moon3::after {
+    .moon2::before {
+      content: "🌝 "; // full
+    }
+
+    .moon3::before {
       // last quarter
-      content: "🌜";
+      content: "🌜 ";
     }
   }
 }
