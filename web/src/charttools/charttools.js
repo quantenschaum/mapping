@@ -251,8 +251,19 @@ export const ChartTools = L.Control.extend({
       map.off("click", mouseAction);
       map.off("mousemove", mouseAction);
       map.off("contextmenu", cancelAction);
-      if (layer) layer.on("contextmenu", layer.remove);
+      if (layer) {
+        layer.on("contextmenu", layer.remove);
+      }
       cancelAction = null;
+    }
+
+    function hideMouse(m) {
+      if (!m || !m.getElement()) return;
+      m.getElement().classList.add("hide-cursor");
+    }
+    function showMouse(m) {
+      if (!m || !m.getElement()) return;
+      m.getElement().classList.remove("hide-cursor");
     }
 
     function drawMarker(name) {
@@ -282,9 +293,11 @@ export const ChartTools = L.Control.extend({
             direction: "top",
           });
           offMouse(marker);
+          showMouse(marker);
         }
       }
       onMouse(draw, marker);
+      hideMouse(marker);
     }
 
     const LINE_OPTS = { color: "black", weight: 2, opacity: 1 };
@@ -320,10 +333,12 @@ export const ChartTools = L.Control.extend({
             xmark.bindTooltip(pos, { direction: "top" });
             circle.setStyle(LINE_OPTS);
             offMouse(group);
+            showMouse(xmark);
           }
         }
       }
       onMouse(draw, group);
+      hideMouse(xmark);
     }
 
     function drawBearing(then, style = LINE_OPTS) {
@@ -365,6 +380,7 @@ export const ChartTools = L.Control.extend({
             });
             line.setStyle(style);
             offMouse(group);
+            showMouse(xmark);
             if (then) then(points);
           }
         }
@@ -385,6 +401,7 @@ export const ChartTools = L.Control.extend({
       let brg = null;
       const group = L.featureGroup().addTo(layer);
       let xmark = L.marker([0, 0], { icon: icon("x") }).addTo(group);
+      hideMouse(xmark);
       const invert = sym.startsWith("-");
       if (invert) sym = sym.substring(1);
       function init(p) {
@@ -392,6 +409,7 @@ export const ChartTools = L.Control.extend({
         line = L.polyline(points, LINE_OPT2).addTo(group);
         symbol = L.marker(p, { icon: icon(sym) }).addTo(group);
         marker = mrk ? L.marker(p, { icon: icon(mrk) }).addTo(group) : null;
+        hideMouse(marker);
       }
       if (start) init(start);
       function draw(e) {
@@ -438,6 +456,7 @@ export const ChartTools = L.Control.extend({
                 direction: "top",
               });
               offMouse(group);
+              showMouse(marker);
               if (then) then(points);
             }
           }
