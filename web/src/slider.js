@@ -31,7 +31,7 @@ L.Control.TimeLineSlider = L.Control.extend({
     leftBgPadding: "2em",
 
     button: "Timeline",
-    heading: "Timeline",
+    title: "Timeline",
     collapsed: true,
   },
 
@@ -138,6 +138,7 @@ L.Control.TimeLineSlider = L.Control.extend({
       let allChangeMapParameters = {
         ...mapParams,
         ...that.options.extraChangeMapParams,
+        slider: that,
       };
       that.options.changeMap(allChangeMapParameters);
     });

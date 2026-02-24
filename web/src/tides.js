@@ -22,6 +22,31 @@ const german = locale.startsWith("de");
 const lang = german ? "de" : "en";
 log("locale", locale, "german", german, "lang", lang);
 
+let predHelgoland;
+
+async function hwHelgoland() {
+  if (predHelgoland == null) {
+    const data = await fetch("/tides/de/data/DE__509A_tides.json").then((r) =>
+      r.json(),
+    );
+    const year = new Date().getFullYear();
+    const ydata = data.years
+      .map((y) => y[year])
+      .filter((d) => d != undefined)[0];
+    predHelgoland = ydata.hwnw_prediction.data;
+  }
+  const pred = predHelgoland;
+  const now = new Date();
+  let currentHW = null;
+  for (const p of pred) {
+    const ts = new Date(p.timestamp);
+    if (p.type == "HW") currentHW = p;
+    if (ts > now) break;
+  }
+  console.log("currentHW", currentHW);
+  return currentHW;
+}
+
 export function addTidealAtlas(map, gauges = false) {
   const layers = [];
 
@@ -63,8 +88,16 @@ export function addTidealAtlas(map, gauges = false) {
         "+6h",
         "fig",
       ],
-      changeMap: (p) => {
+      changeMap: async (p) => {
         let x = p.label.replace("HW", "+0h").replace("h", "");
+        {
+          let title = p.slider.title.innerHTML;
+          title = title.replace(/ \(.*\)$/, "");
+          const hwh = await hwHelgoland();
+          const td = formatTimestamp(hwh.timestamp);
+          title += ` (${td.time} ${td.zone})`;
+          p.slider.title.innerHTML = title;
+        }
         layers.forEach((l) => {
           if (l._url.includes(x)) {
             map.addLayer(l);
@@ -121,10 +154,32 @@ async function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
   return converted;
 }
 
-function localTZ() {
-  const tform = new Intl.DateTimeFormat(locale, { timeZoneName: "short" });
-  const parts = tform.formatToParts(new Date());
+function localTZ(date) {
+  const tform = new Intl.DateTimeFormat(locale, {
+    timeZoneName: "short",
+  });
+  const parts = tform.formatToParts(date ?? new Date());
   return parts.find((part) => part.type === "timeZoneName")?.value;
+  // return tform.resolvedOptions().timeZone;
+}
+
+function formatTimestamp(timestamp, tz) {
+  const ts = new Date(timestamp);
+  let date = ts
+    .toLocaleString(locale, {
+      weekday: "short",
+      month: "2-digit",
+      day: "2-digit",
+      // year: "numeric",
+    })
+    .replace(",", "");
+  const zone = localTZ(ts);
+  const time = ts.toLocaleString(locale, {
+    hour: "2-digit",
+    minute: "2-digit",
+    ...{ timeZone: tz },
+  });
+  return { date, time, zone };
 }
 
 function mergeNoClobber(target, source) {
@@ -296,8 +351,6 @@ export async function addTideGaugesDE(map, preFetch = false) {
     }
     log("moon", moon);
 
-    const tz = localTZ();
-
     function getForcast(timestamp) {
       if (!forecast) return "";
       const ts = new Date(timestamp).getTime();
@@ -308,24 +361,15 @@ export async function addTideGaugesDE(map, preFetch = false) {
 
     let date0,
       hdg0 = null;
-    let rows = `<tr><th>Datum</th><th>${tz}</th><th title="Höhe der Gezeit in Metern ± Abweichung K durch Wettereinfluss">HdG K</th><th title="Alter der Gezeit und C = 100 × (Tidenstieg bzw. -fall)/(mitt. Springtidenhub)">AdG C</th></tr>\n`;
+    let rows = `<tr><th>Datum</th><th>${localTZ()}</th><th title="Höhe der Gezeit in Metern ± Abweichung K durch Wettereinfluss">HdG K</th><th title="Alter der Gezeit und C = 100 × (Tidenstieg bzw. -fall)/(mitt. Springtidenhub)">AdG C</th></tr>\n`;
     for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
       const r = prediction[k];
       log("prediction", r);
       const ts = new Date(r.timestamp);
-      let date = ts
-        .toLocaleString(locale, {
-          month: "2-digit",
-          day: "2-digit",
-          weekday: "short", // year: 'numeric',
-        })
-        .replace(",", "");
-      if (date0 === date) date = "";
-      else date0 = date;
-      const time = ts.toLocaleString(locale, {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
+      const td = formatTimestamp(ts);
+      console.log(td);
+      if (date0 === td.date) td.date = "";
+      else date0 = td.date;
       const hi_lo = r.type;
       const height_astro = r.height / 100;
       let deviation = getForcast(r.timestamp);
@@ -352,7 +396,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
         r.height != null ? ((r.height + offset) / 100).toFixed(2) : "-";
       hdg0 = r.height;
       const when = ts > now ? "future" : "past";
-      rows += `<tr class="${r.type} ${when}"><td>${date}</td><td>${time}</td><td>${height} <span class="forecast">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}</td></tr>\n`;
+      rows += `<tr class="${r.type} ${when}"><td>${td.date}</td><td>${td.time}</td><td>${height} <span class="forecast">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}</td></tr>\n`;
     }
     const table = `<table>\n${rows}</table>`;
     track("de");
@@ -472,30 +516,20 @@ export async function addTideGaugesNL(map, kind = "astronomische-getij") {
           .then((data) => {
             log(data);
 
-            const tz = localTZ();
-
             const extremes = data.series[0].extremes;
 
             let table = "";
             if (extremes) {
               let date0;
-              let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th></tr>\n`;
+              let rows = `<tr><th>Date</th><th>${localTZ()}</th><th>Height</th></tr>\n`;
               extremes.forEach((r) => {
                 // log(r);
                 const ts = new Date(r.dateTime);
-                let date = ts
-                  .toLocaleString(locale, {
-                    month: "2-digit",
-                    day: "2-digit",
-                    weekday: "short", // year: 'numeric',
-                  })
-                  .replace(",", "");
+                const td = formatTimestamp(ts);
+                let date = td.date;
                 if (date0 === date) date = "";
                 else date0 = date;
-                const time = ts.toLocaleString(locale, {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                });
+                const time = td.time;
                 const when = ts > now ? "future" : "past";
                 const height = r.value / 100;
                 rows += `<tr class="${r.sign} ${when}"><td>${date}</td><td>${time}</td><td>${height?.toFixed(2)}</td></tr>\n`;
@@ -578,7 +612,7 @@ export async function addTideGaugesUK(map, preFetch = false) {
       .then((r) => r.json())
       .catch(log);
     if (!data) return;
-    // log(data);
+    log(data);
     const note = data.footerNote;
     const events = data.tidalEventList;
     const curve = data.tidalHeightOccurrenceList;
@@ -592,13 +626,12 @@ export async function addTideGaugesUK(map, preFetch = false) {
     const now0 = new Date();
     now0.setUTCHours(0, 0, 0, 0);
 
-    // const tz = localTZ();
-    const tz = "UTC";
     const moon = 2;
 
     let date0;
     let approx = false;
-    let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th><th class="moon${moon}"></th></tr>\n`;
+    const tz = "UTC"; //localTZ()
+    let rows = `<tr><th>Date</th><th>${tz}</th><th>Height</th><th class="moon${moon}"></th></tr>\n`;
     events.forEach((e) => {
       // log(e);
       const ts = new Date(e.dateTime + "Z");
@@ -606,23 +639,12 @@ export async function addTideGaugesUK(map, preFetch = false) {
       if (ts - now0 > 2 * 86400_000) return;
       const type = e.eventType ? "" : "HW";
       const when = ts > now ? "future" : "past";
-      let date = ts
-        .toLocaleString(locale, {
-          timeZone: tz,
-          month: "2-digit",
-          day: "2-digit",
-          weekday: "short", // year: 'numeric',
-        })
-        .replace(",", "");
+      const td = formatTimestamp(ts, tz);
+      let date = td.date;
       if (date0 === date) date = "";
       else date0 = date;
       const tapprox = e.isApproximateTime ? "*" : "";
-      const time =
-        ts.toLocaleString(locale, {
-          timeZone: tz,
-          hour: "2-digit",
-          minute: "2-digit",
-        }) + tapprox;
+      const time = td.time + tapprox;
       const happrox = e.isApproximateHeight ? "*" : "";
       const height = e.height?.toFixed(1) + happrox;
       const moon = ldate1 < ts && ts < ldate2 ? phase : -1;
@@ -711,28 +733,19 @@ export async function addTideGaugesFR(map, preFetch = false) {
     });
 
     const now = new Date();
-    const tz = localTZ();
 
     let date0;
-    let rows = `<tr><th>📅</th><th>${tz}</th><th>🌊 m</th><th>coeff</th></tr>\n`;
+    let rows = `<tr><th>Date</th><th>${localTZ()}</th><th>Height</th><th>Coeff</th></tr>\n`;
     events.forEach((e) => {
       // log(e);
       const ts = new Date(e.datetime);
       const type = e.event;
       const when = ts > now ? "future" : "past";
-      let date = ts
-        .toLocaleString(locale, {
-          month: "2-digit",
-          day: "2-digit",
-          weekday: "short", // year: 'numeric',
-        })
-        .replace(",", "");
+      const td = formatTimestamp(ts);
+      let date = td.date;
       if (date0 === date) date = "";
       else date0 = date;
-      const time = ts.toLocaleString(locale, {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
+      const time = td.time;
       const height = e.height?.toFixed(1);
       rows += `<tr class="${type} ${when}"><td>${date}</td><td title="${ts}">${time}</td><td>${height}</td><td>${e.coeff || ""}</td></tr>\n`;
     });
