@@ -306,6 +306,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
       return !ydata;
     });
 
+    const notice = ydata.notice ?? [];
     const prediction = ydata.hwnw_prediction.data;
     const level = ydata.hwnw_prediction.level;
     const forecast = forecastdata?.hwnw_forecast?.data;
@@ -385,12 +386,16 @@ export async function addTideGaugesDE(map, preFetch = false) {
           .map((d) => (d > 0 ? "+" : "") + d.toFixed(1))
           .join(" bis ");
       }
-      if (ydata.MSpTh && hdg0) {
-        // calculate local coefficient
-        const range = r.height - hdg0;
-        const coeff = (100 * Math.abs(range)) / ydata.MSpTh;
-        // if (range > 0)
-        r.phase += " " + coeff.toFixed(0).padStart(3, "\u2007");
+      if (ydata.MSpTh) {
+        if (hdg0) {
+          // calculate local coefficient
+          const range = r.height - hdg0;
+          const coeff = (100 * Math.abs(range)) / ydata.MSpTh;
+          // if (range > 0)
+          r.phase += " " + coeff.toFixed(0).padStart(3, "\u2007");
+        } else {
+          r.phase += " " + "".padStart(3, "\u2007");
+        }
       }
       const height =
         r.height != null ? ((r.height + offset) / 100).toFixed(2) : "-";
@@ -404,6 +409,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
       .bindPopup(
         `<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>
         ${table}
+        <div class="notice">${notice.join("<br/>")}</div>
         <div class="basevalues">${basevalues}</div>
         <div class="forecast"><a href="${forecast_link}" target="_blank" class="${forecast_cls}">${forecast_text}</a></div>
         <div id="plot"></div>
