@@ -22,26 +22,28 @@ const german = locale.startsWith("de");
 const lang = german ? "de" : "en";
 log("locale", locale, "german", german, "lang", lang);
 
-let predHelgoland;
+let tideDataHelgoland;
 
 async function hwHelgoland() {
-  if (predHelgoland == null) {
-    const data = await fetch("/tides/de/data/DE__509A_tides.json").then((r) =>
-      r.json(),
+  if (tideDataHelgoland == null) {
+    tideDataHelgoland = await fetch("/tides/de/data/DE__509A_tides.json").then(
+      (r) => r.json(),
     );
-    const year = new Date().getFullYear();
-    const ydata = data.years
-      .map((y) => y[year])
-      .filter((d) => d != undefined)[0];
-    predHelgoland = ydata.hwnw_prediction.data;
   }
-  const pred = predHelgoland;
+  const year = new Date().getFullYear();
+  const ydata = tideDataHelgoland.years
+    .map((y) => y[year])
+    .filter((d) => d != undefined)[0];
+  const pred = ydata.hwnw_prediction.data;
   const now = new Date();
+  let hdg0;
   let currentHW = null;
   for (const p of pred) {
     const ts = new Date(p.timestamp);
     if (p.type == "HW") currentHW = p;
+    if (hdg0) currentHW.coeff = (100 * Math.abs(p.height - hdg0)) / ydata.MSpTh;
     if (ts > now) break;
+    hdg0 = p.height;
   }
   console.log("currentHW", currentHW);
   return currentHW;
@@ -95,7 +97,7 @@ export function addTidealAtlas(map, gauges = false) {
           title = title.replace(/ \(.*\)$/, "");
           const hwh = await hwHelgoland();
           const td = formatTimestamp(hwh.timestamp);
-          title += ` (${td.time} ${td.zone})`;
+          title += ` (${td.time}&thinsp;${td.zone} C&thinsp;${hwh.coeff.toFixed(0)})`;
           p.slider.title.innerHTML = title;
         }
         layers.forEach((l) => {
@@ -409,8 +411,8 @@ export async function addTideGaugesDE(map, preFetch = false) {
       .bindPopup(
         `<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>
         ${table}
-        <div class="notice">${notice.join("<br/>")}</div>
         <div class="basevalues">${basevalues}</div>
+        <div class="notice">${notice.join("<br/>")}</div>
         <div class="forecast"><a href="${forecast_link}" target="_blank" class="${forecast_cls}">${forecast_text}</a></div>
         <div id="plot"></div>
         <div class="source">source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`,
