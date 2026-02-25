@@ -9,9 +9,9 @@ edit_uri: edit/master/docs/
 nav:
   - Chart: ../
   - Download: index.md
+  - Usage: usage.md
   - Screenshots: screenshots.md
   - Printing: print.md
-  #  - Usage: usage.md
   - Tidal Atlas: tides.md
   - Nautical Almanac: almanac.md
 #  - Creation: creation.md

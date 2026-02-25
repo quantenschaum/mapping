@@ -31,7 +31,7 @@ Dit is handig voor het maken van schermafbeeldingen van de kaart zonder de bedie
 
 ## Afdrukken vanuit QGIS
 
-Je kunt QGIS gebruiken om een kaart te maken [zoals deze](paperchart.pdf).
+Je kunt QGIS gebruiken om een kaart te maken [zoals deze](img/paperchart.pdf).
 
 Je kunt als volgt je eigen aangepaste kaarten afdrukken met de klassieke lat/lon zebrarand.
 

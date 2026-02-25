@@ -31,7 +31,7 @@ This is useful for creating screenshots of the map like above without the contro
  
 ## Printing from QGIS
 
-You can use QGIS to create a chart [like this one](paperchart.pdf).
+You can use QGIS to create a chart [like this one](img/paperchart.pdf).
 
 You can print your own custom charts with the classical lat/lon zebra border as follows.
 

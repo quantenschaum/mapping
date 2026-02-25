@@ -31,7 +31,7 @@ Dies ist nützlich, um Screenshots der Karte wie oben ohne die Steuerelemente, a
  
 ## Drucken aus QGIS
 
-Sie können mit QGIS eine Karte [wie diese](paperchart.pdf) erstellen.
+Sie können mit QGIS eine Karte [wie diese](img/paperchart.pdf) erstellen.
 
 Sie können Ihre eigenen benutzerdefinierten Karten mit dem klassischen Seekartenrand wie folgt drucken.
 
