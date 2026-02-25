@@ -27,7 +27,7 @@ Gezeitenhöhen und -strömungen können wie [hier](tides.de.md) beschrieben ange
 
 ## Routen-Werkzeug
 
-![Routen-Werkzeug](img/route-tool.png)
+![Routen-Werkzeug](img/route-tool.webp)
 
 Das Routen-Werkzeug (grüne Schaltfläche im Bild oben) ermöglicht es, Wegpunkte zu setzen und Kurs und Distanz zwischen ihnen abzulesen.
 
@@ -44,7 +44,7 @@ KüG und FüG werden in der linken unteren Ecke angezeigt.
 
 # Karten-Werkzeuge
 
-![Peilung](img/bearing.png)
+![Peilung](img/bearing.webp)
 
 Dies ist eine besondere Funktion dieser Karte.
 Sie kombiniert moderne Elektronik und eine digitale Seekarte mit klassischen Navigationsverfahren, wie sie auf einer Papierkarte durchgeführt wurden. Dies ermöglicht es, GPS- und klassische terrestrische Navigation zu kombinieren oder auf manuelle Navigation zurückzugreifen, falls das GPS ausfällt oder gestört wird.
@@ -56,16 +56,14 @@ Und schließlich ist es ein se gutes Werkzeug für Bildungszwecke. Man kann es v
 
 Die verfügbaren Werkzeuge sind (von links nach rechts)
 
-- Stift - Symbolleiste öffnen/schließen
-- Radiergummi - alle Zeichnungen löschen
-- Wegpunkt - einen WP-Marker setzen
-- Peilung - Peilungslinie zeichnen, rechtweisender und missweisender Wert wird angezeigt
-- Distanz - Distanzkreis zeichnen
-- Peilung & Distanz - Peilungslinie zeichnen und Distanzmarkierung setzen (Radar-Fix)
-- Verseglte Peilung - Peilungslinie zeichnen, dann parallel entlang eines Kursvektors verschieben
-- Fix - einen Schiffsort-Marker setzen
-- Koppeln - Koppel-Linie mit Richtung und Distanz zeichnen
-- 1. Stromaufgabe - Stromdreieck, Koppel-Linie zeichnen, dann Stromvektor
-- 2. Stromaufgabe - Stromdreieck, Stromvektor zeichnen, dann Kurs über Grund, dann Fahrt durchs Wasser
-
-Es gibt ein [Video auf YouTube](https://youtu.be/iiqm5lR0oWU), das diese Werkzeuge demonstriert.
+- **Stift** - Symbolleiste öffnen/schließen
+- **Radiergummi** - alle Zeichnungen löschen
+- **Wegpunkt** - einen WP-Marker setzen
+- **Peilung** - Peilungslinie zeichnen, rechtweisender und missweisender Wert wird angezeigt
+- **Distanz** - Distanzkreis zeichnen
+- **Peilung & Distanz** - Peilungslinie zeichnen und Distanzmarkierung setzen (Radar-Fix)
+- **Verseglte Peilung** - Peilungslinie zeichnen, dann parallel entlang eines Kursvektors verschieben
+- **Fix** - einen Schiffsort-Marker setzen
+- **Koppeln** - Koppel-Linie mit Richtung und Distanz zeichnen
+- **Stromaufgabe 1** - Stromdreieck, Koppel-Linie zeichnen, dann Stromvektor
+- **Stromaufgabe 2** - Stromdreieck, Stromvektor zeichnen, dann Kurs über Grund, dann Fahrt durchs Wasser

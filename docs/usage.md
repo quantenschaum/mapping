@@ -28,7 +28,7 @@ Tidal heights and currents can be displayed as described [here](tides.md). Very 
 
 ## Route Tool
 
-![route tool](img/route-tool.png)
+![route tool](img/route-tool.webp)
 
 The route tool (green button in image above) allows you to place waypoints and and to read off course and distance between them.
 
@@ -45,7 +45,7 @@ COG and SOG are displayed in the lower left corner.
 
 # Chart Tools
 
-![bearing](img/bearing.png)
+![bearing](img/bearing.webp)
 
 This is a unique feature of this chart. 
 It combines modern electronics and a digital chart with classical navigation procedures as they were performed on a papaer chart.
@@ -58,16 +58,14 @@ And lastly it is a great tool for educational purposes. You can use it teach you
 
 The tools available are (left to right)
 
-- Pen - open/close toolbar
-- Eraser - wipe all drawing
-- Waypoint - place a WP marker
-- Bearing - draw bearing line, true and magnetic value is displayed
-- Range -  draw range circle
-- Bearing & Range - draw bearing line and place range mark (radar fix)
-- Running Bearing - draw beaing line, the parallel shift it along a course vector
-- Fix - place a fix marker
-- Dead Reckoning - draw DR line with direction and distance
-- Estimated Position - draw current triangle, draw DR line, then current vector
-- Cource to Steer - draw current triangle, draw current vector, then course over ground, then water speed
-
-There is a [video on YouTube](https://youtu.be/iiqm5lR0oWU) demonstrating these tools.
+- **Pen** - open/close toolbar
+- **Eraser** - wipe all drawing
+- **Waypoint** - place a WP marker
+- **Bearing** - draw bearing line, true and magnetic value is displayed
+- **Range** -  draw range circle
+- **Bearing & Range** - draw bearing line and place range mark (radar fix)
+- **Running Bearing** - draw beaing line, the parallel shift it along a course vector
+- **Fix** - place a fix marker
+- **Dead Reckoning** - draw DR line with direction and distance
+- **Estimated Position** - draw current triangle, draw DR line, then current vector
+- **Cource to Steer** - draw current triangle, draw current vector, then course over ground, then water speed
