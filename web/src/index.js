@@ -25,7 +25,12 @@ import "./boating";
 import { registerSW } from "virtual:pwa-register";
 import { showDialog } from "./infobox";
 import { ackee } from "./ackee";
-import { addTidealAtlas, addTideGauges } from "./tides";
+import {
+  addTidealAtlas,
+  addTideGauges,
+  addTideGaugesDE,
+  addTideGaugesNL,
+} from "./tides";
 import { addBfS, addNfS } from "./bfs";
 import "leaflet-mouse-position";
 import "leaflet-mouse-position/src/L.Control.MousePosition.css";
@@ -487,12 +492,13 @@ if (isSet("gpx")) {
 }
 
 addTidealAtlas(map);
-// if (isStandalone || params.get("tides))
-{
+if (isStandalone || params.get("tides")) {
   addTideGauges(map);
   if (params.get("tides") == "2") {
     addWattSegler(map);
   }
+} else {
+  await Promise.all([addTideGaugesDE(map), addTideGaugesNL(map)]);
 }
 
 if (params.get("bfs")) {
