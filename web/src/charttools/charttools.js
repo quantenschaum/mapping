@@ -6,7 +6,7 @@ import { deg, rad, to180, to360 } from "../utils";
 import { declination } from "./declination";
 const icons = import.meta.glob("./charttools-*.svg", { eager: true });
 
-const isDevMode = process.env.NODE_ENV === "development";
+const isDevMode = import.meta.env.DEV;
 const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 console.log("touch device", isTouch);
 
@@ -191,6 +191,9 @@ export const ChartTools = L.Control.extend({
     }
 
     const mapContainer = map.getContainer();
+
+    let touchOffset = 1;
+
     function touch(mouseEvent, offset = [0, -64]) {
       return (touchEvent) => {
         touchEvent.preventDefault();
@@ -202,10 +205,10 @@ export const ChartTools = L.Control.extend({
           new MouseEvent(mouseEvent, {
             bubbles: true,
             cancelable: true,
-            clientX: touch.clientX + offset[0],
-            clientY: touch.clientY + offset[1],
-            screenX: touch.screenX + offset[0],
-            screenY: touch.screenY + offset[1],
+            clientX: touch.clientX + offset[0] * touchOffset,
+            clientY: touch.clientY + offset[1] * touchOffset,
+            screenX: touch.screenX + offset[0] * touchOffset,
+            screenY: touch.screenY + offset[1] * touchOffset,
             originalEvent: touchEvent,
             shiftKey: touchEvent.shiftKey,
           }),
@@ -244,6 +247,7 @@ export const ChartTools = L.Control.extend({
       map.on("click", mouseAction);
       map.on("mousemove", mouseAction);
       map.on("contextmenu", cancelAction);
+      touchOffset = 1;
     }
 
     function offMouse(layer) {
@@ -255,6 +259,7 @@ export const ChartTools = L.Control.extend({
         layer.on("contextmenu", layer.remove);
       }
       cancelAction = null;
+      touchOffset = 1;
     }
 
     function hideMouse(m) {
@@ -323,6 +328,7 @@ export const ChartTools = L.Control.extend({
             fillColor: "none",
           }).addTo(group);
         } else if (circle != null) {
+          touchOffset = 0;
           let dst = distance(e.latlng, center);
           if (e.originalEvent.shiftKey) dst = Math.round(dst * 10) / 10;
           circle.setRadius(dst * 1852);
@@ -357,6 +363,7 @@ export const ChartTools = L.Control.extend({
           line = L.polyline(points, LINE_OPT2).addTo(group);
           marker = L.marker(e.latlng, { icon: icon("arr") }).addTo(group);
         } else if (points.length) {
+          touchOffset = 0;
           points[1] = e.latlng;
           let brg0 = bearing(...points);
           let dst = distance(...points);
@@ -420,6 +427,7 @@ export const ChartTools = L.Control.extend({
         if (points.length == 0 && e.type == "click") {
           init(e.latlng);
         } else if (points.length) {
+          touchOffset = 0;
           points[1] = e.latlng;
           if (brg != null)
             points[1] = project(points[0], brg, distance(...points));
