@@ -327,12 +327,12 @@ if (!isStandalone) {
         img: "helgoland.png",
         title: "FreeNauticalChart.net",
         text: `<p>is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It uses official data that is available as open data.</p>
-    <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
+        <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
     <p>For more details, usage instructions and downloads, <a href="download/">look into the docs</a>!</p>
     <p style="color:red; font-weight:bold; text-align:center;">Use at own risk, <a href="download/">read the disclaimer</a>!</p>
     <p style="font-size:0.7em;">(The docs also accessible via the link in the attribution in lower right.)</p>`,
       }),
-    5000,
+    isDevMode ? 0 : 3000,
   );
 }
 
