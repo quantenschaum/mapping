@@ -42,6 +42,7 @@ function isSet(name) {
   return params.get(name) == "1";
 }
 const isDevMode = import.meta.env.DEV;
+const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 const isStandalone = !!(
   window.matchMedia("(display-mode: standalone)").matches ||
   window.navigator.standalone ||
@@ -460,16 +461,17 @@ if (isDevMode || isStandalone) {
   new WeatherForecast().addTo(map);
 }
 
-L.control
-  .mousePosition({
-    latFormatter: (v) => degmin(v, 3, 1, 1),
-    lngFormatter: (v) => degmin(v, 3, 0, 1),
-    prefix: "",
-    separator: "\n ",
-    emptyString: "",
-  })
-  .addTo(map);
-
+if (!isTouch) {
+  L.control
+    .mousePosition({
+      latFormatter: (v) => degmin(v, 3, 1, 1),
+      lngFormatter: (v) => degmin(v, 3, 0, 1),
+      prefix: "",
+      separator: "\n ",
+      emptyString: "",
+    })
+    .addTo(map);
+}
 // map.addControl(new L.Control.ScaleNautic());
 
 if (isSet("ais")) {
