@@ -124,7 +124,7 @@ Sie können auch [dieses zusätzliche `mapcss`](https://josm.openstreetmap.de/wi
 
 - `https://raw.githubusercontent.com/quantenschaum/mapping/refs/heads/icons/extra.mapcss`
 
-## [Gezeitenkurven](tides.de.md#gezeitenkurven)
+## [Gezeitenkurven](tides.md#gezeitenkurven)
 
 - [:de: Gezeitenkurven DE](tidecurves.pdf){:download}
 

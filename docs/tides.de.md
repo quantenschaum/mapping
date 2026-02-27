@@ -1,4 +1,4 @@
-# Gezeitenstromatlas
+# Gezeiten
 
 ## Gezeitentafeln und Wasserstand
 
@@ -39,7 +39,7 @@ Er wird in jeder Zeile aus dem Höhenunterschied zwischen dieser und der vorheri
 ### Gezeitenkurven
 
 ![tide curve](img/tidecurve.webp)
-Gezeitenkurven im ATT-Stil, berechnet aus den vom BSH bereitgestellten Daten, kann man [hier](index.de.md#gezeitenkurven) herunterladen.
+Gezeitenkurven im ATT-Stil, berechnet aus den vom BSH bereitgestellten Daten, kann man [hier](index.md#gezeitenkurven) herunterladen.
 
 ## Gezeitenstrom
 

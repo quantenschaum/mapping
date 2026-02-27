@@ -1,4 +1,4 @@
-# Tidal Atlas
+# Tides
 
 ## Times and Water level
 

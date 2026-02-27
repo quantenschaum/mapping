@@ -19,11 +19,11 @@ Ansonsten funktioniert es genauso wie die Karte im Browser, die App ist letztend
 
 ## Drucken
 
-Man kann Seekarten einfach direkt aus dem Browser drucken. Wie das geht, wird [hier](print.de.md) beschrieben.
+Man kann Seekarten einfach direkt aus dem Browser drucken. Wie das geht, wird [hier](print.md) beschrieben.
 
 ## Gezeiten
 
-Gezeitenhöhen und -strömungen können wie [hier](tides.de.md) beschrieben angezeigt werden. Sehr praktisch für die Törnplanung, dies direkt in der Seekarte verfügbar zu haben.
+Gezeitenhöhen und -strömungen können wie [hier](tides.md) beschrieben angezeigt werden. Sehr praktisch für die Törnplanung, dies direkt in der Seekarte verfügbar zu haben.
 
 ## Routen-Werkzeug
 

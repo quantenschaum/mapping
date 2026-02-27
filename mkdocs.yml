@@ -12,7 +12,7 @@ nav:
   - Usage: usage.md
   - Screenshots: screenshots.md
   - Printing: print.md
-  - Tidal Atlas: tides.md
+  - Tides: tides.md
   - Nautical Almanac: almanac.md
 #  - Creation: creation.md
 
@@ -123,18 +123,20 @@ plugins:
           name: "🇩🇪 Deutsch"
           nav_translations:
             Chart: Karte
+            Usage: Bedienung
             Printing: Drucken
             Screenshots: Bildschirmfotos
-            Tidal Atlas: Gezeitenstromatlas
+            Tides: Gezeiten
             Nautical Almanac: Nautisches Jahrbuch
         - locale: nl
           name: "🇳🇱 Nederlands"
           nav_translations:
             Chart: Kaart
+            Usage: Gebruik
             Printing: Afdrukken
             Screenshots: Schermfoto's
-            Tidal Atlas: Getijdenatlas
-            Nautical Almanac: Nautische almanak
+            Tides: Getij
+            Nautical Almanac: Nautische Almanak
   - search:
       lang: en
   - git-revision-date-localized:
