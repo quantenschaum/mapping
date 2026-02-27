@@ -36,6 +36,11 @@ Er wird in jeder Zeile aus dem Höhenunterschied zwischen dieser und der vorheri
 !!! example "Beispiel"
     Möchte man die Stromgeschwindigkeit am 28.02. um 1200 kennen, liest man C am nächsten NW als 78 ab. Man multipliziert die im Gezeitenstromatlas abgelesene Spring-Stromgeschwindigkeit einfach mit 0,78 und erhält den interpolierten Wert.
 
+### Gezeitenkurven
+
+![tide curve](img/tidecurve.webp)
+Gezeitenkurven im ATT-Stil, berechnet aus den vom BSH bereitgestellten Daten, kann man [hier](index.de.md#gezeitenkurven) herunterladen.
+
 ## Gezeitenstrom
 
 Das BSH stellt Gezeitenstromdaten für die Nordsee, den Ärmelkanal und die Deutsche Bucht (höhere Auflösung) bereit.
