@@ -92,7 +92,7 @@ export function addTidealAtlas(map, gauges = false) {
       ],
       changeMap: async (p) => {
         let x = p.label.replace("HW", "+0h").replace("h", "");
-        {
+        if (x.startsWith("-") || x.startsWith("+")) {
           let title = p.slider.title.innerHTML;
           title = title.replace(/ \(.*\)$/, "");
           const hwh = await hwHelgoland();
