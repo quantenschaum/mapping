@@ -22,7 +22,7 @@ import { restoreLayers } from "./restore";
 import { addVectorLayer } from "./vector";
 import { addWattSegler } from "./wattsegler";
 import "./boating";
-import { registerSW } from "virtual:pwa-register";
+// import { registerSW } from "virtual:pwa-register";
 import { showDialog } from "./infobox";
 import { ackee } from "./ackee";
 import {
@@ -54,10 +54,7 @@ log("PWA", "red", "standalone", isStandalone, "development", isDevMode);
 if (isStandalone || isSet("sw")) {
   log("PWA", "red", "registering service worker");
   ackee.record("aed13eec-f7d3-43f5-8483-b12753abd188");
-  registerSW({
-    onNeedRefresh() {},
-    onOfflineReady() {},
-  });
+  // registerSW({ onNeedRefresh() {}, onOfflineReady() {} });
 } else {
   ackee.record("f1a69ffa-afc4-4085-9c7d-044315d27165");
 }
