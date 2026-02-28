@@ -31,10 +31,10 @@ C = 100 * ---------------------
 
 Waar is dat nuttig voor? — U ziet onmiddellijk hoe de actuele rijzing/daling uitvalt ten opzichte van de gemiddelde springtijslag. Omdat de stroomsnelheid doorgaans rechtstreeks evenredig is met de rijzing/daling, kunt u C gebruiken om de in de getijdenstroomatlas vermelde spring-stroomsnelheid te schalen. Daarmee wordt de stroominterpolatie aanzienlijk eenvoudiger en sneller.
 
-Deze wordt in elke rij berekend uit het hoogteverschil tussen deze en de voorgaande rij. Valt het gewenste tijdstip tussen twee rijen, dan leest u C af uit de onderste rij.
+Deze wordt berekend en weergegeven tussen twee rijen.
 
 !!! example "Voorbeeld"
-    Wilt u de stroomsnelheid op 28-02 om 1200 weten, dan leest u C bij het dichtstbijzijnde NW af als 78. Vermenigvuldig de in de getijdenstroomatlas afgelezen spring-stroomsnelheid eenvoudig met 0,78 om de geïnterpoleerde waarde te verkrijgen.
+    Wilt u de stroomsnelheid op 28-02 om 1200 weten, dan leest u C 78. Vermenigvuldig de in de getijdenstroomatlas afgelezen spring-stroomsnelheid eenvoudig met 0,78 om de geïnterpoleerde waarde te verkrijgen.
 
 ### Getijdencurven
 

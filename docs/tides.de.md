@@ -31,10 +31,10 @@ C = 100 * ---------------------
 
 Wozu ist das nützlich? - Man erkennt unmittelbar, wie der aktuelle Stieg/Fall im Vergleich zur mittleren Springtidenhubhöhe ausfällt. Da die Stromgeschwindigkeit in der Regel direkt proportional zum Stieg/Fall ist, kann man C nutzen, um die im Gezeitenstromatlas angegebene Spring-Stromgeschwindigkeit zu skalieren. Dadurch lässt sich die Strominterpolation deutlich einfacher und schneller durchführen.
 
-Er wird in jeder Zeile aus dem Höhenunterschied zwischen dieser und der vorherigen Zeile berechnet. Liegt der gewünschte Zeitpunkt zwischen zwei Zeilen, liest man C aus der unteren Zeile ab.
+Er wird immer zwischen zwei Zeilen berechnet und dargestellt.
 
 !!! example "Beispiel"
-    Möchte man die Stromgeschwindigkeit am 28.02. um 1200 kennen, liest man C am nächsten NW als 78 ab. Man multipliziert die im Gezeitenstromatlas abgelesene Spring-Stromgeschwindigkeit einfach mit 0,78 und erhält den interpolierten Wert.
+    Möchte man die Stromgeschwindigkeit am 28.02. um 1200 kennen, liest man C 78 ab. Man multipliziert die im Gezeitenstromatlas abgelesene Spring-Stromgeschwindigkeit einfach mit 0,78 und erhält den interpolierten Wert.
 
 ### Gezeitenkurven
 

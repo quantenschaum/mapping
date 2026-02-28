@@ -31,10 +31,10 @@ C = 100 * ------------------
 
 Why is this usefull? - It tells you directly how the ongoing rise/fall of the tide compares to the mean springs range. And since the current velocity (drift) is mostly directly proportional to the rise/fall range, C can be used to scale the springs velocity given in the tidal current atlas. This makes current interpolation much easier and faster.
 
-It is calculated in each row from the range between this and the previous row. If the time you are interested in is between two rows, read C from the lower row.
+It is calculated add displayed between two rows.
 
 !!! example
-    If you want to know the drift at 28.02. 1200, you read C at next LW as 78. So, you just multiply the springs drift you read off the tidal atlas by 0.78 and get the interpolated value.
+    If you want to know the drift at 28.02. 1200, you read C as 78. So, you just multiply the springs drift you read off the tidal atlas by 0.78 and get the interpolated value.
     
 ### Tide Curves
 
