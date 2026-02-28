@@ -501,7 +501,7 @@ if (isStandalone || params.get("tides")) {
     addWattSegler(map);
   }
 } else {
-  await Promise.all([addTideGaugesDE(map), addTideGaugesNL(map)]);
+  Promise.all([addTideGaugesDE(map), addTideGaugesNL(map)]);
 }
 
 if (params.get("bfs")) {

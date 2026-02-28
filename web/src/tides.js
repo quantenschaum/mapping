@@ -262,7 +262,7 @@ async function tidePlot(traces) {
 }
 
 export async function addTideGauges(map) {
-  await Promise.all([
+  return Promise.all([
     addTideGaugesDE(map),
     addTideGaugesNL(map),
     // addTideGaugesNL(map, "waterhoogte"),
@@ -358,52 +358,47 @@ export async function addTideGaugesDE(map, preFetch = false) {
       if (!forecast) return "";
       const ts = new Date(timestamp).getTime();
       const fc = forecast.find((f) => new Date(f.timestamp).getTime() === ts);
+      return fc?.value;
       if (fc?.forecast) return `${fc.forecast.replace(" m", "")}`;
       return "";
     }
 
     let date0,
       hdg0 = null;
-    let rows = `<tr><th>Datum</th><th>${localTZ()}</th><th title="Höhe der Gezeit in Metern ± Abweichung K durch Wettereinfluss">HdG K</th><th title="Alter der Gezeit und C = 100 × (Tidenstieg bzw. -fall)/(mitt. Springtidenhub)">AdG C</th></tr>\n`;
+    let rows = `<tr><th>Datum</th><th>${localTZ()}</th><th title="Höhe der Gezeit in Metern ± Abweichung K durch Wettereinfluss">HdG&nbsp;&nbsp;&nbsp;K</th><th title="Alter der Gezeit und C = 100 × (Tidenstieg bzw. -fall)/(mitt. Springtidenhub)">AdG&nbsp;&nbsp;&nbsp;C</th></tr>\n`;
     for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
       const r = prediction[k];
-      log("prediction", r);
+      log("row", r);
       const ts = new Date(r.timestamp);
       const td = formatTimestamp(ts);
-      console.log(td);
       if (date0 === td.date) td.date = "";
       else date0 = td.date;
       const hi_lo = r.type;
       const height_astro = r.height / 100;
-      let deviation = getForcast(r.timestamp);
-      if (deviation) {
+      let height_forecast = getForcast(r.timestamp);
+      let deviation = "";
+      if (height_forecast) {
         // make forecasted deviation relative to astronomical forecast
-        const dev = deviation
-          .split(/\s+/)
-          .map((s) => parseFloat(s.replace(",", ".")))
-          .filter((v) => !isNaN(v));
-        const mean_height = (hi_lo == "HW" ? ydata.MHW : ydata.MNW) / 100;
-        const dev2 = dev.map((d) => d + mean_height - height_astro);
-        deviation = dev2
-          .map((d) => (d > 0 ? "+" : "") + d.toFixed(1))
-          .join(" bis ");
+        const d = height_forecast / 100 - height_astro;
+        deviation = (d < 0 ? "" : "+") + d.toFixed(1);
       }
+      let coeff = "";
       if (ydata.MSpTh) {
         if (hdg0) {
           // calculate local coefficient
           const range = r.height - hdg0;
-          const coeff = (100 * Math.abs(range)) / ydata.MSpTh;
+          coeff = (100 * Math.abs(range)) / ydata.MSpTh;
           // if (range > 0)
-          r.phase += " " + coeff.toFixed(0).padStart(3, "\u2007");
+          coeff = ` <span class="coeff">${coeff.toFixed(0).padStart(3, "\u2007")}</span>`;
         } else {
-          r.phase += " " + "".padStart(3, "\u2007");
+          coeff = ` <span class="coeff">${"".padStart(3, "\u2007")}</span>`;
         }
       }
       const height =
         r.height != null ? ((r.height + offset) / 100).toFixed(2) : "-";
       hdg0 = r.height;
       const when = ts > now ? "future" : "past";
-      rows += `<tr class="${r.type} ${when}"><td>${td.date}</td><td>${td.time}</td><td>${height} <span class="forecast">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}</td></tr>\n`;
+      rows += `<tr class="${r.type} ${when}"><td>${td.date}</td><td>${td.time}</td><td>${height} <span class="deviation">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}${coeff}</td></tr>\n`;
     }
     const table = `<table>\n${rows}</table>`;
     track("de");
