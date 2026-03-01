@@ -20,6 +20,7 @@ export function showDialog(options = {}) {
     title: "Title",
     text: "lorem ipsum",
     button: "Close",
+    callback: null,
     ...options,
   };
   const el = createElementFromHTML(`
@@ -35,5 +36,8 @@ export function showDialog(options = {}) {
   document.body.appendChild(el);
   const btn = document.getElementById("closebutton");
   btn.addEventListener("click", (e) => setSessionBool("infoshown", true));
+  if (options.callback) {
+    options.callback();
+  }
   el.showModal();
 }

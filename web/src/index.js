@@ -331,6 +331,13 @@ const map = L.map("map", {
 new ChartTools().addTo(map);
 
 if (!isStandalone) {
+  let deferredPrompt;
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
   setTimeout(
     () =>
       showDialog({
@@ -340,7 +347,19 @@ if (!isStandalone) {
         <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
     <p>For more details, usage instructions and downloads, <a href="download/">look into the docs</a>!</p>
     <p style="color:red; font-weight:bold; text-align:center;">Use at own risk, <a href="download/">read the disclaimer</a>!</p>
+    <button id="installpwa">Install as App</button>
     <p style="font-size:0.7em;">(The docs are also accessible via the link in the attribution in lower right.)</p>`,
+        callback: () => {
+          const installButton = document.getElementById("installpwa");
+          if (!deferredPrompt) {
+            installButton.style.display = "none";
+          } else {
+            installButton.addEventListener("click", () => {
+              deferredPrompt.prompt();
+              deferredPrompt = null;
+            });
+          }
+        },
       }),
     isDevMode ? 0 : 3000,
   );
