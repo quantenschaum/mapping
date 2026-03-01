@@ -47,7 +47,7 @@ Das BSH stellt Gezeitenstromdaten für die Nordsee, den Ärmelkanal und die Deut
 
 Die Darstellung dieser Daten im [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas) ist leider nicht wirklich brauchbar, man kann weder den Datensatz noch die Gezeitenstunde auswählen. Aber die Rohdaten sind unter [Nordsee](https://gdi.bsh.de/de/feed/Tidal-currents-North-Sea.xml)/[Küste](https://gdi.bsh.de/de/feed/Tidal-currents-German-coastal-waters-and-neighbouring-regions.xml) verfügbar.
 
-I habe mit [QGIS](https://qgis.org/) das Gezeitenstromfeld gerendert und Angaben für Stromgeschwindigkeit- und richtung hinzugefügt. Man kann die Gezeitenstunde auswählen, je nach Zoomstufe erhält man einen Überblick über den Gezeitenstrom und kann bei entsprechender Zoomstufe die Werte direkt an der gewünschten Position ablesen. Bei weiterem Hineinzoomen wird der Küstendatensatz mit höherer Auflösung eingeblendet.
+Ich habe mit [QGIS](https://qgis.org/) das Gezeitenstromfeld gerendert und Angaben für Stromgeschwindigkeit- und richtung hinzugefügt. Man kann die Gezeitenstunde auswählen, je nach Zoomstufe erhält man einen Überblick über den Gezeitenstrom und kann bei entsprechender Zoomstufe die Werte direkt an der gewünschten Position ablesen. Bei weiterem Hineinzoomen wird der Küstendatensatz mit höherer Auflösung eingeblendet.
 
 ![tides](img/tides.webp)
 
