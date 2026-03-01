@@ -138,6 +138,18 @@ const overlays = {
         '<a target="_blank" href="https://emodnet.ec.europa.eu/">EMODnet</a>',
     })
     .on("add", addClass("invert")),
+  // "🇪🇺 IGKB Tiefenschärfe": L.tileLayer.wms(
+  //   "https://www.lfu.bayern.de/gdi/wms/wasser/bodenseetiefenvermessung",
+  //   {
+  //     version: "1.3.0",
+  //     transparent: "true",
+  //     format: "image/png",
+  //     tiled: true,
+  //     layers: "bodensee_wassertiefen",
+  //     attribution:
+  //       '<a target="_blank" href="https://www.igkb.org/forschungsprojekte/tiefenschaerfe">IGKB</a>',
+  //   },
+  // ),
   "🇩🇪 QMAP DE": L.tileLayer.fallback(baseurl + "/qmap-de/{z}/{x}/{y}.png", {
     attribution:
       '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
