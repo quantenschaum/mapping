@@ -19,7 +19,7 @@ Adam Lucke, Anschrift wie oben.
 
 ### 1. Allgemeine Hinweise
 
-Diese Datenschutzerklärung informiert Sie über die Art, den Umfang und den Zweck der Verarbeitung personenbezogener Daten auf der Webseite `freenauticalchart.net` (zuvor `waddenzee.duckdns.org`).
+Diese Datenschutzerklärung informiert Sie über die Art, den Umfang und den Zweck der Verarbeitung personenbezogener Daten auf der Webseite `freenauticalchart.net`.
 
 Diese Webseite dient der Bereitstellung von Karteninhalten im Rahmen eines privaten, nicht-kommerziellen, Open-Source-Projekts.
 
@@ -52,13 +52,9 @@ Mehr Infos: [OSMF Privacy Policy](https://wiki.osmfoundation.org/wiki/Privacy_Po
 Diese Seite verwendet Web-Schriftarten von Google Fonts. Beim Laden der Seite werden Schriftdateien von Google-Servern nachgeladen. Dabei kann Ihre IP-Adresse übertragen werden.  
 Mehr Infos: [Google Datenschutzerklärung](https://policies.google.com/privacy)
 
-#### unpkg CDN
-
-Für das Laden von JavaScript-Bibliotheken wird das CDN `unpkg.com` verwendet. Dabei wird Ihre IP-Adresse an den CDN-Anbieter übermittelt.
-
 #### Cloudflare CDN
 
-Unsere Website nutzt den Dienst **Cloudflare CDN** der Cloudflare, Inc., um die Leistung, Sicherheit und Zuverlässigkeit der Website zu verbessern. Cloudflare stellt ein Content Delivery Network (CDN) bereit, das Inhalte zwischenspeichert und Schutz vor Angriffen wie DDoS-Attacken bietet.
+Diese Website nutzt den Dienst **Cloudflare CDN** der Cloudflare, Inc., um die Leistung, Sicherheit und Zuverlässigkeit der Website zu verbessern. Cloudflare stellt ein Content Delivery Network (CDN) bereit, das Inhalte zwischenspeichert und Schutz vor Angriffen wie DDoS-Attacken bietet.
 
 Bei der Nutzung unserer Website werden personenbezogene Daten wie Ihre IP-Adresse, Browserinformationen und weitere technische Daten an Cloudflare übermittelt und dort verarbeitet. Diese Daten werden benötigt, um die Sicherheit und Funktionsfähigkeit der Website zu gewährleisten.
 
@@ -74,7 +70,7 @@ Cloudflare Web Analytics ermöglicht es uns, aggregierte und anonymisierte stati
 
 Die Verarbeitung erfolgt auf Grundlage von **Art. 6 Abs. 1 lit. f DSGVO** (berechtigtes Interesse). Unser berechtigtes Interesse liegt in der Analyse und Verbesserung unseres Webangebots, ohne in die Privatsphäre unserer Nutzer einzugreifen.
 
-Weitere Informationen findest du in der [Datenschutzerklärung von Cloudflare](https://www.cloudflare.com/privacypolicy/).
+Weitere Informationen finden Sie in der [Datenschutzerklärung von Cloudflare](https://www.cloudflare.com/privacypolicy/).
 
 ### 5. Tracking
 
