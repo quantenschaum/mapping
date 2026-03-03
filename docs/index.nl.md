@@ -74,6 +74,9 @@ De kaarten worden geïmporteerd door de `sqlitedb` bestanden te openen met de ap
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
 - [:de: Getijdenatlas DE](tides.sqlitedb.zip){:download}
 
+!!! note
+    Om de download te versnellen heb ik de Duitse kaart in twee kleinere delen opgesplitst.
+
 #### Online kaarten
 
 De rasterkaarten kunnen ook aan OsmAnd worden toegevoegd als online tegelbron, kaarttegels worden dan op verzoek gedownload.

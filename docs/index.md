@@ -75,6 +75,9 @@ The charts are imported by opening the `sqlitedb` files with the app.
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
 - [:de: Tidal Atlas DE](tides.sqlitedb.zip){:download}
 
+!!! note
+    To speed up the download I had to split the german chart into 2 smaller parts.
+
 #### Online Charts
 
 The raster charts can also be added to OsmAnd as online tile sources, chart tiles are downloaded on demand.

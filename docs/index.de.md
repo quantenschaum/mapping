@@ -74,6 +74,9 @@ Die Rasterkarten werden importiert, indem die `sqlitedb`-Dateien mit der App ge�
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
 - [:de: Gezeitenstromatlas DE](tides.sqlitedb.zip){:download}
 
+!!! note
+    Um den Download zu beschleunigen, habe ich die deutsche Karte in zwei kleinere Teile aufgeteilt.
+
 #### Online-Karten
 
 Die Rasterkarten können auch als Online-Kacheln zu OsmAnd hinzugefügt werden, die Kartenkacheln werden bei Bedarf heruntergeladen.
