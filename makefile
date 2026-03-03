@@ -211,6 +211,13 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles))
 #         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
+charts2:
+	convert.py charts/qmap-de.mbtiles charts/qmap-de-balticsea.mbtiles --west 10.5 -f -t "QMAP-DE Baltic Sea `date +%F`"
+	convert.py charts/qmap-de.mbtiles charts/qmap-de-balticsea.mbtiles --west 9.0 --east 11.0 --south 54.0 -a
+	convert.py charts/qmap-de.mbtiles charts/qmap-de-northsea.mbtiles --east 9.5 -f -t "QMAP-DE North Sea `date +%F`"
+	convert.py charts/qmap-de.mbtiles charts/qmap-de-northsea.mbtiles --east 10.5 --west 9.0 --north 53.8 -a
+	$(MAKE) charts/qmap-de-balticsea.sqlitedb charts/qmap-de-northsea.sqlitedb
+
 zips: icons.zip qmap-data.zip #qmap-de.tiles.zip qmap-nl.tiles.zip
 
 web:

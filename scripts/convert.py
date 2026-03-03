@@ -404,20 +404,24 @@ def mbtiles2mbtiles(inputs, output, args):
     dcur = dest.cursor()
     # https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
     dcur.execute("PRAGMA application_id = 0x4d504258;")
-    dcur.execute("CREATE TABLE metadata (name text, value text);")
-    dcur.execute("CREATE UNIQUE INDEX meta_index on metadata (name);")
+    dcur.execute("CREATE TABLE IF NOT EXISTS metadata (name text, value text);")
+    dcur.execute("CREATE UNIQUE INDEX IF NOT EXISTS meta_index on metadata (name);")
     dcur.execute(
-        "CREATE TABLE tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
+        "CREATE TABLE IF NOT EXISTS tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
     )
     dcur.execute(
-        "CREATE UNIQUE INDEX tile_index on tiles (zoom_level, tile_column, tile_row);"
+        "CREATE UNIQUE INDEX IF NOT EXISTS tile_index on tiles (zoom_level, tile_column, tile_row);"
     )
     name = args.title or inputs[0]
-    dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
+    dcur.execute(
+        f"INSERT INTO metadata VALUES ('name','{name}') ON CONFLICT(name) DO NOTHING;"
+    )
     format = args.format or mbtiles_format(inputs[0])
     print("format", format)
     if format:
-        dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
+        dcur.execute(
+            f"INSERT INTO metadata VALUES ('format','{format}') ON CONFLICT(name) DO NOTHING;"
+        )
 
     i, n, b = 0, 0, 0
     bbox = {}
@@ -474,7 +478,7 @@ def mbtiles2sqlitedb(inputs, output, args):
     dcur = dest.cursor()
 
     dcur.execute(
-        "CREATE TABLE info (tilenumbering, minzoom, maxzoom, title TEXT, url TEXT, randoms TEXT, ellipsoid TEXT, inverted_y TEXT, referer TEXT, useragent TEXT, timecolumn TEXT, expireminutes TEXT);"
+        "CREATE TABLE IF NOT EXISTS info (tilenumbering, minzoom, maxzoom, title TEXT, url TEXT, randoms TEXT, ellipsoid TEXT, inverted_y TEXT, referer TEXT, useragent TEXT, timecolumn TEXT, expireminutes TEXT);"
     )
     dcur.execute(
         "INSERT INTO info VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
@@ -494,9 +498,9 @@ def mbtiles2sqlitedb(inputs, output, args):
         ],
     )
     dcur.execute(
-        f"CREATE TABLE tiles (x int, y int, z int, s int, image blob, {'time long,' if timecol else ''} PRIMARY KEY (x,y,z,s));"
+        f"CREATE TABLE IF NOT EXISTS tiles (x int, y int, z int, s int, image blob, {'time long,' if timecol else ''} PRIMARY KEY (x,y,z,s));"
     )
-    dcur.execute("CREATE UNIQUE INDEX IND on tiles (x,y,z,s);")
+    dcur.execute("CREATE UNIQUE INDEX IF NOT EXISTS IND on tiles (x,y,z,s);")
 
     now = (
         int((datetime.now() - datetime(1970, 1, 1)).total_seconds() * 1000)
@@ -589,19 +593,23 @@ def dir2mbtiles(inputs, output, args):
     dest = sqlite3.connect(output)
     dcur = dest.cursor()
     # https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
-    dcur.execute("CREATE TABLE metadata (name text, value text);")
+    dcur.execute("CREATE TABLE IF NOT EXISTS metadata (name text, value text);")
     dcur.execute(
-        "CREATE TABLE tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
+        "CREATE TABLE IF NOT EXISTS tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
     )
     dcur.execute(
-        "CREATE UNIQUE INDEX tile_index on tiles (zoom_level, tile_column, tile_row);"
+        "CREATE UNIQUE INDEX IF NOT EXISTS tile_index on tiles (zoom_level, tile_column, tile_row);"
     )
     name = args.title or inputs[0]
-    dcur.execute(f"INSERT INTO metadata VALUES ('name','{name}')")
+    dcur.execute(
+        f"INSERT INTO metadata VALUES ('name','{name}') ON CONFLICT(name) DO NOTHING;"
+    )
     format = args.format
     print("format", format)
     if format:
-        dcur.execute(f"INSERT INTO metadata VALUES ('format','{format}')")
+        dcur.execute(
+            f"INSERT INTO metadata VALUES ('format','{format}') ON CONFLICT(name) DO NOTHING;"
+        )
 
     i, n, b = 0, 0, 0
     bbox = {}
