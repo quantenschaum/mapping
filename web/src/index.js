@@ -51,6 +51,7 @@ const isStandalone = !!(
 const locale = navigator.language || navigator.userLanguage;
 const german = locale.startsWith("de");
 const dutch = locale.startsWith("nl");
+const langsuffix = german ? "de/" : dutch ? "nl/" : "";
 
 log("PWA", "red", "standalone", isStandalone, "development", isDevMode);
 
@@ -422,7 +423,7 @@ const SteplessControl = L.Control.extend({
 map.addControl(new SteplessControl({ position: "topleft" }));
 
 function updateAttribution(online = true) {
-  const attrib = `<a class="highlight" href="/download/${german ? "de/" : dutch ? "nl/" : ""}">freenauticalchart.net (?)</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>`;
+  const attrib = `<a class="highlight" href="/download/${langsuffix}">freenauticalchart.net (?)</a> | <a target="_blank" href="https://leafletjs.com/">Leaflet</a>`;
 
   if (!online) {
     map.attributionControl.setPrefix(attrib.replace("(?)", "(offline)"));
