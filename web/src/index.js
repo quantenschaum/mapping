@@ -150,16 +150,16 @@ const overlays = {
   //       '<a target="_blank" href="https://www.igkb.org/forschungsprojekte/tiefenschaerfe">IGKB</a>',
   //   },
   // ),
-  "🇩🇪 QMAP DE": L.tileLayer.fallback(baseurl + "/qmap-de/{z}/{x}/{y}.png", {
-    attribution:
-      '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
-    bounds: boundsDE,
-    crossOrigin: cors,
-  }),
   "🇳🇱 QMAP NL": L.tileLayer.fallback(baseurl + "/qmap-nl/{z}/{x}/{y}.png", {
     attribution:
       '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
     bounds: boundsNL,
+    crossOrigin: cors,
+  }),
+  "🇩🇪 QMAP DE": L.tileLayer.fallback(baseurl + "/qmap-de/{z}/{x}/{y}.png", {
+    attribution:
+      '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
+    bounds: boundsDE,
     crossOrigin: cors,
   }),
   "🌍 OpenSeaMap": L.tileLayer(
@@ -175,21 +175,21 @@ const overlays = {
 if (isDevMode || params.get("pm") == "1") {
   const { PMTiles, leafletRasterLayer } = await import("pmtiles");
   let pm = {
-    "🇩🇪 QMAP DE (pmtiles)": leafletRasterLayer(
-      new PMTiles("/qmap-de.pmtiles"),
-      {
-        attribution:
-          '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
-        bounds: boundsDE,
-        crossOrigin: cors,
-      },
-    ),
     "🇳🇱 QMAP NL (pmtiles)": leafletRasterLayer(
       new PMTiles("/qmap-nl.pmtiles"),
       {
         attribution:
           '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
         bounds: boundsNL,
+        crossOrigin: cors,
+      },
+    ),
+    "🇩🇪 QMAP DE (pmtiles)": leafletRasterLayer(
+      new PMTiles("/qmap-de.pmtiles"),
+      {
+        attribution:
+          '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
+        bounds: boundsDE,
         crossOrigin: cors,
       },
     ),
