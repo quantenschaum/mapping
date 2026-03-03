@@ -70,7 +70,8 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 
 The charts are imported by opening the `sqlitedb` files with the app. 
 
-- [:de: QMAP DE](qmap-de.sqlitedb){:download}
+- [:de: QMAP DE Baltic Sea](qmap-de-balticsea.sqlitedb){:download}
+- [:de: QMAP DE North Sea](qmap-de-northsea.sqlitedb){:download}
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
 - [:de: Tidal Atlas DE](tides.sqlitedb.zip){:download}
 
@@ -91,7 +92,8 @@ The raster charts can also be added to OsmAnd as online tile sources, chart tile
 
 AvNav can read `mbtiles`. Simply drop the files into AvNav's `charts` folder.
 
-- [:de: QMAP DE](qmap-de.mbtiles){:download}
+- [:de: QMAP DE Baltic Sea](qmap-de-balticsea.mbtiles){:download}
+- [:de: QMAP DE North Sea](qmap-de-northsea.mbtiles){:download}
 - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
 - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
 
