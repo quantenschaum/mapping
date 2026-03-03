@@ -7,7 +7,7 @@ description: free to use nautical chars for german and dutch waters based on ope
 
 Here you find precompiled charts for download in various formats usable in different applications.
 
-??? danger "Disclaimer"
+!!! danger "Disclaimer"
     The charts and data files provided are for informational and reference purposes only. They are not intended for navigation, official maritime operations, or any activity requiring precise geographic, hydrographic data. Users should consult official sources, such as government agencies or certified navigation providers, for authoritative and up-to-date navigation information.
     
     No warranty, explicit or implied, is given regarding the accuracy, reliability, or completeness of the provided charts. The provider assumes no responsibility or liability for any errors, omissions, or misuse of this information. 

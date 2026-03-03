@@ -7,7 +7,7 @@ description: gratis te gebruiken zeekaarten voor duitse en nederlandse wateren g
 
 Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formaten die bruikbaar zijn in verschillende applicaties.
 
-??? danger "Disclaimer"
+!!! danger "Disclaimer"
     De geleverde kaarten en gegevensbestanden zijn alleen bedoeld voor informatieve en referentiedoeleinden. Ze zijn niet bedoeld voor navigatie, officiële maritieme operaties of andere activiteiten die precieze geografische, hydrografische gegevens vereisen. Gebruikers moeten officiële bronnen raadplegen, zoals overheidsinstanties of gecertificeerde navigatieleveranciers, voor gezaghebbende en actuele navigatie-informatie.
 
     Er wordt geen garantie, expliciet of impliciet, gegeven met betrekking tot de nauwkeurigheid, betrouwbaarheid of volledigheid van de verstrekte kaarten. De aanbieder aanvaardt geen verantwoordelijkheid of aansprakelijkheid voor eventuele fouten, weglatingen of misbruik van deze informatie.

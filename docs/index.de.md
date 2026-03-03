@@ -7,7 +7,7 @@ description: frei verwendbare Seekarten für deutsche und niederländische Gewä
 
 Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formaten, die in unterschiedlichen Anwendungen verwendet werden können.
  
-??? danger "Haftungsausschluss"
+!!! danger "Haftungsausschluss"
     Die zur Verfügung gestellten Karten und Datendateien dienen nur zu Informations- und Referenzzwecken. Sie sind nicht für die Navigation, den offiziellen Schiffsbetrieb oder andere Aktivitäten gedacht, die präzise geografische und hydrografische Daten erfordern. Benutzer sollten offizielle Quellen, wie z. B. Regierungsbehörden oder zertifizierte Navigationsanbieter, für maßgebliche und aktuelle Navigationsinformationen konsultieren.
 
     Es wird keine Garantie, weder ausdrücklich noch stillschweigend, für die Genauigkeit, Zuverlässigkeit oder Vollständigkeit der bereitgestellten Karten gegeben. Der Anbieter übernimmt keine Verantwortung oder Haftung für etwaige Fehler, Auslassungen oder den Missbrauch dieser Informationen.
