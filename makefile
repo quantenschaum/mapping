@@ -222,7 +222,7 @@ www:
 	rm -rf tmp && mkdir tmp
 	cp -rpv .git tmp
 	cp -rpv mkdocs.yml docs tmp
-	cp -rpv osmand/marine.render.xml charts/* data/*.gpkg qgis/*.qgs tmp/docs
+	cp -rpv osmand/marine.render.xml charts/* tmp/docs
 	cd tmp/docs && ./times.py index.md print.md index.de.md print.de.md index.nl.md print.nl.md
 	cd tmp && mkdocs build
 	rm -rf www/download
