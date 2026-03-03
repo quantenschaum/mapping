@@ -36,8 +36,6 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
     De ruwe gegevensbestanden zijn hier beschikbaar. Ze kunnen worden gebruikt in [QGIS](https://qgis.org/) om je eigen kaarten te renderen of om gegevens te onderzoeken of ermee te spelen. Het QGIS-bestand dat in dit project wordt gebruikt, is te vinden op [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis).
   
     - [Datapakket (alles om kaarten te renderen/printen in één ZIP)](qmap-data.zip){:download}
-    - [QMAP DE tiles](qmap-de.tiles.zip){:download}
-    - [QMAP NL tiles](qmap-nl.tiles.zip){:download}
     
     
 ## [OsmAnd](https://osmand.net/)

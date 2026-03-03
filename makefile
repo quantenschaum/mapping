@@ -211,7 +211,7 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles))
 #         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles))
 
-zips: icons.zip qmap-data.zip qmap-de.tiles.zip qmap-nl.tiles.zip
+zips: icons.zip qmap-data.zip #qmap-de.tiles.zip qmap-nl.tiles.zip
 
 web:
 	cd $@ && npm install && npm run build
@@ -235,7 +235,7 @@ www:
 
 qmap-data.zip:
 	rm -f charts/$@
-	zip charts/$@ -r icons/gen data/bsh.gpkg data/soundg-de.gpkg data/rws.gpkg data/vwm.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
+	zip charts/$@ -r icons/gen data/bsh.gpkg data/rws.gpkg data/vwm.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt
 
 vwm-update:
 	#wget -O wad.osm '[out:xml][timeout:90][bbox:{{bbox}}];(  nwr[~"seamark:type"~"buoy"];  nwr[~"seamark:type"~"beacon"];  nwr["waterway"="fairway"];); (._;>;);out meta;'

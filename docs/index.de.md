@@ -36,8 +36,6 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
     Rohdaten-Dateien sind hier verfügbar. Sie können in [QGIS](https://qgis.org/) verwendet werden, um eigene Karten zu erstellen oder um die Daten zu untersuchen oder mit ihnen herumzuspielen. Die in diesem Projekt verwendete QGIS-Datei ist auf [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis) zu finden.
     
     - [Data Paket (alles zum Rendern/Drucken von Karten in einem ZIP)](qmap-data.zip){:download}
-    - [QMAP DE tiles](qmap-de.tiles.zip){:download}
-    - [QMAP NL tiles](qmap-nl.tiles.zip){:download}
     
     
 ## [OsmAnd](https://osmand.net/)
