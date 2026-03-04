@@ -2,7 +2,7 @@ import L from "leaflet";
 import "leaflet-rotatedmarker";
 import "./charttools.less";
 import { degmin } from "../graticule";
-import { deg, rad, to180, to360 } from "../utils";
+import { deg, rad, to180, to360, p2c, c2p } from "../utils";
 import { declination } from "./declination";
 const icons = import.meta.glob("./charttools-*.svg", { eager: true });
 
@@ -347,12 +347,15 @@ export const ChartTools = L.Control.extend({
       hideMouse(xmark);
     }
 
-    function drawBearing(then, style = LINE_OPTS) {
+    function drawBearing(then, style = LINE_OPTS, useSensor = false) {
       let line = null;
       let points = [];
       let marker = null;
       const group = L.featureGroup().addTo(layer);
       let xmark = L.marker([0, 0], { icon: icon("x") }).addTo(group);
+
+      let heading, size;
+
       function draw(e) {
         // console.log(e);
         if (points.length == 0) {
@@ -362,6 +365,20 @@ export const ChartTools = L.Control.extend({
           points = [e.latlng, e.latlng];
           line = L.polyline(points, LINE_OPT2).addTo(group);
           marker = L.marker(e.latlng, { icon: icon("arr") }).addTo(group);
+          if (useSensor) {
+            const nw = map.getBounds().getNorthWest();
+            const se = map.getBounds().getSouthEast();
+            size = distance(nw, se) * 0.4;
+            readHeading((h) => {
+              heading = h;
+              mapContainer.dispatchEvent(
+                new MouseEvent("mousemove", {
+                  bubbles: true,
+                  cancelable: true,
+                }),
+              );
+            });
+          }
         } else if (points.length) {
           touchOffset = 0;
           points[1] = e.latlng;
@@ -370,6 +387,11 @@ export const ChartTools = L.Control.extend({
           if (e.originalEvent.shiftKey) {
             brg0 = Math.round(brg0);
             // dst = Math.round(dst * 10) / 10;
+            points[1] = project(points[0], brg0, dst);
+          }
+          if (useSensor) {
+            brg0 = to360(heading + 180);
+            dst = size;
             points[1] = project(points[0], brg0, dst);
           }
           const brg1 = to360(brg0 + 180);
@@ -621,6 +643,7 @@ export const ChartTools = L.Control.extend({
     pb.appendChild(button("erase", clear));
     pb.appendChild(button("waypoint", () => drawMarker("wp")));
     pb.appendChild(button("bearing", drawBearing));
+    pb.appendChild(button("bearing2", () => drawBearing(null, LINE_OPTS, 1)));
     pb.appendChild(button("range", drawCircle));
     pb.appendChild(
       button("bearing and range", () => drawBearingRange("-arr", "fix")),
@@ -637,6 +660,84 @@ export const ChartTools = L.Control.extend({
       ),
     );
 
+    startSensor(stopSensor, () => {
+      const style = document.createElement("style");
+      style.textContent = ".button.bearing2 { display: none; }";
+      document.body.appendChild(style);
+    });
+
     return div;
   },
 });
+
+function quaternionToEuler(quaternion) {
+  const [x, y, z, w] = quaternion;
+  // Pitch (rotation around X-axis)
+  let sinPitch = 2 * (w * x + y * z);
+  let cosPitch = 1 - 2 * (x * x + y * y);
+  let pitch = Math.atan2(sinPitch, cosPitch);
+
+  // Roll (rotation around Y-axis)
+  let sinRoll = 2 * (w * y - z * x);
+  let roll = Math.asin(Math.max(-1, Math.min(1, sinRoll))); // clamp for safety
+
+  // Yaw (rotation around Z-axis)
+  let sinYaw = 2 * (w * z + x * y);
+  let cosYaw = 1 - 2 * (y * y + z * z);
+  let yaw = Math.atan2(sinYaw, cosYaw);
+
+  return {
+    pitch: (pitch * 180) / Math.PI,
+    roll: (roll * 180) / Math.PI,
+    yaw: 180 / Math.PI,
+    heading: (360 - (yaw * 180) / Math.PI) % 360,
+  };
+}
+
+let sensor;
+
+function startSensor(
+  callback,
+  onerror,
+  stype = "AbsoluteOrientationSensor",
+  frequency = 10,
+) {
+  try {
+    if (!window[stype]) return;
+    console.log("starting", stype, frequency);
+    sensor = new window[stype]({ frequency: frequency });
+    if (callback) {
+      sensor.addEventListener("reading", (e) => callback(sensor, e));
+    }
+    sensor.addEventListener("error", (event) => {
+      console.error(`${sensor} ${event.error.name} ${event.error.message}`);
+      stopSensor();
+      if (onerror) onerror();
+    });
+    sensor.start();
+  } catch (x) {
+    console.error(x);
+    sensor = null;
+    if (onerror) onerror();
+  }
+}
+
+function stopSensor() {
+  if (!sensor) return;
+  console.log("stopping", sensor);
+  sensor.stop();
+  sensor = null;
+}
+
+function readHeading(callback) {
+  let p = { x: 0, y: 1 };
+  startSensor((sensor) => {
+    let h = quaternionToEuler(sensor.quaternion).heading;
+    let q = p2c(1, h);
+    let a = 0.5;
+    p.x += (q.x - p.x) * a;
+    p.y += (q.y - p.y) * a;
+    let { r, theta } = c2p(p.x, p.y);
+    callback(theta);
+  });
+}
