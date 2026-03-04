@@ -48,6 +48,7 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // mode: "development",
         navigateFallback: "/index.html",
         navigateFallbackAllowlist: [/^\/$/],
         ignoreURLParametersMatching: [/.*/],
@@ -59,6 +60,7 @@ export default defineConfig({
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "assets",
+              cacheableResponse: { statuses: [200] },
               expiration: {
                 maxEntries: 100,
                 maxAgeSeconds: 30 * 24 * 3600,
@@ -70,6 +72,7 @@ export default defineConfig({
             handler: "NetworkFirst",
             options: {
               cacheName: "tides",
+              cacheableResponse: { statuses: [200] },
               networkTimeoutSeconds: 10,
               expiration: {
                 maxEntries: 1000,
@@ -82,6 +85,7 @@ export default defineConfig({
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "tiles",
+              cacheableResponse: { statuses: [200] },
               expiration: {
                 maxEntries: 20000,
                 maxAgeSeconds: 30 * 24 * 3600,
