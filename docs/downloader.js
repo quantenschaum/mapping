@@ -1,5 +1,5 @@
 async function download(url) {
-  // console.log("download", name);
+  console.log("download", url);
   alert(`downloading ${url}, wait for it to finish...`);
 
   try {
@@ -24,10 +24,10 @@ async function download(url) {
 }
 
 function init(name) {
-  // console.log("init", href);
+  console.log("init downloader for", name);
   const links = document.querySelectorAll(`a[href^="${name}"]`);
   links.forEach((l) => {
-    console.log(l);
+    console.log("init on", l.href);
     l.onclick = (e) => {
       e.preventDefault();
       console.log("clicked", l.href);
