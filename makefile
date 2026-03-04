@@ -210,6 +210,8 @@ tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles)) 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles))
 #         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles)
+	split charts/qmap-de.mbtiles -d -a1 -n2 charts/qmap-de.mbtiles.
+	split charts/qmap-de.sqlitedb -d -a1 -n2 charts/qmap-de.sqlitedb.
 	convert.py charts/qmap-de.mbtiles charts/qmap-de-balticsea.mbtiles --west 10.5 -f -t "QMAP-DE Baltic Sea `date +%F`"
 	convert.py charts/qmap-de.mbtiles charts/qmap-de-balticsea.mbtiles --west 9.0 --east 11.0 --south 54.0 -a
 	convert.py charts/qmap-de.mbtiles charts/qmap-de-northsea.mbtiles --east 9.5 -f -t "QMAP-DE North Sea `date +%F`"
