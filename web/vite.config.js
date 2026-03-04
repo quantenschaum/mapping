@@ -61,7 +61,7 @@ export default defineConfig({
               cacheName: "assets",
               expiration: {
                 maxEntries: 100,
-                maxAgeSeconds: 7 * 24 * 3600,
+                maxAgeSeconds: 30 * 24 * 3600,
               },
             },
           },
@@ -78,13 +78,13 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: /\.(png|webp|pbf|json)$/,
+            urlPattern: /\.png$/,
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "tiles",
               expiration: {
                 maxEntries: 20000,
-                maxAgeSeconds: 7 * 24 * 3600,
+                maxAgeSeconds: 30 * 24 * 3600,
                 purgeOnQuotaError: true,
               },
             },

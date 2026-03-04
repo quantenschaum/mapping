@@ -45,8 +45,7 @@ const isDevMode = import.meta.env.DEV;
 const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 const isStandalone = !!(
   window.matchMedia("(display-mode: standalone)").matches ||
-  window.navigator.standalone ||
-  isSet("app")
+  window.navigator.standalone
 );
 const locale = navigator.language || navigator.userLanguage;
 const german = locale.startsWith("de");
