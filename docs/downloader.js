@@ -25,7 +25,7 @@ async function download(url) {
 
 function init(name) {
   console.log("init downloader for", name);
-  const links = document.querySelectorAll(`a[href^="${name}"]`);
+  const links = document.querySelectorAll(`a[href*="${name}"]`);
   links.forEach((l) => {
     console.log("init on", l.href);
     l.onclick = (e) => {
