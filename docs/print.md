@@ -1,6 +1,6 @@
 # Printing Charts
 
-There are multiple ways to print a chart. You can print the raster data directly from your browser (quick and easy) or print vector data from QGIS (better quality but more complicated).
+There are multiple ways to print a chart. You can print the raster data directly from your browser (quick and easy) or print vector data from QGIS (better quality but more involved).
 
 ![exported chart image](img/chartimage.webp)
 
@@ -22,6 +22,9 @@ There are multiple ways to print a chart. You can print the raster data directly
     You may print to PDF instead of printing directly on paper. This way you can save chart for printing it again later. It also allows you to print the chart to an A3 PDF, which can be printed downscaled onto A4. This makes a higher resolution print, but with smaller text and symbols.
     
     Printing PDFs is generally more reliable than printing directly from apps. Often there is better control of the printer and more options available. So, if printing directly from the browser fails, try to print to PDF and then print the PDF from your PDF viewer.
+
+!!! hint "Paper and Ink"
+    It is highly recommended to use a laser printer because toner is water-resistant. Ink from inkjet printers is generally not water-resistant and can run when exposed to water, which may render the print unusable. There is also waterproof paper made from treated cotton or synthetic materials that is suitable for laser printers; using this produces a water-resistant print.
 
 ### Image export
 

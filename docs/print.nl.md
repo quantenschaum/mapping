@@ -23,6 +23,10 @@ Er zijn meerdere manieren om een kaart af te drukken. Je kunt de rastergegevens 
 
     Het afdrukken van PDF's is over het algemeen betrouwbaarder dan het rechtstreeks afdrukken vanuit apps. Vaak is er betere controle over de printer en zijn er meer opties beschikbaar. Dus, als rechtstreeks afdrukken vanuit de browser mislukt, probeer dan af te drukken naar PDF en druk vervolgens de PDF af vanuit je PDF-viewer.
 
+
+!!! hint "Papier en Inkt"
+    Het wordt sterk aangeraden om een laserprinter te gebruiken, omdat toner watervast is. Inkt van inkjetprinters is doorgaans niet watervast en kan bij contact met water uitlopen, waardoor de afdruk onbruikbaar wordt. Er bestaat ook watervast papier van behandeld katoen of kunststof dat geschikt is voor laserprinters; daarmee krijgt u een waterbestendige afdruk.
+
 ### Afbeelding exporteren
 
 Met de onderste van de twee knoppen in de printwidget linksboven kun je de momenteel getoonde kaart exporteren als een afbeeldingsbestand. Je kunt de grootte van het browservenster aanpassen aan de gewenste grootte voordat je gaat exporteren, of je kunt een printlayout selecteren.
