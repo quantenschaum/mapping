@@ -69,13 +69,9 @@ Vectorkaarten en stijlen voor OsmAnd kunnen geïnstalleerd worden door simpelweg
 
 De kaarten worden geïmporteerd door de `sqlitedb` bestanden te openen met de app.
 
-- [:de: QMAP DE Oostzee](qmap-de-balticsea.sqlitedb){:download}
-- [:de: QMAP DE Noordzee](qmap-de-northsea.sqlitedb){:download}
+- [:de: QMAP DE](qmap-de.sqlitedb){:download}
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
 - [:de: Getijdenatlas DE](tides.sqlitedb.zip){:download}
-
-!!! note
-    Om de download te versnellen heb ik de Duitse kaart in twee kleinere delen opgesplitst.
 
 #### Online kaarten
 
@@ -94,8 +90,7 @@ De rasterkaarten kunnen ook aan OsmAnd worden toegevoegd als online tegelbron, k
 
 AvNav kan `mbtiles` lezen. Zet de bestanden gewoon neer in de map `charts` van AvNav.
 
-- [:de: QMAP DE Oostzee](qmap-de-balticsea.mbtiles){:download}
-- [:de: QMAP DE Noordzee](qmap-de-northsea.mbtiles){:download}
+- [:de: QMAP DE](qmap-de.mbtiles){:download}
 - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
 - [:de: Getijdenatlas DE](tides.mbtiles.zip){:download}
 

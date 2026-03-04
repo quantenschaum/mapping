@@ -69,13 +69,9 @@ Vektorkarten und Stile für OsmAnd können durch einfaches Öffnen der `obf`- od
 
 Die Rasterkarten werden importiert, indem die `sqlitedb`-Dateien mit der App geöffnet werden. 
 
-- [:de: QMAP DE Ostsee](qmap-de-balticsea.sqlitedb){:download}
-- [:de: QMAP DE Nordsee](qmap-de-northsea.sqlitedb){:download}
+- [:de: QMAP DE](qmap-de.sqlitedb){:download}
 - [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
 - [:de: Gezeitenstromatlas DE](tides.sqlitedb.zip){:download}
-
-!!! note
-    Um den Download zu beschleunigen, habe ich die deutsche Karte in zwei kleinere Teile aufgeteilt.
 
 #### Online-Karten
 
@@ -94,8 +90,7 @@ Die Rasterkarten können auch als Online-Kacheln zu OsmAnd hinzugefügt werden, 
 
 AvNav kann `mbtiles` lesen. Legen Sie die Dateien einfach in dem Ordner `charts` von AvNav ab.
 
-- [:de: QMAP DE Ostsee](qmap-de-balticsea.mbtiles){:download}
-- [:de: QMAP DE Nordsee](qmap-de-northsea.mbtiles){:download}
+- [:de: QMAP DE](qmap-de.mbtiles){:download}
 - [:nl: QMAP NL](qmap-nl.mbtiles){:download}
 - [:de: Gezeitenstromatlas DE](tides.mbtiles.zip){:download}
 
