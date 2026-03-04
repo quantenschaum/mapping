@@ -29,7 +29,7 @@ C = 100 * ---------------------
           mittl. Springtidenhub
 ```
 
-Wozu ist das nützlich? - Man erkennt unmittelbar, wie der aktuelle Stieg/Fall im Vergleich zur mittleren Springtidenhubhöhe ausfällt. Da die Stromgeschwindigkeit in der Regel direkt proportional zum Stieg/Fall ist, kann man C nutzen, um die im Gezeitenstromatlas angegebene Spring-Stromgeschwindigkeit zu skalieren. Dadurch lässt sich die Strominterpolation deutlich einfacher und schneller durchführen.
+Wozu ist das nützlich? Man erkennt unmittelbar, wie der aktuelle Stieg/Fall im Vergleich zur mittleren Springtidenhub ausfällt. Da die Stromgeschwindigkeit in der Regel direkt proportional zum Stieg/Fall ist, kann man C nutzen, um die im Gezeitenstromatlas angegebene Spring-Stromgeschwindigkeit zu skalieren. Dadurch lässt sich die Strominterpolation deutlich einfacher und schneller durchführen.
 
 Er wird immer zwischen zwei Zeilen berechnet und dargestellt.
 
