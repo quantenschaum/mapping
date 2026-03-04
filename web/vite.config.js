@@ -62,7 +62,7 @@ export default defineConfig({
               cacheName: "assets",
               cacheableResponse: { statuses: [200] },
               expiration: {
-                maxEntries: 100,
+                // maxEntries: 100,
                 maxAgeSeconds: 30 * 24 * 3600,
               },
             },
@@ -75,20 +75,20 @@ export default defineConfig({
               cacheableResponse: { statuses: [200] },
               networkTimeoutSeconds: 10,
               expiration: {
-                maxEntries: 1000,
+                // maxEntries: 1000,
                 maxAgeSeconds: 7 * 24 * 3600,
               },
             },
           },
           {
-            urlPattern: /\.png$/,
+            urlPattern: /\/qmap-(de|nl)\//,
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "tiles",
               cacheableResponse: { statuses: [200] },
               expiration: {
-                maxEntries: 20000,
-                maxAgeSeconds: 30 * 24 * 3600,
+                // maxEntries: 20000,
+                maxAgeSeconds: 30, // * 24 * 3600,
                 purgeOnQuotaError: true,
               },
             },

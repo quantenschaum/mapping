@@ -82,6 +82,13 @@ const basemaps = {
         '<a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     },
   ).on("add", addClass("grayscale")),
+  "🌍 OpenStreetMap (color)": L.tileLayer(
+    "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      attribution:
+        '<a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    },
+  ),
   "🌍 Worldy Imagery": L.tileLayer(
     "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     {
