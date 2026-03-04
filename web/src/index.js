@@ -345,7 +345,7 @@ if (!isStandalone) {
   setTimeout(
     () =>
       showDialog({
-        img: "helgoland.png",
+        img: "logo.webp",
         title: "FreeNauticalChart.net",
         button: german ? "Verstanden!" : "Got it!",
         text: `<div id="info-en">
