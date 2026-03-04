@@ -29,7 +29,7 @@ Er zijn meerdere manieren om een kaart af te drukken. Je kunt de rastergegevens 
 
 ### Afbeelding exporteren
 
-Met de onderste van de twee knoppen in de printwidget linksboven kun je de momenteel getoonde kaart exporteren als een afbeeldingsbestand. Je kunt de grootte van het browservenster aanpassen aan de gewenste grootte voordat je gaat exporteren, of je kunt een printlayout selecteren.
+Met de pijlknop in de printwidget linksboven kun je de momenteel getoonde kaart exporteren als een afbeeldingsbestand. Je kunt de grootte van het browservenster aanpassen aan de gewenste grootte voordat je gaat exporteren, of je kunt een printlayout selecteren.
 
 Dit is handig voor het maken van schermafbeeldingen van de kaart zonder de bedieningselementen, maar met de lat/lon randen.
 
@@ -48,3 +48,24 @@ Je kunt als volgt je eigen aangepaste kaarten afdrukken met de klassieke lat/lon
 7. Pas de lay-out naar wens aan, selecteer het deel van de kaart dat je wilt afdrukken (gebruik het verplaatsgereedschap (C)).
 8. Exporteer als PDF.
 9. Druk de PDF af (rechtstreeks afdrukken vanuit QGIS kan werken, maar PDF afdrukken is meestal betrouwbaarder en je kunt het opslaan om het opnieuw af te drukken).
+
+
+## Grote formaten
+
+Het is mogelijk kaarten af te drukken op formaten groter dan A4. Omdat men meestal slechts een A4-printer heeft, print men de kaart verspreid over meerdere A4-bladen en plakt men deze daarna samen tot een kaart van de gewenste grootte. Ga als volgt te werk.
+
+1. Maak van de te printen kaart een PDF met één pagina in het gewenste formaat. Let daarbij op de resolutie en de grootte van letters en symbolen in het eindformaat. Gebruik voor de beste kwaliteit QGIS of kies een overeenkomstig groot formaat (dat mogelijk niet volledig op het scherm zichtbaar is; met Ctrl-Minus kun je uitzoomen, Ctrl-0 zet terug naar 100%) en exporteer naar PDF. Stel de marges en het papierformaat dienovereenkomstig in.
+2. Verdeel deze PDF over meerdere A4-bladen. Sommige PDF-viewers kunnen dit al doen; anders kun je [dit script](https://github.com/quantenschaum/mapping/blob/master/scripts/poster.py) gebruiken (vereist Linux, Python, pdfposter, LaTeX). Met de optie `-p` kun je het gewenste aantal pagina's opgeven, bijv. `-p 4x2` verdeelt de kaart over 4x2=8 bladen, wat ongeveer overeenkomt met A1 (iets kleiner door overlappende lijmvoegen).
+3. Print de pagina's uit en zet de automatische schaling van de printer uit.
+4. Snijd telkens de onder- en rechterrand weg; gebruik daarvoor de snijtekens.
+5. Plak de vellen aan elkaar tot één grote kaart.
+
+!!! example "Voorbeeldkaart"
+    Het volgende voorbeeld toont de Elbemonding, eenmaal vanuit de browser als A1-PDF gemaakt en verdeeld over 4x2 A4-bladen en eenmaal uit QGIS gegenereerd.
+
+    - Browser (rastergrafiek)
+        - [Voorbeeldkaart A1, één pagina](img/FreeNauticalChart.pdf)
+        - [Voorbeeldkaart A1, 4x2 A4](img/FreeNauticalChart.4x2.pdf)
+    - QGIS (vectorgrafiek, hoge kwaliteit)
+        - [Voorbeeldkaart A1, één pagina](img/paperchart.A1.pdf)
+        - [Voorbeeldkaart A1, 4x2 A4](img/paperchart.4x2.pdf)

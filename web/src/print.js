@@ -136,6 +136,10 @@ export const PrintButton = L.Control.extend({
     pb.appendChild(button("A4", "A4 portrait", "A4 portrait"));
     pb.appendChild(button("A3", "A3 landscape", "A3 landscape"));
     pb.appendChild(button("A3", "A3 portrait", "A3 portrait"));
+    pb.appendChild(button("A2", "A2 landscape", "A2 landscape"));
+    pb.appendChild(button("A2", "A2 portrait", "A2 portrait"));
+    pb.appendChild(button("A1", "A1 landscape", "A1 landscape"));
+    pb.appendChild(button("A1", "A1 portrait", "A1 portrait"));
     pb.addEventListener("mouseenter", () => pb.classList.remove("hide"));
     pb.addEventListener("mouseleave", () => pb.classList.add("hide"));
 
