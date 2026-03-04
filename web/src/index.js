@@ -349,7 +349,7 @@ if (!isStandalone) {
         title: "FreeNauticalChart.net",
         button: german ? "Verstanden!" : "Got it!",
         text: `<div id="info-en">
-        <p>is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It is based official data that is available as open data.</p>
+        <p class="info">is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It is based official data that is available as open data.</p>
         <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
         <p>For more details, usage instructions and downloads, look into the <a href="download/">docs</a>.</p>
         <p style="color:red">The charts provided are for informational and reference purposes only. They are not intended for navigation.</p>
@@ -357,7 +357,7 @@ if (!isStandalone) {
         </div>
 
         <div id="info-de">
-        <p>ist ein Open-Source- und Open-Data-Projekt, das kostenlose, gebrauchsfertige Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich und praktisch nutzbar zu machen. Es basiert auf amtlichen Daten, die als Open Data verfügbar sind.</p>
+        <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose, gebrauchsfertige Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich und praktisch nutzbar zu machen. Es basiert auf amtlichen Daten, die als Open Data verfügbar sind.</p>
         <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
         <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>.</p>
         <p style="color:red">Die zur Verfügung gestellten Karten dienen nur zu Informations- und Referenzzwecken. Sie sind nicht für die Navigation gedacht.</p>
