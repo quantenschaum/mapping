@@ -60,7 +60,10 @@ copyright: |
   document.querySelectorAll('a[href*="?t="],a[download]').forEach(el => {
     const file=el.href.replace(/.*\//,'').replace(/\?.*/,'');
     //console.log(el,file);
-    el.onclick = (ev) => ackee.action('bc4e15f6-b56d-4fca-a425-f4384d985614', { key: file, value: 1, });
+    el.addEventListener('click',(ev) => {
+      console.log('downloading',file);
+      ackee.action('bc4e15f6-b56d-4fca-a425-f4384d985614', { key: file, value: 1, });
+    });
   });
   </script>
 
