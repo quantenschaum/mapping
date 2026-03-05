@@ -370,7 +370,7 @@ if (!isStandalone) {
         <p style="color:red; font-weight:bold;"><a href="download/de/">Haftungsausschluss</a>: Verwendung auf eigene Gefahr!</p>
 
         <button id="installpwa">Install App</button>
-        <p style="font-size:0.7em;">(The docs are also accessible via the link in the attribution in lower right.)</p>
+        <p style="font-size:0.7em; text-align:right;">version ${import.meta.env.GIT_HASH}</p>
         </div>`,
         callback: () => {
           console.log(locale);

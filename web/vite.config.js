@@ -1,7 +1,25 @@
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
+import { execSync } from "child_process";
+
+function gitHashShort() {
+  try {
+    return execSync("git rev-parse --short HEAD", {
+      stdio: ["ignore", "pipe", "ignore"],
+    })
+      .toString()
+      .trim();
+  } catch (e) {
+    return process.env.CI_COMMIT_SHA || "unknown";
+  }
+}
+
+const GIT_HASH = gitHashShort();
 
 export default defineConfig({
+  define: {
+    "import.meta.env.GIT_HASH": JSON.stringify(GIT_HASH),
+  },
   plugins: [
     VitePWA({
       registerType: "autoUpdate",
