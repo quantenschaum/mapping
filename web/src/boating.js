@@ -1,5 +1,5 @@
 import L from "leaflet";
-import { OpenLocationCode } from "open-location-code";
+// import { OpenLocationCode } from "open-location-code";
 import "./boating.less";
 import { degmin } from "./graticule";
 import { ackee } from "./ackee";
@@ -68,7 +68,7 @@ L.Control.Boating = L.Control.extend({
 
     this.boat = L.marker([0, 0]);
 
-    this.olc = new OpenLocationCode();
+    // this.olc = new OpenLocationCode();
 
     return container;
   },
@@ -238,7 +238,8 @@ L.Control.Boating = L.Control.extend({
       html += `<div class="heading">${heading.toFixed(0).padStart(3, "0")}&deg;</div>`;
     if (!isNaN(speed))
       html += `<div class="speed">${speed.toFixed(1)}&ThinSpace;kn</div>`;
-    html += `<div class="position">${lat}<br/>${lng}<br/>${this.olc.encode(e.latlng.lat, e.latlng.lng)}</div>`;
+    html += `<div class="position">${lat}<br/>${lng}</div>`;
+    // html += `<div class="position">${lat}<br/>${lng}<br/>${this.olc.encode(e.latlng.lat, e.latlng.lng)}</div>`;
     html += `<div class="line-legend">${this.options.vectorLength}&ThinSpace;min</div>`;
     this.legend.container.innerHTML = html;
   },
