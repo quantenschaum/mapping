@@ -67,3 +67,14 @@ De beschikbare gereedschappen zijn (van links naar rechts)
 - **Koppelen** - koppellijn met richting en afstand tekenen
 - **Stroomopgave 1** - stroomdriehoek, koppellijn tekenen en daarna stroomvector
 - **Stroomopgave 2** - stroomdriehoek, stroomvector tekenen, vervolgens koers over de grond en daarna vaart door het water
+
+## Elektronisch kompas
+
+Veel smartphones en tablets beschikken over ingebouwde sensoren voor het magnetisch veld en versnelling. Deze kunnen via de Sensor‑API van de browser worden gebruikt, indien ondersteund. De [AbsoluteOrientationSensor](https://developer.mozilla.org/en-US/docs/Web/API/AbsoluteOrientationSensor) maakt het mogelijk het apparaat als een hellingsgecompenseerd magneetkompas te gebruiken. Je krijgt een nauwkeurige magnetische peiling, ook wanneer het apparaat niet horizontaal wordt gehouden. Door optelling van de misswijzing wordt de magnetische peiling automatisch omgerekend naar een rechtwijzende (ware) peiling.
+
+Op die manier kan de smartphone zowel als kaartweergave als handpeilkompas dienen. Detecteert de app een werkende oriëntatiesensor, dan verschijnt een extra peilgereedschap met een blauwe achtergrond. Tik je op het symbool en plaats je een marker op de kaart op het gepeilde object, dan wordt de peilijn automatisch volgens de apparaatoriëntatie getekend. Tik vervolgens ergens op het scherm om de peiling vast te zetten.
+
+Omdat je het apparaat niet horizontaal hoeft te houden, kun je het licht naar links of rechts kantelen en over één van de lange randen kijken om het op het object uit te richten. Je hoeft niet op het scherm te kijken; tik één keer wanneer het apparaat is uitgericht en rustig wordt gehouden.
+
+!!! warning "Kompascalibratie"
+    Voor nauwkeurige meetwaarden is het absoluut noodzakelijk om **voor het peilen een kompascalibratie uit te voeren**. Dit is meestal op te roepen in de standaard kaarten-app door op de positie-marker te tikken, of gebruik een app zoals [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).

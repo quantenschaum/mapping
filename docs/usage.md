@@ -69,3 +69,15 @@ The tools available are (left to right)
 - **Dead Reckoning** - draw DR line with direction and distance
 - **Estimated Position** - draw current triangle, draw DR line, then current vector
 - **Cource to Steer** - draw current triangle, draw current vector, then course over ground, then water speed
+
+## Electronic Compass
+
+Many phones and tablets have built-in sensors for magnetic field and acceleration. These can be accessed through the browser's Sensors API if supported. The [AbsoluteOrientationSensor](https://developer.mozilla.org/en-US/docs/Web/API/AbsoluteOrientationSensor) allows the device to be used as a tilt-compensated magnetic compass. You get an accurate magnetic heading even if the device is not level. By adding the magnetic variation, the magnetic heading is automatically converted into a true heading.
+
+This allows you to use your phone as a chart display and a hand-bearing compass in one unit. If the app detects a working orientation sensor, an additional bearing tool with a blue background is displayed. To use it, tap the icon and place a marker on the chart at the object to which you are taking a bearing. The bearing line will then be drawn automatically according to the device's orientation. Tap the screen anywhere to freeze the bearing.
+
+Since you don't have to hold the device level, you can tilt it slightly left or right and align one of its long edges to point to the object. You don't need to look at the screen, just tap it once when the device is aligned and steady.
+
+!!! warning "Compass Calibration"
+    To get accurate readings it is vital to **perform a compass calibration before taking bearings**.
+    This can usually be done from within the maps app by tapping the position marker, or you can use an app like [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).

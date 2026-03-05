@@ -67,3 +67,14 @@ Die verfügbaren Werkzeuge sind (von links nach rechts)
 - **Koppeln** - Koppel-Linie mit Richtung und Distanz zeichnen
 - **Stromaufgabe 1** - Stromdreieck, Koppel-Linie zeichnen, dann Stromvektor
 - **Stromaufgabe 2** - Stromdreieck, Stromvektor zeichnen, dann Kurs über Grund, dann Fahrt durchs Wasser
+
+## Elektronischer Kompass
+
+Viele Smartphones und Tablets verfügen über eingebaute Sensoren für Magnetfeld und Beschleunigung. Diese können über die Sensors API des Browsers genutzt werden, sofern dies unterstützt wird. Der [AbsoluteOrientationSensor](https://developer.mozilla.org/en-US/docs/Web/API/AbsoluteOrientationSensor) erlaubt es, das Gerät als neigungskompensierten Magnetkompass zu verwenden. Man erhält eine genaue magnetische Peilung, auch wenn das Gerät nicht waagerecht gehalten wird. Durch Addition der Missweisung wird die magnetische Peilung automatisch in eine rechtweisende Peilung umgerechnet.
+
+So kann das Smartphone als Kartenanzeige und als Handpeilkompass in einem Gerät dienen. Erkennt die App einen funktionierenden Orientierungssensor, erscheint ein zusätzliches Peilwerkzeug mit blauem Hintergrund. Tippt man das Symbol an und setzt einen Marker auf der Karte auf das gepeilte Objekt, wird die Peilungslinie automatisch entsprechend der Geräteorientierung gezeichnet. Tippt man dann irgendwo auf den Bildschirm, wird die Peilung eingefroren.
+
+Da man das Gerät nicht waagrecht halten muss, kann man es leicht nach links oder rechts neigen und über eine seiner langen Kanten schauen und es auf das Objekt ausrichten. Man muss nicht dazu nicht auf den Bildschirm schauen, sondern tippt einmal, wenn das Gerät ausgerichtet ist und ruhig gehalten wird.
+
+!!! warning "Kompasskalibrierung"
+    Für genaue Messwerte ist es unbedingt notwendig, **vor dem Peilen eine Kompasskalibrierung durchzuführen**. Dies lässt sich in der Regel in der Standard-Karten-App aufrufen, indem man den Positionsmarker antippt, oder man verwendet eine App wie [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
