@@ -354,28 +354,42 @@ if (!isStandalone) {
         img: "logo.webp",
         title: "FreeNauticalChart.net",
         button: german ? "Verstanden!" : "Got it!",
-        text: `<div id="info-en">
-        <p class="info">is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It is based official data that is available as open data.</p>
+        text: `
         <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
-        <p>For more details, usage instructions and downloads, look into the <a href="download/">docs</a>.</p>
-        <p style="color:red">The charts provided are for informational and reference purposes only. They are not intended for navigation.</p>
-        <p style="color:red; font-weight:bold;"><a href="download/">Disclaimer</a>: Use at own risk!</p>
+
+        <div id="info-en">
+          <p class="info">is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It is based official data that is available as open data.</p>
+          <p>For more details, usage instructions and downloads, look into the <a href="download/">docs</a>.</p>
+          <p style="color:red">The charts provided are for informational and reference purposes only. They are not intended for navigation.</p>
+          <p style="color:red; font-weight:bold;">Use at own risk!</p>
         </div>
 
-        <div id="info-de">
-        <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose, gebrauchsfertige Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich und praktisch nutzbar zu machen. Es basiert auf amtlichen Daten, die als Open Data verfügbar sind.</p>
-        <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
-        <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>.</p>
-        <p style="color:red">Die zur Verfügung gestellten Karten dienen nur zu Informations- und Referenzzwecken. Sie sind nicht für die Navigation gedacht.</p>
-        <p style="color:red; font-weight:bold;"><a href="download/de/">Haftungsausschluss</a>: Verwendung auf eigene Gefahr!</p>
+        <div id="info-de" style="display:none;">
+          <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose, gebrauchsfertige Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich und praktisch nutzbar zu machen. Es basiert auf amtlichen Daten, die als Open Data verfügbar sind.</p>
+          <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>.</p>
+          <p style="color:red">Die zur Verfügung gestellten Karten dienen nur zu Informations- und Referenzzwecken. Sie sind nicht für die Navigation gedacht.</p>
+          <p style="color:red; font-weight:bold;">Verwendung auf eigene Gefahr!</p>
+        </div>
+
+        <div id="info-nl" style="display:none;">
+          <p class="info">is een open-source en open-data project dat gratis, kant-en-klare zeekaarten biedt voor zeilers, watersport- en cartografie‑enthousiastelingen en ontwikkelaars. Het heeft als doel officiële kaartgegevens gemakkelijker toegankelijk en praktisch bruikbaar te maken. Het is gebaseerd op officiële gegevens die als open data beschikbaar zijn.</p>
+          <p>Meer informatie, gebruiksaanwijzingen en downloads vind je in de <a href="download/nl/">documentatie</a>.</p>
+          <p style="color:red">De verstrekte kaarten zijn uitsluitend voor informatie- en referentiedoeleinden. Ze zijn niet bedoeld voor navigatie.</p>
+          <p style="color:red; font-weight:bold;">Gebruik op eigen risico!</p>
+        </div>
 
         <button id="installpwa">Install App</button>
-        <p style="font-size:0.7em; text-align:right;">version ${import.meta.env.GIT_HASH}</p>
-        </div>`,
+        <p style="font-size:0.7em; text-align:right;">version ${import.meta.env.GIT_HASH}</p>`,
         callback: () => {
           console.log(locale);
-          if (german) document.getElementById("info-en").style.display = "none";
-          else document.getElementById("info-de").style.display = "none";
+          if (german) {
+            document.getElementById("info-de").style.display = null;
+            document.getElementById("info-en").style.display = "none";
+          }
+          if (dutch) {
+            document.getElementById("info-nl").style.display = null;
+            document.getElementById("info-en").style.display = "none";
+          }
           const installButton = document.getElementById("installpwa");
           if (!deferredPrompt) {
             installButton.style.display = "none";
