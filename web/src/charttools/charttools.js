@@ -730,15 +730,14 @@ function stopSensor() {
 }
 
 function readHeading(callback) {
-  let p;
+  let heading;
   startSensor((sensor) => {
     let hdg = quaternionToHeading(sensor.quaternion) + DEC;
-    let q = p2c(1, hdg);
-    if (!p) p = q;
-    let a = 0.5;
-    p.x += (q.x - p.x) * a;
-    p.y += (q.y - p.y) * a;
-    hdg = c2p(p.x, p.y).theta;
-    callback(hdg);
+    if (!isFinite(hdg)) return;
+    if (!heading) heading = hdg;
+    let delta = to180(hdg - heading);
+    let alpha = clamp(0.5, (0.5 * Math.abs(delta)) / 10, 1);
+    heading = to360(heading + alpha * delta);
+    callback(heading);
   });
 }

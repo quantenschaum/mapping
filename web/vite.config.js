@@ -130,6 +130,7 @@ export default defineConfig({
   },
   server: {
     // https: true,
+    allowedHosts: true,
     headers: { "Cache-Control": "no-cache, no-store, must-revalidate" },
     proxy: {
       "^/(qmap-de|qmap-nl|download|bfs|nfs)/.*": {

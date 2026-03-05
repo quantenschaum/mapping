@@ -74,7 +74,7 @@ Viele Smartphones und Tablets verfügen über eingebaute Sensoren für Magnetfel
 
 So kann das Smartphone als Kartenanzeige und als Handpeilkompass in einem Gerät dienen. Erkennt die App einen funktionierenden Orientierungssensor, erscheint ein zusätzliches Peilwerkzeug mit blauem Hintergrund. Tippt man das Symbol an und setzt einen Marker auf der Karte auf das gepeilte Objekt, wird die Peilungslinie automatisch entsprechend der Geräteorientierung gezeichnet. Tippt man dann irgendwo auf den Bildschirm, wird die Peilung eingefroren.
 
-Da man das Gerät nicht waagrecht halten muss, kann man es leicht nach links oder rechts neigen und über eine seiner langen Kanten schauen und es auf das Objekt ausrichten. Man muss nicht dazu nicht auf den Bildschirm schauen, sondern tippt einmal, wenn das Gerät ausgerichtet ist und ruhig gehalten wird.
+Da man das Gerät nicht waagrecht halten muss, kann man es leicht nach links oder rechts neigen und über eine seiner langen Kanten schauen und es auf das Objekt ausrichten. Man muss dazu nicht auf den Bildschirm schauen, sondern tippt einmal auf dem Bildschirm, wenn das Gerät ausgerichtet ist und ruhig gehalten wird.
 
 !!! warning "Kompasskalibrierung"
     Für genaue Messwerte ist es unbedingt notwendig, **vor dem Peilen eine Kompasskalibrierung durchzuführen**. Dies lässt sich in der Regel in der Standard-Karten-App aufrufen, indem man den Positionsmarker antippt, oder man verwendet eine App wie [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
