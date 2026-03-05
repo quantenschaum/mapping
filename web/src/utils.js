@@ -21,6 +21,10 @@ export function debounce(func, delay = 1000) {
   };
 }
 
+export function clamp(lower, value, upper) {
+  return Math.max(lower, Math.min(value, upper));
+}
+
 export function deg(a) {
   return (a * 180) / Math.PI;
 }

@@ -2,7 +2,7 @@ import L from "leaflet";
 import "leaflet-rotatedmarker";
 import "./charttools.less";
 import { degmin } from "../graticule";
-import { deg, rad, to180, to360, p2c, c2p } from "../utils";
+import { deg, rad, to180, to360, p2c, c2p, clamp } from "../utils";
 import { declination } from "./declination";
 const icons = import.meta.glob("./charttools-*.svg", { eager: true });
 
@@ -676,22 +676,22 @@ function quaternionToEuler(quaternion) {
   let sinPitch = 2 * (w * x + y * z);
   let cosPitch = 1 - 2 * (x * x + y * y);
   let pitch = Math.atan2(sinPitch, cosPitch);
-
   // Roll (rotation around Y-axis)
   let sinRoll = 2 * (w * y - z * x);
-  let roll = Math.asin(Math.max(-1, Math.min(1, sinRoll))); // clamp for safety
-
+  let roll = Math.asin(clamp(-1, sinRoll, +1));
   // Yaw (rotation around Z-axis)
   let sinYaw = 2 * (w * z + x * y);
   let cosYaw = 1 - 2 * (y * y + z * z);
   let yaw = Math.atan2(sinYaw, cosYaw);
+  return { pitch: deg(pitch), roll: deg(roll), heading: to360(360 - deg(yaw)) };
+}
 
-  return {
-    pitch: (pitch * 180) / Math.PI,
-    roll: (roll * 180) / Math.PI,
-    yaw: 180 / Math.PI,
-    heading: (360 - (yaw * 180) / Math.PI) % 360,
-  };
+function quaternionToHeading(quaternion) {
+  const [x, y, z, w] = quaternion;
+  let sinYaw = 2 * (w * z + x * y);
+  let cosYaw = 1 - 2 * (y * y + z * z);
+  let yaw = Math.atan2(sinYaw, cosYaw);
+  return to360(360 - deg(yaw));
 }
 
 let sensor;
@@ -730,14 +730,15 @@ function stopSensor() {
 }
 
 function readHeading(callback) {
-  let p = { x: 0, y: 1 };
+  let p;
   startSensor((sensor) => {
-    let h = quaternionToEuler(sensor.quaternion).heading;
-    let q = p2c(1, h);
+    let hdg = quaternionToHeading(sensor.quaternion) + DEC;
+    let q = p2c(1, hdg);
+    if (!p) p = q;
     let a = 0.5;
     p.x += (q.x - p.x) * a;
     p.y += (q.y - p.y) * a;
-    let { r, theta } = c2p(p.x, p.y);
-    callback(theta);
+    hdg = c2p(p.x, p.y).theta;
+    callback(hdg);
   });
 }
