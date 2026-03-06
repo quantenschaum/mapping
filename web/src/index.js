@@ -353,7 +353,7 @@ if (!isStandalone) {
       showDialog({
         img: "logo.webp",
         title: "FreeNauticalChart.net",
-        button: german ? "Verstanden!" : "Got it!",
+        button: german ? "Verstanden!" : dutch ? "Accord!" : "Got it!",
         text: `
         <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
 

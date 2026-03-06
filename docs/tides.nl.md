@@ -51,7 +51,7 @@ Ik heb met [QGIS](https://qgis.org/) het getijdenstroomveld gerenderd en gegeven
 
 ![getijden](img/tides.webp)
 
-De kaart ziet eruit zoals hierboven afgebeeld. Met de schuifregelaar kiest u het aantal uren vóór/na hoogwater Helgoland. De pijlen geven door hun grootte en kleur de gemiddelde stroomsnelheid en -richting aan. Het getal onder de pijl is de gemiddelde stroomrichting; de getallen boven de pijl zijn de stroomsnelheden in tienden knopen bij doodtij (nipptide, voor de punt) en bij springtij (na de punt).
+De kaart ziet eruit zoals hierboven afgebeeld. Met de schuifregelaar kiest u het aantal uren vóór/na hoogwater Helgoland. De pijlen geven door hun grootte en kleur de gemiddelde stroomsnelheid en -richting aan. Het getal onder de pijl is de gemiddelde stroomrichting; de getallen boven de pijl zijn de stroomsnelheden in tienden knopen bij doodtij (voor de punt) en bij springtij (na de punt).
 
 ![getijfiguren](img/figures.webp)
 
