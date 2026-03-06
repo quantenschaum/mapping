@@ -248,6 +248,7 @@ export const ChartTools = L.Control.extend({
       map.on("mousemove", mouseAction);
       map.on("contextmenu", cancelAction);
       touchOffset = 1;
+      stopSensor();
     }
 
     function offMouse(layer) {
@@ -260,6 +261,7 @@ export const ChartTools = L.Control.extend({
       }
       cancelAction = null;
       touchOffset = 1;
+      stopSensor();
     }
 
     function hideMouse(m) {
@@ -643,7 +645,8 @@ export const ChartTools = L.Control.extend({
     pb.appendChild(button("erase", clear));
     pb.appendChild(button("waypoint", () => drawMarker("wp")));
     pb.appendChild(button("bearing", drawBearing));
-    pb.appendChild(button("bearing2", () => drawBearing(null, LINE_OPTS, 1)));
+    const b2 = button("bearing2", () => drawBearing(null, LINE_OPTS, 1));
+    pb.appendChild(b2);
     pb.appendChild(button("range", drawCircle));
     pb.appendChild(
       button("bearing and range", () => drawBearingRange("-arr", "fix")),
@@ -660,10 +663,10 @@ export const ChartTools = L.Control.extend({
       ),
     );
 
-    startSensor(stopSensor, () => {
-      const style = document.createElement("style");
-      style.textContent = ".button.bearing2 { display: none; }";
-      document.body.appendChild(style);
+    b2.style.display = "none";
+    readHeading((h) => {
+      b2.style.display = null;
+      stopSensor();
     });
 
     return div;
@@ -698,7 +701,6 @@ let sensor;
 
 function startSensor(
   callback,
-  onerror,
   stype = "AbsoluteOrientationSensor",
   frequency = 10,
 ) {
@@ -712,13 +714,11 @@ function startSensor(
     sensor.addEventListener("error", (event) => {
       console.error(`${sensor} ${event.error.name} ${event.error.message}`);
       stopSensor();
-      if (onerror) onerror();
     });
     sensor.start();
   } catch (x) {
     console.error(x);
-    sensor = null;
-    if (onerror) onerror();
+    stopSensor();
   }
 }
 
@@ -733,7 +733,10 @@ function readHeading(callback) {
   let heading;
   startSensor((sensor) => {
     let hdg = quaternionToHeading(sensor.quaternion) + DEC;
-    if (!isFinite(hdg)) return;
+    if (!isFinite(hdg)) {
+      stopSensor();
+      return;
+    }
     if (!heading) heading = hdg;
     let delta = to180(hdg - heading);
     let alpha = clamp(0.5, (0.5 * Math.abs(delta)) / 10, 1);
