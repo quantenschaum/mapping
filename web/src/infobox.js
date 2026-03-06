@@ -1,21 +1,33 @@
 import "./infobox.less";
 
+const isStandalone = !!(
+  window.matchMedia("(display-mode: standalone)").matches ||
+  window.navigator.standalone
+);
+
 function createElementFromHTML(htmlString) {
   const template = document.createElement("template");
   template.innerHTML = htmlString.trim();
   return template.content.firstChild;
 }
 
-function setSessionBool(name, value) {
-  sessionStorage.setItem(name, value);
+const storage = isStandalone ? localStorage : sessionStorage;
+
+function setInt(name, value) {
+  storage.setItem(name, value);
 }
 
-function getSessionBool(name) {
-  return sessionStorage.getItem(name) == "true";
+function getInt(name) {
+  try {
+    return parseInt(storage.getItem(name) ?? 0);
+  } catch (x) {
+    return 0;
+  }
 }
 
 export function showDialog(options = {}) {
-  if (getSessionBool("infoshown")) return;
+  console.log(Date.now(), getInt("infoshown"));
+  if (Date.now() - getInt("infoshown") < 24 * 3600 * 1000) return;
   options = {
     title: "Title",
     text: "lorem ipsum",
@@ -35,7 +47,7 @@ export function showDialog(options = {}) {
     `);
   document.body.appendChild(el);
   const btn = document.getElementById("closebutton");
-  btn.addEventListener("click", (e) => setSessionBool("infoshown", true));
+  btn.addEventListener("click", (e) => setInt("infoshown", Date.now()));
   if (options.callback) {
     options.callback();
   }

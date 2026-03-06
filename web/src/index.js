@@ -348,13 +348,11 @@ if (!isStandalone) {
     deferredPrompt = e;
   });
 
-  setTimeout(
-    () =>
-      showDialog({
-        img: "logo.webp",
-        title: "FreeNauticalChart.net",
-        button: german ? "Verstanden!" : dutch ? "Accord!" : "Got it!",
-        text: `
+  showDialog({
+    img: "logo.webp",
+    title: "FreeNauticalChart.net",
+    button: german ? "Verstanden!" : dutch ? "Accord!" : "Got it!",
+    text: `
         <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
 
         <div id="info-en">
@@ -389,29 +387,27 @@ if (!isStandalone) {
 
         <button id="installpwa">Install App</button>
         <p style="font-size:0.7em; text-align:right;">version ${import.meta.env.GIT_HASH}</p>`,
-        callback: () => {
-          console.log(locale);
-          if (german) {
-            document.getElementById("info-de").style.display = null;
-            document.getElementById("info-en").style.display = "none";
-          }
-          if (dutch) {
-            document.getElementById("info-nl").style.display = null;
-            document.getElementById("info-en").style.display = "none";
-          }
-          const installButton = document.getElementById("installpwa");
-          if (!deferredPrompt) {
-            installButton.style.display = "none";
-          } else {
-            installButton.addEventListener("click", () => {
-              deferredPrompt.prompt();
-              deferredPrompt = null;
-            });
-          }
-        },
-      }),
-    isDevMode ? 0 : 3000,
-  );
+    callback: () => {
+      console.log(locale);
+      if (german) {
+        document.getElementById("info-de").style.display = null;
+        document.getElementById("info-en").style.display = "none";
+      }
+      if (dutch) {
+        document.getElementById("info-nl").style.display = null;
+        document.getElementById("info-en").style.display = "none";
+      }
+      const installButton = document.getElementById("installpwa");
+      if (!deferredPrompt) {
+        installButton.style.display = "none";
+      } else {
+        installButton.addEventListener("click", () => {
+          deferredPrompt.prompt();
+          deferredPrompt = null;
+        });
+      }
+    },
+  });
 }
 
 const SteplessControl = L.Control.extend({
