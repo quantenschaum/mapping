@@ -7,6 +7,8 @@ description: free to use nautical chars for german and dutch waters based on ope
 
 Here you find precompiled charts for download in various formats usable in different applications.
 
+## Important Information
+
 !!! danger "Disclaimer"
     The charts and data files provided are for informational and reference purposes only. They are not intended for navigation, official maritime operations, or any activity requiring precise geographic, hydrographic data. Users should consult official sources, such as government agencies or certified navigation providers, for authoritative and up-to-date navigation information.
     
@@ -24,7 +26,7 @@ Here you find precompiled charts for download in various formats usable in diffe
     - :de: [BSH](https://www.bsh.de/)
         - [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2))
         - [Bathymetry](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
-        - [SKN Seekartenull](https://gdi.bsh.de/de/feed/Chart-datum-for-the-German-Bight-2021.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
+        - [SKN Seekartenull](https://gdi.bsh.de/de/feed/Chart-datum-for-the-German-Bight-2026.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [Tidal Currents North Sea](https://gdi.bsh.de/de/feed/Tidal-currents-North-Sea.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [Tidal Currents Coastal](https://gdi.bsh.de/de/feed/Tidal-currents-German-coastal-waters-and-neighbouring-regions.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
     - :nl: [RWS](https://www.rijkswaterstaat.nl/)
@@ -36,6 +38,12 @@ Here you find precompiled charts for download in various formats usable in diffe
     Raw data files are available here. They can be used in [QGIS](https://qgis.org/) to render your own charts or to investigate or play with dat data. The QGIS file used in this project can be found on [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis).
     
     - [Data Package (everything to render/print charts in one ZIP)](qmap-data.zip){:download}
+    
+    Unfortunately, due to legal restrictions, it is no longer possible to provide raw data for Germany as preprocessed package for download.
+    
+!!! warning "Spot Soundings"
+    **Spot Soundings are no longer available on the server of the BSH.**
+    The spot soundings in the german part of the map have been extracted from this [bathymetry dataset](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml) which is relatively coarse and out dated. For accurate and up-to-date depth data use official nautical charts.
     
     
 ## [OsmAnd](https://osmand.net/)

@@ -7,6 +7,8 @@ description: frei verwendbare Seekarten für deutsche und niederländische Gewä
 
 Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formaten, die in unterschiedlichen Anwendungen verwendet werden können.
  
+## Wichtige Hinweise 
+ 
 !!! danger "Haftungsausschluss"
     Die zur Verfügung gestellten Karten und Datendateien dienen nur zu Informations- und Referenzzwecken. Sie sind nicht für die Navigation, den offiziellen Schiffsbetrieb oder andere Aktivitäten gedacht, die präzise geografische und hydrografische Daten erfordern. Benutzer sollten offizielle Quellen, wie z. B. Regierungsbehörden oder zertifizierte Navigationsanbieter, für maßgebliche und aktuelle Navigationsinformationen konsultieren.
 
@@ -36,6 +38,12 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
     Rohdaten-Dateien sind hier verfügbar. Sie können in [QGIS](https://qgis.org/) verwendet werden, um eigene Karten zu erstellen oder um die Daten zu untersuchen oder mit ihnen herumzuspielen. Die in diesem Projekt verwendete QGIS-Datei ist auf [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis) zu finden.
     
     - [Data Paket (alles zum Rendern/Drucken von Karten in einem ZIP)](qmap-data.zip){:download}
+
+    Aufgrund rechtlicher Einschränkungen ist es leider nicht mehr möglich, Rohdaten für Deutschland als vorverarbeitetes Paket zum Herunterladen anzubieten.
+
+!!! warning "Punktlotungen"
+    **Punktlotungen werden nicht mehr auf dem Server des BSH bereitgestellt.**
+    Die Punktlotungen im deutschen Teil der Karte stammen aus diesem [Bathymetrie-Datensatz](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml), der relativ grob und veraltet ist. Für genaue und aktuelle Tiefenangaben verwenden Sie bitte offizielle Seekarten.
     
     
 ## [OsmAnd](https://osmand.net/)

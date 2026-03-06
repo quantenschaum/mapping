@@ -39,7 +39,7 @@ Sie können mit QGIS eine Karte [wie diese](img/paperchart.pdf) erstellen.
 Sie können Ihre eigenen benutzerdefinierten Karten mit dem klassischen Seekartenrand wie folgt drucken.
 
 1. Installieren Sie [QGIS](https://qgis.org/) auf Ihrem Computer.
-2. Laden Sie das [Datenpaket](qmap-data.zip){:download} herunter, das alle notwendigen Dateien enthält.
+2. Laden Sie die [Rohdaten](index.md) herunter, das alle notwendigen Dateien enthält.
 3. Entpacken Sie das Datenpaket.
 4. Öffnen Sie `bsh.qgs` mit QGIS.
 5. Wählen Sie `Projekt > Layout Manager`.

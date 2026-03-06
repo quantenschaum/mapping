@@ -23,7 +23,6 @@ Er zijn meerdere manieren om een kaart af te drukken. Je kunt de rastergegevens 
 
     Het afdrukken van PDF's is over het algemeen betrouwbaarder dan het rechtstreeks afdrukken vanuit apps. Vaak is er betere controle over de printer en zijn er meer opties beschikbaar. Dus, als rechtstreeks afdrukken vanuit de browser mislukt, probeer dan af te drukken naar PDF en druk vervolgens de PDF af vanuit je PDF-viewer.
 
-
 !!! hint "Papier en Inkt"
     Het wordt sterk aangeraden om een laserprinter te gebruiken, omdat toner watervast is. Inkt van inkjetprinters is doorgaans niet watervast en kan bij contact met water uitlopen, waardoor de afdruk onbruikbaar wordt. Er bestaat ook watervast papier van behandeld katoen of kunststof dat geschikt is voor laserprinters; daarmee krijgt u een waterbestendige afdruk.
 
@@ -40,7 +39,7 @@ Je kunt QGIS gebruiken om een kaart te maken [zoals deze](img/paperchart.pdf).
 Je kunt als volgt je eigen aangepaste kaarten afdrukken met de klassieke lat/lon zebrarand.
 
 1. Installeer [QGIS](https://qgis.org/) op uw computer.
-2. Download het [datapakket](qmap-data.zip){:download} dat alle benodigde bestanden bevat.
+2. Download het [ruwe datapakket](index.md) dat alle benodigde bestanden bevat.
 3. Pak het gegevenspakket uit.
 4. Open `rws.qgs` met QGIS.
 5. Selecteer `Project > Layout Manager`.

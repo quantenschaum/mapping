@@ -16,23 +16,12 @@ import re
 import sys
 from collections import defaultdict
 from functools import partial
-from itertools import (
-    chain,
-    combinations_with_replacement,
-    groupby,
-    pairwise,
-    permutations,
-    product,
-)
 from os import makedirs
 from os.path import basename, dirname, exists, splitext
-from time import sleep
-from types import NoneType
 
 from pyquery import PyQuery as pq
 from rich.console import Console
 from rich.progress import track
-from rich.traceback import install
 from s57 import abbr_color, resolve
 from sconvert import CATALOG
 
@@ -302,6 +291,10 @@ def main():
 
     features = []
     for fi in ifiles:
+        if fi.endswith('.xml'):
+            fo=fi.replace('.xml','.json')
+            convert_xml(fi,fo)
+            fi=fo
         data = load_json(fi)
         fs = data["features"]
         for f in fs:

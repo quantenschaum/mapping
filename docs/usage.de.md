@@ -42,7 +42,7 @@ Man kann auch das GPS des Geräts verwenden.
 Tippt man auf das Boot-Symbol, wird die GPS-Position auf der Karte mit einem KüG-Vektor von 10 Minuten Länge angezeigt.
 KüG und FüG werden in der linken unteren Ecke angezeigt.
 
-# Karten-Werkzeuge
+## Karten-Werkzeuge
 
 ![Peilung](img/bearing.webp)
 
@@ -68,7 +68,7 @@ Die verfügbaren Werkzeuge sind (von links nach rechts)
 - **Stromaufgabe 1** - Stromdreieck, Koppel-Linie zeichnen, dann Stromvektor
 - **Stromaufgabe 2** - Stromdreieck, Stromvektor zeichnen, dann Kurs über Grund, dann Fahrt durchs Wasser
 
-## Elektronischer Kompass
+### Elektronischer Kompass
 
 Viele Smartphones und Tablets verfügen über eingebaute Sensoren für Magnetfeld und Beschleunigung. Diese können über die Sensors API des Browsers genutzt werden, sofern dies unterstützt wird. Der [AbsoluteOrientationSensor](https://developer.mozilla.org/en-US/docs/Web/API/AbsoluteOrientationSensor) erlaubt es, das Gerät als neigungskompensierten Magnetkompass zu verwenden. Man erhält eine genaue magnetische Peilung, auch wenn das Gerät nicht waagerecht gehalten wird. Durch Addition der Missweisung wird die magnetische Peilung automatisch in eine rechtweisende Peilung umgerechnet.
 

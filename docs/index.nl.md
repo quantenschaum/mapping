@@ -7,6 +7,8 @@ description: gratis te gebruiken zeekaarten voor duitse en nederlandse wateren g
 
 Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formaten die bruikbaar zijn in verschillende applicaties.
 
+## Belangrijke opmerkingen 
+
 !!! danger "Disclaimer"
     De geleverde kaarten en gegevensbestanden zijn alleen bedoeld voor informatieve en referentiedoeleinden. Ze zijn niet bedoeld voor navigatie, officiële maritieme operaties of andere activiteiten die precieze geografische, hydrografische gegevens vereisen. Gebruikers moeten officiële bronnen raadplegen, zoals overheidsinstanties of gecertificeerde navigatieleveranciers, voor gezaghebbende en actuele navigatie-informatie.
 
@@ -36,7 +38,12 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
     De ruwe gegevensbestanden zijn hier beschikbaar. Ze kunnen worden gebruikt in [QGIS](https://qgis.org/) om je eigen kaarten te renderen of om gegevens te onderzoeken of ermee te spelen. Het QGIS-bestand dat in dit project wordt gebruikt, is te vinden op [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis).
   
     - [Datapakket (alles om kaarten te renderen/printen in één ZIP)](qmap-data.zip){:download}
-    
+
+    Helaas is het vanwege juridische beperkingen niet langer mogelijk om de ruwe gegevens voor Duitsland als voorverwerkt pakket ter download aan te bieden.
+
+!!! warning "Spot Soundings"
+    **Spot soundings zijn niet langer beschikbaar op de server van het BSH.**
+    De spot soundings in het Duitse deel van de kaart zijn afkomstig uit deze [bathymetry dataset](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml). Deze dataset is relatief grof en enigszins verouderd. Voor nauwkeurige en actuele dieptegegevens dient u officiële zeekaarten te raadplegen.
     
 ## [OsmAnd](https://osmand.net/)
 

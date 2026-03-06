@@ -585,7 +585,7 @@ if (isSet("vector")) {
     console.log("maplibre", maplibre);
     layers.addBaseLayer(
       L.maplibreGL({
-        style: baseurl + "/style.json",
+        style: baseurl + "vector/style.json",
       }),
       "Vector (experimental)",
     );

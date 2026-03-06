@@ -43,7 +43,7 @@ You may also use the GPS of your device.
 Tap the boat icon and your GPS position will be shown on the map with a COG vector for the next 10 minutes.
 COG and SOG are displayed in the lower left corner.
 
-# Chart Tools
+## Chart Tools
 
 ![bearing](img/bearing.webp)
 
@@ -70,7 +70,7 @@ The tools available are (left to right)
 - **Estimated Position** - draw current triangle, draw DR line, then current vector
 - **Cource to Steer** - draw current triangle, draw current vector, then course over ground, then water speed
 
-## Electronic Compass
+### Electronic Compass
 
 Many phones and tablets have built-in sensors for magnetic field and acceleration. These can be accessed through the browser's Sensors API if supported. The [AbsoluteOrientationSensor](https://developer.mozilla.org/en-US/docs/Web/API/AbsoluteOrientationSensor) allows the device to be used as a tilt-compensated magnetic compass. You get an accurate magnetic heading even if the device is not level. By adding the magnetic variation, the magnetic heading is automatically converted into a true heading.
 

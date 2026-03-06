@@ -42,7 +42,7 @@ Je kunt ook de GPS van het apparaat gebruiken.
 Wanneer je op het bootsymbool tikt, wordt de GPS-positie op de kaart weergegeven met een KüG-vector van 10 minuten lengte.
 KüG en FüG worden in de linkerbenedenhoek weergegeven.
 
-# Kaartgereedschappen
+## Kaartgereedschappen
 
 ![Peilung](img/bearing.webp)
 
@@ -68,7 +68,7 @@ De beschikbare gereedschappen zijn (van links naar rechts)
 - **Stroomopgave 1** - stroomdriehoek, koppellijn tekenen en daarna stroomvector
 - **Stroomopgave 2** - stroomdriehoek, stroomvector tekenen, vervolgens koers over de grond en daarna vaart door het water
 
-## Elektronisch kompas
+### Elektronisch kompas
 
 Veel smartphones en tablets beschikken over ingebouwde sensoren voor het magnetisch veld en versnelling. Deze kunnen via de Sensor‑API van de browser worden gebruikt, indien ondersteund. De [AbsoluteOrientationSensor](https://developer.mozilla.org/en-US/docs/Web/API/AbsoluteOrientationSensor) maakt het mogelijk het apparaat als een hellingsgecompenseerd magneetkompas te gebruiken. Je krijgt een nauwkeurige magnetische peiling, ook wanneer het apparaat niet horizontaal wordt gehouden. Door optelling van de misswijzing wordt de magnetische peiling automatisch omgerekend naar een rechtwijzende (ware) peiling.
 
