@@ -340,7 +340,8 @@ const map = L.map("map", {
 
 new ChartTools().addTo(map);
 
-if (!isStandalone) {
+// if (!isStandalone)
+{
   let deferredPrompt;
 
   window.addEventListener("beforeinstallprompt", (e) => {
