@@ -594,6 +594,7 @@ def dir2mbtiles(inputs, output, args):
     dcur = dest.cursor()
     # https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md
     dcur.execute("CREATE TABLE IF NOT EXISTS metadata (name text, value text);")
+    dcur.execute("CREATE UNIQUE INDEX IF NOT EXISTS meta_index on metadata (name);")
     dcur.execute(
         "CREATE TABLE IF NOT EXISTS tiles (zoom_level integer, tile_column integer, tile_row integer, tile_data blob);"
     )
