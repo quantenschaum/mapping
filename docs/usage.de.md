@@ -79,7 +79,7 @@ Da man das Gerät nicht waagrecht halten muss, kann man es leicht nach links ode
 !!! warning "Kompasskalibrierung"
     Für genaue Messwerte ist es unbedingt notwendig, **vor dem Peilen eine Kompasskalibrierung durchzuführen**. Dies lässt sich in der Regel in der Standard-Karten-App aufrufen, indem man den Positionsmarker antippt, oder man verwendet eine App wie [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
 
-## Vergleich von Veränderungen
+## Zeitliche Veränderungen
 
 ![Comparison](img/compare.webp)
 

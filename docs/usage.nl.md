@@ -80,7 +80,7 @@ Omdat je het apparaat niet horizontaal hoeft te houden, kun je het licht naar li
     Voor nauwkeurige meetwaarden is het absoluut noodzakelijk om **voor het peilen een kompascalibratie uit te voeren**. Dit is meestal op te roepen in de standaard kaarten-app door op de positie-marker te tikken, of gebruik een app zoals [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
 
 
-## Vergelijking van veranderingen
+## Tijdelijke veranderingen
 
 ![Comparison](img/compare.webp)
 

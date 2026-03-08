@@ -82,7 +82,7 @@ Since you don't have to hold the device level, you can tilt it slightly left or 
     To get accurate readings it is vital to **perform a compass calibration before taking bearings**.
     This can usually be done from within the maps app by tapping the position marker, or you can use an app like [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
 
-## Comparison of Changes
+## Changes over Time
 
 ![Comparison](img/compare.webp)
 
