@@ -208,10 +208,18 @@ if (isDevMode || params.get("pm") == "1") {
 }
 
 if (!isStandalone) {
-  overlays["QMAP DE 2025-07-14"] = L.tileLayer.fallback(
+  overlays["QMAP DE 2025-07"] = L.tileLayer.fallback(
     baseurl + "/qmap-de.2025-07-14/{z}/{x}/{y}.webp",
     {
       attribution: '<a href="/download/">QMAP DE 2025-07</a>',
+      bounds: boundsDE,
+      crossOrigin: cors,
+    },
+  );
+  overlays["QMAP DE 2025-02"] = L.tileLayer.fallback(
+    baseurl + "/qmap-de.2025-02-06/{z}/{x}/{y}.png",
+    {
+      attribution: '<a href="/download/">QMAP DE 2025-02</a>',
       bounds: boundsDE,
       crossOrigin: cors,
     },
