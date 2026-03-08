@@ -82,8 +82,8 @@ Since you don't have to hold the device level, you can tilt it slightly left or 
     To get accurate readings it is vital to **perform a compass calibration before taking bearings**.
     This can usually be done from within the maps app by tapping the position marker, or you can use an app like [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
 
-## Historical Comparison
+## Comparison of Changes
 
 ![Comparison](img/compare.webp)
 
-Another feature is the comparison of charts from different times. In the top right you can choose an older version of the chart next to the current one. This is indicated by the date and the missing flag icon. If you select, for example, the current and an older chart, the older chart is overlaid on top of the newer one. Use the transparency slider to fade between the two charts and spot differences directly. Clicking the map while holding the Alt key activates periodic show/hide of the upper map layer at a 2‑second interval. You can pan around the chart while this is running and changes between the versions become immediately apparent.
+Another feature is the comparison of charts from different times. In the top right you can select an older version of the chart alongside the current one. Older versions are identified by their date and by the missing flag icon. If you select the current chart and an older one, the older chart is displayed over the newer. Use the transparency slider to fade between the two maps and directly spot differences. Clicking the map while holding the Alt key toggles a periodic show/hide of the top layer at one-second intervals. This lets you pan around the chart while the layers blink, making changes between versions immediately apparent.

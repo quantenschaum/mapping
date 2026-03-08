@@ -80,8 +80,8 @@ Omdat je het apparaat niet horizontaal hoeft te houden, kun je het licht naar li
     Voor nauwkeurige meetwaarden is het absoluut noodzakelijk om **voor het peilen een kompascalibratie uit te voeren**. Dit is meestal op te roepen in de standaard kaarten-app door op de positie-marker te tikken, of gebruik een app zoals [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
 
 
-## Historische vergelijking
+## Vergelijking van veranderingen
 
 ![Comparison](img/compare.webp)
 
-Een andere functie is het vergelijken van kaarten uit verschillende tijdstippen. Rechtsboven kun je naast de huidige kaart een oudere versie van de kaart selecteren. Dit zie je aan de datum en aan het ontbreken van het vlagsymbool. Als je bijvoorbeeld de huidige en een oudere kaart selecteert, wordt de oudere kaart over de nieuwere heen gelegd. Met de transparantieschuifregelaar kun je nu tussen beide kaarten overblenden en direct de verschillen zien. Een klik op de kaart terwijl je de Alt-toets ingedrukt houdt activeert het periodieke in- en uitfaden van de bovenste kaartlaag met een interval van 2 seconden. Zo kun je in de kaart rondnavigeren en vallen veranderingen tussen de versies direct op.
+Een andere functie is het vergelijken van kaarten van verschillende tijdstippen. Rechtsboven kun je naast de huidige kaart een oudere versie van de kaart selecteren. Oude versies herken je aan de datumaanduiding en doordat het vlaggetje ontbreekt. Selecteer je bijvoorbeeld de huidige en een oude kaart, dan wordt de oude kaart over de nieuwere heen gelegd. Met de transparantieschuifregelaar kun je nu tussen beide kaarten heen- en weerblenden en verschillen direct zien. Een klik op de kaart terwijl je de Alt-toets ingedrukt houdt activeert het periodiek in- en uitfaden van de bovenste kaartlaag met een interval van enkele seconden. Zo kun je door de kaart navigeren en vallen veranderingen tussen de versies direct op.

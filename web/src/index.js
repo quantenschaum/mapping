@@ -207,11 +207,11 @@ if (isDevMode || params.get("pm") == "1") {
   Object.assign(overlays, pm);
 }
 
-if (true || isSet("archive")) {
+if (!isStandalone) {
   overlays["QMAP DE 2025-07-14"] = L.tileLayer.fallback(
     baseurl + "/qmap-de.2025-07-14/{z}/{x}/{y}.webp",
     {
-      attribution: '<a href="/download/">QMAP DE 2025</a>',
+      attribution: '<a href="/download/">QMAP DE 2025-07</a>',
       bounds: boundsDE,
       crossOrigin: cors,
     },
@@ -219,19 +219,19 @@ if (true || isSet("archive")) {
 }
 
 if (isDevMode) {
-  overlays["QMAP DE*"] = L.tileLayer(
+  overlays["QMAP DE nas"] = L.tileLayer(
     "http://nas:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png",
     { bounds: boundsDE },
   );
-  overlays["QMAP NL*"] = L.tileLayer(
+  overlays["QMAP NL nas"] = L.tileLayer(
     "http://nas:8001/tiles/qmap-nl/EPSG3857/{z}/{x}/{y}.png",
     { bounds: boundsNL },
   );
-  overlays["QMAP DE**"] = L.tileLayer(
+  overlays["QMAP DE local"] = L.tileLayer(
     "http://localhost:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png",
     { bounds: boundsDE },
   );
-  overlays["QMAP NL**"] = L.tileLayer(
+  overlays["QMAP NL local"] = L.tileLayer(
     "http://localhost:8001/tiles/qmap-nl/EPSG3857/{z}/{x}/{y}.png",
     { bounds: boundsNL },
   );
