@@ -133,7 +133,7 @@ export default defineConfig({
     allowedHosts: true,
     headers: { "Cache-Control": "no-cache, no-store, must-revalidate" },
     proxy: {
-      "^/(qmap-de|qmap-nl|download|bfs|nfs)/.*": {
+      "^/(qmap-de.*|qmap-nl.*|download|bfs|nfs|archive)/.*": {
         target: "https://freenauticalchart.net",
         changeOrigin: true,
       },

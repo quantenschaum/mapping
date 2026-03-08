@@ -78,3 +78,9 @@ Da man das Gerät nicht waagrecht halten muss, kann man es leicht nach links ode
 
 !!! warning "Kompasskalibrierung"
     Für genaue Messwerte ist es unbedingt notwendig, **vor dem Peilen eine Kompasskalibrierung durchzuführen**. Dies lässt sich in der Regel in der Standard-Karten-App aufrufen, indem man den Positionsmarker antippt, oder man verwendet eine App wie [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
+
+## Historischer Vergleich
+
+![Comparison](img/compare.webp)
+
+Ein weiteres Feature ist der Vergleich von Karten verschiedener Zeitpunkte. Oben rechts kann man neben der aktuellen Karte ein alte Version der Karte auswählen. Dies erkennt man an der Datumsangabe und dass das Flaggensymbol fehlt. Selektiert man z.B. die aktuelle und eine alte Karte, so wird die alte Karte über der neueren eingeblendet. Mit dem Tranzparenzschieberegler kann man nun zwischen beiden Karten hin- und herblenden und Unterschiede direkt erkennen. Ein Klick auf die Karte mit gedrückter Alt-Taste aktiviert das peridiodische Ein- und Ausblenden des oberen Kartenlayers im 2s-Rhythmus. So kann man in der Karte umher navigieren und Veränderungen zwischen den Versionen fallen direkt auf.
