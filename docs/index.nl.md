@@ -10,10 +10,10 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
 ## Belangrijke opmerkingen 
 
 !!! danger "Disclaimer"
-    De geleverde kaarten en gegevensbestanden zijn alleen bedoeld voor informatieve en referentiedoeleinden. Ze zijn niet bedoeld voor navigatie, officiële maritieme operaties of andere activiteiten die precieze geografische, hydrografische gegevens vereisen. Gebruikers moeten officiële bronnen raadplegen, zoals overheidsinstanties of gecertificeerde navigatieleveranciers, voor gezaghebbende en actuele navigatie-informatie.
-
-    Er wordt geen garantie, expliciet of impliciet, gegeven met betrekking tot de nauwkeurigheid, betrouwbaarheid of volledigheid van de verstrekte kaarten. De aanbieder aanvaardt geen verantwoordelijkheid of aansprakelijkheid voor eventuele fouten, weglatingen of misbruik van deze informatie.
-
+    De ter beschikking gestelde kaarten en bestanden dienen uitsluitend voor informatieve, referentie- en opleidingsdoeleinden. **Ze zijn niet geschikt voor navigatie.** Voor gezaghebbende en actuele navigatie-informatie dient u officiële bronnen te gebruiken zoals officiële zeekaarten van overheidsinstanties of gecertificeerde aanbieders.
+    
+    Er wordt geen enkele garantie gegeven, noch expliciet noch impliciet, voor de nauwkeurigheid, betrouwbaarheid, volledigheid of actualiteit van de verstrekte kaarten en gegevens. De aanbieder aanvaardt geen enkele verantwoordelijkheid of aansprakelijkheid voor eventuele fouten, weglatingen, verouderde informatie of het misbruik van deze gegevens. 
+    
     **Gebruik op eigen risico!**
 
 ??? info "Licentie"    
@@ -26,7 +26,7 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
     - :de: [BSH](https://www.bsh.de/)
         - [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2))
         - [Bathymetry](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
-        - [SKN Seekartenull](https://gdi.bsh.de/de/feed/Chart-datum-for-the-German-Bight-2021.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
+        - [SKN Seekartenull](https://gdi.bsh.de/de/feed/Chart-datum-for-the-German-Bight-2026.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [Tidal Currents North Sea](https://gdi.bsh.de/de/feed/Tidal-currents-North-Sea.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [Tidal Currents Coastal](https://gdi.bsh.de/de/feed/Tidal-currents-German-coastal-waters-and-neighbouring-regions.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
     - :nl: [RWS](https://www.rijkswaterstaat.nl/)

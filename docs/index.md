@@ -10,9 +10,9 @@ Here you find precompiled charts for download in various formats usable in diffe
 ## Important Information
 
 !!! danger "Disclaimer"
-    The charts and data files provided are for informational and reference purposes only. They are not intended for navigation, official maritime operations, or any activity requiring precise geographic, hydrographic data. Users should consult official sources, such as government agencies or certified navigation providers, for authoritative and up-to-date navigation information.
+    The charts and data files provided are for informational, reference and training purposes only. **They are not intended for navigation.** For authoritative and up-to-date navigation information, please use official sources such as official nautical charts from government agencies or certified navigation providers.
     
-    No warranty, explicit or implied, is given regarding the accuracy, reliability, or completeness of the provided charts. The provider assumes no responsibility or liability for any errors, omissions, or misuse of this information. 
+    No warranty, explicit or implied, is given regarding the accuracy, reliability, completeness or timeliness of the provided charts and data. The provider assumes no responsibility or liability for any errors, omissions, outdated information or misuse of this data. 
     
     **Use at your own risk!**
 
