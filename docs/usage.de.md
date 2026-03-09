@@ -52,7 +52,7 @@ Diese Art der halbautomatischen Navigation macht einen möglicherweise auch aufm
 Beim Einhandsegeln oder sehr kleiner Crew ermöglichen die Karten-Werkzeuge, einen Schiffsort aus einigen Peilungen direkt auf der digitalen Seekarte mit wenigen Handgriffen zu plotten.
 Man muss die Peilungen nicht aufschreiben, nach unten gehen, rechnen und mit Dreieck und Bleistift hantieren, wobei man möglicherweise seekrank wird.
 Dies kann also die Sorgfalt, gute Seemannschaft und die Sicherheit verbessern.
-Und schließlich ist es ein se gutes Werkzeug für Bildungszwecke. Man kann es verwenden, um sich selbst weiterzubilden oder um andere zu unterrichten sowie Material und Übungen vorzubereiten.
+Und schließlich ist es ein gutes Werkzeug für Bildungszwecke. Man kann es verwenden, um sich selbst weiterzubilden oder um andere zu unterrichten sowie Material und Übungen vorzubereiten.
 
 Die verfügbaren Werkzeuge sind (von links nach rechts)
 
