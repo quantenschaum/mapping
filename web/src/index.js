@@ -383,7 +383,7 @@ new ChartTools().addTo(map);
           <p style="border:3px solid red; padding: 1ex;">The German BSH no longer provides up-to-date spot soundings! The values shown in the chart have been <a href="download/#important-information">sampled from an older dataset</a>.</p>
 
           <p>For more details, usage instructions and downloads, look into the <a href="download/">docs</a>.</p>
-          <p style="color:red">The charts provided are for informational and reference purposes only. <span style="font-weight:bold;">They are not intended for navigation. Use at own risk!</span></p>
+          <p style="color:red">The charts provided are for informational and reference purposes only. <br/><span style="font-weight:bold;">They are not intended for navigation. Use at own risk!</span></p>
         </div>
 
         <div id="info-de" style="display:none;">
@@ -392,7 +392,7 @@ new ChartTools().addTo(map);
           <p style="background: yellow; padding: 1ex;">Das BSH stellt keine aktuellen Einzellotungen mehr zur Verfügung! Die in der Karte dargestellten Werte wurden <a href="download/de/#wichtige-hinweise">einem älteren Datensatz entnommen</a>.</p>
 
           <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>.</p>
-          <p style="color:red">Die zur Verfügung gestellten Karten dienen nur zu Informations- und Referenzzwecken. <span style="font-weight:bold;">Sie sind nicht für die Navigation gedacht. Verwendung auf eigene Gefahr!</span></p>
+          <p style="color:red">Die zur Verfügung gestellten Karten dienen nur zu Informations- und Referenzzwecken. <br/><span style="font-weight:bold;">Sie sind nicht für die Navigation geeignet. Verwendung auf eigene Gefahr!</span></p>
         </div>
 
         <div id="info-nl" style="display:none;">
@@ -401,7 +401,7 @@ new ChartTools().addTo(map);
           <p style="background: yellow; padding: 1ex;">Het BSH levert geen recente individuele dieptemetingen meer! De in de kaart weergegeven waarden zijn afkomstig uit een <a href="download/nl/#belangrijke-opmerkingen">oudere dataset</a>.</p>
 
           <p>Meer informatie, gebruiksaanwijzingen en downloads vind je in de <a href="download/nl/">documentatie</a>.</p>
-          <p style="color:red">De verstrekte kaarten zijn uitsluitend voor informatie- en referentiedoeleinden. <span style="font-weight:bold;">Ze zijn niet bedoeld voor navigatie. Gebruik op eigen risico!</span></p>
+          <p style="color:red">De verstrekte kaarten zijn uitsluitend voor informatie- en referentiedoeleinden. <br/><span style="font-weight:bold;">Ze zijn niet bedoeld voor navigatie. Gebruik op eigen risico!</span></p>
         </div>
 
         <button id="installpwa">Install App</button>
