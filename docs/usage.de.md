@@ -50,7 +50,7 @@ Dies ist eine besondere Funktion dieser Karte.
 Sie kombiniert moderne Elektronik und eine digitale Seekarte mit klassischen Navigationsverfahren, wie sie auf einer Papierkarte durchgeführt wurden. Dies ermöglicht es, GPS- und klassische terrestrische Navigation zu kombinieren oder auf manuelle Navigation zurückzugreifen, falls das GPS ausfällt oder gestört wird.
 Diese Art der halbautomatischen Navigation macht einen möglicherweise auch aufmerksamer dafür, was man tatsächlich tut und wo man sich wirklich befindet.
 Beim Einhandsegeln oder sehr kleiner Crew ermöglichen die Karten-Werkzeuge, einen Schiffsort aus einigen Peilungen direkt auf der digitalen Seekarte mit wenigen Handgriffen zu plotten.
-Man muss die Peilungen nicht aufschreiben, nach unten gehen, rechnen und mit Dreieck und Bleistift hantieren, wobei man möglicherweise seekrank wird.
+Man muss die Peilungen nicht aufschreiben, nach unten gehen, rechnen und mit Dreieck und Bleistift hantieren, wobei man möglicherweise seekrank wird. Anschließend kann die ermittelte Position in die Papierkarte übertragen werden.
 Dies kann also die Sorgfalt, gute Seemannschaft und die Sicherheit verbessern.
 Und schließlich ist es ein gutes Werkzeug für Bildungszwecke. Man kann es verwenden, um sich selbst weiterzubilden oder um andere zu unterrichten sowie Material und Übungen vorzubereiten.
 

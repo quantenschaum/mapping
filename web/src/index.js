@@ -378,7 +378,7 @@ new ChartTools().addTo(map);
         <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
 
         <div id="info-en">
-          <p class="info">is an open source and open data project that aims to provide free, ready-to-use nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access and practical to use. It is based official data that is available as open data.</p>
+          <p class="info">is an open source and open data project that aims to provide free nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access. It is based on official data that is available as open data.</p>
 
           <p style="border:3px solid red; padding: 1ex;">The German BSH no longer provides up-to-date spot soundings! The values shown in the chart have been <a href="download/#important-information">sampled from an older dataset</a>.</p>
 
@@ -387,7 +387,7 @@ new ChartTools().addTo(map);
         </div>
 
         <div id="info-de" style="display:none;">
-          <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose, gebrauchsfertige Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich und praktisch nutzbar zu machen. Es basiert auf amtlichen Daten, die als Open Data verfügbar sind.</p>
+          <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich zu machen. Es basiert auf amtlichen Daten, die als Open Data verfügbar sind.</p>
 
           <p style="background: yellow; padding: 1ex;">Das BSH stellt keine aktuellen Einzellotungen mehr zur Verfügung! Die in der Karte dargestellten Werte wurden <a href="download/de/#wichtige-hinweise">einem älteren Datensatz entnommen</a>.</p>
 
@@ -396,7 +396,7 @@ new ChartTools().addTo(map);
         </div>
 
         <div id="info-nl" style="display:none;">
-          <p class="info">is een open-source en open-data project dat gratis, kant-en-klare zeekaarten biedt voor zeilers, watersport- en cartografie‑enthousiastelingen en ontwikkelaars. Het heeft als doel officiële kaartgegevens gemakkelijker toegankelijk en praktisch bruikbaar te maken. Het is gebaseerd op officiële gegevens die als open data beschikbaar zijn.</p>
+          <p class="info">is een open-source en open-data project dat gratis zeekaarten biedt voor zeilers, watersport- en cartografie‑enthousiastelingen en ontwikkelaars. Het heeft als doel officiële kaartgegevens gemakkelijker toegankelijk te maken. Het is gebaseerd op officiële gegevens die als open data beschikbaar zijn.</p>
 
           <p style="background: yellow; padding: 1ex;">Het BSH levert geen recente individuele dieptemetingen meer! De in de kaart weergegeven waarden zijn afkomstig uit een <a href="download/nl/#belangrijke-opmerkingen">oudere dataset</a>.</p>
 

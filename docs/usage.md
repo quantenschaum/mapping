@@ -53,6 +53,7 @@ This allows you to do combine GPS and terrestrial navigation or to fallback to m
 This kind of semi-automatic navigation may you also make more aware of what you are actually doing and where you really are.
 When sailing short or single handed the chart tools allow you to plot a fix from some bearings directly on the digital chart with a few taps.
 You don't have to write down the bearings, go down below, calculate and fiddle with triangle and pencil, possibly getting sick.
+You can then transfer the determined position to the paper chart.
 So, it may improve your diligence, good seamanship and safety.
 And lastly it is a great tool for educational purposes. You can use it teach yourself or to teach others and to prepare material and excercises.
 

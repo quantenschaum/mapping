@@ -51,6 +51,7 @@ Ze combineert moderne elektronica en een digitale zeekaart met klassieke navigat
 Dit soort halfautomatische navigatie maakt je mogelijk ook bewuster van wat je daadwerkelijk doet en waar je werkelijk bent.
 Bij solozeilen of met een zeer kleine bemanning maken de kaartgereedschappen het mogelijk een scheepspositie rechtstreeks op de digitale zeekaart te plotten op basis van enkele peilingen met slechts een paar handelingen.
 Je hoeft de peilingen niet op te schrijven, naar beneden te gaan, te rekenen en met driehoek en potlood in de weer te zijn, waarbij je mogelijk zeeziek wordt.
+Vervolgens kan de vastgestelde positie op de papieren kaart worden overgebracht.
 Dit kan dus de zorgvuldigheid, goed zeemanschap en de veiligheid verbeteren.
 En tot slot is het een zeer goed hulpmiddel voor educatieve doeleinden. Je kunt het gebruiken om jezelf verder te scholen of om anderen les te geven en materiaal en oefeningen voor te bereiden.
 
