@@ -380,7 +380,7 @@ lightsectors.obf:
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/lightsectors.obf obf/*.obf
 
-depth-de.obf:
+depth+de.obf:
 	rm -rf obf
 	rm -rf osm && mkdir -p osm
 	cp data/depth-de-2.osm osm
@@ -401,12 +401,34 @@ depth-de.obf:
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/$@ obf/*.obf
 
-depth+de.obf:
+depth-de.obf:
 	rm -rf obf
 	rm -rf osm && mkdir -p osm
 	cp data/depth-de-6.osm osm
 	$(MAKE) obf
 	cp obf/depth-de-6.obf charts/$@
+
+depth-nl.obf:
+	rm -rf obf
+	rm -rf osm && mkdir -p osm
+	cp data/waddenzee.osm data/zeeland.osm osm
+	$(MAKE) obf
+
+	rm -rf osm && mkdir -p osm
+	cp data/waddenzee-0.osm data/zeeland-0.osm osm
+	$(MAKE) obf BLEVEL=0
+
+	rm -rf osm && mkdir -p osm
+	cp data/waddenzee-1.osm data/zeeland-1.osm osm
+	$(MAKE) obf BLEVEL=1
+
+	rm -rf osm && mkdir -p osm
+	cp data/waddenzee-2.osm data/zeeland-2.osm osm
+	$(MAKE) obf BLEVEL=2
+
+	rm -rf osm && mkdir -p osm
+	cp data/waddenzee-3.osm data/zeeland-3.osm osm
+	$(MAKE) obf BLEVEL=3
 
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/$@ obf/*.obf
