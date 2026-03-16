@@ -291,10 +291,10 @@ def main():
 
     features = []
     for fi in ifiles:
-        if fi.endswith('.xml'):
-            fo=fi.replace('.xml','.json')
-            convert_xml(fi,fo)
-            fi=fo
+        if fi.endswith(".xml"):
+            fo = fi.replace(".xml", ".json")
+            convert_xml(fi, fo)
+            fi = fo
         data = load_json(fi)
         fs = data["features"]
         for f in fs:

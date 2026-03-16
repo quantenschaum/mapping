@@ -3,8 +3,6 @@
 *Disclaimer: Ich bin kein Jurist. Das folgende ist eine Einschätzung auf Basis öffentlich
 zugänglicher Rechtsquellen, keine Rechtsberatung.*
 
----
-
 ## Worum geht es konkret?
 
 Das BSH stellt Seekartendaten über den WMS-Dienst im GeoSeaPortal kostenlos unter der
@@ -16,8 +14,6 @@ Der Interessante Punkt dabei: Wir reden hier nicht über fertige Seekarten als k
 Produkte, sondern über die zugrundeliegenden **S-57-Vektordaten**, strukturierte Geodaten
 mit Objektgeometrien und Attributen (Tiefen, Seezeichen, Fahrwasserachsen), aus denen Karten
 erst erstellt werden. Die grafische Aufbereitung ist eine separate Leistung.
-
----
 
 ## Der Vergleich mit basemap.de / topografischen Karten
 
@@ -41,8 +37,6 @@ Die Analogie zur Seekarte ist direkt: S-57-Vektordaten = ATKIS Basis-DLM. Fertig
 basemap.de. Gedruckte Seekarte = TK25. Das BKG gibt Ebene 1 kostenlos heraus. Das BSH
 tut das für die entsprechende maritime Ebene nicht vollständig, und genau hier liegt die
 Spannungslage.
-
----
 
 ## Das rechtliche Schichtensystem
 
@@ -81,8 +75,6 @@ Vermessungsdaten ohnehin aufgrund seiner gesetzlichen Pflicht nach dem **Seeaufg
 (Sicherheit und Leichtigkeit des Seeverkehrs). Sobald diese Daten intern genutzt oder an
 Verlage lizenziert werden, greifen die Open-Data-Pflichten.
 
----
-
 ## Das S-63-Argument greift nicht
 
 Das S-63-Verschlüsselungssystem der IHO könnte als technisches Argument für eingeschränkte
@@ -97,8 +89,6 @@ gegen Open-Data-Bereitstellung.
 
 Zusätzlich: IHO-Standards sind technische Empfehlungen einer zwischenstaatlichen
 Organisation, keine verbindlichen Rechtsnormen. Sie können EU-Recht nicht außer Kraft setzen.
-
----
 
 ## Europäischer Vergleich
 
@@ -121,8 +111,6 @@ Die USA (NOAA) stellen sämtliche ENCs vollständig kostenlos als S-57-Dateien z
 Download bereit, ohne Registrierung, ohne Verschlüsselung. Das zeigt, dass es technisch
 und organisatorisch problemlos möglich ist.
 
----
-
 ## Was das BSH entlastet
 
 Die Situation ist nicht allein dem BSH anzulasten. Der **Bundesrechnungshof** verlangt vom
@@ -130,8 +118,6 @@ BSH marktgerechte Einnahmen für seine Daten. Das steht in direktem Widerspruch 
 EU-Open-Data-Pflicht. Das BSH sitzt zwischen zwei widersprüchlichen staatlichen
 Anforderungen, die der Gesetzgeber selbst erzeugt hat und bisher nicht aufgelöst hat.
 Das ist kein Versagen des BSH, sondern ein strukturelles politisches Problem.
-
----
 
 ## Fazit
 
