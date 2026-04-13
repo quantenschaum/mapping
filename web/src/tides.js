@@ -165,7 +165,7 @@ function localTZ(date) {
   // return tform.resolvedOptions().timeZone;
 }
 
-function formatTimestamp(timestamp, tz) {
+function formatTimestamp(timestamp) {
   const ts = new Date(timestamp);
   let date = ts
     .toLocaleString(locale, {
@@ -179,7 +179,7 @@ function formatTimestamp(timestamp, tz) {
   const time = ts.toLocaleString(locale, {
     hour: "2-digit",
     minute: "2-digit",
-    ...{ timeZone: tz },
+    // ...{ timeZone: tz },
   });
   return { date, time, zone };
 }
@@ -198,14 +198,14 @@ const plotColors = ["blue", "red", "green"];
 
 async function tidePlot(traces) {
   const now = new Date();
-  const t0 = new Date(now.getTime() - 6 * 3600_000).toISOString();
-  const t1 = new Date(now.getTime() + 18 * 3600_000).toISOString();
-
+  const t0 = new Date(now.getTime() - 6 * 3600_000);
+  const t1 = new Date(now.getTime() + 18 * 3600_000);
   if (Array.isArray(traces[0])) {
+    const times = traces[0].map((t) => new Date(t));
     traces = traces.slice(1).map((t, i) => {
       return {
         name: plotNames[i] || `trace_${i}`,
-        x: traces[0],
+        x: times,
         y: t,
         type: "scatter",
         mode: "lines",
@@ -236,8 +236,8 @@ async function tidePlot(traces) {
     shapes: [
       {
         type: "line",
-        x0: now.toISOString(),
-        x1: now.toISOString(),
+        x0: now,
+        x1: now,
         xref: "x",
         y0: 0,
         y1: 1,
@@ -383,11 +383,11 @@ export async function addTideGaugesDE(map, preFetch = false) {
         deviation = (d < 0 ? "" : "+") + d.toFixed(1);
       }
       let coeff = "";
-      if (ydata.MSpTh) {
+      if (ydata.MSpTH) {
         if (hdg0) {
           // calculate local coefficient
           const range = r.height - hdg0;
-          coeff = (100 * Math.abs(range)) / ydata.MSpTh;
+          coeff = (100 * Math.abs(range)) / ydata.MSpTH;
           // if (range > 0)
           coeff = ` <span class="coeff">${coeff.toFixed(0).padStart(3, "\u2007")}</span>`;
         } else {
@@ -398,7 +398,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
         r.height != null ? ((r.height + offset) / 100).toFixed(2) : "-";
       hdg0 = r.height;
       const when = ts > now ? "future" : "past";
-      rows += `<tr class="${r.type} ${when}"><td>${td.date}</td><td>${td.time}</td><td>${height} <span class="deviation">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}${coeff}</td></tr>\n`;
+      rows += `<tr class="${r.type} ${when}"><td>${td.date}</td><td title="${r.timestamp}">${td.time}</td><td>${height} <span class="deviation">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}${coeff}</td></tr>\n`;
     }
     const table = `<table>\n${rows}</table>`;
     track("de");
@@ -535,7 +535,7 @@ export async function addTideGaugesNL(map, kind = "astronomische-getij") {
                 const time = td.time;
                 const when = ts > now ? "future" : "past";
                 const height = r.value / 100;
-                rows += `<tr class="${r.sign} ${when}"><td>${date}</td><td>${time}</td><td>${height?.toFixed(2)}</td></tr>\n`;
+                rows += `<tr class="${r.sign} ${when}"><td>${date}</td><td title="${r.dateTime}">${time}</td><td>${height?.toFixed(2)}</td></tr>\n`;
               });
               const ref =
                 p.measurements[0].qualityCode == "MSL" ? "reference=MSL" : "";
@@ -576,12 +576,11 @@ export async function addTideGaugesNL(map, kind = "astronomische-getij") {
               )
                 .then((r) => r.json())
                 .then((d) => {
-                  log(d);
                   tidePlot(
                     d.series.map((s) => {
                       return {
                         name: sname(s.meta.displayName),
-                        x: s.data.map((d) => d.dateTime),
+                        x: s.data.map((d) => new Date(d.dateTime)),
                         y: s.data.map((d) => d.value / 100),
                         line: { color: scolor(s.meta.displayName) },
                       };
@@ -633,8 +632,7 @@ export async function addTideGaugesUK(map, preFetch = false) {
 
     let date0;
     let approx = false;
-    const tz = "UTC"; //localTZ()
-    let rows = `<tr><th>Date</th><th>${tz}</th><th>Height</th><th class="moon${moon}"></th></tr>\n`;
+    let rows = `<tr><th>Date</th><th>${localTZ()}</th><th>Height</th><th class="moon${moon}"></th></tr>\n`;
     events.forEach((e) => {
       // log(e);
       const ts = new Date(e.dateTime + "Z");
@@ -642,7 +640,7 @@ export async function addTideGaugesUK(map, preFetch = false) {
       if (ts - now0 > 2 * 86400_000) return;
       const type = e.eventType ? "" : "HW";
       const when = ts > now ? "future" : "past";
-      const td = formatTimestamp(ts, tz);
+      const td = formatTimestamp(ts);
       let date = td.date;
       if (date0 === date) date = "";
       else date0 = date;
@@ -652,7 +650,7 @@ export async function addTideGaugesUK(map, preFetch = false) {
       const height = e.height?.toFixed(1) + happrox;
       const moon = ldate1 < ts && ts < ldate2 ? phase : -1;
       approx = approx || tapprox || happrox;
-      rows += `<tr class="${type} ${when}"><td>${date}</td><td title="${ts}">${time}</td><td>${height || ""}</td><td class="${phase} moon${moon}"></td></tr>\n`;
+      rows += `<tr class="${type} ${when}"><td>${date}</td><td title="${e.dateTime + "Z"}">${time}</td><td>${height || ""}</td><td class="${phase} moon${moon}"></td></tr>\n`;
     });
 
     const table = `<table>\n${rows}</table>`;
@@ -750,7 +748,7 @@ export async function addTideGaugesFR(map, preFetch = false) {
       else date0 = date;
       const time = td.time;
       const height = e.height?.toFixed(1);
-      rows += `<tr class="${type} ${when}"><td>${date}</td><td title="${ts}">${time}</td><td>${height}</td><td>${e.coeff || ""}</td></tr>\n`;
+      rows += `<tr class="${type} ${when}"><td>${date}</td><td title="${e.datetime}">${time}</td><td>${height}</td><td>${e.coeff || ""}</td></tr>\n`;
     });
 
     const table = `<table>\n${rows}</table>`;
