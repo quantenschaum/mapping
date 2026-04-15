@@ -205,7 +205,7 @@ charts/%.gemf: charts/%.mbtiles data/chartconvert
 
 tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles)) \
        $(patsubst cache_data/%.mbtiles,www/%.pmtiles,$(wildcard cache_data/*.mbtiles))
-	touch www/updated
+	date +%s >www/updated
 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles))
