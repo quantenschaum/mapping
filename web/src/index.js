@@ -375,7 +375,7 @@ new ChartTools().addTo(map);
     title: "FreeNauticalChart.net",
     button: german ? "Verstanden!" : dutch ? "Accord!" : "Got it!",
     text: `
-        <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" />
+        <img src="https://healthchecks.io/b/3/908ee633-599b-4691-ae79-101e8725752c.svg" style='margin-bottom: -0.4ex;' /> <span id='updated'></span>
 
         <div id="info-en">
           <p class="info">is an open source and open data project that aims to provide free nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access. It is based on official data that is available as open data.</p>
@@ -416,6 +416,16 @@ new ChartTools().addTo(map);
         document.getElementById("info-nl").style.display = null;
         document.getElementById("info-en").style.display = "none";
       }
+      fetch(baseurl + "/updated")
+        .then((response) => {
+          console.log("updated", response);
+          if (!response.ok) return;
+          const date = new Date(response.headers.get("Last-Modified"))
+            .toISOString()
+            .slice(0, 10);
+          document.getElementById("updated").innerText = `last update ${date}`;
+        })
+        .catch(console.error);
       const installButton = document.getElementById("installpwa");
       if (!deferredPrompt) {
         installButton.style.display = "none";
