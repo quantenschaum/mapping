@@ -380,42 +380,30 @@ new ChartTools().addTo(map);
         <div id="info-en">
           <p class="info">is an open source and open data project that aims to provide free nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access. It is based on official data that is available as open data.</p>
 
-          <p style="border:3px solid red; padding: 1ex;">The German BSH no longer provides up-to-date spot soundings! The values shown in the chart have been <a href="download/#important-information">sampled from an older dataset</a>.</p>
+          <p>For more details, usage instructions and downloads, see the <a href="download/">documentation</a>. Please read the important notes.</p>
 
-          <p>For more details, usage instructions and downloads, look into the <a href="download/">docs</a>.</p>
-          <p style="color:red">The charts provided are for informational and reference purposes only. <br/><span style="font-weight:bold;">They are not intended for navigation. Use at own risk!</span></p>
+          <p style="color:red">The charts provided are for informational and reference purposes only.<br/><span style="font-weight:bold;">They are not intended for navigation. Use at own risk!</span></p>
         </div>
 
         <div id="info-de" style="display:none;">
           <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich zu machen. Es basiert auf amtlichen Daten, die als Open Data verfügbar sind.</p>
 
-          <p style="background: yellow; padding: 1ex;">Das BSH stellt keine aktuellen Einzellotungen mehr zur Verfügung! Die in der Karte dargestellten Werte wurden <a href="download/de/#wichtige-hinweise">einem älteren Datensatz entnommen</a>.</p>
+          <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>. Beachten Sie die wichtigen Hinweise.</p>
 
-          <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>.</p>
-          <p style="color:red">Die zur Verfügung gestellten Karten dienen nur zu Informations- und Referenzzwecken. <br/><span style="font-weight:bold;">Sie sind nicht für die Navigation geeignet. Verwendung auf eigene Gefahr!</span></p>
+          <p style="color:red">Die zur Verfügung gestellten Karten dienen nur zu Informations- und Referenzzwecken.<br/><span style="font-weight:bold;">Sie sind nicht für die Navigation geeignet. Verwendung auf eigene Gefahr!</span></p>
         </div>
 
         <div id="info-nl" style="display:none;">
           <p class="info">is een open-source en open-data project dat gratis zeekaarten biedt voor zeilers, watersport- en cartografie‑enthousiastelingen en ontwikkelaars. Het heeft als doel officiële kaartgegevens gemakkelijker toegankelijk te maken. Het is gebaseerd op officiële gegevens die als open data beschikbaar zijn.</p>
 
-          <p style="background: yellow; padding: 1ex;">Het BSH levert geen recente individuele dieptemetingen meer! De in de kaart weergegeven waarden zijn afkomstig uit een <a href="download/nl/#belangrijke-opmerkingen">oudere dataset</a>.</p>
+          <p>Meer informatie, gebruiksaanwijzingen en downloads vind je in de <a href="download/nl/">documentatie</a>. Lees de belangrijke opmerkingen.</p>
 
-          <p>Meer informatie, gebruiksaanwijzingen en downloads vind je in de <a href="download/nl/">documentatie</a>.</p>
-          <p style="color:red">De verstrekte kaarten zijn uitsluitend voor informatie- en referentiedoeleinden. <br/><span style="font-weight:bold;">Ze zijn niet bedoeld voor navigatie. Gebruik op eigen risico!</span></p>
+          <p style="color:red">De verstrekte kaarten zijn uitsluitend voor informatie- en referentiedoeleinden.<br/><span style="font-weight:bold;">Ze zijn niet bedoeld voor navigatie. Gebruik op eigen risico!</span></p>
         </div>
 
         <button id="installpwa">Install App</button>
         <p style="font-size:0.7em; text-align:right;">version ${import.meta.env.GIT_HASH}</p>`,
     callback: () => {
-      console.log(locale);
-      if (german) {
-        document.getElementById("info-de").style.display = null;
-        document.getElementById("info-en").style.display = "none";
-      }
-      if (dutch) {
-        document.getElementById("info-nl").style.display = null;
-        document.getElementById("info-en").style.display = "none";
-      }
       fetch(baseurl + "/updated")
         .then((response) => {
           console.log("updated", response);
@@ -426,6 +414,15 @@ new ChartTools().addTo(map);
           document.getElementById("updated").innerText = `last update ${date}`;
         })
         .catch(console.error);
+      console.log(locale);
+      if (german) {
+        document.getElementById("info-de").style.display = null;
+        document.getElementById("info-en").style.display = "none";
+      }
+      if (dutch) {
+        document.getElementById("info-nl").style.display = null;
+        document.getElementById("info-en").style.display = "none";
+      }
       const installButton = document.getElementById("installpwa");
       if (!deferredPrompt) {
         installButton.style.display = "none";

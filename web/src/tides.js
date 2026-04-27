@@ -14,13 +14,20 @@ function track(x) {
 
 const log = logger("tides", "lightblue");
 
+const PARAMS = new URLSearchParams(window.location.search);
 const baseurl = "https://freenauticalchart.net";
 const attrTides =
   '<a href="/download/tides/">Tidal Atlas *</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/gezeitenstromatlas">BSH</a>)';
-const locale = navigator.language || navigator.userLanguage;
+const locale =
+  PARAMS.get("locale") || navigator.language || navigator.userLanguage;
 const german = locale.startsWith("de");
+const dutch = locale.startsWith("nl");
 const lang = german ? "de" : "en";
-log("locale", locale, "german", german, "lang", lang);
+const SOURCE = german ? "Quelle" : dutch ? "bron" : "source";
+const DATE = german ? "Tag" : dutch ? "Dag" : "Day";
+const HEIGHT = german ? "Höhe" : dutch ? "Hoogte" : "Height";
+const TIMEZONE =
+  PARAMS.get("tz") || Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 let tideDataHelgoland;
 
@@ -159,6 +166,7 @@ async function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
 function localTZ(date) {
   const tform = new Intl.DateTimeFormat(locale, {
     timeZoneName: "short",
+    timeZone: TIMEZONE,
   });
   const parts = tform.formatToParts(date ?? new Date());
   return parts.find((part) => part.type === "timeZoneName")?.value;
@@ -175,14 +183,36 @@ function formatTimestamp(timestamp) {
       // year: "numeric",
     })
     .replace(",", "");
-  const zone = localTZ(ts);
   const time = ts.toLocaleString(locale, {
     hour: "2-digit",
     minute: "2-digit",
-    // ...{ timeZone: tz },
+    timeZone: TIMEZONE,
   });
-  return { date, time, zone };
+  const zone = localTZ(ts);
+  const tz = TIMEZONE;
+  return { date, time, zone, locale, tz };
 }
+
+function toISOString(date) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: TIMEZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+    fractionalSecondDigits: 3,
+  }).formatToParts(date);
+
+  const get = (type) => parts.find((p) => p.type === type).value;
+  const str = `${get("year")}-${get("month")}-${get("day")}T${get("hour")}:${get("minute")}:${get("second")}`;
+  console.log(date, str);
+  return str;
+}
+
+console.log("now", formatTimestamp(new Date()));
 
 function mergeNoClobber(target, source) {
   for (const [key, value] of Object.entries(source)) {
@@ -201,7 +231,7 @@ async function tidePlot(traces) {
   const t0 = new Date(now.getTime() - 6 * 3600_000);
   const t1 = new Date(now.getTime() + 18 * 3600_000);
   if (Array.isArray(traces[0])) {
-    const times = traces[0].map((t) => new Date(t));
+    const times = traces[0].map((t) => toISOString(new Date(t)));
     traces = traces.slice(1).map((t, i) => {
       return {
         name: plotNames[i] || `trace_${i}`,
@@ -365,7 +395,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
 
     let date0,
       hdg0 = null;
-    let rows = `<tr><th>Datum</th><th>${localTZ()}</th><th title="Höhe der Gezeit in Metern ± Abweichung K durch Wettereinfluss">HdG&nbsp;&nbsp;&nbsp;K</th><th title="Alter der Gezeit und C = 100 × (Tidenstieg bzw. -fall)/(mitt. Springtidenhub)">AdG&nbsp;&nbsp;&nbsp;C</th></tr>\n`;
+    let rows = `<tr><th>${DATE}</th><th>${localTZ()}</th><th title="Höhe der Gezeit in Metern ± Abweichung K durch Wettereinfluss">HdG&nbsp;&nbsp;&nbsp;K</th><th title="Alter der Gezeit und C = 100 × (Tidenstieg bzw. -fall)/(mitt. Springtidenhub)">AdG&nbsp;&nbsp;&nbsp;C</th></tr>\n`;
     for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
       const r = prediction[k];
       log("row", r);
@@ -410,7 +440,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
         <div class="notice">${notice.join("<br/>")}</div>
         <div class="forecast"><a href="${forecast_link}" target="_blank" class="${forecast_cls}">${forecast_text}</a></div>
         <div id="plot"></div>
-        <div class="source">source <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`,
+        <div class="source">${SOURCE} <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`,
       )
       .openPopup();
 
@@ -524,7 +554,7 @@ export async function addTideGaugesNL(map, kind = "astronomische-getij") {
             let table = "";
             if (extremes) {
               let date0;
-              let rows = `<tr><th>Date</th><th>${localTZ()}</th><th>Height</th></tr>\n`;
+              let rows = `<tr><th>${DATE}</th><th>${localTZ()}</th><th>${HEIGHT}</th></tr>\n`;
               extremes.forEach((r) => {
                 // log(r);
                 const ts = new Date(r.dateTime);
@@ -546,7 +576,7 @@ export async function addTideGaugesNL(map, kind = "astronomische-getij") {
             track("nl");
             layer
               .bindPopup(
-                `<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div class="basevalues"></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`,
+                `<div class="tides"><a target="_blank" href="${link}" class="stationname">${p.name}</a>${table}<div class="basevalues"></div><div id="plot"></div><div class="source">${SOURCE} <a target="_blank" href="https://waterinfo.rws.nl/publiek/astronomische-getij">RWS</a></div></div>`,
               )
               .openPopup();
 
@@ -632,7 +662,7 @@ export async function addTideGaugesUK(map, preFetch = false) {
 
     let date0;
     let approx = false;
-    let rows = `<tr><th>Date</th><th>${localTZ()}</th><th>Height</th><th class="moon${moon}"></th></tr>\n`;
+    let rows = `<tr><th>${DATE}</th><th>${localTZ()}</th><th>${HEIGHT}</th><th class="moon${moon}"></th></tr>\n`;
     events.forEach((e) => {
       // log(e);
       const ts = new Date(e.dateTime + "Z");
@@ -659,7 +689,7 @@ export async function addTideGaugesUK(map, preFetch = false) {
     track("uk");
     await marker
       .bindPopup(
-        `<div class="tides"><a target="_blank" href="https://easytide.admiralty.co.uk/?PortID=${ID}" class="stationname">${name}</a>${table}<div class="basevalues">above chart datum${approx}</div><div class="forecast">${note}</div><div id="plot"></div><div class="source">source <a target="_blank" href="https://easytide.admiralty.co.uk/">UKHO</a></div></div>`,
+        `<div class="tides"><a target="_blank" href="https://easytide.admiralty.co.uk/?PortID=${ID}" class="stationname">${name}</a>${table}<div class="basevalues">above chart datum${approx}</div><div class="forecast">${note}</div><div id="plot"></div><div class="source">${SOURCE} <a target="_blank" href="https://easytide.admiralty.co.uk/">UKHO</a></div></div>`,
       )
       .openPopup();
 
@@ -736,7 +766,7 @@ export async function addTideGaugesFR(map, preFetch = false) {
     const now = new Date();
 
     let date0;
-    let rows = `<tr><th>Date</th><th>${localTZ()}</th><th>Height</th><th>Coeff</th></tr>\n`;
+    let rows = `<tr><th>${DATE}</th><th>${localTZ()}</th><th>${HEIGHT}</th><th>Coeff</th></tr>\n`;
     events.forEach((e) => {
       // log(e);
       const ts = new Date(e.datetime);
@@ -757,7 +787,7 @@ export async function addTideGaugesFR(map, preFetch = false) {
     track("fr");
     await marker
       .bindPopup(
-        `<div class="tides"><a target="_blank" href="https://maree.shom.fr/harbor/${ID}" class="stationname">${name}</a>${table}<div class="basevalues"></div><div class="forecast"></div><div id="plot"></div><div class="source">source <a target="_blank" href="https://maree.shom.fr/">SHOM</a></div></div>`,
+        `<div class="tides"><a target="_blank" href="https://maree.shom.fr/harbor/${ID}" class="stationname">${name}</a>${table}<div class="basevalues"></div><div class="forecast"></div><div id="plot"></div><div class="source">${SOURCE} <a target="_blank" href="https://maree.shom.fr/">SHOM</a></div></div>`,
       )
       .openPopup();
 
@@ -835,7 +865,7 @@ export async function addTideGaugesBaltic(map) {
         `<div class="tides"><a target="_blank" href="https://www.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/${g.id}" class="stationname">${name}<br />
         <img src="/forecast/balt/${g.id}-wasserstand-mobile.png" style="max-width: 100%;" /></a>
         <div id="plot">
-        <div class="source">source <a target="_blank" href="https://www.bsh.de/DE/DATEN/Vorhersagen/Wasserstand_Ostsee/wasserstand_ostsee_node.html">BSH</a></div>
+        <div class="source">${SOURCE} <a target="_blank" href="https://www.bsh.de/DE/DATEN/Vorhersagen/Wasserstand_Ostsee/wasserstand_ostsee_node.html">BSH</a></div>
         </div>`,
       )
       .on("click", (e) => track("baltic"))

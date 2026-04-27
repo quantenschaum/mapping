@@ -235,21 +235,29 @@ def convert_xml(ifile, ofile):
             except:
                 pass
 
-        # if not (gtype and coords): continue
+        if not gtype or not coords:
+            print("skipping", title)
+            continue
         assert gtype and coords, (title, gtype, coords, str(i))
 
-        # print(gtype,coords)
-        desc = pq(i("description").text())
-        # print(desc)
+        # print(gtype, coords)
+        desc = i("description").text()
+        # if "<" not in desc: desc = i("description").html()
+        desc = pq(desc)
         props = {}
         for li in desc("li"):
             li = pq(li)
-            # print(li)
+            # print(li.outer_html())
             key = pq(li('span[class="atr-name"]')).text().strip()
             val = pq(li('span[class="atr-value"]')).text().strip()
-            val = parse(val)
             # print(key,'=',val)
-            props[key] = val
+            props[key] = parse(val)
+
+        # print(props)
+        if not props:
+            print("no props", title)
+            continue
+        assert props
 
         f = {
             "type": "Feature",
