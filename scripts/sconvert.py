@@ -104,6 +104,7 @@ def read_csv(filename):
 csvdir = dirname(__file__)
 s57obj = read_csv(csvdir + "/s57objectclasses.csv")
 s57attr = read_csv(csvdir + "/s57attributes.csv")
+s57types = {"A": str, "I": int, "F": float, "E": int, "L": str, "S": str}
 
 
 def catalog():
@@ -510,8 +511,12 @@ def features2senc(filename, features, scale_jitter=100):
             if ptype == 3:
 
                 def triangulate(polygon):
-                    verts = np.array([v for c in polygon for v in c]).reshape(-1, 2)
-                    rings = list(accumulate(len(c) for c in polygon))
+                    verts = np.array(
+                        [v for c in polygon for v in c], dtype="float32"
+                    ).reshape(-1, 2)
+                    rings = np.array(
+                        list(accumulate(len(c) for c in polygon)), dtype="uint32"
+                    )
                     indices = earcut.triangulate_float32(verts, rings)
                     return [verts[i] for i in indices]
 
@@ -540,12 +545,7 @@ def features2senc(filename, features, scale_jitter=100):
                     # print('skipped',a)
                     continue
                 # print(s57attr[atype])
-                if s57attr[atype][2] == "E":
-                    v = int(v)
-                if s57attr[atype][2] == "F":
-                    v = float(v)
-                if s57attr[atype][2] == "L":
-                    v = str(v)
+                v = s57types[s57attr[atype][2]](v)
                 # print(a,v,acronym_code(a),vtype,type(v))
                 senc.add_record(type=FEATURE_ATTRIBUTE_RECORD, atype=atype, value=v)
 
