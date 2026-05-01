@@ -19,7 +19,6 @@ from functools import partial
 from os import makedirs
 from os.path import basename, dirname, exists, splitext
 
-from pyquery import PyQuery as pq
 from rich.console import Console
 from rich.progress import track
 from s57 import abbr_color, resolve
@@ -153,127 +152,6 @@ def data_types(features):
     return {k: (array if v == list else v) for k, v in types.items()}
 
 
-def convert_xml(ifile, ofile):
-    print(
-        "converting",
-        ifile,
-        "-->",
-        ofile,
-    )
-    xml = pq(filename=ifile)
-    items = xml("item")
-    print(len(items), "xml items")
-    features = []
-    for i in track(items, "[red]converting[/]"):
-        i = pq(i)
-        title = i("title").text()
-        # print(title)
-        gtype, coords = None, None
-
-        if not gtype:
-            try:
-                coords = i(r"georss\:point").text()
-                assert coords
-                coords = list(map(float, coords.split()))
-                assert len(coords) % 2 == 0, str(i)
-                coords = list(zip(coords[1::2], coords[::2]))
-                if len(coords) > 2:
-                    gtype = "MultiPoint"
-                else:
-                    gtype = "Point"
-                    coords = coords[0]
-            except:
-                pass
-
-        if not gtype:
-            try:
-                coords = i(r"georss\:line").text()
-                assert coords
-                coords = list(map(float, coords.split()))
-                assert len(coords) % 2 == 0, str(i)
-                coords = list(zip(coords[1::2], coords[::2]))
-                gtype = "LineString"
-
-                r = []
-                rings = []
-                for c in coords:
-                    if len(r) == 0:
-                        rings.append(r)
-                    r.append(c)
-                    if len(r) > 1 and r[0] == r[-1]:
-                        r = []
-                # if len(rings)<2: continue
-                # print('lines',len(rings))
-
-                if len(rings) > 1:
-                    gtype = "MultiLineString"
-                    coords = rings
-            except:
-                pass
-
-        if not gtype:
-            try:
-                coords = i(r"georss\:polygon").text()
-                assert coords
-                coords = list(map(float, coords.split()))
-                assert len(coords) % 2 == 0, str(i)
-                coords = list(zip(coords[1::2], coords[::2]))
-
-                r = []
-                rings = []
-                for c in coords:
-                    if len(r) == 0:
-                        rings.append(r)
-                    r.append(c)
-                    if len(r) > 1 and r[0] == r[-1]:
-                        r = []
-                # if len(rings)<2: continue
-                # print('polygons',len(rings),rings)
-
-                coords = rings
-                gtype = "Polygon"
-            except:
-                pass
-
-        if not gtype or not coords:
-            print("skipping", title)
-            continue
-        assert gtype and coords, (title, gtype, coords, str(i))
-
-        # print(gtype, coords)
-        desc = i("description").text()
-        # if "<" not in desc: desc = i("description").html()
-        desc = pq(desc)
-        props = {}
-        for li in desc("li"):
-            li = pq(li)
-            # print(li.outer_html())
-            key = pq(li('span[class="atr-name"]')).text().strip()
-            val = pq(li('span[class="atr-value"]')).text().strip()
-            # print(key,'=',val)
-            props[key] = parse(val)
-
-        # print(props)
-        if not props:
-            print("no props", title)
-            continue
-        assert props
-
-        f = {
-            "type": "Feature",
-            "id": title,
-            "properties": props,
-            "geometry": {
-                "type": gtype,
-                "coordinates": coords,
-            },
-        }
-        # print(f)
-        features.append(f)
-        # break
-    save_json(ofile, {"type": "FeatureCollection", "features": features})
-
-
 def main():
     parser = ArgumentParser(
         description="BSH WMS data filter", formatter_class=ArgumentDefaultsHelpFormatter
@@ -292,17 +170,8 @@ def main():
     ldir = args.layers
     assert ofile or ldir
 
-    # if ifile.endswith('.xml'):
-    #   jfile=ifile.replace('.xml','.json')
-    #   convert_xml(ifile,jfile)
-    #   ifile=jfile
-
     features = []
     for fi in ifiles:
-        if fi.endswith(".xml"):
-            fo = fi.replace(".xml", ".json")
-            convert_xml(fi, fo)
-            fi = fo
         data = load_json(fi)
         fs = data["features"]
         for f in fs:

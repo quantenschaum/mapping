@@ -5,6 +5,7 @@ import csv
 import json
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 from datetime import datetime
+from time import sleep
 
 try:
     from rich_argparse import (
@@ -704,7 +705,8 @@ def main():
 
     # SENC --> S57
     if args.s57:
-        write_txt(join(out, "Chartinfo.txt"), f"ChartInfo:{basename(out)}\n")
+        title = args.title or basename(out)
+        write_txt(join(out, "Chartinfo.txt"), f"ChartInfo:{title}\n")
         for fi in track(files, "SENC --> S57"):
             fo = join(out, basename(fi).replace(".senc", ".S57"))
             print(fi, "-->", fo)
