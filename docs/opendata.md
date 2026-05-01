@@ -1,0 +1,208 @@
+# OpenData und Seekarten in Deutschland
+
+**Wenn eine Behörde die eigenen Daten fürchtet**
+
+*Wie das BSH ein Vorzeige-Open-Data-Projekt ausbremst und was das über den Stand digitaler Verwaltung in Deutschland verrät*
+
+---
+
+## Der Fall freenauticalchart.net
+
+Ein Softwareentwickler und Segler hat geschafft, was Behörden seit Jahren versprechen, aber selten liefern: aus öffentlich bereitgestellten Geodaten ein nützliches, frei zugängliches Produkt zu bauen. Auf [freenauticalchart.net](https://freenauticalchart.net) stehen Seekarten für deutsche und niederländische Gewässer kostenlos zur Verfügung, aufgebaut u.a. aus den Vektordaten, die das Bundesamt für Seeschifffahrt und Hydrographie (BSH) im [GeoSeaPortal](https://gdi.bsh.de/mapapps/resources/apps/navigation) veröffentlicht.
+
+Das Projekt fand Beachtung: Magazine wie [Yacht](https://www.yacht.de/newsletter/meinung-kostenlose-seekarten-zu-schon-um-wahr-zu-sein/) und [Segeln](https://segeln-magazin.de/2026/03/10/kostenlose-seekarten-ganz-legal/) berichteten, in der Community wurde es als Modellfall gelobt. Genau ab diesem Moment begann das Problem.
+
+Kurz nach der Presseberichterstattung verschwanden die Punktlotungen aus dem öffentlich zugänglichen Datenbestand. Eine direkte Kommunikation mit dem Entwickler gab es nicht. Stattdessen tauchte eine Klausel in den Nutzungsbedingungen auf, die in ihrer Absurdität schwer zu überbieten ist: 
+
+**Die Verwendung der Daten zu Navigatonszwecken ist nicht gestattet.**
+
+Seekartendaten, nicht zur Navigation. Man muss diesen Satz zweimal lesen.
+
+Und damit war es nicht zu Ende. Inzwischen geht das BSH einen Schritt weiter und schränkt den Zugriff auf den Datenbestand weiter ein.
+
+## Schleichende Demontage: OpenData nur noch dem Namen nach
+
+Aktuell hat das BSH den Zugriff auf die Daten weiter erschwert. Über restriktivere Servereinstellungen werden die  Abrufmöglichkeiten eingeschränkt, gleichzeitig wurden weitere Teile der Daten entfernt. Anscheinend soll praktische Nutzung der offenen Daten systematisch behindert werden.
+
+Das Muster ist erkennbar: Die Daten werden formal weiterhin als OpenData deklariert, aber so bereitgestellt, dass eine sinnvolle Nutzung effektiv unmöglich wird. Das ist die wohl elegantste Form, eine Open-Data-Verpflichtung zu unterlaufen, ohne sie offen zu verletzen, ein bürokratischer Etikettenschwindel.
+
+Genau das konterkariert den gesamten Sinn von OpenData. Die EU-Richtlinie 2019/1024 verlangt nicht nur eine theoretische Bereitstellung, sondern eine *tatsächlich nutzbare* Bereitstellung in maschinenlesbarer Form, ohne diskriminierende Zugangshürden, mit hinreichender Performance für die Weiterverwendung. Eine Behörde, die Daten formal anbietet, sie aber durch Server-Einstellungen und schrittweise Datenamputation effektiv unbrauchbar macht, erfüllt diese Anforderung nicht.
+
+Der Vorgang ist auch deshalb bemerkenswert, weil er *direkt auf eine sichtbare zivilgesellschaftliche Nutzung reagiert*. Solange niemand die offenen Daten ernsthaft nutzte, blieb das Angebot großzügig. Sobald ein Projekt zeigt, was tatsächlich möglich ist, werden die Schleusen geschlossen. Das ist die genaue Umkehrung dessen, was OpenData leisten soll: nicht Bereitstellung für niemanden, sondern Bereitstellung für die Allgemeinheit.
+
+## Die eigentliche Absurdität: Niemand darf es, alle tun es trotzdem
+
+Wer den Konflikt um freie Seekartendaten verstehen will, muss sich die folgende Pointe klarmachen, die in der gesamten Debatte selten ausgesprochen wird: **In der Sport- und Freizeitschifffahrt sind auch die teuren, lizenzierten, qualitätsgesicherten digitalen Daten am Ende nicht offiziell zur Navigation zugelassen.**
+
+Der Ablauf ist absurd. Die Kartenverlage kaufen vom BSH lizenzierte, für die Navigation freigegebene Daten ein. Sie verarbeiten diese in Apps und Plottern weiter. Diese Endprodukte, sei es eine App auf dem Tablet oder ein Karten-Plotter für mehrere tausend Euro, sind dann *ausdrücklich nicht zur Navigation zugelassen*. In den AGB steht regelmäßig, sie seien lediglich eine "Navigationshilfe", maßgeblich sei die amtliche Papierkarte.
+
+Anders ist die Lage in der *Berufsschifffahrt*: Dort gibt es mit zertifizierten ECDIS-Systemen und amtlichen ENCs sehr wohl rechtlich anerkannte digitale Navigationsgrundlagen. In der *Freizeitschifffahrt jedoch nicht*, dort ist und bleibt die Papierkarte mit aktueller Berichtigung das einzig anerkannte Navigationsmittel. Bei einer Kontrolle durch die Wasserschutzpolizei oder im Schadensfall vor Gericht wird genau diese verlangt.
+
+### Ein Realitätscheck: Die Charteryacht in der Ostsee
+
+Wer einmal auf einer Charteryacht in der Ostsee war, kennt das Bild: An Bord liegt in der Regel der NV-Kartensatz, ein Satz Papierkarten mit Hafenplänen, Revierführern (meist jedoch ohne Berichtigungen). Damit ist die Crew formal ausgestattet, die rechtlichen Anforderungen sind erfüllt. Bei einer Kontrolle durch die Wasserschutzpolizei wäre alles in Ordnung.
+
+Und trotzdem: Auf praktisch jeder dieser Yachten findet sich gleichzeitig ein fest installierter Plotter von einem der großen Anbieter, inklusive Kartenmodul für mehrere tausend Euro. Dazu kommen oft noch Tablet-Apps, die die Charterer selbst mitbringen, die ebenfalls Kartenpakete für mehrere hundert Euro im Jahr beinhalten.
+
+Warum? Weil niemand mehr ernsthaft mit Papierkarte und Stechzirkel navigiert. Weil die Realität auf dem Wasser längst digital ist, auch in der Freizeitschifffahrt. Weil ein Plotter mit AIS, Track, Routenfunktion, automatischer Positionsanzeige und Tiefenintegration etwas leistet, was eine Papierkarte nicht kann und effektiv einen Sicherheitsgewinn darstellt.
+
+Genau hier zeigt sich der eigentliche Witz: Die Papierkarte ist eine juristische Fiktion, der Plotter ist die gelebte Praxis. Und beide existieren auf jedem Schiff parallel, die Papierkarte als Alibi, der Plotter als tatsächliches Navigationsinstrument. Niemand bei der Wasserschutzpolizei verhindert es, niemand bei den Verlagen widerspricht, niemand bei den Plotterherstellern erinnert beim Kauf daran, dass das Gerät offiziell "nur eine Navigationshilfe" ist.
+
+Damit wird die Aufregung um freenauticalchart.net erst recht unverständlich. Wenn in der Freizeitschifffahrt ohnehin *kein digitales Produkt*, egal ob frei oder teuer lizenziert, als offizielle Navigationsgrundlage verwendet werden darf, worin besteht dann der angebliche Sicherheitsschaden, wenn jemand kostenlose Karten aus offenen Daten anbietet? Der freie Plotter mit kostenlosen Karten unterscheidet sich rechtlich gar nicht vom 5.000-Euro-Gerät mit lizenzierten Karten, beide sind formal "nur Hilfsmittel", beide werden aber faktisch zur Hauptnavigation eingesetzt.
+
+Die Logik des BSH und der Verlage müsste konsequent angewendet bedeuten: Auch lizenzierte Apps und Plotter dürften "nicht zur Navigation verwendet werden". Im Kleingedruckten der Hersteller steht das tatsächlich. Nur wird es dort niemand ernsthaft lesen oder beanstanden, weil das Geschäftsmodell auf genau dieser Diskrepanz zwischen offizieller Rechtslage und gelebter Praxis aufgebaut ist.
+
+Das entlarvt das Sicherheitsargument vollständig. Es geht nicht um Sicherheit. Es geht nicht um Qualität. Es geht nicht darum, Freizeitskipper vor falschen Daten zu schützen. Wenn das das Ziel wäre, müsste man konsequenterweise *alle digitalen Karten* für untauglich erklären, und die Skipper zurück auf die Papierkarte zwingen. Das tut niemand, und es würde auch niemand mehr akzeptieren.
+
+Alternativ wäre es konsequent aktuelle amtliche Daten vollständig frei zur Verfügung zu stellen. Das würde die Sicherheit durch aktuelles Kartenmaterial auf dem Wasser erhöhen, so wie es z.B. im niederländischen Watt praktiziert wird.
+
+## Wer wird hier eigentlich geschützt?
+
+Ein gern genanntes Argument lautet: Man müsse das Geschäftsmodell der Kartenverlage schützen. Schaut man genauer hin, hält auch das nicht stand.
+
+Die Verlage verkaufen weit mehr als bloße Daten. Sie produzieren Papierkarten, Hafenhandbücher, Revierführer, Törnplaner, gedrucktes Begleitmaterial, Layout, wetterfeste Materialien, Logistik. Das alles ist Wertschöpfung, die bleibt, mit oder ohne offene Daten. Das Ausland zeigt es eindrücklich: In den Niederlanden und in den USA sind ENCs ganz oder weitgehend offen verfügbar und die Kartenverlage existieren dort weiter. Sie verkaufen weiter Papierkarten und Handbücher. Niemand ist pleite gegangen und niemand beschwert sich deswegen.
+
+Das Geschäftsmodellargument ist also empirisch widerlegt. Bleibt die Frage: **Wer wird hier eigentlich wirklich geschützt?**
+
+Die ehrliche Antwort lautet vermutlich: das Amt selbst. Die Lizenzeinnahmen aus dem ENC-Verkauf fließen in den Haushalt. Sie sind ein Posten, den der Bundesrechnungshof eingefordert hat, an dem das BSH-Budget hängt, an dem auch institutionelle Strukturen hängen. Würden die Daten frei, fiele dieser Posten weg. Das wäre für den Bund verschmerzbar, aber für die behördeninterne Logik unbequem.
+
+Damit wird das Bild klar: Was hier geschützt wird, ist weder die Sicherheit der Skipper noch das Überleben der Verlage, sondern in erster Linie die Einnahmenstruktur einer Behörde. Und das ist nicht nur politisch fragwürdig, es ist im Lichte der EU-Open-Data-Richtlinie und des Datennutzungsgesetzes mit hoher Wahrscheinlichkeit *rechtswidrig*. Öffentlich finanzierte Daten dürfen nicht zurückgehalten oder durch technische Schikanen entwertet werden, nur damit eine Behörde ihren bisherigen Lizenzumsatz nicht verliert. Genau diese Konstellation will die EU-Gesetzgebung beenden.
+
+## Ein notwendiger Exkurs: Vermessungsdaten, Bathymetrie und ENCs
+
+Um die Debatte sauber zu führen, müssen drei Dinge unterschieden werden, die in der öffentlichen Diskussion oft vermengt werden:
+
+**1. Vermessungsrohdaten** sind die unmittelbaren Messergebnisse hydrographischer Aufnahmen: Echolotsignale, Tiefenpunkte mit Koordinaten, Sonarscans. Diese Rohdaten sind teilweise öffentlich zugänglich.
+
+**2a. Bathymetriedatensatz:** Aus den Vermessungsdaten wird ein digitales Höhenmodell des Meeresbodens erstellt, eine möglichst naturgetreue physikalische Repräsentation der Topographie unter Wasser. Dieser Bathymetriedatensatz wird vom BSH als OpenData im GeoSeaPortal angeboten. *Es handelt sich dabei nicht um Seekartendaten.*
+
+**2b. Seekarten (ENCs):** Parallel dazu fließen dieselben Vermessungsdaten in die elektronischen Seekarten (Electronic Navigational Charts, ENCs) im S-57-Format. Hier werden sie kartographisch aufbereitet, nach seekartographischen Konventionen, nach dem Prinzip "der sicherere Tiefenwert zählt", normiert für ECDIS-Systeme. ENCs sind ein eigenständiges Produkt mit eigener Logik. Sie werden nicht offen veröffentlicht, sondern an Lizenznehmer abgegeben. Die Daten, auf denen die ENCs beruhen, werden teilweise im GeoSeaPortal vom BSH öffentlich zugänglich bereitgestellt, d.h. die Datenbasis, nicht die fertige ENC.
+
+**Was nutzt nun freenauticalchart.net?** Entgegen einer naheliegenden Annahme ist es *nicht* primär das Bathymetriemodell. Das Projekt verwendet die *ENC-basierten Vektordaten* aus dem WMS-Dienst des BSH, Tiefenlinien, Seezeichen, Fahrwasser, Wracks, etc. Diese Daten sind kartographisch aufbereitet und werden wöchentlich aktualisiert.
+
+Auf den Bathymetriedatensatz wird nur *als Notbehelf* für die Punktlotungen zurückgegriffen, weil das BSH diese aus dem ENC-Datenstrom entfernt hat. Das ist ein schlechter Workaround: gröber, weniger aktuell, nicht für diesen Zweck konzipiert.
+
+Wichtig ist die Konsequenz daraus: Wenn das BSH öffentlich erklärt, es gebe "zwei fundamental unterschiedliche Arten von Seekartendaten", qualitätsgesicherte und Open-Data-Bathymetrie, dann ist das in dieser Form irreführend. Es gibt nur eine Art von Seekartendaten, das sind die ENCs. Die Bathymetriedaten sind keine Seekartendaten. Was über den BSH-WMS frei verfügbar ist, sind aber sehr wohl ENC-abgeleitete Vektordaten, also kartographisch aufbereitete Seekarteninformationen, nur eben formal ohne Garantie für Aktualität und Korrektheit.
+
+## Die BSH-Argumentation im Detail
+
+Die offiziellen Aussagen des BSH, wie sie auch im [Yacht-Artikel](https://www.yacht.de/ausruestung/elektronik/freenauticalchart-net-einordnung-des-bsh-schafft-klarheit-ueber-die-zugrunde-liegenden-daten/) zitiert werden, verdienen eine differenzierte Betrachtung. Vieles davon ist formal korrekt und trotzdem nicht überzeugend.
+
+**"Die Open-Data-Daten sind nicht für die Navigation geeignet."**  
+as ist als formaler Disclaimer richtig, das BSH übernimmt für diese Daten keine Garantie. Niemand hat etwas anderes behauptet. Die spannendere Frage ist: Gibt es effektiv zwei Datensätze, einen "guten" und einen "schlechten"? Und was wäre aufwendiger: die aktuellen Daten online zu stellen oder künstlich veraltete bzw. verfälschte Daten bereitzuhalten?
+
+**"Das wäre ein sehr großer Aufwand, die Open-Data-Dienste aktuell zu halten."**  
+Das ist sachlich nicht haltbar. Der technische Aufwand, geprüfte Daten frei ins Netz zu stellen, ist effektiv null, man müsste die Datenbank entsprechend öffnen oder Dateien exportieren. Vollautomatisch realisierbar. Dass es nicht passiert, ist eine politische, keine technische Frage.
+
+**"Wenn wir das so ins Netz stellen, können wir nicht mehr garantieren, dass die Daten korrekt sind, aktuell sind und den Qualitätsanforderungen entsprechen."**  
+Schwer nachvollziehbar. Wenn dieselben geprüften Daten einem Lizenznehmer vertraglich übergeben werden, sind sie per Definition qualitätsgesichert. Eine freie Bereitstellung derselben Daten würde an ihrer Qualität nichts ändern. Die Garantie fällt nicht weg, weil die Daten schlechter werden, sie fällt weg, weil das BSH keine Verträge mit allen Nutzern hat. Das ist ein Haftungsthema, kein Qualitätsthema.
+
+**"Wir wissen nicht, wer was daraus machen kann."**  
+Das gilt aber genauso für Lizenznehmer. Auch Kartenverlage erstellen keine amtlichen Karten und gängige Plotter sind keine genormten ECDIS-Systeme. Was am Ende beim Skipper ankommt, liegt ohnehin nicht mehr im Verantwortungsbereich des BSH.
+
+**"Selbst wenn Tonnen und Leuchtfeuer auf der Karte schön dargestellt sind, kann die Position veraltet sein."**  
+Vollkommen richtig, nur gilt das prinzipiell für jede Karte, die nicht laufend berichtigt wird. Das ist kein Argument gegen offene Daten, sondern eine generelle Eigenschaft von Kartenwerken.
+
+**"Eine generelle Freigabe aller Seekarten wäre eine politische Entscheidung, die auf Bundesregierungsebene getroffen werden müsste."** Hier liegt der eigentliche Knackpunkt. Das BSH macht im Rahmen seiner Möglichkeiten einen guten Job. Die Menschen dort entscheiden nicht über die Lizenzpolitik. Sie müssen mit Rahmenbedingungen leben, die teils unangenehm und, wahrscheinlich, mit EU-Recht kollidieren.
+
+## Das institutionelle Dilemma
+
+Was hier zu beobachten ist, lässt sich am besten als *institutionelles Übergangsdilemma* beschreiben: Ein Teil der Daten wurde korrekt unter GeoNutzV freigegeben. Parallel läuft ein altes Lizenzierungsmodell weiter, dessen rechtliche Grundlage durch EU-Recht zunehmend erodiert. Beide Modelle bestehen nebeneinander, inkonsistent, juristisch fragil und kommunikativ kaum darstellbar.
+
+Hinzu kommt ein strukturelles Problem: Das BSH ist eine Bundesbehörde, finanziert aus dem Bundeshaushalt. Sie ist kein Unternehmen und müsste strukturell nicht kostendeckend arbeiten. Trotzdem verlangt der Bundesrechnungshof "marktgerechte Preise". Die Lizenzeinnahmen werden zur Haushaltsgröße und damit zum Hindernis für eine konsequente Umsetzung des Open-Data-Gedankens. Würden die Daten frei, fiele dieser Posten weg, die Kartenverlage bekämen die Daten kostenlos. Das wäre weniger ein Problem für die Verlage als für das BSH bzw. den Bund. Endprodukte für Endkunden könnten dann sogar günstiger werden.
+
+Das ist genau die Konstellation, die die EU-PSI-Richtlinie und die nachfolgende Open-Data-Richtlinie (2019/1024) eigentlich auflösen wollten, mit der Grenzkostenregel, nach der die Bereitstellung öffentlich finanzierter Daten höchstens die Grenzkosten der Verbreitung kosten darf. Bei digitalen Daten sind diese Grenzkosten praktisch null.
+
+Die jüngsten Maßnahmen, verschärfte Servereinstellungen, weitere Datenamputationen, passen exakt in dieses Bild. Sie sind nicht Ausdruck einer technischen Notwendigkeit, sondern eines Kontrollreflexes: Wenn man die Daten schon nicht offen sperren kann, macht man sie eben unbrauchbar.
+
+## Faire Anmerkung zu den Kartenverlagen
+
+Pauschal Kritik an den Kartenanbietern zu üben, wäre unfair. Abo-Modelle und Zwangsregistrierungen sind nervig bis fragwürdig, aber man bekommt dafür auch mehr als bloße Daten. Insbesondere Papierkarten müssen gelayoutet, gedruckt, wetterfest produziert, im richtigen Format und mit Handbuch geliefert werden. Wer das einmal selbst probiert hat, weiß, wie aufwendig das ist.
+
+Die Möglichkeit, "seine" Karte einfach auf A4 ausdrucken zu können, ist sinnvoll für die Ausbildung, für Übungskarten mit Rand, für eine Wattwanderung, als Zusatzkarte zum Hereinmalen, als Screenshot für eine Webseite. Offene Daten erschließen darüber hinaus Möglichkeiten, die kein kommerzielles Produkt jemals abdecken kann, das ist ein Stück digitaler Freiheit, das man nicht unterschätzen sollte. Dazu gehört auch die Nutzung in freier Software wie OpenCPN oder AvNav.
+
+Und selbst "qualitätsgesicherte" Karten enthalten Fehler. Insbesondere bei den Tiefen in der Nordsee verändert sich das Gewässer schneller, als man messen kann. Vorsicht und Seemannschaft bleiben unersetzlich, mit oder ohne amtliche Karte.
+
+## S-63: Was Verschlüsselung wirklich bedeutet
+
+Im Zusammenhang mit ENCs taucht regelmäßig das S-63-Schema auf, das angeblich der Sicherheit dient. Hier muss man zwei technische Dinge sauber trennen, die in der öffentlichen Diskussion fast immer vermischt werden:
+
+**Digitale Signaturen** sichern die Integrität der Daten. Sie garantieren, dass eine Karte tatsächlich vom angegebenen Aussteller stammt und nicht manipuliert wurde. Das ist das eigentliche, navigatorisch relevante Sicherheitsmerkmal. Signaturen ließen sich problemlos auch auf vollständig offene Daten anwenden, sie kosten den Nutzer nichts und schützen vor verfälschten Karten.
+
+**Verschlüsselung** ist davon kategorisch zu unterscheiden. Die in S-63 verwendete Verschlüsselung mit gerätespezifischen Permits ist ein *reiner Kopierschutz*. Sie sichert keine Integrität, das tun die Signaturen. Sie schützt das *Lizenzmodell*, nicht die Sicherheit der Navigation. Die IHO selbst formuliert das deutlich: Zweck der Verschlüsselung ist der Schutz vor unautorisierter Verbreitung.
+
+Wer also "Sicherheit" als Argument für die Verschlüsselung anführt, verwechselt absichtlich oder fahrlässig zwei Dinge. Sicherheit kommt aus der Signatur. Verschlüsselung dient dem Geld.
+
+## Kartenupdates: Wer ist wirklich aktuell?
+
+Ein Argument, das in der Debatte oft fällt: Amtliche Karten seien aktueller, freie Daten gefährlich veraltet. Schaut man genauer hin, ist das Bild differenzierter, und teils geradezu paradox.
+
+Die *Nachrichten für Seefahrer* (NfS) vom BSH und die *Bekanntmachungen für Seefahrer* (BfS) der WSAs erscheinen regelmäßig, zeitnah und systematisch. Sie sind die primäquelle von Kartenupdates.
+
+**o-charts** ist der einzige Positivfall im kommerziellen Bereich: direkter S-57-Bezug von den Hydrographischen Ämtern, wöchentliche NfS-Integration, Update direkt aus OpenCPN oder AvNav heraus anstoßbar und unschlagbar günstig. Formal sind das keine amtlichen ENCs, inhaltlich aber dieselben Daten und sehr aktuell.
+
+**NV Charts** dagegen zeigt das strukturelle Problem: Der eigene Updateservice kopiert letztlich BfS und NfS, für die Papierkarte ist das ein sinnvoller Rhythmus, denn dort muss man die Updates ohnehin manuell eintragen. Die digitale App jedoch lässt sich vom Nutzer *nicht* laufend aktualisieren, schon gar nicht manuell. NfS-Änderungen tauchen teils erst Monate später in der App auf. Das konterkariert den Sinn einer digitalen Karte mit Internetzugang vollständig.
+
+Hinzu kommt die Haftungsklausel der Verlage, die Apps seien nur "Navigationshilfen", maßgeblich sei die Papierkarte. Mit der gelebten Realität der allermeisten Freizeitskipper hat das nichts zu tun. Niemand fährt heute mit Papierkarte und Stechzirkel über die Ostsee, und niemand bei den Verlagen glaubt das ernsthaft, denn sonst würde man die Apps gar nicht produzieren. Die Klausel ist eine Haftungsumkehr, kein navigatorischer Hinweis.
+
+Damit verschiebt sich der Diskurs: Die Frage ist nicht "amtlich vs. frei", sondern "aktualisierbar/aktuell vs. nicht aktualisierbar". Und ausgerechnet das freie Projekt freenauticalchart.net hängt direkt am wöchentlich aktualisierten WMS-Dienst des BSH, während eine bezahlte App-Version monatelang veraltet sein kann.
+
+## Der Ländervergleich: Es geht auch anders
+
+Dass dieses Spannungsverhältnis lösbar ist, zeigen mehrere Länder:
+
+- **Niederlande:** Aktuelle ENCs für Waddenzee und Zeeland frei zum Download.
+- **USA:** Komplette ENCs frei zum Download, ausgerechnet das Land, in dem sonst Turbokapitalismus regiert.
+
+Navigation und Lizenzschutz schließen sich offensichtlich nicht aus. Auch in den Niederlanden gibt es offene Seekarten, gedruckte Werke und Handbücher kommerzieller Anbieter parallel. Die Verlage existieren weiter. Genau das entzieht dem Schutz-des-Geschäftsmodells-Argument die Grundlage, empirisch widerlegt durch das Ausland.
+
+In Deutschland gibt es mit [basemap.de](https://basemap.de) längst offene topographische Daten, auch dort gab es Befürchtungen, auch dort haben sie sich nicht bewahrheitet.
+
+Ein **Dual-Licensing-Modell** wäre der naheliegende Kompromiss: nicht-kommerzielle Nutzung frei, kommerzielle Nutzung kostenpflichtig bzw. die offiziellen ENCs für die Berufsschiffahrt sind kostenpflichtig. So lassen sich öffentliches Interesse, EU-Recht und das berechtigte Geschäftsinteresse der Verlage vereinen, ohne ein Vorzeigeprojekt wie freenauticalchart.net auszubremsen, was für die Zivilgesellschaft einen Mehrwert liefert, denn genau dies ist das Ziel der OpenData-Gesetzgebung.
+
+## Die rechtliche Lage und mögliche Klagewege
+
+Die juristische Situation ist klarer, als das BSH es darstellt. Mehrere Anspruchsgrundlagen kommen in Betracht:
+
+**EU-Richtlinie 2019/1024 (Open-Data-Richtlinie)** definiert Geodaten ausdrücklich als "hochwertige Datensätze", die in maschinenlesbarer Form, gebührenfrei und unter offenen Standardlizenzen bereitgestellt werden sollen. Die Durchführungsverordnung (EU) 2023/138 konkretisiert das. Die Grenzkostenregel der vorherigen PSI-Richtlinie wirkt fort: Öffentlich finanzierte Daten dürfen höchstens die Grenzkosten der Verbreitung kosten, bei digitalen Daten faktisch null.
+
+Wichtig in diesem Zusammenhang: Die Open-Data-Richtlinie verlangt nicht nur formale Bereitstellung, sondern eine **diskriminierungsfreie und tatsächlich nutzbare** Bereitstellung. Künstliche Drosselung, restriktive Servereinstellungen oder schrittweise Datenamputation könnten daher selbst dann rechtswidrig sein, wenn die Daten formal noch "OpenData" heißen.
+
+**Das Datennutzungsgesetz (DNG)** als nationale Umsetzung verpflichtet Behörden zur diskriminierungsfreien Bereitstellung. Eine Klausel wie "nicht für die Navigation geeignet" auf Daten, die nachweislich aus dem für die Navigation produzierten ENC-Datenbestand abgeleitet sind, dürfte mit dem DNG kaum vereinbar sein, das ist eine zweckwidrige Beschränkung. Verschärft wird die rechtliche Problematik dadurch, dass diese Beschränkung **nicht einmal die offizielle Sicherheitslogik** der Sport- und Freizeitschifffahrt stützt: Auch die kommerziellen Apps und Plotter sind dort nicht zur offiziellen Navigation zugelassen. Das Argument einer "Schutzfunktion" durch die Klausel ist damit gegenstandslos.
+
+Besonders heikel: Wenn das eigentliche Schutzziel der Beschränkungen weder die Sicherheit der Skipper noch das Geschäftsmodell der Verlage ist, sondern der **eigene Lizenzumsatz der Behörde**, dann handelt es sich um eine Beschränkung, die **gegen den Sinn und Zweck des EU-Rechts gerichtet ist**, und damit aller Voraussicht nach rechtswidrig.
+
+**Das Geodatenzugangsgesetz (GeoZG)** und die INSPIRE-Richtlinie verpflichten zur offenen Bereitstellung von Geobasisdaten.
+
+**Das Informationsfreiheitsgesetz (IFG)** käme als ergänzender Hebel in Betracht, ist aber bei kommerziell relevanten Werken schwächer.
+
+**Wer könnte klagen?**
+
+- **man selbst**, als unmittelbar Betroffener mit klarem Rechtsschutzbedürfnis
+- **NGOs** wie die Gesellschaft für Freiheitsrechte (GFF), netzpolitik.org oder FragDenStaat, die strategische Klagen im Open-Data-Bereich führen und für genau diese Konstellationen die richtigen Adressaten sind
+- **Open Boat Projects** als organisierte Community
+- **Verbände wie der DSV** als Interessenvertretung der Segler
+- **Kommerzielle Wettbewerber**, die durch die Lizenzpolitik benachteiligt werden
+- **Die EU-Kommission** im Rahmen eines Vertragsverletzungsverfahrens
+
+Die aussichtsreichste Route dürfte nicht eine IFG-Klage auf vollständige ENC-Herausgabe sein, sondern eine **DNG-/GeoZG-Klage gegen die zweckwidrige Nutzungsbeschränkung und faktische Unbenutzbarmachung** der bereits offenen Daten. Wenn das BSH Daten freigibt, kann es ihre Verwendung nicht nach Gutdünken ausschließen oder durch technische Schikanen entwerten, schon gar nicht ausgerechnet für den originären Zweck dieser Daten, der zudem für *kein* digitales Produkt der Freizeitschifffahrt offiziell anerkannt ist.
+
+Dass dieses Problem nicht nur Deutschland betrifft, macht den Weg über die EU besonders interessant. Andere Mitgliedstaaten haben ähnliche Konflikte, ein Vertragsverletzungsverfahren könnte strukturelle Klärung bringen.
+
+## Fazit: Eine Frage des Willens
+
+Der Fall freenauticalchart.net ist ein Lehrstück über den Zustand der digitalen Verwaltung in Deutschland. Eine Behörde, die eigentlich vorbildlich Daten bereitstellt und ein vorbildliches Update-System betreibt, fängt an, die Nutzung dieser Daten zu erschweren, sobald jemand etwas Sinnvolles damit anfängt.
+
+Die Entwicklung ist dabei nicht statisch, sondern dynamisch in die falsche Richtung: erst das Verschwinden der Punktlotungen, dann die kuriose Klausel zur Nutzung, inzwischen verschärfte Servereinstellungen und weitere Datenkürzungen. OpenData wird damit zum Etikett ohne Inhalt, formale Konformität bei tatsächlicher Verweigerung.
+
+Besonders skurril wird das Ganze vor dem Hintergrund, dass in der Freizeitschifffahrt *kein einziges digitales Kartenprodukt* als offizielle Navigationsgrundlage gilt. Die Aufregung um vermeintliche Sicherheitsrisiken durch freie Karten ist damit nicht nur unverhältnismäßig, sondern argumentativ leer.
+
+Auch das gerne nachgeschobene Argument, man müsse die Kartenverlage schützen, hält nicht. Die Verlage verkaufen Papierkarten, Hafenhandbücher und Begleitmaterial, das tun sie im Ausland auch dort weiter, wo ENCs längst frei verfügbar sind. Das Geschäftsmodell der Verlage ist robuster, als die deutsche Debatte suggeriert.
+
+Was bleibt, ist der unangenehme Verdacht, dass hier vor allem *eine Behörde sich selbst schützt*, ihre Lizenzeinnahmen, ihre Haushaltsstruktur, ihre etablierten Verfahren. Und genau das ist, was die EU-Open-Data-Richtlinie eigentlich beenden sollte. Eine künstliche Verknappung öffentlich finanzierter Daten zum Erhalt eigener Einnahmen ist mit hoher Wahrscheinlichkeit rechtswidrig.
+
+Dabei ist das nicht primär die Schuld des BSH. Die Menschen dort machen ihre Arbeit gut. Sie entscheiden aber nicht über das Lizenzmodell. Sie sitzen in einem institutionellen Übergangsdilemma zwischen altem Kostendeckungsdruck und neuem EU-Datenrecht, und das ist eine Konstellation, die nicht durch Pressestatements einer Bundesbehörde aufgelöst werden kann, sondern nur politisch oder juristisch.
+
+Die juristische Lage spricht eher gegen das fortgeführte Lizenzmodell als für es. Die technischen Argumente halten kaum stand. Der Ländervergleich zeigt, dass es anders geht. Was bleibt, ist der Eindruck einer Politik, die hofft, das Thema möge sich nicht weiter durchsetzen, und die nun, da es sich doch durchsetzt, zur stillen Demontage übergeht.
+
+OpenData ist in Deutschland kein technisches Problem. Es ist ein Willens-Problem. Und solange Hobbyprojekte Einzelner die offiziellen Apps in Aktualität und Nutzbarkeit übertreffen und ausgerechnet dafür systematisch sabotiert werden, weiß man, wo dieser Wille fehlt.
