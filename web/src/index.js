@@ -380,6 +380,8 @@ new ChartTools().addTo(map);
         <div id="info-en">
           <p class="info">is an open source and open data project that aims to provide free nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access. It is based on data that is available as open data.</p>
 
+          <p style="background:yellow; padding:1ex;">Parts of the data that were previously freely available have been removed from the BSH server and access has been restricted. <b>An update of the German part of the chart is not possible for the time being.</b></p>
+
           <p>For more details, usage instructions and downloads, see the <a href="download/">documentation</a>. Please read the important notes.</p>
 
           <p style="color:red">The charts provided are for informational and reference purposes only.<br/><span style="font-weight:bold;">They are not intended for navigation. Use at own risk!</span></p>
@@ -388,6 +390,8 @@ new ChartTools().addTo(map);
         <div id="info-de" style="display:none;">
           <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich zu machen. Es basiert auf Daten, die als Open Data verfügbar sind.</p>
 
+          <p style="background:yellow; padding:1ex;">Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. <b>Ein Update des deutschen Teils der Karte ist bis auf weiteres nicht mehr möglich. Weitere Informationen zu OpenData <a href="download/de/opendata/">hier</a>.</b></p>
+
           <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>. Beachten Sie die wichtigen Hinweise.</p>
 
           <p style="color:red">Die zur Verfügung gestellten Karten dienen nur zu Informations- und Referenzzwecken.<br/><span style="font-weight:bold;">Sie sind nicht für die Navigation geeignet. Verwendung auf eigene Gefahr!</span></p>
@@ -395,6 +399,8 @@ new ChartTools().addTo(map);
 
         <div id="info-nl" style="display:none;">
           <p class="info">is een open-source en open-data project dat gratis zeekaarten biedt voor zeilers, watersport- en cartografie‑enthousiastelingen en ontwikkelaars. Het heeft als doel officiële kaartgegevens gemakkelijker toegankelijk te maken. Het is gebaseerd op gegevens die als open data beschikbaar zijn.</p>
+
+          <p style="background:yellow; padding:1ex;">Op de server van het BSH zijn meer delen van de eerder vrij toegankelijke gegevens verwijderd en is de toegang bemoeilijkt. <b>Een update van het Duitse deel van de kaart is voorlopig niet mogelijk.</b></p>
 
           <p>Meer informatie, gebruiksaanwijzingen en downloads vind je in de <a href="download/nl/">documentatie</a>. Lees de belangrijke opmerkingen.</p>
 
