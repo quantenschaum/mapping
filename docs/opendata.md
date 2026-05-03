@@ -14,7 +14,7 @@ Das Projekt fand Beachtung: Magazine wie [Yacht](https://www.yacht.de/newsletter
 
 Kurz nach der Presseberichterstattung verschwanden die Punktlotungen aus dem öffentlich zugänglichen Datenbestand. Eine direkte Kommunikation mit dem Entwickler gab es nicht. Stattdessen tauchte eine Klausel in den Nutzungsbedingungen auf, die in ihrer Absurdität schwer zu überbieten ist: 
 
-**Die Verwendung der Daten zu Navigatonszwecken ist nicht gestattet.**
+>**Die Verwendung der Daten zu Navigatonszwecken ist nicht gestattet.**
 
 Seekartendaten, nicht zur Navigation zu verwenden. Man muss diesen Satz zweimal lesen.
 
@@ -114,22 +114,28 @@ Wichtig ist die Konsequenz daraus: Wenn das BSH öffentlich erklärt, es gebe "z
 
 Die offiziellen Aussagen des BSH, wie sie auch im [Yacht-Artikel](https://www.yacht.de/ausruestung/elektronik/freenauticalchart-net-einordnung-des-bsh-schafft-klarheit-ueber-die-zugrunde-liegenden-daten/) zitiert werden, verdienen eine differenzierte Betrachtung. Vieles davon ist rein formal korrekt und trotzdem nicht überzeugend.
 
-**"Die Open-Data-Daten sind nicht für die Navigation geeignet."**  
-Das ist als formaler Disclaimer richtig, das BSH übernimmt für diese Daten keine Garantie. Niemand hat etwas anderes behauptet. Die spannendere Frage ist: Gibt es effektiv zwei Datensätze, einen "guten" und einen "schlechten"? Und was wäre aufwendiger: die aktuellen Daten online zu stellen oder künstlich veraltete bzw. verfälschte Daten bereitzuhalten?
+> Die Open-Data-Daten sind nicht für die Navigation geeignet.
 
-**"Das wäre ein sehr großer Aufwand, die Open-Data-Dienste aktuell zu halten."**  
-Das ist sachlich nicht haltbar. Der technische Aufwand, geprüfte Daten frei ins Netz zu stellen, ist effektiv null, man müsste die Datenbank entsprechend öffnen oder Dateien exportieren. Vollautomatisch realisierbar. Dass es nicht passiert, ist eine politische, keine technische Frage.
+Das ist als formaler Disclaimer richtig, das BSH übernimmt für diese Daten keine Garantie. Niemand hat etwas anderes behauptet. Die spannendere Frage ist: Gibt es effektiv zwei Datensätze, einen "guten" und einen "schlechten"? Und was wäre aufwendiger: die aktuellen Daten online zu stellen oder künstlich veraltete bzw. verfälschte Daten bereitzuhalten? Und wäre die überhaupt zulässig?
 
-**"Wenn wir das so ins Netz stellen, können wir nicht mehr garantieren, dass die Daten korrekt sind, aktuell sind und den Qualitätsanforderungen entsprechen."**  
+> Das wäre ein sehr großer Aufwand, die Open-Data-Dienste aktuell zu halten.
+
+Das ist sachlich nicht haltbar. Der technische Aufwand, geprüfte Daten frei ins Netz zu stellen, ist effektiv null, man müsste die Datenbank entsprechend öffnen oder Dateien exportieren. Vollautomatisch realisierbar. Vor allem war es ja bis Anfang diesen Jahres möglich, die Daten waren verfügbar. Dass es nicht (mehr) passiert, ist eine politische, keine technische Frage.
+
+> Wenn wir das so ins Netz stellen, können wir nicht mehr garantieren, dass die Daten korrekt sind, aktuell sind und den Qualitätsanforderungen entsprechen.
+
 Schwer nachvollziehbar. Wenn dieselben geprüften Daten einem Lizenznehmer vertraglich übergeben werden, sind sie per Definition qualitätsgesichert. Eine freie Bereitstellung derselben Daten würde an ihrer Qualität nichts ändern. Die Garantie fällt nicht weg, weil die Daten schlechter werden, sie fällt weg, weil das BSH keine Verträge mit allen Nutzern hat. Das ist ein Haftungsthema, kein Qualitätsthema.
 
-**"Wir wissen nicht, wer was daraus machen kann."**  
-Das gilt aber genauso für Lizenznehmer. Auch Kartenverlage erstellen keine amtlichen Karten und gängige Plotter sind keine genormten ECDIS-Systeme. Was am Ende beim Skipper ankommt, liegt ohnehin nicht mehr im Verantwortungsbereich des BSH.
+> Wir wissen nicht, wer was daraus machen kann.  
 
-**"Selbst wenn Tonnen und Leuchtfeuer auf der Karte schön dargestellt sind, kann die Position veraltet sein."**  
+Das gilt aber genauso für die Lizenznehmer. Auch Kartenverlage erstellen keine amtlichen Karten und gängige Plotter sind keine genormten ECDIS-Systeme. Was am Ende beim Skipper ankommt, liegt ohnehin nicht mehr im Verantwortungsbereich des BSH.
+
+> Selbst wenn Tonnen und Leuchtfeuer auf der Karte schön dargestellt sind, kann die Position veraltet sein.  
+
 Vollkommen richtig, nur gilt das prinzipiell für jede Karte, die nicht laufend berichtigt wird. Das ist kein Argument gegen offene Daten, sondern eine generelle Eigenschaft von Kartenwerken. Und sogar amtliche Karten enthalten Fehler.
 
-**"Eine generelle Freigabe aller Seekarten wäre eine politische Entscheidung, die auf Bundesregierungsebene getroffen werden müsste."**  
+> Eine generelle Freigabe aller Seekarten wäre eine politische Entscheidung, die auf Bundesregierungsebene getroffen werden müsste.  
+
 Hier liegt der eigentliche Knackpunkt. Das BSH macht im Rahmen seiner Möglichkeiten einen guten Job. Die Menschen dort entscheiden nicht über die Lizenzpolitik. Sie müssen mit Rahmenbedingungen leben, die teils unangenehm und, wahrscheinlich, mit EU-Recht kollidieren. Aber das BSH kann sich in gewissem Rahmen aktiv für oder gegen OpenData einsetzen.
 
 ## Das institutionelle Dilemma
