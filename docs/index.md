@@ -16,6 +16,12 @@ Here you find precompiled charts for download in various formats usable in diffe
     
     **Use at your own risk!**
 
+    
+!!! warning "BSH Data"
+    Parts of the data that were previously freely available have been removed from the BSH server and access has been restricted. **An update of the German part of the chart is not possible for the time being.**  
+    **Spot Soundings are no longer available on the server of the BSH.**
+    The spot soundings in the german part of the map have been extracted from this [bathymetry dataset](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml) which is relatively coarse and out dated. For accurate and up-to-date depth data use official nautical charts.
+
 ??? info "License"    
     - The downloadable files on this page are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
     - The code of this project used to generate the charts an other data is licensed under [GPL](https://www.gnu.org/licenses/gpl-3.0.de.html).
@@ -39,12 +45,7 @@ Here you find precompiled charts for download in various formats usable in diffe
     
     - [Data Package (everything to render/print charts in one ZIP)](qmap-data.zip){:download}
     
-    Unfortunately, due to legal restrictions, it is no longer possible to provide raw data for Germany as preprocessed package for download.
-    
-!!! warning "Spot Soundings"
-    **Spot Soundings are no longer available on the server of the BSH.**
-    The spot soundings in the german part of the map have been extracted from this [bathymetry dataset](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml) which is relatively coarse and out dated. For accurate and up-to-date depth data use official nautical charts.
-    
+    Unfortunately, due to legal restrictions, it is no longer possible to provide raw data for Germany as preprocessed package for download.    
     
 ## [OsmAnd](https://osmand.net/)
 

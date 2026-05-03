@@ -41,7 +41,8 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
 
     Helaas is het vanwege juridische beperkingen niet langer mogelijk om de ruwe gegevens voor Duitsland als voorverwerkt pakket ter download aan te bieden.
 
-!!! warning "Spot Soundings"
+!!! warning "BSH Gegevens"
+    Op de server van het BSH zijn meer delen van de eerder vrij toegankelijke gegevens verwijderd en is de toegang bemoeilijkt. **Een update van het Duitse deel van de kaart is voorlopig niet mogelijk.**  
     **Spot soundings zijn niet langer beschikbaar op de server van het BSH.**
     De spot soundings in het Duitse deel van de kaart zijn afkomstig uit deze [bathymetry dataset](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml). Deze dataset is relatief grof en enigszins verouderd. Voor nauwkeurige en actuele dieptegegevens dient u officiële zeekaarten te raadplegen.
     

@@ -16,6 +16,11 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
     
     **Verwendung auf eigene Gefahr!**
 
+!!! warning "BSH-Daten"
+    Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. Ein Update des deutschen Teils der Karte ist bis auf weiteres nicht mehr möglich. Weitere Informationen zu OpenData [hier](opendata.md).  
+    **Punktlotungen werden nicht mehr auf dem Server des BSH bereitgestellt.**
+    Die Punktlotungen im deutschen Teil der Karte stammen aus diesem [Bathymetrie-Datensatz](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml), der relativ grob und veraltet ist. Für genaue und aktuelle Tiefenangaben verwenden Sie bitte offizielle Seekarten.
+
 ??? info "Lizenzen"    
     - Die herunterladbaren Dateien auf dieser Seite sind lizenziert unter [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
     - Der Code dieses Projekts, der zur Erstellung der Karten und anderer Daten verwendet wird, ist lizenziert unter [GPL](https://www.gnu.org/licenses/gpl-3.0.de.html).
@@ -39,12 +44,7 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
     
     - [Data Paket (alles zum Rendern/Drucken von Karten in einem ZIP)](qmap-data.zip){:download}
 
-    Aufgrund rechtlicher Einschränkungen ist es leider nicht mehr möglich, Rohdaten für Deutschland als vorverarbeitetes Paket zum Herunterladen anzubieten.
-
-!!! warning "Punktlotungen"
-    **Punktlotungen werden nicht mehr auf dem Server des BSH bereitgestellt.**
-    Die Punktlotungen im deutschen Teil der Karte stammen aus diesem [Bathymetrie-Datensatz](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml), der relativ grob und veraltet ist. Für genaue und aktuelle Tiefenangaben verwenden Sie bitte offizielle Seekarten.
-    
+    Aufgrund rechtlicher Einschränkungen ist es leider nicht mehr möglich, Rohdaten für Deutschland als vorverarbeitetes Paket zum Herunterladen anzubieten.    
     
 ## [OsmAnd](https://osmand.net/)
 
