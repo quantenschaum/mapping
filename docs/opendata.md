@@ -209,7 +209,7 @@ Die Frage ist also nicht, ob ein deutsches Behördensystem mit offenen Daten üb
 
 Die juristische Situation ist klarer, als das BSH es darstellt. Mehrere Anspruchsgrundlagen kommen in Betracht:
 
-**[EU-Richtlinie 2019/1024 (Open-Data-Richtlinie)](https://it-sicherheit.de/ratgeber/it-sicherheitsgesetze/ueberblick/open-data-directive/)** definiert Geodaten ausdrücklich als "hochwertige Datensätze", die in maschinenlesbarer Form, gebührenfrei und unter offenen Standardlizenzen bereitgestellt werden sollen. Die Durchführungsverordnung (EU) 2023/138 konkretisiert das. Die Grenzkostenregel der vorherigen PSI-Richtlinie wirkt fort: Öffentlich finanzierte Daten dürfen höchstens die Grenzkosten der Verbreitung kosten, bei digitalen Daten faktisch null.
+**[EU-Richtlinie 2019/1024 (Open-Data-Richtlinie)](https://it-sicherheit.de/ratgeber/it-sicherheitsgesetze/ueberblick/open-data-directive/)** definiert Geodaten ausdrücklich als "hochwertige Datensätze", die in maschinenlesbarer Form, gebührenfrei und unter offenen Standardlizenzen bereitgestellt werden sollen. Die [Durchführungsverordnung (EU) 2023/138](https://de.wikipedia.org/wiki/Durchf%C3%BChrungsverordnung_(EU)_2023/138) konkretisiert das. Die Grenzkostenregel der vorherigen PSI-Richtlinie wirkt fort: Öffentlich finanzierte Daten dürfen höchstens die Grenzkosten der Verbreitung kosten, bei digitalen Daten faktisch null.
 
 Wichtig in diesem Zusammenhang: Die Open-Data-Richtlinie verlangt nicht nur formale Bereitstellung, sondern eine **diskriminierungsfreie und tatsächlich nutzbare** Bereitstellung. Künstliche Drosselung, restriktive Servereinstellungen oder schrittweise Datenamputation könnten daher selbst dann rechtswidrig sein, wenn die Daten formal noch "OpenData" heißen.
 
