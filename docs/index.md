@@ -24,7 +24,7 @@ Here you find precompiled charts for download in various formats usable in diffe
     The charts provided by this project are based on data by
     
     - :de: [BSH](https://www.bsh.de/)
-        - [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2))
+        - [GeoSeaPortal](https://www.geoseaportal.de/mapapps/resources/apps/navigation/)/[Öffentliche Dienste](https://gdi.bsh.de/public/public_services.html) ([GeoNutzV](https://www.bsh.de/DE/THEMEN/Geoinformationen/_Anlagen/Downloads/Geonutzv.pdf?__blob=publicationFile&v=2))
         - [Bathymetry](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [SKN Seekartenull](https://gdi.bsh.de/de/feed/Chart-datum-for-the-German-Bight-2026.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [Tidal Currents North Sea](https://gdi.bsh.de/de/feed/Tidal-currents-North-Sea.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
