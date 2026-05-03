@@ -16,13 +16,13 @@ Kurz nach der Presseberichterstattung verschwanden die Punktlotungen aus dem öf
 
 **Die Verwendung der Daten zu Navigatonszwecken ist nicht gestattet.**
 
-Seekartendaten, nicht zur Navigation. Man muss diesen Satz zweimal lesen.
+Seekartendaten, nicht zur Navigation zu verwenden. Man muss diesen Satz zweimal lesen.
 
 Und damit war es nicht zu Ende. Inzwischen geht das BSH einen Schritt weiter und schränkt den Zugriff auf den Datenbestand weiter ein.
 
 ## Schleichende Demontage: OpenData nur noch dem Namen nach
 
-Aktuell hat das BSH den Zugriff auf die Daten weiter erschwert. Über restriktivere Servereinstellungen werden die  Abrufmöglichkeiten eingeschränkt, gleichzeitig wurden weitere Teile der Daten entfernt. Anscheinend soll praktische Nutzung der offenen Daten systematisch behindert werden.
+Aktuell hat das BSH den Zugriff auf die Daten weiter erschwert. Über restriktivere Servereinstellungen werden die Abrufmöglichkeiten eingeschränkt, gleichzeitig wurden weitere Teile der Daten entfernt. Anscheinend soll praktische Nutzung der offenen Daten systematisch behindert werden.
 
 Das Muster ist erkennbar: Die Daten werden formal weiterhin als OpenData deklariert, aber so bereitgestellt, dass eine sinnvolle Nutzung effektiv unmöglich wird. Das ist die wohl elegantste Form, eine Open-Data-Verpflichtung zu unterlaufen, ohne sie offen zu verletzen, ein bürokratischer Etikettenschwindel.
 
@@ -34,11 +34,11 @@ Der Vorgang ist auch deshalb bemerkenswert, weil er *direkt auf eine sichtbare z
 
 Wer den Konflikt um freie Seekartendaten verstehen will, muss sich die folgende Pointe klarmachen, die in der gesamten Debatte selten ausgesprochen wird: **In der Sport- und Freizeitschifffahrt sind auch die teuren, lizenzierten, qualitätsgesicherten digitalen Daten am Ende nicht offiziell zur Navigation zugelassen.**
 
-Der Ablauf ist absurd. Die Kartenverlage kaufen vom BSH lizenzierte, für die Navigation freigegebene Daten ein. Sie verarbeiten diese in Apps und Plottern weiter. Diese Endprodukte, sei es eine App auf dem Tablet oder ein Karten-Plotter für mehrere tausend Euro, sind dann *ausdrücklich nicht zur Navigation zugelassen*. In den AGB steht regelmäßig, sie seien lediglich eine "Navigationshilfe", maßgeblich sei die amtliche Papierkarte.
+Die Kartenverlage kaufen vom BSH lizenzierte, für die Navigation freigegebene Daten ein. Sie verarbeiten diese in ihren Apps und für Plotter aufbereitet weiter. Diese Endprodukte, sei es eine App auf dem Tablet oder ein Karten-Plotter für mehrere tausend Euro, sind dann *ausdrücklich nicht zur Navigation zugelassen*. In den AGB steht regelmäßig, sie seien lediglich eine "Navigationshilfe", maßgeblich und vorgeschrieben sei eine aktuelle Papierseekarte.
 
 Anders ist die Lage in der *Berufsschifffahrt*: Dort gibt es mit zertifizierten ECDIS-Systemen und amtlichen ENCs sehr wohl rechtlich anerkannte digitale Navigationsgrundlagen. In der *Freizeitschifffahrt jedoch nicht*, dort ist und bleibt die Papierkarte mit aktueller Berichtigung das einzig anerkannte Navigationsmittel. Bei einer Kontrolle durch die Wasserschutzpolizei oder im Schadensfall vor Gericht wird genau diese verlangt.
 
-### Ein Realitätscheck: Die Charteryacht in der Ostsee
+## Ein Realitätscheck: Die Charteryacht in der Ostsee
 
 Wer einmal auf einer Charteryacht in der Ostsee war, kennt das Bild: An Bord liegt in der Regel der NV-Kartensatz, ein Satz Papierkarten mit Hafenplänen, Revierführern (meist jedoch ohne Berichtigungen). Damit ist die Crew formal ausgestattet, die rechtlichen Anforderungen sind erfüllt. Bei einer Kontrolle durch die Wasserschutzpolizei wäre alles in Ordnung.
 
@@ -55,6 +55,22 @@ Die Logik des BSH und der Verlage müsste konsequent angewendet bedeuten: Auch l
 Das entlarvt das Sicherheitsargument vollständig. Es geht nicht um Sicherheit. Es geht nicht um Qualität. Es geht nicht darum, Freizeitskipper vor falschen Daten zu schützen. Wenn das das Ziel wäre, müsste man konsequenterweise *alle digitalen Karten* für untauglich erklären, und die Skipper zurück auf die Papierkarte zwingen. Das tut niemand, und es würde auch niemand mehr akzeptieren.
 
 Alternativ wäre es konsequent aktuelle amtliche Daten vollständig frei zur Verfügung zu stellen. Das würde die Sicherheit durch aktuelles Kartenmaterial auf dem Wasser erhöhen, so wie es z.B. im niederländischen Watt praktiziert wird.
+
+## Die GeoNutzV
+
+Der vielleicht wichtigste rechtliche Punkt wird in der gesamten Debatte bislang kaum benannt: Die Daten des BSH sind unter der Verordnung zur Festlegung der Nutzungsbestimmungen für die Bereitstellung von Geodaten des Bundes (GeoNutzV) veröffentlicht worden. Und genau diese Lizenz lässt die nun aufgestellten Einschränkungen schlicht nicht zu.
+
+Die GeoNutzV ist bewusst extrem permissiv gehalten. Sie erlaubt jede Art der Nutzung, kommerziell wie nicht-kommerziell, einschließlich Vervielfältigung, Veränderung, Weiterverbreitung und Kombination mit anderen Daten. Eine Zweckbindung sieht die GeoNutzV nicht vor, und sie kann auch nicht nachträglich durch AGB-Klauseln, Nutzungshinweise oder Zusatzbedingungen eingeführt werden.
+
+An dieser Stelle ist eine wichtige Unterscheidung zwischen zwei oberflächlich ähnlichen, juristisch aber grundverschiedenen Formulierungen nötig. Ein Hinweis wie "Die Daten sind nicht zur Navigation geeignet" ist kein Verbot und keine Nutzungsbeschränkung. Er ist ein haftungsrechtlicher Disclaimer. Der Herausgeber sagt damit lediglich: Ich übernehme keine Gewähr dafür, dass diese Daten den Anforderungen an navigatorische Eignung genügen, und hafte nicht für Schäden, die aus einer solchen Verwendung entstehen. Die Verantwortung für die Wahl seiner Navigationsmittel liegt ohnehin beim Schiffsführer, das ergibt sich aus den allgemeinen Regeln guter Seemannschaft. Er kann sich vollkommen legitim entscheiden, diese Daten gleichwohl zur Navigation zu verwenden, er trägt dann eben das Risiko ihrer möglichen Unvollständigkeit oder Veraltung selbst. Genau so funktionieren im Übrigen auch die Disclaimer der kommerziellen Plotter und Apps, die sich formal als "Navigationshilfen" ausweisen.
+
+Vollkommen anders verhält es sich bei dem Satz, den das BSH in seine Nutzungsbedingungen aufgenommen hat: "Die Verwendung der Daten zu Navigatonszwecken ist nicht gestattet." Das ist kein Hinweis und kein Disclaimer, sondern eine Untersagung, ein Verbot der Nutzung zu einem bestimmten Zweck. Und genau dieses Verbot ist mit der GeoNutzV nicht vereinbar. Die GeoNutzV gibt der Behörde nicht das Recht, einzelne Verwendungszwecke auszuschließen, sie sieht eine pauschale Freigabe für jede Nutzung vor. Eine zweckbindende Verbotsklausel verlässt damit den Rahmen der gewählten Lizenz und ist mit hoher Wahrscheinlichkeit unwirksam. Das BSH hätte seine Sicherheits- und Haftungsbedenken vollständig durch einen Eignungs-Disclaimer abdecken können, ohne dabei in Konflikt mit der GeoNutzV zu geraten. Stattdessen wurde ein Verbot formuliert, das die Lizenz nicht hergibt.
+
+Damit verhält es sich grundlegend anders als bei einem klassischen Lizenzvertrag. Ein Lizenzvertrag zwischen BSH und einem Kartenverlag kann beliebige Beschränkungen enthalten, Zweckbindung, Weitergabeverbote, Auflagen, weil er individualvertraglich ausgehandelt wird. OpenData unter GeoNutzV funktioniert prinzipiell anders: Es handelt sich um eine pauschale, einseitige Freigabe an die Allgemeinheit. Wer die Daten herunterlädt, schließt keinen Vertrag, sondern nimmt eine bereits erteilte Erlaubnis in Anspruch. Genau das ist der Sinn von OpenData, nicht eine "kostenlose Variante" eines Lizenzvertrags zu sein, sondern die Daten aus dem Regime individueller Nutzungskontrolle herauszunehmen.
+
+Daraus folgt eine zweite, oft übersehene Konsequenz: Einmal unter GeoNutzV veröffentlichte Daten sind nicht rückholbar. Wer einen Datensatz heruntergeladen hat, hat die Nutzungsrechte daran erworben, dauerhaft und unwiderruflich. Das BSH kann zwar künftige Veröffentlichungen einschränken oder bereits bereitgestellte Datensätze offline nehmen, es kann aber nicht im Nachhinein die Nutzung der bereits veröffentlichten Datenbestände untersagen oder einschränken. Eine später eingefügte Klausel "nicht zur Navigation" entfaltet gegenüber den bereits unter GeoNutzV freigegebenen Daten keinerlei rechtliche Wirkung, sie ist schlicht unbeachtlich. Wer die Daten zu einem Zeitpunkt bezogen hat, an dem sie unter GeoNutzV standen, darf sie weiter zu jedem Zweck verwenden, einschließlich der Navigation, einschließlich der kommerziellen Weiterverwertung, einschließlich der Integration in eigene Karten- und Navigationsprodukte.
+
+Das ist kein juristischer Trick und kein Schlupfloch, sondern der konstitutive Unterschied zwischen einer offenen Lizenz und einem Lizenzvertrag. OpenData lebt von der Verlässlichkeit dieser Freigabe. Würden Behörden die Nutzung nachträglich einschränken können, wäre OpenData wertlos, denn niemand könnte darauf aufbauend ein Produkt entwickeln, ohne das Risiko einzugehen, dass die rechtliche Grundlage später entzogen wird. Genau diese Verlässlichkeit garantiert die GeoNutzV, und genau diese Verlässlichkeit ist es, die das BSH mit seinen aktuellen Manövern zu untergraben versucht. Rechtlich kann es damit nicht durchdringen: Die Verbotsklausel ist mit der Lizenz unvereinbar und damit aller Voraussicht nach unwirksam, die bereits veröffentlichten Daten bleiben frei nutzbar, und der Versuch, OpenData nachträglich in einen quasi-vertraglichen Beschränkungsrahmen zu pressen, widerspricht dem Wesen der gewählten Lizenz.
 
 ## Wer wird hier eigentlich geschützt?
 
