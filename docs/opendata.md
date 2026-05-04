@@ -286,6 +286,15 @@ Für Sportboote ist die internationale Vorschrift **SOLAS Kapitel V Regel 19** �
 
 Daraus folgt mittelbar die Anforderung, mit aktuellem Kartenmaterial zu navigieren. Die laufende Berichtigung erfolgt über die **Nachrichten für Seefahrer (NfS)** des BSH (oder den Update-Service des Anbieters nicht-amtlicher Karten), die Mitführung der NfS selbst ist für Sportboote nach § 13 Abs. 1 Nr. 2 Buchst. c SchSV nicht verpflichtend.
 
+### Weitereführende Quellen
+
+- [Papierseekarten noch Pflicht?](https://www.mym.info/papierseekarten-noch-pflicht-2/)
+- [Die Notwendigkeit von Papierseekarten für die Schifffahrt](https://www.hansenautic.de/blog/die-unverzichtbarkeit-von-papierseekarten-fuer-die-schifffahrt-gesetzliche-anforderungen-und-praxisvorteile)
+- [Müssen Seekarten laufend berichtigt werden?](https://www.boote-magazin.de/bootswissen/recht/recht-muessen-seekarten-laufend-berichtigt-werden/)
+- [2026er Berichtigungssätze für DK-Ostseekarten sind da](https://www.yacht.de/segelwissen/navigation/navigation-2026er-berichtigungssaetze-fuer-dk-ostseekarten-sind-da/)
+
+Fazit aus allen vier Quellen in einem Satz: Die Papierseekarte ist Pflicht, muss aber nicht amtlich sein und nicht laufend berichtigt werden, ein bußgeldbewehrter Berichtigungszwang besteht nicht, wohl aber die Erwartung der Wasserschutzpolizei, dass die Karte dem NfS-Stand entspricht.
+
 ### Zusammenfassung
 
 | Kriterium | Papierkarte (nicht-amtlich) | Digitale Karte |
