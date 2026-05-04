@@ -257,3 +257,129 @@ Die juristische Lage spricht eher gegen das fortgeführte Lizenzmodell als dafü
 OpenData ist in Deutschland kein technisches Problem. Es ist ein Willens-Problem. Und solange Hobbyprojekte Einzelner die offiziellen Apps in Aktualität und Nutzbarkeit übertreffen und ausgerechnet dafür systematisch sabotiert werden, weiß man, wo dieser Wille fehlt.
 
 ---
+
+## Digitale Karten in der Praxis
+
+### Kartenpflicht nach § 13 SchSV
+
+Maßgeblich für Sportboote unter deutscher Flagge ist **[§ 13 (1) 2a der Schiffssicherheitsverordnung (SchSV)](https://www.gesetze-im-internet.de/schsv_1998/__13.html)**:
+
+> auf der Brücke stets folgende Unterlagen vorhanden sind: die für die jeweilige Seereise erforderlichen amtlichen Ausgaben von Seekarten und Seebüchern […]; bei Sportbooten im Sinne der Sportbootführerscheinverordnung-See genügt es, wenn an Bord nicht-amtliche Ausgaben mitgeführt werden.
+
+Aus dem Wortlaut ergeben sich drei rechtlich relevante Aussagen:
+
+1. Die Pflicht bezieht sich auf **Ausgaben**, ein Begriff, der sich auf physische Druckerzeugnisse bezieht. Digitale Karten werden im gesamten SchSV nicht als Erfüllungsmittel genannt.
+2. Für Sportboote genügt eine **nicht-amtliche Papierkarte**.
+3. Die in § 13 Abs. 1 Nr. 2 Buchst. b und c SchSV genannten weiteren Pflichten (Schiffssicherheitsvorschriften, Nachrichten für Seefahrer) entfallen für Sportboote ausdrücklich.
+
+### Kein Ersatz durch digitale Karten
+
+§ 13 SchSV kennt digitale Karten als Erfüllungsmittel nicht. Auch ein Kartenplotter mit lizenzierten Karten oder eine App auf Tablet oder Smartphone erfüllen die Kartenpflicht nicht. Bestätigt wird das durch die Nutzungsbedingungen aller relevanten kommerziellen Anbieter, die ihre digitalen Produkte ausdrücklich nicht als zur Navigation zugelassene Mittel deklarieren (siehe Tabelle im Folgeabschnitt).
+
+Für Sportboote ist die internationale Vorschrift **SOLAS Kapitel V Regel 19** über elektronische Seekarten (ECDIS) ohnehin nicht anwendbar; sie gilt nur für Schiffe in internationaler Fahrt oberhalb bestimmter Größen- und Verwendungsgrenzen.
+
+### Gute Seemannschaft als Auffangnorm
+
+Über die konkrete Ausrüstungspflicht hinaus gilt der Grundsatz der guten Seemannschaft nach **[§ 3 (1) der Seeschifffahrtsstraßen-Ordnung (SeeSchStrO)](https://www.gesetze-im-internet.de/seeschstro_1971/__3.html)**:
+
+> Jeder Verkehrsteilnehmer hat sich so zu verhalten, dass die Sicherheit und Leichtigkeit des Verkehrs gewährleistet ist […]
+
+Daraus folgt mittelbar die Anforderung, mit aktuellem Kartenmaterial zu navigieren. Die laufende Berichtigung erfolgt über die **Nachrichten für Seefahrer (NfS)** des BSH (oder den Update-Service des Anbieters nicht-amtlicher Karten), die Mitführung der NfS selbst ist für Sportboote nach § 13 Abs. 1 Nr. 2 Buchst. c SchSV nicht verpflichtend.
+
+### Zusammenfassung
+
+| Kriterium | Papierkarte (nicht-amtlich) | Digitale Karte |
+|---|:---:|:---:|
+| Erfüllt § 13 Abs. 1 Nr. 2a SchSV | Ja | Nein |
+| Rechtlich bindend zur Erfüllung der Kartenpflicht | Ja | Nein |
+| Status in der Sportschifffahrt | Pflicht | Navigationshilfe |
+
+Rechtlich bindend ist in der Sportschifffahrt *ausschließlich die Papierkarte*. Digitale Karten sind unabhängig von Anbieter, Lizenzform oder Preis lediglich Hilfsmittel. Der Unterschied zwischen einer kommerziell lizenzierten App und einer freien Karte aus offenen Daten liegt damit nicht im rechtlichen Status, sondern allein im Preis.
+
+### Abgrenzung: Zivilrechtliche Haftung
+
+Die vorstehende Betrachtung betrifft ausschließlich die öffentlich-rechtliche Ausrüstungspflicht nach SchSV. Die zivilrechtliche Haftung im Schadensfall gegenüber Mitfahrern, Dritten, Versicherern oder Charterunternehmen ist davon zu trennen und folgt eigenen Maßstäben.
+
+Hier kommt es nicht auf die formale Erfüllung des § 13 SchSV an, sondern auf das Verhalten des Schiffsführers gemessen am Sorgfaltsmaßstab der guten Seemannschaft (§ 276 BGB i.V.m. § 3 SeeSchStrO). Entscheidend sind im Streitfall Fragen wie: Wurde mit hinreichend aktuellem Kartenmaterial navigiert? Wurden NfS-Berichtigungen berücksichtigt? Wurde die gewählte Karte, ob Papier, App oder Plotter, in einer Weise eingesetzt, die der konkreten Situation angemessen war?
+
+Für diese zivilrechtliche Bewertung ist unerheblich, ob die genutzte digitale Karte aus einer kommerziellen Lizenz oder einer freien Quelle stammt. Maßgeblich ist allein, ob die Datengrundlage zum Zeitpunkt der Fahrt aktuell und für die jeweilige Verwendung geeignet war. Der Haftungsausschluss in den AGB der Kartenanbieter (siehe Tabelle) entlastet den Schiffsführer in dieser Hinsicht nicht, er verlagert lediglich die Verantwortung vom Hersteller auf den Nutzer.
+
+Die zivilrechtliche Haftungsfrage ist damit eine eigenständige Problematik, die in diesem Artikel nicht erschöpfend behandelt wird.
+
+## Lizenzierte Kartendaten, null Garantie
+
+*Was digitale Kartenanbieter ihren zahlenden Kunden wirklich bieten*
+
+Das Sicherheitsargument impliziert, lizenzierte kommerzielle Kartenprodukte böten dem Nutzer eine qualitativ überlegene, rechtlich abgesicherte Variante einer nicht-amtlichen Seekarte. Ein Blick in die Nutzungsbedingungen der wichtigsten Anbieter ergibt ein anderes Bild: Der zahlende Kunde erhält in keinem Fall eine Garantie für Aktualität oder Korrektheit der Karten, die Navigation mit dem Produkt wird durchgehend ausdrücklich nicht als zulässiger Verwendungszweck anerkannt, und die Haftung wird vollständig auf den Nutzer abgewälzt.
+
+### Übersicht: Nutzungsbedingungen im Vergleich 
+
+| Anbieter | Garantie Aktualität/Richtigkeit | Zur Navigation zugelassen | Haftungsausschluss | Nutzungsbedingungen |
+|---|---|---|---|---|
+| **Garmin / Navionics** | Keine. Ausdrücklicher Ausschluss jeder Gewähr für Genauigkeit, Vollständigkeit oder Aktualität. | Nein. Ausdrücklich nur als „Reisehilfe" (*travel aid*) deklariert. Darf nicht für Zwecke verwendet werden, die präzise Messung erfordern. | Vollständig. Garmin haftet nicht für Ungenauigkeiten, Fehler, Datenverlust oder Schäden jeder Art, die aus der Nutzung entstehen. | [marine-cartography-disclaimer](https://www.garmin.com/en-US/legal/marine-cartography-disclaimer/) / [marine_cartography_eula](https://www.garmin.com/en-US/legal/marine_cartography_eula/) |
+| **C-MAP** (Kongsberg / Navico) | Keine. Daten können unregelmäßig oder gar nicht aktualisiert werden. Keine Gewähr für Vollständigkeit. | Nein. Ausdrücklich nur für *situational and/or positional awareness*, nicht zur Navigation. | Vollständig. Keinerlei Haftung für Schäden durch Ungenauigkeiten oder Fehler der Kartendaten. | [Terms of Purchase](https://store.c-map.com/en/Home/TermsOfPurchase) / [EULA](https://www.c-map.com/legal/terms-and-conditions-eula/) |
+| **NV Charts** | Keine. Digitale Seekarten werden ausdrücklich als Navigationshilfen bezeichnet. Aktualitätsgarantie nicht gegeben. | Nein. Ausdrücklich nur Navigationshilfe, kein Navigationsmittel. | Vollständig. Keine Haftung für Schäden, die aus der Nutzung der digitalen Karten entstehen. | [Nutzungsbedingungen App (DE)](https://nvcharts.com/Terms_of_Use_app_de.html) |
+| **Delius Klasing** (Yacht Navigator) | Keine. Delius Klasing übernimmt ausdrücklich keine Gewährleistung für die ununterbrochene Erreichbarkeit oder Aktualität der Kartendaten. | Nein. App als Navigationshilfe deklariert, keine Anerkennung als Navigationsmittel. | Vollständig. Haftungsausschluss für Schäden aus fehlerhaften oder veralteten Kartendaten. | [Nutzungsbedingungen Yacht Navigator](https://support.delius-klasing.de/357233-App-Yacht-Navigator---Nutzungsbedingungen) |
+| **o-charts** (für OpenCPN / AvNav) | Keine Garantie für Aktualität oder Fehlerfreiheit. Daten stammen von Hydrographischen Ämtern, werden aber ohne eigene Gewähr weitergegeben. | Nein. Ausdrücklich kein Navigationsmittel, nur ergänzende Hilfe. | Vollständig. Renate Rosner Consult (Betreiber) haftet nicht für navigatorische Schäden. | [EULA o-charts](https://o-charts.org/manuals/docs/EN_rrc_eula_ChartSetsForOpenCPN.html) |
+
+**Hinweis zur Verifikation:** Die Tabelleninhalte basieren auf den verlinkten Dokumenten sowie auf Suchergebnissen vom Mai 2026. AGB-Texte können jederzeit geändert werden. Vor einer Veröffentlichung empfiehlt sich ein Abgleich mit den jeweils verlinkten Originaldokumenten, insbesondere für die genauen Zitate im Fließtext unten.
+
+### Die Schlüsselformulierungen im Detail
+
+#### Garmin / Navionics
+
+Die prägnanteste Formulierung findet sich im offiziellen Marine Cartography Disclaimer von Garmin, der für alle Navionics-Produkte gilt:
+
+> [THIS PRODUCT IS INTENDED TO BE USED ONLY AS A TRAVEL AID AND MUST NOT BE USED FOR ANY PURPOSE REQUIRING PRECISE MEASUREMENT OF DIRECTION, DISTANCE, LOCATION OR TOPOGRAPHY.](https://www.garmin.com/en-US/legal/marine-cartography-disclaimer/)
+
+Übersetzt: *„Dieses Produkt ist ausschließlich als Reisehilfe gedacht und darf nicht für Zwecke verwendet werden, die eine präzise Messung von Richtung, Entfernung, Position oder Topographie erfordern."*
+
+Navigation auf dem Wasser erfordert per Definition präzise Messung von Richtung, Entfernung und Position. Der Disclaimer schließt damit den Hauptverwendungszweck des Produktes formal aus, bei einem Kartenplotter, der explizit für die maritime Navigation vermarktet und zu entsprechenden Preisen verkauft wird. Der Haftungsausschluss ist vollständig: 
+
+>[GARMIN SHALL NOT BE LIABLE FOR ANY INACCURACY, ERROR IN, OR FAILURE OF THE SOFTWARE](https://www.garmin.com/en-US/legal/terms-of-use/)
+
+Garmin haftet nicht für Ungenauigkeiten, Fehler oder Versagen der Software.
+
+#### C-MAP
+
+C-MAP formuliert den Ausschluss für bestimmte Kartendaten noch deutlicher. In den Purchase Terms heißt es ausdrücklich, dass Kartendaten 
+
+> [NOT FOR NAVIGATION BUT IS FOR SITUATIONAL AND/OR POSITIONAL AWARENESS ONLY](https://store.c-map.com/en/Home/TermsOfPurchase)
+
+bereitgestellt werden, also nicht zur Navigation, sondern nur zur Lageorientierung. Gleichzeitig wird darauf hingewiesen, dass diese Daten möglicherweise nicht regelmäßig aktualisiert werden. Eine Garantie für Korrektheit oder Aktualität wird an keiner Stelle erteilt.
+
+#### NV Charts
+
+> [Die über den Dienst bereitgestellten Seekarten und Navigationshilfen sind zum Zeitpunkt der Veröffentlichung der App und etwaiger Updates nach bestem Wissen von NV auf dem aktuellen Stand.](https://nvcharts.com/Terms_of_Use_app_de.html)
+
+Steht in den Terms of Use der App (siehe auch [Aktualität](#kartenupdates-wer-ist-wirklich-aktuell)), aber ebenso steht dort:
+
+> [Der Dienst ist kein Ersatz für vorgeschriebene nautische Instrumente und Navigationshilfen, insbesondere für vorgeschriebene Papierseekarten. Dem Nutzer ist die Ungenauigkeit von digitalen Seekarten und GPS-Satellitendaten bekannt. Die Nutzung des Dienstes als Navigationshilfe ist ausschließlich in Verbindung mit und in Ergänzung der Nutzung von Papierseekarten gestattet.](https://nvcharts.com/Terms_of_Use_app_de.html)
+
+NV Charts formuliert in seinen Unterlagen weiterhin: 
+
+> [Navigationssoftware und digitale Seekarten sind Navigationshilfen und ersetzen keine Navigationskenntnisse"](https://nvcharts.com/media/download/Handbuch.pdf).
+
+Die [Nutzungsbedingungen der App](https://nvcharts.com/Terms_of_Use_app_de.html) gewähren dem Käufer eine nicht-ausschließliche Lizenz zur Nutzung auf einem einzelnen Gerät, jedoch keinerlei Gewähr dafür, dass die Karten korrekt, vollständig oder aktuell sind. Eine Haftung für navigatorische Schäden wird ausgeschlossen.
+
+#### Delius Klasing (Yacht Navigator)
+
+In den Nutzungsbedingungen des Yacht Navigators heißt es explizit: 
+
+> [Delius Klasing übernimmt keine Gewährleistung für die ununterbrochene Erreichbarkeit der Anwendung."](https://support.delius-klasing.de/357233-App-Yacht-Navigator---Nutzungsbedingungen) 
+
+Für die inhaltliche Korrektheit oder Aktualität der Kartendaten gilt dieselbe Logik: keine Garantie, vollständige Haftungsabwälzung auf den Nutzer. Das ist bemerkenswert, da Delius Klasing gleichzeitig auf seiner Verlagsseite mit Qualität und Aktualität der Karten wirbt.
+
+#### o-charts
+
+o-charts nimmt unter den kommerziellen Anbietern eine Sonderstellung ein: Das Produkt bezieht S-57-Daten direkt von den Hydrographischen Ämtern und integriert NfS-Berichtigungen wöchentlich. Dennoch schließt das [EULA jede Haftung für navigatorische Schäden aus](https://o-charts.org/manuals/docs/EN_rrc_eula_ChartSetsForOpenCPN.html?lng=en), konsequenterweise, da auch ein Hydrographisches Amt keine absolute Fehlerlosigkeit garantieren kann.
+
+### Was diese Übersicht bedeutet
+
+Das Ergebnis der Analyse ist eindeutig und für die Debatte von zentraler Bedeutung:
+
+**Kein einziger kommerzieller Anbieter**, unabhängig davon, ob das Produkt im Abonnement oder als Einmalkauf erworben wurde, erteilt dem zahlenden Kunden eine Garantie für Aktualität oder Korrektheit der Kartendaten. Kein einziger Anbieter erkennt sein Produkt als rechtlich zulässiges Navigationsmittel an (bei rein digitalen Karten auch nicht möglich). Alle schließen die Haftung für navigatorische Schäden vollständig aus.
+
+Das Geschäftsmodell der Kartenanbieter basiert damit strukturell auf einer Diskrepanz: Das Produkt wird für die Navigation vermarktet, für die Navigation verkauft, für die Navigation genutzt, aber rechtlich niemals als Navigationsmittel anerkannt. Die Haftung für alle Konsequenzen dieser Nutzung trägt ausschließlich der Käufer, der für dieses Privileg im Fall eines Plotters mit Kartenpaket mehrere tausend Euro bezahlt hat.
+
+Vor diesem Hintergrund wird die Position des BSH bzw. der Krtenanbieter gegenüber OpenData vollends unhaltbar. Wenn das Sicherheitsargument wäre, freie Karten seien für den Nutzer gefährlich, weil keine Aktualitätsgarantie besteht und keine Haftung übernommen wird, dann müsste dasselbe Argument gegen jedes kommerzielle Kartenprodukt auf dem Markt erhoben werden. Der einzige relevante Unterschied zwischen einem 5.000-Euro-Plotter mit lizenzierten Karten und OpenData-Kartern auf dem Tablet besteht nicht in der Rechtslage, nicht in der Haftungsstruktur, nicht in der formalen Zulassung zur Navigation, sondern im Preis. Und der Preis ist kein Sicherheitsargument.
