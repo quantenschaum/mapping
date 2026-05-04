@@ -326,7 +326,7 @@ Das Sicherheitsargument impliziert, lizenzierte kommerzielle Kartenprodukte böt
 | Anbieter | Garantie Aktualität/Richtigkeit | Zur Navigation zugelassen | Haftungsausschluss | Nutzungsbedingungen |
 |---|---|---|---|---|
 | **Garmin / Navionics** | Keine. Ausdrücklicher Ausschluss jeder Gewähr für Genauigkeit, Vollständigkeit oder Aktualität. | Nein. Ausdrücklich nur als „Reisehilfe" (*travel aid*) deklariert. Darf nicht für Zwecke verwendet werden, die präzise Messung erfordern. | Vollständig. Garmin haftet nicht für Ungenauigkeiten, Fehler, Datenverlust oder Schäden jeder Art, die aus der Nutzung entstehen. | [marine-cartography-disclaimer](https://www.garmin.com/en-US/legal/marine-cartography-disclaimer/) / [marine_cartography_eula](https://www.garmin.com/en-US/legal/marine_cartography_eula/) |
-| **C-MAP** (Kongsberg / Navico) | Keine. Daten können unregelmäßig oder gar nicht aktualisiert werden. Keine Gewähr für Vollständigkeit. | Nein. Ausdrücklich nur für *situational and/or positional awareness*, nicht zur Navigation. | Vollständig. Keinerlei Haftung für Schäden durch Ungenauigkeiten oder Fehler der Kartendaten. | [Terms of Purchase](https://store.c-map.com/en/Home/TermsOfPurchase) / [EULA](https://www.c-map.com/legal/terms-and-conditions-eula/) |
+| **C-MAP** (Kongsberg / Navico) | Keine. Daten können unregelmäßig oder gar nicht aktualisiert werden. Keine Gewähr für Vollständigkeit. | Nein. Ausdrücklich nur Hilfmittel, nicht zur Navigation. | Vollständig. Keinerlei Haftung für Schäden durch Ungenauigkeiten oder Fehler der Kartendaten. | [Terms of Purchase](https://store.c-map.com/en/Home/TermsOfPurchase) / [EULA](https://www.c-map.com/legal/terms-and-conditions-eula/) |
 | **NV Charts** | Keine. Digitale Seekarten werden ausdrücklich als Navigationshilfen bezeichnet. Aktualitätsgarantie nicht gegeben. | Nein. Ausdrücklich nur Navigationshilfe, kein Navigationsmittel. | Vollständig. Keine Haftung für Schäden, die aus der Nutzung der digitalen Karten entstehen. | [Nutzungsbedingungen App (DE)](https://nvcharts.com/Terms_of_Use_app_de.html) |
 | **Delius Klasing** (Yacht Navigator) | Keine. Delius Klasing übernimmt ausdrücklich keine Gewährleistung für die ununterbrochene Erreichbarkeit oder Aktualität der Kartendaten. | Nein. App als Navigationshilfe deklariert, keine Anerkennung als Navigationsmittel. | Vollständig. Haftungsausschluss für Schäden aus fehlerhaften oder veralteten Kartendaten. | [Nutzungsbedingungen Yacht Navigator](https://support.delius-klasing.de/357233-App-Yacht-Navigator---Nutzungsbedingungen) |
 | **o-charts** (für OpenCPN / AvNav) | Keine Garantie für Aktualität oder Fehlerfreiheit. Daten stammen von Hydrographischen Ämtern, werden aber ohne eigene Gewähr weitergegeben. | Nein. Ausdrücklich kein Navigationsmittel, nur ergänzende Hilfe. | Vollständig. Renate Rosner Consult (Betreiber) haftet nicht für navigatorische Schäden. | [EULA o-charts](https://o-charts.org/manuals/docs/EN_rrc_eula_ChartSetsForOpenCPN.html) |
@@ -351,11 +351,25 @@ Garmin haftet nicht für Ungenauigkeiten, Fehler oder Versagen der Software.
 
 #### C-MAP
 
-C-MAP formuliert den Ausschluss für bestimmte Kartendaten noch deutlicher. In den Purchase Terms heißt es ausdrücklich, dass Kartendaten 
+C-MAP formuliert bezüglich der Verwendung eindeutig:
 
-> [NOT FOR NAVIGATION BUT IS FOR SITUATIONAL AND/OR POSITIONAL AWARENESS ONLY](https://store.c-map.com/en/Home/TermsOfPurchase)
+> [personal, non-exclusive right to use the Data, Media and Services only for Your benefit solely as an ancillary navigational aid (i.e., a supplement to official navigation information and traditional navigation techniques), and not as the sole or primary method of navigation.](https://www.c-map.com/legal/terms-and-conditions-eula/)
 
-bereitgestellt werden, also nicht zur Navigation, sondern nur zur Lageorientierung. Gleichzeitig wird darauf hingewiesen, dass diese Daten möglicherweise nicht regelmäßig aktualisiert werden. Eine Garantie für Korrektheit oder Aktualität wird an keiner Stelle erteilt.
+übersetzt: eine persönliche, nicht ausschließliche Berechtigung, die Daten, Medien und Dienste ausschließlich zu Ihrem Nutzen lediglich als ergänzende Navigationshilfe zu verwenden (d.h. als Ergänzung zu amtlichen Navigationsinformationen und traditionellen Navigationstechniken) und nicht als alleiniges oder primäres Navigationsmittel.
+
+Weiter heißt es
+
+> ONLY UP-TO-DATE OFFICIAL GOVERNMENT CHARTS AND NOTICES TO MARINERS CONTAIN ALL INFORMATION NEEDED FOR THE SAFETY OF NAVIGATION
+
+übersetzt: Nur aktuelle amtliche Seekarten und die NfS enthalten alle für die Sicherheit der Navigation notwendigen Informationen.
+
+Gleichzeitig wird darauf hingewiesen, dass diese Daten möglicherweise nicht regelmäßig aktualisiert werden. Eine Garantie für Korrektheit oder Aktualität wird an keiner Stelle erteilt.
+
+> IN NO EVENT SHALL C-MAP OR ITS THIRD PARTY LICENSORS BE LIABLE TO YOU OR TO ANY THIRD PARTY FOR ANY SPECIAL, INCIDENTAL, INDIRECT, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES
+
+übersetzt: IN KEINEM FALL HAFTET C‑MAP ODER SEINE DRITTLIZENZGEBER IHNEN ODER DRITTEN GEGENÜBER FÜR BESONDERE, ZUFÄLLIGE, INDIREKTE, FOLGE-, STRAF- ODER EXEMPLARISCHE SCHÄDEN.
+
+Die Haftung wird also vollständig ausgeschlossen.
 
 #### NV Charts
 
