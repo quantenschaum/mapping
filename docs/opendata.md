@@ -207,9 +207,9 @@ An diesen beiden Beispielen lässt sich die saubere Linie erkennen, die im BSH-F
 
 Die Frage ist also nicht, ob ein deutsches Behördensystem mit offenen Daten überhaupt umgehen kann, BKG und DWD beweisen seit Jahren das Gegenteil, sondern warum ausgerechnet das BSH einen Sonderweg geht, der inzwischen sogar in die falsche Richtung weist.
 
-## Die rechtliche Lage und mögliche Klagewege
+## Die rechtliche Lage und Wege
 
-Die juristische Situation ist klarer, als das BSH es darstellt. Mehrere Anspruchsgrundlagen kommen in Betracht:
+Die juristische Situation ist klarer als dargestellt. Mehrere Anspruchsgrundlagen kommen in Betracht:
 
 **[EU-Richtlinie 2019/1024 (Open-Data-Richtlinie)](https://it-sicherheit.de/ratgeber/it-sicherheitsgesetze/ueberblick/open-data-directive/)** definiert Geodaten ausdrücklich als "hochwertige Datensätze", die in maschinenlesbarer Form, gebührenfrei und unter offenen Standardlizenzen bereitgestellt werden sollen. Die [Durchführungsverordnung (EU) 2023/138](https://de.wikipedia.org/wiki/Durchf%C3%BChrungsverordnung_(EU)_2023/138) konkretisiert das. Die Grenzkostenregel der vorherigen PSI-Richtlinie wirkt fort: Öffentlich finanzierte Daten dürfen höchstens die Grenzkosten der Verbreitung kosten, bei digitalen Daten faktisch null.
 
@@ -250,8 +250,10 @@ Auch das gerne nachgeschobene Argument, man müsse die Kartenverlage schützen, 
 
 Was bleibt, ist der unangenehme Verdacht, dass hier vor allem *eine Behörde sich selbst schützt*, ihre Lizenzeinnahmen, ihre Haushaltsstruktur, ihre etablierten Verfahren. Und genau das ist, was die EU-Open-Data-Richtlinie eigentlich beenden sollte. Eine künstliche Verknappung öffentlich finanzierter Daten zum Erhalt eigener Einnahmen ist mit hoher Wahrscheinlichkeit rechtswidrig.
 
-Dabei ist das nicht primär die Schuld des BSH. Die Menschen dort machen ihre Arbeit gut. Sie entscheiden aber nicht über das Lizenzmodell. Sie sitzen in einem institutionellen Übergangsdilemma zwischen altem Kostendeckungsdruck und neuem EU-Datenrecht, und das ist eine Konstellation, die nicht durch Pressestatements einer Bundesbehörde aufgelöst werden kann, sondern nur politisch oder juristisch.
+Dabei ist das nicht primär die Schuld des BSH. Die Menschen dort machen ihre Arbeit gut. Sie entscheiden aber nicht über das Lizenzmodell. Sie sitzen in einem institutionellen Übergangsdilemma zwischen altem Kostendeckungsdruck und neuem EU-Datenrecht, und das ist eine Konstellation, die nicht durch Pressestatements einer Bundesbehörde aufgelöst werden kann, sondern nur politisch oder juristisch. Die Behörde sollte sich aber gemäß ihres Auftrages dem Gesetz und Gemeinwohl verpflichtet für OpenData einsetzen und die bislang offenen Daten verteidigen anstatt sie einzuschränken.
 
-Die juristische Lage spricht eher gegen das fortgeführte Lizenzmodell als für es. Die technischen Argumente halten kaum stand. Der Ländervergleich zeigt, dass es anders geht. Was bleibt, ist der Eindruck einer Politik, die hofft, das Thema möge sich nicht weiter durchsetzen, und die nun, da es sich doch durchsetzt, zur stillen Demontage übergeht.
+Die juristische Lage spricht eher gegen das fortgeführte Lizenzmodell als dafür. Die technischen Argumente halten kaum stand. Der Ländervergleich zeigt, dass es anders geht. Was bleibt, ist der Eindruck einer Politik, die hofft, das Thema möge sich nicht weiter durchsetzen, und die nun, da es sich doch durchsetzt, zur stillen Demontage übergeht.
 
 OpenData ist in Deutschland kein technisches Problem. Es ist ein Willens-Problem. Und solange Hobbyprojekte Einzelner die offiziellen Apps in Aktualität und Nutzbarkeit übertreffen und ausgerechnet dafür systematisch sabotiert werden, weiß man, wo dieser Wille fehlt.
+
+---
