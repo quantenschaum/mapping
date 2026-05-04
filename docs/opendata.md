@@ -70,17 +70,27 @@ Daraus folgt: Einmal unter GeoNutzV veröffentlichte Daten sind nicht rückholba
 
 Das ist kein Schlupfloch, sondern der konstitutive Unterschied zwischen offener Lizenz und Lizenzvertrag. OpenData lebt von der Verlässlichkeit dieser Freigabe, ohne sie könnte niemand darauf aufbauend ein Produkt entwickeln. 
 
+## Anmerkung zu den Kartenverlagen
+
+Pauschal Kritik an den Kartenanbietern zu üben, wäre unfair. Abo-Modelle und Zwangsregistrierungen sind nervig bis fragwürdig, aber man bekommt dafür auch mehr als bloße Daten. Insbesondere Papierkarten müssen gelayoutet, gedruckt, wetterfest produziert, im richtigen Format und mit Handbuch geliefert werden. Wer das einmal selbst probiert hat, weiß, wie aufwendig das ist.
+
 ## Wer wird hier eigentlich geschützt?
 
 Ein gern genanntes Argument lautet: Man müsse das Geschäftsmodell der Kartenverlage schützen. Schaut man genauer hin, hält auch das nicht stand.
 
-Die Verlage verkaufen weit mehr als bloße Daten. Sie produzieren Papierkarten, Hafenhandbücher, Revierführer, Törnplaner, gedrucktes Begleitmaterial, Layout, wetterfeste Materialien, Logistik. Das alles ist Wertschöpfung, die bleibt, mit oder ohne offene Daten. Das Ausland zeigt es eindrücklich: In den Niederlanden und in den USA sind ENCs ganz oder weitgehend offen verfügbar und die Kartenverlage existieren dort weiter. Sie verkaufen weiter Papierkarten und Handbücher. Niemand ist pleite gegangen und niemand beschwert sich deswegen.
+Die Verlage verkaufen weit mehr als bloße Daten. Abo-Modelle und Zwangsregistrierungen sind nervig bis fragwürdig, aber es gibt einen Mehrwert. Sie produzieren Papierkarten, Hafenhandbücher, Revierführer, Törnplaner, gedrucktes Begleitmaterial, Layout, wetterfeste Materialien, Logistik und eine App als Surplus. Das alles ist Wertschöpfung, die bleibt, mit oder ohne offene Daten. Das Ausland zeigt es eindrücklich: In den Niederlanden und in den USA sind ENCs ganz oder weitgehend offen verfügbar und die Kartenverlage existieren dort weiter. Sie verkaufen weiter Papierkarten und Handbücher. Niemand ist pleite gegangen und niemand beschwert sich deswegen.
 
 Das Geschäftsmodellargument ist also empirisch widerlegt. Bleibt die Frage: **Wer wird hier eigentlich wirklich geschützt?**
 
 Die ehrliche Antwort lautet vermutlich: das Amt selbst. Die Lizenzeinnahmen aus dem ENC-Verkauf fließen in den Haushalt. Sie sind ein Posten, den der Bundesrechnungshof eingefordert hat, an dem das BSH-Budget hängt, an dem auch institutionelle Strukturen hängen. Würden die Daten frei, fiele dieser Posten weg. Das wäre für den Bund verschmerzbar, aber für die behördeninterne Logik unbequem.
 
 Damit wird das Bild klar: Was hier geschützt wird, ist weder die Sicherheit der Skipper noch das Überleben der Verlage, sondern in erster Linie die Einnahmenstruktur einer Behörde. Und das ist nicht nur politisch fragwürdig, es ist im Lichte der EU-Open-Data-Richtlinie und des Datennutzungsgesetzes mit hoher Wahrscheinlichkeit *rechtswidrig*. Öffentlich finanzierte Daten dürfen nicht zurückgehalten oder durch technische Schikanen entwertet werden, nur damit eine Behörde ihren bisherigen Lizenzumsatz nicht verliert. Genau diese Konstellation will die EU-Gesetzgebung beenden.
+
+## Digitale Freiheit
+
+Die Möglichkeit, "seine eigene" Karte einfach auf A4 ausdrucken zu können, ist sinnvoll für die Ausbildung, für Übungskarten, für eine Wattwanderung, als Zusatzkarte zum Hereinmalen, als Screenshot für eine Webseite. Offene Daten erschließen darüber hinaus Möglichkeiten, die kein kommerzielles Produkt jemals abdecken kann, das ist ein Stück digitaler Freiheit, das man nicht unterschätzen sollte. Dazu gehört auch die Nutzung in freier Software wie OpenCPN oder AvNav.
+
+Und selbst "qualitätsgesicherte" Karten enthalten Fehler. Insbesondere bei den Tiefen in der Nordsee verändert sich das Gewässer schneller, als man messen kann. Vorsicht und gute Seemannschaft bleiben unersetzlich, mit oder ohne amtliche Karte.
 
 ## Behörden und Beamte: Fragen über Fragen
 
@@ -147,14 +157,6 @@ Hinzu kommt ein strukturelles Problem: Das BSH ist eine Bundesbehörde, finanzie
 Das ist genau die Konstellation, die die EU-PSI-Richtlinie und die nachfolgende Open-Data-Richtlinie (2019/1024) eigentlich auflösen wollten, mit der Grenzkostenregel, nach der die Bereitstellung öffentlich finanzierter Daten höchstens die Grenzkosten der Verbreitung kosten darf. Bei digitalen Daten sind diese Grenzkosten praktisch null.
 
 Die jüngsten Maßnahmen, verschärfte Servereinstellungen, weitere Datenamputationen, passen exakt in dieses Bild. Sie sind nicht Ausdruck einer technischen Notwendigkeit, sondern eines Kontrollreflexes: Wenn man die Daten schon nicht offen sperren kann, macht man sie eben unbrauchbar.
-
-## Anmerkung zu den Kartenverlagen
-
-Pauschal Kritik an den Kartenanbietern zu üben, wäre unfair. Abo-Modelle und Zwangsregistrierungen sind nervig bis fragwürdig, aber man bekommt dafür auch mehr als bloße Daten. Insbesondere Papierkarten müssen gelayoutet, gedruckt, wetterfest produziert, im richtigen Format und mit Handbuch geliefert werden. Wer das einmal selbst probiert hat, weiß, wie aufwendig das ist.
-
-Die Möglichkeit, "seine" Karte einfach auf A4 ausdrucken zu können, ist sinnvoll für die Ausbildung, für Übungskarten, für eine Wattwanderung, als Zusatzkarte zum Hereinmalen, als Screenshot für eine Webseite. Offene Daten erschließen darüber hinaus Möglichkeiten, die kein kommerzielles Produkt jemals abdecken kann, das ist ein Stück digitaler Freiheit, das man nicht unterschätzen sollte. Dazu gehört auch die Nutzung in freier Software wie OpenCPN oder AvNav.
-
-Und selbst "qualitätsgesicherte" Karten enthalten Fehler. Insbesondere bei den Tiefen in der Nordsee verändert sich das Gewässer schneller, als man messen kann. Vorsicht und Seemannschaft bleiben unersetzlich, mit oder ohne amtliche Karte.
 
 ## S-63: Was Verschlüsselung wirklich bedeutet
 
