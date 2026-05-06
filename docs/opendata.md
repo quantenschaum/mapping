@@ -58,7 +58,7 @@ Alternativ wäre es konsequent aktuelle amtliche Daten vollständig frei zur Ver
 
 ## Die GeoNutzV
 
-Ein zentraler rechtlicher Punkt wird in der Debatte bislang kaum benannt: Die Daten des BSH sind unter der *Verordnung zur Festlegung der Nutzungsbestimmungen für die Bereitstellung von Geodaten des Bundes* ([GeoNutzV](https://www.gesetze-im-internet.de/geonutzv/BJNR054700013.html)) veröffentlicht worden. Diese Lizenz ist bewusst extrem permissiv gehalten und erlaubt jede Art der Nutzung, kommerziell wie nicht-kommerziell, einschließlich Vervielfältigung, Veränderung und Weiterverbreitung. Eine Zweckbindung sieht sie nicht vor, und eine solche kann auch nicht nachträglich durch AGB-Klauseln oder Nutzungshinweise eingeführt werden.
+Ein zentraler rechtlicher Punkt wird in der Debatte bislang kaum benannt: Die Daten des BSH sind unter der *Verordnung zur Festlegung der Nutzungsbestimmungen für die Bereitstellung von Geodaten des Bundes* ([GeoNutzV](https://www.gesetze-im-internet.de/geonutzv/BJNR054700013.html#:~:text=(1)%20Geodaten%20und%20Geodatendienste,gestellt)) veröffentlicht worden. Diese Lizenz ist bewusst extrem permissiv gehalten und erlaubt jede Art der Nutzung, kommerziell wie nicht-kommerziell, einschließlich Vervielfältigung, Veränderung und Weiterverbreitung. Eine Zweckbindung sieht sie nicht vor, und eine solche kann auch nicht nachträglich durch AGB-Klauseln oder Nutzungshinweise eingeführt werden.
 
 Wichtig ist hier die Unterscheidung zwischen zwei oberflächlich ähnlichen, juristisch aber grundverschiedenen Formulierungen. Ein Hinweis wie "Die Daten sind nicht zur Navigation geeignet" ist kein Verbot, sondern ein haftungsrechtlicher Disclaimer: Der Herausgeber übernimmt keine Gewähr und haftet nicht für Schäden, die aus einer solchen Verwendung resultieren. Die Verantwortung für die Wahl seiner Navigationsmittel liegt ohnehin beim Schiffsführer. Er kann sich legitim entscheiden, die Daten gleichwohl zur Navigation zu verwenden, und trägt dann das Risiko selbst. Genau so funktionieren auch die Disclaimer kommerzieller Plotter und Apps.
 
@@ -211,15 +211,15 @@ Die Frage ist also nicht, ob ein deutsches Behördensystem mit offenen Daten üb
 
 Die juristische Situation ist klarer als dargestellt. Mehrere Anspruchsgrundlagen kommen in Betracht:
 
-**[EU-Richtlinie 2019/1024 (Open-Data-Richtlinie)](https://it-sicherheit.de/ratgeber/it-sicherheitsgesetze/ueberblick/open-data-directive/)** definiert Geodaten ausdrücklich als "hochwertige Datensätze", die in maschinenlesbarer Form, gebührenfrei und unter offenen Standardlizenzen bereitgestellt werden sollen. Die [Durchführungsverordnung (EU) 2023/138](https://de.wikipedia.org/wiki/Durchf%C3%BChrungsverordnung_(EU)_2023/138) konkretisiert das. Die Grenzkostenregel der vorherigen PSI-Richtlinie wirkt fort: Öffentlich finanzierte Daten dürfen höchstens die Grenzkosten der Verbreitung kosten, bei digitalen Daten faktisch null.
+**[EU-Richtlinie 2019/1024 (Open-Data/PSI-Richtlinie)](https://it-sicherheit.de/ratgeber/it-sicherheitsgesetze/ueberblick/open-data-directive/#:~:text=Diese%20hochwertigen%20Datens%C3%A4tze,Massendownload)** definiert Geodaten ausdrücklich als "hochwertige Datensätze", die in maschinenlesbarer Form, gebührenfrei und unter offenen Standardlizenzen bereitgestellt werden sollen. Die [Durchführungsverordnung (EU) 2023/138](https://de.wikipedia.org/wiki/Durchf%C3%BChrungsverordnung_(EU)_2023/138) konkretisiert das. Die [Grenzkostenregel](https://gesetze.legal/eu/rl_2019_1024_eu/6#:~:text=granzkosten) der vorherigen PSI-Richtlinie (PSI=Public Sector Information) wirkt fort: Öffentlich finanzierte Daten dürfen höchstens die Grenzkosten der Verbreitung kosten, bei digitalen Daten faktisch null.
 
 Wichtig in diesem Zusammenhang: Die Open-Data-Richtlinie verlangt nicht nur formale Bereitstellung, sondern eine **diskriminierungsfreie und tatsächlich nutzbare** Bereitstellung. Künstliche Drosselung, restriktive Servereinstellungen oder schrittweise Datenamputation könnten daher selbst dann rechtswidrig sein, wenn die Daten formal noch "OpenData" heißen.
 
-**[Das Datennutzungsgesetz (DNG)](https://www.gesetze-im-internet.de/dng/BJNR294200021.html)** als nationale Umsetzung verpflichtet Behörden zur diskriminierungsfreien Bereitstellung. Eine Klausel wie "nicht für die Navigation geeignet" auf Daten, auf den für die Navigation produzierte ENCs basieren, dürfte mit dem DNG kaum vereinbar sein, das ist eine zweckwidrige Beschränkung. Verschärft wird die rechtliche Problematik dadurch, dass diese Beschränkung **nicht einmal die offizielle Sicherheitslogik** der Sport- und Freizeitschifffahrt stützt: Auch die kommerziellen Apps und Plotter sind dort nicht zur offiziellen Navigation zugelassen. Das Argument einer "Schutzfunktion" durch die Klausel ist damit gegenstandslos.
+**[Das Datennutzungsgesetz (DNG)](https://www.gesetze-im-internet.de/dng/__4.html#:~:text=Grundsatz%20der%20uneingeschr%C3%A4nkten%20Datennutzung)** als nationale Umsetzung verpflichtet Behörden zur diskriminierungsfreien Bereitstellung. Eine Klausel wie "nicht für die Navigation geeignet" auf Daten, auf den für die Navigation produzierte ENCs basieren, dürfte mit dem DNG kaum vereinbar sein, das ist eine zweckwidrige Beschränkung. Verschärft wird die rechtliche Problematik dadurch, dass diese Beschränkung **nicht einmal die offizielle Sicherheitslogik** der Sport- und Freizeitschifffahrt stützt: Auch die kommerziellen Apps und Plotter sind dort nicht zur offiziellen Navigation zugelassen. Das Argument einer "Schutzfunktion" durch die Klausel ist damit gegenstandslos.
 
 Besonders heikel: Wenn das eigentliche Schutzziel der Beschränkungen weder die Sicherheit der Skipper noch das Geschäftsmodell der Verlage ist, sondern der **eigene Lizenzumsatz der Behörde**, dann handelt es sich um eine Beschränkung, die **gegen den Sinn und Zweck des EU-Rechts gerichtet ist**, und damit aller Voraussicht nach rechtswidrig.
 
-[§10 DNG, Grundsatz der Unentgeltlichkeit](https://www.gesetze-im-internet.de/dng/__10.html) besagt, dass öffentliche Stellen Entgelte verlangen dürfen, aber nicht für hochwertige Datensätze. Dies ist *explitzit ausgeschlossen*. Seekartendaten fallen in die [Kategorien](https://www.geoportal.hessen.de/article/HVD/) Georaum und Mobilität und sind somit ein *hochwertiger Datensatz*.
+[§10 DNG, Grundsatz der Unentgeltlichkeit](https://www.gesetze-im-internet.de/dng/__10.html#:~:text=absatz%202%20nummer,datens%C3%A4tze) besagt, dass öffentliche Stellen Entgelte verlangen dürfen, aber nicht für hochwertige Datensätze. Dies ist *explitzit ausgeschlossen*. Seekartendaten fallen in die [Kategorien](https://www.geoportal.hessen.de/article/HVD/) Georaum und Mobilität und sind somit ein *hochwertiger Datensatz*.
 
 **Das Geodatenzugangsgesetz (GeoZG)** und die INSPIRE-Richtlinie verpflichten zur offenen Bereitstellung von Geobasisdaten.
 
@@ -262,7 +262,7 @@ OpenData ist in Deutschland kein technisches Problem. Es ist ein Willens-Problem
 
 ### Kartenpflicht nach § 13 SchSV
 
-Maßgeblich für Sportboote unter deutscher Flagge ist **[§ 13 (1) 2a der Schiffssicherheitsverordnung (SchSV)](https://www.gesetze-im-internet.de/schsv_1998/__13.html)**:
+Maßgeblich für Sportboote unter deutscher Flagge ist **[§ 13 (1) 2a der Schiffssicherheitsverordnung (SchSV)](https://www.gesetze-im-internet.de/schsv_1998/__13.html#:~:text=auf%20der%20br%C3%BCcke,mitgef%C3%BChrt%20werden)**:
 
 > auf der Brücke stets folgende Unterlagen vorhanden sind: die für die jeweilige Seereise erforderlichen amtlichen Ausgaben von Seekarten und Seebüchern […]; bei Sportbooten im Sinne der Sportbootführerscheinverordnung-See genügt es, wenn an Bord nicht-amtliche Ausgaben mitgeführt werden.
 
@@ -280,7 +280,7 @@ Für Sportboote ist die internationale Vorschrift **SOLAS Kapitel V Regel 19** �
 
 ### Gute Seemannschaft als Auffangnorm
 
-Über die konkrete Ausrüstungspflicht hinaus gilt der Grundsatz der guten Seemannschaft nach **[§ 3 (1) der Seeschifffahrtsstraßen-Ordnung (SeeSchStrO)](https://www.gesetze-im-internet.de/seeschstro_1971/__3.html)**:
+Über die konkrete Ausrüstungspflicht hinaus gilt der Grundsatz der guten Seemannschaft nach **[§ 3 (1) der Seeschifffahrtsstraßen-Ordnung (SeeSchStrO)](https://www.gesetze-im-internet.de/seeschstro_1971/__3.html#:~:text=Er%20hat%20insbesondere,erfordern)**:
 
 > Jeder Verkehrsteilnehmer hat sich so zu verhalten, dass die Sicherheit und Leichtigkeit des Verkehrs gewährleistet ist […]
 
@@ -288,8 +288,8 @@ Daraus folgt mittelbar die Anforderung, mit aktuellem Kartenmaterial zu navigier
 
 ### Weitereführende Quellen
 
-- [Papierseekarten noch Pflicht?](https://www.mym.info/papierseekarten-noch-pflicht-2/)
-- [Die Notwendigkeit von Papierseekarten für die Schifffahrt](https://www.hansenautic.de/blog/die-unverzichtbarkeit-von-papierseekarten-fuer-die-schifffahrt-gesetzliche-anforderungen-und-praxisvorteile)
+- [Papierseekarten noch Pflicht?](https://www.mym.info/papierseekarten-noch-pflicht-2/#:~:text=Elektronische%20Seekarten,einsetzbar)
+- [Die Notwendigkeit von Papierseekarten für die Schifffahrt](https://www.hansenautic.de/blog/die-unverzichtbarkeit-von-papierseekarten-fuer-die-schifffahrt-gesetzliche-anforderungen-und-praxisvorteile#:~:text=aktuelle%20Papierseekarten)
 - [Müssen Seekarten laufend berichtigt werden?](https://www.boote-magazin.de/bootswissen/recht/recht-muessen-seekarten-laufend-berichtigt-werden/)
 - [2026er Berichtigungssätze für DK-Ostseekarten sind da](https://www.yacht.de/segelwissen/navigation/navigation-2026er-berichtigungssaetze-fuer-dk-ostseekarten-sind-da/)
 
@@ -339,13 +339,13 @@ Das Sicherheitsargument impliziert, lizenzierte kommerzielle Kartenprodukte böt
 
 Die prägnanteste Formulierung findet sich im offiziellen Marine Cartography Disclaimer von Garmin, der für alle Navionics-Produkte gilt:
 
-> [THIS PRODUCT IS INTENDED TO BE USED ONLY AS A TRAVEL AID AND MUST NOT BE USED FOR ANY PURPOSE REQUIRING PRECISE MEASUREMENT OF DIRECTION, DISTANCE, LOCATION OR TOPOGRAPHY.](https://www.garmin.com/en-US/legal/marine-cartography-disclaimer/)
+> [THIS PRODUCT IS INTENDED TO BE USED ONLY AS A TRAVEL AID AND MUST NOT BE USED FOR ANY PURPOSE REQUIRING PRECISE MEASUREMENT OF DIRECTION, DISTANCE, LOCATION OR TOPOGRAPHY.](https://www.garmin.com/en-US/legal/marine-cartography-disclaimer/#:~:text=THIS%20PRODUCT%20IS%20INTENDED,TOPOGRAPHY)
 
 Übersetzt: *„Dieses Produkt ist ausschließlich als Reisehilfe gedacht und darf nicht für Zwecke verwendet werden, die eine präzise Messung von Richtung, Entfernung, Position oder Topographie erfordern."*
 
 Navigation auf dem Wasser erfordert per Definition präzise Messung von Richtung, Entfernung und Position. Der Disclaimer schließt damit den Hauptverwendungszweck des Produktes formal aus, bei einem Kartenplotter, der explizit für die maritime Navigation vermarktet und zu entsprechenden Preisen verkauft wird. Der Haftungsausschluss ist vollständig: 
 
->[GARMIN SHALL NOT BE LIABLE FOR ANY INACCURACY, ERROR IN, OR FAILURE OF THE SOFTWARE](https://www.garmin.com/en-US/legal/terms-of-use/)
+>[GARMIN SHALL NOT BE LIABLE FOR ANY INACCURACY, ERROR IN, OR FAILURE OF THE SOFTWARE](https://www.garmin.com/en-US/legal/terms-of-use/#:~:text=GARMIN%20SHALL%20NOT%20BE%20LIABLE,SOFTWARE)
 
 Garmin haftet nicht für Ungenauigkeiten, Fehler oder Versagen der Software.
 
@@ -353,19 +353,19 @@ Garmin haftet nicht für Ungenauigkeiten, Fehler oder Versagen der Software.
 
 C-MAP formuliert bezüglich der Verwendung eindeutig:
 
-> [personal, non-exclusive right to use the Data, Media and Services only for Your benefit solely as an ancillary navigational aid (i.e., a supplement to official navigation information and traditional navigation techniques), and not as the sole or primary method of navigation.](https://www.c-map.com/legal/terms-and-conditions-eula/)
+> [personal, non-exclusive right to use the Data, Media and Services only for Your benefit solely as an ancillary navigational aid (i.e., a supplement to official navigation information and traditional navigation techniques), and not as the sole or primary method of navigation.](https://www.c-map.com/legal/terms-and-conditions-eula/#:~:text=personal,navigation)
 
 Übersetzt: "eine persönliche, nicht ausschließliche Berechtigung, die Daten, Medien und Dienste ausschließlich zu Ihrem Nutzen lediglich als ergänzende Navigationshilfe zu verwenden (d.h. als Ergänzung zu amtlichen Navigationsinformationen und traditionellen Navigationstechniken) und nicht als alleiniges oder primäres Navigationsmittel."
 
 Weiter heißt es
 
-> ONLY UP-TO-DATE OFFICIAL GOVERNMENT CHARTS AND NOTICES TO MARINERS CONTAIN ALL INFORMATION NEEDED FOR THE SAFETY OF NAVIGATION
+> [ONLY UP-TO-DATE OFFICIAL GOVERNMENT CHARTS AND NOTICES TO MARINERS CONTAIN ALL INFORMATION NEEDED FOR THE SAFETY OF NAVIGATION](https://www.c-map.com/legal/terms-and-conditions-eula/#:~:text=ONLY%20UP,SAFETY%20OF%20NAVIGATION)
 
 Übersetzt: "Nur aktuelle amtliche Seekarten und die NfS enthalten alle für die Sicherheit der Navigation notwendigen Informationen."
 
 Gleichzeitig wird darauf hingewiesen, dass diese Daten möglicherweise nicht regelmäßig aktualisiert werden. Eine Garantie für Korrektheit oder Aktualität wird an keiner Stelle erteilt.
 
-> IN NO EVENT SHALL C-MAP OR ITS THIRD PARTY LICENSORS BE LIABLE TO YOU OR TO ANY THIRD PARTY FOR ANY SPECIAL, INCIDENTAL, INDIRECT, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES
+> [IN NO EVENT SHALL C-MAP OR ITS THIRD PARTY LICENSORS BE LIABLE TO YOU OR TO ANY THIRD PARTY FOR ANY SPECIAL, INCIDENTAL, INDIRECT, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES](https://www.c-map.com/legal/terms-and-conditions-eula/#:~:text=IN%20NO%20EVENT,DAMAGES)
 
 Übersetzt: "IN KEINEM FALL HAFTET C‑MAP ODER SEINE DRITTLIZENZGEBER IHNEN ODER DRITTEN GEGENÜBER FÜR BESONDERE, ZUFÄLLIGE, INDIREKTE, FOLGE-, STRAF- ODER EXEMPLARISCHE SCHÄDEN."
 
@@ -373,11 +373,11 @@ Die Haftung wird also vollständig ausgeschlossen.
 
 #### NV Charts
 
-> [Die über den Dienst bereitgestellten Seekarten und Navigationshilfen sind zum Zeitpunkt der Veröffentlichung der App und etwaiger Updates nach bestem Wissen von NV auf dem aktuellen Stand.](https://nvcharts.com/Terms_of_Use_app_de.html)
+> [Die über den Dienst bereitgestellten Seekarten und Navigationshilfen sind zum Zeitpunkt der Veröffentlichung der App und etwaiger Updates nach bestem Wissen von NV auf dem aktuellen Stand.](https://nvcharts.com/Terms_of_Use_app_de.html#:~:text=Die%20%C3%BCber%20den%20Dienst%20bereitgestellten%20Seekarten,Stand)
 
 Steht in den Terms of Use der App (siehe auch [Aktualität](#kartenupdates-wer-ist-wirklich-aktuell)), aber ebenso steht dort:
 
-> [Der Dienst ist kein Ersatz für vorgeschriebene nautische Instrumente und Navigationshilfen, insbesondere für vorgeschriebene Papierseekarten. Dem Nutzer ist die Ungenauigkeit von digitalen Seekarten und GPS-Satellitendaten bekannt. Die Nutzung des Dienstes als Navigationshilfe ist ausschließlich in Verbindung mit und in Ergänzung der Nutzung von Papierseekarten gestattet.](https://nvcharts.com/Terms_of_Use_app_de.html)
+> [Der Dienst ist kein Ersatz für vorgeschriebene nautische Instrumente und Navigationshilfen, insbesondere für vorgeschriebene Papierseekarten. Dem Nutzer ist die Ungenauigkeit von digitalen Seekarten und GPS-Satellitendaten bekannt. Die Nutzung des Dienstes als Navigationshilfe ist ausschließlich in Verbindung mit und in Ergänzung der Nutzung von Papierseekarten gestattet.](https://nvcharts.com/Terms_of_Use_app_de.html#:~:text=Der%20Dienst%20ist%20kein%20Ersatz,gestattet)
 
 NV Charts formuliert in seinen Unterlagen weiterhin: 
 
@@ -387,11 +387,11 @@ Die [Nutzungsbedingungen der App](https://nvcharts.com/Terms_of_Use_app_de.html)
 
 Weiterhin steht in den AGB:
 
-> [Unsere Seekarten sind mit größtmöglicher Sorgfalt und Aktualität hergestellt. Dennoch sind alle Angaben von Maßen, Zeichnungen und Fotos nur als Anleitung zu verstehen.](https://nvcharts.com/information/agb/)
+> [Unsere Seekarten sind mit größtmöglicher Sorgfalt und Aktualität hergestellt. Dennoch sind alle Angaben von Maßen, Zeichnungen und Fotos nur als Anleitung zu verstehen.](https://nvcharts.com/information/agb/#:~:text=Unsere%20Seekarten,verstehen)
 
 und 
 
-> [Die in der Software dargestellten Seekarten entsprechen (...) angezeigten Stand. Eine Gewähr für die Richtigkeit der wiedergegebenen Daten wird nicht übernommen. Die Navigation mit den Daten der Software ist nur im Bereich der Sportschifffahrt bei gleichzeitiger Navigation auf entsprechenden Papierkarten zulässig.](https://nvcharts.com/information/agb/)
+> [Die in der Software dargestellten Seekarten entsprechen (...) angezeigten Stand. Eine Gewähr für die Richtigkeit der wiedergegebenen Daten wird nicht übernommen. Die Navigation mit den Daten der Software ist nur im Bereich der Sportschifffahrt bei gleichzeitiger Navigation auf entsprechenden Papierkarten zulässig.](https://nvcharts.com/information/agb/#:~:text=Die%20in%20der%20Software%20dargestellten%20Seekarten,zul%C3%A4ssig)
 
 D.h. größtmögliche Sorgfalt, aber keine Garantie für Richtigkeit. Alle Angaben nur als Orientierung/Anleitung (auch die Papierkarte).
 
@@ -399,7 +399,13 @@ D.h. größtmögliche Sorgfalt, aber keine Garantie für Richtigkeit. Alle Angab
 
 In den Nutzungsbedingungen des Yacht Navigators heißt es explizit: 
 
-> [Delius Klasing übernimmt keine Gewährleistung für die ununterbrochene Erreichbarkeit der Anwendung."](https://support.delius-klasing.de/357233-App-Yacht-Navigator---Nutzungsbedingungen) 
+> [Delius Klasing übernimmt keine Gewährleistung für die ununterbrochene Erreichbarkeit der Anwendung."](https://support.delius-klasing.de/357233-App-Yacht-Navigator---Nutzungsbedingungen#:~:text=Delius%20Klasing%20%C3%BCbernimmt%20keine%20Gew%C3%A4hrleistung,Anwendung) 
+
+> [Die Anwendung ist dazu bestimmt, als Navigationshilfe zu dienen. Sie ist kein Ersatz für den Gebrauch von Karten zugelassener staatlicher Stellen.](https://support.delius-klasing.de/357233-App-Yacht-Navigator---Nutzungsbedingungen#:~:text=Die%20Anwendung%20ist%20dazu%20bestimmt,Stellen)
+
+> [Nur offizielle Seekarten und nautische Nachrichten für Seefahrer enthalten alle zur sicheren Navigation notwendigen Informationen. Die Nutzung der Navigationshilfe erfolgt auf eigenes Risiko. Es ist die Verantwortung des Benutzers, dieses Produkt umsichtig zu verwenden.](https://support.delius-klasing.de/357233-App-Yacht-Navigator---Nutzungsbedingungen#:~:text=Nur%20offizielle%20Seekarten,verwenden)
+
+> [Schadensersatzansprüche sind sowohl gegen Delius Klasing als auch gegen gesetzliche Vertreter, leitende Angestellte oder sonstige Erfüllungs- bzw. Verrichtungsgehilfen ausgeschlossen](https://support.delius-klasing.de/357233-App-Yacht-Navigator---Nutzungsbedingungen#:~:text=Schadensersatzanspr%C3%BCche,ausgeschlossen)
 
 Für die inhaltliche Korrektheit oder Aktualität der Kartendaten gilt dieselbe Logik: keine Garantie, vollständige Haftungsabwälzung auf den Nutzer. Das ist bemerkenswert, da Delius Klasing gleichzeitig auf seiner Verlagsseite mit Qualität und Aktualität der Karten wirbt.
 
