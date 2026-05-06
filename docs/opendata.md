@@ -355,19 +355,19 @@ C-MAP formuliert bezüglich der Verwendung eindeutig:
 
 > [personal, non-exclusive right to use the Data, Media and Services only for Your benefit solely as an ancillary navigational aid (i.e., a supplement to official navigation information and traditional navigation techniques), and not as the sole or primary method of navigation.](https://www.c-map.com/legal/terms-and-conditions-eula/)
 
-übersetzt: eine persönliche, nicht ausschließliche Berechtigung, die Daten, Medien und Dienste ausschließlich zu Ihrem Nutzen lediglich als ergänzende Navigationshilfe zu verwenden (d.h. als Ergänzung zu amtlichen Navigationsinformationen und traditionellen Navigationstechniken) und nicht als alleiniges oder primäres Navigationsmittel.
+Übersetzt: "eine persönliche, nicht ausschließliche Berechtigung, die Daten, Medien und Dienste ausschließlich zu Ihrem Nutzen lediglich als ergänzende Navigationshilfe zu verwenden (d.h. als Ergänzung zu amtlichen Navigationsinformationen und traditionellen Navigationstechniken) und nicht als alleiniges oder primäres Navigationsmittel."
 
 Weiter heißt es
 
 > ONLY UP-TO-DATE OFFICIAL GOVERNMENT CHARTS AND NOTICES TO MARINERS CONTAIN ALL INFORMATION NEEDED FOR THE SAFETY OF NAVIGATION
 
-übersetzt: Nur aktuelle amtliche Seekarten und die NfS enthalten alle für die Sicherheit der Navigation notwendigen Informationen.
+Übersetzt: "Nur aktuelle amtliche Seekarten und die NfS enthalten alle für die Sicherheit der Navigation notwendigen Informationen."
 
 Gleichzeitig wird darauf hingewiesen, dass diese Daten möglicherweise nicht regelmäßig aktualisiert werden. Eine Garantie für Korrektheit oder Aktualität wird an keiner Stelle erteilt.
 
 > IN NO EVENT SHALL C-MAP OR ITS THIRD PARTY LICENSORS BE LIABLE TO YOU OR TO ANY THIRD PARTY FOR ANY SPECIAL, INCIDENTAL, INDIRECT, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES
 
-übersetzt: IN KEINEM FALL HAFTET C‑MAP ODER SEINE DRITTLIZENZGEBER IHNEN ODER DRITTEN GEGENÜBER FÜR BESONDERE, ZUFÄLLIGE, INDIREKTE, FOLGE-, STRAF- ODER EXEMPLARISCHE SCHÄDEN.
+Übersetzt: "IN KEINEM FALL HAFTET C‑MAP ODER SEINE DRITTLIZENZGEBER IHNEN ODER DRITTEN GEGENÜBER FÜR BESONDERE, ZUFÄLLIGE, INDIREKTE, FOLGE-, STRAF- ODER EXEMPLARISCHE SCHÄDEN."
 
 Die Haftung wird also vollständig ausgeschlossen.
 
@@ -384,6 +384,16 @@ NV Charts formuliert in seinen Unterlagen weiterhin:
 > [Navigationssoftware und digitale Seekarten sind Navigationshilfen und ersetzen keine Navigationskenntnisse"](https://nvcharts.com/media/download/Handbuch.pdf).
 
 Die [Nutzungsbedingungen der App](https://nvcharts.com/Terms_of_Use_app_de.html) gewähren dem Käufer eine nicht-ausschließliche Lizenz zur Nutzung auf einem einzelnen Gerät, jedoch keinerlei Gewähr dafür, dass die Karten korrekt, vollständig oder aktuell sind. Eine Haftung für navigatorische Schäden wird ausgeschlossen.
+
+Weiterhin steht in den AGB:
+
+> [Unsere Seekarten sind mit größtmöglicher Sorgfalt und Aktualität hergestellt. Dennoch sind alle Angaben von Maßen, Zeichnungen und Fotos nur als Anleitung zu verstehen.](https://nvcharts.com/information/agb/)
+
+und 
+
+> [Die in der Software dargestellten Seekarten entsprechen (...) angezeigten Stand. Eine Gewähr für die Richtigkeit der wiedergegebenen Daten wird nicht übernommen. Die Navigation mit den Daten der Software ist nur im Bereich der Sportschifffahrt bei gleichzeitiger Navigation auf entsprechenden Papierkarten zulässig.](https://nvcharts.com/information/agb/)
+
+D.h. größtmögliche Sorgfalt, aber keine Garantie für Richtigkeit. Alle Angaben nur als Orientierung/Anleitung (auch die Papierkarte).
 
 #### Delius Klasing (Yacht Navigator)
 
