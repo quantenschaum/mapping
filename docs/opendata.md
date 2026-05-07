@@ -12,13 +12,13 @@ Ein Softwareentwickler und Segler hat geschafft, was Behörden seit Jahren versp
 
 Das Projekt fand Beachtung: Magazine wie [Yacht](https://www.yacht.de/newsletter/meinung-kostenlose-seekarten-zu-schon-um-wahr-zu-sein/) und [Segeln](https://segeln-magazin.de/2026/03/10/kostenlose-seekarten-ganz-legal/) berichteten, in der Community wurde es als Modellfall gelobt. Genau ab diesem Moment begann das Problem.
 
-Kurz nach der Presseberichterstattung verschwanden die Punktlotungen aus dem öffentlich zugänglichen Datenbestand. Eine direkte Kommunikation mit dem Entwickler gab es nicht. Stattdessen tauchte eine Klausel in den Nutzungsbedingungen auf, die in ihrer Absurdität schwer zu überbieten ist: 
+Kurz nach der Presseberichterstattung verschwanden die Punktlotungen aus dem öffentlich zugänglichen Datenbestand. Eine direkte Kommunikation mit dem Entwickler gab es nicht. Stattdessen tauchte eine Klausel in den Nutzungsbedingungen auf: 
 
 >**Die Verwendung der Daten zu Navigatonszwecken ist nicht gestattet.**
 
-Seekartendaten, nicht zur Navigation zu verwenden. Man muss diesen Satz zweimal lesen.
+*Seekartendaten, nicht zur Navigation zu verwenden.* Es mag formal korrekt sein, bei nicht qualitätsgesicherten Daten darauf hinzuweisen, dass diese nicht geeignet sind für diesen Zweck, doch es liegt eine gewissen Absurdität darin, die Navigation mit Seekartendaten, die primär für die Navigation erhoben und erzeugt wurden, zu verbieten. Interessanterweise sind auch die [digitalen Karten der kommerziellen Anbieter](#lizenzierte-kartendaten-null-garantie) ebenfalls nicht für die Navigation zugelassen.
 
-Und damit war es nicht zu Ende. Inzwischen geht das BSH einen Schritt weiter und schränkt den Zugriff auf den Datenbestand weiter ein.
+Und damit ist es nicht zu Ende. Inzwischen geht das BSH einen Schritt weiter und schränkt den Zugriff auf den Datenbestand weiter ein.
 
 ## Schleichende Demontage: OpenData nur noch dem Namen nach
 
@@ -187,11 +187,25 @@ Damit verschiebt sich der Diskurs: Die Frage ist nicht "amtlich vs. frei", sonde
 Dass dieses Spannungsverhältnis lösbar ist, zeigen mehrere Länder:
 
 - **Niederlande:** Aktuelle ENCs für Waddenzee und Zeeland frei zum Download.
-- **USA:** Komplette ENCs frei zum Download, ausgerechnet das Land, in dem sonst Turbokapitalismus regiert.
+- **USA:** Komplette ENCs frei zum Download, und *zur Navigation zu verwenden*.
 
-Navigation und Lizenzschutz schließen sich offensichtlich nicht aus. Auch in den Niederlanden gibt es offene Seekarten, gedruckte Werke und Handbücher kommerzieller Anbieter parallel. Die Verlage existieren weiter. Genau das entzieht dem Schutz-des-Geschäftsmodells-Argument die Grundlage, empirisch widerlegt durch das Ausland.
+Offene Daten und Lizenzschutz schließen sich offensichtlich nicht gegenseitig aus. Auch in den Niederlanden gibt es offene Seekarten, gedruckte Werke und Handbücher kommerzieller Anbieter parallel. Die Verlage existieren weiter. Genau das entzieht dem Schutz-des-Geschäftsmodells-Argument die Grundlage, empirisch widerlegt durch das Ausland.
 
-Ein **Dual-Licensing-Modell** wäre der naheliegende Kompromiss: nicht-kommerzielle Nutzung frei, kommerzielle Nutzung kostenpflichtig bzw. die offiziellen ENCs für die Berufsschiffahrt sind kostenpflichtig. So lassen sich öffentliches Interesse, EU-Recht und das berechtigte Geschäftsinteresse der Verlage vereinen, ohne ein Vorzeigeprojekt wie freenauticalchart.net auszubremsen, was für die Zivilgesellschaft einen Mehrwert liefert, denn genau dies ist das Ziel der OpenData-Gesetzgebung.
+Ein **Dual-Licensing-Modell** wäre der naheliegende Kompromiss: 
+
+- kostenpflichtige Bereitstellung für ausrüstungspflichtige Schiffe nach SOLAS über den [IC-ENC Vertriebsweg](https://www.ic-enc.org/distribution) (Mehrwert durch Qualitätskontrolle, Validierung, Aufbereitung, Bereitstellung, Updates)
+- kostenpflichtige Bereitstellung für Wiederverkäufer (value added reseller, Mehrwert durch Qualitätskontrolle und zugesicherte Aktualität und Korrektheit)
+- freie Bereitstellung der Daten unter OpenData für die Allgemeinheit (ohne Garantien oder Haftung)
+
+So ließen sich öffentliches Interesse, EU-Recht und die Finanzierung vereinen, ohne ein Vorzeigeprojekt auszubremsen, was für die Zivilgesellschaft einen Mehrwert liefert, denn genau dies ist das Ziel der OpenData-Gesetzgebung.
+
+### Vergleich mit der NOAA
+
+Die NOAA stellt die [amtlichen elektronischen Seekarten der USA](https://nauticalcharts.noaa.gov/charts/noaa-enc.html) (ENCs) kostenlos und ohne Registrierung zur Verfügung, bietet sie aber gleichzeitig über den kostenpflichtigen [IC-ENC Vertriebsweg](https://nauticalcharts.noaa.gov/publications/print-agents.html#enc-distributors) an. Die Karten können als [Einzeldateien heruntergeladen](https://charts.noaa.gov/ENCs/ENCs.shtml), über standardisierte [WMS- und WMTS-Dienste](https://nauticalcharts.noaa.gov/data/gis-data-and-services.html#enc-display-services) eingebunden oder als [MBTiles-Pakete](https://distribution.charts.noaa.gov/ncds/index.html) für die Offline-Nutzung bezogen werden. Für die Darstellung im Web stehen zwei Varianten zur Wahl: eine [ECDIS-ähnliche Ansicht](https://nauticalcharts.noaa.gov/enconline/enconline.html) sowie eine [klassische Darstellung](https://nauticalcharts.noaa.gov/NCDSviewer/) ähnlich der klassischen Papierkarte. Laut den Nutzungsbedingungen sind die ENCs [ausdrücklich für die Navigation vorgesehen](https://charts.noaa.gov/ENCs/ENC_Agreement.shtml#:~:text=intended%20for%20navigational%20use).
+
+Das Modell der NOAA zeigt, dass offene Verfügbarkeit und kostenpflichtiger Fachvertrieb kein Widerspruch sind. Die NOAA stellt ihre ENCs direkt und kostenlos bereit und bietet sie parallel über IC-ENC gegen Gebühr an. Das RENC-System wird dadurch nicht geschwächt, sondern auf seinen eigentlichen Kern reduziert: den zertifizierten Mehrwertdienst für professionelle Nutzer, die S-63-verschlüsselte, ECDIS-zertifizierte Karten mit Aktualisierungsgarantie benötigen und für diesen Mehrwert zu zahlen bereit bzw. gesetzlich verpflichtet sind.
+
+Ein solches Dual-License-Modell ließe sich auf das BSH übertragen und würde mehrere Interessen zugleich bedienen. Freizeitschifffahrt, GIS-Anwendungen, Forschung und Behörden erhielten Zugang zu amtlichen deutschen Seekarten in offenen Formaten, ohne Registrierung, ohne Lizenzkosten. Die kommerzielle Seeschifffahrt wird auf den bewährten Weg über den zertifizierte Vertriebsweg versorgt, der die technische Infrastruktur bedient und Haftung, Aktualität und internationale Einbindung garantiert. Beide Wege bedienen unterschiedliche Märkte und schließen sich gegenseitig nicht aus.
 
 ## Bundesbehörden im Vergleich
 
@@ -413,12 +427,17 @@ Für die inhaltliche Korrektheit oder Aktualität der Kartendaten gilt dieselbe 
 
 o-charts nimmt unter den kommerziellen Anbietern eine Sonderstellung ein: Das Produkt bezieht S-57-Daten direkt von den Hydrographischen Ämtern und integriert NfS-Berichtigungen wöchentlich. Dennoch schließt das [EULA jede Haftung für navigatorische Schäden aus](https://o-charts.org/manuals/docs/EN_rrc_eula_ChartSetsForOpenCPN.html?lng=en), konsequenterweise, da auch ein Hydrographisches Amt keine absolute Fehlerlosigkeit garantieren kann.
 
-### Was diese Übersicht bedeutet
+### Was diese Analyse bedeutet
 
 Das Ergebnis der Analyse ist eindeutig und für die Debatte von zentraler Bedeutung:
 
 **Kein einziger kommerzieller Anbieter**, unabhängig davon, ob das Produkt im Abonnement oder als Einmalkauf erworben wurde, erteilt dem zahlenden Kunden eine Garantie für Aktualität oder Korrektheit der Kartendaten. Kein einziger Anbieter erkennt sein Produkt als rechtlich zulässiges Navigationsmittel an (bei rein digitalen Karten auch nicht möglich). Alle schließen die Haftung für navigatorische Schäden vollständig aus.
 
 Das Geschäftsmodell der Kartenanbieter basiert damit strukturell auf einer Diskrepanz: Das Produkt wird für die Navigation vermarktet, für die Navigation verkauft, für die Navigation genutzt, aber rechtlich niemals als Navigationsmittel anerkannt. Die Haftung für alle Konsequenzen dieser Nutzung trägt ausschließlich der Käufer, der für dieses Privileg im Fall eines Plotters mit Kartenpaket mehrere tausend Euro bezahlt hat.
+
+Der Mehrwert der vom BSH gegen Entgelt lizensierten Kartendaten besteht in der Qualitätsicherung, Garantie für Aktualität und Richtigkeit sowie ggf. der Haftung für aus Fehlern resultierenden Schäden. Dabei stellen sich unmittelbar die folgenden Fragen:
+
+- Enthält der Lizenzvertrag des BSH überhaupt solche Garantien und Haftungsverpflichtungen, oder geht es darin lediglich um Entgelte und Nutzungsrechte?
+- Wenn das BSH bei lizensierten Daten Garantien und Haftungsverpflichtungen abgibt, warum werden diese dann nicht durch die Kartenverlage an den Endkunden weitergegeben?
 
 Vor diesem Hintergrund wird die Position des BSH bzw. der Kartenanbieter gegenüber OpenData vollends unhaltbar. Wenn das Sicherheitsargument wäre, freie Karten seien für den Nutzer gefährlich, weil keine Aktualitätsgarantie besteht und keine Haftung übernommen wird, dann müsste dasselbe Argument gegen jedes kommerzielle Kartenprodukt auf dem Markt erhoben werden. Der einzige relevante Unterschied zwischen einem 5.000-Euro-Plotter mit lizenzierten Karten und OpenData-Kartern auf dem Tablet besteht nicht in der Rechtslage, nicht in der Haftungsstruktur, nicht in der formalen Zulassung zur Navigation, sondern im Preis. Und der Preis ist kein Sicherheitsargument. Was man mit dem Kauf eine Karte eines kommerziellen Anbieters primär erwirbt ist Bequemlichkeit.
