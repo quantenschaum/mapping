@@ -8,7 +8,7 @@ Wie das BSH ein Vorzeige-Open-Data-Projekt ausbremst und was das über den Stand
 
 *Das Projekt freenauticalchart.net zeigt exemplarisch, wie Open-Data-Verpflichtungen unterlaufen werden. Ein Entwickler baute aus frei verfügbaren Geodaten des BSH nutzbare Seekarten und löste damit eine schleichende Demontage genau jener Datenbasis aus, auf der sein Projekt aufbaute: Punktlotungen verschwanden, restriktive Nutzungsklauseln tauchten auf, Servereinstellungen wurden verschärft.*
 
-*Die angeführten Sicherheits- und Qualitätsargumente nicht tragen. Erstens gilt in der Freizeitschifffahrt kein digitales Kartenprodukt als offiziell zugelassenes Navigationsmittel, weder ein kostenloser OpenData-Viewer noch ein Plotter für 5.000 Euro mit lizenzierten Karten. Alle kommerziellen Anbieter schließen Aktualitätsgarantien und Haftung vollständig aus*
+*Die angeführten Sicherheits- und Qualitätsargumente tragen nicht. Erstens gilt in der Freizeitschifffahrt kein digitales Kartenprodukt als offiziell zugelassenes Navigationsmittel, weder ein kostenloser OpenData-Viewer noch ein Plotter für 5.000 Euro mit lizenzierten Karten. Alle kommerziellen Anbieter schließen Aktualitätsgarantien und Haftung vollständig aus*
 
 *Zweitens ist die Rechtslage eindeutiger als dargestellt: Unter der GeoNutzV einmal freigegebene Daten sind unwiderruflich freigegeben, nachträgliche Verbote einzelner Verwendungszwecke sind mit der Lizenz unvereinbar. Die EU-Open-Data-Richtlinie (2019/1024) und das Datennutzungsgesetz verlangen nicht nur formale, sondern tatsächlich nutzbare Bereitstellung. Behörden wie BKG und DWD demonstrieren, dass offene Basisdaten und kommerzielle Endprodukte problemlos koexistieren, ebenso wie das Ausland, etwa die Niederlande und die USA.*
 
