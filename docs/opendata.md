@@ -304,7 +304,7 @@ Für Sportboote ist die internationale Vorschrift **SOLAS Kapitel V Regel 19** �
 
 Über die konkrete Ausrüstungspflicht hinaus gilt der Grundsatz der guten Seemannschaft nach **[§ 3 (1) der Seeschifffahrtsstraßen-Ordnung (SeeSchStrO)](https://www.gesetze-im-internet.de/seeschstro_1971/__3.html#:~:text=Er%20hat%20insbesondere,erfordern)**:
 
-> Jeder Verkehrsteilnehmer hat sich so zu verhalten, dass die Sicherheit und Leichtigkeit des Verkehrs gewährleistet ist […]
+> Jeder Verkehrsteilnehmer hat sich so zu verhalten, dass die Sicherheit und Leichtigkeit des Verkehrs gewährleistet ist […] Er hat insbesondere die Vorsichtsmaßregeln zu beachten, die Seemannsbrauch oder besondere Umstände des Falles erfordern.
 
 Daraus folgt mittelbar die Anforderung, mit aktuellem Kartenmaterial zu navigieren. Die laufende Berichtigung erfolgt über die **Nachrichten für Seefahrer (NfS)** des BSH (oder den Update-Service des Anbieters nicht-amtlicher Karten), die Mitführung der NfS selbst ist für Sportboote nach § 13 Abs. 1 Nr. 2 Buchst. c SchSV nicht verpflichtend.
 
