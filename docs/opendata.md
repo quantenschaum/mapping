@@ -431,6 +431,22 @@ In den Nutzungsbedingungen des Yacht Navigators heißt es explizit:
 
 Für die inhaltliche Korrektheit oder Aktualität der Kartendaten gilt dieselbe Logik: keine Garantie, vollständige Haftungsabwälzung auf den Nutzer. Das ist bemerkenswert, da Delius Klasing gleichzeitig auf seiner Verlagsseite mit Qualität und Aktualität der Karten wirbt.
 
+#### Kartenwerft
+
+Die AGB der Kartenwerft App sagen
+
+> [Die Anwendung und die hierin hinterlegten nautischen Informationen sind eine Navigationshilfe für den Benutzer und ersetzen nicht die für eine ordentliche Schiffsführung notwendige Benutzung von Papierkarten.](https://www.kartenwerft.de/agb/#:~:text=die%20anwendung%20und%20die,papierkarten)
+
+weiter hin steht dort die folgende Warnung (für App und Papierkarten):
+
+> [BSH, GST und SMA haben die in diesen Produkten enthaltenen Angaben *nicht geprüft* und haften nicht für ihre Richtigkeit oder die Richtigkeit späterer Datenänderungen. *BSH, GST und SMA garantieren nicht, dass diese Produkte nationale oder internationale Vorschriften für die navigatorische Eignung solcher Produkte erfüllen.*](https://www.kartenwerft.de/agb/#:~:text=warnung,erf%C3%BCllen)
+
+Die App wird als Hilfmittel deklariert, maßgeblich ist die Papierkarte. Bemerkenswert ist die Aussage zum BSH. Bedeutet dies, dass das BSH die Vollständigkeit, Aktualität und Korrektheit seiner eigenen Daten nicht garantiert, trotz Lizenz, oder dass es die von der Kartenwerft erstellte Karte nicht geprüft hat?
+
+> Für Schäden, die dem Benutzer durch die Verwendung der Anwendung entstehen, haftet KartenWerft nur für Vorsatz und grobe Fahrlässigkeit. Insbesondere in den Fällen, [...] haftet KartenWerft nur soweit dieser durch Vorsatz oder grobe Fahrlässigkeit verursacht wurde.
+
+Auch hier wird die Haftung ausgeschlossen.
+
 #### o-charts
 
 o-charts nimmt unter den kommerziellen Anbietern eine Sonderstellung ein: Das Produkt bezieht S-57-Daten direkt von den Hydrographischen Ämtern und integriert NfS-Berichtigungen wöchentlich. Dennoch schließt das [EULA jede Haftung für navigatorische Schäden aus](https://o-charts.org/manuals/docs/EN_rrc_eula_ChartSetsForOpenCPN.html?lng=en), konsequenterweise, da auch ein Hydrographisches Amt keine absolute Fehlerlosigkeit garantieren kann.
