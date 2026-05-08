@@ -347,7 +347,7 @@ Das Sicherheitsargument impliziert, lizenzierte kommerzielle Kartenprodukte böt
 
 | Anbieter | Garantie Aktualität/Richtigkeit | Zur Navigation zugelassen | Haftungsausschluss | Nutzungsbedingungen |
 |---|---|---|---|---|
-| **Garmin / Navionics** | Keine. Ausdrücklicher Ausschluss jeder Gewähr für Genauigkeit, Vollständigkeit oder Aktualität. | Nein. Ausdrücklich nur als „Reisehilfe" (*travel aid*) deklariert. Darf nicht für Zwecke verwendet werden, die präzise Messung erfordern. | Vollständig. Garmin haftet nicht für Ungenauigkeiten, Fehler, Datenverlust oder Schäden jeder Art, die aus der Nutzung entstehen. | [marine-cartography-disclaimer](https://www.garmin.com/en-US/legal/marine-cartography-disclaimer/) / [marine_cartography_eula](https://www.garmin.com/en-US/legal/marine_cartography_eula/) |
+| **Garmin / Navionics** | Keine. Ausdrücklicher Ausschluss jeder Gewähr für Genauigkeit, Vollständigkeit oder Aktualität. | Nein. Ausdrücklich nur als "Reisehilfe" (*travel aid*) deklariert. Darf nicht für Zwecke verwendet werden, die präzise Messung erfordern. | Vollständig. Garmin haftet nicht für Ungenauigkeiten, Fehler, Datenverlust oder Schäden jeder Art, die aus der Nutzung entstehen. | [marine-cartography-disclaimer](https://www.garmin.com/en-US/legal/marine-cartography-disclaimer/) / [marine_cartography_eula](https://www.garmin.com/en-US/legal/marine_cartography_eula/) |
 | **C-MAP** (Kongsberg / Navico) | Keine. Daten können unregelmäßig oder gar nicht aktualisiert werden. Keine Gewähr für Vollständigkeit. | Nein. Ausdrücklich nur Hilfmittel, nicht zur Navigation. | Vollständig. Keinerlei Haftung für Schäden durch Ungenauigkeiten oder Fehler der Kartendaten. | [Terms of Purchase](https://store.c-map.com/en/Home/TermsOfPurchase) / [EULA](https://www.c-map.com/legal/terms-and-conditions-eula/) |
 | **NV Charts** | Keine. Digitale Seekarten werden ausdrücklich als Navigationshilfen bezeichnet. Aktualitätsgarantie nicht gegeben. | Nein. Ausdrücklich nur Navigationshilfe, kein Navigationsmittel. | Vollständig. Keine Haftung für Schäden, die aus der Nutzung der digitalen Karten entstehen. | [Nutzungsbedingungen App (DE)](https://nvcharts.com/Terms_of_Use_app_de.html) |
 | **Delius Klasing** (Yacht Navigator) | Keine. Delius Klasing übernimmt ausdrücklich keine Gewährleistung für die ununterbrochene Erreichbarkeit oder Aktualität der Kartendaten. | Nein. App als Navigationshilfe deklariert, keine Anerkennung als Navigationsmittel. | Vollständig. Haftungsausschluss für Schäden aus fehlerhaften oder veralteten Kartendaten. | [Nutzungsbedingungen Yacht Navigator](https://support.delius-klasing.de/357233-App-Yacht-Navigator---Nutzungsbedingungen) |
@@ -363,7 +363,7 @@ Die prägnanteste Formulierung findet sich im offiziellen Marine Cartography Dis
 
 > [THIS PRODUCT IS INTENDED TO BE USED ONLY AS A TRAVEL AID AND MUST NOT BE USED FOR ANY PURPOSE REQUIRING PRECISE MEASUREMENT OF DIRECTION, DISTANCE, LOCATION OR TOPOGRAPHY.](https://www.garmin.com/en-US/legal/marine-cartography-disclaimer/#:~:text=THIS%20PRODUCT%20IS%20INTENDED,TOPOGRAPHY)
 
-Übersetzt: *„Dieses Produkt ist ausschließlich als Reisehilfe gedacht und darf nicht für Zwecke verwendet werden, die eine präzise Messung von Richtung, Entfernung, Position oder Topographie erfordern."*
+Übersetzt: *"Dieses Produkt ist ausschließlich als Reisehilfe gedacht und darf nicht für Zwecke verwendet werden, die eine präzise Messung von Richtung, Entfernung, Position oder Topographie erfordern."*
 
 Navigation auf dem Wasser erfordert per Definition präzise Messung von Richtung, Entfernung und Position. Der Disclaimer schließt damit den Hauptverwendungszweck des Produktes formal aus, bei einem Kartenplotter, der explizit für die maritime Navigation vermarktet und zu entsprechenden Preisen verkauft wird. Der Haftungsausschluss ist vollständig: 
 
@@ -449,3 +449,179 @@ Der Mehrwert der vom BSH gegen Entgelt lizensierten Kartendaten besteht in der Q
 - Wenn das BSH bei lizensierten Daten Garantien und Haftungsverpflichtungen abgibt, warum werden diese dann nicht durch die Kartenverlage an den Endkunden weitergegeben?
 
 Vor diesem Hintergrund wird die Position des BSH bzw. der Kartenanbieter gegenüber OpenData vollends unhaltbar. Wenn das Sicherheitsargument wäre, freie Karten seien für den Nutzer gefährlich, weil keine Aktualitätsgarantie besteht und keine Haftung übernommen wird, dann müsste dasselbe Argument gegen jedes kommerzielle Kartenprodukt auf dem Markt erhoben werden. Der einzige relevante Unterschied zwischen einem 5.000-Euro-Plotter mit lizenzierten Karten und OpenData-Kartern auf dem Tablet besteht nicht in der Rechtslage, nicht in der Haftungsstruktur, nicht in der formalen Zulassung zur Navigation, sondern im Preis. Und der Preis ist kein Sicherheitsargument. Was man mit dem Kauf eine Karte eines kommerziellen Anbieters primär erwirbt ist Bequemlichkeit.
+
+---
+
+## Die GeoNutzV genauer betrachtet
+
+Die Verordnung zur Festlegung der Nutzungsbestimmungen für die Bereitstellung von Geodaten des Bundes ([GeoNutzV](https://www.gesetze-im-internet.de/geonutzv/BJNR054700013.html)) ist eine Rechtsverordnung der Bundesregierung, erlassen auf Grundlage von § 14 Nr. 2 i. V. m. [§ 11 Abs. 3 des Geodatenzugangsgesetzes](https://www.gesetze-im-internet.de/geozg/__11.html) (GeoZG). Sie regelt die Bedingungen, unter denen Geodaten und Geodatendienste des Bundes, einschließlich zugehöriger Metadaten, nach § 11 Abs. 1 und 2 GeoZG von den geodatenhaltenden Stellen nach § 2 Abs. 1 i. V. m. § 3 Abs. 8 GeoZG zur Verfügung gestellt werden.
+
+### Anwendungsbereich
+
+- **Persönlicher Anwendungsbereich**: Nur geodatenhaltende Stellen des Bundes (§ 2 Abs. 1 GeoZG), nicht der Länder. Länderbehörden unterliegen eigenen Regelungen (z. B. auf Basis der INSPIRE-Richtlinie oder Landesgeodatengesetzen).
+- **Sachlicher Anwendungsbereich**: Geodaten, Geodatendienste und Metadaten, die nach § 11 Abs. 1 und 2 GeoZG bereitgestellt werden. Geodaten, die nicht unter das GeoZG fallen (z. B. Verschlusssachen, sicherheitssensible Daten), werden von der GeoNutzV nicht erfasst.
+
+Nicht alle Bundesgeodaten fallen automatisch unter die GeoNutzV. Das GeoZG selbst enthält in § 9 wichtige Ausnahmetatbestände (z.B. öffentliche Sicherheit, laufende Verwaltungsverfahren), die den Zugang und damit auch die Lizenzierung ausschließen können.
+
+### Nutzungsrecht
+
+§ 2 GeoNutzV ist die Kernvorschrift der Verordnung. Sie gewährt:
+
+- Weltweites, nicht-exklusives, unentgeltliches Nutzungsrecht
+- Für alle Nutzungszwecke, kommerziell wie nicht-kommerziell
+- Inklusive Recht zur Vervielfältigung, Verbreitung, Bearbeitung und öffentlichen Zugänglichmachung
+
+>[Geodaten des Bundes werden für alle derzeit bekannten sowie alle zukünftig bekannten Zwecke kommerzieller und nicht kommerzieller Nutzung geldleistungsfrei zur Verfügung gestellt, soweit durch besondere Rechtsvorschrift nichts anderes bestimmt ist oder vertragliche oder gesetzliche Rechte Dritter dem nicht entgegenstehen.](https://www.gesetze-im-internet.de/geonutzv/__2.html#:~:text=Geodaten%20und,entgegenstehen)
+
+Diese zwei Vorbehalte sind für die Frage der Zulässigkeit von Nutzungseinschränkungen entscheidend.
+
+### Nutzungseinschränkungen
+
+Kann oder darf eine geodatenhaltende Bundesbehörde die nach § 2 GeoNutzV grundsätzlich weite Nutzungsgestattung durch Zweckbindungen (Nutzung nur für bestimmte Zwecke erlaubt) oder Zweckausschlüsse (bestimmte Zwecke verboten) einschränken?
+
+Die Antwort ergibt sich aus dem Zusammenspiel von GeoNutzV, GeoZG und übergeordnetem Recht.
+
+#### Grundsatz: Einschränkungen sind systemwidrig
+
+Der erklärte Regelungszweck der GeoNutzV ist die Maximierung der Nutzungsoffenheit. Die Verordnung wurde bewusst den Kriterien der Open-Data-Bewegung nachgebildet, insbesondere dem Grundsatz, dass öffentliche Daten ohne diskriminierende Nutzungsbeschränkungen zugänglich sein sollen.
+
+Eine behördliche Praxis, die darüber hinausgehende Zweckbindungen oder Zweckausschlüsse in Lizenzbedingungen einführt (z.B. "nicht zur kommerziellen Nutzung" oder "nur für wissenschaftliche Zwecke"), würde dem Telos der GeoNutzV widersprechen und wäre grundsätzlich unzulässig.
+
+#### Ausnahme 1: Besondere Rechtsvorschrift
+
+Der erste und wichtigste Vorbehalt in § 2 GeoNutzV lautet: 
+
+> soweit durch besondere Rechtsvorschrift nichts anderes bestimmt ist
+
+Dieser Vorbehalt erlaubt Nutzungseinschränkungen, wenn:
+
+- **Formeller Rechtssatz**  
+  Es muss sich um ein Gesetz, eine Verordnung oder Satzung handeln (nicht um eine bloße Verwaltungsvorschrift oder Allgemeine Geschäftsbedingung)
+- **Spezialgesetzlich**  
+  Die Norm muss spezieller sein als die GeoNutzV
+- **Inhaltliche Rechtfertigung**  
+  Die Einschränkung muss einem legitimen öffentlichen Zweck dienen (z.B. Datenschutz, nationale Sicherheit, Schutz von Infrastruktur)
+
+Beispiele für zulässige Einschränkungen durch besondere Rechtsvorschriften:
+
+- **§ 9 GeoZG**  
+  selbst schließt den Zugang zu Geodaten aus, wenn öffentliche Sicherheitsinteressen entgegenstehen, schon der Zugang, nicht nur die Nutzung ist beschränkt
+- **Datenschutzrecht (DSGVO, BDSG)**  
+  Wenn Geodaten personenbezogene Daten beinhalten (z.B. Grundstückseigentümerdaten), können Nutzungszwecke durch Datenschutzrecht eingeschränkt sein
+- **UrhG**  
+  Schutzrechte Dritter (dazu sogleich)
+-  **BNatSchG, WHG**  
+  u.a. Fachgesetze, die bestimmte Nutzungsformen von Umweltdaten einschränken können
+- **Sicherheitsrechtliche Vorschriften**  
+  (z.B. Sicherheitsüberprüfungsgesetz): Für militärisch oder sicherheitsrelevant klassifizierte Geobasisdaten (d.h. Verschlusssachen)
+
+*Zweckbindungen und Zweckausschlüsse sind zulässig, wenn sie auf einer formellen Rechtsgrundlage beruhen, die der GeoNutzV vorgeht. Eine bloße behördliche Entscheidung genügt nicht.*
+
+#### Ausnahme 2: Rechte Dritter
+
+Der zweite Vorbehalt:
+
+>oder vertragliche oder gesetzliche Rechte Dritter dem nicht entgegenstehen.
+
+Gemeint sind insbesondere:
+
+- **Urheberrechte und verwandte Schutzrechte**  
+  Von Bedeutung sind verwandte Schutzrechte im 2. und 3. Teil des UrhG (§ 70 ff.) z.B. für Luftbilder, die als Lichtbilder (§ 72 UrhG) geschützt sein können. Wenn ein Geodatensatz Bestandteile enthält, an denen Dritte Urheberrechte halten (z.B. eingekaufte Satellitendaten, lizenziertes Kartenmaterial), kann die Behörde diese Rechte nicht einseitig aufheben. Die Nutzungsgestattung reicht nur so weit, wie die Behörde selbst berechtigt ist.
+- **Datenbankschutzrechte** (§§ 87a ff. UrhG)  
+  Geodaten werden häufig in Datenbanken organisiert. Wenn ein privater Dritter diese Datenbank erstellt hat und ein Datenbankherstellerrecht nach § 87a UrhG besteht, können Nutzungseinschränkungen bestehen.
+- **Vertragliche Rechte Dritter**  
+  Wenn die Behörde Geodaten auf vertraglicher Basis erworben hat und der Vertragspartner Nutzungsbeschränkungen vereinbart hat (z.B. nur interne Verwaltungsnutzung), kann die Behörde diese Daten nicht in vollem Umfang nach GeoNutzV lizenzieren.
+
+*Bundesbehörden müssen beim Erwerb von Geodaten von privaten Unternehmen darauf achten, ausreichend breite Weiternutzungsrechte zu erwerben, um die GeoNutzV vollständig anwenden zu können. Andernfalls sind Einschränkungen de facto unvermeidlich.*
+
+Über die beiden genannten Vorbehalte hinaus dürfen geodatenhaltende Bundesbehörden keine eigenmächtigen Nutzungseinschränkungen hinzufügen. Konkret unzulässig wäre:
+
+- **Verbot kommerzieller Nutzung**: Widerspricht § 2 GeoNutzV ausdrücklich
+- **Beschränkung auf wissenschaftliche Zwecke**: Zweckbindung ohne Rechtsgrundlage; verstößt gegen GeoNutzV-Telos
+- **Verbot der Weitergabe an Dritte**: § 3 GeoNutzV erlaubt Weitergabe ausdrücklich
+- **Nutzungsgebühren für bestimmte Zwecke**: Verstoß gegen Geldleistungsfreiheit nach § 2
+- **Technische Zugangsbeschränkungen als De-facto-Zweckausschluss**: Unzulässige Umgehung der GeoNutzV, ggf. Verstoß gegen § 11 GeoZG
+
+Die GeoNutzV lässt eine über die gesetzlich geregelten Ausnahmen hinausgehende administrative Beschränkung der Nutzungsrechte nicht zu.
+
+### Verhältnis zum europäischen Recht (INSPIRE, Open-Data-Richtlinie)
+
+Die GeoNutzV ist eingebettet in einen europäischen Rahmen:
+
+- **INSPIRE-Richtlinie (2007/2/EG)**: Schreibt vor, dass Geodaten der öffentlichen Verwaltung interoperabel und zugänglich sein müssen. Nutzungsbeschränkungen sind nur zulässig, wenn sie im Einzelfall durch Ausnahmetatbestände der Richtlinie gerechtfertigt sind.
+- **Open-Data-Richtlinie (EU 2019/1024)**: Verlangt für öffentliche Stellen eine möglichst weitgehende Weiterverwendbarkeit. Zweckbindungen und -ausschlüsse bedürfen auch hier besonderer Rechtfertigung.
+
+### Fazit
+
+Die GeoNutzV etabliert ein Regel-Ausnahme-Verhältnis zugunsten freier Nutzung. Zweckbindungen und Zweckausschlüsse sind keine freie behördliche Gestaltungsoptionen, sondern müssen sich auf konkrete Rechtsnormen oder Drittrechte stützen lassen. Behörden, die darüber hinausgehende Einschränkungen einführen, verstoßen gegen ihre gesetzliche Lizenzierungspflicht nach dem GeoZG.
+
+### Konkreter Fall
+
+> Verwendung zur Navigation nicht gestattet
+
+Die Klausel "Verwendung zur Navigation nicht gestattet" ist ein klassischer Zweckausschluss: Eine spezifische Nutzungsform wird aus dem lizenzierten Nutzungsbereich herausgenommen. Dies steht in direktem Widerspruch zum Grundsatz des § 2 GeoNutzV, der alle Nutzungszwecke umfasst.
+
+Die Klausel wäre nur dann zulässig, wenn einer der beiden Vorbehalte greift:
+
+- Besondere Rechtsvorschrift
+- Rechte Dritter
+
+Da das BSH seine Seekartendaten selbst produziert, eigene hydrographische Vermessung, eigene Aufbereitung, eigene Datenbankstruktur, scheiden Drittrechte aus. Alles hängt an der Frage der besonderen Rechtsvorschrift.
+
+**SOLAS** begründet eine positive Bereitstellungspflicht, der Staat muss qualitativ hochwertige Navigationsdaten liefern. Das ist aber keine Ermächtigungsgrundlage für den Ausschluss der Nutzung freier Geodaten zur Navigation. SOLAS sagt nichts über Open-Data-Lizenzbedingungen. Aus der Pflicht zur Bereitstellung amtlicher Daten folgt kein Verbot, andere Daten zur Navigation zu nutzen.
+
+Das **SeeAufgG** weist dem BSH Aufgaben im Bereich Seekartographie und Schiffssicherheit zu. Es regelt die Aufgaben und Verantwortlichkeiten der einzelnen Bundesbehörden auf dem Gebiet der Seeschifffahrt.
+
+Das SeeAufgG enthält:
+
+- Die Pflicht des BSH, amtliche ENCs nach IHO-Standard zu produzieren und aktuell zu halten
+- Die Grundlage für das offizielle Seekartensystem (zertifiziert, kostenpflichtig über PRIMAR/IC-ENC)
+- Keine Ermächtigung zum lizenzrechtlichen Ausschluss der Navigationsnutzung von Open-Data-Rohdaten
+
+Das SeeAufgG regelt das behördliche Leistungsangebot, nicht die privatrechtlichen Nutzungsbedingungen für freigegebene Geodaten. Die Logik des Gesetzes ist: Das BSH muss amtliche, verlässliche Karten bereitstellen. Was Nutzer mit Open-Data-Rohdaten anfangen, liegt außerhalb seines Regelungsauftrags.
+
+Das **Geodatenzugangsgesetz** ist das übergeordnete Gesetz zur GeoNutzV. § 11 GeoZG schreibt die Bereitstellung vor. § 9 GeoZG enthält Ausnahmen (öffentliche Sicherheit etc.), aber:
+
+- § 9 GeoZG erlaubt es Behörden, den Zugang zu Geodaten zu verweigern, wenn spezifische Schutzgüter berührt sind
+- Ein pauschaler Navigationsausschluss für Tiefendaten, die bereits öffentlich zugänglich gemacht wurden, fällt nicht unter die § 9-Ausnahmen
+- Seekartendaten, die ohnehin veröffentlicht sind, können nicht nachträglich durch eine lizenzrechtliche Klausel für bestimmte Zwecke "zugangsbeschränkt" werden
+
+Ergebnis: GeoZG trägt den Zweckausschluss nicht, sondern steht ihm entgegen.
+
+Das BSH könnte argumentieren, es wolle sich durch die Klausel vor **Staatshaftungsansprüchen** schützen: Navigiert jemand mit unzertifizierten Open-Data-Seekarten und erleidet Schaden, könnte das BSH in Regress genommen werden.
+
+Dieses Argument scheitert auf mehreren Ebenen:
+
+-  Die kostenlose Bereitstellung von Rohdaten unter GeoNutzV begründet KEINE Amtspflicht zur lückenlosen   Aktualität gegenüber dem einzelnen Nutzer. Daher keine Haftungsgrundlage, also kein Schutzbedürfnis
+- § 5 GeoNutzV enthält bereits einen ausdrücklichen Haftungsausschluss für Richtigkeit, Vollständigkeit   und Aktualität der bereitgestellten Daten. Das Haftungsrisiko ist bereits durch die GeoNutzV selbst vollständig abgedeckt.
+- Haftungsrechtliche Überlegungen rechtfertigen keine Abweichung vom zwingenden Wortlaut des § 2 GeoNutzV.  Verwaltung handelt nur im Rahmen der Ermächtigungsgrundlage Haftungsvermeidung ist keine solche.
+
+Man könnte überlegen, ob **sicherheitsrelevante Vorschriften** (z.B. kritische Infrastruktur, Verteidigung) eine Rolle spielen. Das scheidet hier aus:
+
+- Es geht um zivile Hydrographiedaten für deutsche Küstengewässer, keine Verschlusssachen
+§ 9 GeoZG-Ausnahmen für Sicherheitsbelange würden den Zugang überhaupt sperren, nicht nur einen Zweck ausschließen
+- Eine selektive Zwecksperre für Navigation bei gleichzeitig frei zugänglichen Tiefendaten wäre widersprüchlich: Wer die Daten hat, kann sie auch zur Navigation nutzen, das Verbot ist faktisch nicht durchsetzbar.
+
+Das BSH betreibt faktisch drei parallele **Vertriebskanäle** für seine Seekartendaten, die unterschiedlichen Rechtsregimen unterliegen.
+
+- RENC/IC-ENC (Offizielle ENC), Endnutzer: kommerzielle Schifffahrt
+- Kartenverlage als Lizenznehmer, BSH vergibt Nutzungslizenzen (kostenpflichtig)
+- Open Data
+
+Können diese Arrangements GeoNutzV-Ausnahmen begründen?
+
+Das IC-ENC Cooperation Arrangement (COA) ist ein multilaterales Kooperationsabkommen zwischen nationalen hydrographischen Diensten (Issuing Authorities). Es verweist auf SOLAS-Verpflichtungen und schafft einen Rahmen für Harmonisierung von technischen, lizenzrechtlichen und Vertriebsarrangements.
+
+Der IC-ENC/RENC ist eine Distributionsplattform, kein Rechteinhaber. Das BSH bleibt der alleinige Urheber und Datenbankersteller seiner eigenen Vermessungsdaten. Der IC-ENC erwirbt keine Schutzrechte in den BSH-Daten, er erhält lediglich das Recht, sie zu verbreiten. Die "Rechte Dritter" im Sinne des § 2 GeoNutzV müssen aber Rechte am Datenmaterial sein (Urheberrecht, Datenbankherstellerrecht), nicht bloße Distributionsrechte. Weiterhin ist das IC-ENC COA ist ein internationales Kooperationsabkommen zwischen hydrographischen Diensten, kein formeller Rechtssatz im Sinne des deutschen Rechtes.
+
+Der IC-ENC verwendet die S-63-Datenschutztechnik (IHO-Standard) zur Verschlüsselung und Zugriffskontrolle auf ENCs. Das Joint RENC PAYS-System operiert auf Basis von S-63 und dem PRIMAR Distributor Agreement.
+S-63 ist ein technisches Zugangskontrollsystem, das Kopierschutz implementiert. Aber:
+
+- Technische Schutzmaßnahmen schränken Nutzungsrechte nicht ein, sie kontrollieren nur den Zugang zu einem bestimmten Produktformat
+- BSH-Rohdaten (die dem S-63-System zugrunde liegen) und das verschlüsselte ENC-Produkt sind verschiedene Gegenstände
+- Die Open-Data-Pflicht betrifft die Rohdaten, nicht das verschlüsselte Endprodukt
+
+Das BSH vergibt **Lizenzen** an Kartenverlage, die digitale Daten für eine Informationsverwertung oder Weiterverwertung nutzen möchten, benötigen dafür ggf. eine Lizenz.
+Die  Verlage erwerben damit ein Nutzungsrecht an BSH-Daten und erstellen daraus eigene kartographische Produkte. Sie erwerben damit keine Rechte gegen das BSH, die eine Open-Data-Freigabe verhindern würden. Der Verlag hat ein Recht, BSH-Daten zu nutzen, er hat kein Recht, andere an der Nutzung zu hindern.
+
+Das BSH darf öffentlich kommunizieren, dass seine Open-Data-Rohdaten nicht die Qualität amtlicher Seekarten haben und nicht nach SOLAS-Standards zertifiziert sind. Das ist sinnvoll, richtig und notwendig. Es darf aber nicht als Lizenzbedingung unter der GeoNutzV festschreiben, dass die Nutzung zur Navigation verboten ist, denn dafür fehlt schlicht jede gesetzliche Ermächtigungsgrundlage. Die GeoNutzV erlaubt alle Nutzungszwecke ohne Einschränkung. Abweichungen bedürfen einer besonderen Rechtsvorschrift, die hier nicht existiert.
