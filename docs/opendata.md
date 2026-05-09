@@ -609,8 +609,8 @@ Das BSH könnte argumentieren, es wolle sich durch die Klausel vor **Staatshaftu
 
 Dieses Argument scheitert auf mehreren Ebenen:
 
--  Die kostenlose Bereitstellung von Rohdaten unter GeoNutzV begründet KEINE Amtspflicht zur lückenlosen   Aktualität gegenüber dem einzelnen Nutzer. Daher keine Haftungsgrundlage, also kein Schutzbedürfnis
-- § 5 GeoNutzV enthält bereits einen ausdrücklichen Haftungsausschluss für Richtigkeit, Vollständigkeit   und Aktualität der bereitgestellten Daten. Das Haftungsrisiko ist bereits durch die GeoNutzV selbst vollständig abgedeckt.
+-  Die kostenlose Bereitstellung von Rohdaten unter GeoNutzV begründet KEINE Amtspflicht zur lückenlosen Aktualität gegenüber dem einzelnen Nutzer. Daher keine Haftungsgrundlage, also kein Schutzbedürfnis
+- § 4 GeoNutzV enthält bereits einen ausdrücklichen Haftungsausschluss für Richtigkeit, Vollständigkeit und Aktualität der bereitgestellten Daten. Das Haftungsrisiko ist bereits durch die GeoNutzV selbst abgedeckt.
 - Haftungsrechtliche Überlegungen rechtfertigen keine Abweichung vom zwingenden Wortlaut des § 2 GeoNutzV.  Verwaltung handelt nur im Rahmen der Ermächtigungsgrundlage Haftungsvermeidung ist keine solche.
 
 Man könnte überlegen, ob **sicherheitsrelevante Vorschriften** (z.B. kritische Infrastruktur, Verteidigung) eine Rolle spielen. Das scheidet hier aus:
