@@ -345,7 +345,7 @@ Das Sicherheitsargument impliziert, lizenzierte kommerzielle Kartenprodukte böt
 
 ### Übersicht: Nutzungsbedingungen im Vergleich 
 
-| Anbieter | Garantie Aktualität/Richtigkeit | Zur Navigation zugelassen | Haftungsausschluss | Nutzungsbedingungen |
+| Anbieter | Garantie Aktualität/Richtigkeit | App zur Navigation zugelassen | Haftungsausschluss | Nutzungsbedingungen |
 |---|---|---|---|---|
 | **Garmin / Navionics** | Keine. Ausdrücklicher Ausschluss jeder Gewähr für Genauigkeit, Vollständigkeit oder Aktualität. | Nein. Ausdrücklich nur als "Reisehilfe" (*travel aid*) deklariert. Darf nicht für Zwecke verwendet werden, die präzise Messung erfordern. | Vollständig. Garmin haftet nicht für Ungenauigkeiten, Fehler, Datenverlust oder Schäden jeder Art, die aus der Nutzung entstehen. | [marine-cartography-disclaimer](https://www.garmin.com/en-US/legal/marine-cartography-disclaimer/) / [marine_cartography_eula](https://www.garmin.com/en-US/legal/marine_cartography_eula/) |
 | **C-MAP** (Kongsberg / Navico) | Keine. Daten können unregelmäßig oder gar nicht aktualisiert werden. Keine Gewähr für Vollständigkeit. | Nein. Ausdrücklich nur Hilfmittel, nicht zur Navigation. | Vollständig. Keinerlei Haftung für Schäden durch Ungenauigkeiten oder Fehler der Kartendaten. | [Terms of Purchase](https://store.c-map.com/en/Home/TermsOfPurchase) / [EULA](https://www.c-map.com/legal/terms-and-conditions-eula/) |
