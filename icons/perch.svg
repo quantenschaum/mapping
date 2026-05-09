@@ -16,12 +16,12 @@
       .outline {
         fill: none;
         stroke: black;
-        stroke-width: 0.3;
+        stroke-width: 1.5;
       }
       .inline {
         fill: none;
         stroke: none;
-        stroke-width: 0.8;
+        stroke-width: 1.5;
       }
       .fill {
         fill: none;
