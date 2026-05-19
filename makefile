@@ -3,7 +3,7 @@
 # https://www.teledynecaris.com/s-57/frames/S57catalog.htm
 
 SHELL=/bin/bash
-export PATH:=$(PWD)/scripts:$(PWD)/spreet/target/release:$(PWD)/tippecanoe:$(PWD)/pmtiles:$(PATH)
+export PATH:=$(PWD)/scripts:$(PATH)
 export OGR_S57_OPTIONS=LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON
 # export S57_CSV="$(PWD)/scripts"
 
@@ -15,10 +15,11 @@ help:
 build:
 # 	$(MAKE) lightsectors.obf
 	$(MAKE) vwm rws
-	$(MAKE) qmap-de.obf qmap-de.zip qmap-nl.zip
+	# $(MAKE) qmap-de.obf qmap-de.zip qmap-nl.zip
+	$(MAKE) qmap-nl.zip
 	$(MAKE) clean-cache
 	$(MAKE) docker-seed
-	$(MAKE) vector charts tiles zips www
+	$(MAKE) charts tiles zips www
 
 vwm:
 	rm -rf data/vwm && mkdir -p data/vwm
@@ -98,21 +99,6 @@ icons.zip: icons/gen
 	rm -f charts/$@
 	zip charts/$@ -r icons/gen
 
-spreet:
-	git clone https://github.com/flother/spreet
-	cd spreet && cargo build --release
-
-sprites: icons
-	spreet icons/gen  www/vector/icons --recursive --unique --ratio 2
-	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 1/g' www/vector/icons.json -i
-	spreet icons/gen  www/vector/icons@2x --recursive --unique --ratio 4
-	sed 's/"pixelRatio": [[:digit:]]\+/"pixelRatio": 2/g' www/vector/icons@2x.json -i
-
-vector:
-	tippecanoe -Z6 -z16 -B6 -r1 data/bsh/filtered/*.json -j '{"*":["any", ["all",["==","uband",1],["<=","$$zoom",8]], ["all",["==","uband",2],["in","$$zoom",9]], ["all",["==","uband",3],["in","$$zoom",10,11]], ["all",["==","uband",4],["in","$$zoom",12,13]], ["all",["==","uband",5],["in","$$zoom",14,15]], ["all",["==","uband",6],[">=","$$zoom",16]],        ["all",["has","MARSYS"], ["any", ["all",["==","uband",2],["<=","$$zoom",8]], ["all",["==","uband",3],["in","$$zoom",9]], ["all",["==","uband",4],["in","$$zoom",10,11]], ["all",["==","uband",5],["in","$$zoom",12,13]], ["all",["==","uband",6],["in","$$zoom",14,15]]] ] ]}' --no-tile-compression -o vector.pmtiles -f -x lnam -x dsnm -x fidn -x fids -x prim -x rcid -x rver -x agen -x objl -x grup -x SCAMIN -x SCAMAX -x file -x catgeo -x chart -x scale -x name
-	ls -lh vector.pmtiles
-	mv -v vector.pmtiles www/vector/
-
 data/Elevation-Bathymetry.zip:
 	# https://gdi.bsh.de/de/feed/Hoehe-Bathymetrie.xml
 	wget -O data/Elevation-Bathymetry.zip https://gdi.bsh.de/de/data/Elevation-Bathymetry.zip
@@ -186,13 +172,6 @@ www/%/: charts/%.mbtiles
 	convert.py -f $< $@
 	cp www/map.html $@/index.html
 	chmod +rX -R $@
-
-www/%.pmtiles: charts/%.mbtiles pmtiles
-	go-pmtiles convert $< $@
-
-pmtiles:
-	git clone https://github.com/protomaps/go-pmtiles.git $@
-	cd $@ && go build
 
 data/chartconvert:
 	mkdir -p data

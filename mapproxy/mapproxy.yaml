@@ -4,7 +4,7 @@ globals:
     resampling_method: bilinear
   cache:
     link_single_color_images: true
-    meta_size: [ 6,6 ]
+    meta_size: [6, 6]
     meta_buffer: 200
     bulk_meta_tiles: true
     base_dir: ../cache_data
@@ -28,9 +28,9 @@ sources:
     coverage:
       datasource: ../data/bsh.gpkg
       where: recind="Overview"
-      srs: 'EPSG:4326'
-#    image:
-#      transparent_color: '#f9ecc0'
+      srs: "EPSG:4326"
+  #    image:
+  #      transparent_color: '#f9ecc0'
   qgis1:
     # shifted usage band as underlay
     type: wms
@@ -41,7 +41,7 @@ sources:
     coverage:
       datasource: ../data/bsh.gpkg
       where: recind="Overview"
-      srs: 'EPSG:4326'
+      srs: "EPSG:4326"
   qgis2:
     # shifted usage band as underlay
     type: wms
@@ -52,7 +52,7 @@ sources:
     coverage:
       datasource: ../data/bsh.gpkg
       where: recind="Overview"
-      srs: 'EPSG:4326'
+      srs: "EPSG:4326"
   rws:
     type: wms
     req:
@@ -62,24 +62,24 @@ sources:
     coverage:
       datasource: ../data/rws-covr.gpkg
       where: CATCOV=1
-      srs: 'EPSG:4326'
+      srs: "EPSG:4326"
 
 caches:
-  qmap-de:
-    sources: [ 'qgis2:BSH','qgis1:BSH','qgis0:BSH' ]
-    grids: [ GLOBAL_WEBMERCATOR ]
-    cache:
-      type: mbtiles
+  # qmap-de:
+  #   sources: [ 'qgis2:BSH','qgis1:BSH','qgis0:BSH' ]
+  #   grids: [ GLOBAL_WEBMERCATOR ]
+  #   cache:
+  #     type: mbtiles
   qmap-nl:
-    sources: [ 'rws:enc,vwm' ]
-    grids: [ GLOBAL_WEBMERCATOR ]
+    sources: ["rws:enc,vwm"]
+    grids: [GLOBAL_WEBMERCATOR]
     cache:
       type: mbtiles
 
 layers:
-  - name: qmap-de
-    title: "QMAP DE"
-    sources: [ qmap-de ]
+  # - name: qmap-de
+  #   title: "QMAP DE"
+  #   sources: [ qmap-de ]
   - name: qmap-nl
     title: "QMAP NL"
-    sources: [ qmap-nl ]
+    sources: [qmap-nl]
