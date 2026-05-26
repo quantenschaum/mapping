@@ -137,7 +137,7 @@ export default defineConfig({
         target: "https://freenauticalchart.net",
         changeOrigin: true,
       },
-      "^.*\.pmtiles$": {
+      "/vector": {
         target: "https://freenauticalchart.net",
         changeOrigin: true,
       },

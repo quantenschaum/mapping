@@ -625,13 +625,24 @@ if (params.get("nfs") == "1") {
 legend(layers);
 
 if (isSet("vector")) {
-  import("@maplibre/maplibre-gl-leaflet").then((maplibre) => {
-    console.log("maplibre", maplibre);
+  Promise.all([
+    import("@maplibre/maplibre-gl-leaflet"),
+    import("maplibre-gl"),
+    import("pmtiles"),
+  ]).then(([, maplibregl, { Protocol }]) => {
+    const protocol = new Protocol();
+    maplibregl.addProtocol("pmtiles", protocol.tile);
     layers.addBaseLayer(
       L.maplibreGL({
-        style: baseurl + "vector/style.json",
+        style: baseurl + "vector/bsh.json",
       }),
-      "Vector (experimental)",
+      "QMAP-DE Vector (experimental)",
+    );
+    layers.addBaseLayer(
+      L.maplibreGL({
+        style: baseurl + "vector/rws.json",
+      }),
+      "QMAP-NL Vector (experimental)",
     );
   });
 }
