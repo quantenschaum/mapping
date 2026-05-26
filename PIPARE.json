@@ -1,0 +1,3 @@
+{"type":"FeatureCollection","features":[
+{"type": "Feature", "id": "Approach_Offshore_Installations_Cable_Pipeline_Areas.fid-d507654_19dcb60bcb0_2ee5", "geometry": {"type": "Polygon", "coordinates": [[[9.338977, 53.848461], [9.339223, 53.848452], [9.339401, 53.848471], [9.339676, 53.848552], [9.3409, 53.849162], [9.341132, 53.848985], [9.339902, 53.848368], [9.33971, 53.848234], [9.339611, 53.848078], [9.33952, 53.847898], [9.338786, 53.848521], [9.338977, 53.848461]]]}, "geometry_name": "geom", "properties": {"rver": 1, "PRODCT": "3", "lnam": "00B442FE06BBDA01", "SCAMAX": 22000, "util_type": 2, "grup": 2, "name": "DE4NO13S.000", "CATPIP": "2,3", "SCAMIN": 89999, "file": "Hydrography.json", "uband": 4, "chart": "DE4NO13S", "catgeo": 3, "layer": "PIPARE"}}
+]}
