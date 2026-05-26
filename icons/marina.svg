@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="14"
+   height="14"
    id="svg2"
    sodipodi:docname="marina.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
   <sodipodi:namedview
      id="namedview22131"
      pagecolor="#ffffff"
@@ -22,33 +24,32 @@
      showgrid="false"
      showguides="true"
      inkscape:zoom="33.71875"
-     inkscape:cx="15.733086"
-     inkscape:cy="15.614458"
-     inkscape:window-width="1792"
-     inkscape:window-height="1297"
-     inkscape:window-x="1685"
-     inkscape:window-y="692"
-     inkscape:window-maximized="0"
+     inkscape:cx="6.1390176"
+     inkscape:cy="6.0500463"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg2">
     <sodipodi:guide
-       position="10.083411,16"
+       position="0.51074381,6.4273317"
        orientation="0,1"
        id="guide22613"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="16,24.496756"
+       position="6.4273328,14.924088"
        orientation="-1,0"
        id="guide22615"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
   </sodipodi:namedview>
-
   <g
      id="g116721"
-     transform="matrix(1.3333333,0,0,-1.3333333,-90.388397,194.32306)">
+     transform="matrix(1.3333333,0,0,-1.3333333,-99.388397,185.32306)">
     <g
        id="g936"
        transform="translate(75.2543,133.7433)"

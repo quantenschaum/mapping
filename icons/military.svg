@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="6"
+   height="12"
    id="svg2"
    sodipodi:docname="military.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,23 +24,23 @@
      showgrid="false"
      showguides="true"
      inkscape:zoom="33.71875"
-     inkscape:cx="12.693234"
-     inkscape:cy="13.271548"
-     inkscape:window-width="1792"
-     inkscape:window-height="1297"
-     inkscape:window-x="1689"
-     inkscape:window-y="724"
-     inkscape:window-maximized="0"
+     inkscape:cx="-1.0676552"
+     inkscape:cy="-1.3642261"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg2">
     <sodipodi:guide
-       position="10.083411,16"
+       position="-3.6704402,9.8120439"
        orientation="0,1"
        id="guide22613"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="16,24.496756"
+       position="2.2461488,18.3088"
        orientation="-1,0"
        id="guide22615"
        inkscape:locked="false"
@@ -49,7 +49,7 @@
   </sodipodi:namedview>
   <g
      id="g163087"
-     transform="matrix(1.3333333,0,0,-1.3333333,-656.80944,279.26107)">
+     transform="matrix(1.3333333,0,0,-1.3333333,-670.01143,265.03104)">
     <g
        id="g2474"
        transform="translate(505.3697,196.2778)"

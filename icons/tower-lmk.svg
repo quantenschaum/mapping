@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="7"
+   height="13"
    id="svg2"
    sodipodi:docname="tower-lmk.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,33 +23,40 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      showguides="true"
-     inkscape:zoom="30.75"
-     inkscape:cx="15.300813"
-     inkscape:cy="15.98374"
-     inkscape:window-width="1702"
-     inkscape:window-height="1471"
-     inkscape:window-x="465"
-     inkscape:window-y="29"
-     inkscape:window-maximized="0"
+     inkscape:zoom="86.974134"
+     inkscape:cx="4.0701756"
+     inkscape:cy="9.1751417"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg2">
     <sodipodi:guide
-       position="17.333333,16"
+       position="4.3566658,1.1741022"
        orientation="0,1"
        id="guide745"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="16,33.691057"
+       position="3.5,21.036626"
        orientation="-1,0"
        id="guide1473"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="13.506987,2"
+       orientation="0,1"
+       id="guide1"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
   </sodipodi:namedview>
   <g
      id="CATLMK_17"
-     transform="matrix(1.3333333,0,0,-1.3333333,-84.410397,757.83195)">
+     transform="matrix(1.3333333,0,0,-1.3333333,-96.909731,752.79051)">
     <g
        id="g1430"
        transform="translate(74.6273,556.3434)"

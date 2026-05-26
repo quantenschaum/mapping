@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="7"
+   height="14"
    id="svg2"
    sodipodi:docname="cross-lmk.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -22,24 +22,25 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      showgrid="false"
-     inkscape:zoom="36.125"
-     inkscape:cx="12.775087"
-     inkscape:cy="15.986159"
-     inkscape:window-width="1920"
-     inkscape:window-height="2091"
-     inkscape:window-x="653"
-     inkscape:window-y="29"
-     inkscape:window-maximized="0"
-     showguides="true">
+     inkscape:zoom="72.25"
+     inkscape:cx="2.1314879"
+     inkscape:cy="11.474048"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:current-layer="svg2">
     <sodipodi:guide
-       position="16.941176,16"
+       position="4.1915626,2"
        orientation="0,1"
        id="guide1290"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="16,30.754325"
+       position="3.5,17.732572"
        orientation="-1,0"
        id="guide1292"
        inkscape:locked="false"
@@ -48,7 +49,7 @@
   </sodipodi:namedview>
   <g
      id="CATLMK_14"
-     transform="matrix(3.7795276,0,0,3.7795276,-2606.5013,446.66212)">
+     transform="matrix(3.7795276,0,0,3.7795276,-2619.0008,442.641)">
     <path
        d="m 694.72015,-113.94043 h -0.64064 m -0.45191,0 h -0.60749"
        style="fill:none;stroke:#231f20;stroke-width:0.119944;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"

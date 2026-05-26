@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="15"
+   height="10"
    id="svg2"
    sodipodi:docname="wreck-dangerous.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +14,7 @@
      id="defs12" />
   <sodipodi:namedview
      id="namedview10"
-     pagecolor="#505050"
+     pagecolor="#ffffff"
      bordercolor="#eeeeee"
      borderopacity="1"
      inkscape:showpageshadow="0"
@@ -23,27 +23,27 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="32.21875"
-     inkscape:cx="16"
-     inkscape:cy="16"
-     inkscape:window-width="1919"
-     inkscape:window-height="1275"
-     inkscape:window-x="349"
-     inkscape:window-y="69"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="g260" />
+     inkscape:cx="7.014549"
+     inkscape:cy="4.4384093"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
   <g
      id="g260"
-     transform="matrix(1.5089843,0,0,-1.4631879,9.3789902,15.946488)"
+     transform="matrix(1.5089843,0,0,-1.4631879,0.34550334,4.3996821)"
      clip-path="url(#clipPath25156)"
      style="stroke:#231f20;stroke-width:0.471092;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.00471091, 0.970452;stroke-dashoffset:0.329764;stroke-opacity:1">
     <path
-       d="M 0,0 C 0,1.532 1.896,2.772 4.235,2.772 6.573,2.772 8.469,1.532 8.469,0 8.469,-1.532 6.573,-2.775 4.235,-2.775 1.896,-2.775 0,-1.532 0,0"
+       d="m 0.51173779,-0.41588695 c 0,1.53200005 1.89599991,2.77200005 4.23499991,2.77200005 2.338,0 4.234,-1.24 4.234,-2.77200005 0,-1.53199995 -1.896,-2.77499995 -4.234,-2.77499995 -2.339,0 -4.23499991,1.243 -4.23499991,2.77499995"
        style="display:inline;fill:#afcce3;fill-opacity:1;fill-rule:nonzero;stroke:#231f20;stroke-width:0.471092;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.00471091, 0.970453;stroke-dashoffset:0.329764;stroke-opacity:1"
        id="path262" />
   </g>
   <g
      id="g672"
-     transform="matrix(1.3333333,0,0,-1.3333333,12.980504,17.499962)"
+     transform="matrix(1.3333333,0,0,-1.3333333,4.5139995,6.5113339)"
      clip-path="url(#clipPath24520)">
     <path
        d="M 0,0 V 2.266"

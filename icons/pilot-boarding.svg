@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="14"
+   height="14"
    id="svg2"
+   sodipodi:docname="pilot-boarding.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="59.125"
+     inkscape:cx="6.0549683"
+     inkscape:cy="6.0549683"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
   <g
      id="g177879"
-     transform="matrix(1.3333333,0,0,-1.3333333,-364.71012,723.50945)">
+     transform="matrix(1.3333333,0,0,-1.3333333,-373.71012,714.50945)">
     <path
        d="m 281.2806,530.6326 c 0,2.348 1.904,4.252 4.252,4.252 2.348,0 4.252,-1.904 4.252,-4.252 0,-2.349 -1.904,-4.253 -4.252,-4.253 -2.348,0 -4.252,1.904 -4.252,4.253 z"
        style="fill:none;stroke:#ec008c;stroke-width:0.567;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"

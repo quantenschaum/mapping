@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="17"
+   height="17"
+   id="svg2"
+   sodipodi:docname="crane.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="59.125"
+     inkscape:cx="2.2832981"
+     inkscape:cy="7.6786469"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     showguides="true">
+    <sodipodi:guide
+       position="21.116808,8.5"
+       orientation="0,1"
+       id="guide1"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="8.5,15.564878"
+       orientation="-1,0"
+       id="guide2"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
+  <g
+     id="g1684"
+     transform="matrix(2.6508023,0,0,-2.6508023,-442.47663,976.99725)">
+    <g
+       id="g1686"
+       clip-path="url(#clipPath1690)"
+       transform="translate(0.56586642,-0.5658664)">
+      <g
+         id="g2"
+         transform="translate(-1.3203532,1.3203523)">
+        <g
+           id="g1692"
+           transform="translate(169.43684,364.60506)">
+          <path
+             d="M 0,0 C 0,0.799 0.648,1.446 1.446,1.446 2.245,1.446 2.892,0.799 2.892,0 2.892,-0.798 2.245,-1.445 1.446,-1.445 0.648,-1.445 0,-0.798 0,0 Z"
+             style="fill:none;stroke:#231f20;stroke-width:0.51;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+             id="path1694" />
+        </g>
+        <path
+           style="fill:#1a1a1a;stroke:#1a1a1a;stroke-width:0.528142;stroke-linecap:round"
+           d="m 170.88284,364.60556 v -2.86152"
+           id="path1" />
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="7"
+   height="13"
    id="svg2"
    sodipodi:docname="tower.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xml:space="preserve"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs1" /><sodipodi:namedview
+   id="namedview1"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   showguides="true"
+   inkscape:zoom="59.125"
+   inkscape:cx="3.3657505"
+   inkscape:cy="10.147992"
+   inkscape:window-width="3840"
+   inkscape:window-height="2094"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg2"><sodipodi:guide
+     position="14.833113,2"
+     orientation="0,1"
+     id="guide1"
+     inkscape:locked="false"
+     inkscape:label=""
+     inkscape:color="rgb(0,134,229)" /><sodipodi:guide
+     position="3.5,4.2899709"
+     orientation="-1,0"
+     id="guide2"
+     inkscape:locked="false"
+     inkscape:label=""
+     inkscape:color="rgb(0,134,229)" /></sodipodi:namedview>
   <style
    type="text/css"
    id="base">
@@ -45,75 +76,75 @@
   <path
    id="BCNSHP_3"
    class="fill uniform vertical02 vertical03 horizontal02 horizontal03 horizontal04 cross02 saltire02 squared02"
-   d="M 18.340391,16 17.638509,5.9999998 H 14.361492 L 13.65961,16 Z" />
+   d="M 5.8403911,10.999999 5.1385091,0.99999905 H 1.8614921 L 1.1596101,10.999999 Z" />
   <path
    id="path939"
    class="fill vertical13"
-   d="m 15.219236,6 v 10 h 3.121672 L 17.639191,6 Z" />
+   d="M 2.7192361,0.99999925 V 10.999999 h 3.121672 L 5.1391911,0.99999925 Z" />
   <path
    id="path944"
    class="fill vertical12"
-   d="m 16,6 v 10 h 2.340908 L 17.639191,6 Z" />
+   d="M 3.5000001,0.99999925 V 10.999999 h 2.340908 L 5.1391911,0.99999925 Z" />
   <path
    id="path949"
    class="fill vertical23"
-   d="m 16.780765,6 v 10 h 1.560143 L 17.639191,6 Z" />
+   d="M 4.2807651,0.99999925 V 10.999999 h 1.560143 L 5.1391911,0.99999925 Z" />
 <path
    id="path392"
    class="fill horizontal14"
-   d="M 17.813927,8.5 H 14.186074 L 13.659093,16 h 4.681815 z" />
+   d="m 5.3139271,3.4999992 h -3.627853 l -0.526981,7.4999998 h 4.681815 z" />
   <path
    id="path397"
    class="fill horizontal13"
-   d="M 17.872172,9.3339844 H 14.127829 L 13.659093,16 h 4.681815 z" />
+   d="m 5.3721721,4.3339836 h -3.744343 l -0.468736,6.6660154 h 4.681815 z" />
   <path
    id="path402"
    class="fill horizontal24 horizontal12"
-   d="m 17.990049,11 h -3.980097 l -0.350859,5 h 4.681815 z" />
+   d="m 5.4900491,5.9999992 h -3.980097 l -0.350859,4.9999998 h 4.681815 z" />
   <path
    id="path407"
    class="fill horizontal23"
-   d="M 18.10654,12.666016 H 13.893461 L 13.659093,16 h 4.681815 z" />
+   d="m 5.6065401,7.6660152 h -4.213079 l -0.234368,3.3339838 h 4.681815 z" />
   <path
    id="path412"
    class="fill horizontal34"
-   d="M 18.166173,13.5 H 13.833828 L 13.659093,16 h 4.681815 z" />
+   d="m 5.6661731,8.4999992 h -4.332345 l -0.174735,2.4999998 h 4.681815 z" />
 <path
    id="path303"
    class="fill squared12"
-   d="m 16,11 h -1.990048 l -0.350859,5 H 16 Z" />
+   d="m 3.5000001,5.9999992 h -1.990048 l -0.350859,4.9999998 h 2.340907 z" />
   <path
    id="path318"
    class="fill fill squared12"
-   d="m 16,6 v 5 h 1.990049 L 17.639191,6 Z" />
+   d="M 3.5000001,0.99999925 V 5.9999992 h 1.990049 L 5.1391911,0.99999925 Z" />
 <path
    class="inline cross12"
-   d="M 16,16 V 6"
+   d="M 3.5000001,10.999999 V 0.99999925"
    id="path314" />
   <path
    class="inline cross12"
-   d="m 14.010552,11 h 3.979497"
+   d="m 1.5105521,5.9999992 h 3.979497"
    id="path316" />
   <path
    class="inline saltire12"
-   d="M 13.918344,16.010224 17.442765,6.0944414"
+   d="M 1.4183441,11.010223 4.9427651,1.0944406"
    id="path319" />
   <path
    class="inline saltire12"
-   d="M 18.058302,16.014642 14.521758,6.0892995"
+   d="M 5.5583021,11.014641 2.0217581,1.0892987"
    id="path321" />
   <path
    id="path1500"
    class="outline"
-   d="M 18.340391,16 17.638509,5.9999998 H 14.361492 L 13.65961,16 Z" />
+   d="M 5.8403911,10.999999 5.1385091,0.99999905 H 1.8614921 L 1.1596101,10.999999 Z" />
   <path
    class="baseline"
-   d="M 12.640532,16 H 19.35947"
+   d="M 0.14053213,10.999999 H 6.8594701"
    id="path5181" />
   <circle
    class="basepoint"
    id="path5349"
-   cx="16"
-   cy="16"
+   cx="3.5"
+   cy="11"
    r="1" />
 </svg>

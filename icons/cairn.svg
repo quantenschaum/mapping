@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="12"
+   height="12"
    id="svg2"
    sodipodi:docname="cairn.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="true"
+     inkscape:zoom="59.125"
+     inkscape:cx="5.5475687"
+     inkscape:cy="8.9978858"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2">
+    <sodipodi:guide
+       position="11.153409,2"
+       orientation="0,1"
+       id="guide2"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="6,9.2581263"
+       orientation="-1,0"
+       id="guide3"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -43,47 +79,47 @@
   <circle
      class="fill uniform horizontal02 vertical13"
      id="BCNSHP_6"
-     cx="16"
-     cy="9.5421457"
+     cx="6"
+     cy="3.5421462"
      r="2.3941736" />
   <circle
      class="fill uniform horizontal12 vertical03"
      id="circle305"
-     cx="13.401989"
-     cy="13.605825"
+     cx="3.401989"
+     cy="7.6058259"
      r="2.3941736" />
   <circle
      class="fill uniform horizontal12 vertical23"
      id="circle318"
-     cx="18.598574"
-     cy="13.605826"
+     cx="8.5985737"
+     cy="7.6058269"
      r="2.3941736" />
   <circle
      class="outline"
      id="circle320"
-     cx="16"
-     cy="9.5421457"
+     cx="6"
+     cy="3.5421462"
      r="2.3941736" />
   <circle
      class="outline"
-     id="circle305"
-     cx="13.401989"
-     cy="13.605825"
+     id="circle1"
+     cx="3.401989"
+     cy="7.6058259"
      r="2.3941736" />
   <circle
      class="outline"
-     id="circle318"
-     cx="18.598574"
-     cy="13.605826"
+     id="circle2"
+     cx="8.5985737"
+     cy="7.6058269"
      r="2.3941736" />
   <path
      class="baseline"
-     d="M 10.456122,15.999999 H 21.543876"
+     d="M 0.45612192,9.9999994 H 11.543876"
      id="path5181" />
   <circle
      class="basepoint"
      id="path5349"
-     cx="16"
-     cy="16"
+     cx="6"
+     cy="10"
      r="1" />
 </svg>

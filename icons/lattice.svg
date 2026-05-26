@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="10"
+   height="13"
    id="svg2"
    sodipodi:docname="lattice.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xml:space="preserve"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs1" /><sodipodi:namedview
+   id="namedview1"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   showguides="true"
+   inkscape:zoom="59.125"
+   inkscape:cx="4.7357294"
+   inkscape:cy="10.147992"
+   inkscape:window-width="3840"
+   inkscape:window-height="2094"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg2"><sodipodi:guide
+     position="5,9.4918737"
+     orientation="-1,0"
+     id="guide1"
+     inkscape:locked="false"
+     inkscape:label=""
+     inkscape:color="rgb(0,134,229)" /><sodipodi:guide
+     position="18.676533,2"
+     orientation="0,1"
+     id="guide2"
+     inkscape:locked="false"
+     inkscape:label=""
+     inkscape:color="rgb(0,134,229)" /></sodipodi:namedview>
   <style
    type="text/css"
    id="base">
@@ -43,33 +74,33 @@
   </style>
 <path
    class="outline uniform"
-   d="m 13.544558,7.495261 5.159199,2.512006"
+   d="m 2.544558,2.4952606 5.159199,2.512006"
    id="BCNSHP_4" />
   <path
    class="outline uniform"
-   d="m 18.455442,7.495261 -5.159199,2.512006"
+   d="M 7.455442,2.4952606 2.296243,5.0072666"
    id="path250" />
 
 <path
    class="outline uniform"
-   d="m 13.198111,11 5.882584,2.820452"
+   d="m 2.198111,5.9999996 5.882584,2.820452"
    id="path295" />
   <path
    class="outline uniform"
-   d="m 18.80189,11 -5.882584,2.820452"
+   d="M 7.80189,5.9999996 1.919306,8.8204516"
    id="path393" />
   <path
    class="outline uniform"
-   d="M 12.703854,16 13.692367,5.9999998 h 4.615266 L 19.296146,16"
+   d="M 1.703854,10.999999 2.692367,0.99999944 H 7.307633 L 8.296146,10.999999"
    id="path447" />
   <path
    class="baseline"
-   d="m 11.26861,16 h 9.46278"
+   d="M 0.26861,10.999999 H 9.73139"
    id="path5181" />
   <circle
    class="basepoint"
    id="path5349"
-   cx="16"
-   cy="16"
+   cx="5"
+   cy="11"
    r="1" />
 </svg>

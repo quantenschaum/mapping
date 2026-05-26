@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="10"
+   height="8"
    id="svg2"
    sodipodi:docname="can.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="true"
+     inkscape:zoom="59.125"
+     inkscape:cx="4.5665962"
+     inkscape:cy="4.9048626"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2">
+    <sodipodi:guide
+       position="15.436509,2"
+       orientation="0,1"
+       id="guide1"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="5,9.2739826"
+       orientation="-1,0"
+       id="guide2"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
   <style
      type="text/css"
      id="base">
@@ -42,7 +78,7 @@
   </style>
   <g
      id="BOYSHP_2"
-     transform="rotate(15,16,16)">
+     transform="rotate(15,48.478771,-30.776649)">
     <path
        class="fill horizontal04 horizontal03 horizontal02 vertical02 vertical03 uniform cross02"
        id="path3994"
@@ -54,11 +90,11 @@
     <path
        id="path459"
        class="fill vertical13"
-       d="M 14.911411 11.952423 L 14.911447 16.291677 L 19.129826 15.161366 L 19.129382 11.952533 L 14.911411 11.952423 z " />
+       d="m 14.911411,11.952423 3.6e-5,4.339254 4.218379,-1.130311 -4.44e-4,-3.208833 z" />
     <path
        id="path466"
        class="fill vertical23"
-       d="M 17.107333 11.952437 L 17.107419 15.703268 L 19.129826 15.161366 L 19.129382 11.952533 L 17.107333 11.952437 z " />
+       d="m 17.107333,11.952437 8.6e-5,3.750831 2.022407,-0.541902 -4.44e-4,-3.208833 z" />
     <path
        class="fill horizontal13"
        id="path1030"
@@ -81,7 +117,7 @@
        d="m 19.128906,14.988778 h -6.257812 v 1.84961 l 6.257812,-1.675782 z" />
     <path
        class="inline cross12"
-       d="m 16,16 0,-4.047194"
+       d="M 16,16 V 11.952806"
        id="path357" />
     <path
        class="inline cross12"
@@ -94,12 +130,12 @@
   </g>
   <path
      class="baseline"
-     d="m 11.457132,16 h 9.085736"
+     d="M 0.45713166,6 H 9.5428677"
      id="path5179" />
   <circle
      class="basepoint"
      id="path5349"
-     cx="16"
-     cy="16"
+     cx="5"
+     cy="6"
      r="1" />
 </svg>

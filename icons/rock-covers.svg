@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="5"
+   height="5"
    id="svg2"
+   sodipodi:docname="rock-covers.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-   <g
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="59.125"
+     inkscape:cx="2.0972516"
+     inkscape:cy="1.9365751"
+     inkscape:window-width="1750"
+     inkscape:window-height="1401"
+     inkscape:window-x="26"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
      id="g237941"
-     transform="matrix(1.3333333,0,0,-1.3333333,-341.26146,459.63826)">
+     transform="matrix(1.3333333,0,0,-1.3333333,-354.76146,446.13826)">
     <g
        id="g420"
        transform="translate(268.5301,334.1932)"

@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="32"
-   height="32"
+   width="4"
+   height="6"
    id="svg2"
    sodipodi:docname="sphere.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="59.125"
+     inkscape:cx="1.8773784"
+     inkscape:cy="5.6321353"
+     inkscape:window-width="3840"
+     inkscape:window-height="2094"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
   <style
      type="text/css"
      id="base">
@@ -40,24 +60,28 @@
       }
       COLORING{}
   </style>
-  <path
-     class="baseline"
-     d="M 16,13.914208 V 16"
-     id="TOPSHP_3" />
-  <circle
-     class="fill uniform horizontal02"
-     id="path348"
-     cx="16"
-     cy="12.236607"
-     r="1.7220814" />
-  <path
-     id="circle369"
-     class="fill horizontal12"
-     d="M 17.722656 12.236328 L 14.277344 12.236328 A 1.7220814 1.7220814 0 0 0 16 13.958984 A 1.7220814 1.7220814 0 0 0 17.722656 12.236328 z " />
-  <circle
-     class="outline"
-     id="circle13"
-     cx="16"
-     cy="12.236607"
-     r="1.7220814" />
+  <g
+     id="g1"
+     transform="translate(0.1279186,0.3645252)">
+    <path
+       class="baseline"
+       d="m 1.8720814,3.5496828 v 2.085792"
+       id="TOPSHP_3" />
+    <circle
+       class="fill uniform horizontal02"
+       id="path348"
+       cx="1.8720814"
+       cy="1.8720814"
+       r="1.7220814" />
+    <path
+       id="circle369"
+       class="fill horizontal12"
+       d="M 3.5947374,1.8718028 H 0.14942543 a 1.7220814,1.7220814 0 0 0 1.72265597,1.722656 1.7220814,1.7220814 0 0 0 1.722656,-1.722656 z" />
+    <circle
+       class="outline"
+       id="circle13"
+       cx="1.8720814"
+       cy="1.8720814"
+       r="1.7220814" />
+  </g>
 </svg>
