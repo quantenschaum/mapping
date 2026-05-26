@@ -19,8 +19,8 @@ patterns = (
     "squared",
     "border",
     "cross",
-)  # "saltire"
-
+    # "saltire"
+)
 object_colors = {
     "": None,
     "white": "#ffffff",  # 1
@@ -172,6 +172,7 @@ def main():
             # print(icon, p, sections)
 
             for s in sections:
+                # if s > 3:                    continue
                 colors = colors_for(icon)
 
                 cols = list(
@@ -190,7 +191,7 @@ def main():
                     # print(icon,p,cs)
 
                     width_out = 0.3
-                    width_in = 1.5
+                    width_in = 1.3
                     width_base = 0.5
                     color_out = "black"
                     color_base_out = "black"
