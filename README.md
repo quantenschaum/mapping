@@ -1,7 +1,7 @@
-# BSH DATA
+# BSH-DATEN
 
-The data in this folder was retrieved from the following endpoints,
-which are listed at https://gdi.bsh.de/public/public_services.html
+Die Daten in diesem Ordner wurden von den folgenden Endpunkten abgerufen,
+die unter https://gdi.bsh.de/public/public_services.html aufgeführt sind.
 
 - https://gdi.bsh.de/en/mapservice/Aids-to-Navigation-for-Nautical-Products-WMS
 - https://gdi.bsh.de/en/mapservice/Hydrographic-Data-for-Nautical-Products-WMS
@@ -9,25 +9,28 @@ which are listed at https://gdi.bsh.de/public/public_services.html
 - https://gdi.bsh.de/en/mapservice/Land-and-Marine-Areas-for-Nautical-Products-WMS
 - https://gdi.bsh.de/en/mapservice/Topography-for-Nautical-Products-WMS
 
-Date of download: 2026-04-27 and 2026-03-02 (`SOUNDG.json` last available spot sounding data)
+Datum des Downloads: 2026-04-27 und 2026-03-02 (`SOUNDG.json` zuletzt verfügbare Spot-Sounding-Daten)
 
-The license statement at the time of the download was http://www.gesetze-im-internet.de/geonutzv/GeoNutzV.pdf
+Die Lizenzangabe zum Zeitpunkt des Downloads war und ist http://www.gesetze-im-internet.de/geonutzv/GeoNutzV.pdf
 
-The data was split into layers, one layer per file.
+Die Daten wurden in Layer aufgeteilt, ein Layer pro Datei.
 
-Disclaimer by BSH at time of download: "Nicht zur Navigation geeignet." The phrase "Die Verwendung der Daten zu Navigationszwecken ist nicht gestattet." was added later, *after* these downloads.
+Hinweis vom BSH zum Zeitpunkt des Downloads: "Nicht zur Navigation geeignet."
+Diese wurd ab ca. April 2026 geänder zu "Die Verwendung der Daten zu Navigationszwecken ist nicht gestattet."
 
-`_NFS.json` contains locations and instructions for correction, that have been extracted manually from the [NfS](https://www.bsh.de/DE/THEMEN/Schifffahrt/Nautische_Informationen/Nachrichten_fuer_Seefahrer/Nachrichten_fuer_Seefahrer_abonnement_node.html) as far as possible.
+## NfS-Korrekturen
 
-|   NfS   | extracted | applied |
-| :-----: | :-------: | :-----: |
-| 13/2026 |     ✓     |    ✓    |
-| 14/2026 |     ✓     |    ✓    |
-| 15/2026 |     ✓     |    ✓    |
-| 17/2026 |     ✓     |         |
-| 18/2026 |     ✓     |         |
-| 19/2026 |     ✓     |         |
-| 20/2026 |     ✓     |         |
-| 21/2026 |     ✓     |         |
+`nfs.json` enthält Positionen und Anweisungen für Korrekturen, die soweit möglich manuell aus den [NfS](https://www.bsh.de/DE/THEMEN/Schifffahrt/Nautische_Informationen/Nachrichten_fuer_Seefahrer/Nachrichten_fuer_Seefahrer_abonnement_node.html) extrahiert wurden. Diese Korrekturen wurden in die Daten eingearbeitet.
 
-corresponding BfS (as listed in NfS): NL BaZ 17/P- und T-Liste/26, PL 15/183/26, WSA Elbe-Nordsee 103/26, WSA Elbe-Nordsee 113(P), 121/26, WSA Elbe-Nordsee 131/26, WSA Elbe-Nordsee, Survey LP30325/26, 142/26, WSA Elbe-Nordsee, Survey LP30426, LP30138, LP30422/26, WSA Elbe-Nordsee, Survey LP30426/26, WSA Elbe-Nordsee, Survey LP30598/26, WSA Ems-Nordsee 56/26, WSA Ems-Nordsee 99, 104/26, WSA Ems-Nordsee, Survey LP30280/26, WSA Ostsee 127, 132/26, WSA Ostsee 137/26, WSA Ostsee 82/26, WSA Ostsee 87/26, WSA Ostsee 92/26, WSA Ostsee 98/26, WSA Ostsee, Survey LP30634/26, WSA Weser-Jade-Nordsee 53/26; WSA Elbe-Nordsee 135/26
+|   NfS   | extrahiert | eingearbeitet |
+| :-----: | :--------: | :-----------: |
+| 13/2026 |     ✓      |       ✓       |
+| 14/2026 |     ✓      |       ✓       |
+| 15/2026 |     ✓      |       ✓       |
+| 17/2026 |     ✓      |               |
+| 18/2026 |     ✓      |               |
+| 19/2026 |     ✓      |               |
+| 20/2026 |     ✓      |               |
+| 21/2026 |     ✓      |               |
+
+**zugehörige BfS** (wie in den NfS aufgeführt): NL BaZ 17/P- und T-Liste/26, PL 15/183/26, WSA Elbe-Nordsee 103/26, WSA Elbe-Nordsee 113(P), 121/26, WSA Elbe-Nordsee 131/26, WSA Elbe-Nordsee, Survey LP30325/26, 142/26, WSA Elbe-Nordsee, Survey LP30426, LP30138, LP30422/26, WSA Elbe-Nordsee, Survey LP30426/26, WSA Elbe-Nordsee, Survey LP30598/26, WSA Ems-Nordsee 56/26, WSA Ems-Nordsee 99, 104/26, WSA Ems-Nordsee, Survey LP30280/26, WSA Ostsee 127, 132/26, WSA Ostsee 137/26, WSA Ostsee 82/26, WSA Ostsee 87/26, WSA Ostsee 92/26, WSA Ostsee 98/26, WSA Ostsee, Survey LP30634/26, WSA Weser-Jade-Nordsee 53/26; WSA Elbe-Nordsee 135/26
