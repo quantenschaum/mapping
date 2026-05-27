@@ -18,6 +18,15 @@ Die Daten wurden in Layer aufgeteilt, ein Layer pro Datei.
 Hinweis vom BSH zum Zeitpunkt des Downloads: "Nicht zur Navigation geeignet."
 Diese wurd ab ca. April 2026 geänder zu "Die Verwendung der Daten zu Navigationszwecken ist nicht gestattet."
 
+## Updates
+
+Einzelnen Layer wurden selektiv aus den oben genannten Endpunken aktualisiert.
+
+|   Datum    | Layer  |
+| :--------: | :----: |
+| 2026-05-27 | DEPARE |
+| 2026-05-27 | DEPCNT |
+
 ## NfS-Korrekturen
 
 `nfs.json` enthält Positionen und Anweisungen für Korrekturen, die soweit möglich manuell aus den [NfS](https://www.bsh.de/DE/THEMEN/Schifffahrt/Nautische_Informationen/Nachrichten_fuer_Seefahrer/Nachrichten_fuer_Seefahrer_abonnement_node.html) extrahiert wurden. Diese Korrekturen wurden in die Daten eingearbeitet.
