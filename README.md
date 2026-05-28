@@ -11,21 +11,30 @@ die unter https://gdi.bsh.de/public/public_services.html aufgeführt sind.
 
 Datum des Downloads: 2026-04-27 und 2026-03-02 (`SOUNDG.json` zuletzt verfügbare Spot-Sounding-Daten)
 
-Die Lizenzangabe zum Zeitpunkt des Downloads war und ist http://www.gesetze-im-internet.de/geonutzv/GeoNutzV.pdf
+Die Lizenzangabe zum Zeitpunkt des Downloads war und ist http://www.gesetze-im-internet.de/geonutzv/GeoNutzV.pdf  
+
+D.h. die Nutzung der Daten für u.a. folgenden Zwecke ist zulässig: 
+
+- weltweite, unentgeltliche Nutzung
+- für alle Nutzungszwecke, kommerziell wie nicht-kommerziell
+- Kombination mit anderen Daten sowie die Bearbeitung
+- Vervielfältigung, Verbreitung und öffentliche Zugänglichmachung
 
 Die Daten wurden in Layer aufgeteilt, ein Layer pro Datei.
 
-Hinweis vom BSH zum Zeitpunkt des Downloads: "Nicht zur Navigation geeignet."
-Diese wurd ab ca. April 2026 geänder zu "Die Verwendung der Daten zu Navigationszwecken ist nicht gestattet."
+Eine Einschränkung der Nutungszwecke ist im Rahmen der GeoNutzV nicht vorgesehen, dennoch sein auf folgende Angaben des BSH hingewiesen:
+
+- Hinweis vom BSH zum Zeitpunkt des Downloads: "Nicht zur Navigation geeignet."
+- Diese wurd ab ca. April 2026 geänder zu "Die Verwendung der Daten zu Navigationszwecken ist nicht gestattet."
 
 ## Updates
 
-Einzelnen Layer wurden selektiv aus den oben genannten Endpunken aktualisiert.
+Einzelne Layer wurden selektiv aus den oben genannten Endpunken zu späteren Zeitpunkten aktualisiert.
 
-|   Datum    | Layer  |
-| :--------: | :----: |
-| 2026-05-27 | DEPARE |
-| 2026-05-27 | DEPCNT |
+|   Datum    | Layer  | Beschreibung  |
+| :--------: | :----: | :------------ |
+| 2026-05-27 | DEPARE | Konturflächen |
+| 2026-05-27 | DEPCNT | Tiefenlinien  |
 
 ## NfS-Korrekturen
 
@@ -36,10 +45,11 @@ Einzelnen Layer wurden selektiv aus den oben genannten Endpunken aktualisiert.
 | 13/2026 |     ✓      |       ✓       |
 | 14/2026 |     ✓      |       ✓       |
 | 15/2026 |     ✓      |       ✓       |
-| 17/2026 |     ✓      |               |
-| 18/2026 |     ✓      |               |
-| 19/2026 |     ✓      |               |
-| 20/2026 |     ✓      |               |
-| 21/2026 |     ✓      |               |
+| 17/2026 |     ✓      |       ✓       |
+| 18/2026 |     ✓      |       ✓       |
+| 19/2026 |     ✓      |       ✓       |
+| 20/2026 |     ✓      |       ✓       |
+| 21/2026 |     ✓      |       ✓       |
+| 22/2026 |     ✓      |       ✓       |
 
-**zugehörige BfS** (wie in den NfS aufgeführt): NL BaZ 17/P- und T-Liste/26, PL 15/183/26, WSA Elbe-Nordsee 103/26, WSA Elbe-Nordsee 113(P), 121/26, WSA Elbe-Nordsee 131/26, WSA Elbe-Nordsee, Survey LP30325/26, 142/26, WSA Elbe-Nordsee, Survey LP30426, LP30138, LP30422/26, WSA Elbe-Nordsee, Survey LP30426/26, WSA Elbe-Nordsee, Survey LP30598/26, WSA Ems-Nordsee 56/26, WSA Ems-Nordsee 99, 104/26, WSA Ems-Nordsee, Survey LP30280/26, WSA Ostsee 127, 132/26, WSA Ostsee 137/26, WSA Ostsee 82/26, WSA Ostsee 87/26, WSA Ostsee 92/26, WSA Ostsee 98/26, WSA Ostsee, Survey LP30634/26, WSA Weser-Jade-Nordsee 53/26; WSA Elbe-Nordsee 135/26
+**zugehörige BfS** (wie in den NfS aufgeführt): NL BaZ 17/P- und T-Liste/26, PL 15/183/26, WSA Elbe-Nordsee 103/26, WSA Elbe-Nordsee 113(P), 121/26, WSA Elbe-Nordsee 131/26, WSA Elbe-Nordsee, Survey LP30325/26, 142/26, WSA Elbe-Nordsee, Survey LP30426, LP30138, LP30422/26, WSA Elbe-Nordsee, Survey LP30426/26, WSA Elbe-Nordsee, Survey LP30598/26, WSA Ems-Nordsee 56/26, WSA Ems-Nordsee 99, 104/26, WSA Ems-Nordsee, Survey LP30280/26, WSA Ostsee 127, 132/26, WSA Ostsee 137/26, WSA Ostsee 146/26, WSA Ostsee 82/26, WSA Ostsee 87/26, WSA Ostsee 92/26, WSA Ostsee 98/26, WSA Ostsee, Survey LP30634/26, WSA Weser-Jade-Nordsee 53/26; WSA Elbe-Nordsee 135/26
