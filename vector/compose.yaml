@@ -1,0 +1,22 @@
+services:
+  tileserver:
+    image: maptiler/tileserver-gl
+    ports:
+      - 9000:8080
+    volumes:
+      - ./data:/data
+    command: "-c /data/config.json"
+
+  maputnik:
+    image: ghcr.io/maplibre/maputnik:main
+    ports:
+      - 8000:8000
+
+  mapproxy:
+    image: kartoza/mapproxy
+    ports:
+      - 8001:8001
+    volumes:
+      - .:/data
+    working_dir: /data
+    command: "mapproxy-util serve-develop /data/mapproxy.yaml -b 0.0.0.0:8001"

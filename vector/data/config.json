@@ -1,0 +1,29 @@
+{
+  "options": {
+    "paths": {
+      "root": "/data",
+      "styles": "styles",
+      "sprites": "sprites",
+      "fonts": "fonts"
+    },
+    "serveAllStyles": true,
+    "serveAllFonts": true,
+    "maxScaleFactor": 2,
+    "leafletRetina": false,
+    "tileMargin": 256,
+    "formatOptions": {
+      "png": {
+        "palette": true,
+        "colors": 256
+      }
+    }
+  },
+  "data": {
+    "bsh": {
+      "mbtiles": "bsh.mbtiles"
+    },
+    "rws": {
+      "mbtiles": "rws.mbtiles"
+    }
+  }
+}
