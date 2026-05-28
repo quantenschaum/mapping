@@ -13,15 +13,15 @@ seeds:
     coverages: [coastal]
   approach:
     caches: [qmap-de]
-    levels: [12, 13, 14]
+    levels: [12, 13, 14, 15]
     coverages: [approach]
   harbour:
     caches: [qmap-de]
-    levels: [12, 13, 14, 15]
+    levels: [12, 13, 14, 15, 16]
     coverages: [harbour]
   berthing:
     caches: [qmap-de]
-    levels: [12, 13, 14, 15, 16]
+    levels: [12, 13, 14, 15, 16, 17]
     coverages: [berthing]
   rws:
     caches: [qmap-nl]
