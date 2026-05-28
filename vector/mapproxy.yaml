@@ -25,7 +25,7 @@ services:
 sources:
   tiles-de:
     type: tile
-    url: http://tileserver:8080/styles/bsh/512/%(tms_path)s.png
+    url: http://tileserver:8080/styles/qmap-de/512/%(tms_path)s.png
     transparent: true
     grid: webmercator_512
     coverage:
@@ -33,7 +33,7 @@ sources:
       srs: "EPSG:4326"
   tiles-nl:
     type: tile
-    url: http://tileserver:8080/styles/rws/512/%(tms_path)s.png
+    url: http://tileserver:8080/styles/qmap-nl/512/%(tms_path)s.png
     transparent: true
     grid: webmercator_512
     coverage:

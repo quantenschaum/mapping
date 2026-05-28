@@ -1,7 +1,6 @@
 SHELL=/bin/bash
 export PATH:=$(PWD)/tools/bin:$(PWD)/node_modules/.bin:$(PATH)
 TODAY=$(shell date +%F)
-MERGE=jq -sc '{type:"FeatureCollection", features: map(.features // []) | add}'
 
 # usesful tools
 # https://stevage.github.io/vector-inspector/
@@ -75,6 +74,8 @@ fonts:
 		mkdir -p "$@/$$D"; \
 		build-glyphs $$F "$@/$$D"; done
 
+
+MERGE=jq -sc '{type:"FeatureCollection", features: map(.features // []) | add}'
 
 SOURCE=../data/bsh
 
