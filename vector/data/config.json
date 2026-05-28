@@ -19,11 +19,11 @@
     }
   },
   "data": {
-    "bsh": {
-      "mbtiles": "bsh.mbtiles"
+    "qmap-de": {
+      "mbtiles": "qmap-de.mbtiles"
     },
-    "rws": {
-      "mbtiles": "rws.mbtiles"
+    "qmap-nl": {
+      "mbtiles": "qmap-nl.mbtiles"
     }
   }
 }

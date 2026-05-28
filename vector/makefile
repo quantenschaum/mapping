@@ -76,7 +76,7 @@ fonts:
 
 MERGE=jq -sc '{type:"FeatureCollection", features: map(.features // []) | add}'
 
-SOURCE=bsh
+SOURCE=../data/bsh
 
 split/%.json: $(SOURCE)/%.json
 	mapshaper $< -filter 'uband>0' -o $@
@@ -152,15 +152,14 @@ bsh.tiles: merged
 	tippecanoe $</UB4/*.json -f -r1 -ao -ac $(Y) -Z11 -z12 -o UB4.mbtiles # 4 Approach
 	tippecanoe $</UB5/*.json -f -r1 -ao -ac $(Y) -Z13 -z13 -o UB5.mbtiles # 5 Harbour
 	tippecanoe $</UB6/*.json -f -r1 -ao -ac $(Y) -Z14 -z14 -o UB6.mbtiles # 6 Berthing
-	NAME=$(SOURCE); NAME=$${NAME^^}; \
-	tile-join -n $$NAME -N "$(TODAY)" -A "QMAP/$$NAME" -f -o $(SOURCE).mbtiles UB?.mbtiles
-	pmtiles convert $(SOURCE).mbtiles $(SOURCE).pmtiles
-	ls -lh $(SOURCE)*tiles
-	mv $(SOURCE).mbtiles data
-	mv $(SOURCE).pmtiles public
+	tile-join -n QMAP-DE -N "$(TODAY)" -A QMAP-DE -f -o qmap-de.mbtiles UB?.mbtiles
+	pmtiles convert qmap-de.mbtiles qmap-de.pmtiles
+	ls -lh *tiles
+	mv qmap-de.mbtiles data
+	mv qmap-de.pmtiles public
 	rm UB*.mbtiles
 
-styles: data/styles/bsh.json public/bsh.json
+styles: data/styles/qmap-de.json public/qmap-de.json
 
 rws: ../data/rws.layers
 	rm -rf $@ && cp -r $< $@
@@ -179,13 +178,13 @@ rws: ../data/rws.layers
 rws.tiles: rws
 	tippecanoe $</M_COVR.json $</LNDARE.json $</DEPARE.json $</COALNE.json $</BUAARE.json $</LNDRGN.json $</SEAARE.json -f -ao -ac -Z8 -z9 $(Y) -o $<0.mbtiles
 	tippecanoe $</*.json -f -r1 -ao -ac -Z10 -z14 -y SCAMIN $(Y) -o $<1.mbtiles -j '{ "SOUNDG": ["any", ["all", ["==", "$$zoom", 11], [">=", "SCAMIN", 160000] ], ["all", ["==", "$$zoom", 12], [">=", "SCAMIN", 80000] ], ["all", ["==", "$$zoom", 13], [">=", "SCAMIN", 40000] ], ["all", [">=", "$$zoom", 14]] ], "buoys":[">=","$$zoom",11], "beacons":[">=","$$zoom",11], "LIGHTS":[">=","$$zoom",11], "DAYMAR":[">=","$$zoom",11], "DEPCNT":[">=","$$zoom",11] }'
-	tile-join -n "RWS" -N "$(TODAY)" -A "QMAP/RWS" -f -o $<.mbtiles $<?.mbtiles
-	pmtiles convert $<.mbtiles $<.pmtiles
-	ls -lh $<*tiles
-	mv $<.mbtiles data
-	mv $<.pmtiles public
+	tile-join -n "RWS" -N "$(TODAY)" -A "QMAP/RWS" -f -o qmap-nl.mbtiles $<?.mbtiles
+	pmtiles convert qmap-nl.mbtiles qmap-nl.pmtiles
+	ls -lh *tiles
+	mv qmap-nl.mbtiles data
+	mv qmap-nl.pmtiles public
 	rm rws*.mbtiles
-styles: data/styles/rws.json public/rws.json
+styles: data/styles/qmap-nl.json public/qmap-nl.json
 
 tiles: bsh.tiles rws.tiles
 
