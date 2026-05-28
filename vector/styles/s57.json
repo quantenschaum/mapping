@@ -1444,7 +1444,7 @@
           [
             "let",
             "NATSUR",
-            ["concat", ",", ["get", "NATRSUR"], ","],
+            ["concat", ",", ["get", "NATSUR"], ","],
             [
               "coalesce",
               ["get", "NOBJNM"],

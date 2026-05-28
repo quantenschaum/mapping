@@ -10,7 +10,7 @@
     "serveAllFonts": true,
     "maxScaleFactor": 2,
     "leafletRetina": false,
-    "tileMargin": 256,
+    "tileMargin": 128,
     "formatOptions": {
       "png": {
         "palette": true,

@@ -4,8 +4,8 @@ globals:
   # resampling_method: bilinear
   cache:
     link_single_color_images: true
-    # meta_size: [1, 1]
-    # meta_buffer: 0
+    meta_size: [1, 1]
+    meta_buffer: 0
     # bulk_meta_tiles: true
     base_dir: cache_data
   http:

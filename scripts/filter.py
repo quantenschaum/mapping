@@ -51,14 +51,12 @@ def save_json(filename, data, **kwargs):
 
 
 BANDS = {
-    "Overview": 1,
-    "General": 2,
-    "Coastal": 3,
-    "Coastel": 3,
-    "Approach": 4,
-    "Harbor": 5,
-    "Harbour": 5,
-    "Berthing": 6,
+    "Over": 1,
+    "Gene": 2,
+    "Coas": 3,
+    "Appr": 4,
+    "Harb": 5,
+    "Bert": 6,
 }
 
 

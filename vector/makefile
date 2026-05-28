@@ -34,9 +34,11 @@ deploy: build
 tunnel:
 	cloudflared tunnel --url http://localhost:5173/
 
+OSM=visible
+
 data/styles/%.json: styles/s57.json
 	N=$(patsubst data/styles/%.json,%,$@); \
-	jq '.name="'$$N'" | .sources.s57.url="mbtiles://{'$$N'}" | .sprite="icons" | .glyphs="{fontstack}/{range}.pbf"' $< > $@
+	jq '.name="'$$N'" | .sources.s57.url="mbtiles://{'$$N'}" | .sprite="icons" | .glyphs="{fontstack}/{range}.pbf" | .layers[0].layout.visibility="$(OSM)"' $< > $@
 	gl-style-validate $@
 
 BASE=http://localhost:5173
@@ -218,8 +220,9 @@ serve:
 	docker compose up
 
 seed:
-	make -B styles
+	make -B styles OSM=none
 	mkdir -p cache_data && touch cache_data/.nobackup
 	docker compose up -d
+	sleep 3
 	docker compose exec -u mapproxy -T mapproxy mapproxy-seed -f /data/mapproxy.yaml -s /data/seed.yaml
 	docker compose down

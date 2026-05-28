@@ -27,6 +27,7 @@
     "leaflet.control.opacity": "^1.6.0",
     "leaflet.tilelayer.fallback": "^1.0.4",
     "less": "^4.6.4",
+    "maplibre-gl": "^5.24.0",
     "open-location-code": "^1.0.3",
     "plotly.js-basic-dist": "^3.5.0",
     "pmtiles": "^4.4.1",

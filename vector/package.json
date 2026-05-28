@@ -14,12 +14,12 @@
     "less": "^4.6.4",
     "maplibre-gl": "^5.24.0",
     "pmtiles": "^4.4.1",
-    "terser": "^5.47.1",
+    "terser": "^5.48.0",
     "vite": "^7.3.3"
   },
   "devDependencies": {
     "@maplibre/maplibre-gl-style-spec": "^24.8.5",
     "fontnik": "^0.7.4",
-    "mapshaper": "^0.7.16"
+    "mapshaper": "^0.7.21"
   }
 }
