@@ -170,6 +170,9 @@ tiles: bsh.tiles rws.tiles
 clean:
 	rm -rf dist split merged rws *.gpkg *.mbtiles *.pmtiles
 
+clean-cache:
+	rm -rf cache_data
+
 depth:
 	rm -rf $@ && mkdir -p $@
 	mapshaper merged/UB6/DEPARE.json \
