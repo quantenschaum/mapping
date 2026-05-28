@@ -1,6 +1,7 @@
 SHELL=/bin/bash
 export PATH:=$(PWD)/tools/bin:$(PWD)/node_modules/.bin:$(PATH)
 TODAY=$(shell date +%F)
+MERGE=jq -sc '{type:"FeatureCollection", features: map(.features // []) | add}'
 
 # usesful tools
 # https://stevage.github.io/vector-inspector/
@@ -37,6 +38,7 @@ tunnel:
 OSM=visible
 
 data/styles/%.json: styles/s57.json
+	mkdir -p data/styles
 	N=$(patsubst data/styles/%.json,%,$@); \
 	jq '.name="'$$N'" | .sources.s57.url="mbtiles://{'$$N'}" | .sprite="icons" | .glyphs="{fontstack}/{range}.pbf" | .layers[0].layout.visibility="$(OSM)"' $< > $@
 	gl-style-validate $@
@@ -73,8 +75,6 @@ fonts:
 		mkdir -p "$@/$$D"; \
 		build-glyphs $$F "$@/$$D"; done
 
-
-MERGE=jq -sc '{type:"FeatureCollection", features: map(.features // []) | add}'
 
 SOURCE=../data/bsh
 
@@ -115,31 +115,9 @@ merged: split
 	nice make $(patsubst $</%.json,$@/%.json,$(wildcard $</*.json)) -j
 	rm -f $@/*.json
 	for F in $@/*/*1.json; do $(MERGE) $${F//1./?.} > $${F//1./.} && rm $${F//1./?.}; done
-	for F in $$(cd $@/UB6 && echo *.json); do $(MERGE) $@/UB?/$$F >$@/$$F; done
+	# for F in $$(cd $@/UB6 && echo *.json); do $(MERGE) $@/UB?/$$F >$@/$$F; done
 	# for U in $$(seq 6); do cp $</M_COVR.json $@/UB$$U; done
-	mapshaper $</M_COVR.json -lines each='uband=A.uband||B.uband,chartname=A.chartname||B.chartname' -o $@/M_COVR.json
-
-# https://github.com/felt/tippecanoe#usage
-# https://github.com/felt/tippecanoe#tile-join
-# -f force overwrite
-# -Zmin -zmax min/max zoom level
-# -zg auto max zoom, -ae extend if dropping
-# -n "name" -N "description" -A "attribution"
-# -ab detect shared borders
-# -x exclude field
-# -y include field (only)
-# -j feature filter -J from file
-# -r1 drop rate 1 = don't drop points
-# -B12 base zoom
-# -S1 simplification by scale 1-10
-# -ps no line simplification
-# -pS only simplify at lower zooms
-# -ab detect shared borders
-# -ac coalesce consecutive features with same attributes
-# -ao reorder features by attributes, use with -ac
-# -pC no tile compression
-# -pf no feature limit
-# -pk no size limit
+	# mapshaper $</M_COVR.json -lines each='uband=A.uband||B.uband,chartname=A.chartname||B.chartname' -o $@/M_COVR.json
 
 # include only fields used in the style
 Y=$(shell jq '.. | arrays | select(.[0]=="get" or .[0]=="has") | .[1]' styles/s57.json | sort | uniq | sed 's/^/-y /')
@@ -152,7 +130,7 @@ bsh.tiles: merged
 	tippecanoe $</UB4/*.json -f -r1 -ao -ac $(Y) -Z11 -z12 -o UB4.mbtiles # 4 Approach
 	tippecanoe $</UB5/*.json -f -r1 -ao -ac $(Y) -Z13 -z13 -o UB5.mbtiles # 5 Harbour
 	tippecanoe $</UB6/*.json -f -r1 -ao -ac $(Y) -Z14 -z14 -o UB6.mbtiles # 6 Berthing
-	tile-join -n QMAP-DE -N "$(TODAY)" -A QMAP-DE -f -o qmap-de.mbtiles UB?.mbtiles
+	tile-join -n QMAP-DE -N "$(TODAY)" -A QMAP/BSH -f -o qmap-de.mbtiles UB?.mbtiles
 	pmtiles convert qmap-de.mbtiles qmap-de.pmtiles
 	ls -lh *tiles
 	mv qmap-de.mbtiles data
