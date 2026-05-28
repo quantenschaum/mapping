@@ -130,7 +130,7 @@ Wichtig ist die Konsequenz daraus: Wenn das BSH öffentlich erklärt, es gebe "z
 
 ## Die Argumentation des BSH im Detail
 
-Die offiziellen Aussagen des BSH, wie sie auch im [Yacht-Artikel](https://www.yacht.de/ausruestung/elektronik/freenauticalchart-net-einordnung-des-bsh-schafft-klarheit-ueber-die-zugrunde-liegenden-daten/) zitiert werden, verdienen eine differenzierte Betrachtung. Vieles davon ist rein formal korrekt und trotzdem nicht überzeugend.
+Die offiziellen Aussagen des BSH, wie sie auch im [Yacht-Artikel](https://archive.li/VVRom) zitiert werden, verdienen eine differenzierte Betrachtung. Vieles davon ist rein formal korrekt und trotzdem nicht überzeugend.
 
 > Die Open-Data-Daten sind nicht für die Navigation geeignet.
 
