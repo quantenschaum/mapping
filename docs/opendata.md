@@ -467,6 +467,15 @@ Der Mehrwert der vom BSH gegen Entgelt lizensierten Kartendaten besteht in der Q
 
 Vor diesem Hintergrund wird die Position des BSH bzw. der Kartenanbieter gegenüber OpenData vollends unhaltbar. Wenn das Sicherheitsargument wäre, freie Karten seien für den Nutzer gefährlich, weil keine Aktualitätsgarantie besteht und keine Haftung übernommen wird, dann müsste dasselbe Argument gegen jedes kommerzielle Kartenprodukt auf dem Markt erhoben werden. Der einzige relevante Unterschied zwischen einem 5.000-Euro-Plotter mit lizenzierten Karten und OpenData-Kartern auf dem Tablet besteht nicht in der Rechtslage, nicht in der Haftungsstruktur, nicht in der formalen Zulassung zur Navigation, sondern im Preis. Und der Preis ist kein Sicherheitsargument. Was man mit dem Kauf eine Karte eines kommerziellen Anbieters primär erwirbt ist Bequemlichkeit.
 
+### Was garantiert das BSH selbst
+
+Im [Entgeldverzeichnis des BSH](https://www.bsh.de/DE/Das_BSH/Gebuehren_Preise/Gebuehren_und_Preise/_Anlagen/Downloads/Entgeltverzeichnis-digitale-Daten.pdf?__blob=publicationFile&v=8) steht folgender Haftungsausschluss.
+
+>Das BSH haftet nicht für die Eignung der Daten für den von der Bestellerin/dem Besteller vorgesehenen Zweck, die Verletzung von Rechten Dritter, die Gültigkeit, Richtigkeit,
+Vollständigkeit, Genauigkeit, Konsistenz und Qualität der Daten.
+
+D.h. das [BSH argumentiert](#die-argumentation-des-bsh-im-detail), dass die Daten, die die Lizenznehmer erhalten, qualitätsgesichert und verlässlich seien, schließt aber die Haftung genau dafür, also für Vollständigkeit, Genauigkeit, Konsistenz und Qualität der Daten, für diese lizenzierten Daten aus.
+
 ---
 
 ## Die GeoNutzV genauer betrachtet
