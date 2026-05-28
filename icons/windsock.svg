@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="16"
+   width="11"
    height="12"
    id="svg2"
    sodipodi:docname="windsock.svg"
@@ -32,7 +32,7 @@
      showgrid="false"
      showguides="true"
      inkscape:zoom="61.5"
-     inkscape:cx="4.3739837"
+     inkscape:cx="4.3821138"
      inkscape:cy="7.2682927"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -63,11 +63,11 @@
        clip-path="url(#clipPath3749)">
       <path
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.375;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-         d="m 141.00483,453.1746 v 6.26525"
+         d="m 137.18334,453.1746 v 6.26525"
          id="path7836" />
       <g
          id="g3759"
-         transform="translate(140.3855,452.32401)">
+         transform="translate(136.56401,452.32401)">
         <path
            d="m 0,0 h -1.503 v 0.283 h 1.502 z"
            style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -75,7 +75,7 @@
       </g>
       <g
          id="g3763"
-         transform="translate(141.657,452.60721)">
+         transform="translate(137.83551,452.60721)">
         <path
            d="M 0,0 H 1.477 V -0.283 H -0.008 Z"
            style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -83,7 +83,7 @@
       </g>
       <g
          id="g3767"
-         transform="translate(140.2996,452.46561)">
+         transform="translate(136.47811,452.46561)">
         <path
            d="M 0,0 C 0,0.392 0.317,0.709 0.709,0.709 1.1,0.709 1.418,0.392 1.418,0 1.418,-0.392 1.1,-0.709 0.709,-0.709 0.317,-0.709 0,-0.392 0,0 Z"
            style="fill:none;stroke:#231f20;stroke-width:0.283;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
@@ -91,19 +91,19 @@
       </g>
       <path
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.375;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-         d="m 141.00483,459.43985 5.74136,-0.29422 v -1.12321 l -5.72857,-0.50794 h 0.009 z"
+         d="m 137.18334,459.43985 5.74136,-0.29422 v -1.12321 l -5.72857,-0.50794 h 0.009 z"
          id="path7892" />
       <path
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m 142.24776,459.37615 v -1.7526"
+         d="m 138.42627,459.37615 v -1.7526"
          id="path7990" />
       <path
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m 143.87551,459.29274 v -1.52486"
+         d="m 140.05402,459.29274 v -1.52486"
          id="path7992" />
       <path
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m 145.36025,459.21665 v -1.31712"
+         d="m 141.53876,459.21665 v -1.31712"
          id="path7994" />
     </g>
   </g>

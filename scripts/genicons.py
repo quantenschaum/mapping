@@ -191,7 +191,7 @@ def main():
                     # print(icon,p,cs)
 
                     width_out = 0.3
-                    width_in = 1.3
+                    width_in = 0.8
                     width_base = 0.5
                     color_out = "black"
                     color_base_out = "black"

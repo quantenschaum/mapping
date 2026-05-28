@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="6"
+   width="7"
    height="11"
    id="svg2"
    sodipodi:docname="sphere_over_rhombus.svg"
@@ -23,7 +23,7 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="28.34375"
-     inkscape:cx="2.5402426"
+     inkscape:cx="2.5578831"
      inkscape:cy="10.513782"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -63,7 +63,7 @@
   </style>
   <g
      id="g1"
-     transform="translate(-12.992405,-5)">
+     transform="translate(-12.492405,-5)">
     <path
        class="baseline"
        d="M 16,13.914208 V 16"

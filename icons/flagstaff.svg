@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="7"
+   width="11"
    height="14"
    id="svg2"
    sodipodi:docname="flagstaff.svg"
@@ -24,7 +24,7 @@
      showgrid="false"
      showguides="true"
      inkscape:zoom="95.371027"
-     inkscape:cx="1.8663949"
+     inkscape:cx="1.8716376"
      inkscape:cy="6.46947"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -40,7 +40,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="3.5,11.768259"
+       position="5.5,11.768259"
        orientation="-1,0"
        id="guide22615"
        inkscape:locked="false"
@@ -49,7 +49,7 @@
   </sodipodi:namedview>
   <g
      id="CATLMK_5"
-     transform="translate(-19.88156,-5.1346304)">
+     transform="translate(-17.88183,-5.1346304)">
     <path
        d="M 23.38183,6.3546531 V 16.294659"
        style="fill:none;stroke:#231f20;stroke-width:0.756;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"

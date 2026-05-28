@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="6"
+   width="11"
    height="19"
    id="svg2"
    sodipodi:docname="flare-stack.svg"
@@ -24,8 +24,8 @@
      showgrid="false"
      showguides="true"
      inkscape:zoom="67.4375"
-     inkscape:cx="2.2391103"
-     inkscape:cy="14.383689"
+     inkscape:cx="2.231696"
+     inkscape:cy="12.011121"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
      inkscape:window-x="0"
@@ -40,7 +40,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="3,11.485344"
+       position="5.5,11.485344"
        orientation="-1,0"
        id="guide22615"
        inkscape:locked="false"
@@ -49,7 +49,7 @@
   </sodipodi:namedview>
   <g
      id="CATLMK_6"
-     transform="matrix(1.1966578,0,0,-1.1966578,-92.363814,542.59353)"
+     transform="matrix(1.1966578,0,0,-1.1966578,-89.863216,542.59353)"
      style="stroke-width:1.11421">
     <g
        id="g1578"

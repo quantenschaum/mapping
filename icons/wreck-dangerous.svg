@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="15"
+   width="16"
    height="10"
    id="svg2"
    sodipodi:docname="wreck-dangerous.svg"
@@ -23,7 +23,7 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="32.21875"
-     inkscape:cx="7.014549"
+     inkscape:cx="7.0300679"
      inkscape:cy="4.4384093"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -33,7 +33,7 @@
      inkscape:current-layer="svg2" />
   <g
      id="g260"
-     transform="matrix(1.5089843,0,0,-1.4631879,0.34550334,4.3996821)"
+     transform="matrix(1.5089843,0,0,-1.4631879,0.84550337,4.3996821)"
      clip-path="url(#clipPath25156)"
      style="stroke:#231f20;stroke-width:0.471092;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.00471091, 0.970452;stroke-dashoffset:0.329764;stroke-opacity:1">
     <path
@@ -43,7 +43,7 @@
   </g>
   <g
      id="g672"
-     transform="matrix(1.3333333,0,0,-1.3333333,4.5139995,6.5113339)"
+     transform="matrix(1.3333333,0,0,-1.3333333,5.0139995,6.5113339)"
      clip-path="url(#clipPath24520)">
     <path
        d="M 0,0 V 2.266"

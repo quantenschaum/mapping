@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="10"
+   width="11"
    height="8"
    id="svg2"
    sodipodi:docname="can.svg"
@@ -23,7 +23,7 @@
      inkscape:deskcolor="#d1d1d1"
      showguides="true"
      inkscape:zoom="59.125"
-     inkscape:cx="4.5665962"
+     inkscape:cx="4.5750529"
      inkscape:cy="4.9048626"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -39,7 +39,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="5,9.2739826"
+       position="5.5,9.2739826"
        orientation="-1,0"
        id="guide2"
        inkscape:locked="false"
@@ -78,7 +78,7 @@
   </style>
   <g
      id="BOYSHP_2"
-     transform="rotate(15,48.478771,-30.776649)">
+     transform="rotate(15,48.728771,-28.877709)">
     <path
        class="fill horizontal04 horizontal03 horizontal02 vertical02 vertical03 uniform cross02"
        id="path3994"
@@ -130,12 +130,12 @@
   </g>
   <path
      class="baseline"
-     d="M 0.45713166,6 H 9.5428677"
+     d="M 0.95713198,6 H 10.042868"
      id="path5179" />
   <circle
      class="basepoint"
      id="path5349"
-     cx="5"
+     cx="5.5000005"
      cy="6"
      r="1" />
 </svg>

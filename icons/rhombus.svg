@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="6"
+   width="7"
    height="8"
    id="svg2"
    sodipodi:docname="rhombus.svg"
@@ -22,7 +22,7 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="59.125"
-     inkscape:cx="2.6215645"
+     inkscape:cx="2.6300211"
      inkscape:cy="6.8837209"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -62,7 +62,7 @@
   </style>
   <g
      id="g1"
-     transform="translate(0.38865051,1.1141779)">
+     transform="translate(0.88865051,1.1141779)">
     <path
        class="baseline"
        d="m 2.6189445,4.8000301 v 2.085792"

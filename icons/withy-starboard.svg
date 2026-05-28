@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="9"
+   width="11"
    height="14"
    id="svg2"
    sodipodi:docname="withy-starboard.svg"
@@ -23,7 +23,7 @@
      inkscape:deskcolor="#d1d1d1"
      showguides="true"
      inkscape:zoom="59.125"
-     inkscape:cx="4.2790698"
+     inkscape:cx="4.2875264"
      inkscape:cy="11.162791"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -39,7 +39,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="4.5,-1.0376586"
+       position="5.5,-1.0376586"
        orientation="-1,0"
        id="guide2"
        inkscape:locked="false"
@@ -78,21 +78,21 @@
   <path
      class="outline"
      style="fill:none;stroke:#000000;stroke-width:0.3"
-     d="M 4.5,0.840764 V 12"
+     d="M 5.5,0.840764 V 12"
      id="withy" />
   <path
      id="path849"
      class="outline"
      style="fill:none;stroke:#000000;stroke-width:0.3"
-     d="M 1.76941,4.2622231 4.5,3.0947271 7.23059,4.2622231" />
+     d="M 2.76941,4.2622231 5.5,3.0947271 8.23059,4.2622231" />
   <path
      id="path389"
      class="outline"
      style="fill:none;stroke:#000000;stroke-width:0.3"
-     d="M 0.28705402,8.325219 4.5,6.420382 8.712946,8.325219" />
+     d="M 1.287054,8.325219 5.5,6.420382 9.712946,8.325219" />
   <path
      class="baseline"
      style="fill:none;stroke:#000000;stroke-width:0.5"
-     d="m 3.5,12 h 2"
+     d="m 4.5,12 h 2"
      id="path5181" />
 </svg>

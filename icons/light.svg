@@ -2,7 +2,7 @@
 <svg
    version="1.0"
    width="6"
-   height="13"
+   height="14"
    id="svg2"
    sodipodi:docname="light.svg"
    inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
@@ -24,8 +24,8 @@
      showgrid="false"
      showguides="true"
      inkscape:zoom="57.8125"
-     inkscape:cx="1.5394595"
-     inkscape:cy="-0.069189189"
+     inkscape:cx="1.5481081"
+     inkscape:cy="5.4659459"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
      inkscape:window-x="0"
@@ -40,7 +40,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="2.2674527,52.74781"
+       position="3,53.74781"
        orientation="-1,0"
        id="guide1465"
        inkscape:locked="false"
@@ -88,7 +88,7 @@
      id="g390"
      inkscape:transform-center-x="-0.010064436"
      inkscape:transform-center-y="8.1469017"
-     transform="rotate(45.310716,30.632609,-8.4091227)">
+     transform="rotate(45.310716,29.803785,-8.0631768)">
     <path
        class="fill uniform"
        d="m 23.129659,26.226475 c 0.891806,0.878519 2.327513,0.868236 3.207029,-0.02348 0.878519,-0.891806 0.86733,-2.328599 -0.02448,-3.207118 C 25.4195,22.116271 20.328463,19.122631 17.25,17.25 c 1.825402,2.876297 4.986947,8.09687 5.879659,8.976475"

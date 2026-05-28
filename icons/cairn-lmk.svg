@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="12"
+   width="11"
    height="12"
    id="svg2"
    sodipodi:docname="cairn-lmk.svg"
@@ -23,7 +23,7 @@
      inkscape:deskcolor="#d1d1d1"
      showguides="true"
      inkscape:zoom="59.125"
-     inkscape:cx="5.5475687"
+     inkscape:cx="5.5560254"
      inkscape:cy="8.9978858"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -39,7 +39,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="6,3.3891385"
+       position="5.5,3.3891385"
        orientation="-1,0"
        id="guide3"
        inkscape:locked="false"
@@ -78,47 +78,47 @@
   <circle
      class="fill uniform horizontal02 vertical13"
      id="CATLMK_1"
-     cx="6"
+     cx="5.5"
      cy="3.5421462"
      r="2.3941736" />
   <circle
      class="fill uniform horizontal12 vertical03"
      id="circle305"
-     cx="3.401989"
+     cx="2.901989"
      cy="7.6058259"
      r="2.3941736" />
   <circle
      class="fill uniform horizontal12 vertical23"
      id="circle318"
-     cx="8.5985737"
+     cx="8.0985737"
      cy="7.6058269"
      r="2.3941736" />
   <circle
      class="outline"
      id="circle320"
-     cx="6"
+     cx="5.5"
      cy="3.5421462"
      r="2.3941736" />
   <circle
      class="outline"
      id="circle1"
-     cx="3.401989"
+     cx="2.901989"
      cy="7.6058259"
      r="2.3941736" />
   <circle
      class="outline"
      id="circle2"
-     cx="8.5985737"
+     cx="8.0985737"
      cy="7.6058269"
      r="2.3941736" />
   <path
      class="baseline"
-     d="M 0.45612192,9.9999994 H 11.543876"
+     d="M -0.04387808,9.9999994 H 11.043876"
      id="path5181" />
   <circle
      class="basepoint"
      id="path5349"
-     cx="6"
+     cx="5.5"
      cy="10"
      r="1" />
 </svg>

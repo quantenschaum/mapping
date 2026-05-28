@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="7"
+   width="11"
    height="15"
    id="svg2"
    sodipodi:docname="obelisk.svg"
@@ -23,7 +23,7 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="72.948795"
-     inkscape:cx="3.2488542"
+     inkscape:cx="3.2420001"
      inkscape:cy="10.061852"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -40,7 +40,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="3.5,17.942438"
+       position="5.5,17.942438"
        orientation="-1,0"
        id="guide1292"
        inkscape:locked="false"
@@ -49,7 +49,7 @@
   </sodipodi:namedview>
   <g
      id="CATLMK_12"
-     transform="matrix(3.7795276,0,0,3.7795276,-2619.0008,443.641)">
+     transform="matrix(3.7795276,0,0,3.7795276,-2617.0013,443.641)">
     <path
        d="m 694.72015,-113.94043 h -0.64064 m -0.45191,0 h -0.60749"
        style="fill:none;stroke:#231f20;stroke-width:0.119944;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"

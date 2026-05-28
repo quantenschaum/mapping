@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="10"
-   height="10"
+   width="11"
+   height="11"
    id="svg2"
    sodipodi:docname="foul.svg"
    inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
@@ -24,10 +24,10 @@
      showgrid="false"
      showguides="true"
      inkscape:zoom="32.90625"
-     inkscape:cx="3.8290598"
-     inkscape:cy="4.1177588"
-     inkscape:window-width="2202"
-     inkscape:window-height="1461"
+     inkscape:cx="3.8138651"
+     inkscape:cy="4.1329535"
+     inkscape:window-width="1650"
+     inkscape:window-height="1568"
      inkscape:window-x="26"
      inkscape:window-y="23"
      inkscape:window-maximized="0"
@@ -49,7 +49,7 @@
   </sodipodi:namedview>
   <g
      id="g12730"
-     transform="matrix(1.3333333,0,0,-1.3333333,-348.94732,297.07959)">
+     transform="matrix(1.3333333,0,0,-1.3333333,-348.44732,297.57959)">
     <path
        d="m 262.626,220.477 h 6.236 v 0.283 h -6.236 z"
        style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"

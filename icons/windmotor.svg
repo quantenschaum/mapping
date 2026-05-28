@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="9"
+   width="11"
    height="15"
    id="svg2"
    sodipodi:docname="windmotor.svg"
@@ -23,7 +23,7 @@
      inkscape:deskcolor="#d1d1d1"
      showguides="true"
      inkscape:zoom="59.125"
-     inkscape:cx="3.602537"
+     inkscape:cx="3.5940803"
      inkscape:cy="12.735729"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -39,7 +39,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,134,229)" />
     <sodipodi:guide
-       position="4.5,-4.0108351"
+       position="5.5,-4.0108351"
        orientation="-1,0"
        id="guide2"
        inkscape:locked="false"
@@ -48,7 +48,7 @@
   </sodipodi:namedview>
   <g
      id="CATLMK_19"
-     transform="matrix(1.3333333,0,0,-1.3333333,-101.44506,525.14852)">
+     transform="matrix(1.3333333,0,0,-1.3333333,-100.44506,525.14852)">
     <g
        id="g1598"
        transform="translate(79.1753,390.6613)"

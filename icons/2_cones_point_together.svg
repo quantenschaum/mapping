@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.0"
-   width="4"
+   width="7"
    height="10"
    id="svg2"
    sodipodi:docname="2_cones_point_together.svg"
@@ -22,7 +22,7 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="59.125"
-     inkscape:cx="1.8435518"
+     inkscape:cx="1.8689218"
      inkscape:cy="9.5729387"
      inkscape:window-width="3840"
      inkscape:window-height="2094"
@@ -62,7 +62,7 @@
   </style>
   <g
      id="g1"
-     transform="translate(0.15610918,0.4323304)">
+     transform="translate(1.6561092,0.4323304)">
     <path
        class="baseline"
        d="m 1.8442553,7.4818776 v 2.085792"
