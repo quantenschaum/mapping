@@ -14,12 +14,13 @@ help:
 
 build:
 # 	$(MAKE) lightsectors.obf
-	$(MAKE) vwm rws
-	# $(MAKE) qmap-de.obf qmap-de.zip qmap-nl.zip
-	$(MAKE) qmap-nl.zip
-	$(MAKE) clean-cache
-	$(MAKE) docker-seed
-	$(MAKE) charts tiles zips www
+	$(MAKE) vwm rws rws.layers
+	$(MAKE) qmap-de.zip qmap-nl.zip #qmap-de.obf
+	# $(MAKE) clean-cache
+	# $(MAKE) docker-seed
+	$(MAKE) -C vector clean tiles seed
+	# $(MAKE) charts tiles zips www
+	$(MAKE) charts tiles www
 
 vwm:
 	rm -rf data/vwm && mkdir -p data/vwm
@@ -162,7 +163,8 @@ docker-seed: docker
 
 charts/%.mbtiles: cache_data/%.mbtiles
 	mkdir -p charts
-	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -IFpng -O150 #-P000000,ffffff,f9ecc0,cadbc1,afcce3,cadeef,f1f6fc,800080,fab20b,ed1c24,00a650,fab20b,fa870b
+	convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`"
+	# convert.py -yfX $< $@ -t "$(basename $(notdir $@)) `date +%F`" -IFpng -O150 #-P000000,ffffff,f9ecc0,cadbc1,afcce3,cadeef,f1f6fc,800080,fab20b,ed1c24,00a650,fab20b,fa870b
 
 charts/%.sqlitedb: charts/%.mbtiles
 	mkdir -p charts
@@ -189,8 +191,8 @@ tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles)) 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles))
 #         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles)
-	split charts/qmap-de.mbtiles  -d -a1 -n2 charts/qmap-de.mbtiles.
-	split charts/qmap-de.sqlitedb -d -a1 -n2 charts/qmap-de.sqlitedb.
+	# split charts/qmap-de.mbtiles  -d -a1 -n2 charts/qmap-de.mbtiles.
+	# split charts/qmap-de.sqlitedb -d -a1 -n2 charts/qmap-de.sqlitedb.
 	# convert.py charts/qmap-de.mbtiles charts/qmap-de-balticsea.mbtiles --west 10.5 -f -t "QMAP-DE Baltic Sea `date +%F`"
 	# convert.py charts/qmap-de.mbtiles charts/qmap-de-balticsea.mbtiles --west 9.0 --east 11.0 --south 54.0 -a
 	# convert.py charts/qmap-de.mbtiles charts/qmap-de-northsea.mbtiles --east 9.5 -f -t "QMAP-DE North Sea `date +%F`"
@@ -320,7 +322,7 @@ qmap-de.obf:
 
 qmap-de.zip:
 	rm -rf qmap-de/
-	sconvert.py -o qmap-de data/bsh/layers/*.json -t "QMAP-DE `date +%F`"
+	sconvert.py -o qmap-de data/bsh/??????.json -t "QMAP-DE `date +%F`"
 	rm -f charts/$@
 	zip charts/$@ -r qmap-de
 

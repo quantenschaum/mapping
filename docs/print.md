@@ -32,29 +32,12 @@ With the arrow button in the print widget on the top left you can export the cur
 
 This is useful for creating screenshots of the map like above without the control elements but including the lat/lon borders.
  
-## Printing from QGIS
-
-You can use QGIS to create a chart [like this one](img/paperchart.pdf).
-
-You can print your own custom charts with the classical lat/lon zebra border as follows.
-
-1. Install [QGIS](https://qgis.org/) on your computer.
-2. Download the [raw data](index.md) containing all necessary file.
-3. Unzip the data package.
-4. Open `bsh.qgs` with QGIS.
-5. Select `Project > Layout Manager`.
-6. Doubleclick the `paperchart` layout and the layout editor will open.
-7. Adjust the layout to your liking, select the part of the map you want to print (use the move content tool (C)).
-8. Export as PDF.
-9. Print the PDF (direct printing from QGIS may work, but printing PDF is usually more reliable and you can save it to print it again).
-
-
 ## Large formats
 
 It is possible to print maps in sizes larger than A4. Since most users usually only have an A4 printer, the map can be printed across several A4 sheets and then glued together into a larger map. Proceed as follows.
 
 1. Create the map to be printed as a one-page PDF in the desired size. Pay attention to the resolution and the size of fonts and symbols for the target format. For best quality use QGIS or choose a sufficiently large format (the map may not be fully visible on screen; use Ctrl-Minus to zoom out, Ctrl-0 to reset to 100%) and print to PDF. Set the paper size and margins accordingly.
-2. Split this PDF across multiple A4 sheets. Some PDF viewers can do this natively, or you can use [this script](https://github.com/quantenschaum/mapping/blob/master/scripts/poster.py) (requires Linux, Python, pdfposter, LaTeX). With the `-p` option you can specify the number of pages, e.g. `-p 4x2` distributes the map onto 4x2=8 sheets, which is approximately A1 (slightly smaller due to overlapping glue seams).
+2. Split this PDF across multiple A4 sheets. Some PDF viewers can do this natively, or you can use [this script](https://github.com/quantenschaum/mapping/blob/master/scripts/poster.py). With the `-t` option you can specify the number of pages, e.g. `-t 4x2` distributes the map onto 4x2=8 sheets, which is approximately A1 (slightly smaller due to overlapping glue seams).
 3. Print the pages, making sure to disable any automatic scaling in the printer settings.
 4. Trim the bottom and right margins of each sheet using the crop marks.
 5. Glue the sheets together to form the full map.

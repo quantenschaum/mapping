@@ -8,4 +8,4 @@ images:
 	rm img/*.png
 
 install:
-	pip install --break-system-packages mkdocs mkdocs-material mkdocs-i18n mkdocs-static-i18n mkdocs-git-revision-date-localized-plugin
+	pip install --break-system-packages mkdocs mkdocs-material mkdocs-static-i18n mkdocs-git-revision-date-localized-plugin

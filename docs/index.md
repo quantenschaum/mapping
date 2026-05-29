@@ -15,12 +15,13 @@ Here you find precompiled charts for download in various formats usable in diffe
     No warranty, explicit or implied, is given regarding the accuracy, reliability, completeness or timeliness of the provided charts and data. The provider assumes no responsibility or liability for any errors, omissions, outdated information or misuse of this data. 
     
     **Use at your own risk!**
-
     
 !!! warning "BSH Data"
-    Parts of the data that were previously freely available have been removed from the BSH server and access has been restricted. **An update of the German part of the chart is not possible for the time being.**  
-    **Spot Soundings are no longer available on the server of the BSH.**
-    The spot soundings in the german part of the map have been extracted from this [bathymetry dataset](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml) which is relatively coarse and out dated. For accurate and up-to-date depth data use official nautical charts.
+    Parts of the data that were previously freely available have been removed from the BSH server and access has been restricted. 
+
+    BSH now states: "The use of the data for navigation purposes is not permitted."
+
+    The German part of the chart is now based on older data downloaded on 2026-04-27 and on spot soundings that were last available on 2026-03-02. The data was then selectively updated using the currently available datasets, and the NfS was incorporated as far as possible. See also [here](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten).
 
 ??? info "License"    
     - The downloadable files on this page are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
@@ -40,12 +41,6 @@ Here you find precompiled charts for download in various formats usable in diffe
         - [Vaarwegmarkeringen drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
         - [Vaarwegmarkeringen vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
 
-??? note "Raw Data"
-    Raw data files are available here. They can be used in [QGIS](https://qgis.org/) to render your own charts or to investigate or play with dat data. The QGIS file used in this project can be found on [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis).
-    
-    - [Data Package (everything to render/print charts in one ZIP)](qmap-data.zip){:download}
-    
-    Unfortunately, due to legal restrictions, it is no longer possible to provide raw data for Germany as preprocessed package for download.    
     
 ## [OsmAnd](https://osmand.net/)
 
@@ -57,16 +52,12 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 - [:nl: Depth Data NL](depth-nl.obf){:download}
 - [:globe_with_meridians: Light Sectors Worldwide](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download} (**important!**)
-- [:de: QMAP DE (nav aids)*](qmap-de.obf){:download}
 
 !!! failure "Use the Marine Rendering Style!"
     The vector chart will not be rendered properly without the marine rendering style and render engine 2 (OpenGL)!  
     **It will only work when using the Marine Rendering Style!**  
     The Marine Rendering Style is now included in OsmAnd by default.
   
-!!! warning "* QMAP DE"
-    The QMAP DE vector chart contains navaids, rocks and other point like objects. It is meant to be used *instead* of the OSM data, not in combination with it. If you activate both, you will get duplicate objects, which can be confusing.
-
 ### Raster Charts
 
 The charts are imported by opening the `sqlitedb` files with the app. 

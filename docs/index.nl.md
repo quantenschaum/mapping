@@ -16,6 +16,13 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
     
     **Gebruik op eigen risico!**
 
+!!! warning "BSH-gegevens"
+    Delen van de gegevens die voorheen vrij beschikbaar waren, zijn van de BSH-server verwijderd en de toegang is beperkt. Meer informatie hierover vind je [hier](opendata.md).  
+
+    BSH stelt nu: "Het gebruik van de gegevens voor navigatiedoeleinden is niet toegestaan."
+
+    Het Duitse deel van de kaart is nu gebaseerd op oudere gegevens die zijn gedownload op 2026-04-27 en op dieptepeilingen die voor het laatst beschikbaar waren op 2026-03-02. De gegevens zijn vervolgens selectief bijgewerkt met de momenteel beschikbare datasets, en de NfS is zo veel mogelijk verwerkt. Zie ook [hier](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten).
+    
 ??? info "Licentie"    
     - De downloadbare bestanden op deze pagina zijn gelicenseerd onder [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
     - De code van dit project die wordt gebruikt om de kaarten en andere gegevens te genereren is gelicenseerd onder [GPL](https://www.gnu.org/licenses/gpl-3.0.de.html).
@@ -34,18 +41,6 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
         - [Vaarwegmarkeringen drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
         - [Vaarwegmarkeringen vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
 
-??? note "Ruwe gegevens"
-    De ruwe gegevensbestanden zijn hier beschikbaar. Ze kunnen worden gebruikt in [QGIS](https://qgis.org/) om je eigen kaarten te renderen of om gegevens te onderzoeken of ermee te spelen. Het QGIS-bestand dat in dit project wordt gebruikt, is te vinden op [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis).
-  
-    - [Datapakket (alles om kaarten te renderen/printen in één ZIP)](qmap-data.zip){:download}
-
-    Helaas is het vanwege juridische beperkingen niet langer mogelijk om de ruwe gegevens voor Duitsland als voorverwerkt pakket ter download aan te bieden.
-
-!!! warning "BSH Gegevens"
-    Op de server van het BSH zijn meer delen van de eerder vrij toegankelijke gegevens verwijderd en is de toegang bemoeilijkt. **Een update van het Duitse deel van de kaart is voorlopig niet mogelijk.**  
-    **Spot soundings zijn niet langer beschikbaar op de server van het BSH.**
-    De spot soundings in het Duitse deel van de kaart zijn afkomstig uit deze [bathymetry dataset](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml). Deze dataset is relatief grof en enigszins verouderd. Voor nauwkeurige en actuele dieptegegevens dient u officiële zeekaarten te raadplegen.
-    
 ## [OsmAnd](https://osmand.net/)
 
 ### Vectorkaarten
@@ -56,15 +51,11 @@ Vectorkaarten en stijlen voor OsmAnd kunnen geïnstalleerd worden door simpelweg
 - [:nl: Dieptegegevens NL](depth-nl.obf){:download}
 - [:globe_with_meridians: Lichtsectoren wereldwijd](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
-- [:de: QMAP DE (zeeteken)*](qmap-de.obf){:download}
 
 !!! failure "Gebruik de Marine Rendering Style!"
     De vectorkaart wordt niet correct weergegeven zonder de Marine Rendering Style en render engine 2 (OpenGL)!  
     **Het werkt alleen bij gebruik van de Marine Rendering Style!**  
     De Marine Rendering Style is nu standaard opgenomen in OsmAnd.
-
-!!! warning "* QMAP DE"
-    De QMAP DE vectorkaart bevat zeeteken, rotsen en andere puntvormige objecten. Deze kaart is bedoeld om te gebruiken *in plaats van* de OSM-gegevens, niet in combinatie ermee. Als je beide activeert, krijg je dubbele objecten, wat verwarrend kan zijn.
 
 ### Rasterkaarten
 

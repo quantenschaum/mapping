@@ -125,7 +125,7 @@ merged: split
 Y=$(shell jq '.. | arrays | select(.[0]=="get" or .[0]=="has") | .[1]' styles/s57.json | sort | uniq | sed 's/^/-y /')
 
 bsh.tiles: merged
-	tippecanoe $</M_COVR.json -f -y uband $(Y) -Z6 -z13 -j '{"*":["any",["all",["<=","$$zoom",6],[">","uband",1]],["all",["<=","$$zoom",8],[">","uband",2]],["all",["<=","$$zoom",10],[">","uband",3]],["all",["<=","$$zoom",12],[">","uband",4]],["all",["<=","$$zoom",13],[">","uband",5]]]}' -o UB0.mbtiles # charts outlines
+	# tippecanoe $</M_COVR.json -f -y uband $(Y) -Z6 -z13 -j '{"*":["any",["all",["<=","$$zoom",6],[">","uband",1]],["all",["<=","$$zoom",8],[">","uband",2]],["all",["<=","$$zoom",10],[">","uband",3]],["all",["<=","$$zoom",12],[">","uband",4]],["all",["<=","$$zoom",13],[">","uband",5]]]}' -o UB0.mbtiles # charts outlines
 	tippecanoe $</UB1/*.json -f -r1 -ao -ac $(Y) -Z6  -z6  -o UB1.mbtiles # 1 Overview
 	tippecanoe $</UB2/*.json -f -r1 -ao -ac $(Y) -Z7  -z8  -o UB2.mbtiles # 2 General
 	tippecanoe $</UB3/*.json -f -r1 -ao -ac $(Y) -Z9  -z10 -o UB3.mbtiles # 3 Coastal
@@ -200,6 +200,10 @@ serve:
 	make -B styles
 	mkdir -p cache_data && touch cache_data/.nobackup
 	docker compose up
+
+mapproxy:
+	mkdir -p cache_data && touch cache_data/.nobackup
+	docker compose up $@
 
 seed:
 	make -B styles OSM=none

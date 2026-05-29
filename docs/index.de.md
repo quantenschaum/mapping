@@ -17,9 +17,11 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
     **Verwendung auf eigene Gefahr!**
 
 !!! warning "BSH-Daten"
-    Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. Ein Update des deutschen Teils der Karte ist bis auf weiteres nicht mehr möglich. Weitere Informationen zu OpenData [hier](opendata.md).  
-    **Punktlotungen werden nicht mehr auf dem Server des BSH bereitgestellt.**
-    Die Punktlotungen im deutschen Teil der Karte stammen aus diesem [Bathymetrie-Datensatz](https://gdi.bsh.de/de/feed/Elevation-Bathymetry.xml), der relativ grob und veraltet ist. Für genaue und aktuelle Tiefenangaben verwenden Sie bitte offizielle Seekarten.
+    Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. Weitere Informationen dazu [hier](opendata.md).  
+
+    Das BSH weist nun darauf hin: "Die Nutzung der Daten für Navigationszwecke ist nicht gestattet."
+
+    Der deutsche Teil der Karte basiert jetzt auf älteren Daten mit Stand 2026-04-27 sowie auf Punktlotungen, die zuletzt am 2026-03-02 verfügbar waren. Anschließend wurden die Daten selektiv mit den aktuell verfügbaren Datensätzen aktualisiert, und die NfS wurde soweit wie möglich eingearbeitet. Siehe dazu auch [hier](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten).
 
 ??? info "Lizenzen"    
     - Die herunterladbaren Dateien auf dieser Seite sind lizenziert unter [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
@@ -39,13 +41,6 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
         - [Vaarwegmarkeringen drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
         - [Vaarwegmarkeringen vast](https://data.overheid.nl/dataset/2bf96f3b-128d-4506-85e0-08e8fc19a11c) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
 
-??? note "Rohdaten"
-    Rohdaten-Dateien sind hier verfügbar. Sie können in [QGIS](https://qgis.org/) verwendet werden, um eigene Karten zu erstellen oder um die Daten zu untersuchen oder mit ihnen herumzuspielen. Die in diesem Projekt verwendete QGIS-Datei ist auf [GitHub](https://github.com/quantenschaum/mapping/tree/master/qgis) zu finden.
-    
-    - [Data Paket (alles zum Rendern/Drucken von Karten in einem ZIP)](qmap-data.zip){:download}
-
-    Aufgrund rechtlicher Einschränkungen ist es leider nicht mehr möglich, Rohdaten für Deutschland als vorverarbeitetes Paket zum Herunterladen anzubieten.    
-    
 ## [OsmAnd](https://osmand.net/)
 
 ### Vektor-Karten
@@ -56,15 +51,11 @@ Vektorkarten und Stile für OsmAnd können durch einfaches Öffnen der `obf`- od
 - [:nl: Tiefendaten NL](depth-nl.obf){:download}
 - [:globe_with_meridians: Feuersektoren, weltweit](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
-- [:de: QMAP DE (Seezeichen)*](qmap-de.obf){:download}
 
 !!! failure "Marine Rendering Style verwenden!"
     Die Vektorkarte wird ohne den Marine Rendering Style und Renderengine 2 (OpenGL) nicht korrekt dargestellt!  
     **Die Darstellung funktioniert ausschließlich mit dem Marine Rendering Style!**  
     Der Marine Rendering Style ist jetzt in OsmAnd bereits enthalten.
-
-!!! warning "* QMAP DE"
-    Die QMAP DE Vektorkarte enthält Seezeichen, Felsen und andere punktförmige Objekte. Sie ist dafür gedacht, *anstelle* der OSM-Daten verwendet zu werden, nicht in Kombination mit ihnen. Wenn Sie beide aktivieren, erhalten Sie doppelte Objekte, was verwirrend sein kann.
 
 ### Raster-Karten
 

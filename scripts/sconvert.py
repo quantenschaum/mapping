@@ -373,7 +373,7 @@ def features2senc(filename, features, scale_jitter=100):
     features = sorted(features, key=sort_key)
 
     S, N, W, E = bounds(features)  # cell/chart bounds
-    assert S < N and W < E
+    assert S < N and W < E, (filename, S, N, W, E)
     clon, clat = (W + E) / 2, (S + N) / 2  # cell center lon, lat
     cx, cy = ll2grid(clon, clat)  # cell center in grid coordinates
 
@@ -672,7 +672,7 @@ def read_features(filename):
             }  # merge lists into strings
             if not f["geometry"] or not f["geometry"]["coordinates"]:
                 continue  # drop w/o geometry
-            p["layer"] = p.get("layer", layer)
+            p["layer"] = p.get("layer") or layer
             features.append(f)
     return features
 
@@ -733,7 +733,7 @@ def main():
         charts = set(
             filter(lambda f: f, (f["properties"].get(CHART) for f in features))
         )
-        print(len(charts), "charts")
+        print(len(charts), "cells")
         for c in track(sorted(charts), "writing S57"):
             data1 = list(
                 filter(
