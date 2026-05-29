@@ -109,22 +109,10 @@ const basemaps = {
   //     bounds: boundsNL,
   //   },
   // ),
-  "🇳🇱 Luchtfoto 25cm": L.tileLayer.wms(
+  "🇳🇱 Luchtfoto": L.tileLayer.wms(
     "https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0",
     {
       layers: "Actueel_ortho25",
-      version: "1.3.0",
-      transparent: "true",
-      format: "image/jpg",
-      tiled: true,
-      attribution: '<a target="_blank" href="https://www.pdok.nl/">PDOK</a>',
-      bounds: boundsNL,
-    },
-  ),
-  "🇳🇱 Luchtfoto 8cm": L.tileLayer.wms(
-    "https://service.pdok.nl/hwh/luchtfotorgb/wms/v1_0",
-    {
-      layers: "Actueel_orthoHR",
       version: "1.3.0",
       transparent: "true",
       format: "image/jpg",
@@ -380,7 +368,7 @@ new ChartTools().addTo(map);
         <div id="info-en">
           <p class="info">is an open source and open data project that aims to provide free nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access. It is based on data that is available as open data.</p>
 
-          <p style="background:yellow; padding:1ex;">Parts of the data that were previously freely available have been removed from the BSH server and access has been restricted. <b>An update of the German part of the chart is not possible for the time being.</b></p>
+          <p style="background:yellow; padding:1ex;">Further parts of the previously freely accessible data have been removed from the BSH server, and access has been made more difficult. <b>The German part of the map now reflects the status as of 2026-04-27 and the last available depth data from 2026-03-02, including corrections based on the NTM.</b> More information: <a href="download/de/opendata/">Open Data</a>.</p>
 
           <p>For more details, usage instructions and downloads, see the <a href="download/">documentation</a>. Please read the important notes.</p>
 
@@ -390,7 +378,7 @@ new ChartTools().addTo(map);
         <div id="info-de" style="display:none;">
           <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich zu machen. Es basiert auf Daten, die als Open Data verfügbar sind.</p>
 
-          <p style="background:yellow; padding:1ex;">Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. <b>Ein Update des deutschen Teils der Karte ist bis auf weiteres nicht mehr möglich. Weitere Informationen zu OpenData <a href="download/de/opendata/">hier</a>.</b></p>
+          <p style="background:yellow; padding:1ex;">Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. <b>Der deutsche Teil der Karte zeigt jetzt den Stand vom 2026-04-27 und die zuletzt verfügbaren Tiefenangaben vom 2026-03-02 sowie Korrekturen auf Basis der NfS.</b> Weitere Informationen <a href="download/de/opendata/">Open Data</a>.</p>
 
           <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>. Beachten Sie die wichtigen Hinweise.</p>
 
@@ -400,7 +388,7 @@ new ChartTools().addTo(map);
         <div id="info-nl" style="display:none;">
           <p class="info">is een open-source en open-data project dat gratis zeekaarten biedt voor zeilers, watersport- en cartografie‑enthousiastelingen en ontwikkelaars. Het heeft als doel officiële kaartgegevens gemakkelijker toegankelijk te maken. Het is gebaseerd op gegevens die als open data beschikbaar zijn.</p>
 
-          <p style="background:yellow; padding:1ex;">Op de server van het BSH zijn meer delen van de eerder vrij toegankelijke gegevens verwijderd en is de toegang bemoeilijkt. <b>Een update van het Duitse deel van de kaart is voorlopig niet mogelijk.</b></p>
+          <p style="background:yellow; padding:1ex;">Op de server van het BSH zijn nog meer delen van de voorheen vrij toegankelijke gegevens verwijderd en is de toegang bemoeilijkt. <b>Het Duitse deel van de kaart toont nu de stand van 2026-04-27 en de laatst beschikbare dieptegegevens van 2026-03-02, inclusief correcties op basis van de BaZ.</b> Meer informatie: <a href="download/de/opendata/">Open Data</a>.</p>
 
           <p>Meer informatie, gebruiksaanwijzingen en downloads vind je in de <a href="download/nl/">documentatie</a>. Lees de belangrijke opmerkingen.</p>
 

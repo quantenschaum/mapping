@@ -17,7 +17,7 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
     **Verwendung auf eigene Gefahr!**
 
 !!! warning "BSH-Daten"
-    Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. Weitere Informationen dazu [hier](opendata.md).  
+    Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. Weitere Informationen zu [Open Data](opendata.md).  
 
     Das BSH weist nun darauf hin: "Die Nutzung der Daten für Navigationszwecke ist nicht gestattet."
 

@@ -17,7 +17,7 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
     **Gebruik op eigen risico!**
 
 !!! warning "BSH-gegevens"
-    Delen van de gegevens die voorheen vrij beschikbaar waren, zijn van de BSH-server verwijderd en de toegang is beperkt. Meer informatie hierover vind je [hier](opendata.md).  
+    Delen van de gegevens die voorheen vrij beschikbaar waren, zijn van de BSH-server verwijderd en de toegang is beperkt. Meer informatie hierover vind je onder [Open Data](opendata.md).  
 
     BSH stelt nu: "Het gebruik van de gegevens voor navigatiedoeleinden is niet toegestaan."
 
