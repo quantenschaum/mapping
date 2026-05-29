@@ -86,7 +86,7 @@ split/%.json: $(SRC)/%.json
 split: $(SRC)
 	rm -rf $@ && mkdir -p $@
 	touch $@/.nobackup
-	nice make $(patsubst $</%.json,$@/%.json,$(wildcard $</??????.json)) -j
+	nice make $(patsubst $</%.json,$@/%.json,$(wildcard $</??????.json)) -j10
 	$(MERGE) $@/BOY*.json > $@/buoys.json
 	$(MERGE) $@/BCN*.json > $@/beacons.json
 	rm $@/BOY*.json $@/BCN*.json
@@ -114,7 +114,7 @@ merged: split
 	rm -rf $@ && mkdir -p $@/UB1 $@/UB2 $@/UB3 $@/UB4 $@/UB5 $@/UB6
 	touch $@/.nobackup
 	for U in $$(seq 6); do make $@/_M$$U.json; done
-	nice make $(patsubst $</%.json,$@/%.json,$(wildcard $</*.json)) -j
+	nice make $(patsubst $</%.json,$@/%.json,$(wildcard $</*.json)) -j10
 	rm -f $@/*.json
 	for F in $@/*/*1.json; do $(MERGE) $${F//1./?.} > $${F//1./.} && rm $${F//1./?.}; done
 	# for F in $$(cd $@/UB6 && echo *.json); do $(MERGE) $@/UB?/$$F >$@/$$F; done
