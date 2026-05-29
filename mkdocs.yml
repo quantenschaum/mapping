@@ -68,9 +68,6 @@ copyright: |
   });
   </script>
 
-extra_javascript:
-  - downloader.js
-
 markdown_extensions:
   - admonition
   - pymdownx.details
