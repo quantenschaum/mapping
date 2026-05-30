@@ -9,7 +9,7 @@ help:
 
 build:
 # 	$(MAKE) lightsectors.obf
-	$(MAKE) vwm rws rws.layers
+	$(MAKE) vwm rws
 	$(MAKE) fnc-de.zip fnc-nl.zip #fnc-de.obf
 	# $(MAKE) clean-cache
 	# $(MAKE) docker-seed
