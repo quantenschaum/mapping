@@ -13,8 +13,8 @@ build:
 	$(MAKE) fnc-de.zip fnc-nl.zip #fnc-de.obf
 	# $(MAKE) clean-cache
 	# $(MAKE) docker-seed
-	$(MAKE) -C vector clean split
-	$(MAKE) -C vector tiles seed
+	cd vector && $(MAKE) clean split
+	cd vector && $(MAKE) tiles seed
 	# $(MAKE) charts tiles zips www
 	$(MAKE) charts tiles www
 
