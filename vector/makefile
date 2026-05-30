@@ -126,9 +126,9 @@ Y=$(shell jq '.. | arrays | select(.[0]=="get" or .[0]=="has") | .[1]' styles/s5
 
 bsh.tiles: merged
 	# tippecanoe $</M_COVR.json -f -y uband $(Y) -Z6 -z13 -j '{"*":["any",["all",["<=","$$zoom",6],[">","uband",1]],["all",["<=","$$zoom",8],[">","uband",2]],["all",["<=","$$zoom",10],[">","uband",3]],["all",["<=","$$zoom",12],[">","uband",4]],["all",["<=","$$zoom",13],[">","uband",5]]]}' -o UB0.mbtiles # charts outlines
-	tippecanoe $</UB1/*.json -f -r1 -ao -ac $(Y) -Z6  -z6  -o UB1.mbtiles # 1 Overview
-	tippecanoe $</UB2/*.json -f -r1 -ao -ac $(Y) -Z7  -z8  -o UB2.mbtiles # 2 General
-	tippecanoe $</UB3/*.json -f -r1 -ao -ac $(Y) -Z9  -z10 -o UB3.mbtiles # 3 Coastal
+	tippecanoe $</UB1/*.json -f -r1 -ao -ac $(Y) -Z6  -z8  -o UB1.mbtiles # 1 Overview
+	tippecanoe $</UB2/*.json -f -r1 -ao -ac $(Y) -Z9  -z9  -o UB2.mbtiles # 2 General
+	tippecanoe $</UB3/*.json -f -r1 -ao -ac $(Y) -Z10 -z10 -o UB3.mbtiles # 3 Coastal
 	tippecanoe $</UB4/*.json -f -r1 -ao -ac $(Y) -Z11 -z12 -o UB4.mbtiles # 4 Approach
 	tippecanoe $</UB5/*.json -f -r1 -ao -ac $(Y) -Z13 -z13 -o UB5.mbtiles # 5 Harbour
 	tippecanoe $</UB6/*.json -f -r1 -ao -ac $(Y) -Z14 -z14 -o UB6.mbtiles # 6 Berthing
