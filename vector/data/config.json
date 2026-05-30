@@ -19,11 +19,11 @@
     }
   },
   "data": {
-    "qmap-de": {
-      "mbtiles": "qmap-de.mbtiles"
+    "fnc-de": {
+      "mbtiles": "fnc-de.mbtiles"
     },
-    "qmap-nl": {
-      "mbtiles": "qmap-nl.mbtiles"
+    "fnc-nl": {
+      "mbtiles": "fnc-nl.mbtiles"
     }
   }
 }

@@ -7,7 +7,7 @@ let protocol = new Protocol();
 maplibregl.addProtocol("pmtiles", protocol.tile);
 
 var style =
-  (new URL(document.location).searchParams.get("style") ?? "bsh") + ".json";
+  (new URL(document.location).searchParams.get("style") ?? "fnc-de") + ".json";
 
 const map = new maplibregl.Map({
   container: "map",

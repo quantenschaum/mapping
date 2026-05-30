@@ -1,30 +1,30 @@
 seeds:
   overview:
-    caches: [qmap-de]
+    caches: [fnc-de]
     levels: [7]
     coverages: [overview]
   general:
-    caches: [qmap-de]
+    caches: [fnc-de]
     levels: [8, 9]
     coverages: [general]
   coastal:
-    caches: [qmap-de]
+    caches: [fnc-de]
     levels: [10, 11]
     coverages: [coastal]
   approach:
-    caches: [qmap-de]
+    caches: [fnc-de]
     levels: [12, 13, 14, 15]
     coverages: [approach]
   harbour:
-    caches: [qmap-de]
+    caches: [fnc-de]
     levels: [12, 13, 14, 15, 16]
     coverages: [harbour]
   berthing:
-    caches: [qmap-de]
+    caches: [fnc-de]
     levels: [12, 13, 14, 15, 16, 17]
     coverages: [berthing]
   rws:
-    caches: [qmap-nl]
+    caches: [fnc-nl]
     levels: [8, 9, 10, 11, 12, 13, 14, 15, 16]
     coverages: [rws]
 

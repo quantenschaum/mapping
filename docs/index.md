@@ -21,7 +21,7 @@ Here you find precompiled charts for download in various formats usable in diffe
 
     BSH now states: "The use of the data for navigation purposes is not permitted."
 
-    The German part of the chart is now based on older data downloaded on 2026-04-27 and on spot soundings that were last available on 2026-03-02. The data was then selectively updated using the currently available datasets, and the NfS was incorporated as far as possible. See also [Open Data](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten).
+    The German part of the chart is now based on [older data](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten) downloaded on 2026-04-27 and on spot soundings that were last available on 2026-03-02. The data was then selectively updated using the currently available datasets, and the NfS was incorporated as far as possible. 
 
 ??? info "License"    
     - The downloadable files on this page are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
@@ -62,16 +62,16 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 
 The charts are imported by opening the `sqlitedb` files with the app. 
 
-- [:de: QMAP DE](qmap-de.sqlitedb){:download}
-- [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
+- [:de: FNC DE](fnc-de.sqlitedb){:download}
+- [:nl: FNC NL](fnc-nl.sqlitedb){:download}
 - [:de: Tidal Atlas DE](tides.sqlitedb.zip){:download}
 
 #### Online Charts
 
 The raster charts can also be added to OsmAnd as online tile sources, chart tiles are downloaded on demand.
 
-- :de: QMAP DE online [`https://freenauticalchart.net/qmap-de/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=QMAP-DE&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.png)
-- :nl: QMAP NL online [`https://freenauticalchart.net/qmap-nl/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=QMAP-NL&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.png)
+- :de: FNC DE online [`https://freenauticalchart.net/fnc-de/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=FNC-DE&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/fnc-de/%7B0%7D/%7B1%7D/%7B2%7D.png)
+- :nl: FNC NL online [`https://freenauticalchart.net/fnc-nl/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=FNC-NL&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/fnc-nl/%7B0%7D/%7B1%7D/%7B2%7D.png)
 
 !!! tip
     Select `sqlitedb` as storage format. This will store the tiles more efficiently into a single database file.  
@@ -83,19 +83,19 @@ The raster charts can also be added to OsmAnd as online tile sources, chart tile
 
 AvNav can read `mbtiles`. Simply drop the files into AvNav's `charts` folder.
 
-- [:de: QMAP DE](qmap-de.mbtiles){:download}
-- [:nl: QMAP NL](qmap-nl.mbtiles){:download}
+- [:de: FNC DE](fnc-de.mbtiles){:download}
+- [:nl: FNC NL](fnc-nl.mbtiles){:download}
 - [:de: Tidal Atlas DE](tides.mbtiles.zip){:download}
 
 ### Vector Charts
 
 The S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html) plugin, they work with [OpenCPN](https://opencpn.org/) as well.
     
-- [:de: QMAP DE](qmap-de.zip){:download}
-- [:nl: QMAP NL](qmap-nl.zip){:download}
+- [:de: FNC DE](fnc-de.zip){:download}
+- [:nl: FNC NL](fnc-nl.zip){:download}
 
-!!! info "QMAP NL"
-    The buoys and beacons in QMAP-NL vector chart are those from the original ENC and not from the separate dataset. The scale/usage band of the chart was adjusted to display properly in AvNav, it does not work out of the box when converting the charts with OpenCPN.
+!!! info "FNC NL"
+    The buoys and beacons in FNC-NL vector chart are those from the original ENC and not from the separate dataset. The scale/usage band of the chart was adjusted to display properly in AvNav, it does not work out of the box when converting the charts with OpenCPN.
 
 ## [OpenCPN](https://opencpn.org/)
 
@@ -108,8 +108,8 @@ OpenCPN and other applications can display raster charts from `mbtiles`.
 
 The raster charts can be added to JOSM as [imagery layers](https://josm.openstreetmap.de/wiki/Help/Preferences/Imagery).
 
-- :de: QMAP DE `tms:https://freenauticalchart.net/qmap-de/{zoom}/{x}/{y}.png`
-- :nl: QMAP NL `tms:https://freenauticalchart.net/qmap-nl/{zoom}/{x}/{y}.png`
+- :de: FNC DE `tms:https://freenauticalchart.net/fnc-de/{zoom}/{x}/{y}.png`
+- :nl: FNC NL `tms:https://freenauticalchart.net/fnc-nl/{zoom}/{x}/{y}.png`
 
 You may also want to [add this extra `mapcss`](https://josm.openstreetmap.de/wiki/Help/Preferences/MapPaintPreference) (as last entry) for improved rendering of seamarks.
 

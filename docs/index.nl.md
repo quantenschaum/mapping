@@ -21,7 +21,7 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
 
     BSH stelt nu: "Het gebruik van de gegevens voor navigatiedoeleinden is niet toegestaan."
 
-    Het Duitse deel van de kaart is nu gebaseerd op oudere gegevens die zijn gedownload op 2026-04-27 en op dieptepeilingen die voor het laatst beschikbaar waren op 2026-03-02. De gegevens zijn vervolgens selectief bijgewerkt met de momenteel beschikbare datasets, en de NfS is zo veel mogelijk verwerkt. Zie ook [hier](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten).
+    Het Duitse deel van de kaart is nu gebaseerd op [oudere gegevens](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten) die zijn gedownload op 2026-04-27 en op dieptepeilingen die voor het laatst beschikbaar waren op 2026-03-02. De gegevens zijn vervolgens selectief bijgewerkt met de momenteel beschikbare datasets, en de NfS is zo veel mogelijk verwerkt.
     
 ??? info "Licentie"    
     - De downloadbare bestanden op deze pagina zijn gelicenseerd onder [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
@@ -61,16 +61,16 @@ Vectorkaarten en stijlen voor OsmAnd kunnen geïnstalleerd worden door simpelweg
 
 De kaarten worden geïmporteerd door de `sqlitedb` bestanden te openen met de app.
 
-- [:de: QMAP DE](qmap-de.sqlitedb){:download}
-- [:nl: QMAP NL](qmap-nl.sqlitedb){:download}
+- [:de: FNC DE](fnc-de.sqlitedb){:download}
+- [:nl: FNC NL](fnc-nl.sqlitedb){:download}
 - [:de: Getijdenatlas DE](tides.sqlitedb.zip){:download}
 
 #### Online kaarten
 
 De rasterkaarten kunnen ook aan OsmAnd worden toegevoegd als online tegelbron, kaarttegels worden dan op verzoek gedownload.
  
-- :de: QMAP DE online [`https://freenauticalchart.net/qmap-de/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=QMAP-DE&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-de/%7B0%7D/%7B1%7D/%7B2%7D.png)
-- :nl: QMAP NL online [`https://freenauticalchart.net/qmap-nl/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=QMAP-NL&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/qmap-nl/%7B0%7D/%7B1%7D/%7B2%7D.png)
+- :de: FNC DE online [`https://freenauticalchart.net/fnc-de/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=FNC-DE&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/fnc-de/%7B0%7D/%7B1%7D/%7B2%7D.png)
+- :nl: FNC NL online [`https://freenauticalchart.net/fnc-nl/{0}/{1}/{2}.png`](http://osmand.net/add-tile-source?name=FNC-NL&min_zoom=8&max_zoom=16&url_template=https://freenauticalchart.net/fnc-nl/%7B0%7D/%7B1%7D/%7B2%7D.png)
 
 !!! tip
     Selecteer `sqlitedb` als opslagformaat. Dit zal de tiles efficiënter opslaan in een enkel databasebestand.  
@@ -82,19 +82,19 @@ De rasterkaarten kunnen ook aan OsmAnd worden toegevoegd als online tegelbron, k
 
 AvNav kan `mbtiles` lezen. Zet de bestanden gewoon neer in de map `charts` van AvNav.
 
-- [:de: QMAP DE](qmap-de.mbtiles){:download}
-- [:nl: QMAP NL](qmap-nl.mbtiles){:download}
+- [:de: FNC DE](fnc-de.mbtiles){:download}
+- [:nl: FNC NL](fnc-nl.mbtiles){:download}
 - [:de: Getijdenatlas DE](tides.mbtiles.zip){:download}
 
 ### Vectorkaarten
 
 De S57-bestanden kunnen worden gebruikt met de [Ocharts(NG)](https://www.wellenvogel.net/software/avnav/docs/hints/ochartsng.html) plugin, ze werken ook met [OpenCPN](https://opencpn.org/).
 
-- [:de: QMAP DE](qmap-de.zip){:download}
-- [:nl: QMAP NL](qmap-nl.zip){:download}
+- [:de: FNC DE](fnc-de.zip){:download}
+- [:nl: FNC NL](fnc-nl.zip){:download}
 
-!!! info "QMAP NL"
-    De boeien en bakens in de QMAP-NL vectorkaart zijn die van de originele ENC en niet van de aparte dataset. De schaal/gebruiksband van de kaart is aangepast om goed weer te geven in AvNav, het werkt niet out of the box bij het converteren van de kaarten met OpenCPN.
+!!! info "FNC NL"
+    De boeien en bakens in de FNC-NL vectorkaart zijn die van de originele ENC en niet van de aparte dataset. De schaal/gebruiksband van de kaart is aangepast om goed weer te geven in AvNav, het werkt niet out of the box bij het converteren van de kaarten met OpenCPN.
 
 ## [OpenCPN](https://opencpn.org/)
 
@@ -107,8 +107,8 @@ OpenCPN en andere applicaties kunnen rasterkaarten van `mbtiles` weergeven.
 
 De rasterkaarten kunnen aan JOSM worden toegevoegd als [achtergrondlaag](https://josm.openstreetmap.de/wiki/Help/Preferences/Imagery).
 
-- :de: QMAP DE `tms:https://freenauticalchart.net/qmap-de/{zoom}/{x}/{y}.png`
-- :nl: QMAP NL `tms:https://freenauticalchart.net/qmap-nl/{zoom}/{x}/{y}.png`
+- :de: FNC DE `tms:https://freenauticalchart.net/fnc-de/{zoom}/{x}/{y}.png`
+- :nl: FNC NL `tms:https://freenauticalchart.net/fnc-nl/{zoom}/{x}/{y}.png`
 
 Je wilt misschien ook [deze extra `mapcss`](https://josm.openstreetmap.de/wiki/Help/Preferences/MapPaintPreference) toevoegen (als laatste item) voor verbeterde rendering van zeeteken.
 

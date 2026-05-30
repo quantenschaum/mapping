@@ -148,15 +148,15 @@ const overlays = {
   //       '<a target="_blank" href="https://www.igkb.org/forschungsprojekte/tiefenschaerfe">IGKB</a>',
   //   },
   // ),
-  "🇳🇱 QMAP NL": L.tileLayer.fallback(baseurl + "/qmap-nl/{z}/{x}/{y}.png", {
+  "🇳🇱 FNC NL": L.tileLayer.fallback(baseurl + "/fnc-nl/{z}/{x}/{y}.png", {
     attribution:
-      '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
+      '<a href="/download/">FNC NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
     bounds: boundsNL,
     crossOrigin: cors,
   }),
-  "🇩🇪 QMAP DE": L.tileLayer.fallback(baseurl + "/qmap-de/{z}/{x}/{y}.png", {
+  "🇩🇪 FNC DE": L.tileLayer.fallback(baseurl + "/fnc-de/{z}/{x}/{y}.png", {
     attribution:
-      '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
+      '<a href="/download/">FNC DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
     bounds: boundsDE,
     crossOrigin: cors,
   }),
@@ -173,33 +173,27 @@ const overlays = {
 if (isDevMode || params.get("pm") == "1") {
   const { PMTiles, leafletRasterLayer } = await import("pmtiles");
   let pm = {
-    "🇳🇱 QMAP NL (pmtiles)": leafletRasterLayer(
-      new PMTiles("/qmap-nl.pmtiles"),
-      {
-        attribution:
-          '<a href="/download/">QMAP NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
-        bounds: boundsNL,
-        crossOrigin: cors,
-      },
-    ),
-    "🇩🇪 QMAP DE (pmtiles)": leafletRasterLayer(
-      new PMTiles("/qmap-de.pmtiles"),
-      {
-        attribution:
-          '<a href="/download/">QMAP DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
-        bounds: boundsDE,
-        crossOrigin: cors,
-      },
-    ),
+    "🇳🇱 FNC NL (pmtiles)": leafletRasterLayer(new PMTiles("/fnc-nl.pmtiles"), {
+      attribution:
+        '<a href="/download/">FNC NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
+      bounds: boundsNL,
+      crossOrigin: cors,
+    }),
+    "🇩🇪 FNC DE (pmtiles)": leafletRasterLayer(new PMTiles("/fnc-de.pmtiles"), {
+      attribution:
+        '<a href="/download/">FNC DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
+      bounds: boundsDE,
+      crossOrigin: cors,
+    }),
   };
   Object.assign(overlays, pm);
 }
 
 if (!isStandalone) {
-  overlays["QMAP DE 2025-02"] = L.tileLayer.fallback(
-    baseurl + "/qmap-de.2025-02-06/{z}/{x}/{y}.png",
+  overlays["FNC DE 2025-02"] = L.tileLayer.fallback(
+    baseurl + "/fnc-de.2025-02-06/{z}/{x}/{y}.png",
     {
-      attribution: '<a href="/download/">QMAP DE 2025-02</a>',
+      attribution: '<a href="/download/">FNC DE 2025-02</a>',
       bounds: boundsDE,
       crossOrigin: cors,
     },
@@ -207,21 +201,21 @@ if (!isStandalone) {
 }
 
 if (isDevMode) {
-  overlays["QMAP DE nas"] = L.tileLayer(
-    "http://nas:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png",
-    { bounds: boundsDE },
-  );
-  overlays["QMAP NL nas"] = L.tileLayer(
-    "http://nas:8001/tiles/qmap-nl/EPSG3857/{z}/{x}/{y}.png",
+  overlays["FNC NL tileserver"] = L.tileLayer(
+    "http://localhost:8000/styles/fnc-nl/256/{z}/{x}/{y}.png",
     { bounds: boundsNL },
   );
-  overlays["QMAP DE local"] = L.tileLayer(
-    "http://localhost:8001/tiles/qmap-de/EPSG3857/{z}/{x}/{y}.png",
+  overlays["FNC DE tileserver"] = L.tileLayer(
+    "http://localhost:8000/styles/fnc-de/256/{z}/{x}/{y}.png",
     { bounds: boundsDE },
   );
-  overlays["QMAP NL local"] = L.tileLayer(
-    "http://localhost:8001/tiles/qmap-nl/EPSG3857/{z}/{x}/{y}.png",
+  overlays["FNC NL mapproxy"] = L.tileLayer(
+    "http://localhost:8001/tiles/1.0.0/fnc-nl/EPSG3857/{z}/{x}/{y}.png",
     { bounds: boundsNL },
+  );
+  overlays["FNC DE mapproxy"] = L.tileLayer(
+    "http://localhost:8001/tiles/1.0.0/fnc-de/EPSG3857/{z}/{x}/{y}.png",
+    { bounds: boundsDE },
   );
 }
 
@@ -342,8 +336,8 @@ const map = L.map("map", {
   layers: [
     basemaps["🌍 OpenStreetMap"],
     overlays["Grid"],
-    overlays["🇩🇪 QMAP DE"],
-    overlays["🇳🇱 QMAP NL"],
+    overlays["🇩🇪 FNC DE"],
+    overlays["🇳🇱 FNC NL"],
   ],
 });
 
@@ -624,13 +618,13 @@ if (isSet("vector")) {
       L.maplibreGL({
         style: baseurl + "vector/bsh.json",
       }),
-      "QMAP-DE Vector (experimental)",
+      "FNC-DE Vector (experimental)",
     );
     layers.addBaseLayer(
       L.maplibreGL({
         style: baseurl + "vector/rws.json",
       }),
-      "QMAP-NL Vector (experimental)",
+      "FNC-NL Vector (experimental)",
     );
   });
 }

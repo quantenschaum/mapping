@@ -1,7 +1,7 @@
 {
   "version": 8,
-  "name": "bsh",
-  "metadata": {"maputnik:renderer": "mlgl"},
+  "name": "fnc-de",
+  "metadata": { "maputnik:renderer": "mlgl" },
   "center": [9.5, 54.3],
   "zoom": 6,
   "sources": {
@@ -11,17 +11,17 @@
       "tileSize": 256,
       "attribution": "OSM"
     },
-    "s57": {"type": "vector", "url": "http://localhost:9000/data/bsh.json"}
+    "s57": { "type": "vector", "url": "http://localhost:8000/data/fnc-de.json" }
   },
-  "sprite": "http://localhost:9000/styles/bsh/sprite",
-  "glyphs": "http://localhost:9000/fonts/{fontstack}/{range}.pbf",
+  "sprite": "http://localhost:8000/styles/fnc-de/sprite",
+  "glyphs": "http://localhost:8000/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "osm",
       "type": "raster",
       "source": "osm",
-      "layout": {"visibility": "visible"},
-      "paint": {"raster-saturation": -0.8}
+      "layout": { "visibility": "visible" },
+      "paint": { "raster-saturation": -0.8 }
     },
     {
       "id": "depth-uncharted",
@@ -29,8 +29,8 @@
       "source": "s57",
       "source-layer": "UNSARE",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "#999", "fill-opacity": 0.5}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-color": "#999", "fill-opacity": 0.5 }
     },
     {
       "id": "depth-dredged",
@@ -38,8 +38,8 @@
       "source": "s57",
       "source-layer": "DRGARE",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "#eee"}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-color": "#eee" }
     },
     {
       "id": "depth-areas",
@@ -92,7 +92,7 @@
       "type": "line",
       "source": "s57",
       "source-layer": "DRGARE",
-      "paint": {"line-color": "#999", "line-dasharray": [2, 2]}
+      "paint": { "line-color": "#999", "line-dasharray": [2, 2] }
     },
     {
       "id": "land",
@@ -100,7 +100,7 @@
       "source": "s57",
       "source-layer": "LNDARE",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "#F9ECC0"}
+      "paint": { "fill-color": "#F9ECC0" }
     },
     {
       "id": "vegetation-line",
@@ -108,7 +108,7 @@
       "source": "s57",
       "source-layer": "VEGATN",
       "filter": ["==", ["geometry-type"], "LineString"],
-      "paint": {"line-color": "green", "line-opacity": 0.3, "line-width": 3}
+      "paint": { "line-color": "green", "line-opacity": 0.3, "line-width": 3 }
     },
     {
       "id": "vegetation",
@@ -116,7 +116,7 @@
       "source": "s57",
       "source-layer": "VEGATN",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "green", "fill-opacity": 0.3}
+      "paint": { "fill-color": "green", "fill-opacity": 0.3 }
     },
     {
       "id": "urban",
@@ -124,7 +124,7 @@
       "source": "s57",
       "source-layer": "BUAARE",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "rgba(135, 88, 22, 1)", "fill-opacity": 0.5}
+      "paint": { "fill-color": "rgba(135, 88, 22, 1)", "fill-opacity": 0.5 }
     },
     {
       "id": "factory",
@@ -132,7 +132,7 @@
       "source": "s57",
       "source-layer": "PRDARE",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "gray", "fill-opacity": 0.5}
+      "paint": { "fill-color": "gray", "fill-opacity": 0.5 }
     },
     {
       "id": "lake",
@@ -140,7 +140,7 @@
       "source": "s57",
       "source-layer": "LAKARE",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "rgba(97, 161, 251, 1)"}
+      "paint": { "fill-color": "rgba(97, 161, 251, 1)" }
     },
     {
       "id": "silo",
@@ -148,8 +148,8 @@
       "source": "s57",
       "source-layer": "SILTNK",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "gray", "fill-opacity": 0.5}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-color": "gray", "fill-opacity": 0.5 }
     },
     {
       "id": "cliff",
@@ -158,7 +158,11 @@
       "source-layer": "SLOTOP",
       "minzoom": 11,
       "filter": ["==", ["get", "CATSLO"], 6],
-      "paint": {"line-pattern": "cliff", "line-width": 16, "line-opacity": 0.8}
+      "paint": {
+        "line-pattern": "cliff",
+        "line-width": 16,
+        "line-opacity": 0.8
+      }
     },
     {
       "id": "dock-dry",
@@ -166,7 +170,7 @@
       "source": "s57",
       "source-layer": "DRYDOC",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "#999"}
+      "paint": { "fill-color": "#999" }
     },
     {
       "id": "dock-floating",
@@ -174,7 +178,7 @@
       "source": "s57",
       "source-layer": "FLODOC",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "rgba(106, 144, 189, 1)"}
+      "paint": { "fill-color": "rgba(106, 144, 189, 1)" }
     },
     {
       "id": "coastline",
@@ -188,7 +192,7 @@
       "source": "s57",
       "source-layer": "SLCONS",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "rgba(209, 158, 68, 1)"}
+      "paint": { "fill-color": "rgba(209, 158, 68, 1)" }
     },
     {
       "id": "shoreline-line",
@@ -216,7 +220,7 @@
       "type": "line",
       "source": "s57",
       "source-layer": "DYKCON",
-      "paint": {"line-width": 3, "line-color": "#333"}
+      "paint": { "line-width": 3, "line-color": "#333" }
     },
     {
       "id": "pylon-fill",
@@ -224,14 +228,14 @@
       "source": "s57",
       "source-layer": "PYLONS",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "rgba(209, 158, 68, 1)"}
+      "paint": { "fill-color": "rgba(209, 158, 68, 1)" }
     },
     {
       "id": "pylon-line",
       "type": "line",
       "source": "s57",
       "source-layer": "PYLONS",
-      "paint": {"line-color": "#333", "line-width": 4}
+      "paint": { "line-color": "#333", "line-width": 4 }
     },
     {
       "id": "gate-area",
@@ -239,7 +243,7 @@
       "source": "s57",
       "source-layer": "GATCON",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "gray"}
+      "paint": { "fill-color": "gray" }
     },
     {
       "id": "gate-line",
@@ -247,7 +251,7 @@
       "source": "s57",
       "source-layer": "GATCON",
       "filter": ["==", ["geometry-type"], "LineString"],
-      "paint": {"line-color": "gray", "line-width": 3}
+      "paint": { "line-color": "gray", "line-width": 3 }
     },
     {
       "id": "gate-point",
@@ -281,15 +285,15 @@
       "source": "s57",
       "source-layer": "BRIDGE",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "rgba(210, 183, 93, 1)"}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-color": "rgba(210, 183, 93, 1)" }
     },
     {
       "id": "bridge-outline",
       "type": "line",
       "source": "s57",
       "source-layer": "BRIDGE",
-      "paint": {"line-color": "rgba(72, 50, 6, 1)", "line-width": 2}
+      "paint": { "line-color": "rgba(72, 50, 6, 1)", "line-width": 2 }
     },
     {
       "id": "tunnel",
@@ -308,7 +312,7 @@
       "source": "s57",
       "source-layer": "AIRARE",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "#999"}
+      "paint": { "fill-color": "#999" }
     },
     {
       "id": "airfield-runway",
@@ -316,7 +320,7 @@
       "source": "s57",
       "source-layer": "RUNWAY",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "#666"}
+      "paint": { "fill-color": "#666" }
     },
     {
       "id": "canal-area",
@@ -324,7 +328,7 @@
       "source": "s57",
       "source-layer": "CANALS",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "#2A8FDC"}
+      "paint": { "fill-color": "#2A8FDC" }
     },
     {
       "id": "canal-line",
@@ -332,7 +336,7 @@
       "source": "s57",
       "source-layer": "CANALS",
       "filter": ["==", ["geometry-type"], "LineString"],
-      "paint": {"line-color": "#2A8FDC", "line-width": 3}
+      "paint": { "line-color": "#2A8FDC", "line-width": 3 }
     },
     {
       "id": "river-area",
@@ -340,7 +344,7 @@
       "source": "s57",
       "source-layer": "RIVERS",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "#2A8FDC"}
+      "paint": { "fill-color": "#2A8FDC" }
     },
     {
       "id": "river-line",
@@ -348,7 +352,7 @@
       "source": "s57",
       "source-layer": "RIVERS",
       "filter": ["==", ["geometry-type"], "LineString"],
-      "paint": {"line-color": "#2A8FDC", "line-width": 3}
+      "paint": { "line-color": "#2A8FDC", "line-width": 3 }
     },
     {
       "id": "road-area",
@@ -356,8 +360,8 @@
       "source": "s57",
       "source-layer": "ROADWY",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "gray", "fill-opacity": 0.8}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-color": "gray", "fill-opacity": 0.8 }
     },
     {
       "id": "road-line",
@@ -369,7 +373,7 @@
         ["==", ["geometry-type"], "LineString"],
         ["!=", ["get", "CATROD"], 4]
       ],
-      "layout": {"visibility": "visible"},
+      "layout": { "visibility": "visible" },
       "paint": {
         "line-width": ["match", ["get", "CATROD"], 4, 1.5, 3],
         "line-dasharray": [
@@ -393,7 +397,7 @@
         ["==", ["geometry-type"], "LineString"],
         ["==", ["get", "CATROD"], 4]
       ],
-      "layout": {"visibility": "visible"},
+      "layout": { "visibility": "visible" },
       "paint": {
         "line-width": ["match", ["get", "CATROD"], 4, 1.5, 3],
         "line-dasharray": [2, 2],
@@ -407,8 +411,8 @@
       "source": "s57",
       "source-layer": "DAMCON",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "rgba(92, 92, 92, 1)", "fill-opacity": 0.8}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-color": "rgba(92, 92, 92, 1)", "fill-opacity": 0.8 }
     },
     {
       "id": "dam-line",
@@ -416,8 +420,8 @@
       "source": "s57",
       "source-layer": "DAMCON",
       "filter": ["==", ["geometry-type"], "LineString"],
-      "layout": {"visibility": "visible"},
-      "paint": {"line-color": "gray", "line-width": 3}
+      "layout": { "visibility": "visible" },
+      "paint": { "line-color": "gray", "line-width": 3 }
     },
     {
       "id": "causeway-area",
@@ -425,8 +429,8 @@
       "source": "s57",
       "source-layer": "CAUSWY",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "gray", "fill-opacity": 0.8}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-color": "gray", "fill-opacity": 0.8 }
     },
     {
       "id": "causeway-line",
@@ -434,22 +438,26 @@
       "source": "s57",
       "source-layer": "CAUSWY",
       "filter": ["==", ["geometry-type"], "LineString"],
-      "layout": {"visibility": "visible"},
-      "paint": {"line-color": "gray", "line-width": 3}
+      "layout": { "visibility": "visible" },
+      "paint": { "line-color": "gray", "line-width": 3 }
     },
     {
       "id": "railway",
       "type": "line",
       "source": "s57",
       "source-layer": "RAILWY",
-      "paint": {"line-width": 3, "line-color": "#333"}
+      "paint": { "line-width": 3, "line-color": "#333" }
     },
     {
       "id": "railway-dash",
       "type": "line",
       "source": "s57",
       "source-layer": "RAILWY",
-      "paint": {"line-width": 2, "line-color": "#eee", "line-dasharray": [3, 3]}
+      "paint": {
+        "line-width": 2,
+        "line-color": "#eee",
+        "line-dasharray": [3, 3]
+      }
     },
     {
       "id": "building",
@@ -457,7 +465,7 @@
       "source": "s57",
       "source-layer": "BUISGL",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-opacity": 0.5}
+      "paint": { "fill-opacity": 0.5 }
     },
     {
       "id": "building-single",
@@ -465,8 +473,8 @@
       "source": "s57",
       "source-layer": "BUISGL",
       "filter": ["==", ["geometry-type"], "Point"],
-      "layout": {"icon-image": "building", "icon-size": 0.8},
-      "paint": {"text-opacity": 0.7}
+      "layout": { "icon-image": "building", "icon-size": 0.8 },
+      "paint": { "text-opacity": 0.7 }
     },
     {
       "id": "dumping-ground-area",
@@ -531,7 +539,7 @@
       "type": "line",
       "source": "s57",
       "source-layer": "DWRTPT",
-      "paint": {"line-color": "magenta", "line-dasharray": [2, 2]}
+      "paint": { "line-color": "magenta", "line-dasharray": [2, 2] }
     },
     {
       "id": "deepwater-arrows",
@@ -551,7 +559,7 @@
       "type": "line",
       "source": "s57",
       "source-layer": "FERYRT",
-      "paint": {"line-color": "grey", "line-dasharray": [4, 2]}
+      "paint": { "line-color": "grey", "line-dasharray": [4, 2] }
     },
     {
       "id": "ferry-symbol",
@@ -569,8 +577,12 @@
       "type": "line",
       "source": "s57",
       "source-layer": "FSHFAC",
-      "layout": {"visibility": "visible"},
-      "paint": {"line-color": "#333", "line-width": 2, "line-dasharray": [3, 1]}
+      "layout": { "visibility": "visible" },
+      "paint": {
+        "line-color": "#333",
+        "line-width": 2,
+        "line-dasharray": [3, 1]
+      }
     },
     {
       "id": "ponton",
@@ -578,7 +590,7 @@
       "source": "s57",
       "source-layer": "PONTON",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": {"fill-color": "rgba(195, 165, 129, 1)"}
+      "paint": { "fill-color": "rgba(195, 165, 129, 1)" }
     },
     {
       "id": "dir-buoyage",
@@ -596,7 +608,7 @@
         ],
         "icon-rotate": ["get", "ORIENT"]
       },
-      "paint": {"icon-opacity": 0.5}
+      "paint": { "icon-opacity": 0.5 }
     },
     {
       "id": "hulk",
@@ -604,16 +616,16 @@
       "source": "s57",
       "source-layer": "HULKES",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "rgba(123, 107, 88, 1)"}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-color": "rgba(123, 107, 88, 1)" }
     },
     {
       "id": "marinefarm",
       "type": "line",
       "source": "s57",
       "source-layer": "MARCUL",
-      "layout": {"visibility": "visible"},
-      "paint": {"line-dasharray": [4, 2]}
+      "layout": { "visibility": "visible" },
+      "paint": { "line-dasharray": [4, 2] }
     },
     {
       "id": "marinefarm-symbol",
@@ -641,8 +653,8 @@
       "type": "line",
       "source": "s57",
       "source-layer": "OSPARE",
-      "layout": {"visibility": "visible"},
-      "paint": {"line-dasharray": [2, 2], "line-color": "gray"}
+      "layout": { "visibility": "visible" },
+      "paint": { "line-dasharray": [2, 2], "line-color": "gray" }
     },
     {
       "id": "oil-barrier",
@@ -660,14 +672,14 @@
       "type": "line",
       "source": "s57",
       "source-layer": "CONVYR",
-      "paint": {"line-color": "grey", "line-width": 4}
+      "paint": { "line-color": "grey", "line-width": 4 }
     },
     {
       "id": "recommended-traffic-limit",
       "type": "line",
       "source": "s57",
       "source-layer": "RCTLPT",
-      "paint": {"line-color": "magenta", "line-dasharray": [4, 4]}
+      "paint": { "line-color": "magenta", "line-dasharray": [4, 4] }
     },
     {
       "id": "recommended-traffic-lane",
@@ -707,14 +719,14 @@
       "type": "line",
       "source": "s57",
       "source-layer": "PRCARE",
-      "paint": {"line-color": "magenta", "line-dasharray": [4, 4]}
+      "paint": { "line-color": "magenta", "line-dasharray": [4, 4] }
     },
     {
       "id": "inshore-traffic-zone",
       "type": "line",
       "source": "s57",
       "source-layer": "ISTZNE",
-      "paint": {"line-color": "magenta", "line-dasharray": [1, 6]}
+      "paint": { "line-color": "magenta", "line-dasharray": [1, 6] }
     },
     {
       "id": "restriction-restricted-entry",
@@ -731,8 +743,8 @@
           ["in", ",8,", ["var", "RESTRN"]]
         ]
       ],
-      "layout": {"visibility": "none"},
-      "paint": {"fill-opacity": 0.03, "fill-color": "yellow"}
+      "layout": { "visibility": "none" },
+      "paint": { "fill-opacity": 0.03, "fill-color": "yellow" }
     },
     {
       "id": "restriction-no-entry",
@@ -749,8 +761,8 @@
           ["in", ",7,", ["var", "RESTRN"]]
         ]
       ],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-opacity": 0.05, "fill-color": "red"}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-opacity": 0.05, "fill-color": "red" }
     },
     {
       "id": "restriction-PSSA",
@@ -767,7 +779,7 @@
           ["in", ",28,", ["var", "CATREA"]]
         ]
       ],
-      "layout": {"visibility": "visible"},
+      "layout": { "visibility": "visible" },
       "paint": {
         "line-color": "green",
         "line-width": 10,
@@ -810,7 +822,7 @@
         "text-offset": [0, 0.5],
         "symbol-spacing": 300
       },
-      "paint": {"text-color": "green"}
+      "paint": { "text-color": "green" }
     },
     {
       "id": "restriction-line1",
@@ -818,7 +830,7 @@
       "source": "s57",
       "source-layer": "RESARE",
       "filter": ["all"],
-      "layout": {"visibility": "visible"},
+      "layout": { "visibility": "visible" },
       "paint": {
         "line-color": [
           "let",
@@ -954,7 +966,7 @@
         "text-radial-offset": 1,
         "text-ignore-placement": true
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "radio-calling-line",
@@ -981,7 +993,7 @@
         "symbol-placement": "line",
         "text-offset": [0, -0.8]
       },
-      "paint": {"text-color": "magenta", "text-opacity": 0.5}
+      "paint": { "text-color": "magenta", "text-opacity": 0.5 }
     },
     {
       "id": "radio-calling-point",
@@ -1008,7 +1020,7 @@
         "text-allow-overlap": true,
         "text-ignore-placement": false
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "radio-calling-name",
@@ -1024,7 +1036,7 @@
         "text-variable-anchor": ["top", "left", "right", "bottom"],
         "text-radial-offset": 1.5
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "pilot-boarding",
@@ -1041,7 +1053,7 @@
         "text-variable-anchor": ["top", "left", "right", "bottom"],
         "text-radial-offset": 1
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "silo-point",
@@ -1087,7 +1099,7 @@
       "type": "line",
       "source": "s57",
       "source-layer": "RADLNE",
-      "paint": {"line-color": "magenta", "line-opacity": 0.5}
+      "paint": { "line-color": "magenta", "line-opacity": 0.5 }
     },
     {
       "id": "TSS-lane-copy",
@@ -1095,8 +1107,8 @@
       "source": "s57",
       "source-layer": "TSSLPT",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-opacity": 0.03, "fill-color": "yellow"}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-opacity": 0.03, "fill-color": "yellow" }
     },
     {
       "id": "TSS-lane",
@@ -1104,8 +1116,8 @@
       "source": "s57",
       "source-layer": "TSSLPT",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-opacity": 0.05, "fill-color": "yellow"}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-opacity": 0.05, "fill-color": "yellow" }
     },
     {
       "id": "TSS-lane-arrow",
@@ -1121,7 +1133,7 @@
         "icon-rotation-alignment": "map",
         "icon-pitch-alignment": "map"
       },
-      "paint": {"icon-opacity": 0.5}
+      "paint": { "icon-opacity": 0.5 }
     },
     {
       "id": "TSS-crossing",
@@ -1129,8 +1141,8 @@
       "source": "s57",
       "source-layer": "TSSCRS",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "magenta", "fill-opacity": 0.05}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-color": "magenta", "fill-opacity": 0.05 }
     },
     {
       "id": "TSS-area",
@@ -1138,15 +1150,15 @@
       "source": "s57",
       "source-layer": "TSEZNE",
       "filter": ["==", ["geometry-type"], "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "magenta", "fill-opacity": 0.2}
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-color": "magenta", "fill-opacity": 0.2 }
     },
     {
       "id": "TSS-boundary",
       "type": "line",
       "source": "s57",
       "source-layer": "TSSBND",
-      "layout": {"visibility": "visible"},
+      "layout": { "visibility": "visible" },
       "paint": {
         "line-color": "magenta",
         "line-width": 2,
@@ -1159,45 +1171,45 @@
       "type": "line",
       "source": "s57",
       "source-layer": "TSELNE",
-      "layout": {"visibility": "visible"},
-      "paint": {"line-color": "magenta", "line-width": 2, "line-opacity": 0.8}
+      "layout": { "visibility": "visible" },
+      "paint": { "line-color": "magenta", "line-width": 2, "line-opacity": 0.8 }
     },
     {
       "id": "territorial-area",
       "type": "line",
       "source": "s57",
       "source-layer": "TESARE",
-      "layout": {"visibility": "none"},
-      "paint": {"line-dasharray": [5, 2, 1, 2], "line-width": 2}
+      "layout": { "visibility": "none" },
+      "paint": { "line-dasharray": [5, 2, 1, 2], "line-width": 2 }
     },
     {
       "id": "territorial-line",
       "type": "line",
       "source": "s57",
       "source-layer": "STSLNE",
-      "layout": {"visibility": "none"},
-      "paint": {"line-dasharray": [5, 2, 1, 2], "line-width": 2}
+      "layout": { "visibility": "none" },
+      "paint": { "line-dasharray": [5, 2, 1, 2], "line-width": 2 }
     },
     {
       "id": "tideway",
       "type": "line",
       "source": "s57",
       "source-layer": "TIDEWY",
-      "paint": {"line-color": "#333", "line-dasharray": [4, 2]}
+      "paint": { "line-color": "#333", "line-dasharray": [4, 2] }
     },
     {
       "id": "fairway",
       "type": "line",
       "source": "s57",
       "source-layer": "FAIRWY",
-      "paint": {"line-color": "gray", "line-dasharray": [2, 2]}
+      "paint": { "line-color": "gray", "line-dasharray": [2, 2] }
     },
     {
       "id": "navigation-line",
       "type": "line",
       "source": "s57",
       "source-layer": "NAVLNE",
-      "paint": {"line-color": "#333", "line-dasharray": [4, 2]}
+      "paint": { "line-color": "#333", "line-dasharray": [4, 2] }
     },
     {
       "id": "military-area",
@@ -1245,7 +1257,7 @@
         "icon-ignore-placement": true,
         "icon-offset": [0, 8]
       },
-      "paint": {"icon-opacity": 0.5}
+      "paint": { "icon-opacity": 0.5 }
     },
     {
       "id": "cable-area1",
@@ -1314,21 +1326,21 @@
       "source-layer": "CBLSUB",
       "minzoom": 10,
       "layout": {},
-      "paint": {"line-pattern": "cable", "line-width": 6, "line-opacity": 0.7}
+      "paint": { "line-pattern": "cable", "line-width": 6, "line-opacity": 0.7 }
     },
     {
       "id": "pipeline-ohd",
       "type": "line",
       "source": "s57",
       "source-layer": "PIPOHD",
-      "paint": {"line-dasharray": [4, 2], "line-width": 2}
+      "paint": { "line-dasharray": [4, 2], "line-width": 2 }
     },
     {
       "id": "pipeline-area",
       "type": "line",
       "source": "s57",
       "source-layer": "PIPARE",
-      "paint": {"line-color": "magenta", "line-dasharray": [4, 4]}
+      "paint": { "line-color": "magenta", "line-dasharray": [4, 4] }
     },
     {
       "id": "pipeline",
@@ -1347,7 +1359,7 @@
       "type": "line",
       "source": "s57",
       "source-layer": "HRBARE",
-      "layout": {"visibility": "none"},
+      "layout": { "visibility": "none" },
       "paint": {
         "line-color": "rgba(30, 114, 249, 1)",
         "line-width": 1,
@@ -1383,7 +1395,7 @@
         "icon-ignore-placement": true,
         "text-radial-offset": 1.5
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "rescue-station",
@@ -1429,7 +1441,7 @@
         "text-radial-offset": 1,
         "text-variable-anchor": ["top", "left", "right", "bottom"]
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "seabed",
@@ -1514,7 +1526,7 @@
         "text-anchor": "center",
         "visibility": "visible"
       },
-      "paint": {"text-color": "gray"}
+      "paint": { "text-color": "gray" }
     },
     {
       "id": "flood-ebb",
@@ -1546,7 +1558,7 @@
           "]"
         ]
       },
-      "paint": {"text-color": "rgba(61, 72, 146, 1)"}
+      "paint": { "text-color": "rgba(61, 72, 146, 1)" }
     },
     {
       "id": "signal-wanring",
@@ -1595,7 +1607,7 @@
       "type": "line",
       "source": "s57",
       "source-layer": "WRECKS",
-      "paint": {"line-color": "#333"}
+      "paint": { "line-color": "#333" }
     },
     {
       "id": "wrecks",
@@ -1876,7 +1888,7 @@
         "icon-allow-overlap": true,
         "visibility": "visible"
       },
-      "paint": {"icon-opacity": 0.7}
+      "paint": { "icon-opacity": 0.7 }
     },
     {
       "id": "light-sector2",
@@ -1913,7 +1925,7 @@
         "icon-ignore-placement": true,
         "visibility": "visible"
       },
-      "paint": {"icon-opacity": 0.7}
+      "paint": { "icon-opacity": 0.7 }
     },
     {
       "id": "light-arc-1",
@@ -1989,7 +2001,7 @@
         "icon-allow-overlap": true,
         "icon-ignore-placement": true
       },
-      "paint": {"icon-opacity": 0.8}
+      "paint": { "icon-opacity": 0.8 }
     },
     {
       "id": "light-arc-2",
@@ -2093,7 +2105,7 @@
         "icon-allow-overlap": true,
         "icon-ignore-placement": true
       },
-      "paint": {"icon-opacity": 0.8}
+      "paint": { "icon-opacity": 0.8 }
     },
     {
       "id": "light-arc-3",
@@ -2196,7 +2208,7 @@
         "icon-allow-overlap": true,
         "icon-ignore-placement": true
       },
-      "paint": {"icon-opacity": 0.8}
+      "paint": { "icon-opacity": 0.8 }
     },
     {
       "id": "light-full",
@@ -2212,7 +2224,7 @@
         ["!", ["has", "SECTR2"]],
         ["!", ["in", ",11,", ["concat", ",", ["get", "STATUS"], ","]]]
       ],
-      "layout": {"visibility": "none"},
+      "layout": { "visibility": "none" },
       "paint": {
         "circle-radius": ["step", ["get", "VALNMR"], 0, 0, 40, 20, 60],
         "circle-opacity": 0,
@@ -2648,14 +2660,14 @@
         "text-font": ["Noto Sans Regular"],
         "text-size": 12
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "anchorage",
       "type": "line",
       "source": "s57",
       "source-layer": "ACHARE",
-      "paint": {"line-color": "magenta", "line-dasharray": [4, 4]}
+      "paint": { "line-color": "magenta", "line-dasharray": [4, 4] }
     },
     {
       "id": "anchorage-symbol",
@@ -2689,7 +2701,7 @@
         "text-allow-overlap": true,
         "text-ignore-placement": true
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "berths",
@@ -2701,7 +2713,7 @@
         "text-size": 12,
         "text-font": ["Noto Sans Semi Bold"]
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "magnetic-variation",
@@ -2723,7 +2735,7 @@
         "text-allow-overlap": false,
         "visibility": "none"
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "clearance-bridge",
@@ -2828,7 +2840,7 @@
         "symbol-spacing": 300,
         "text-offset": [0, 0.7]
       },
-      "paint": {"text-color": "gray", "text-opacity": 0.5}
+      "paint": { "text-color": "gray", "text-opacity": 0.5 }
     },
     {
       "id": "label-region",
@@ -2841,7 +2853,7 @@
         "text-size": 13,
         "text-font": ["Noto Sans Italic"]
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "label-sea",
@@ -2853,7 +2865,7 @@
         "text-size": 13,
         "text-font": ["Noto Sans Italic"]
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "label-lake",
@@ -2876,7 +2888,7 @@
         "text-size": 12,
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]]
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "label-urban",
@@ -2890,7 +2902,7 @@
         "text-variable-anchor": ["top", "left", "right", "bottom"],
         "text-radial-offset": 0.5
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "label-elevation",
@@ -2902,7 +2914,7 @@
         "text-size": 12,
         "text-field": ["get", "ELEVAT"]
       },
-      "paint": {"text-color": "rgba(86, 45, 0, 1)"}
+      "paint": { "text-color": "rgba(86, 45, 0, 1)" }
     },
     {
       "id": "label-hulk",
@@ -2915,7 +2927,7 @@
         "text-size": 12,
         "text-variable-anchor": ["center", "left", "right", "top", "bottom"]
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "label-fairway",
@@ -2929,7 +2941,7 @@
         "symbol-placement": "point",
         "text-anchor": "bottom"
       },
-      "paint": {"text-color": "gray"}
+      "paint": { "text-color": "gray" }
     },
     {
       "id": "label-shoreline",
@@ -2944,7 +2956,7 @@
         "text-anchor": "bottom",
         "symbol-spacing": 500
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "label-ponton",
@@ -2957,7 +2969,7 @@
         "text-size": 12,
         "text-variable-anchor": ["center", "left", "right", "top", "bottom"]
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "label-dock-dry",
@@ -3023,7 +3035,7 @@
         "symbol-placement": "point",
         "text-radial-offset": 1
       },
-      "paint": {"text-color": "gray"}
+      "paint": { "text-color": "gray" }
     },
     {
       "id": "label-bridge",
@@ -3072,7 +3084,7 @@
         "text-size": 12,
         "text-allow-overlap": true
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "label-fishing-facility",
@@ -3109,7 +3121,7 @@
         "icon-offset": [0, -10],
         "icon-size": 0.8
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "label-radar-range",
@@ -3125,7 +3137,7 @@
         "symbol-spacing": 500,
         "text-offset": [0, 1]
       },
-      "paint": {"text-color": "magenta", "text-opacity": 0.5}
+      "paint": { "text-color": "magenta", "text-opacity": 0.5 }
     },
     {
       "id": "label-TSS1",
@@ -3139,7 +3151,7 @@
         "text-size": 12,
         "text-anchor": "bottom"
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "label-TSS2",
@@ -3153,7 +3165,7 @@
         "text-size": 12,
         "text-anchor": "bottom"
       },
-      "paint": {"text-color": "magenta"}
+      "paint": { "text-color": "magenta" }
     },
     {
       "id": "label-radar-line",
@@ -3168,7 +3180,7 @@
         "text-anchor": "bottom",
         "symbol-spacing": 500
       },
-      "paint": {"text-color": "magenta", "text-opacity": 0.5}
+      "paint": { "text-color": "magenta", "text-opacity": 0.5 }
     },
     {
       "id": "label-recommended-route",
@@ -3182,7 +3194,7 @@
         "symbol-placement": "line-center",
         "text-anchor": "bottom"
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "label-navigation-line",
@@ -3198,7 +3210,7 @@
         "symbol-z-order": "auto",
         "text-anchor": ["case", ["<", ["get", "ORIENT"], 180], "top", "bottom"]
       },
-      "paint": {"text-color": "#333"}
+      "paint": { "text-color": "#333" }
     },
     {
       "id": "label-production-area",
@@ -3210,7 +3222,7 @@
         "text-font": ["Noto Sans Regular"],
         "text-size": 12
       },
-      "paint": {"text-color": "gray"}
+      "paint": { "text-color": "gray" }
     },
     {
       "id": "label-military",
@@ -3223,7 +3235,7 @@
         "text-size": 12,
         "text-allow-overlap": false
       },
-      "paint": {"text-color": "magenta", "text-opacity": 0.5}
+      "paint": { "text-color": "magenta", "text-opacity": 0.5 }
     },
     {
       "id": "label-dumping-ground",
@@ -3666,7 +3678,7 @@
       "source": "s57",
       "source-layer": "ADMARE",
       "filter": ["all", [">=", "JRSDTN", 3]],
-      "layout": {"visibility": "none"},
+      "layout": { "visibility": "none" },
       "paint": {
         "line-width": 2,
         "line-color": [
@@ -3711,7 +3723,7 @@
       "source": "s57",
       "source-layer": "M_COVR",
       "filter": ["!", ["has", "ORIENT"]],
-      "layout": {"visibility": "visible"},
+      "layout": { "visibility": "visible" },
       "paint": {
         "line-opacity": 0.5,
         "line-color": "gray",
@@ -3747,7 +3759,7 @@
         "text-ignore-placement": true,
         "visibility": "none"
       },
-      "paint": {"text-opacity": 0.5}
+      "paint": { "text-opacity": 0.5 }
     },
     {
       "id": "DEBUG",
@@ -3767,15 +3779,30 @@
         "text-variable-anchor": ["center", "top", "bottom", "right", "left"],
         "text-radial-offset": 5
       },
-      "paint": {"text-color": "rgba(206, 27, 206, 1)"}
+      "paint": { "text-color": "rgba(206, 27, 206, 1)" }
+    },
+    {
+      "id": "WATERMARK",
+      "type": "symbol",
+      "source": "s57",
+      "source-layer": "M_COVR",
+      "layout": {
+        "visibility": "none",
+        "text-field": "freenauticalchart.net",
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 12
+      },
+      "paint": { "text-opacity": 0.5, "text-color": "blue" }
     },
     {
       "id": "TILES",
       "type": "line",
       "source": "s57",
       "source-layer": "M_COVR",
-      "layout": {"visibility": "none"},
-      "paint": {"line-color": "blue", "line-offset": 20}
+      "layout": { "visibility": "none" },
+      "paint": { "line-color": "blue", "line-offset": 20 }
     },
     {
       "id": "waypoint",
@@ -3787,7 +3814,7 @@
         ["==", ["geometry-type"], "Point"],
         ["==", ["slice", ["get", "OBJNAM"], 0, 2], "WP"]
       ],
-      "paint": {"circle-color": "magenta", "circle-radius": 4}
+      "paint": { "circle-color": "magenta", "circle-radius": 4 }
     }
   ],
   "id": "h83iane"

@@ -1,11 +1,6 @@
-# https://www.perrygeo.com/processing-s57-soundings.html
-# https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc
-# https://www.teledynecaris.com/s-57/frames/S57catalog.htm
-
 SHELL=/bin/bash
-export PATH:=$(PWD)/scripts:$(PATH)
+export PATH:=$(PWD)/scripts:$(PWD)/vector/tools/bin:$(PATH)
 export OGR_S57_OPTIONS=LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON
-# export S57_CSV="$(PWD)/scripts"
 
 .PHONY: icons obf vwm charts qgis mapproxy www web
 
@@ -15,10 +10,11 @@ help:
 build:
 # 	$(MAKE) lightsectors.obf
 	$(MAKE) vwm rws rws.layers
-	$(MAKE) qmap-de.zip qmap-nl.zip #qmap-de.obf
+	$(MAKE) fnc-de.zip fnc-nl.zip #fnc-de.obf
 	# $(MAKE) clean-cache
 	# $(MAKE) docker-seed
-	$(MAKE) -C vector clean tiles seed
+	$(MAKE) -C vector clean split
+	$(MAKE) -C vector tiles seed
 	# $(MAKE) charts tiles zips www
 	$(MAKE) charts tiles www
 
@@ -175,6 +171,9 @@ www/%/: charts/%.mbtiles
 	cp www/map.html $@/index.html
 	chmod +rX -R $@
 
+www/%.pmtiles: charts/%.mbtiles
+	pmtiles convert $< $@
+
 data/chartconvert:
 	mkdir -p data
 	wget -O data/avnav.zip https://github.com/wellenvogel/avnav/archive/refs/heads/master.zip
@@ -192,7 +191,7 @@ charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles))
 #         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles)
 
-zips: icons.zip qmap-data.zip #qmap-de.tiles.zip qmap-nl.tiles.zip
+zips: icons.zip fnc-data.zip #fnc-de.tiles.zip fnc-nl.tiles.zip
 
 web:
 	cd $@ && npm install && npm run build
@@ -214,7 +213,7 @@ www:
 %.tiles.zip:
 	cd www && zip - -q -r $(patsubst %.tiles.zip,%/,$@) -x '*.webp' >../charts/$@
 
-qmap-data.zip:
+fnc-data.zip:
 	rm -f charts/$@
 	zip charts/$@ -r icons/gen data/rws.gpkg data/vwm.gpkg qgis/bsh.qgs qgis/rws.qgs qgis/paperchart.qpt #data/bsh.gpkg
 
@@ -301,7 +300,7 @@ obf: data/omc osmand/batch-$(BLEVEL).xml
 	for F in $@/*_2.obf; do G=$${F/_2./.}; G=$${G,,}; mv -v $$F $$G; done
 	rm -f $@/*.log
 
-qmap-de.obf:
+fnc-de.obf:
 	rm -rf osm && mkdir -p osm
 	for L in buoys beacons facilities lights stations; do update.py bsh-$$L data/bsh/A*.json none osm/$$L.osm -a; done
 	for L in rocks wrecks obstructions; do update.py bsh-$$L data/bsh/R*.json none osm/$$L.osm -a; done
@@ -311,18 +310,18 @@ qmap-de.obf:
 	rm -rf obf
 	$(MAKE) obf
 	mkdir -p charts
-	data/omc/inspector.sh -c charts/qmap-de.obf obf/*.obf
+	data/omc/inspector.sh -c charts/fnc-de.obf obf/*.obf
 
-qmap-de.zip:
-	rm -rf qmap-de/
-	sconvert.py -o qmap-de data/bsh/??????.json -t "QMAP-DE `date +%F`"
+fnc-de.zip:
+	rm -rf fnc-de/
+	sconvert.py -o fnc-de data/bsh/??????.json -t "FNC-DE `date +%F`"
 	rm -f charts/$@
-	zip charts/$@ -r qmap-de
+	zip charts/$@ -r fnc-de
 
-qmap-nl.zip: rws.layers
+fnc-nl.zip: rws.layers
 	rm -rf $(basename $@)/
 # 	cp -v data/vwm/layers/*.json data/rws.layers
-	sconvert.py -o $(basename $@) data/rws.layers/*.json -t "QMAP-NL `date +%F`" -u4 -j0
+	sconvert.py -o $(basename $@) data/rws.layers/*.json -t "FNC-NL `date +%F`" -u4 -j0
 	rm -f charts/$@
 	zip charts/$@ -r $(basename $@)
 
