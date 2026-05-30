@@ -367,6 +367,8 @@ new ChartTools().addTo(map);
           <p>For more details, usage instructions and downloads, see the <a href="download/">documentation</a>. Please read the important notes.</p>
 
           <p style="color:red">The charts provided are for informational and reference purposes only.<br/><span style="font-weight:bold;">They are not intended for navigation. Use at own risk!</span></p>
+
+          <p>The German BSH now states: "Use of the data for navigation purposes is not permitted."</p>
         </div>
 
         <div id="info-de" style="display:none;">
@@ -377,6 +379,8 @@ new ChartTools().addTo(map);
           <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>. Beachten Sie die wichtigen Hinweise.</p>
 
           <p style="color:red">Die zur Verfügung gestellten Karten dienen nur zu Informations- und Referenzzwecken.<br/><span style="font-weight:bold;">Sie sind nicht für die Navigation geeignet. Verwendung auf eigene Gefahr!</span></p>
+
+          <p>Das BSH weist jetzt darauf hin: "Die Nutzung der Daten für Navigationszwecke ist nicht gestattet."</p>
         </div>
 
         <div id="info-nl" style="display:none;">
@@ -387,6 +391,8 @@ new ChartTools().addTo(map);
           <p>Meer informatie, gebruiksaanwijzingen en downloads vind je in de <a href="download/nl/">documentatie</a>. Lees de belangrijke opmerkingen.</p>
 
           <p style="color:red">De verstrekte kaarten zijn uitsluitend voor informatie- en referentiedoeleinden.<br/><span style="font-weight:bold;">Ze zijn niet bedoeld voor navigatie. Gebruik op eigen risico!</span></p>
+
+          <p>Het Duitse BSH wijst er nu op: "Het gebruik van de gegevens voor navigatiedoeleinden is niet toegestaan."</p>
         </div>
 
         <button id="installpwa">Install App</button>
