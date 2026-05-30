@@ -292,9 +292,11 @@ Maßgeblich für Sportboote unter deutscher Flagge ist **[§ 13 (1) 2a der Schif
 
 Aus dem Wortlaut ergeben sich drei rechtlich relevante Aussagen:
 
-1. Die Pflicht bezieht sich auf **Ausgaben**, ein Begriff, der sich auf physische Druckerzeugnisse bezieht. Digitale Karten werden im gesamten SchSV nicht als Erfüllungsmittel genannt.
+1. Die Pflicht bezieht sich auf **Ausgaben**, ein Begriff, der sich (der Auslegung der Behörden nach) auf physische Druckerzeugnisse bezieht. Digitale Karten werden im gesamten SchSV nicht als Erfüllungsmittel genannt.
 2. Für Sportboote genügt eine **nicht-amtliche Papierkarte**.
 3. Die in § 13 Abs. 1 Nr. 2 Buchst. b und c SchSV genannten weiteren Pflichten (Schiffssicherheitsvorschriften, Nachrichten für Seefahrer) entfallen für Sportboote ausdrücklich.
+
+**Anmerkung**: Diese Thema wird aufgrund der unklaren Rechtslage immer wieder diskutiert. Es gibt die [plausibel dargelegte Auffassungen](https://www.yacht-recht.de/1448/), dass eine aktuelle Papierkarte formal nicht Pflicht ist. 
 
 ### Kein Ersatz durch digitale Karten
 
