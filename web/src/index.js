@@ -191,7 +191,7 @@ if (isDevMode || params.get("pm") == "1") {
 
 if (!isStandalone) {
   overlays["FNC DE 2025-02"] = L.tileLayer.fallback(
-    baseurl + "/fnc-de.2025-02-06/{z}/{x}/{y}.png",
+    baseurl + "/qmap-de.2025-02-06/{z}/{x}/{y}.png",
     {
       attribution: '<a href="/download/">FNC DE 2025-02</a>',
       bounds: boundsDE,

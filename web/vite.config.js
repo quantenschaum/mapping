@@ -99,7 +99,7 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: /\/qmap-(de|nl)\//,
+            urlPattern: /\/fnc-(de|nl)\//,
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "tiles",
@@ -133,7 +133,7 @@ export default defineConfig({
     allowedHosts: true,
     headers: { "Cache-Control": "no-cache, no-store, must-revalidate" },
     proxy: {
-      "^/(qmap-de.*|qmap-nl.*|download|bfs|nfs|archive)/.*": {
+      "^/(qmap-.*|fnc-.*|download|bfs|nfs|archive)/.*": {
         target: "https://freenauticalchart.net",
         changeOrigin: true,
       },
