@@ -471,7 +471,7 @@ Vor diesem Hintergrund wird die Position des BSH bzw. der Kartenanbieter gegenü
 
 ### Was garantiert das BSH selbst
 
-Im [Entgeldverzeichnis des BSH](https://www.bsh.de/DE/Das_BSH/Gebuehren_Preise/Gebuehren_und_Preise/_Anlagen/Downloads/Entgeltverzeichnis-digitale-Daten.pdf?__blob=publicationFile&v=8) steht folgender Haftungsausschluss.
+Im [Entgeldverzeichnis des BSH Anlage 2 Punkt 8](https://www.bsh.de/DE/Das_BSH/Gebuehren_Preise/Gebuehren_und_Preise/_Anlagen/Downloads/Entgeltverzeichnis-digitale-Daten.pdf?__blob=publicationFile&v=8) steht folgender Haftungsausschluss.
 
 >Das BSH haftet nicht für die Eignung der Daten für den von der Bestellerin/dem Besteller vorgesehenen Zweck, die Verletzung von Rechten Dritter, die Gültigkeit, Richtigkeit,
 Vollständigkeit, Genauigkeit, Konsistenz und Qualität der Daten.
