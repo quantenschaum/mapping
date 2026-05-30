@@ -374,7 +374,7 @@ new ChartTools().addTo(map);
         <div id="info-de" style="display:none;">
           <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich zu machen. Es basiert auf Daten, die als Open Data verfügbar sind.</p>
 
-          <p style="background:yellow; padding:1ex;">Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. <b>Der deutsche Teil der Karte zeigt jetzt den Stand vom 2026-04-27 und die zuletzt verfügbaren Tiefenangaben vom 2026-03-02 sowie Korrekturen auf Basis der NfS.</b> Weitere Informationen <a href="download/de/opendata/">Open Data</a>.</p>
+          <p style="background:yellow; padding:1ex;">Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. <b>Der deutsche Teil der Karte zeigt jetzt den Stand vom 2026-04-27 und die zuletzt verfügbaren Tiefenangaben vom 2026-03-02 sowie Korrekturen auf Basis der NfS.</b> Weitere Informationen: <a href="download/de/opendata/">Open Data</a>.</p>
 
           <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>. Beachten Sie die wichtigen Hinweise.</p>
 
