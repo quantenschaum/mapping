@@ -190,10 +190,26 @@ if (isDevMode || params.get("pm") == "1") {
 }
 
 if (!isStandalone) {
-  overlays["FNC DE 2025-02"] = L.tileLayer.fallback(
+  overlays["QMAP DE 2025-02"] = L.tileLayer.fallback(
     baseurl + "/qmap-de.2025-02-06/{z}/{x}/{y}.png",
     {
-      attribution: '<a href="/download/">FNC DE 2025-02</a>',
+      attribution: '<a href="/download/">QMAP DE 2025-02</a>',
+      bounds: boundsDE,
+      crossOrigin: cors,
+    },
+  );
+  overlays["QMAP DE 2026-03"] = L.tileLayer.fallback(
+    baseurl + "/qmap-de.2026-03-02/{z}/{x}/{y}.png",
+    {
+      attribution: '<a href="/download/">QMAP DE 2026-03</a>',
+      bounds: boundsDE,
+      crossOrigin: cors,
+    },
+  );
+  overlays["QMAP NL 2026-03"] = L.tileLayer.fallback(
+    baseurl + "/qmap-nl.2026-03-08/{z}/{x}/{y}.png",
+    {
+      attribution: '<a href="/download/">QMAP NL 2026-03</a>',
       bounds: boundsDE,
       crossOrigin: cors,
     },
