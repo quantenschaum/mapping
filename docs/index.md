@@ -99,10 +99,7 @@ The S57 files can be used with the [Ocharts(NG)](https://www.wellenvogel.net/sof
 
 ## [OpenCPN](https://opencpn.org/)
 
-OpenCPN and other applications can display raster charts from `mbtiles`.
-
-- Raster Charts: see [AvNav](#avnav)
-- Vector Charts: see [AvNav](#avnav)
+see [AvNav](#avnav), the charts work with OpenCPN, too.
 
 ## [JOSM](https://josm.openstreetmap.de/)
 

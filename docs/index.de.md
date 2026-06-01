@@ -98,10 +98,7 @@ Die S57-Dateien können mit dem [Ocharts(NG)](https://www.wellenvogel.net/softwa
 
 ## [OpenCPN](https://opencpn.org/)
 
-OpenCPN und andere Anwendungen können Rasterkarten aus `mbtiles` anzeigen.
-
-- Raster Charts: siehe [AvNav](#avnav)
-- Vector Charts: siehe [AvNav](#avnav)
+siehe [AvNav](#avnav), die Karten funktionieren auch mit OpenCPN.
 
 ## [JOSM](https://josm.openstreetmap.de/)
 

@@ -98,10 +98,7 @@ De S57-bestanden kunnen worden gebruikt met de [Ocharts(NG)](https://www.wellenv
 
 ## [OpenCPN](https://opencpn.org/)
 
-OpenCPN en andere applicaties kunnen rasterkaarten van `mbtiles` weergeven.
-
-- Raster Charts: zie [AvNav](#avnav)
-- Vector Charts: zie [AvNav](#avnav)
+Zie [AvNav](#avnav); de kaarten werken ook met OpenCPN.
 
 ## [JOSM](https://josm.openstreetmap.de/)
 
