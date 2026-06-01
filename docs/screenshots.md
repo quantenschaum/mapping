@@ -43,9 +43,3 @@ Vector Chart
 Imagery Layer
 
 ![JOSM](img/josm.webp)
-
-## Garmin
-
-Small handheld device eTrex Vista HCx
-
-![garmin](img/garmin.webp)

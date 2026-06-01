@@ -117,10 +117,6 @@ You may also want to [add this extra `mapcss`](https://josm.openstreetmap.de/wik
 
 ## [Tide Curves](tides.md#tide-curves)
 
+in ATT style
+
 - [:de: Tide Curves DE](tidecurves.pdf){:download}
-
-## Garmin
-
-There is **experimental** support for Garmin devices. The file contains depth data and buoys/beacons only, it may be combined with data from [bbbike](https://extract.bbbike.org/?format=garmin-oseam.zip). You may need to enable spot soundings and marine colors in the map settings.
-
-- [:de: Depthdata DE](gmapsupp.img){:download}

@@ -116,10 +116,6 @@ Sie können auch [dieses zusätzliche `mapcss`](https://josm.openstreetmap.de/wi
 
 ## [Gezeitenkurven](tides.md#gezeitenkurven)
 
+im ATT-Stil
+
 - [:de: Gezeitenkurven DE](tidecurves.pdf){:download}
-
-## Garmin
-
-Es gibt eine **experimentelle** Unterstützung für Garmin-Geräte. Die Datei enthält nur Tiefendaten und Seezeichen, sie kann mit Daten von [bbbike](https://extract.bbbike.org/?format=garmin-oseam.zip) kombiniert werden. Möglicherweise müssen Sie in den Karteneinstellungen Lotungen und Seekartenfarben aktivieren.
-
-- [:de: Tiefendaten DE](gmapsupp.img){:download}

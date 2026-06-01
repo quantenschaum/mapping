@@ -384,31 +384,31 @@ new ChartTools().addTo(map);
 
           <p style="color:red">The charts provided are for informational and reference purposes only.<br/><span style="font-weight:bold;">They are not intended for navigation. Use at own risk!</span></p>
 
-          <p>The German BSH now states: "Use of the data for navigation purposes is not permitted."</p>
+          <p style="color:blue;">The German BSH now states: "Use of the data for navigation purposes is not permitted."</p>
         </div>
 
         <div id="info-de" style="display:none;">
           <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich zu machen. Es basiert auf Daten, die als Open Data verfügbar sind.</p>
 
-          <p style="background:yellow; padding:1ex;">Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. <b>Der deutsche Teil der Karte zeigt jetzt den Stand vom 2026-04-27 und die zuletzt verfügbaren Tiefenangaben vom 2026-03-02 sowie Korrekturen auf Basis der NfS.</b> Weitere Informationen: <a href="download/de/opendata/">Open Data</a>.</p>
+          <p style="background:yellow; padding:1ex;">Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. <b>Der deutsche Teil der Karte zeigt jetzt den Stand vom 27.04.2026 und die zuletzt verfügbaren Tiefenangaben vom 02.03.2026 sowie Korrekturen auf Basis der NfS.</b> Weitere Informationen: <a href="download/de/opendata/">Open Data</a>.</p>
 
           <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>. Beachten Sie die wichtigen Hinweise.</p>
 
           <p style="color:red">Die zur Verfügung gestellten Karten dienen nur zu Informations- und Referenzzwecken.<br/><span style="font-weight:bold;">Sie sind nicht für die Navigation geeignet. Verwendung auf eigene Gefahr!</span></p>
 
-          <p>Das BSH weist jetzt darauf hin: "Die Nutzung der Daten für Navigationszwecke ist nicht gestattet."</p>
+          <p style="color:blue;">Das BSH weist jetzt darauf hin: "Die Nutzung der Daten für Navigationszwecke ist nicht gestattet."</p>
         </div>
 
         <div id="info-nl" style="display:none;">
           <p class="info">is een open-source en open-data project dat gratis zeekaarten biedt voor zeilers, watersport- en cartografie‑enthousiastelingen en ontwikkelaars. Het heeft als doel officiële kaartgegevens gemakkelijker toegankelijk te maken. Het is gebaseerd op gegevens die als open data beschikbaar zijn.</p>
 
-          <p style="background:yellow; padding:1ex;">Op de server van het BSH zijn nog meer delen van de voorheen vrij toegankelijke gegevens verwijderd en is de toegang bemoeilijkt. <b>Het Duitse deel van de kaart toont nu de stand van 2026-04-27 en de laatst beschikbare dieptegegevens van 2026-03-02, inclusief correcties op basis van de BaZ.</b> Meer informatie: <a href="download/de/opendata/">Open Data</a>.</p>
+          <p style="background:yellow; padding:1ex;">Op de server van het BSH zijn nog meer delen van de voorheen vrij toegankelijke gegevens verwijderd en is de toegang bemoeilijkt. <b>Het Duitse deel van de kaart toont nu de stand van 27-04-2026 en de laatst beschikbare dieptegegevens van 02-03-2026, inclusief correcties op basis van de BaZ.</b> Meer informatie: <a href="download/de/opendata/">Open Data</a>.</p>
 
           <p>Meer informatie, gebruiksaanwijzingen en downloads vind je in de <a href="download/nl/">documentatie</a>. Lees de belangrijke opmerkingen.</p>
 
           <p style="color:red">De verstrekte kaarten zijn uitsluitend voor informatie- en referentiedoeleinden.<br/><span style="font-weight:bold;">Ze zijn niet bedoeld voor navigatie. Gebruik op eigen risico!</span></p>
 
-          <p>Het Duitse BSH wijst er nu op: "Het gebruik van de gegevens voor navigatiedoeleinden is niet toegestaan."</p>
+          <p style="color:blue;">Het Duitse BSH wijst er nu op: "Het gebruik van de gegevens voor navigatiedoeleinden is niet toegestaan."</p>
         </div>
 
         <button id="installpwa">Install App</button>

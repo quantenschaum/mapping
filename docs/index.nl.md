@@ -116,10 +116,6 @@ Je wilt misschien ook [deze extra `mapcss`](https://josm.openstreetmap.de/wiki/H
 
 ## [Getijdencurves](tides.md#tide-curves)
 
+in ATT-stijl
+
 - [:de: Getijdencurves DE](tidecurves.pdf){:download}
-
-## Garmin
-
-Er is **experimentele** ondersteuning voor Garmin-toestellen. Het bestand bevat alleen dieptegegevens en boeien/bakens, het kan worden gecombineerd met gegevens van [bbbike](https://extract.bbbike.org/?format=garmin-oseam.zip). Het kan nodig zijn om peilingen en zeekleuren in te schakelen in de kaartinstellingen.
-
-- [:de: Dieptegegevens DE](gmapsupp.img){:download}

@@ -43,9 +43,3 @@ Vektor-Karte
 Hintergrund-Layer
 
 ![JOSM](img/josm.webp)
-
-## Garmin
-
-Kleines Hand-Gerät eTrex Vista HCx
-
-![garmin](img/garmin.webp)
