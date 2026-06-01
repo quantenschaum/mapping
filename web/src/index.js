@@ -501,6 +501,28 @@ function updateAttribution(online = true) {
         .toISOString()
         .slice(0, 10);
       map.attributionControl.setPrefix(attrib.replace("(?)", `(${date})`));
+      return response.json();
+    })
+    .then((data) => {
+      {
+        const layer = overlays["🇩🇪 FNC DE"];
+        let attr = layer.options.attribution;
+        map.attributionControl.removeAttribution(attr);
+        attr += ` <a href="https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten">(${data["fnc-de"]["updated"]}, NfS ${data["fnc-de"]["nfs"]})</a>`;
+        console.log(attr);
+        layer.options.attribution = attr;
+        if (map.hasLayer(layer)) map.attributionControl.addAttribution(attr);
+      }
+      {
+        const layer = overlays["🇳🇱 FNC NL"];
+        let attr = layer.options.attribution;
+        map.attributionControl.removeAttribution(attr);
+        attr += ` (${data["fnc-nl"]})</a>`;
+        console.log(attr);
+        layer.options.attribution = attr;
+        if (map.hasLayer(layer)) map.attributionControl.addAttribution(attr);
+      }
+      map.attributionControl.setPrefix(attrib.replace("(?)", ""));
     })
     .catch(console.error);
 }

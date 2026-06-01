@@ -1,6 +1,7 @@
 SHELL=/bin/bash
 export PATH:=$(PWD)/scripts:$(PWD)/vector/tools/bin:$(PATH)
 export OGR_S57_OPTIONS=LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON
+TODAY=$(shell date +%F)
 
 .PHONY: icons obf vwm charts qgis mapproxy www web
 
@@ -185,11 +186,15 @@ charts/%.gemf: charts/%.mbtiles data/chartconvert
 
 tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles)) \
        $(patsubst cache_data/%.mbtiles,www/%.pmtiles,$(wildcard cache_data/*.mbtiles))
-	date +%s >www/updated
+	make updated
 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles))
 #         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles)
+
+updated:
+	jq -n --slurpfile meta data/bsh/meta.json '{"fnc-de": $$meta[0], "fnc-nl": "$(TODAY)"}' >www/updated
+
 
 zips: icons.zip fnc-data.zip #fnc-de.tiles.zip fnc-nl.tiles.zip
 
