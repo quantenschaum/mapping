@@ -651,7 +651,6 @@ S-63 ist ein technisches Zugangskontrollsystem, das Kopierschutz implementiert. 
 - BSH-Rohdaten (die dem S-63-System zugrunde liegen) und das verschlüsselte ENC-Produkt sind verschiedene Gegenstände
 - Die Open-Data-Pflicht betrifft die Rohdaten, nicht das verschlüsselte Endprodukt
 
-Das BSH vergibt **Lizenzen** an Kartenverlage, die digitale Daten für eine Informationsverwertung oder Weiterverwertung nutzen möchten, benötigen dafür ggf. eine Lizenz.
-Die  Verlage erwerben damit ein Nutzungsrecht an BSH-Daten und erstellen daraus eigene kartographische Produkte. Sie erwerben damit keine Rechte gegen das BSH, die eine Open-Data-Freigabe verhindern würden. Der Verlag hat ein Recht, BSH-Daten zu nutzen, er hat kein Recht, andere an der Nutzung zu hindern.
+Das BSH vergibt **Lizenzen** an Kartenverlage, die digitale Daten für eine Informationsverwertung oder Weiterverwertung nutzen möchten. Die Verlage erwerben damit ein Nutzungsrecht an BSH-Daten und erstellen daraus eigene kartographische Produkte. Sie erwerben damit keine Rechte gegen das BSH, die eine Open-Data-Freigabe verhindern würden. Der Verlag hat ein Recht, BSH-Daten zu nutzen, er hat kein Recht, andere an der Nutzung zu hindern.
 
 Das BSH darf öffentlich kommunizieren, dass seine Open-Data-Rohdaten nicht die Qualität amtlicher Seekarten haben und nicht nach SOLAS-Standards zertifiziert sind. Das ist sinnvoll, richtig und notwendig. Es darf aber nicht als Lizenzbedingung unter der GeoNutzV festschreiben, dass die Nutzung zur Navigation verboten ist, denn dafür fehlt schlicht jede gesetzliche Ermächtigungsgrundlage. Die GeoNutzV erlaubt alle Nutzungszwecke ohne Einschränkung. Abweichungen bedürfen einer besonderen Rechtsvorschrift, die hier nicht existiert.
