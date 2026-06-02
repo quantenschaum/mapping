@@ -170,7 +170,7 @@ styles: data/styles/fnc-nl.json public/fnc-nl.json
 tiles: bsh.tiles rws.tiles
 
 clean: clean-cache
-	rm -rf dist split merged rws *.gpkg *.mbtiles *.pmtiles
+	rm -rf dist split merged rws *.gpkg *.mbtiles *.pmtiles *@2x.yaml
 
 clean-cache:
 	rm -rf cache_data
@@ -206,10 +206,24 @@ mapproxy:
 	mkdir -p cache_data && touch cache_data/.nobackup
 	docker compose up $@
 
-seed:
+mapproxy@2x.yaml: mapproxy.yaml
+	cp $< $@
+	sed -i 's/s\.png/s@2x.png/g' $@
+	sed -i 's/GLOBAL_WEBMERCATOR/GLOBAL_WEBMERCATOR\n    tile_size: [512, 512]/g' $@
+	sed -i 's/#\s*tile_size/tile_size/g' $@
+	sed -i -E 's/(fnc-[a-z]+)(:|])/\1@2x\2/g' $@
+
+seed@2x.yaml: seed.yaml
+	sed -E 's/(fnc-[a-z]+)/\1@2x/g' $< >$@
+
+seed: seed$(R).yaml mapproxy$(R).yaml
 	make -B styles OSM=none
 	mkdir -p cache_data && touch cache_data/.nobackup
 	docker compose up -d
 	sleep 3
-	docker compose exec -u mapproxy -T mapproxy mapproxy-seed -f /data/mapproxy.yaml -s /data/seed.yaml
+	docker compose exec -u mapproxy -T mapproxy mapproxy-seed -f /data/$(word 2,$^) -s /data/$<
 	docker compose down
+	ls -lh cache_data
+
+seed2x:
+	make seed R=@2x

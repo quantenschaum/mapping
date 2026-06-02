@@ -16,12 +16,16 @@ services:
   tms:
   wms:
 
+grids:
+  webmercator:
+    base: GLOBAL_WEBMERCATOR
+
 sources:
   tiles-de:
     type: tile
     url: http://tileserver:8080/styles/fnc-de/256/%(tms_path)s.png
     transparent: true
-    grid: GLOBAL_WEBMERCATOR
+    grid: webmercator
     coverage:
       datasource: split/M_COVR.json
       srs: "EPSG:4326"
@@ -29,7 +33,7 @@ sources:
     type: tile
     url: http://tileserver:8080/styles/fnc-nl/256/%(tms_path)s.png
     transparent: true
-    grid: GLOBAL_WEBMERCATOR
+    grid: webmercator
     coverage:
       datasource: rws/M_COVR.json
       srs: "EPSG:4326"
@@ -37,14 +41,12 @@ sources:
 caches:
   fnc-de:
     sources: ["tiles-de"]
-    grids: [GLOBAL_WEBMERCATOR]
+    grids: [webmercator]
     cache:
       type: mbtiles
-      # type: file
-      # directory_layout: tms
   fnc-nl:
     sources: ["tiles-nl"]
-    grids: [GLOBAL_WEBMERCATOR]
+    grids: [webmercator]
     cache:
       type: mbtiles
 
