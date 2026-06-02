@@ -327,7 +327,6 @@ export async function addTideGaugesDE(map, preFetch = false) {
     const p = f.properties;
     // log(p);
     track("de");
-    log(stations_de[f.id]);
     const offset =
       p.chartdatum_relative_to_gaugezero ??
       stations_de[f.id]["SKN (ueber PNP)"];
