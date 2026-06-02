@@ -99,7 +99,7 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: /\/fnc-(de|nl)\//,
+            urlPattern: /\/fnc-(de|nl)/,
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "tiles",

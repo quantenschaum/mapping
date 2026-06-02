@@ -115,6 +115,12 @@ export const PrintButton = L.Control.extend({
           map.options.zoomDelta = 0.5;
           map.options.zoomSnap = 0.5;
           map.options.wheelPxPerZoomLevel = 100;
+          // force retina tiles for printing
+          Object.values(map._layers).forEach((l) => {
+            if (l._url?.includes("{r}")) {
+              l.setUrl(l._url.replace("{r}", "@2x"));
+            }
+          });
         } else {
           body.classList.remove("print");
           b.classList.remove("selected");
@@ -124,6 +130,12 @@ export const PrintButton = L.Control.extend({
           delete map.options.zoomSnap;
           delete map.options.wheelPxPerZoomLevel;
           map.setZoom(map.getZoom());
+          // restore layers
+          Object.values(map._layers).forEach((l) => {
+            if (l._url?.includes("@2x")) {
+              l.setUrl(l._url.replace("@2x", "{r}"));
+            }
+          });
         }
       });
       return b;

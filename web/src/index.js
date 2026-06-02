@@ -349,6 +349,7 @@ const map = L.map("map", {
   minZoom: 6,
   maxZoom: 18,
   zoomControl: false,
+  wheelPxPerZoomLevel: 120, // fixes 2 zoom level jump on scroll on chrome
   layers: [
     basemaps["🌍 OpenStreetMap"],
     overlays["Grid"],
