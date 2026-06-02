@@ -3,6 +3,7 @@ import "leaflet.tilelayer.fallback";
 import "./slider";
 import { logger } from "./utils";
 import "./tides.less";
+import stations_de from "./tides.json";
 import { ackee } from "./ackee";
 
 function track(x) {
@@ -33,26 +34,29 @@ let tideDataHelgoland;
 
 async function hwHelgoland() {
   if (tideDataHelgoland == null) {
-    tideDataHelgoland = await fetch("/tides/de/data/DE__509A_tides.json").then(
-      (r) => r.json(),
-    );
+    tideDataHelgoland = await fetch(
+      "/forecast/de/items/helgoland_binnenhafen",
+    ).then((r) => r.json());
   }
-  const year = new Date().getFullYear();
-  const ydata = tideDataHelgoland.years
-    .map((y) => y[year])
-    .filter((d) => d != undefined)[0];
-  const pred = ydata.hwnw_prediction.data;
+  log(tideDataHelgoland);
+  const props = tideDataHelgoland.properties;
+  const pred = props.high_water_low_water;
   const now = new Date();
   let hdg0;
   let currentHW = null;
   for (const p of pred) {
+    p.timestamp = p.event_timestamp;
+    p.height = p.tidal_prediction_value;
     const ts = new Date(p.timestamp);
-    if (p.type == "HW") currentHW = p;
-    if (hdg0) currentHW.coeff = (100 * Math.abs(p.height - hdg0)) / ydata.MSpTh;
+    if (p.event == "HW") currentHW = p;
+    if (hdg0)
+      currentHW.coeff =
+        (100 * Math.abs(p.height - hdg0)) /
+        (props.mean_high_water - props.mean_low_water);
     if (ts > now) break;
     hdg0 = p.height;
   }
-  console.log("currentHW", currentHW);
+  log("currentHW", currentHW);
   return currentHW;
 }
 
@@ -208,11 +212,11 @@ function toISOString(date) {
 
   const get = (type) => parts.find((p) => p.type === type).value;
   const str = `${get("year")}-${get("month")}-${get("day")}T${get("hour")}:${get("minute")}:${get("second")}`;
-  console.log(date, str);
+  // log(date, str);
   return str;
 }
 
-console.log("now", formatTimestamp(new Date()));
+log("now", formatTimestamp(new Date()));
 
 function mergeNoClobber(target, source) {
   for (const [key, value] of Object.entries(source)) {
@@ -298,202 +302,148 @@ export async function addTideGauges(map) {
     // addTideGaugesNL(map, "waterhoogte"),
     addTideGaugesUK(map),
     addTideGaugesFR(map),
-    addTideGaugesBaltic(map),
   ]);
 }
 
 export async function addTideGaugesDE(map, preFetch = false) {
-  async function showPopup(marker, g) {
-    // log(g);
-    const tidedata = await fetch(
-      `/tides/de/data/DE_${g.bshnr.padStart(5, "_")}_tides.json`,
-    )
-      .then((r) => r.json())
-      .catch(log);
-    log("tidedata", tidedata);
-    if (!tidedata) return;
+  const layer = L.layerGroup().addTo(map);
+  const colors = { 1: "white", 2: "lightblue", 3: "gray" };
 
-    const forecast_map = await fetch("/forecast/de/data/map.json")
-      .then((r) => r.json())
-      .catch(log);
-    log("forecast_map", forecast_map);
-
-    const forecastdata = await fetch(
-      `/forecast/de/data/DE_${g.bshnr.padStart(5, "_")}.json`,
-    )
-      .then((r) => r.json())
-      .catch(log);
-    log("forecastdata", forecastdata);
-
+  async function showPopup(marker, f) {
     const now = new Date();
     const today = new Date(now);
     today.setHours(0);
     today.setMinutes(0);
     today.setSeconds(0);
     today.setMilliseconds(0);
-    const year = now.getFullYear().toString();
-    let ydata;
-    tidedata.years.every((y) => {
-      ydata = y[year];
-      return !ydata;
-    });
-
-    const notice = ydata.notice ?? [];
-    const prediction = ydata.hwnw_prediction.data;
-    const level = ydata.hwnw_prediction.level;
-    const forecast = forecastdata?.hwnw_forecast?.data;
-    const curve = forecastdata?.curve_forecast?.data;
-    const fc_date = new Date(forecast_map?.creation_forecast);
-    const forecast_date = fc_date.toLocaleString(locale, {
-      month: "2-digit",
-      day: "2-digit",
-      weekday: "short",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const forecast_text = forecast_map?.forecast_text
-      ? forecast_map?.forecast_text[lang] + ` (${forecast_date})`
-      : "";
-    const forecast_link = curve
-      ? `https://wasserstand-nordsee.bsh.de/${g.seo_id}?zeitraum=tag1bis2`
-      : "https://wasserstand-nordsee.bsh.de";
-    const forecast_cls = now - fc_date > 8 * 3600_000 ? "old" : "new";
-
-    const offsets = {
-      PNP: -ydata["SKN (ueber PNP)"],
-      SKN: 0,
-    };
-    const offset = offsets[level];
-
-    log("ydata", ydata);
-    const basevalues = ydata.MHW
-      ? `<span>MHW ${(ydata.MHW + offset) / 100}</span><span>MNW ${(ydata.MNW + offset) / 100}</span><span>MTH ${ydata.MTH / 100}</span>`
-      : // +        `<span>MSpHW ${(ydata.MSpHW + offset) / 100}</span><span>MSpNW ${(ydata.MSpNW + offset) / 100}</span><span>MSpTh ${ydata.MSpTh / 100}</span>` +
-        // `<span>MNpHW ${(ydata.MNpHW + offset) / 100}</span><span>MNpNW ${(ydata.MNpNW + offset) / 100}</span><span>MNpTh ${ydata.MNpTh / 100}</span>` +
-        // `<span>NpC ${((100 * ydata.MNpTh) / ydata.MSpTh).toFixed(0)}</span>`
-        "";
-
-    let i = 0;
-    var moon;
-    for (; i < prediction.length; i++) {
-      const ts = new Date(prediction[i].timestamp);
-      // log(pred.data[i], now, ts, ts >= now);
-      let m = prediction[i].moon;
-      if (m != undefined) moon = m;
-      if (ts > today) break;
+    // refetch if data is old
+    if (now - new Date(f.properties.forecast_timestamp) > 6 * 3600_000) {
+      const g = await fetch(`/forecast/de/items/${f.id}?lang=en&f=json`)
+        .then((r) => r.json())
+        .catch(console.error);
+      // log(g);
+      if (g?.gauge_label) f = g;
     }
-    log("moon", moon);
-
-    function getForcast(timestamp) {
-      if (!forecast) return "";
-      const ts = new Date(timestamp).getTime();
-      const fc = forecast.find((f) => new Date(f.timestamp).getTime() === ts);
-      return fc?.value;
-      if (fc?.forecast) return `${fc.forecast.replace(" m", "")}`;
-      return "";
-    }
-
-    let date0,
-      hdg0 = null;
-    let rows = `<tr><th>${DATE}</th><th>${localTZ()}</th><th title="Höhe der Gezeit in Metern ± Abweichung K durch Wettereinfluss">HdG&nbsp;&nbsp;&nbsp;K</th><th title="Alter der Gezeit und C = 100 × (Tidenstieg bzw. -fall)/(mitt. Springtidenhub)">AdG&nbsp;&nbsp;&nbsp;C</th></tr>\n`;
-    for (let k = i; k < Math.min(i + 8, prediction.length); k++) {
-      const r = prediction[k];
-      log("row", r);
-      const ts = new Date(r.timestamp);
-      const td = formatTimestamp(ts);
-      if (date0 === td.date) td.date = "";
-      else date0 = td.date;
-      const hi_lo = r.type;
-      const height_astro = r.height / 100;
-      let height_forecast = getForcast(r.timestamp);
-      let deviation = "";
-      if (height_forecast) {
-        // make forecasted deviation relative to astronomical forecast
-        const d = height_forecast / 100 - height_astro;
-        deviation = (d < 0 ? "" : "+") + d.toFixed(1);
-      }
-      let coeff = "";
-      if (ydata.MSpTH) {
-        if (hdg0) {
-          // calculate local coefficient
-          const range = r.height - hdg0;
-          coeff = (100 * Math.abs(range)) / ydata.MSpTH;
-          // if (range > 0)
-          coeff = ` <span class="coeff">${coeff.toFixed(0).padStart(3, "\u2007")}</span>`;
-        } else {
-          coeff = ` <span class="coeff">${"".padStart(3, "\u2007")}</span>`;
-        }
-      }
-      const height =
-        r.height != null ? ((r.height + offset) / 100).toFixed(2) : "-";
-      hdg0 = r.height;
-      const when = ts > now ? "future" : "past";
-      rows += `<tr class="${r.type} ${when}"><td>${td.date}</td><td title="${r.timestamp}">${td.time}</td><td>${height} <span class="deviation">${deviation}</span></td><td class="${r.phase} moon${r.moon}">${r.phase}${coeff}</td></tr>\n`;
-    }
-    const table = `<table>\n${rows}</table>`;
+    const p = f.properties;
+    // log(p);
     track("de");
+    log(stations_de[f.id]);
+    const offset =
+      p.chartdatum_relative_to_gaugezero ??
+      stations_de[f.id]["SKN (ueber PNP)"];
+    const mhw = (p.mean_high_water - offset) / 100;
+    const mlw = (p.mean_low_water - offset) / 100;
+    const basevalues = p.region.includes("baltic")
+      ? ""
+      : `<span>MHW ${mhw.toFixed(2)}</span><span>MNW ${mlw.toFixed(2)}</span><span>MTH ${(mhw - mlw).toFixed(2)}</span>`;
+    const forecast_ts = new Date(p.forecast_timestamp);
+    const forecast_date = formatTimestamp(forecast_ts);
+    const forecast_text = p.forecast_text[lang];
+    const forecast_cls = now - forecast_ts > 8 * 3600_000 ? "old" : "new";
+    const notice = stations_de[f.id]?.notice || [];
+
+    let table = "";
+    const prediction = p.high_water_low_water;
+    if (prediction) {
+      let rows = `<tr><th>${DATE}</th><th>${localTZ()}</th><th title="Höhe der Gezeit in Metern, Abweichung K durch Wettereinfluss">HdG&nbsp;&nbsp;&nbsp;K</th><th title="Stieg|Fall, C = 100 × (Stieg|Fall)/MSpTH">S/F&nbsp;&nbsp;&nbsp;C</th></tr>\n`;
+      let last_date = "";
+      let c = 0;
+      let height0 = null;
+      prediction.forEach((r) => {
+        const ts = new Date(r.event_timestamp);
+        if (ts >= today && c++ < 8) {
+          // log("row", r);
+          const td = formatTimestamp(ts);
+          const when = ts > now ? "future" : "past";
+          const date = td.date == last_date ? "" : td.date;
+          const height = (r.tidal_prediction_value - offset) / 100;
+          const d = (r.forecast_value - r.tidal_prediction_value) / 100;
+          const deviation = d ? (d < 0 ? "" : "+") + d.toFixed(1) : "";
+          const MSpTH = stations_de[f.id]?.MSpTH / 100 || mhw - mlw;
+          const c = (100 * Math.abs(height - height0)) / MSpTH;
+          const range = height0 && c ? (height - height0).toFixed(2) : "";
+          const coeff = height0 && c ? c.toFixed(0) : "";
+          rows += `<tr class="${r.event} ${when}"><td>${date}</td><td title="${r.event_timestamp}">${td.time}</td><td>${height.toFixed(2)} <span class="deviation" title="M${r.event}${r.forecast_deviation}">${deviation}</span><td><span class="coeff">${range} ${coeff.padStart(3, "\u2007")}</span></td></tr>\n`;
+          last_date = td.date;
+          height0 = height;
+        }
+      });
+      table = `<table>\n${rows}</table>`;
+    }
+
     await marker
       .bindPopup(
-        `<div class="tides"><a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}" class="stationname">${g.station_name}</a>
+        `<div class="tides"><a target="_blank" href="${p.bsh_url_waterlevel ?? "https://gezeiten.bsh.de/" + f.id}" class="stationname">${p.gauge_label}</a>
         ${table}
         <div class="basevalues">${basevalues}</div>
         <div class="notice">${notice.join("<br/>")}</div>
-        <div class="forecast"><a href="${forecast_link}" target="_blank" class="${forecast_cls}">${forecast_text}</a></div>
+        <div class="section">${p.official_warning_level_region ?? p.automated_gauge_warning}</div>
+        <div class="forecast ${forecast_cls}">${forecast_text} (${forecast_date.date} ${forecast_date.time} ${forecast_date.zone})</div>
         <div id="plot"></div>
-        <div class="source">${SOURCE} <a target="_blank" href="https://gezeiten.bsh.de">BSH</a></div></div>`,
+        <div class="source">${SOURCE} <a target="_blank" href="https://wasserstand.bsh.de">BSH</a></div></div>`,
       )
       .openPopup();
 
+    const curve = p.curve;
     if (!curve) return;
-
     tidePlot([
       curve.map((d) => d.timestamp),
-      curve.map((d) => (d.astro + offset) / 100),
+      curve.map((d) => ((d.tidal_prediction ?? NaN) - offset) / 100),
       curve
-        .map((d) => (d.curveforecast + offset) / 100)
+        .map((d) => (d.automated_curve_forecast - offset) / 100)
         .map((v) => (v > 0 ? v : null)),
       curve
-        .map((d) => (d.measurement + offset) / 100)
+        .map((d) => (d.measurement - offset) / 100)
         .map((v) => (v > 0 ? v : null)),
     ]);
   }
 
-  const layer = L.layerGroup().addTo(map);
-  const colors = { 1: "white", 2: "lightblue", 3: "gray" };
-
-  fetch("/tides/de/data/tides_overview.json")
+  fetch("/forecast/de/items?lang=en&f=json")
     .then((r) => r.json())
     .then((data) => {
       // log(data);
-      data.gauges.forEach((g) => {
-        // log(g);
-        if (g.gauge_group == 3) return;
-        if (preFetch)
-          fetch(`/tides/de/data/DE_${g.bshnr.padStart(5, "_")}_tides.json`);
-        let m = L.circleMarker([g.latitude, g.longitude], {
+      data.features.forEach((f) => {
+        const p = f.properties;
+        // log(p);
+        // if (!p.bsh_url_waterlevel) return;
+        if (f.id == "helgoland_binnenhafen") tideDataHelgoland = f;
+        let m = L.circleMarker([p.latitude, p.longitude], {
           radius: 4,
           weight: 3,
-          color: g.station_name.includes("Helgoland") ? "darkred" : "blue",
-          fillColor: colors[g.gauge_group],
+          color: p.gauge_label.includes("Helgoland") ? "darkred" : "blue",
+          fillColor: colors[p.bsh_url_waterlevel ? 1 : 2],
           fillOpacity: 1,
         })
           .bindPopup(
-            `<a target="_blank" href="https://gezeiten.bsh.de/${g.seo_id}">${g.station_name}</a>`,
+            `<a target="_blank" href="${p.bsh_url_waterlevel ?? "https://gezeiten.bsh.de/" + f.id}">${p.gauge_label}</a>`,
           )
-          .on("click", (e) => showPopup(e.target, g))
+          .on("click", (e) => showPopup(e.target, f))
           .addTo(layer);
         // if (isDevMode && g.station_name.includes('Helgoland')) showPopup(m, g);
       });
     })
     .catch(log);
 
-  map.on("zoomend", () => {
-    if (map.getZoom() >= 8) {
-      if (!map.hasLayer(layer)) map.addLayer(layer);
-    } else {
-      if (map.hasLayer(layer)) map.removeLayer(layer);
-    }
-  });
+  return;
+  fetch("/tides/de/data/tides_overview.json")
+    .then((r) => r.json())
+    .then((data) => {
+      // log(data);
+      let stations = {};
+      data.gauges.forEach(async (g) => {
+        // log(g);
+        const x = await fetch(
+          `/tides/de/data/DE_${g.bshnr.padStart(5, "_")}_tides.json`,
+        ).then((r) => r.json());
+        // log(x);
+        stations[x.seo_id] = x.years[0][2026];
+        delete stations[x.seo_id].hwnw_prediction;
+        Object.keys(stations[x.seo_id]).forEach((key) => {
+          if (stations[x.seo_id][key] === null) delete stations[x.seo_id][key];
+        });
+        log(JSON.stringify(stations));
+      });
+    });
 }
 
 export async function addTideGaugesNL(map, kind = "astronomische-getij") {
@@ -848,222 +798,3 @@ export async function addTideGaugesFR(map, preFetch = false) {
     }
   });
 }
-
-export async function addTideGaugesBaltic(map) {
-  const layer = L.layerGroup().addTo(map);
-
-  gauges_baltic.forEach((g) => {
-    const name = g.id.charAt(0).toUpperCase() + g.id.slice(1);
-    L.circleMarker(g.pos, {
-      radius: 4,
-      weight: 3,
-      color: "blue",
-      fillColor: "gray",
-      fillOpacity: 1,
-    })
-      .bindPopup(
-        `<div class="tides"><a target="_blank" href="https://www.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/${g.id}" class="stationname">${name}<br />
-        <img src="/forecast/balt/${g.id}-wasserstand-mobile.png" style="max-width: 100%;" /></a>
-        <div id="plot">
-        <div class="source">${SOURCE} <a target="_blank" href="https://www.bsh.de/DE/DATEN/Vorhersagen/Wasserstand_Ostsee/wasserstand_ostsee_node.html">BSH</a></div>
-        </div>`,
-      )
-      .on("click", (e) => track("baltic"))
-      .addTo(layer);
-  });
-
-  map.on("zoomend", () => {
-    if (map.getZoom() >= 8) {
-      if (!map.hasLayer(layer)) map.addLayer(layer);
-    } else {
-      if (map.hasLayer(layer)) map.removeLayer(layer);
-    }
-  });
-}
-
-const gauges_baltic = [
-  {
-    pos: [53.8436648730873, 13.858494243912],
-    id: "karnin",
-  },
-  {
-    pos: [53.750310387515, 14.0664775589393],
-    id: "ueckermuende",
-  },
-  {
-    pos: [54.3717574942496, 12.4189604829756],
-    id: "althagen",
-  },
-  {
-    pos: [54.4345393131129, 13.0322210328025],
-    id: "barhoeft",
-  },
-  {
-    pos: [54.1697309881668, 12.1033882570632],
-    id: "warnemuende",
-  },
-  {
-    pos: [54.3712205767312, 12.7232205648675],
-    id: "barth",
-  },
-  {
-    pos: [54.3056821786853, 13.1190147979804],
-    id: "stralsund",
-  },
-  {
-    pos: [54.2344610993266, 13.2897144931285],
-    id: "stahlbrode",
-  },
-  {
-    pos: [54.0417373644072, 13.7703795207791],
-    id: "wolgast",
-  },
-  {
-    pos: [54.5244936484629, 13.0935551573537],
-    id: "neuendorf",
-  },
-  {
-    pos: [54.5847664432537, 13.1113622406783],
-    id: "kloster",
-  },
-  {
-    pos: [54.5575935956121, 13.2451345829697],
-    id: "wittower-faehre",
-  },
-  {
-    pos: [54.3416033935843, 13.4996964003141],
-    id: "lauterbach",
-  },
-  {
-    pos: [54.5082930590658, 13.6366513556098],
-    id: "sassnitz",
-  },
-  {
-    pos: [54.280666589378, 13.7097569727335],
-    id: "thiessow",
-  },
-  {
-    pos: [54.2043478526933, 13.7719056374206],
-    id: "ruden",
-  },
-  {
-    pos: [54.2413133375738, 13.9072081427742],
-    id: "greifswalder-oie",
-  },
-  {
-    pos: [54.1078601243791, 13.8076220385415],
-    id: "karlshagen",
-  },
-  {
-    pos: [54.0603783352471, 14.0008229194429],
-    id: "koserow",
-  },
-  {
-    pos: [54.0977113519667, 13.4571529234706],
-    id: "greifswald-wieck",
-  },
-  {
-    pos: [54.795056780405, 9.43301766621292],
-    id: "flensburg",
-  },
-  {
-    pos: [54.8232672918699, 9.65414099231528],
-    id: "langballigau",
-  },
-  {
-    pos: [54.672736033682, 10.0366885843959],
-    id: "schleimuende",
-  },
-  {
-    pos: [53.9919967667161, 11.3756421426989],
-    id: "timmendorf-poel",
-  },
-  {
-    pos: [53.8987616054927, 11.4579177844637],
-    id: "wismar",
-  },
-  {
-    pos: [54.3729593653957, 11.0056641681444],
-    id: "heiligenhafen",
-  },
-  {
-    pos: [54.3720866822911, 10.1570496121807],
-    id: "kiel-holtenau",
-  },
-  {
-    pos: [54.4995887917968, 10.2732678650434],
-    id: "kiel-leuchtturm",
-  },
-  {
-    pos: [54.0965230966469, 10.8049878297893],
-    id: "neustadt",
-  },
-  {
-    pos: [54.4966302631479, 11.23887433814],
-    id: "marienleuchte",
-  },
-  {
-    pos: [54.6643839117666, 9.93793813426306],
-    id: "kappeln",
-  },
-  {
-    pos: [54.5114316939266, 9.56905851883919],
-    id: "schleswig",
-  },
-  {
-    pos: [54.474702770338, 9.83600726774434],
-    id: "eckernfoerde",
-  },
-  {
-    pos: [53.8930077557352, 10.7030650688505],
-    id: "luebeck",
-  },
-  {
-    pos: [53.9580237174946, 10.8721815274298],
-    id: "travemuende",
-  },
-  {
-    pos: [54.0830643023035, 12.1551089607214],
-    id: "rostock",
-  },
-  {
-    pos: [54.45899747, 12.57181925],
-    id: "prerow",
-  },
-  {
-    pos: [54.3722, 12.62228],
-    id: "bodstedt",
-  },
-  {
-    pos: [54.24741, 12.4669],
-    id: "ribnitz",
-  },
-  {
-    pos: [54.43144, 12.68975],
-    id: "zingst",
-  },
-  {
-    pos: [54.47516, 13.44748],
-    id: "ralswiek",
-  },
-  {
-    pos: [53.9805, 14.04969],
-    id: "pudagla",
-  },
-  {
-    pos: [53.75316, 14.02415],
-    id: "grambin",
-  },
-  {
-    pos: [54.226108, 11.090759],
-    id: "dahme-seebruecke",
-  },
-  {
-    pos: [54.336143, 10.645835],
-    id: "lippe",
-  },
-  {
-    pos: [54.535813, 9.642506],
-    id: "fuesing",
-  },
-];

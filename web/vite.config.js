@@ -151,17 +151,12 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/tides\/de/, ""),
       },
       "/forecast/de": {
-        target: "https://wasserstand-nordsee.bsh.de",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/forecast\/de/, ""),
-      },
-      "/forecast/balt": {
-        target: "https://www2.bsh.de",
+        target: "https://gdi.bsh.de",
         changeOrigin: true,
         rewrite: (path) =>
           path.replace(
-            /^\/forecast\/balt/,
-            "/aktdat/wvd/ostsee/pegelkurve/de/figures",
+            /^\/forecast\/de/,
+            "/ldproxy/rest/services/WaterLevelForecast/collections/waterlevelforecastdata",
           ),
       },
       "/tides/nl": {
