@@ -18,7 +18,7 @@ Wie das BSH ein Vorzeige-Open-Data-Projekt ausbremst und was das über den Stand
 
 Ein Softwareentwickler und Segler hat geschafft, was Behörden seit Jahren versprechen, aber selten liefern: aus öffentlich bereitgestellten Geodaten ein nützliches, frei zugängliches Produkt zu bauen. Auf [freenauticalchart.net](https://freenauticalchart.net) stehen Seekarten für deutsche und niederländische Gewässer kostenlos zur Verfügung, aufgebaut u.a. aus den Vektordaten, die das Bundesamt für Seeschifffahrt und Hydrographie (BSH) im [GeoSeaPortal](https://gdi.bsh.de/mapapps/resources/apps/navigation) veröffentlicht.
 
-Das Projekt fand Beachtung: Magazine wie [Yacht](https://www.yacht.de/newsletter/meinung-kostenlose-seekarten-zu-schon-um-wahr-zu-sein/) und [Segeln](https://segeln-magazin.de/2026/03/10/kostenlose-seekarten-ganz-legal/) berichteten, in der Community wurde es als Modellfall gelobt. (später auch ein [Interview im Yacht Podcast](https://www.yacht.de/special/menschen/podcast-freenauticalchart/))
+Das Projekt fand Beachtung: Magazine wie [Yacht](https://archive.li/PU98r) und [Segeln](https://archive.li/Wa8cB) berichteten, in der Community wurde es als Modellfall gelobt. (später auch ein [Interview im Yacht Podcast](https://www.yacht.de/special/menschen/podcast-freenauticalchart/))
 
 Genau ab diesem Moment begann das Problem.
 
@@ -136,7 +136,7 @@ Die offiziellen Aussagen des BSH, wie sie auch im [Yacht-Artikel](https://archiv
 
 > Die Open-Data-Daten sind nicht für die Navigation geeignet.
 
-Das ist als formaler Disclaimer richtig, das BSH übernimmt für diese Daten keine Garantie. Niemand hat etwas anderes behauptet. Die spannendere Frage ist: Gibt es effektiv zwei Datensätze, einen "guten" und einen "schlechten"? Und was wäre aufwendiger: die aktuellen Daten online zu stellen oder künstlich veraltete bzw. verfälschte Daten bereitzuhalten? Und wäre die überhaupt zulässig?
+Das ist als formaler Disclaimer richtig, das BSH übernimmt für diese Daten keine Garantie. Niemand hat etwas anderes behauptet. Die spannendere Frage ist: Gibt es effektiv zwei Datensätze, einen "guten" und einen "schlechten"? Und was wäre aufwendiger: die aktuellen Daten online zu stellen oder künstlich veraltete bzw. verfälschte Daten bereitzuhalten? Und wäre dies überhaupt zulässig? Zudem bedeutet "nicht geeignet" auch nicht, dass es vorboten ist, die Verantwortlichkeit für die evtl. Folgen liegt dann lediglich beim Anwender selbst.
 
 > Das wäre ein sehr großer Aufwand, die Open-Data-Dienste aktuell zu halten.
 
@@ -148,7 +148,7 @@ Schwer nachvollziehbar. Wenn dieselben geprüften Daten einem Lizenznehmer vertr
 
 > Wir wissen nicht, wer was daraus machen kann.  
 
-Das gilt aber genauso für die Lizenznehmer. Auch Kartenverlage erstellen keine amtlichen Karten und gängige Plotter sind keine genormten ECDIS-Systeme. Was am Ende beim Skipper ankommt, liegt ohnehin nicht mehr im Verantwortungsbereich des BSH.
+Das gilt aber genauso für die Lizenznehmer. Auch Kartenverlage erstellen keine amtlichen Karten und gängige Plotter sind keine genormten ECDIS-Systeme. Die GeoNutzV oder andere offene Lizenzen erlauben jedwede Nutzung. Was am Ende beim Endanwender ankommt, liegt ohnehin nicht mehr im Verantwortungsbereich des BSH.
 
 > Selbst wenn Tonnen und Leuchtfeuer auf der Karte schön dargestellt sind, kann die Position veraltet sein.  
 
@@ -156,7 +156,7 @@ Vollkommen richtig, nur gilt das prinzipiell für jede Karte, die nicht laufend 
 
 > Eine generelle Freigabe aller Seekarten wäre eine politische Entscheidung, die auf Bundesregierungsebene getroffen werden müsste.  
 
-Hier liegt der eigentliche Knackpunkt. Das BSH macht im Rahmen seiner Möglichkeiten einen guten Job. Die Menschen dort entscheiden nicht über die Lizenzpolitik. Sie müssen mit Rahmenbedingungen leben, die teils unangenehm und, wahrscheinlich, mit EU-Recht kollidieren. Aber das BSH kann sich in gewissem Rahmen aktiv für oder gegen OpenData einsetzen.
+Hier liegt der eigentliche Knackpunkt. Das BSH macht im Rahmen seiner Möglichkeiten einen guten Job. Die Menschen dort entscheiden wahrscheinlich nicht selbst über die Lizenzpolitik. Sie müssen mit Rahmenbedingungen leben, die teils unangenehm sein und wahrscheinlich mit EU-Recht kollidieren. Aber das BSH kann sich in gewissem Rahmen aktiv für oder gegen OpenData einsetzen. Und als vom Steuerzahler finanzierte Behörde sollte man sich vom Selbstverständnis her der Allgemeinheit verpflicht fühlen und die Freiheit der Daten verteidigen.
 
 ## Das institutionelle Dilemma
 
