@@ -148,13 +148,13 @@ const overlays = {
   //       '<a target="_blank" href="https://www.igkb.org/forschungsprojekte/tiefenschaerfe">IGKB</a>',
   //   },
   // ),
-  "🇳🇱 FNC NL": L.tileLayer.fallback(baseurl + "/fnc-nl/{z}/{x}/{y}.png", {
+  "🇳🇱 FNC NL": L.tileLayer.fallback(baseurl + "/fnc-nl{r}/{z}/{x}/{y}.png", {
     attribution:
       '<a href="/download/">FNC NL</a> (<a target="_blank" href="https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc">RWS</a>)',
     bounds: boundsNL,
     crossOrigin: cors,
   }),
-  "🇩🇪 FNC DE": L.tileLayer.fallback(baseurl + "/fnc-de/{z}/{x}/{y}.png", {
+  "🇩🇪 FNC DE": L.tileLayer.fallback(baseurl + "/fnc-de{r}/{z}/{x}/{y}.png", {
     attribution:
       '<a href="/download/">FNC DE</a> (<a target="_blank" href="https://www.geoseaportal.de/mapapps/resources/apps/navigation/">BSH</a>)',
     bounds: boundsDE,
@@ -218,11 +218,11 @@ if (!isStandalone) {
 
 if (isDevMode) {
   overlays["FNC NL tileserver"] = L.tileLayer(
-    "http://localhost:8000/styles/fnc-nl/256/{z}/{x}/{y}.png",
+    "http://localhost:8000/styles/fnc-nl/256/{z}/{x}/{y}{r}.png",
     { bounds: boundsNL },
   );
   overlays["FNC DE tileserver"] = L.tileLayer(
-    "http://localhost:8000/styles/fnc-de/256/{z}/{x}/{y}.png",
+    "http://localhost:8000/styles/fnc-de/256/{z}/{x}/{y}{r}.png",
     { bounds: boundsDE },
   );
   overlays["FNC NL mapproxy"] = L.tileLayer(
@@ -509,7 +509,6 @@ function updateAttribution(online = true) {
         let attr = layer.options.attribution;
         map.attributionControl.removeAttribution(attr);
         attr += ` <a href="https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten">(${data["fnc-de"]["updated"]}, NfS ${data["fnc-de"]["nfs"]})</a>`;
-        console.log(attr);
         layer.options.attribution = attr;
         if (map.hasLayer(layer)) map.attributionControl.addAttribution(attr);
       }
@@ -518,7 +517,6 @@ function updateAttribution(online = true) {
         let attr = layer.options.attribution;
         map.attributionControl.removeAttribution(attr);
         attr += ` (${data["fnc-nl"]})</a>`;
-        console.log(attr);
         layer.options.attribution = attr;
         if (map.hasLayer(layer)) map.attributionControl.addAttribution(attr);
       }
@@ -660,13 +658,13 @@ if (isSet("vector")) {
     maplibregl.addProtocol("pmtiles", protocol.tile);
     layers.addBaseLayer(
       L.maplibreGL({
-        style: baseurl + "vector/bsh.json",
+        style: baseurl + "vector/fnc-de.json",
       }),
       "FNC-DE Vector (experimental)",
     );
     layers.addBaseLayer(
       L.maplibreGL({
-        style: baseurl + "vector/rws.json",
+        style: baseurl + "vector/fnc-nl.json",
       }),
       "FNC-NL Vector (experimental)",
     );
