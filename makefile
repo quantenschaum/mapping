@@ -15,7 +15,7 @@ build:
 	# $(MAKE) clean-cache
 	# $(MAKE) docker-seed
 	cd vector && $(MAKE) clean split
-	cd vector && $(MAKE) tiles seed
+	cd vector && $(MAKE) tiles seed seed2x
 	# $(MAKE) charts tiles zips www
 	$(MAKE) charts tiles www
 
