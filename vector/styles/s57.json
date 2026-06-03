@@ -119,6 +119,22 @@
       "paint": { "fill-color": "green", "fill-opacity": 0.3 }
     },
     {
+      "id": "sloping-top",
+      "type": "line",
+      "source": "s57",
+      "source-layer": "SLOTOP",
+      "filter": ["all"],
+      "paint": { "line-color": "rgba(217, 170, 30, 1)" }
+    },
+    {
+      "id": "sloping-ground",
+      "type": "fill",
+      "source": "s57",
+      "source-layer": "SLOGRD",
+      "filter": ["all"],
+      "paint": { "fill-opacity": 0.5, "fill-color": "rgba(217, 170, 30, 1)" }
+    },
+    {
       "id": "urban",
       "type": "fill",
       "source": "s57",
