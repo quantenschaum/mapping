@@ -404,7 +404,7 @@ export async function addTideGaugesDE(map) {
 
   function reloadData() {
     log("reload DE");
-    fetch("/forecast/de/items?lang=en&f=json")
+    fetch("/tides/de/items?lang=en&f=json")
       .then((r) => r.json())
       .then((data) => {
         // log(data);

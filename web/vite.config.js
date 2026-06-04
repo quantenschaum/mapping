@@ -146,16 +146,11 @@ export default defineConfig({
         changeOrigin: true,
       },
       "/tides/de": {
-        target: "https://gezeiten.bsh.de",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/tides\/de/, ""),
-      },
-      "/forecast/de": {
         target: "https://gdi.bsh.de",
         changeOrigin: true,
         rewrite: (path) =>
           path.replace(
-            /^\/forecast\/de/,
+            /^\/tides\/de/,
             "/ldproxy/rest/services/WaterLevelForecast/collections/waterlevelforecastdata",
           ),
       },
