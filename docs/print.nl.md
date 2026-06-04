@@ -1,7 +1,5 @@
 # Kaarten afdrukken
 
-Er zijn meerdere manieren om een kaart af te drukken. Je kunt de rastergegevens direct vanuit je browser afdrukken (snel en eenvoudig) of vectorgegevens vanuit QGIS afdrukken (betere kwaliteit maar ingewikkelder).
-
 ![exported chart image](img/chartimage.webp)
 
 ## Afdrukken vanuit browser
@@ -36,7 +34,7 @@ Dit is handig voor het maken van schermafbeeldingen van de kaart zonder de bedie
 
 Het is mogelijk kaarten af te drukken op formaten groter dan A4. Omdat men meestal slechts een A4-printer heeft, print men de kaart verspreid over meerdere A4-bladen en plakt men deze daarna samen tot een kaart van de gewenste grootte. Ga als volgt te werk.
 
-1. Maak van de te printen kaart een PDF met één pagina in het gewenste formaat. Let daarbij op de resolutie en de grootte van letters en symbolen in het eindformaat. Gebruik voor de beste kwaliteit QGIS of kies een overeenkomstig groot formaat (dat mogelijk niet volledig op het scherm zichtbaar is; met Ctrl-Minus kun je uitzoomen, Ctrl-0 zet terug naar 100%) en exporteer naar PDF. Stel de marges en het papierformaat dienovereenkomstig in.
+1. Maak van de te printen kaart een PDF met één pagina in het gewenste formaat. Let daarbij op de resolutie en de grootte van letters en symbolen in het eindformaat. Voor de beste kwaliteit kies een overeenkomstig groot formaat (dat mogelijk niet volledig op het scherm zichtbaar is; met Ctrl-Minus kun je uitzoomen, Ctrl-0 zet terug naar 100%) en exporteer naar PDF. Stel de marges en het papierformaat dienovereenkomstig in.
 2. Verdeel deze PDF over meerdere A4-bladen. Sommige PDF-viewers kunnen dit al doen; anders kun je [dit script](https://github.com/quantenschaum/mapping/blob/master/scripts/poster.py) gebruiken. Met de optie `-t` kun je het gewenste aantal pagina's opgeven, bijv. `-t 4x2` verdeelt de kaart over 4x2=8 bladen, wat ongeveer overeenkomt met A1 (iets kleiner door overlappende lijmvoegen).
 3. Print de pagina's uit en zet de automatische schaling van de printer uit.
 4. Snijd telkens de onder- en rechterrand weg; gebruik daarvoor de snijtekens.

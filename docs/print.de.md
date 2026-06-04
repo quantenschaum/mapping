@@ -1,7 +1,5 @@
 # Karten Drucken
 
-Es gibt mehrere Möglichkeiten, Karten zu drucken. Sie können die Rasterdaten direkt aus Ihrem Browser heraus drucken (schnell und einfach) oder Vektordaten aus QGIS drucken (bessere Qualität, aber aufwendiger).
-
 ![exported chart image](img/chartimage.webp)
 
 ## Drucken aus dem Browser
@@ -36,7 +34,7 @@ Dies ist nützlich, um Screenshots der Karte wie oben ohne die Steuerelemente, a
 
 Es ist möglich die Karten auf Formaten größer als A4 auszudrucken. Da man in der Regel jedoch nur einen A4-Drucker besitzt, druckt man die Karte verteilt auf mehrere A4-Blätter aus und klebt diesen anschließed zu einer Karte beliebiger Größe zusammen. Dabei geht man wie folgt vor.
 
-1. zu druckende Karte als PDF mit einer Seite in der gewünschten Größe erstellen, dabei auf die Auflösung und Größe von Schift und Symbolen im Zielformat achten, für beste Qualität QGIS verwenden oder ein entprechend großes Format wählen (ist dann ggf. nicht vollständig auf dem Bildschirm sichtbar, mit Strg-Minus kann man rauszoomen, Strg-0 setzt zurück auf 100%) und in PDF drucken, dazu die Ränder und Papierformat entsprechend einstellen.
+1. zu druckende Karte als PDF mit einer Seite in der gewünschten Größe erstellen, dabei auf die Auflösung und Größe von Schift und Symbolen im Zielformat achten, für beste Qualität ein entprechend großes Format wählen (ist dann ggf. nicht vollständig auf dem Bildschirm sichtbar, mit Strg-Minus kann man rauszoomen, Strg-0 setzt zurück auf 100%) und in PDF drucken, dazu die Ränder und Papierformat entsprechend einstellen.
 2. dieses PDF auf mehrere A4-Blätter verteilen, entweder kann der verwendte PDF-Viewer dies bereits oder man verwendet [dieses Script](https://github.com/quantenschaum/mapping/blob/master/scripts/poster.py). Mit der Option `-t` kann man die gewünsche Anzahl Seiten angeben, z.B. `-t 4x2` verteilt die Karte auf 4x2=8 Blätter, was ungefähr A1 enspricht (etwas kleiner wegen überlappender Klebefugen)
 3. die Seiten ausdrucken, dabei die Autoskalierung des Druckers abschalten
 4. den je unteren und rechten Rand abschneiden, dazu die Schnittmarken verwenden
