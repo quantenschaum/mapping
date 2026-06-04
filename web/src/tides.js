@@ -230,7 +230,7 @@ function mergeNoClobber(target, source) {
 const plotNames = ["astro", "forecast", "measured"];
 const plotColors = ["blue", "red", "green"];
 
-async function tidePlot(traces) {
+async function tidePlot(traces, rootid = "plot") {
   const now = new Date();
   const t0 = new Date(now.getTime() - 6 * 3600_000);
   const t1 = new Date(now.getTime() + 18 * 3600_000);
@@ -292,7 +292,7 @@ async function tidePlot(traces) {
     scrollZoom: true,
   };
   const Plotly = await import("plotly.js-basic-dist");
-  Plotly.newPlot("plot", traces, layout, config);
+  Plotly.newPlot(rootid, traces, layout, config);
 }
 
 export async function addTideGauges(map) {
@@ -305,17 +305,7 @@ export async function addTideGauges(map) {
   ]);
 }
 
-export async function addTideGaugesDE(map, preFetch = false) {
-  const colors = { 1: "white", 2: "lightblue", 3: "gray" };
-  const layer = L.layerGroup().addTo(map);
-  map.on("zoomend", () => {
-    if (map.getZoom() >= 8) {
-      if (!map.hasLayer(layer)) map.addLayer(layer);
-    } else {
-      if (map.hasLayer(layer)) map.removeLayer(layer);
-    }
-  });
-
+export async function addTideGaugesDE(map) {
   async function showPopup(marker, f) {
     const now = new Date();
     const today = new Date(now);
@@ -324,12 +314,9 @@ export async function addTideGaugesDE(map, preFetch = false) {
     today.setSeconds(0);
     today.setMilliseconds(0);
     // refetch if data is old
-    if (now - new Date(f.properties.forecast_timestamp) > 6 * 3600_000) {
-      const g = await fetch(`/forecast/de/items/${f.id}?lang=en&f=json`)
-        .then((r) => r.json())
-        .catch(console.error);
-      // log(g);
-      if (g?.gauge_label) f = g;
+    const ts = f.downloaded;
+    if (now - new Date(ts) > 1 * 3600_000) {
+      reloadData();
     }
     const p = f.properties;
     // log(p);
@@ -384,50 +371,68 @@ export async function addTideGaugesDE(map, preFetch = false) {
         <div class="notice">${notice.join("<br/>")}</div>
         <div class="section">${p.official_warning_level_region ?? p.automated_gauge_warning}</div>
         <div class="forecast ${forecast_cls}">${forecast_text} (${forecast_date.date} ${forecast_date.time} ${forecast_date.zone})</div>
-        <div id="plot"></div>
+        <div class="plot" id="plot_${f.id}"></div>
         <div class="source">${SOURCE} <a target="_blank" href="https://wasserstand.bsh.de">BSH</a></div></div>`,
       )
       .openPopup();
 
     const curve = p.curve;
     if (!curve) return;
-    tidePlot([
-      curve.map((d) => d.timestamp),
-      curve.map((d) => ((d.tidal_prediction ?? NaN) - offset) / 100),
-      curve
-        .map((d) => (d.automated_curve_forecast - offset) / 100)
-        .map((v) => (v > 0 ? v : null)),
-      curve
-        .map((d) => (d.measurement - offset) / 100)
-        .map((v) => (v > 0 ? v : null)),
-    ]);
+    tidePlot(
+      [
+        curve.map((d) => d.timestamp),
+        curve.map((d) => ((d.tidal_prediction ?? NaN) - offset) / 100),
+        curve
+          .map((d) => (d.automated_curve_forecast - offset) / 100)
+          .map((v) => (v > 0 ? v : null)),
+        curve
+          .map((d) => (d.measurement - offset) / 100)
+          .map((v) => (v > 0 ? v : null)),
+      ],
+      `plot_${f.id}`,
+    );
   }
 
-  fetch("/forecast/de/items?lang=en&f=json")
-    .then((r) => r.json())
-    .then((data) => {
-      // log(data);
-      data.features.forEach((f) => {
-        const p = f.properties;
-        // log(p);
-        // if (!p.bsh_url_waterlevel) return;
-        if (f.id == "helgoland_binnenhafen") tideDataHelgoland = f;
-        let m = L.circleMarker([p.latitude, p.longitude], {
-          radius: 4,
-          weight: 3,
-          color: p.gauge_label.includes("Helgoland") ? "darkred" : "blue",
-          fillColor: colors[p.bsh_url_waterlevel ? 1 : 2],
-          fillOpacity: 1,
-        })
-          .bindPopup(
-            `<a target="_blank" href="${p.bsh_url_waterlevel ?? "https://gezeiten.bsh.de/" + f.id}">${p.gauge_label}</a>`,
-          )
-          .on("click", (e) => showPopup(e.target, f))
-          .addTo(layer);
-        // if (isDevMode && g.station_name.includes('Helgoland')) showPopup(m, g);
-      });
-    })
-    .catch(log);
+  const layer = L.layerGroup().addTo(map);
+  map.on("zoomend", () => {
+    if (map.getZoom() >= 8) {
+      if (!map.hasLayer(layer)) map.addLayer(layer);
+    } else {
+      if (map.hasLayer(layer)) map.removeLayer(layer);
+    }
+  });
+
+  function reloadData() {
+    log("reload DE");
+    fetch("/forecast/de/items?lang=en&f=json")
+      .then((r) => r.json())
+      .then((data) => {
+        // log(data);
+        layer.clearLayers();
+        data.features.forEach((f) => {
+          const p = f.properties;
+          // log(p);
+          // if (!p.bsh_url_waterlevel) return;
+          if (f.id == "helgoland_binnenhafen") tideDataHelgoland = f;
+          f.downloaded = new Date();
+          let m = L.circleMarker([p.latitude, p.longitude], {
+            radius: 4,
+            weight: 3,
+            color: p.gauge_label.includes("Helgoland") ? "darkred" : "blue",
+            fillColor: p.bsh_url_waterlevel ? "white" : "lightblue",
+            fillOpacity: 1,
+          })
+            .bindPopup(
+              `<a target="_blank" href="${p.bsh_url_waterlevel ?? "https://gezeiten.bsh.de/" + f.id}">${p.gauge_label}</a>`,
+            )
+            .on("click", (e) => showPopup(e.target, f))
+            .addTo(layer);
+        });
+        return data;
+      })
+      .catch(log);
+  }
+  reloadData();
 
   return;
   fetch("/tides/de/data/tides_overview.json")
