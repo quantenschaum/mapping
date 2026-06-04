@@ -5,7 +5,7 @@
 Das deutsche BSH und der niederländische RWS stellen Gezeitendaten betreit unter
 
 - <https://gezeiten.bsh.de/>
-- <https://wasserstand-nordsee.bsh.de/>
+- <https://wasserstand.bsh.de/> ([API](https://gdi.bsh.de/ldproxy/rest/services/WaterLevelForecast))
 - <https://waterinfo.rws.nl/>
 
 Diese sind in die Karte integriert worden. Durch Anklicken der blauen Markierungen erhalten Sie in einem Popup die Gezeitenvorhersagedaten für den aktuellen und den nächsten Tag. Wenn nicht anders angegeben, ist die Bezugshöhe SKN/LAT.

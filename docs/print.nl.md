@@ -43,11 +43,10 @@ Het is mogelijk kaarten af te drukken op formaten groter dan A4. Omdat men meest
 5. Plak de vellen aan elkaar tot één grote kaart.
 
 !!! example "Voorbeeldkaart"
-    Het volgende voorbeeld toont de Elbemonding, eenmaal vanuit de browser als A1-PDF gemaakt en verdeeld over 4x2 A4-bladen en eenmaal uit QGIS gegenereerd.
+    Het volgende voorbeeld toont de Elbemonding als één A1-PDF en verdeeld over 2x4 A4-vellen, geprint naar PDF vanuit de browser.
 
-    - Browser (rastergrafiek)
-        - [Voorbeeldkaart A1, één pagina](img/FreeNauticalChart.pdf)
-        - [Voorbeeldkaart A1, 4x2 A4](img/FreeNauticalChart.4x2.pdf)
-    - QGIS (vectorgrafiek, hoge kwaliteit)
-        - [Voorbeeldkaart A1, één pagina](img/paperchart.A1.pdf)
-        - [Voorbeeldkaart A1, 4x2 A4](img/paperchart.4x2.pdf)
+    - [Voorbeeldkaart A1, enkele pagina](img/FreeNauticalChart.pdf)
+    - [Voorbeeldkaart A1, 2x4 A4](img/FreeNauticalChart.2x4.pdf)
+
+!!! tip
+    Afdrukken met Firefox kan leiden tot een zeer slechte kwaliteit; gebruik daarom bij voorkeur een browser op basis van Chrome.

@@ -1,7 +1,5 @@
 # Printing Charts
 
-There are multiple ways to print a chart. You can print the raster data directly from your browser (quick and easy) or print vector data from QGIS (better quality but more involved).
-
 ![exported chart image](img/chartimage.webp)
 
 ## Printing from Browser
@@ -43,11 +41,10 @@ It is possible to print maps in sizes larger than A4. Since most users usually o
 5. Glue the sheets together to form the full map.
 
 !!! example "Example map"
-    The following example shows the Elbe estuary, once generated from the browser as an A1 PDF and distributed across 4x2 A4 sheets, and once generated from QGIS.
+    The following example shows the Elbe estuary as single A1 PDF and distributed across 2x4 A4 sheets, printed to PDF from the browser.
 
-    - Browser (raster image)
-        - [Example map A1, single page](img/FreeNauticalChart.pdf)
-        - [Example map A1, 4x2 A4](img/FreeNauticalChart.4x2.pdf)
-    - QGIS (vector graphic, high quality)
-        - [Example map A1, single page](img/paperchart.A1.pdf)
-        - [Example map A1, 4x2 A4](img/paperchart.4x2.pdf)
+    - [Example map A1, single page](img/FreeNauticalChart.pdf)
+    - [Example map A1, 2x4 A4](img/FreeNauticalChart.2x4.pdf)
+
+!!! tip
+    Prining with Firefox may result in very bad quality, try a chrome-based browser instead.

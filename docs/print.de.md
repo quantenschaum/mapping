@@ -43,11 +43,10 @@ Es ist möglich die Karten auf Formaten größer als A4 auszudrucken. Da man in 
 5. Karte zusammenkleben
 
 !!! example "Beispielkarte"
-    Das folgende Beispiel zeigt die Elbmündung, einaml aus dem Browser als A1-PDF erzeugt und auf 4x2 A4-Blätter verteilt und einmal aus QGIS erzeugt.    
-    
-    - Browser (Rastergrafik)
-        - [Beispielkarte A1, eine Seite](img/FreeNauticalChart.pdf)
-        - [Beispielkarte A1, 4x2 A4](img/FreeNauticalChart.4x2.pdf)
-    - QGIS (Vektorgrafik, hohe Qualität)
-        - [Beispielkarte A1, eine Seite](img/paperchart.A1.pdf)
-        - [Beispielkarte A1, 4x2 A4](img/paperchart.4x2.pdf)
+    Das folgende Beispiel zeigt die Elbmündung als einzelnes A1-PDF sowie verteilt auf 2x4 A4-Blätter, aus dem Browser als PDF gedruckt.
+
+    - [Beispielkarte A1, einzelne Seite](img/FreeNauticalChart.pdf)
+    - [Beispielkarte A1, 2x4 A4](img/FreeNauticalChart.2x4.pdf)
+
+!!! tip
+    Das Drucken mit Firefox kann zu sehr schlechter Qualität führen. Verwenden Sie stattdessen am besten einen Chrome-basierten Browser.

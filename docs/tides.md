@@ -5,7 +5,7 @@
 The German BSH and the Dutch RWS provide tide data at
 
 - <https://gezeiten.bsh.de/>
-- <https://wasserstand-nordsee.bsh.de/>
+- <https://wasserstand.bsh.de/> ([API](https://gdi.bsh.de/ldproxy/rest/services/WaterLevelForecast))
 - <https://waterinfo.rws.nl/>
 
 These have been integrated into the map. By clicking on the blue markers, you get tide forcast data for the current and the next day in a popup. The reference height level is LAT if not otherwise indicated.

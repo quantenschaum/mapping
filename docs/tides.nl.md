@@ -5,7 +5,7 @@
 Het Duitse BSH en de Nederlandse RWS stellen getijdendata beschikbaar via
 
 - <https://gezeiten.bsh.de/>
-- <https://wasserstand-nordsee.bsh.de/>
+- <https://wasserstand.bsh.de/> ([API](https://gdi.bsh.de/ldproxy/rest/services/WaterLevelForecast))
 - <https://waterinfo.rws.nl/>
 
 Deze zijn in de kaart geïntegreerd. Door op de blauwe markeringen te klikken ontvangt u in een pop-up de getijvoorspellingen voor de huidige en de volgende dag. Tenzij anders aangegeven is de referentiehoogte SKN/LAT.

@@ -36,6 +36,7 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
         - [SKN Seekartenull](https://gdi.bsh.de/de/feed/Chart-datum-for-the-German-Bight-2026.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [Tidal Currents North Sea](https://gdi.bsh.de/de/feed/Tidal-currents-North-Sea.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
         - [Tidal Currents Coastal](https://gdi.bsh.de/de/feed/Tidal-currents-German-coastal-waters-and-neighbouring-regions.xml) ([DL-DE->BY-2.0](https://www.govdata.de/dl-de/by-2-0))
+        - [Wasserstand API](https://gdi.bsh.de/ldproxy/rest/services/WaterLevelForecast) ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode.en))
     - :nl: [RWS](https://www.rijkswaterstaat.nl/)
         - [ENC](https://www.vaarweginformatie.nl/frp/main/#/page/infra_enc) (?)
         - [Vaarwegmarkeringen drijvend](https://data.overheid.nl/dataset/5eb0f65c-e90f-464e-8f46-01c5eeb6adf5) ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
@@ -92,9 +93,6 @@ Die S57-Dateien können mit dem [Ocharts(NG)](https://www.wellenvogel.net/softwa
     
 - [:de: FNC DE](fnc-de.zip){:download}
 - [:nl: FNC NL](fnc-nl.zip){:download}
-
-!!! info "FNC NL"
-    Die Seezeichen in der FNC-NL-Vektorkarte stammen aus der ursprünglichen ENC und nicht aus dem separaten Datensatz. Die Maßstabseinstellungen der Karte wurden so angepasst, dass die in AvNav korrekt angezeigt wird. Bei der Konvertierung der Karten mit OpenCPN funktioniert dies nicht ohne weiteres.
 
 ## [OpenCPN](https://opencpn.org/)
 
