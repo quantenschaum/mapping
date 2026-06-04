@@ -306,8 +306,15 @@ export async function addTideGauges(map) {
 }
 
 export async function addTideGaugesDE(map, preFetch = false) {
-  const layer = L.layerGroup().addTo(map);
   const colors = { 1: "white", 2: "lightblue", 3: "gray" };
+  const layer = L.layerGroup().addTo(map);
+  map.on("zoomend", () => {
+    if (map.getZoom() >= 8) {
+      if (!map.hasLayer(layer)) map.addLayer(layer);
+    } else {
+      if (map.hasLayer(layer)) map.removeLayer(layer);
+    }
+  });
 
   async function showPopup(marker, f) {
     const now = new Date();
@@ -344,7 +351,7 @@ export async function addTideGaugesDE(map, preFetch = false) {
     let table = "";
     const prediction = p.high_water_low_water;
     if (prediction) {
-      let rows = `<tr><th>${DATE}</th><th>${localTZ()}</th><th title="Höhe der Gezeit in Metern, Abweichung K durch Wettereinfluss">HdG&nbsp;&nbsp;&nbsp;K</th><th title="Stieg|Fall, C = 100 × (Stieg|Fall)/MSpTH">S/F&nbsp;&nbsp;&nbsp;C</th></tr>\n`;
+      let rows = `<tr><th>${DATE}</th><th>${localTZ()}</th><th title="Höhe der Gezeit in Metern (astronomisch), Abweichung K durch Wettereinfluss">HdG&nbsp;&nbsp;&nbsp;K</th><th title="C = 100 × (Stieg|Fall)/MSpTH">Coeff</th></tr>\n`;
       let last_date = "";
       let c = 0;
       let height0 = null;
@@ -360,9 +367,8 @@ export async function addTideGaugesDE(map, preFetch = false) {
           const deviation = d ? (d < 0 ? "" : "+") + d.toFixed(1) : "";
           const MSpTH = stations_de[f.id]?.MSpTH / 100 || mhw - mlw;
           const c = (100 * Math.abs(height - height0)) / MSpTH;
-          const range = height0 && c ? (height - height0).toFixed(2) : "";
           const coeff = height0 && c ? c.toFixed(0) : "";
-          rows += `<tr class="${r.event} ${when}"><td>${date}</td><td title="${r.event_timestamp}">${td.time}</td><td>${height.toFixed(2)} <span class="deviation" title="M${r.event}${r.forecast_deviation}">${deviation}</span><td><span class="coeff">${range} ${coeff.padStart(3, "\u2007")}</span></td></tr>\n`;
+          rows += `<tr class="${r.event} ${when}"><td>${date}</td><td title="${r.event_timestamp}">${td.time}</td><td>${height.toFixed(2)} <span class="deviation" title="M${r.event}${r.forecast_deviation}">${deviation}</span><td><span class="coeff">${coeff}</span></td></tr>\n`;
           last_date = td.date;
           height0 = height;
         }
