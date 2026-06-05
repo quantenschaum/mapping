@@ -80,10 +80,11 @@ SECT_FIELDS = {
     "licht_B_g": "SECTR2",
 }
 TYPES = {
-    "COLPAT": int,
     "BOYSHP": int,
     "BCNSHP": int,
     "TOPSHP": int,
+    "COLPAT": int,
+    "LITCHR": int,
     "HEIGHT": lambda s: float(s.replace(",", ".")),
     "ORIENT": lambda s: float(s.replace(",", ".")),
     "SECTR1": lambda s: float(s.replace(",", ".")),
@@ -108,7 +109,6 @@ def translate(p, fields, layer):
 def buoy_beacon(p, kind):
     BXX_FIELDS = BOY_FIELDS if kind == "buoy" else BCN_FIELDS
     o = translate(p, BXX_FIELDS, "BOY/BCN")
-
     c = o.get("COLOUR", "")
     l = "BOY" if kind == "buoy" else "BCN"
     if any(i in c for i in "34"):  # red/green
@@ -126,12 +126,16 @@ def buoy_beacon(p, kind):
     return o
 
 
-def topmark(p):
+def topmark(p, kind):
     o = translate(p, TOP_FIELDS, "TOPMAR")
+    if len(o) > 1:
+        BXX_FIELDS = BOY_FIELDS if kind == "buoy" else BCN_FIELDS
+        shape, SHAPE = [(k, v) for k, v in BXX_FIELDS.items() if v.endswith("SHP")][0]
+        o[SHAPE] = int(p[shape])
     return o
 
 
-def light(p):
+def light(p, kind):
     o = translate(p, LIGHT_FIELDS, "LIGHTS")
     return o
 
@@ -182,12 +186,12 @@ def main():
         if len(o) > 1:
             features.append(feature(o, *ll))
 
-        o = topmark(p)
+        o = topmark(p, kind)
         # print(o)
         if len(o) > 1:
             features.append(feature(o, *ll))
 
-        o = light(p)
+        o = light(p, kind)
         # print(o)
         if "COLOUR" in o:
             features.append(feature(o, *ll))

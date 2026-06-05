@@ -93,7 +93,7 @@ split: $(SRC)
 	[[ -f $@/M_COVR.json ]] && \
 		mapshaper $@/M_COVR.json -filter 'CATCOV==1' -o force $@/M_COVR.json || \
 		mapshaper $@/M_NSYS.json -filter 'ORIENT==null' -o $@/M_COVR.json
-	mapshaper $@/M_COVR.json -each 'chartname=chart' -o force $@/M_COVR.json
+	mapshaper $@/M_COVR.json -each 'cell=chart' -o force $@/M_COVR.json
 	mapshaper $@/DEPARE.json -each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' -dissolve allow-overlaps uband,areatype calc='DRVAL1=min(DRVAL1), DRVAL2=max(DRVAL2)' -explode -each 'area=this.area/1e6' -o force $@/DEPARE.json
 
 merged/_M%.json: split
@@ -119,7 +119,7 @@ merged: split
 	for F in $@/*/*1.json; do $(MERGE) $${F//1./?.} > $${F//1./.} && rm $${F//1./?.}; done
 	# for F in $$(cd $@/UB6 && echo *.json); do $(MERGE) $@/UB?/$$F >$@/$$F; done
 	# for U in $$(seq 6); do cp $</M_COVR.json $@/UB$$U; done
-	# mapshaper $</M_COVR.json -lines each='uband=A.uband||B.uband,chartname=A.chartname||B.chartname' -o $@/M_COVR.json
+	# mapshaper $</M_COVR.json -lines each='uband=A.uband||B.uband,cell=A.cell||B.cell' -o $@/M_COVR.json
 
 # include only fields used in the style
 Y=$(shell jq '.. | arrays | select(.[0]=="get" or .[0]=="has") | .[1]' styles/s57.json | sort | uniq | sed 's/^/-y /')
@@ -149,15 +149,21 @@ rws: ../data/rws.layers
 	$(MERGE) $@/BCN*.json > $@/beacons.json
 	rm $@/BOY*.json $@/BCN*.json
 	mapshaper ../data/vwm/drijvend.s57.json -filter 'layer.startsWith("BOY")' -o $@/buoys.json
-	# cp ../data/vwm/vast.s57.json     $@/beacons.json
+	mapshaper ../data/vwm/drijvend.s57.json -filter 'layer=="LIGHTS"' -o $@/lights1.json
+	mapshaper ../data/vwm/drijvend.s57.json -filter 'layer=="TOPMAR"' -o $@/topmar1.json
+	# mapshaper ../data/vwm/vast.s57.json -filter 'layer.startsWith("BCN")' -o $@/beacons.json
+	mapshaper ../data/vwm/vast.s57.json -filter 'layer=="LIGHTS"' -o $@/lights2.json
+	mapshaper ../data/vwm/vast.s57.json -filter 'layer=="TOPMAR"' -o $@/topmar2.json
+	$(MERGE) $@/lights?.json > $@/LIGHTS.json && rm $@/lights?.json
+	$(MERGE) $@/topmar?.json > $@/TOPMAR.json && rm $@/topmar?.json
 	mapshaper $@/DEPARE.json -each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' -dissolve areatype calc='DRVAL1=min(DRVAL1), DRVAL2=max(DRVAL2)' -o force $@/DEPARE.json
 	mapshaper $@/DEPCNT.json -filter 'VALDCO<=0 || [1,2,3,5,10,20,50].includes(VALDCO)' -o force $@/DEPCNT.json
 	mapshaper $@/SOUNDG.json -each 'VALSOU=DEPTH' -o force $@/SOUNDG.json
-	mapshaper $@/M_COVR.json -filter 'CATCOV==1' -each 'chartname=chart' -o force $@/M_COVR.json
+	mapshaper $@/M_COVR.json -filter 'CATCOV==1' -each 'cell=chart' -o force $@/M_COVR.json
 
 rws.tiles: rws
 	tippecanoe $</M_COVR.json $</LNDARE.json $</DEPARE.json $</COALNE.json $</BUAARE.json $</LNDRGN.json $</SEAARE.json -f -ao -ac -Z8 -z9 $(Y) -o $<0.mbtiles
-	tippecanoe $</*.json -f -r1 -ao -ac -Z10 -z14 -y SCAMIN $(Y) -o $<1.mbtiles -j '{ "SOUNDG": ["any", ["all", ["==", "$$zoom", 11], [">=", "SCAMIN", 160000] ], ["all", ["==", "$$zoom", 12], [">=", "SCAMIN", 80000] ], ["all", ["==", "$$zoom", 13], [">=", "SCAMIN", 40000] ], ["all", [">=", "$$zoom", 14]] ], "buoys":[">=","$$zoom",11], "beacons":[">=","$$zoom",11], "LIGHTS":[">=","$$zoom",11], "DAYMAR":[">=","$$zoom",11], "DEPCNT":[">=","$$zoom",11] }'
+	tippecanoe $</*.json -f -r1 -ao -ac -Z10 -z14 -y SCAMIN $(Y) -o $<1.mbtiles -j '{ "SOUNDG": ["any", ["all", ["==", "$$zoom", 11], [">=", "SCAMIN", 160000] ], ["all", ["==", "$$zoom", 12], [">=", "SCAMIN", 80000] ], ["all", ["==", "$$zoom", 13], [">=", "SCAMIN", 40000] ], ["all", [">=", "$$zoom", 14]] ], "buoys":[">=","$$zoom",11], "beacons":[">=","$$zoom",11], "LIGHTS":[">=","$$zoom",11], "TOPMAR":[">=","$$zoom",11], "DAYMAR":[">=","$$zoom",11], "DEPCNT":[">=","$$zoom",11] }'
 	tile-join -n "fnc-nl" -N "$(TODAY)" -A "FNC/RWS" -f -o fnc-nl.mbtiles $<?.mbtiles
 	pmtiles convert fnc-nl.mbtiles fnc-nl.pmtiles
 	ls -lh *tiles

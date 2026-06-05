@@ -11,7 +11,13 @@
       "tileSize": 256,
       "attribution": "OSM"
     },
-    "s57": { "type": "vector", "url": "http://localhost:8000/data/fnc-de.json" }
+    "oseam": {
+      "type": "raster",
+      "tiles": ["https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png"],
+      "tileSize": 256,
+      "attribution": "OSM"
+    },
+    "s57": { "type": "vector", "url": "http://localhost:8000/data/fnc-nl.json" }
   },
   "sprite": "http://localhost:8000/styles/fnc-de/sprite",
   "glyphs": "http://localhost:8000/fonts/{fontstack}/{range}.pbf",
@@ -1088,7 +1094,6 @@
       "source": "s57",
       "source-layer": "OFSPLF",
       "layout": {
-        "icon-image": "platform",
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
         "text-field": ["get", "OBJNAM"],
@@ -1096,7 +1101,9 @@
         "text-size": 12,
         "text-radial-offset": 1,
         "text-anchor": "bottom-left",
-        "text-variable-anchor": ["bottom-left", "bottom-right"]
+        "text-variable-anchor": ["bottom-left", "bottom-right"],
+        "icon-image": "platform",
+        "text-optional": true
       }
     },
     {
@@ -2299,7 +2306,13 @@
       "source": "s57",
       "source-layer": "TOPMAR",
       "layout": {
-        "icon-rotate": 0,
+        "icon-rotate": [
+          "match",
+          ["coalesce", ["get", "BOYSHP"], 0],
+          [0, 6, 7],
+          0,
+          15
+        ],
         "icon-size": 1,
         "icon-image": [
           "coalesce",
@@ -2317,11 +2330,21 @@
           ],
           "TOPSHP/3/0/0"
         ],
-        "visibility": "none",
+        "visibility": "visible",
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
         "icon-anchor": "bottom",
-        "icon-offset": [0, -22]
+        "icon-offset": [
+          "match",
+          ["coalesce", ["get", "BOYSHP"], 0],
+          1,
+          ["literal", [0, -12]],
+          2,
+          ["literal", [0, -8]],
+          3,
+          ["literal", [0, -9]],
+          ["literal", [0, -22]]
+        ]
       }
     },
     {
@@ -3831,6 +3854,12 @@
         ["==", ["slice", ["get", "OBJNAM"], 0, 2], "WP"]
       ],
       "paint": { "circle-color": "magenta", "circle-radius": 4 }
+    },
+    {
+      "id": "openseamarks",
+      "type": "raster",
+      "source": "oseam",
+      "layout": { "visibility": "none" }
     }
   ],
   "id": "h83iane"
