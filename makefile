@@ -371,11 +371,11 @@ depth+de.obf:
 	data/omc/inspector.sh -c charts/$@ obf/*.obf
 
 depth-de.obf:
-	rm -rf obf
-	rm -rf osm && mkdir -p osm
-	cp data/depth-de-6.osm osm
+	rm -rf obf osm
+	mkdir -p osm
+	cp vector/depth-de.osm osm
 	$(MAKE) obf
-	cp obf/depth-de-6.obf charts/$@
+	cp obf/depth-de.obf charts/$@
 
 depth-nl.obf:
 	rm -rf obf

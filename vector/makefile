@@ -176,32 +176,38 @@ styles: data/styles/fnc-nl.json public/fnc-nl.json
 tiles: bsh.tiles rws.tiles
 
 clean: clean-cache
-	rm -rf dist split merged rws *.gpkg *.mbtiles *.pmtiles *@2x.yaml
+	rm -rf dist split merged rws *.gpkg *.mbtiles *.pmtiles *@2x.yaml depth-de*
 
 clean-cache:
 	rm -rf cache_data
 
-depth:
+depth-de: merged/UB6
 	rm -rf $@ && mkdir -p $@
-	mapshaper merged/UB6/DEPARE.json \
+	mapshaper $</DEPARE.json \
 		-each 'contourarea="depth"' \
 		-each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' \
-		-dissolve contourarea,areatype \
+		-dissolve allow-overlaps fields=contourarea,areatype \
 		-o $@/DEPARE.json
-	mapshaper merged/UB6/DEPCNT.json \
+	mapshaper $@/DEPARE.json -filter 'areatype==10' -erase $</LNDARE.json -o $@/DEPARE1.json
+	mapshaper $@/DEPARE.json -filter 'areatype==5'  -erase $</LNDARE.json -o $@/DEPARE2.json
+	mapshaper $@/DEPARE.json -filter 'areatype==2'  -erase $</LNDARE.json -o $@/DEPARE3.json
+	mapshaper $@/DEPARE.json -filter 'areatype==0'  -erase $</LNDARE.json -o $@/DEPARE4.json
+	mapshaper $@/DEPARE.json -filter 'areatype==-1' -erase $</LNDARE.json -o $@/DEPARE5.json
+	$(MERGE) $@/DEPARE?.json >$@/DEPARE.json
+	mapshaper $</DEPCNT.json \
 		-each 'contour="depth"' \
 		-each 'depth=VALDCO.toFixed(0)' \
-		-each 'contourtype=10' \
+		-each 'contourtype=VALDCO<0?"-1":[0,1,2,3,4,5,10,20,50].includes(VALDCO)?VALDCO.toFixed(0)+"m":VALDCO%1000==0?"1000":VALDCO%100==0?"100":VALDCO%10==0?"10":VALDCO%5==0?"5":"1"' \
 		-dissolve contour,depth,contourtype \
 		-o $@/DEPCNT.json
-	mapshaper merged/UB6/SOUNDG.json \
+	mapshaper $</SOUNDG.json \
 		-each 'point="depth"' \
 		-each 'depth=VALSOU>10||VALSOU%10==0?VALSOU.toFixed(0):VALSOU.toFixed(1)' \
 		-filter-fields point,depth,uband \
 		-o $@/SOUNDG.json
-	ogr2ogr $@/depth.gpkg $@/DEPARE.json
-	ogr2ogr $@/depth.gpkg $@/DEPCNT.json -append
-	ogr2ogr $@/depth.gpkg $@/SOUNDG.json -append
+	ogr2ogr $@.gpkg $@/DEPARE.json
+	ogr2ogr $@.gpkg $@/DEPCNT.json -append
+	ogr2ogr $@.gpkg $@/SOUNDG.json -append
 
 serve:
 	make -B styles
