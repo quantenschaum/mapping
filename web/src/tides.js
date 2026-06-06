@@ -35,26 +35,20 @@ let tideDataHelgoland;
 async function hwHelgoland() {
   if (tideDataHelgoland == null) {
     tideDataHelgoland = await fetch(
-      "/forecast/de/items/helgoland_binnenhafen",
+      "/tides/de/items/helgoland_binnenhafen",
     ).then((r) => r.json());
   }
   log(tideDataHelgoland);
   const props = tideDataHelgoland.properties;
   const pred = props.high_water_low_water;
   const now = new Date();
-  let hdg0;
   let currentHW = null;
   for (const p of pred) {
     p.timestamp = p.event_timestamp;
     p.height = p.tidal_prediction_value;
     const ts = new Date(p.timestamp);
     if (p.event == "HW") currentHW = p;
-    if (hdg0)
-      currentHW.coeff =
-        (100 * Math.abs(p.height - hdg0)) /
-        (props.mean_high_water - props.mean_low_water);
     if (ts > now) break;
-    hdg0 = p.height;
   }
   log("currentHW", currentHW);
   return currentHW;
@@ -108,7 +102,7 @@ export function addTidealAtlas(map, gauges = false) {
           title = title.replace(/ \(.*\)$/, "");
           const hwh = await hwHelgoland();
           const td = formatTimestamp(hwh.timestamp);
-          title += ` (${td.time}&thinsp;${td.zone} C&thinsp;${hwh.coeff.toFixed(0)})`;
+          title += ` (${td.time}&thinsp;${td.zone})`;
           p.slider.title.innerHTML = title;
         }
         layers.forEach((l) => {
@@ -410,7 +404,9 @@ export async function addTideGaugesDE(map) {
           const p = f.properties;
           // log(p);
           // if (!p.bsh_url_waterlevel) return;
-          if (f.id == "helgoland_binnenhafen") tideDataHelgoland = f;
+          if (f.id == "helgoland_binnenhafen") {
+            tideDataHelgoland = f;
+          }
           f.downloaded = new Date();
           let m = L.circleMarker([p.latitude, p.longitude], {
             radius: 4,
