@@ -97,13 +97,17 @@ export function addTidealAtlas(map, gauges = false) {
       ],
       changeMap: async (p) => {
         let x = p.label.replace("HW", "+0h").replace("h", "");
-        if (x.startsWith("-") || x.startsWith("+")) {
-          let title = p.slider.title.innerHTML;
-          title = title.replace(/ \(.*\)$/, "");
-          const hwh = await hwHelgoland();
-          const td = formatTimestamp(hwh.timestamp);
-          title += ` (${td.time}&thinsp;${td.zone})`;
-          p.slider.title.innerHTML = title;
+        try {
+          if (x.startsWith("-") || x.startsWith("+")) {
+            let title = p.slider.title.innerHTML;
+            title = title.replace(/ \(.*\)$/, "");
+            const hwh = await hwHelgoland();
+            const td = formatTimestamp(hwh.timestamp);
+            title += ` (${td.time}&thinsp;${td.zone})`;
+            p.slider.title.innerHTML = title;
+          }
+        } catch (e) {
+          console.error(e);
         }
         layers.forEach((l) => {
           if (l._url.includes(x)) {
