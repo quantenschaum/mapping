@@ -378,16 +378,13 @@ export async function addTideGaugesDE(map) {
 
     const curve = p.curve;
     if (!curve) return;
+    log(curve);
     tidePlot(
       [
         curve.map((d) => d.timestamp),
         curve.map((d) => ((d.tidal_prediction ?? NaN) - offset) / 100),
-        curve
-          .map((d) => (d.automated_curve_forecast - offset) / 100)
-          .map((v) => (v > 0 ? v : null)),
-        curve
-          .map((d) => (d.measurement - offset) / 100)
-          .map((v) => (v > 0 ? v : null)),
+        curve.map((d) => (d.automated_curve_forecast - offset) / 100),
+        curve.map((d) => (d.measurement - offset) / 100),
       ],
       `plot_${f.id}`,
     );
