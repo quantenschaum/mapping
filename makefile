@@ -373,30 +373,30 @@ depth+de.obf:
 depth-de.obf:
 	rm -rf obf osm
 	mkdir -p osm
-	cp vector/depth-de.osm osm
+	cp vector/depth-de/depth-de.osm osm
 	$(MAKE) obf
 	cp obf/depth-de.obf charts/$@
 
 depth-nl.obf:
 	rm -rf obf
 	rm -rf osm && mkdir -p osm
-	cp data/waddenzee.osm data/zeeland.osm osm
+	cp vector/depth-nl/DEPARE.osm vector/depth-nl/DEPCNT.osm osm
 	$(MAKE) obf
 
 	rm -rf osm && mkdir -p osm
-	cp data/waddenzee-0.osm data/zeeland-0.osm osm
+	cp vector/depth-nl/SOUNDG0.osm osm
 	$(MAKE) obf BLEVEL=0
 
 	rm -rf osm && mkdir -p osm
-	cp data/waddenzee-1.osm data/zeeland-1.osm osm
+	cp vector/depth-nl/SOUNDG1.osm osm
 	$(MAKE) obf BLEVEL=1
 
 	rm -rf osm && mkdir -p osm
-	cp data/waddenzee-2.osm data/zeeland-2.osm osm
+	cp vector/depth-nl/SOUNDG2.osm osm
 	$(MAKE) obf BLEVEL=2
 
 	rm -rf osm && mkdir -p osm
-	cp data/waddenzee-3.osm data/zeeland-3.osm osm
+	cp vector/depth-nl/SOUNDG3.osm osm
 	$(MAKE) obf BLEVEL=3
 
 	mkdir -p charts

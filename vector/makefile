@@ -195,6 +195,7 @@ depth-de: merged/UB6
 	mapshaper $@/DEPARE.json -filter 'areatype==-1' -erase $</LNDARE.json -o $@/DEPARE5.json
 	$(MERGE) $@/DEPARE?.json >$@/DEPARE.json
 	mapshaper $</DEPCNT.json \
+		-filter 'VALDCO<0 || [0,1,2,3,4,5,10,20,50].includes(VALDCO)' \
 		-each 'contour="depth"' \
 		-each 'depth=VALDCO.toFixed(0)' \
 		-each 'contourtype=VALDCO<0?"-1":[0,1,2,3,4,5,10,20,50].includes(VALDCO)?VALDCO.toFixed(0)+"m":VALDCO%1000==0?"1000":VALDCO%100==0?"100":VALDCO%10==0?"10":VALDCO%5==0?"5":"1"' \
@@ -203,11 +204,35 @@ depth-de: merged/UB6
 	mapshaper $</SOUNDG.json \
 		-each 'point="depth"' \
 		-each 'depth=VALSOU>10||VALSOU%10==0?VALSOU.toFixed(0):VALSOU.toFixed(1)' \
-		-filter-fields point,depth,uband \
+		-filter-fields point,depth \
 		-o $@/SOUNDG.json
-	ogr2ogr $@.gpkg $@/DEPARE.json
-	ogr2ogr $@.gpkg $@/DEPCNT.json -append
-	ogr2ogr $@.gpkg $@/SOUNDG.json -append
+	ogr2ogr $@/$@.gpkg $@/DEPARE.json
+	ogr2ogr $@/$@.gpkg $@/DEPCNT.json -append
+	ogr2ogr $@/$@.gpkg $@/SOUNDG.json -append
+
+depth-nl: rws
+	rm -rf $@ && mkdir -p $@
+	mapshaper $</DEPARE.json \
+		-each 'contourarea="depth"' \
+		-each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' \
+		-dissolve allow-overlaps fields=contourarea,areatype \
+		-o $@/DEPARE.json
+	mapshaper $</DEPCNT.json \
+		-filter 'VALDCO<0 || [0,1,2,3,4,5,10,20,50].includes(VALDCO)' \
+		-each 'contour="depth"' \
+		-each 'depth=VALDCO.toFixed(0)' \
+		-each 'contourtype=VALDCO<0?"-1":[0,1,2,3,4,5,10,20,50].includes(VALDCO)?VALDCO.toFixed(0)+"m":VALDCO%1000==0?"1000":VALDCO%100==0?"100":VALDCO%10==0?"10":VALDCO%5==0?"5":"1"' \
+		-dissolve contour,depth,contourtype \
+		-o $@/DEPCNT.json
+	mapshaper $</SOUNDG.json \
+		-each 'point="depth"' \
+		-each 'depth=VALSOU>10||VALSOU%10==0?VALSOU.toFixed(0):VALSOU.toFixed(1)' \
+		-filter-fields point,depth,SCAMIN \
+		-o $@/SOUNDG3.json
+	mapshaper $@/SOUNDG3.json -filter 'SCAMIN>=40000'  -o $@/SOUNDG2.json
+	mapshaper $@/SOUNDG2.json -filter 'SCAMIN>=80000'  -o $@/SOUNDG1.json
+	mapshaper $@/SOUNDG1.json -filter 'SCAMIN>=160000' -o $@/SOUNDG0.json
+	for F in $@/*.json; do ogr2ogr $${F//.json/.gpkg} $$F; done
 
 serve:
 	make -B styles
