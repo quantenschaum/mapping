@@ -18,7 +18,7 @@ Wie das BSH ein Vorzeige-Open-Data-Projekt ausbremst und was das über den Stand
 
 Ein Softwareentwickler und Segler hat geschafft, was Behörden seit Jahren versprechen, aber selten liefern: aus öffentlich bereitgestellten Geodaten ein nützliches, frei zugängliches Produkt zu bauen. Auf [freenauticalchart.net](https://freenauticalchart.net) stehen Seekarten für deutsche und niederländische Gewässer kostenlos zur Verfügung, aufgebaut u.a. aus den Vektordaten, die das Bundesamt für Seeschifffahrt und Hydrographie (BSH) im [GeoSeaPortal](https://gdi.bsh.de/mapapps/resources/apps/navigation) veröffentlicht.
 
-Das Projekt fand Beachtung: Magazine wie [Yacht](https://archive.li/PU98r) und [Segeln](https://archive.li/Wa8cB) berichteten, in der Community wurde es als Modellfall gelobt. (später auch ein [Interview im Yacht Podcast](https://www.yacht.de/special/menschen/podcast-freenauticalchart/))
+Das Projekt fand Beachtung: Magazine wie [Yacht](https://archive.li/PU98r) und [Segeln](https://archive.li/Wa8cB) berichteten, in der Community wurde es als Modellfall gelobt. (später auch ein [Interview im Yacht Podcast](https://archive.li/VYuUy) mit anschließender [Stellungnahme des BSH](https://archive.li/WM2gc))
 
 Genau ab diesem Moment begann das Problem.
 
