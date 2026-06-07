@@ -1,0 +1,2885 @@
+<?xml version="1.0" encoding="UTF-8"?><WMS_Capabilities xmlns:inspire_vs="http://inspire.ec.europa.eu/schemas/inspire_vs/1.0" xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0" version="1.3.0" updateSequence="589289" xmlns="http://www.opengis.net/wms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wms https://gdi.bsh.de/mapservice_gs/schemas/wms/1.3.0/capabilities_1_3_0.xsd http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 https://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd">
+  <Service>
+    <Name>WMS</Name>
+    <Title>Navigationshilfen für nautische Produkte - WMS</Title>
+    <Abstract>Daten von festen und schwimmenden Seemarken für nautische Produkte.
+Weitere Informationen finden Sie unter:
+https://gdi.bsh.de/de/data/Aids-to-Navigation-for-Nautical-Products_Information_Navigationshilfen_fuer_nautische_Produkte_DE.pdf
+ --- 
+Data of fixed and floating sea marks for nautical products.
+For more information, please visit:
+https://gdi.bsh.de/en/data/Aids-to-Navigation-for-Nautical-Products_Information_Navigationshilfen_fuer_nautische_Produkte_DE.pdf</Abstract>
+    <KeywordList>
+      <Keyword>Bake</Keyword>
+      <Keyword>beacon</Keyword>
+      <Keyword>BSH</Keyword>
+      <Keyword>Bundesamt für Seeschifffahrt und Hydrographie</Keyword>
+      <Keyword>buoy</Keyword>
+      <Keyword>Federal Maritime and Hydrographic Agency</Keyword>
+      <Keyword>Feuer</Keyword>
+      <Keyword>fog signal</Keyword>
+      <Keyword>lights</Keyword>
+      <Keyword>Nebelsignal</Keyword>
+      <Keyword>radar</Keyword>
+      <Keyword>Radar</Keyword>
+      <Keyword>radio</Keyword>
+      <Keyword>Radio</Keyword>
+      <Keyword>satellite navigation system</Keyword>
+      <Keyword>Satellitennavigationssystem</Keyword>
+      <Keyword>Tonne</Keyword>
+    </KeywordList>
+    <OnlineResource xlink:type="simple" xlink:href="https://www.bsh.de"/>
+    <ContactInformation>
+      <ContactPersonPrimary>
+        <ContactPerson/>
+        <ContactOrganization>Bundesamt für Seeschifffahrt und Hydrographie (BSH)</ContactOrganization>
+      </ContactPersonPrimary>
+      <ContactPosition>Datenprodukte</ContactPosition>
+      <ContactAddress>
+        <AddressType/>
+        <Address>Bernhard-Nocht-Str. 78</Address>
+        <City>Hamburg</City>
+        <StateOrProvince>Hamburg</StateOrProvince>
+        <PostCode>20359</PostCode>
+        <Country>Deutschland</Country>
+      </ContactAddress>
+      <ContactVoiceTelephone/>
+      <ContactFacsimileTelephone/>
+      <ContactElectronicMailAddress>datenprodukte@bsh.de</ContactElectronicMailAddress>
+    </ContactInformation>
+    <Fees>NONE</Fees>
+    <AccessConstraints>Zugriffsbeschränkung: unclassified --- Nutzungsbedingungen: Die Verwendung der Daten zu Navigationszwecken ist nicht gestattet. --- Lizenz: Dieser Datensatz kann gemäß der "Nutzungsbestimmungen für die Bereitstellung von Geodaten des Bundes" (http://www.gesetze-im-internet.de/geonutzv/GeoNutzV.pdf) genutzt werden., {"id": " geoNutz/20130319", "url": "http://www.gesetze-im-internet.de/geonutzv/GeoNutzV.pdf", "name": "Nutzungsbestimmungen für die Bereitstellung von Geodaten des Bundes", "quelle": "Quelle: © BSH 2019"}</AccessConstraints>
+  </Service>
+  <Capability>
+    <Request>
+      <GetCapabilities>
+        <Format>text/xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?SERVICE=WMS&amp;"/>
+            </Get>
+            <Post>
+              <OnlineResource xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?SERVICE=WMS&amp;"/>
+            </Post>
+          </HTTP>
+        </DCPType>
+      </GetCapabilities>
+      <GetMap>
+        <Format>image/png</Format>
+        <Format>application/atom+xml</Format>
+        <Format>application/json;type=utfgrid</Format>
+        <Format>application/pdf</Format>
+        <Format>application/rss+xml</Format>
+        <Format>application/vnd.google-earth.kml+xml</Format>
+        <Format>application/vnd.google-earth.kml+xml;mode=networklink</Format>
+        <Format>application/vnd.google-earth.kmz</Format>
+        <Format>image/geotiff</Format>
+        <Format>image/geotiff8</Format>
+        <Format>image/gif</Format>
+        <Format>image/jpeg</Format>
+        <Format>image/png; mode=8bit</Format>
+        <Format>image/svg+xml</Format>
+        <Format>image/tiff</Format>
+        <Format>image/tiff8</Format>
+        <Format>image/vnd.jpeg-png</Format>
+        <Format>image/vnd.jpeg-png8</Format>
+        <Format>text/html; subtype=openlayers</Format>
+        <Format>text/html; subtype=openlayers2</Format>
+        <Format>text/html; subtype=openlayers3</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?SERVICE=WMS&amp;"/>
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetMap>
+      <GetFeatureInfo>
+        <Format>text/plain</Format>
+        <Format>application/vnd.ogc.gml</Format>
+        <Format>text/xml</Format>
+        <Format>application/vnd.ogc.gml/3.1.1</Format>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>text/html</Format>
+        <Format>application/json</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?SERVICE=WMS&amp;"/>
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetFeatureInfo>
+    </Request>
+    <Exception>
+      <Format>XML</Format>
+      <Format>INIMAGE</Format>
+      <Format>BLANK</Format>
+      <Format>JSON</Format>
+    </Exception>
+    <Layer>
+      <Title>Navigationshilfen für nautische Produkte - WMS</Title>
+      <Abstract>Daten von festen und schwimmenden Seemarken für nautische Produkte.
+Weitere Informationen finden Sie unter:
+https://gdi.bsh.de/de/data/Aids-to-Navigation-for-Nautical-Products_Information_Navigationshilfen_fuer_nautische_Produkte_DE.pdf
+ --- 
+Data of fixed and floating sea marks for nautical products.
+For more information, please visit:
+https://gdi.bsh.de/en/data/Aids-to-Navigation-for-Nautical-Products_Information_Navigationshilfen_fuer_nautische_Produkte_DE.pdf</Abstract>
+      <!--Limited list of EPSG projections:-->
+      <CRS>EPSG:3035</CRS>
+      <CRS>EPSG:31466</CRS>
+      <CRS>EPSG:2397</CRS>
+      <CRS>EPSG:2399</CRS>
+      <CRS>EPSG:4258</CRS>
+      <CRS>EPSG:4314</CRS>
+      <CRS>EPSG:3395</CRS>
+      <CRS>EPSG:2167</CRS>
+      <CRS>EPSG:2168</CRS>
+      <CRS>EPSG:31462</CRS>
+      <CRS>EPSG:31467</CRS>
+      <CRS>EPSG:4230</CRS>
+      <CRS>EPSG:23031</CRS>
+      <CRS>EPSG:31469</CRS>
+      <CRS>EPSG:31465</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3039</CRS>
+      <CRS>EPSG:4647</CRS>
+      <CRS>EPSG:32633</CRS>
+      <CRS>EPSG:25833</CRS>
+      <CRS>EPSG:2398</CRS>
+      <CRS>EPSG:3034</CRS>
+      <CRS>EPSG:2166</CRS>
+      <CRS>EPSG:32632</CRS>
+      <CRS>EPSG:25832</CRS>
+      <CRS>EPSG:31463</CRS>
+      <CRS>EPSG:32631</CRS>
+      <CRS>EPSG:31468</CRS>
+      <CRS>EPSG:31464</CRS>
+      <CRS>EPSG:3038</CRS>
+      <CRS>EPSG:25831</CRS>
+      <CRS>EPSG:23033</CRS>
+      <CRS>EPSG:23032</CRS>
+      <CRS>EPSG:3040</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>CRS:84</CRS>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>3.3485</westBoundLongitude>
+        <eastBoundLongitude>30.3333334</eastBoundLongitude>
+        <southBoundLatitude>52.3333333</southBoundLatitude>
+        <northBoundLatitude>66.5</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="3.3485" miny="52.3333333" maxx="30.3333334" maxy="66.5"/>
+      <Layer queryable="1">
+        <Name>1_Overview</Name>
+        <Title>Overview</Title>
+        <Abstract/>
+        <KeywordList/>
+        <CRS>EPSG:4326</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>3.3485</westBoundLongitude>
+          <eastBoundLongitude>30.3333334</eastBoundLongitude>
+          <southBoundLatitude>52.3333333</southBoundLatitude>
+          <northBoundLatitude>66.5</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="3.3485" miny="52.3333333" maxx="30.3333334" maxy="66.5"/>
+        <BoundingBox CRS="EPSG:4326" minx="52.3333333" miny="3.3485" maxx="66.5" maxy="30.3333334"/>
+        <Style>
+          <Name>default-style-1_Overview</Name>
+          <Title>1_Overview style</Title>
+          <Abstract>Default style for 1_Overview layer</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=1_Overview"/>
+          </LegendURL>
+        </Style>
+        <Layer queryable="1" opaque="0">
+          <Name>Overview_Lights</Name>
+          <Title>Lights</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>3.9943289</westBoundLongitude>
+            <eastBoundLongitude>29.6304166</eastBoundLongitude>
+            <southBoundLatitude>53.5887691</southBoundLatitude>
+            <northBoundLatitude>65.6607833</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="3.9943289" miny="53.5887691" maxx="29.6304166" maxy="65.6607833"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5887691" miny="3.9943289" maxx="65.6607833" maxy="29.6304166"/>
+          <Style>
+            <Name>Overview_Lights</Name>
+            <Title>Overview_Lights</Title>
+            <LegendURL width="87" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Overview_Lights"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Overview_All_Other_Buoys</Name>
+          <Title>All Other Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.3670339</westBoundLongitude>
+            <eastBoundLongitude>8.1084666</eastBoundLongitude>
+            <southBoundLatitude>53.7909431</southBoundLatitude>
+            <northBoundLatitude>53.9993</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.3670339" miny="53.7909431" maxx="8.1084666" maxy="53.9993"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.7909431" miny="6.3670339" maxx="53.9993" maxy="8.1084666"/>
+          <Style>
+            <Name>Overview_All_Other_Buoys</Name>
+            <Title>Overview_All_Other_Buoys</Title>
+            <LegendURL width="160" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Overview_All_Other_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Overview_Fog_Signals_Daymarks</Name>
+          <Title>Fog Signals, Daymarks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.34535</westBoundLongitude>
+            <eastBoundLongitude>7.4587167</eastBoundLongitude>
+            <southBoundLatitude>54.16595</southBoundLatitude>
+            <northBoundLatitude>54.1795833</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.34535" miny="54.16595" maxx="7.4587167" maxy="54.1795833"/>
+          <BoundingBox CRS="EPSG:4326" minx="54.16595" miny="6.34535" maxx="54.1795833" maxy="7.4587167"/>
+          <Style>
+            <Name>Overview_Fog_Signals_Daymarks</Name>
+            <Title>Overview_Fog_Signals_Daymarks</Title>
+            <LegendURL width="86" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Overview_Fog_Signals_Daymarks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Overview_Radio_Radar_Equipment</Name>
+          <Title>Radio Radar Equipment</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>radioradarequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.6458539000000005</westBoundLongitude>
+            <eastBoundLongitude>7.6460539</eastBoundLongitude>
+            <southBoundLatitude>53.971418899999996</southBoundLatitude>
+            <northBoundLatitude>53.9716189</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.6458539000000005" miny="53.971418899999996" maxx="7.6460539" maxy="53.9716189"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.971418899999996" miny="7.6458539000000005" maxx="53.9716189" maxy="7.6460539"/>
+          <Style>
+            <Name>Overview_Radio_Radar_Equipment</Name>
+            <Title>Overview_Radio_Radar_Equipment</Title>
+            <LegendURL width="197" height="100">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Overview_Radio_Radar_Equipment"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Overview_Services</Name>
+          <Title>Services</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.34535</westBoundLongitude>
+            <eastBoundLongitude>10.8775696</eastBoundLongitude>
+            <southBoundLatitude>53.9669507</southBoundLatitude>
+            <northBoundLatitude>54.1795833</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.34535" miny="53.9669507" maxx="10.8775696" maxy="54.1795833"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.9669507" miny="6.34535" maxx="54.1795833" maxy="10.8775696"/>
+          <Style>
+            <Name>Overview_Services</Name>
+            <Title>Overview_Services</Title>
+            <LegendURL width="186" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Overview_Services"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Overview_Facility_Point_Feature</Name>
+          <Title>Facility Point Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>3.9943289</westBoundLongitude>
+            <eastBoundLongitude>29.6304166</eastBoundLongitude>
+            <southBoundLatitude>53.5887691</southBoundLatitude>
+            <northBoundLatitude>65.6607833</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="3.9943289" miny="53.5887691" maxx="29.6304166" maxy="65.6607833"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5887691" miny="3.9943289" maxx="65.6607833" maxy="29.6304166"/>
+          <Style>
+            <Name>Overview_Facility_Point_Feature</Name>
+            <Title>Overview_Facility_Point_Feature</Title>
+            <LegendURL width="160" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Overview_Facility_Point_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Overview_Pilot_Office_Point</Name>
+          <Title>Pilot Office Point</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.6621222</westBoundLongitude>
+            <eastBoundLongitude>29.6304166</eastBoundLongitude>
+            <southBoundLatitude>53.5887691</southBoundLatitude>
+            <northBoundLatitude>65.6607833</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.6621222" miny="53.5887691" maxx="29.6304166" maxy="65.6607833"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5887691" miny="6.6621222" maxx="65.6607833" maxy="29.6304166"/>
+          <Style>
+            <Name>Overview_Pilot_Office_Point</Name>
+            <Title>Overview_Pilot_Office_Point</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Overview_Pilot_Office_Point"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Overview_Navigational_System_of_Marks</Name>
+          <Title>Navigational System of Marks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>metadatafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>3.3485005</westBoundLongitude>
+            <eastBoundLongitude>30.3333334</eastBoundLongitude>
+            <southBoundLatitude>52.3333333</southBoundLatitude>
+            <northBoundLatitude>66.5</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="3.3485005" miny="52.3333333" maxx="30.3333334" maxy="66.5"/>
+          <BoundingBox CRS="EPSG:4326" minx="52.3333333" miny="3.3485005" maxx="66.5" maxy="30.3333334"/>
+          <Style>
+            <Name>Overview_Navigational_System_of_Marks</Name>
+            <Title>Overview_Navigational_System_of_Marks</Title>
+            <LegendURL width="20" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Overview_Navigational_System_of_Marks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+      </Layer>
+      <Layer queryable="1">
+        <Name>2_General</Name>
+        <Title>General</Title>
+        <Abstract/>
+        <KeywordList/>
+        <CRS>EPSG:4326</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>3.3485</westBoundLongitude>
+          <eastBoundLongitude>30.3333334</eastBoundLongitude>
+          <southBoundLatitude>52.3333333</southBoundLatitude>
+          <northBoundLatitude>66.5</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="3.3485" miny="52.3333333" maxx="30.3333334" maxy="66.5"/>
+        <BoundingBox CRS="EPSG:4326" minx="52.3333333" miny="3.3485" maxx="66.5" maxy="30.3333334"/>
+        <Style>
+          <Name>default-style-2_General</Name>
+          <Title>2_General style</Title>
+          <Abstract>Default style for 2_General layer</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=2_General"/>
+          </LegendURL>
+        </Style>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Lights</Name>
+          <Title>Lights</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>3.9597333</westBoundLongitude>
+            <eastBoundLongitude>14.4578</eastBoundLongitude>
+            <southBoundLatitude>53.5887691</southBoundLatitude>
+            <northBoundLatitude>55.80265</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="3.9597333" miny="53.5887691" maxx="14.4578" maxy="55.80265"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5887691" miny="3.9597333" maxx="55.80265" maxy="14.4578"/>
+          <Style>
+            <Name>General_Lights</Name>
+            <Title>General_Lights</Title>
+            <LegendURL width="87" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Lights"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_All_Other_Beacons</Name>
+          <Title>All Other Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.9029751</westBoundLongitude>
+            <eastBoundLongitude>12.6995424</eastBoundLongitude>
+            <southBoundLatitude>54.131025</southBoundLatitude>
+            <northBoundLatitude>54.992518</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.9029751" miny="54.131025" maxx="12.6995424" maxy="54.992518"/>
+          <BoundingBox CRS="EPSG:4326" minx="54.131025" miny="7.9029751" maxx="54.992518" maxy="12.6995424"/>
+          <Style>
+            <Name>General_All_Other_Beacons</Name>
+            <Title>General_All_Other_Beacons</Title>
+            <LegendURL width="177" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_All_Other_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Lateral_Buoys</Name>
+          <Title>Lateral Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.5533333</westBoundLongitude>
+            <eastBoundLongitude>14.2073333</eastBoundLongitude>
+            <southBoundLatitude>53.7483333</southBoundLatitude>
+            <northBoundLatitude>54.7063353</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.5533333" miny="53.7483333" maxx="14.2073333" maxy="54.7063353"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.7483333" miny="6.5533333" maxx="54.7063353" maxy="14.2073333"/>
+          <Style>
+            <Name>General_Lateral_Buoys</Name>
+            <Title>General_Lateral_Buoys</Title>
+            <LegendURL width="300" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Lateral_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Cardinal_Buoys</Name>
+          <Title>Cardinal Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>3.9597333</westBoundLongitude>
+            <eastBoundLongitude>13.9056667</eastBoundLongitude>
+            <southBoundLatitude>53.9518333</southBoundLatitude>
+            <northBoundLatitude>55.80265</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="3.9597333" miny="53.9518333" maxx="13.9056667" maxy="55.80265"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.9518333" miny="3.9597333" maxx="55.80265" maxy="13.9056667"/>
+          <Style>
+            <Name>General_Cardinal_Buoys</Name>
+            <Title>General_Cardinal_Buoys</Title>
+            <LegendURL width="150" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Cardinal_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_All_Other_Buoys</Name>
+          <Title>All Other Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>5.80965</westBoundLongitude>
+            <eastBoundLongitude>14.4578</eastBoundLongitude>
+            <southBoundLatitude>53.6492731</southBoundLatitude>
+            <northBoundLatitude>55.0746094</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="5.80965" miny="53.6492731" maxx="14.4578" maxy="55.0746094"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.6492731" miny="5.80965" maxx="55.0746094" maxy="14.4578"/>
+          <Style>
+            <Name>General_All_Other_Buoys</Name>
+            <Title>General_All_Other_Buoys</Title>
+            <LegendURL width="160" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_All_Other_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Fog_Signals_Daymarks</Name>
+          <Title>Fog Signals, Daymarks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.34535</westBoundLongitude>
+            <eastBoundLongitude>8.4876</eastBoundLongitude>
+            <southBoundLatitude>54.097</southBoundLatitude>
+            <northBoundLatitude>54.3580167</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.34535" miny="54.097" maxx="8.4876" maxy="54.3580167"/>
+          <BoundingBox CRS="EPSG:4326" minx="54.097" miny="6.34535" maxx="54.3580167" maxy="8.4876"/>
+          <Style>
+            <Name>General_Fog_Signals_Daymarks</Name>
+            <Title>General_Fog_Signals_Daymarks</Title>
+            <LegendURL width="86" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Fog_Signals_Daymarks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Radio_Radar_Equipment</Name>
+          <Title>Radio Radar Equipment</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>radioradarequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>3.9943289</westBoundLongitude>
+            <eastBoundLongitude>14.1773278</eastBoundLongitude>
+            <southBoundLatitude>53.47</southBoundLatitude>
+            <northBoundLatitude>55.7913597</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="3.9943289" miny="53.47" maxx="14.1773278" maxy="55.7913597"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.47" miny="3.9943289" maxx="55.7913597" maxy="14.1773278"/>
+          <Style>
+            <Name>General_Radio_Radar_Equipment</Name>
+            <Title>General_Radio_Radar_Equipment</Title>
+            <LegendURL width="197" height="100">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Radio_Radar_Equipment"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Services</Name>
+          <Title>Services</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.34535</westBoundLongitude>
+            <eastBoundLongitude>14.1903095</eastBoundLongitude>
+            <southBoundLatitude>53.877795</southBoundLatitude>
+            <northBoundLatitude>54.8246081</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.34535" miny="53.877795" maxx="14.1903095" maxy="54.8246081"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.877795" miny="6.34535" maxx="54.8246081" maxy="14.1903095"/>
+          <Style>
+            <Name>General_Services</Name>
+            <Title>General_Services</Title>
+            <LegendURL width="186" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Services"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Signal_Stations</Name>
+          <Title>Signal Stations</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>10.2735917</westBoundLongitude>
+            <eastBoundLongitude>10.2737917</eastBoundLongitude>
+            <southBoundLatitude>54.499522999999996</southBoundLatitude>
+            <northBoundLatitude>54.499723</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="10.2735917" miny="54.499522999999996" maxx="10.2737917" maxy="54.499723"/>
+          <BoundingBox CRS="EPSG:4326" minx="54.499522999999996" miny="10.2735917" maxx="54.499723" maxy="10.2737917"/>
+          <Style>
+            <Name>General_Signal_Stations</Name>
+            <Title>General_Signal_Stations</Title>
+            <LegendURL width="167" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Signal_Stations"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Facility_Point_Feature</Name>
+          <Title>Facility Point Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>3.9943289</westBoundLongitude>
+            <eastBoundLongitude>14.1903095</eastBoundLongitude>
+            <southBoundLatitude>53.5887691</southBoundLatitude>
+            <northBoundLatitude>55.7913597</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="3.9943289" miny="53.5887691" maxx="14.1903095" maxy="55.7913597"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5887691" miny="3.9943289" maxx="55.7913597" maxy="14.1903095"/>
+          <Style>
+            <Name>General_Facility_Point_Feature</Name>
+            <Title>General_Facility_Point_Feature</Title>
+            <LegendURL width="160" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Facility_Point_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Facility_Area_Feature</Name>
+          <Title>Facility Area Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>10.880848</westBoundLongitude>
+            <eastBoundLongitude>10.883618</eastBoundLongitude>
+            <southBoundLatitude>53.960583</southBoundLatitude>
+            <northBoundLatitude>53.962687</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="10.880848" miny="53.960583" maxx="10.883618" maxy="53.962687"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.960583" miny="10.880848" maxx="53.962687" maxy="10.883618"/>
+          <Style>
+            <Name>General_Facility_Area_Feature</Name>
+            <Title>General_Facility_Area_Feature</Title>
+            <LegendURL width="160" height="240">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Facility_Area_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Facility_Area_Feature_Label</Name>
+          <Title>Facility Area Feature Label</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>10.880848</westBoundLongitude>
+            <eastBoundLongitude>10.883618</eastBoundLongitude>
+            <southBoundLatitude>53.960583</southBoundLatitude>
+            <northBoundLatitude>53.962687</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="10.880848" miny="53.960583" maxx="10.883618" maxy="53.962687"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.960583" miny="10.880848" maxx="53.962687" maxy="10.883618"/>
+          <Style>
+            <Name>General_Facility_Area_Feature_Label</Name>
+            <Title>General_Facility_Area_Feature_Label</Title>
+            <LegendURL width="190" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Facility_Area_Feature_Label"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Pilot_Office_Point</Name>
+          <Title>Pilot Office Point</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>5.7440829</westBoundLongitude>
+            <eastBoundLongitude>14.1903095</eastBoundLongitude>
+            <southBoundLatitude>53.5887691</southBoundLatitude>
+            <northBoundLatitude>55.2941253</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="5.7440829" miny="53.5887691" maxx="14.1903095" maxy="55.2941253"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5887691" miny="5.7440829" maxx="55.2941253" maxy="14.1903095"/>
+          <Style>
+            <Name>General_Pilot_Office_Point</Name>
+            <Title>General_Pilot_Office_Point</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Pilot_Office_Point"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Pilot_Office_Area</Name>
+          <Title>Pilot Office Area</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>10.880848</westBoundLongitude>
+            <eastBoundLongitude>10.883618</eastBoundLongitude>
+            <southBoundLatitude>53.960583</southBoundLatitude>
+            <northBoundLatitude>53.962687</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="10.880848" miny="53.960583" maxx="10.883618" maxy="53.962687"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.960583" miny="10.880848" maxx="53.962687" maxy="10.883618"/>
+          <Style>
+            <Name>General_Pilot_Office_Area</Name>
+            <Title>General_Pilot_Office_Area</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Pilot_Office_Area"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>General_Navigational_System_of_Marks</Name>
+          <Title>Navigational System of Marks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>metadatafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>3.3485</westBoundLongitude>
+            <eastBoundLongitude>14.7480745</eastBoundLongitude>
+            <southBoundLatitude>53.4</southBoundLatitude>
+            <northBoundLatitude>55.9186158</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="3.3485" miny="53.4" maxx="14.7480745" maxy="55.9186158"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4" miny="3.3485" maxx="55.9186158" maxy="14.7480745"/>
+          <Style>
+            <Name>General_Navigational_System_of_Marks</Name>
+            <Title>General_Navigational_System_of_Marks</Title>
+            <LegendURL width="20" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=General_Navigational_System_of_Marks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+      </Layer>
+      <Layer queryable="1">
+        <Name>3_Coastal</Name>
+        <Title>Coastal</Title>
+        <Abstract/>
+        <KeywordList/>
+        <CRS>EPSG:4326</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>3.3485</westBoundLongitude>
+          <eastBoundLongitude>30.3333334</eastBoundLongitude>
+          <southBoundLatitude>52.3333333</southBoundLatitude>
+          <northBoundLatitude>66.5</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="3.3485" miny="52.3333333" maxx="30.3333334" maxy="66.5"/>
+        <BoundingBox CRS="EPSG:4326" minx="52.3333333" miny="3.3485" maxx="66.5" maxy="30.3333334"/>
+        <Style>
+          <Name>default-style-3_Coastal</Name>
+          <Title>3_Coastal style</Title>
+          <Abstract>Default style for 3_Coastal layer</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=3_Coastal"/>
+          </LegendURL>
+        </Style>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Lights</Name>
+          <Title>Lights</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.1885167</westBoundLongitude>
+            <eastBoundLongitude>14.4578</eastBoundLongitude>
+            <southBoundLatitude>53.4057184</southBoundLatitude>
+            <northBoundLatitude>55.0746094</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.1885167" miny="53.4057184" maxx="14.4578" maxy="55.0746094"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4057184" miny="6.1885167" maxx="55.0746094" maxy="14.4578"/>
+          <Style>
+            <Name>Coastal_Lights</Name>
+            <Title>Coastal_Lights</Title>
+            <LegendURL width="87" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Lights"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Lateral_Beacons</Name>
+          <Title>Lateral Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>13.4659895</westBoundLongitude>
+            <eastBoundLongitude>13.6066334</eastBoundLongitude>
+            <southBoundLatitude>54.5753725</southBoundLatitude>
+            <northBoundLatitude>54.5853</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="13.4659895" miny="54.5753725" maxx="13.6066334" maxy="54.5853"/>
+          <BoundingBox CRS="EPSG:4326" minx="54.5753725" miny="13.4659895" maxx="54.5853" maxy="13.6066334"/>
+          <Style>
+            <Name>Coastal_Lateral_Beacons</Name>
+            <Title>Coastal_Lateral_Beacons</Title>
+            <LegendURL width="202" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Lateral_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Cardinal_Beacons</Name>
+          <Title>Cardinal Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.95951</westBoundLongitude>
+            <eastBoundLongitude>9.95971</eastBoundLongitude>
+            <southBoundLatitude>54.776251699999996</southBoundLatitude>
+            <northBoundLatitude>54.7764517</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.95951" miny="54.776251699999996" maxx="9.95971" maxy="54.7764517"/>
+          <BoundingBox CRS="EPSG:4326" minx="54.776251699999996" miny="9.95951" maxx="54.7764517" maxy="9.95971"/>
+          <Style>
+            <Name>Coastal_Cardinal_Beacons</Name>
+            <Title>Coastal_Cardinal_Beacons</Title>
+            <LegendURL width="150" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Cardinal_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_All_Other_Beacons</Name>
+          <Title>All Other Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7628338</westBoundLongitude>
+            <eastBoundLongitude>13.6372441</eastBoundLongitude>
+            <southBoundLatitude>53.6064836</southBoundLatitude>
+            <northBoundLatitude>54.992518</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7628338" miny="53.6064836" maxx="13.6372441" maxy="54.992518"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.6064836" miny="6.7628338" maxx="54.992518" maxy="13.6372441"/>
+          <Style>
+            <Name>Coastal_All_Other_Beacons</Name>
+            <Title>Coastal_All_Other_Beacons</Title>
+            <LegendURL width="177" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_All_Other_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Lateral_Buoys</Name>
+          <Title>Lateral Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.5533333</westBoundLongitude>
+            <eastBoundLongitude>14.2201667</eastBoundLongitude>
+            <southBoundLatitude>53.7483333</southBoundLatitude>
+            <northBoundLatitude>54.7063353</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.5533333" miny="53.7483333" maxx="14.2201667" maxy="54.7063353"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.7483333" miny="6.5533333" maxx="54.7063353" maxy="14.2201667"/>
+          <Style>
+            <Name>Coastal_Lateral_Buoys</Name>
+            <Title>Coastal_Lateral_Buoys</Title>
+            <LegendURL width="300" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Lateral_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Cardinal_Buoys</Name>
+          <Title>Cardinal Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.3859167</westBoundLongitude>
+            <eastBoundLongitude>13.8661667</eastBoundLongitude>
+            <southBoundLatitude>53.6639116</southBoundLatitude>
+            <northBoundLatitude>55.0493383</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.3859167" miny="53.6639116" maxx="13.8661667" maxy="55.0493383"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.6639116" miny="6.3859167" maxx="55.0493383" maxy="13.8661667"/>
+          <Style>
+            <Name>Coastal_Cardinal_Buoys</Name>
+            <Title>Coastal_Cardinal_Buoys</Title>
+            <LegendURL width="150" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Cardinal_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_All_Other_Buoys</Name>
+          <Title>All Other Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.1885167</westBoundLongitude>
+            <eastBoundLongitude>14.4578</eastBoundLongitude>
+            <southBoundLatitude>53.6492731</southBoundLatitude>
+            <northBoundLatitude>55.0746094</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.1885167" miny="53.6492731" maxx="14.4578" maxy="55.0746094"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.6492731" miny="6.1885167" maxx="55.0746094" maxy="14.4578"/>
+          <Style>
+            <Name>Coastal_All_Other_Buoys</Name>
+            <Title>Coastal_All_Other_Buoys</Title>
+            <LegendURL width="160" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_All_Other_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Mooring_Warping_Facility</Name>
+          <Title>Mooring/Warping Facility</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>12.4965784</westBoundLongitude>
+            <eastBoundLongitude>12.6816333</eastBoundLongitude>
+            <southBoundLatitude>54.4436333</southBoundLatitude>
+            <northBoundLatitude>54.47518</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="12.4965784" miny="54.4436333" maxx="12.6816333" maxy="54.47518"/>
+          <BoundingBox CRS="EPSG:4326" minx="54.4436333" miny="12.4965784" maxx="54.47518" maxy="12.6816333"/>
+          <Style>
+            <Name>Coastal_Mooring_Warping_Facility</Name>
+            <Title>Coastal_Mooring_Warping_Facility</Title>
+            <LegendURL width="126" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Mooring_Warping_Facility"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Fog_Signals_Daymarks</Name>
+          <Title>Fog Signals, Daymarks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.34535</westBoundLongitude>
+            <eastBoundLongitude>11.2289785</eastBoundLongitude>
+            <southBoundLatitude>53.9538795</southBoundLatitude>
+            <northBoundLatitude>54.5031681</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.34535" miny="53.9538795" maxx="11.2289785" maxy="54.5031681"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.9538795" miny="6.34535" maxx="54.5031681" maxy="11.2289785"/>
+          <Style>
+            <Name>Coastal_Fog_Signals_Daymarks</Name>
+            <Title>Coastal_Fog_Signals_Daymarks</Title>
+            <LegendURL width="86" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Fog_Signals_Daymarks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Radio_Radar_Equipment</Name>
+          <Title>Radio Radar Equipment</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>radioradarequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.34069</westBoundLongitude>
+            <eastBoundLongitude>14.1773278</eastBoundLongitude>
+            <southBoundLatitude>53.331005</southBoundLatitude>
+            <northBoundLatitude>55.0605203</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.34069" miny="53.331005" maxx="14.1773278" maxy="55.0605203"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.331005" miny="6.34069" maxx="55.0605203" maxy="14.1773278"/>
+          <Style>
+            <Name>Coastal_Radio_Radar_Equipment</Name>
+            <Title>Coastal_Radio_Radar_Equipment</Title>
+            <LegendURL width="197" height="100">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Radio_Radar_Equipment"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Services</Name>
+          <Title>Services</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.34535</westBoundLongitude>
+            <eastBoundLongitude>14.189576</eastBoundLongitude>
+            <southBoundLatitude>53.333325</southBoundLatitude>
+            <northBoundLatitude>55.0179475</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.34535" miny="53.333325" maxx="14.189576" maxy="55.0179475"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.333325" miny="6.34535" maxx="55.0179475" maxy="14.189576"/>
+          <Style>
+            <Name>Coastal_Services</Name>
+            <Title>Coastal_Services</Title>
+            <LegendURL width="186" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Services"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Signal_Stations</Name>
+          <Title>Signal Stations</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>10.2736059</westBoundLongitude>
+            <eastBoundLongitude>10.935645</eastBoundLongitude>
+            <southBoundLatitude>54.3161044</southBoundLatitude>
+            <northBoundLatitude>54.4996317</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="10.2736059" miny="54.3161044" maxx="10.935645" maxy="54.4996317"/>
+          <BoundingBox CRS="EPSG:4326" minx="54.3161044" miny="10.2736059" maxx="54.4996317" maxy="10.935645"/>
+          <Style>
+            <Name>Coastal_Signal_Stations</Name>
+            <Title>Coastal_Signal_Stations</Title>
+            <LegendURL width="167" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Signal_Stations"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Facility_Point_Feature</Name>
+          <Title>Facility Point Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.34535</westBoundLongitude>
+            <eastBoundLongitude>14.189576</eastBoundLongitude>
+            <southBoundLatitude>53.333325</southBoundLatitude>
+            <northBoundLatitude>55.0605203</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.34535" miny="53.333325" maxx="14.189576" maxy="55.0605203"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.333325" miny="6.34535" maxx="55.0605203" maxy="14.189576"/>
+          <Style>
+            <Name>Coastal_Facility_Point_Feature</Name>
+            <Title>Coastal_Facility_Point_Feature</Title>
+            <LegendURL width="160" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Facility_Point_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Facility_Area_Feature</Name>
+          <Title>Facility Area Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>8.1356563</westBoundLongitude>
+            <eastBoundLongitude>13.5846064</eastBoundLongitude>
+            <southBoundLatitude>53.5659049</southBoundLatitude>
+            <northBoundLatitude>54.507638</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="8.1356563" miny="53.5659049" maxx="13.5846064" maxy="54.507638"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5659049" miny="8.1356563" maxx="54.507638" maxy="13.5846064"/>
+          <Style>
+            <Name>Coastal_Facility_Area_Feature</Name>
+            <Title>Coastal_Facility_Area_Feature</Title>
+            <LegendURL width="160" height="240">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Facility_Area_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Facility_Area_Feature_Label</Name>
+          <Title>Facility Area Feature Label</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>8.1356563</westBoundLongitude>
+            <eastBoundLongitude>13.5846064</eastBoundLongitude>
+            <southBoundLatitude>53.5659049</southBoundLatitude>
+            <northBoundLatitude>54.507638</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="8.1356563" miny="53.5659049" maxx="13.5846064" maxy="54.507638"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5659049" miny="8.1356563" maxx="54.507638" maxy="13.5846064"/>
+          <Style>
+            <Name>Coastal_Facility_Area_Feature_Label</Name>
+            <Title>Coastal_Facility_Area_Feature_Label</Title>
+            <LegendURL width="190" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Facility_Area_Feature_Label"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Pilot_Office_Point</Name>
+          <Title>Pilot Office Point</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.4155971</westBoundLongitude>
+            <eastBoundLongitude>14.189576</eastBoundLongitude>
+            <southBoundLatitude>53.4057184</southBoundLatitude>
+            <northBoundLatitude>55.0605203</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.4155971" miny="53.4057184" maxx="14.189576" maxy="55.0605203"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4057184" miny="6.4155971" maxx="55.0605203" maxy="14.189576"/>
+          <Style>
+            <Name>Coastal_Pilot_Office_Point</Name>
+            <Title>Coastal_Pilot_Office_Point</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Pilot_Office_Point"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Pilot_Office_Area</Name>
+          <Title>Pilot Office Area</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>10.3676028</westBoundLongitude>
+            <eastBoundLongitude>13.5846064</eastBoundLongitude>
+            <southBoundLatitude>53.960583</southBoundLatitude>
+            <northBoundLatitude>54.489868</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="10.3676028" miny="53.960583" maxx="13.5846064" maxy="54.489868"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.960583" miny="10.3676028" maxx="54.489868" maxy="13.5846064"/>
+          <Style>
+            <Name>Coastal_Pilot_Office_Area</Name>
+            <Title>Coastal_Pilot_Office_Area</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Pilot_Office_Area"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Coastal_Navigational_System_of_Marks</Name>
+          <Title>Navigational System of Marks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>metadatafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.1653333</westBoundLongitude>
+            <eastBoundLongitude>14.7480745</eastBoundLongitude>
+            <southBoundLatitude>53.3116485</southBoundLatitude>
+            <northBoundLatitude>55.2166667</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.1653333" miny="53.3116485" maxx="14.7480745" maxy="55.2166667"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.3116485" miny="6.1653333" maxx="55.2166667" maxy="14.7480745"/>
+          <Style>
+            <Name>Coastal_Navigational_System_of_Marks</Name>
+            <Title>Coastal_Navigational_System_of_Marks</Title>
+            <LegendURL width="20" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Coastal_Navigational_System_of_Marks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+      </Layer>
+      <Layer queryable="1">
+        <Name>4_Approach</Name>
+        <Title>Approach</Title>
+        <Abstract/>
+        <KeywordList/>
+        <CRS>EPSG:4326</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>3.3485</westBoundLongitude>
+          <eastBoundLongitude>30.3333334</eastBoundLongitude>
+          <southBoundLatitude>52.3333333</southBoundLatitude>
+          <northBoundLatitude>66.5</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="3.3485" miny="52.3333333" maxx="30.3333334" maxy="66.5"/>
+        <BoundingBox CRS="EPSG:4326" minx="52.3333333" miny="3.3485" maxx="66.5" maxy="30.3333334"/>
+        <Style>
+          <Name>default-style-4_Approach</Name>
+          <Title>4_Approach style</Title>
+          <Abstract>Default style for 4_Approach layer</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=4_Approach"/>
+          </LegendURL>
+        </Style>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Lights</Name>
+          <Title>Lights</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>5.7440829</westBoundLongitude>
+            <eastBoundLongitude>14.2730015</eastBoundLongitude>
+            <southBoundLatitude>53.0599</southBoundLatitude>
+            <northBoundLatitude>55.2941253</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="5.7440829" miny="53.0599" maxx="14.2730015" maxy="55.2941253"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0599" miny="5.7440829" maxx="55.2941253" maxy="14.2730015"/>
+          <Style>
+            <Name>Approach_Lights</Name>
+            <Title>Approach_Lights</Title>
+            <LegendURL width="87" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Lights"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Lateral_Beacons</Name>
+          <Title>Lateral Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7793618</westBoundLongitude>
+            <eastBoundLongitude>14.0980924</eastBoundLongitude>
+            <southBoundLatitude>53.0796886</southBoundLatitude>
+            <northBoundLatitude>54.8595714</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7793618" miny="53.0796886" maxx="14.0980924" maxy="54.8595714"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0796886" miny="6.7793618" maxx="54.8595714" maxy="14.0980924"/>
+          <Style>
+            <Name>Approach_Lateral_Beacons</Name>
+            <Title>Approach_Lateral_Beacons</Title>
+            <LegendURL width="202" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Lateral_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Cardinal_Beacons</Name>
+          <Title>Cardinal Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.853</westBoundLongitude>
+            <eastBoundLongitude>11.0759141</eastBoundLongitude>
+            <southBoundLatitude>53.1708167</southBoundLatitude>
+            <northBoundLatitude>55.0105</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.853" miny="53.1708167" maxx="11.0759141" maxy="55.0105"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.1708167" miny="6.853" maxx="55.0105" maxy="11.0759141"/>
+          <Style>
+            <Name>Approach_Cardinal_Beacons</Name>
+            <Title>Approach_Cardinal_Beacons</Title>
+            <LegendURL width="150" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Cardinal_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_All_Other_Beacons</Name>
+          <Title>All Other Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.6603257</westBoundLongitude>
+            <eastBoundLongitude>14.2730015</eastBoundLongitude>
+            <southBoundLatitude>53.0523063</southBoundLatitude>
+            <northBoundLatitude>55.0533745</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.6603257" miny="53.0523063" maxx="14.2730015" maxy="55.0533745"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0523063" miny="6.6603257" maxx="55.0533745" maxy="14.2730015"/>
+          <Style>
+            <Name>Approach_All_Other_Beacons</Name>
+            <Title>Approach_All_Other_Beacons</Title>
+            <LegendURL width="177" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_All_Other_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Lateral_Buoys</Name>
+          <Title>Lateral Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.4052333</westBoundLongitude>
+            <eastBoundLongitude>14.2718966</eastBoundLongitude>
+            <southBoundLatitude>53.1750325</southBoundLatitude>
+            <northBoundLatitude>55.0642652</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.4052333" miny="53.1750325" maxx="14.2718966" maxy="55.0642652"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.1750325" miny="6.4052333" maxx="55.0642652" maxy="14.2718966"/>
+          <Style>
+            <Name>Approach_Lateral_Buoys</Name>
+            <Title>Approach_Lateral_Buoys</Title>
+            <LegendURL width="269" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Lateral_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Cardinal_Buoys</Name>
+          <Title>Cardinal Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.0466667</westBoundLongitude>
+            <eastBoundLongitude>14.0495284</eastBoundLongitude>
+            <southBoundLatitude>53.187</southBoundLatitude>
+            <northBoundLatitude>55.0493383</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.0466667" miny="53.187" maxx="14.0495284" maxy="55.0493383"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.187" miny="6.0466667" maxx="55.0493383" maxy="14.0495284"/>
+          <Style>
+            <Name>Approach_Cardinal_Buoys</Name>
+            <Title>Approach_Cardinal_Buoys</Title>
+            <LegendURL width="150" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Cardinal_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_All_Other_Buoys</Name>
+          <Title>All Other Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>5.7636167</westBoundLongitude>
+            <eastBoundLongitude>14.2705817</eastBoundLongitude>
+            <southBoundLatitude>53.1089333</southBoundLatitude>
+            <northBoundLatitude>55.1941667</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="5.7636167" miny="53.1089333" maxx="14.2705817" maxy="55.1941667"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.1089333" miny="5.7636167" maxx="55.1941667" maxy="14.2705817"/>
+          <Style>
+            <Name>Approach_All_Other_Buoys</Name>
+            <Title>Approach_All_Other_Buoys</Title>
+            <LegendURL width="146" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_All_Other_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Mooring_Warping_Facility</Name>
+          <Title>Mooring/Warping Facility</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.9261873</westBoundLongitude>
+            <eastBoundLongitude>14.2719316</eastBoundLongitude>
+            <southBoundLatitude>53.0592307</southBoundLatitude>
+            <northBoundLatitude>54.7590449</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.9261873" miny="53.0592307" maxx="14.2719316" maxy="54.7590449"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0592307" miny="6.9261873" maxx="54.7590449" maxy="14.2719316"/>
+          <Style>
+            <Name>Approach_Mooring_Warping_Facility</Name>
+            <Title>Approach_Mooring_Warping_Facility</Title>
+            <LegendURL width="126" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Mooring_Warping_Facility"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Fog_Signals_Daymarks</Name>
+          <Title>Fog Signals, Daymarks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.420608</westBoundLongitude>
+            <eastBoundLongitude>13.944048</eastBoundLongitude>
+            <southBoundLatitude>53.2854442</southBoundLatitude>
+            <northBoundLatitude>54.7522149</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.420608" miny="53.2854442" maxx="13.944048" maxy="54.7522149"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.2854442" miny="6.420608" maxx="54.7522149" maxy="13.944048"/>
+          <Style>
+            <Name>Approach_Fog_Signals_Daymarks</Name>
+            <Title>Approach_Fog_Signals_Daymarks</Title>
+            <LegendURL width="86" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Fog_Signals_Daymarks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Radio_Radar_Equipment</Name>
+          <Title>Radio Radar Equipment</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>radioradarequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>5.7440829</westBoundLongitude>
+            <eastBoundLongitude>14.26995</eastBoundLongitude>
+            <southBoundLatitude>53.08108</southBoundLatitude>
+            <northBoundLatitude>55.2941253</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="5.7440829" miny="53.08108" maxx="14.26995" maxy="55.2941253"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.08108" miny="5.7440829" maxx="55.2941253" maxy="14.26995"/>
+          <Style>
+            <Name>Approach_Radio_Radar_Equipment</Name>
+            <Title>Approach_Radio_Radar_Equipment</Title>
+            <LegendURL width="197" height="100">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Radio_Radar_Equipment"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Services</Name>
+          <Title>Services</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.6410015</westBoundLongitude>
+            <eastBoundLongitude>14.2713852</eastBoundLongitude>
+            <southBoundLatitude>53.0355831</southBoundLatitude>
+            <northBoundLatitude>55.0193785</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.6410015" miny="53.0355831" maxx="14.2713852" maxy="55.0193785"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0355831" miny="6.6410015" maxx="55.0193785" maxy="14.2713852"/>
+          <Style>
+            <Name>Approach_Services</Name>
+            <Title>Approach_Services</Title>
+            <LegendURL width="186" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Services"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Signal_Stations</Name>
+          <Title>Signal Stations</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.0394997</westBoundLongitude>
+            <eastBoundLongitude>14.0463813</eastBoundLongitude>
+            <southBoundLatitude>53.0590349</southBoundLatitude>
+            <northBoundLatitude>54.5240839</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.0394997" miny="53.0590349" maxx="14.0463813" maxy="54.5240839"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0590349" miny="7.0394997" maxx="54.5240839" maxy="14.0463813"/>
+          <Style>
+            <Name>Approach_Signal_Stations</Name>
+            <Title>Approach_Signal_Stations</Title>
+            <LegendURL width="167" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Signal_Stations"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Facility_Point_Feature</Name>
+          <Title>Facility Point Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>5.7440829</westBoundLongitude>
+            <eastBoundLongitude>14.2719316</eastBoundLongitude>
+            <southBoundLatitude>53.0326536</southBoundLatitude>
+            <northBoundLatitude>55.2941253</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="5.7440829" miny="53.0326536" maxx="14.2719316" maxy="55.2941253"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0326536" miny="5.7440829" maxx="55.2941253" maxy="14.2719316"/>
+          <Style>
+            <Name>Approach_Facility_Point_Feature</Name>
+            <Title>Approach_Facility_Point_Feature</Title>
+            <LegendURL width="160" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Facility_Point_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Facility_Area_Feature</Name>
+          <Title>Facility Area Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.6996139</westBoundLongitude>
+            <eastBoundLongitude>13.7588759</eastBoundLongitude>
+            <southBoundLatitude>53.0324715</southBoundLatitude>
+            <northBoundLatitude>55.0525834</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.6996139" miny="53.0324715" maxx="13.7588759" maxy="55.0525834"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0324715" miny="6.6996139" maxx="55.0525834" maxy="13.7588759"/>
+          <Style>
+            <Name>Approach_Facility_Area_Feature</Name>
+            <Title>Approach_Facility_Area_Feature</Title>
+            <LegendURL width="160" height="240">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Facility_Area_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Facility_Area_Feature_Label</Name>
+          <Title>Facility Area Feature Label</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.6996139</westBoundLongitude>
+            <eastBoundLongitude>13.7588759</eastBoundLongitude>
+            <southBoundLatitude>53.0324715</southBoundLatitude>
+            <northBoundLatitude>55.0525834</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.6996139" miny="53.0324715" maxx="13.7588759" maxy="55.0525834"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0324715" miny="6.6996139" maxx="55.0525834" maxy="13.7588759"/>
+          <Style>
+            <Name>Approach_Facility_Area_Feature_Label</Name>
+            <Title>Approach_Facility_Area_Feature_Label</Title>
+            <LegendURL width="190" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Facility_Area_Feature_Label"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Pilot_Office_Point</Name>
+          <Title>Pilot Office Point</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>5.7440829</westBoundLongitude>
+            <eastBoundLongitude>14.2713852</eastBoundLongitude>
+            <southBoundLatitude>53.0326536</southBoundLatitude>
+            <northBoundLatitude>55.2941253</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="5.7440829" miny="53.0326536" maxx="14.2713852" maxy="55.2941253"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0326536" miny="5.7440829" maxx="55.2941253" maxy="14.2713852"/>
+          <Style>
+            <Name>Approach_Pilot_Office_Point</Name>
+            <Title>Approach_Pilot_Office_Point</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Pilot_Office_Point"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Pilot_Office_Area</Name>
+          <Title>Pilot Office Area</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.6996139</westBoundLongitude>
+            <eastBoundLongitude>13.758549</eastBoundLongitude>
+            <southBoundLatitude>53.0324715</southBoundLatitude>
+            <northBoundLatitude>55.0525834</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.6996139" miny="53.0324715" maxx="13.758549" maxy="55.0525834"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0324715" miny="6.6996139" maxx="55.0525834" maxy="13.758549"/>
+          <Style>
+            <Name>Approach_Pilot_Office_Area</Name>
+            <Title>Approach_Pilot_Office_Area</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Pilot_Office_Area"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Approach_Navigational_System_of_Marks</Name>
+          <Title>Navigational System of Marks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>metadatafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>5.66</westBoundLongitude>
+            <eastBoundLongitude>14.2837385</eastBoundLongitude>
+            <southBoundLatitude>52.9666667</southBoundLatitude>
+            <northBoundLatitude>55.3</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="5.66" miny="52.9666667" maxx="14.2837385" maxy="55.3"/>
+          <BoundingBox CRS="EPSG:4326" minx="52.9666667" miny="5.66" maxx="55.3" maxy="14.2837385"/>
+          <Style>
+            <Name>Approach_Navigational_System_of_Marks</Name>
+            <Title>Approach_Navigational_System_of_Marks</Title>
+            <LegendURL width="20" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Approach_Navigational_System_of_Marks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+      </Layer>
+      <Layer queryable="1">
+        <Name>5_Harbour</Name>
+        <Title>Harbour</Title>
+        <Abstract/>
+        <KeywordList/>
+        <CRS>EPSG:4326</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>3.3485</westBoundLongitude>
+          <eastBoundLongitude>30.3333334</eastBoundLongitude>
+          <southBoundLatitude>52.3333333</southBoundLatitude>
+          <northBoundLatitude>66.5</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="3.3485" miny="52.3333333" maxx="30.3333334" maxy="66.5"/>
+        <BoundingBox CRS="EPSG:4326" minx="52.3333333" miny="3.3485" maxx="66.5" maxy="30.3333334"/>
+        <Style>
+          <Name>default-style-5_Harbour</Name>
+          <Title>5_Harbour style</Title>
+          <Abstract>Default style for 5_Harbour layer</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=5_Harbour"/>
+          </LegendURL>
+        </Style>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Lights</Name>
+          <Title>Lights</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7412183</westBoundLongitude>
+            <eastBoundLongitude>14.0980642</eastBoundLongitude>
+            <southBoundLatitude>53.0778345</southBoundLatitude>
+            <northBoundLatitude>55.0167213</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7412183" miny="53.0778345" maxx="14.0980642" maxy="55.0167213"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0778345" miny="6.7412183" maxx="55.0167213" maxy="14.0980642"/>
+          <Style>
+            <Name>Harbour_Lights</Name>
+            <Title>Harbour_Lights</Title>
+            <LegendURL width="87" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Lights"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Lateral_Beacons</Name>
+          <Title>Lateral Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.1468727</westBoundLongitude>
+            <eastBoundLongitude>14.0980642</eastBoundLongitude>
+            <southBoundLatitude>53.0796886</southBoundLatitude>
+            <northBoundLatitude>55.0165144</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.1468727" miny="53.0796886" maxx="14.0980642" maxy="55.0165144"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0796886" miny="7.1468727" maxx="55.0165144" maxy="14.0980642"/>
+          <Style>
+            <Name>Harbour_Lateral_Beacons</Name>
+            <Title>Harbour_Lateral_Beacons</Title>
+            <LegendURL width="202" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Lateral_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Cardinal_Beacons</Name>
+          <Title>Cardinal Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.14445</westBoundLongitude>
+            <eastBoundLongitude>12.0973913</eastBoundLongitude>
+            <southBoundLatitude>53.1169231</southBoundLatitude>
+            <northBoundLatitude>54.8144406</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.14445" miny="53.1169231" maxx="12.0973913" maxy="54.8144406"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.1169231" miny="7.14445" maxx="54.8144406" maxy="12.0973913"/>
+          <Style>
+            <Name>Harbour_Cardinal_Beacons</Name>
+            <Title>Harbour_Cardinal_Beacons</Title>
+            <LegendURL width="150" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Cardinal_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_All_Other_Beacons</Name>
+          <Title>All Other Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.747977</westBoundLongitude>
+            <eastBoundLongitude>14.0716069</eastBoundLongitude>
+            <southBoundLatitude>53.0776255</southBoundLatitude>
+            <northBoundLatitude>55.016578</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.747977" miny="53.0776255" maxx="14.0716069" maxy="55.016578"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0776255" miny="6.747977" maxx="55.016578" maxy="14.0716069"/>
+          <Style>
+            <Name>Harbour_All_Other_Beacons</Name>
+            <Title>Harbour_All_Other_Beacons</Title>
+            <LegendURL width="177" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_All_Other_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Lateral_Buoys</Name>
+          <Title>Lateral Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7406627</westBoundLongitude>
+            <eastBoundLongitude>14.1020084</eastBoundLongitude>
+            <southBoundLatitude>53.09792</southBoundLatitude>
+            <northBoundLatitude>54.8228817</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7406627" miny="53.09792" maxx="14.1020084" maxy="54.8228817"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.09792" miny="6.7406627" maxx="54.8228817" maxy="14.1020084"/>
+          <Style>
+            <Name>Harbour_Lateral_Buoys</Name>
+            <Title>Harbour_Lateral_Buoys</Title>
+            <LegendURL width="300" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Lateral_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Cardinal_Buoys</Name>
+          <Title>Cardinal Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.093735</westBoundLongitude>
+            <eastBoundLongitude>14.1010574</eastBoundLongitude>
+            <southBoundLatitude>53.1653333</southBoundLatitude>
+            <northBoundLatitude>54.6706617</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.093735" miny="53.1653333" maxx="14.1010574" maxy="54.6706617"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.1653333" miny="7.093735" maxx="54.6706617" maxy="14.1010574"/>
+          <Style>
+            <Name>Harbour_Cardinal_Buoys</Name>
+            <Title>Harbour_Cardinal_Buoys</Title>
+            <LegendURL width="150" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Cardinal_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_All_Other_Buoys</Name>
+          <Title>All Other Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.1354033</westBoundLongitude>
+            <eastBoundLongitude>13.7753317</eastBoundLongitude>
+            <southBoundLatitude>53.3295495</southBoundLatitude>
+            <northBoundLatitude>54.8241667</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.1354033" miny="53.3295495" maxx="13.7753317" maxy="54.8241667"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.3295495" miny="7.1354033" maxx="54.8241667" maxy="13.7753317"/>
+          <Style>
+            <Name>Harbour_All_Other_Buoys</Name>
+            <Title>Harbour_All_Other_Buoys</Title>
+            <LegendURL width="160" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_All_Other_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Mooring_Warping_Facility</Name>
+          <Title>Mooring/Warping Facility</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.1585739</westBoundLongitude>
+            <eastBoundLongitude>13.8274418</eastBoundLongitude>
+            <southBoundLatitude>53.0773232</southBoundLatitude>
+            <northBoundLatitude>55.0169234</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.1585739" miny="53.0773232" maxx="13.8274418" maxy="55.0169234"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0773232" miny="7.1585739" maxx="55.0169234" maxy="13.8274418"/>
+          <Style>
+            <Name>Harbour_Mooring_Warping_Facility</Name>
+            <Title>Harbour_Mooring_Warping_Facility</Title>
+            <LegendURL width="126" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Mooring_Warping_Facility"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Fog_Signals_Daymarks</Name>
+          <Title>Fog Signals, Daymarks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.5015853</westBoundLongitude>
+            <eastBoundLongitude>13.8588286</eastBoundLongitude>
+            <southBoundLatitude>53.361177</southBoundLatitude>
+            <northBoundLatitude>54.7522149</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.5015853" miny="53.361177" maxx="13.8588286" maxy="54.7522149"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.361177" miny="7.5015853" maxx="54.7522149" maxy="13.8588286"/>
+          <Style>
+            <Name>Harbour_Fog_Signals_Daymarks</Name>
+            <Title>Harbour_Fog_Signals_Daymarks</Title>
+            <LegendURL width="86" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Fog_Signals_Daymarks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Radio_Radar_Equipment</Name>
+          <Title>Radio Radar Equipment</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>radioradarequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.207</westBoundLongitude>
+            <eastBoundLongitude>13.1311667</eastBoundLongitude>
+            <southBoundLatitude>53.08108</southBoundLatitude>
+            <northBoundLatitude>54.3896667</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.207" miny="53.08108" maxx="13.1311667" maxy="54.3896667"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.08108" miny="7.207" maxx="54.3896667" maxy="13.1311667"/>
+          <Style>
+            <Name>Harbour_Radio_Radar_Equipment</Name>
+            <Title>Harbour_Radio_Radar_Equipment</Title>
+            <LegendURL width="197" height="100">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Radio_Radar_Equipment"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Services</Name>
+          <Title>Services</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7481708</westBoundLongitude>
+            <eastBoundLongitude>14.0666852</eastBoundLongitude>
+            <southBoundLatitude>53.0807698</southBoundLatitude>
+            <northBoundLatitude>55.0164246</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7481708" miny="53.0807698" maxx="14.0666852" maxy="55.0164246"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0807698" miny="6.7481708" maxx="55.0164246" maxy="14.0666852"/>
+          <Style>
+            <Name>Harbour_Services</Name>
+            <Title>Harbour_Services</Title>
+            <LegendURL width="186" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Services"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Signal_Stations</Name>
+          <Title>Signal Stations</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>7.1862693</westBoundLongitude>
+            <eastBoundLongitude>14.066478</eastBoundLongitude>
+            <southBoundLatitude>53.0837492</southBoundLatitude>
+            <northBoundLatitude>54.7305303</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="7.1862693" miny="53.0837492" maxx="14.066478" maxy="54.7305303"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0837492" miny="7.1862693" maxx="54.7305303" maxy="14.066478"/>
+          <Style>
+            <Name>Harbour_Signal_Stations</Name>
+            <Title>Harbour_Signal_Stations</Title>
+            <LegendURL width="167" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Signal_Stations"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Facility_Point_Feature</Name>
+          <Title>Facility Point Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7427313</westBoundLongitude>
+            <eastBoundLongitude>14.0971546</eastBoundLongitude>
+            <southBoundLatitude>53.0773232</southBoundLatitude>
+            <northBoundLatitude>55.0169234</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7427313" miny="53.0773232" maxx="14.0971546" maxy="55.0169234"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0773232" miny="6.7427313" maxx="55.0169234" maxy="14.0971546"/>
+          <Style>
+            <Name>Harbour_Facility_Point_Feature</Name>
+            <Title>Harbour_Facility_Point_Feature</Title>
+            <LegendURL width="160" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Facility_Point_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Facility_Area_Feature</Name>
+          <Title>Facility Area Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7445957</westBoundLongitude>
+            <eastBoundLongitude>14.0972871</eastBoundLongitude>
+            <southBoundLatitude>53.0709377</southBoundLatitude>
+            <northBoundLatitude>55.0182006</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7445957" miny="53.0709377" maxx="14.0972871" maxy="55.0182006"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0709377" miny="6.7445957" maxx="55.0182006" maxy="14.0972871"/>
+          <Style>
+            <Name>Harbour_Facility_Area_Feature</Name>
+            <Title>Harbour_Facility_Area_Feature</Title>
+            <LegendURL width="160" height="240">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Facility_Area_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Facility_Area_Feature_Label</Name>
+          <Title>Facility Area Feature Label</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7445957</westBoundLongitude>
+            <eastBoundLongitude>14.0972871</eastBoundLongitude>
+            <southBoundLatitude>53.0709377</southBoundLatitude>
+            <northBoundLatitude>55.0182006</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7445957" miny="53.0709377" maxx="14.0972871" maxy="55.0182006"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0709377" miny="6.7445957" maxx="55.0182006" maxy="14.0972871"/>
+          <Style>
+            <Name>Harbour_Facility_Area_Feature_Label</Name>
+            <Title>Harbour_Facility_Area_Feature_Label</Title>
+            <LegendURL width="190" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Facility_Area_Feature_Label"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Pilot_Office_Point</Name>
+          <Title>Pilot Office Point</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7445067</westBoundLongitude>
+            <eastBoundLongitude>14.0700756</eastBoundLongitude>
+            <southBoundLatitude>53.0781516</southBoundLatitude>
+            <northBoundLatitude>55.0167213</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7445067" miny="53.0781516" maxx="14.0700756" maxy="55.0167213"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0781516" miny="6.7445067" maxx="55.0167213" maxy="14.0700756"/>
+          <Style>
+            <Name>Harbour_Pilot_Office_Point</Name>
+            <Title>Harbour_Pilot_Office_Point</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Pilot_Office_Point"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Pilot_Office_Area</Name>
+          <Title>Pilot Office Area</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7445957</westBoundLongitude>
+            <eastBoundLongitude>14.0972871</eastBoundLongitude>
+            <southBoundLatitude>53.0709377</southBoundLatitude>
+            <northBoundLatitude>55.0182006</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7445957" miny="53.0709377" maxx="14.0972871" maxy="55.0182006"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0709377" miny="6.7445957" maxx="55.0182006" maxy="14.0972871"/>
+          <Style>
+            <Name>Harbour_Pilot_Office_Area</Name>
+            <Title>Harbour_Pilot_Office_Area</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Pilot_Office_Area"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Harbour_Navigational_System_of_Marks</Name>
+          <Title>Navigational System of Marks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>metadatafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>6.7366667</westBoundLongitude>
+            <eastBoundLongitude>14.1033334</eastBoundLongitude>
+            <southBoundLatitude>53.0666667</southBoundLatitude>
+            <northBoundLatitude>55.0191667</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="6.7366667" miny="53.0666667" maxx="14.1033334" maxy="55.0191667"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.0666667" miny="6.7366667" maxx="55.0191667" maxy="14.1033334"/>
+          <Style>
+            <Name>Harbour_Navigational_System_of_Marks</Name>
+            <Title>Harbour_Navigational_System_of_Marks</Title>
+            <LegendURL width="20" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Harbour_Navigational_System_of_Marks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+      </Layer>
+      <Layer queryable="1">
+        <Name>6_Berthing</Name>
+        <Title>Berthing</Title>
+        <Abstract/>
+        <KeywordList/>
+        <CRS>EPSG:4326</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>3.3485</westBoundLongitude>
+          <eastBoundLongitude>30.3333334</eastBoundLongitude>
+          <southBoundLatitude>52.3333333</southBoundLatitude>
+          <northBoundLatitude>66.5</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="3.3485" miny="52.3333333" maxx="30.3333334" maxy="66.5"/>
+        <BoundingBox CRS="EPSG:4326" minx="52.3333333" miny="3.3485" maxx="66.5" maxy="30.3333334"/>
+        <Style>
+          <Name>default-style-6_Berthing</Name>
+          <Title>6_Berthing style</Title>
+          <Abstract>Default style for 6_Berthing layer</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=6_Berthing"/>
+          </LegendURL>
+        </Style>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Lights</Name>
+          <Title>Lights</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8285222</westBoundLongitude>
+            <eastBoundLongitude>13.8569928</eastBoundLongitude>
+            <southBoundLatitude>53.4726417</southBoundLatitude>
+            <northBoundLatitude>54.6726665</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8285222" miny="53.4726417" maxx="13.8569928" maxy="54.6726665"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4726417" miny="9.8285222" maxx="54.6726665" maxy="13.8569928"/>
+          <Style>
+            <Name>Berthing_Lights</Name>
+            <Title>Berthing_Lights</Title>
+            <LegendURL width="87" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Lights"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Lateral_Beacons</Name>
+          <Title>Lateral Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8784894</westBoundLongitude>
+            <eastBoundLongitude>12.09785</eastBoundLongitude>
+            <southBoundLatitude>53.5025825</southBoundLatitude>
+            <northBoundLatitude>54.402374</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8784894" miny="53.5025825" maxx="12.09785" maxy="54.402374"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5025825" miny="9.8784894" maxx="54.402374" maxy="12.09785"/>
+          <Style>
+            <Name>Berthing_Lateral_Beacons</Name>
+            <Title>Berthing_Lateral_Beacons</Title>
+            <LegendURL width="202" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Lateral_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Cardinal_Beacons</Name>
+          <Title>Cardinal Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8746873</westBoundLongitude>
+            <eastBoundLongitude>11.4409367</eastBoundLongitude>
+            <southBoundLatitude>53.5165697</southBoundLatitude>
+            <northBoundLatitude>54.3315368</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8746873" miny="53.5165697" maxx="11.4409367" maxy="54.3315368"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5165697" miny="9.8746873" maxx="54.3315368" maxy="11.4409367"/>
+          <Style>
+            <Name>Berthing_Cardinal_Beacons</Name>
+            <Title>Berthing_Cardinal_Beacons</Title>
+            <LegendURL width="150" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Cardinal_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_All_Other_Beacons</Name>
+          <Title>All Other Beacons</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>beaconfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8558298</westBoundLongitude>
+            <eastBoundLongitude>12.0880218</eastBoundLongitude>
+            <southBoundLatitude>53.5147872</southBoundLatitude>
+            <northBoundLatitude>54.6742956</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8558298" miny="53.5147872" maxx="12.0880218" maxy="54.6742956"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5147872" miny="9.8558298" maxx="54.6742956" maxy="12.0880218"/>
+          <Style>
+            <Name>Berthing_All_Other_Beacons</Name>
+            <Title>Berthing_All_Other_Beacons</Title>
+            <LegendURL width="177" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_All_Other_Beacons"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Lateral_Buoys</Name>
+          <Title>Lateral Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8361719</westBoundLongitude>
+            <eastBoundLongitude>13.85502</eastBoundLongitude>
+            <southBoundLatitude>53.4740734</southBoundLatitude>
+            <northBoundLatitude>54.3375</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8361719" miny="53.4740734" maxx="13.85502" maxy="54.3375"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4740734" miny="9.8361719" maxx="54.3375" maxy="13.85502"/>
+          <Style>
+            <Name>Berthing_Lateral_Buoys</Name>
+            <Title>Berthing_Lateral_Buoys</Title>
+            <LegendURL width="300" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Lateral_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Cardinal_Buoys</Name>
+          <Title>Cardinal Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.9741758</westBoundLongitude>
+            <eastBoundLongitude>13.8543179</eastBoundLongitude>
+            <southBoundLatitude>53.5171671</southBoundLatitude>
+            <northBoundLatitude>54.3790602</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.9741758" miny="53.5171671" maxx="13.8543179" maxy="54.3790602"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5171671" miny="9.9741758" maxx="54.3790602" maxy="13.8543179"/>
+          <Style>
+            <Name>Berthing_Cardinal_Buoys</Name>
+            <Title>Berthing_Cardinal_Buoys</Title>
+            <LegendURL width="150" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Cardinal_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_All_Other_Buoys</Name>
+          <Title>All Other Buoys</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>buoyfeature</Keyword>
+            <Keyword>features</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8650682</westBoundLongitude>
+            <eastBoundLongitude>13.8569928</eastBoundLongitude>
+            <southBoundLatitude>53.4933862</southBoundLatitude>
+            <northBoundLatitude>54.1685833</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8650682" miny="53.4933862" maxx="13.8569928" maxy="54.1685833"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4933862" miny="9.8650682" maxx="54.1685833" maxy="13.8569928"/>
+          <Style>
+            <Name>Berthing_All_Other_Buoys</Name>
+            <Title>Berthing_All_Other_Buoys</Title>
+            <LegendURL width="160" height="80">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_All_Other_Buoys"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Mooring_Warping_Facility</Name>
+          <Title>Mooring/Warping Facility</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8280689</westBoundLongitude>
+            <eastBoundLongitude>12.0911815</eastBoundLongitude>
+            <southBoundLatitude>53.4618906</southBoundLatitude>
+            <northBoundLatitude>54.6731849</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8280689" miny="53.4618906" maxx="12.0911815" maxy="54.6731849"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4618906" miny="9.8280689" maxx="54.6731849" maxy="12.0911815"/>
+          <Style>
+            <Name>Berthing_Mooring_Warping_Facility</Name>
+            <Title>Berthing_Mooring_Warping_Facility</Title>
+            <LegendURL width="126" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Mooring_Warping_Facility"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Fog_Signals_Daymarks</Name>
+          <Title>Fog Signals, Daymarks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8784894</westBoundLongitude>
+            <eastBoundLongitude>10.8856447</eastBoundLongitude>
+            <southBoundLatitude>53.5217906</southBoundLatitude>
+            <northBoundLatitude>53.9566461</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8784894" miny="53.5217906" maxx="10.8856447" maxy="53.9566461"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.5217906" miny="9.8784894" maxx="53.9566461" maxy="10.8856447"/>
+          <Style>
+            <Name>Berthing_Fog_Signals_Daymarks</Name>
+            <Title>Berthing_Fog_Signals_Daymarks</Title>
+            <LegendURL width="86" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Fog_Signals_Daymarks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Radio_Radar_Equipment</Name>
+          <Title>Radio Radar Equipment</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>radioradarequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.872763</westBoundLongitude>
+            <eastBoundLongitude>12.097699</eastBoundLongitude>
+            <southBoundLatitude>53.4943263</southBoundLatitude>
+            <northBoundLatitude>54.1866841</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.872763" miny="53.4943263" maxx="12.097699" maxy="54.1866841"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4943263" miny="9.872763" maxx="54.1866841" maxy="12.097699"/>
+          <Style>
+            <Name>Berthing_Radio_Radar_Equipment</Name>
+            <Title>Berthing_Radio_Radar_Equipment</Title>
+            <LegendURL width="197" height="100">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Radio_Radar_Equipment"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Services</Name>
+          <Title>Services</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8418319</westBoundLongitude>
+            <eastBoundLongitude>13.8488872</eastBoundLongitude>
+            <southBoundLatitude>53.4888733</southBoundLatitude>
+            <northBoundLatitude>54.4306247</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8418319" miny="53.4888733" maxx="13.8488872" maxy="54.4306247"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4888733" miny="9.8418319" maxx="54.4306247" maxy="13.8488872"/>
+          <Style>
+            <Name>Berthing_Services</Name>
+            <Title>Berthing_Services</Title>
+            <LegendURL width="186" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Services"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Signal_Stations</Name>
+          <Title>Signal Stations</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>signalequipmentfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.828501</westBoundLongitude>
+            <eastBoundLongitude>13.8584935</eastBoundLongitude>
+            <southBoundLatitude>53.4703713</southBoundLatitude>
+            <northBoundLatitude>54.3149503</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.828501" miny="53.4703713" maxx="13.8584935" maxy="54.3149503"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4703713" miny="9.828501" maxx="54.3149503" maxy="13.8584935"/>
+          <Style>
+            <Name>Berthing_Signal_Stations</Name>
+            <Title>Berthing_Signal_Stations</Title>
+            <LegendURL width="167" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Signal_Stations"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Facility_Point_Feature</Name>
+          <Title>Facility Point Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8280689</westBoundLongitude>
+            <eastBoundLongitude>13.857343</eastBoundLongitude>
+            <southBoundLatitude>53.4618906</southBoundLatitude>
+            <northBoundLatitude>54.673266</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8280689" miny="53.4618906" maxx="13.857343" maxy="54.673266"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4618906" miny="9.8280689" maxx="54.673266" maxy="13.857343"/>
+          <Style>
+            <Name>Berthing_Facility_Point_Feature</Name>
+            <Title>Berthing_Facility_Point_Feature</Title>
+            <LegendURL width="160" height="60">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Facility_Point_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Facility_Area_Feature</Name>
+          <Title>Facility Area Feature</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8267</westBoundLongitude>
+            <eastBoundLongitude>13.8586499</eastBoundLongitude>
+            <southBoundLatitude>53.4606847</southBoundLatitude>
+            <northBoundLatitude>54.6741114</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8267" miny="53.4606847" maxx="13.8586499" maxy="54.6741114"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4606847" miny="9.8267" maxx="54.6741114" maxy="13.8586499"/>
+          <Style>
+            <Name>Berthing_Facility_Area_Feature</Name>
+            <Title>Berthing_Facility_Area_Feature</Title>
+            <LegendURL width="160" height="240">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Facility_Area_Feature"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Facility_Area_Feature_Label</Name>
+          <Title>Facility Area Feature Label</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8267</westBoundLongitude>
+            <eastBoundLongitude>13.8586499</eastBoundLongitude>
+            <southBoundLatitude>53.4606847</southBoundLatitude>
+            <northBoundLatitude>54.6741114</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8267" miny="53.4606847" maxx="13.8586499" maxy="54.6741114"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4606847" miny="9.8267" maxx="54.6741114" maxy="13.8586499"/>
+          <Style>
+            <Name>Berthing_Facility_Area_Feature_Label</Name>
+            <Title>Berthing_Facility_Area_Feature_Label</Title>
+            <LegendURL width="190" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Facility_Area_Feature_Label"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Pilot_Office_Point</Name>
+          <Title>Pilot Office Point</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilitypointfeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8414214</westBoundLongitude>
+            <eastBoundLongitude>13.8488872</eastBoundLongitude>
+            <southBoundLatitude>53.4676694</southBoundLatitude>
+            <northBoundLatitude>54.6724247</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8414214" miny="53.4676694" maxx="13.8488872" maxy="54.6724247"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4676694" miny="9.8414214" maxx="54.6724247" maxy="13.8488872"/>
+          <Style>
+            <Name>Berthing_Pilot_Office_Point</Name>
+            <Title>Berthing_Pilot_Office_Point</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Pilot_Office_Point"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Pilot_Office_Area</Name>
+          <Title>Pilot Office Area</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>facilityareafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8267</westBoundLongitude>
+            <eastBoundLongitude>13.8586499</eastBoundLongitude>
+            <southBoundLatitude>53.4606847</southBoundLatitude>
+            <northBoundLatitude>54.6741114</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8267" miny="53.4606847" maxx="13.8586499" maxy="54.6741114"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4606847" miny="9.8267" maxx="54.6741114" maxy="13.8586499"/>
+          <Style>
+            <Name>Berthing_Pilot_Office_Area</Name>
+            <Title>Berthing_Pilot_Office_Area</Title>
+            <LegendURL width="103" height="40">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Pilot_Office_Area"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+        <Layer queryable="1" opaque="0">
+          <Name>Berthing_Navigational_System_of_Marks</Name>
+          <Title>Navigational System of Marks</Title>
+          <Abstract/>
+          <KeywordList>
+            <Keyword>features</Keyword>
+            <Keyword>metadatafeature</Keyword>
+          </KeywordList>
+          <CRS>EPSG:4326</CRS>
+          <CRS>CRS:84</CRS>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>9.8267</westBoundLongitude>
+            <eastBoundLongitude>13.859</eastBoundLongitude>
+            <southBoundLatitude>53.4606732</southBoundLatitude>
+            <northBoundLatitude>54.6744833</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="CRS:84" minx="9.8267" miny="53.4606732" maxx="13.859" maxy="54.6744833"/>
+          <BoundingBox CRS="EPSG:4326" minx="53.4606732" miny="9.8267" maxx="54.6744833" maxy="13.859"/>
+          <Style>
+            <Name>Berthing_Navigational_System_of_Marks</Name>
+            <Title>Berthing_Navigational_System_of_Marks</Title>
+            <LegendURL width="20" height="20">
+              <Format>image/png</Format>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/ows?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=Berthing_Navigational_System_of_Marks"/>
+            </LegendURL>
+          </Style>
+        </Layer>
+      </Layer>
+    </Layer>
+  </Capability>
+</WMS_Capabilities>
