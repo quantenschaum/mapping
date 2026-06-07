@@ -11,14 +11,14 @@ Die Daten in diesem Ordner wurden von den folgenden Endpunkten, die das BSH öff
 
 Die Daten wurden in Layer aufgeteilt, ein Layer pro Datei.
 
-Datum des initialen Downloads: 
+Datum des initialen Downloads:
 
 - 2026-04-27 alle Layer
 - 2026-03-02 zusätzlich `SOUNDG.json` (zuletzt verfügbare Tiefenpunkte)
 
-Die Lizenzangabe zum Zeitpunkt des Downloads war und ist die [GeoNutzV](http://www.gesetze-im-internet.de/geonutzv/GeoNutzV.pdf).  
+Die Lizenzangabe zum Zeitpunkt des Downloads war und ist die [GeoNutzV](http://www.gesetze-im-internet.de/geonutzv/GeoNutzV.pdf).
 
-D.h. die Nutzung der Daten für u.a. folgenden Zwecke ist zulässig: 
+D.h. die Nutzung der Daten für u.a. folgenden Zwecke ist zulässig:
 
 - alle Nutzungszwecke, kommerziell wie nicht-kommerziell
 - Bearbeitung und Umwandlung der Daten sowie die Kombination mit anderen Daten
@@ -53,4 +53,4 @@ Einzelne Layer wurden selektiv aus den oben genannten Endpunken zu späteren Zei
 | 20/2026 |     ✓      |       ✓       |
 | 21/2026 |     ✓      |       ✓       |
 | 22/2026 |     ✓      |       ✓       |
-| 23/2026 |     ✓      |              |
+| 23/2026 |     ✓      |       ✓       |
