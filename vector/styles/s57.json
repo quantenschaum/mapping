@@ -2871,7 +2871,7 @@
       "source-layer": "M_COVR",
       "filter": ["!", ["has", "ORIENT"]],
       "layout": {
-        "text-field": ["get", "chartname"],
+        "text-field": ["get", "cell"],
         "text-font": ["Noto Sans Regular"],
         "text-size": 12,
         "symbol-placement": "line",
