@@ -158,6 +158,176 @@ Vollkommen richtig, nur gilt das prinzipiell für jede Karte, die nicht laufend 
 
 Hier liegt der eigentliche Knackpunkt. Das BSH macht im Rahmen seiner Möglichkeiten einen guten Job. Die Menschen dort entscheiden wahrscheinlich nicht selbst über die Lizenzpolitik. Sie müssen mit Rahmenbedingungen leben, die teils unangenehm sein und wahrscheinlich mit EU-Recht kollidieren. Aber das BSH kann sich in gewissem Rahmen aktiv für oder gegen OpenData einsetzen. Und als vom Steuerzahler finanzierte Behörde sollte man sich vom Selbstverständnis her der Allgemeinheit verpflicht fühlen und die Freiheit der Daten verteidigen.
 
+### Analyse der BSH-Stellungnahme im [Yacht-Podcast](https://archive.li/WM2gc)
+
+#### 1. Konfigurationsfehler, privater Link
+
+> Eine Lücke, ein Konfigurationsfehler in unserem GeoSeaPortal hat bestanden, sodass Daten frei verfügbar waren, die wir korrekterweise nur über unsere Lizenznehmer vertreiben (00:01:54)
+
+> und einen Link aber kennt, mit dem man darauf kommt, der war ja nicht frei und ganz öffentlich angezeigt (00:04:07)
+
+Das ist sachlich falsch. Das BSH hat seine WMS-Dienste für Nautical Products **aktiv auf mehreren offiziellen Kanälen gleichzeitig publiziert:**
+
+- im GeoSeaPortal selbst
+- in seinen [public services](https://gdi.bsh.de/public/public_services.html), angekündigt im [News-Feed](https://gdi.bsh.de/de/news.xml)
+- in den WMS-Endpunknten selbst über [GetCapabilities](https://gdi.bsh.de/mapservice_gs/NAUTHIS_AidsAndServices/wms?SERVICE=WMS&REQUEST=GetCapabilities&VERSION=1.3.0) mit explizitem [Hinweis auf S-57-Codierung der Tabelleninformationen](https://gdi.bsh.de/en/data/Aids-to-Navigation-for-Nautical-Products_Information_Navigationshilfen_fuer_nautische_Produkte_DE.pdf)
+- Tabelleninformationen impliziert auch bewusste Bereitstellung von Vektordaten als GeoJSON, denn Grafiken enthalten keine Tabellen
+- im [Metadatenkatalog der GDI-DE](https://gdk.gdi-de.org/)
+- im [EU-Datenkatalog](https://data.europa.eu/)
+
+Das sind keine versteckten Links. Das ist der Standard zum Publizieren von Geodatendiensten. Hier wurde kein Konfigurationsfehler ausgenutzt, es wurde genau das getan, wofür diese Mechanismen gedacht sind: öffentlich katalogisierte Dienste gesucht, gefunden und genutzt. Im öffentlichen Dienst selbst können ggf. Daten publiziert worden sein, die es nicht hätten sein sollen nach Ansicht des BSH, ein privater Link wurde jedoch nie verwendet.
+
+Dehling räumt im selben Atemzug ein:
+
+> Er hat nichts falsch gemacht. - Nein, überhaupt nicht. (00:05:06)
+
+Dieser Widerspruch sitzt unaufgelöst mitten im Interview: Einerseits "Konfigurationsfehler ausgenutzt und versteckter Link", andererseits "nichts falsch gemacht". Beides zusammen ergibt keinen Sinn. Entweder war der Dienst regulär veröffentlicht, dann war es kein Fehler. Oder er war nicht für die Öffentlichkeit gedacht, dann hätte er etwas Unzulässiges getan. Das BSH will beides gleichzeitig behaupten.
+
+#### 2. Das Sicherheitsargument
+
+> Es geht wirklich um die Sicherheit. (00:15:42)
+
+Das ist ein unbelegte Behauptung. Davor ist von "Warnmeldungen" die Rede, gemeint sind wahrscheinlich die BfS. Die BfS muss man immer unanhängig von der verwendeten Karten lesen, egal ob frei, gekauft, amtlich oder nicht-amtlich und die BfS sind frei zugänglich. Das hat gar nichts mit dem OpenData-Thema oder FNC zu tun.
+
+> Weil die Datengrundlage für das, was dann FreeNauticalCharts oder andere mit den WMS-Daten machen also aus dem GeoSeaPortal Portal heraus... Das sind nicht in der Qualität wie sie das... Wie die Daten die wir für den Lizenznehmer bereitstellen. Nicht um die anderen schlechter zu stellen, sondern wir stecken da mehr Aufwand rein damit die Lizenznehmer wirklich jeweils unseren aktuellsten Stand haben und wir führen ja täglich Updates unserer Daten. (00:19:00)
+
+##### 2a. Stichproben zeigen: Die Daten stimmen überein
+
+Ein direkter Seitenvergleich in AvNav (split mode, gekoppeltes Pan/Zoom) zwischen FreeNauticalChart und aktuellen o-charts für Hiddensee, Fehmarn, Elbe, Helgoland und das Watt ergibt: Tiefenangaben identisch, Konturlinien identisch, Tonnen und Lichter identisch, Sperrgebiete identisch. Unterschiede beschränken sich auf marginale Darstellungsdetails wie fehlende Topzeichen. Kein einziger sicherheitsrelevanter Unterschied feststellbar. Der Moderator fragt mehrfach konkret nach, eine substanzielle Antwort bleibt aus.
+
+##### 2b. Konkrete Unterschiede werden nicht benannt
+
+Auf die direkte Nachfrage, worin die Qualitätsunterschiede konkret bestehen, weicht Dehling auf Allgemeinplätze aus: Vermessungsgenauigkeit, ISO-Zertifizierung, Aktualität. Kein einziges Beispiel, kein konkreter Datenpunkt, keine Gegenüberstellung. Wer behauptet, die Daten seien sicherheitsrelevant verschieden, trägt dafür die Beweislast. Sie wird nicht erfüllt.
+
+##### 2c. Woher sollen die Unterschiede überhaupt kommen?
+
+Beide Datensätze stammen aus derselben BSH-Quelldatenbank, die die Basis für die offiziellen ENCs bildet. Daten verändern sich nicht von selbst je nachdem, über welchen Kanal sie ausgeliefert werden. Wenn der WMS-Datensatz schlechter ist als die lizenzierten Daten, hat das BSH das **bewusst so eingerichtet**, durch Filterung, durch Entkopplung von der Produktionsdatenbank, durch gezielte Entfernung von Datenpunkten wie den Punktlotungen. Das ist keine technische Notwendigkeit, sondern eine bewusste, politische Entscheidung. Das Sicherheitsargument beschreibt in diesem Fall nicht einen inhärenten Qualitätsunterschied, sondern die Folgen einer behördlichen Maßnahme, die das BSH selbst herbeigeführt hat. Die Darstellung, es gäbe zwei verschiedene Datensätze, die sich naturbedingt qualitativ grundlegend unterscheinden, ist nicht richt. Was sollen das für Kartendaten sein, in die nicht "mehr Aufwand reingesteckt wird"? Werden zwei verschiedene Datensätz gepflegt, von denen einer schlechter gepflegt wird als der andere? Wenn ja, wozu?
+
+##### 2d. Freie Bereitstellung über WMS verändert die Qualität nicht
+
+Die Qualität eines Datensatzes ist eine Eigenschaft des Datensatzes, nicht des Vertriebswegs. Ob dieselben Daten über eine Lizenzdatenübergabe oder über einen offenen WMS-Dienst ausgeliefert werden, ändert an ihrem Inhalt nichts. Die Gleichung "lizenziert = qualitativ hochwertig, frei = qualitativ minderwertig" ist logisch nicht haltbar, solange die Quelldaten identisch sind.
+
+##### 2e. Das BSH schließt Haftung für Qualität sogar gegenüber Lizenznehmern aus
+
+Im [Entgeldverzeichnis des BSH Anlage 2 Punkt 8](https://www.bsh.de/DE/Das_BSH/Gebuehren_Preise/Gebuehren_und_Preise/_Anlagen/Downloads/Entgeltverzeichnis-digitale-Daten.pdf?__blob=publicationFile&v=8) steht folgender Haftungsausschluss.
+
+> Das BSH haftet nicht für die Eignung der Daten für den von der Bestellerin/dem Besteller vorgesehenen Zweck, die Verletzung von Rechten Dritter, die Gültigkeit, Richtigkeit, Vollständigkeit, Genauigkeit, Konsistenz und Qualität der Daten.
+
+Das BSH wirbt mit Qualitätssicherung als Argument für sein Lizenzmodell, schließt aber genau für diese Qualitätseigenschaften die Haftung aus, auch gegenüber den zahlenden Lizenznehmern. Und diese geben diese Nicht-Haftung vollständig an den Endkunden weiter, wie die AGB aller relevanten Anbieter belegen. Die Qualitätskette endet nirgendwo in einer tatsächlichen Garantie.
+
+##### 2f. Kontrolle über Kartennutzung ist nicht Aufgabe des BSH
+
+Die Überwachung, ob ein Skipper aktuelle und geeignete Karten an Bord hat und diese korrekt anwendet, obliegt der Wasserschutzpolizei, nicht dem BSH. Das BSH hat keinen gesetzlichen Auftrag, die private Nutzung seiner veröffentlichten Daten zu steuern oder zu unterbinden. Dass es dies dennoch tut, ist eine Kompetenzüberdehnung, die einer Rechtsgrundlage bedarf, welche nicht vorgetragen wird.
+
+#### 3. Das Haushaltsargument
+
+> Wir sind gemäß der Bundeshaushaltsordnung zum wirtschaftlichen Handeln verpflichtet, unsere Produkte zu einem marktüblichen Preis abzugeben. Wenn ich das nicht mehr machen würde, bräuchte ich dafür eine gesetzliche Grundlage oder eine Befreiung. (00:03:05)
+
+##### 3a. Die Beweislast ist umgekehrt
+
+Dehling stellt das Lizenzmodell als Regelfall dar und die freie Bereitstellung als begründungspflichtigen Ausnahmefall. Das ist rechtlich fragwürdig. Nach § 10 DNG gilt der **Grundsatz der Unentgeltlichkeit**: Öffentliche Stellen sollen Daten grundsätzlich kostenlos bereitstellen. Das Entgeltmodell ist der Ausnahmefall, der einer Rechtsgrundlage bedarf, nicht die Kostenfreiheit.
+
+##### 3b. Die HVD-Frage
+
+Die entscheidende Rechtsfrage wird im gesamten Interview nicht einmal erwähnt: Sind Seekartendaten **hochwertige Datensätze (HVD)** im Sinne der EU-Durchführungsverordnung (EU) 2023/138? Seekartendaten fallen in die Kategorien Georaum und Mobilität, beide sind in der HVD-Liste aufgeführt. Wenn ja, gilt das **Kostenfreiheitsgebot** zwingend und unabhängig von der Bundeshaushaltsordnung, denn EU-Recht bricht nationales Haushaltsrecht. Diese Frage zu übergehen, obwohl eine Rechtsabteilung und technisches Fachpersonal das Interview vorbereitet haben könnten, ist bemerkenswert.
+
+##### 3c. Doppelte Finanzierung
+
+> Dann würde mir der Bundesfinanzminister irgendwann sagen oder der Bundesrechnungshof: "Warum gehst du nicht wirtschaftlich mit den Bundesmitteln um?" Das Geld geht übrigens die Einnahmen, gehen übrigens nicht an das BSH sondern, die gehen direkt an den Finanzminister. (00:06:06)
+
+Die Einnahmen fließen nicht ans BSH, sondern direkt in den Bundeshaushalt. Die Vermessungsschiffe, das Personal, die gesamte Infrastruktur werden aus Steuermitteln finanziert. Die Daten sind damit **bereits von der Allgemeinheit bezahlt** worden, aus Steuermitteln. Und da das BSH eine Behörde ist, muss diese auch nicht zwingend wirtschaftlich arbeiten, es ist ja kein Unternehmen und ist steuerfinanziert. Lizenzeinnahmen sind eine zweite Zahlung der Allgemeinheit für dasselbe Gut. Genau diese Doppelfinanzierung wollte die EU-PSI-Richtlinie mit der Grenzkostenregel beenden: Digitale Daten dürfen höchstens die Grenzkosten der Verbreitung kosten, faktisch null bei digitalen Daten.
+
+##### 3d. Falsche Gleichsetzung von Daten und Endprodukt
+
+Dehling verwendet "Seekartendaten", "Seekarten" und "ENC = Electronic Navigational Charts" durchgehend synonym:
+
+> Die Seekartendaten selbst, also das, was wir als Electronic Navigational Chart bezeichnen [...] fallen eben nicht darunter. (00:02:43)
+
+> Das Produkt Seekartendaten und Seekarten in Papier [...] müssen über einen marktüblichen Preis vertrieben werden. (00:18:18)
+
+Das ist ein fundamentaler Kategorienfehler. Es gibt verschiedene Ebenen:
+
+| Ebene                             | Gegenstand                              | Rechtsstatus                            |
+| --------------------------------- | --------------------------------------- | --------------------------------------- |
+| Rohdaten / Vektordaten            | Tiefenpunkte, Geometrien, Seezeichen    | HVD, Kostenfreiheitsgebot               |
+| ENC für Freizeitschifffahrt       | S-57-Format, mit NfS-Integration        | Produkt, diskutierbar                   |
+| ENC für Berufsschifffahrt (SOLAS) | S-57/S-63, ECDIS-zertifiziert, Garantie | Zertifiziertes Produkt, kostenpflichtig |
+| Papierkarte                       | Layout, Druck, Vertrieb                 | Physisches Produkt, kostenpflichtig     |
+
+Der Mehrwert des Endprodukts entsteht durch Aufbereitung, Zertifizierung und Vertriebsinfrastruktur, nicht durch die Exklusivität der Rohdaten. BKG, DWD und NOAA demonstrieren täglich, dass **freie Basisdaten** und **kostenpflichtige Endprodukte** problemlos koexistieren. Indem das BSH beides gleichsetzt, rettet es das Lizenzmodell für das Endprodukt auf Kosten einer kaum haltbaren Einschränkung der Basisdaten.
+
+#### 4. Nutzungseinschränkung und GeoNutzV 
+
+> Wir haben uns an die internationale Formulierung angepasst. International üblich ist "not to be used for navigation" (00:09:36)
+
+Der Moderator benennt den rechtlich relevanten Unterschied korrekt: **"Nicht geeignet"** ist ein Disclaimer, er schiebt die Haftung, verbietet aber nichts. **"Nicht gestattet"** ist ein Verbot, ein Zweckausschluss.
+
+Dehling bagatellisiert:
+
+> Da wäre ich jetzt nicht so, dass (sehe ich) jetzt ganz dramatisch anwenden. (00:09:48)
+
+Wenn das "nicht so dramatisch" ist, warum hat man es dann überhaupt geändert?
+
+Die englische Formulierung "not to be used for navigation" ist tatsächlich näher an einem Warnhinweis. Die deutsche Formulierung "Verwendung zu Navigationszwecken ist **nicht gestattet**" ist juristisch eindeutig ein Verbot. Und dieses Verbot ist mit der [GeoNutzV nicht vereinbar](#die-geonutzv-genauer-betrachtet).
+
+#### 5. Das Kontrollargument
+
+> Über einen WMS-Dienst, wo jeder und jede was runterladen kann, kann ich nicht sicherstellen, dass das aktuell ist und welche Daten zu welchem Zeitpunkt benutzt wurden. (00:16:33)
+
+Die Datenqualität wurde bereits diskutiert.
+
+Die Identität des Nutzers hat keinen Einfluss auf die Qualität oder Aktualität der Daten. Datenqualität entsteht durch Vermessungsgenauigkeit, korrekte Aufbereitung und Aktualität zum Zeitpunkt der Bereitstellung, vollständig unabhängig davon, wer die Daten herunterlädt. Ob eine oder eine Million Personen auf den WMS zugreifen, ändert an den ausgelieferten Informationen nichts.
+
+Was Dehling tatsächlich meint: Das BSH verliert die **administrative Kontrolle** darüber, wer mit seinen Daten was macht. Das mag ein legitimes behördliches Interesse sein, aber es ist kein Sicherheitsinteresse des Nutzers. Die Substitution des einen durch das andere ist die zentrale rhetorische Verschiebung des gesamten Interviews. Zudem stellt sich die Frage, ob diese Kontrolle überhaupt notwendig ist und wozu sie eigentlich dienen soll. Aufgabe des BSH ist die Erstellung und Pflege der Karten, nicht die Kontrolle der Nutzung.
+
+#### 6. Die Rolle der Kartenverlage 
+
+> Natürlich denken wir dabei dann in zweiter Instanz auch an unsere Lizenznehmer. (00:17:42)
+
+Auf die direkte Frage, ob Kartenverlage nach der Veröffentlichung Druck ausgeübt haben, weicht Dehling aus:
+
+> Nicht ursprünglich also die... natürlich müssen wir dann, wenn wir das festgestellt haben... (00:17:26)
+
+Das ist keine Antwort. Die Frage nach dem Interessenkonflikt, eine Behörde, deren Entscheidungen zufällig exakt den Geschäftsmodellen weniger kommerzieller Lizenznehmer dienen, bleibt unbeantwortet. Dabei ist die zeitliche Abfolge eindeutig: Der Zugang wurde **nach** der öffentlichen Aufmerksamkeit eingeschränkt, nicht vorher. 
+
+#### 7. Aktualität
+
+> Über einen WMS-Dienst, wo jeder und jede was runterladen kann, kann ich nicht sicherstellen, dass das aktuell ist. (00:16:33)
+
+Der WMS-Dienst, über den FNC die Daten bezieht, ist der **Server des BSH**. Das BSH betreibt ihn, speist ihn, entscheidet über seinen Inhalt. Die Aussage "Ich kann nicht sicherstellen, was auf meinem eigenen Server aktuell ist" ist entweder technisch falsch oder ein Eingeständnis organisatorischer Dysfunktion.
+
+##### 7a. Updates sind im WMS ebenso verfügbar machbar
+
+Dehling behauptet:
+
+> Wir führen täglich Updates unserer Daten durch und stellen das den Lizenznehmern bereit. (00:19:29)
+
+Tatsächlich erscheinen die Nachrichten für Seefahrer wöchentlich, das ist der Takt navigatorisch relevanter Änderungen. Entscheidender: Was immer der Aktualisierungsrhythmus der Produktionsdatenbank ist, er ist auf den WMS vollständig übertragbar. Liegt der WMS auf der Quelldatenbank, ist er automatisch gleich aktuell. Liegt er auf einer entkoppelten Spiegelung, ist das eine **bewusste Designentscheidung**, keine technische Unmöglichkeit. Und eine regelmäßige Synchronisation ist technisch machbar, sie hat sehr wahrscheinlich auch bis dato stattgefunden.
+
+##### 7b. Nachvollziehbarkeit ist im WMS technisch lösbar
+
+> Welche Daten zu welchem Zeitpunkt benutzt wurden, das kann ich dann nicht mehr sicherstellen. (00:16:44)
+
+Dieselben Mechanismen, die bei lizenzierten Daten Rückverfolgbarkeit ermöglichen, funktionieren identisch für WMS-Daten:
+
+- **Zeitstempel / Versionsnummer:** Die ausgelieferten Daten können Versionsnummer oder Zeitstempel enthalten, damit ist die Nachvollziehbarkeit gegeben.
+- **Fehlersuche:** Ein gemeldeter Fehler wird in der aktuellen Version gesucht. Ist er vorhanden → aktuell fehlerhaft. Ist er behoben → Korrekturzeitpunkt in der Versionshistorie. Dieser Prozess ist für lizenzierte und WMS-Daten **identisch**, sofern das BSH eine Versionierung führt. 
+
+Und der haftungsrechtliche Kontext macht das gesamte Argument vollends irrelevant: Das BSH schließt für freie und lizenzierte Daten jede Haftung für Richtigkeit und Vollständigkeit aus. 
+
+#### Gesamtbefund
+
+Alle sieben Argumentationsstränge des BSH folgen demselben Muster: **Administrative Eigeninteressen des BSH**, Kontrolle, Einnahmen, Haftungsvermeidung, werden als **Sicherheitsinteressen der Nutzer** verkauft. Die Gleichsetzung von Rohdaten und Endprodukt ermöglicht es, das Lizenzmodell für zertifizierte ECDIS-Produkte auf die Basisdaten auszudehnen. Das Haushaltsargument kehrt die Beweislast um. Das Sicherheitsargument wird nie mit konkreten Daten untermauert.
+
+Was im Interview fehlt: 
+
+- der konkrete Qualitätsunterschied
+- eine Antwort auf die HVD-Frage
+- eine Auseinandersetzung mit dem Auslandsvergleich
+- eine Erklärung, warum das BSH selbst bei lizenzierten Daten keine Qualitätsgarantie gibt
+- eine klare Rechtsgrundlage für den Navigationsausschluss unter der GeoNutzV
+
+
 ## Das institutionelle Dilemma
 
 Was hier zu beobachten ist, lässt sich am besten als *institutionelles Übergangsdilemma* beschreiben: Ein Teil der Daten wurde korrekt unter GeoNutzV freigegeben. Parallel läuft ein altes Lizenzierungsmodell weiter, dessen rechtliche Grundlage durch EU-Recht zunehmend erodiert. Beide Modelle bestehen nebeneinander, inkonsistent, juristisch fragil und kommunikativ kaum darstellbar.
@@ -475,8 +645,7 @@ Vor diesem Hintergrund wird die Position des BSH bzw. der Kartenanbieter gegenü
 
 Im [Entgeldverzeichnis des BSH Anlage 2 Punkt 8](https://www.bsh.de/DE/Das_BSH/Gebuehren_Preise/Gebuehren_und_Preise/_Anlagen/Downloads/Entgeltverzeichnis-digitale-Daten.pdf?__blob=publicationFile&v=8) steht folgender Haftungsausschluss.
 
->Das BSH haftet nicht für die Eignung der Daten für den von der Bestellerin/dem Besteller vorgesehenen Zweck, die Verletzung von Rechten Dritter, die Gültigkeit, Richtigkeit,
-Vollständigkeit, Genauigkeit, Konsistenz und Qualität der Daten.
+>Das BSH haftet nicht für die Eignung der Daten für den von der Bestellerin/dem Besteller vorgesehenen Zweck, die Verletzung von Rechten Dritter, die Gültigkeit, Richtigkeit, Vollständigkeit, Genauigkeit, Konsistenz und Qualität der Daten.
 
 D.h. das [BSH argumentiert](#die-argumentation-des-bsh-im-detail), dass die Daten, die die Lizenznehmer erhalten, qualitätsgesichert und verlässlich seien, schließt aber die Haftung genau dafür, also für Vollständigkeit, Genauigkeit, Konsistenz und Qualität der Daten, für diese lizenzierten Daten aus.
 
