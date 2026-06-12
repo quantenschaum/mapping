@@ -18,7 +18,7 @@ Wie das BSH ein Vorzeige-Open-Data-Projekt ausbremst und was das über den Stand
 
 Ein Softwareentwickler und Segler hat geschafft, was Behörden seit Jahren versprechen, aber selten liefern: aus öffentlich bereitgestellten Geodaten ein nützliches, frei zugängliches Produkt zu bauen. Auf [freenauticalchart.net](https://freenauticalchart.net) stehen Seekarten für deutsche und niederländische Gewässer kostenlos zur Verfügung, aufgebaut u.a. aus den Vektordaten, die das Bundesamt für Seeschifffahrt und Hydrographie (BSH) im [GeoSeaPortal](https://gdi.bsh.de/mapapps/resources/apps/navigation) veröffentlicht.
 
-Das Projekt fand Beachtung: Magazine wie [Yacht](https://archive.li/PU98r) und [Segeln](https://archive.li/Wa8cB) berichteten, in der Community wurde es als Modellfall gelobt. (später auch ein [Interview im Yacht Podcast](https://archive.li/VYuUy) mit anschließender [Stellungnahme des BSH](https://archive.li/WM2gc) auch auf der [Webzeite des BSH](https://archive.li/cyhlf))
+Das Projekt fand Beachtung: Magazine wie [Yacht](https://archive.li/PU98r) und [Segeln](https://archive.li/Wa8cB) berichteten, in der Community wurde es als Modellfall gelobt. (später auch ein [Interview im Yacht Podcast](https://archive.li/VYuUy) mit anschließender [Stellungnahme des BSH](https://archive.li/WM2gc) auch auf der [Webseite des BSH](https://archive.li/cyhlf))
 
 Genau ab diesem Moment begann das Problem.
 
@@ -160,6 +160,8 @@ Hier liegt der eigentliche Knackpunkt. Das BSH macht im Rahmen seiner Möglichke
 
 ### Analyse der BSH-Stellungnahme im [Yacht-Podcast](https://archive.li/WM2gc)
 
+und den zeitgleich erschienenen Erläuterungen auf der [Webseite des BSH](https://archive.li/cyhlf)
+
 #### 1. Konfigurationsfehler, privater Link
 
 > Eine Lücke, ein Konfigurationsfehler in unserem GeoSeaPortal hat bestanden, sodass Daten frei verfügbar waren, die wir korrekterweise nur über unsere Lizenznehmer vertreiben (00:01:54)
@@ -218,6 +220,16 @@ Das BSH wirbt mit Qualitätssicherung als Argument für sein Lizenzmodell, schli
 ##### 2f. Kontrolle über Kartennutzung ist nicht Aufgabe des BSH
 
 Die Überwachung, ob ein Skipper aktuelle und geeignete Karten an Bord hat und diese korrekt anwendet, obliegt der Wasserschutzpolizei, nicht dem BSH. Das BSH hat keinen gesetzlichen Auftrag, die private Nutzung seiner veröffentlichten Daten zu steuern oder zu unterbinden. Dass es dies dennoch tut, ist eine Kompetenzüberdehnung, die einer Rechtsgrundlage bedarf, welche nicht vorgetragen wird.
+
+##### 2f. Einhaltung definierter Qualitäts‑ und Sicherheitsstandards
+
+> [Das BSH ist aus Gründen der Sicherheit verpflichtet, bei der Veröffentlichung von Seekartenproduktdaten die Einhaltung definierter Qualitäts‑ und Sicherheitsstandards sicherzustellen. Die geschlossenen Lizenzvereinbarungen mit anerkannten Kartenverlagen gewährleisten, dass veröffentlichte Produkte den Anforderungen an aktuelle, verlässliche und sicherheitsrelevante Seekarten entsprechen. Dies umfasst insbesondere die fachgerechte Auswahl, Prüfung und Darstellung von Tiefenangaben sowie weiteren sicherheitsrelevanten Informationen.](https://archive.li/cyhlf#:~:text=Darstellung%20von%20Tiefenangaben)
+
+schreibt das BSH, sagt aber gleichzeitig
+
+> [Wie wird sichergestellt, dass lizenzierte Herausgeber die Sicherheitsanforderungen erfüllen? - Die Verantwortung für die korrekte Verarbeitung und Darstellung der Daten im Endprodukt liegt anschließend bei den jeweiligen Lizenznehmerinnen und Lizenznehmern.](https://archive.li/cyhlf#:~:text=Darstellung%20der%20Daten%20im%20Endprodukt%20liegt%20anschlie%C3%9Fend%20bei%20den%20jeweiligen%20Lizenznehmerinnen)
+
+Das widerspricht sich direkt. Konkret bedeutet dies, dass die Einhaltung *definierter Qualitäts‑ und Sicherheitsstandards* durch das BSH **gar nicht sichergestellt** wird.
 
 #### 3. Das Haushaltsargument
 
