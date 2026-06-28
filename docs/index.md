@@ -21,7 +21,7 @@ Here you find precompiled charts for download in various formats usable in diffe
 
     BSH now states: "The use of the data for navigation purposes is not permitted."
 
-    The German part of the chart is now based on [older data](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten) downloaded on 2026-04-27 and on spot soundings that were last available on 2026-03-02. The data was then selectively updated using the currently available datasets, and the NfS was incorporated as far as possible. 
+    The German part of the chart is now based on [older data](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten) downloaded on 2026-04-27 and on spot soundings that were last available on 2026-03-02. The data was then selectively updated using the currently available datasets, and the NfS was incorporated as far as possible. Updates of withdrawn and replaced charts are not covered.
 
 ??? info "License"    
     - The downloadable files on this page are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

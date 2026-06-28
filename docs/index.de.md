@@ -21,7 +21,7 @@ Hier finden Sie vorkompilierte Karten zum Herunterladen in verschiedenen Formate
 
     Das BSH weist nun darauf hin: "Die Nutzung der Daten für Navigationszwecke ist nicht gestattet."
 
-    Der deutsche Teil der Karte basiert jetzt auf [älteren Daten](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten) mit Stand 2026-04-27 sowie auf Punktlotungen, die zuletzt am 2026-03-02 verfügbar waren. Anschließend wurden die Daten selektiv mit den aktuell verfügbaren Datensätzen aktualisiert, und die NfS wurde soweit wie möglich eingearbeitet.
+    Der deutsche Teil der Karte basiert derzeit auf [älteren Daten](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten) (Stand: 27.04.2026) sowie auf Punktlotungen, die zuletzt am 02.03.2026 verfügbar waren. Anschließend wurden die Daten selektiv mit aktuell verfügbaren Datensätzen aktualisiert, und die NfS wurde soweit wie möglich eingearbeitet. Aktualisierungen zurückgezogener oder ersetzter Karten sind nicht enthalten.
 
 ??? info "Lizenzen"    
     - Die herunterladbaren Dateien auf dieser Seite sind lizenziert unter [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

@@ -21,7 +21,7 @@ Hier vind je voorgecompileerde kaarten om te downloaden in verschillende formate
 
     BSH stelt nu: "Het gebruik van de gegevens voor navigatiedoeleinden is niet toegestaan."
 
-    Het Duitse deel van de kaart is nu gebaseerd op [oudere gegevens](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten) die zijn gedownload op 2026-04-27 en op dieptepeilingen die voor het laatst beschikbaar waren op 2026-03-02. De gegevens zijn vervolgens selectief bijgewerkt met de momenteel beschikbare datasets, en de NfS is zo veel mogelijk verwerkt.
+    Het Duitse deel van de kaart is momenteel gebaseerd op [oudere gegevens](https://github.com/quantenschaum/mapping/tree/bsh-data#bsh-daten), gedownload op 2026-04-27, en op dieptepeilingen die voor het laatst beschikbaar waren op 2026-03-02. De gegevens zijn vervolgens selectief bijgewerkt met de momenteel beschikbare datasets, en de NfS is zo volledig mogelijk verwerkt. Updates of ingetrokken en vervangen kaarten zijn niet opgenomen.
     
 ??? info "Licentie"    
     - De downloadbare bestanden op deze pagina zijn gelicenseerd onder [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
