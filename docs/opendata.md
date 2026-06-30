@@ -12,6 +12,15 @@ Wie das BSH ein Vorzeige-Open-Data-Projekt ausbremst und was das über den Stand
 
 *Zweitens ist die Rechtslage eindeutiger als dargestellt: Unter der GeoNutzV einmal freigegebene Daten sind unwiderruflich freigegeben, nachträgliche Verbote einzelner Verwendungszwecke sind mit der Lizenz unvereinbar. Die EU-Open-Data-Richtlinie (2019/1024) und das Datennutzungsgesetz verlangen nicht nur formale, sondern tatsächlich nutzbare Bereitstellung. Behörden wie BKG und DWD demonstrieren, dass offene Basisdaten und kommerzielle Endprodukte problemlos koexistieren, ebenso wie das Ausland, etwa die Niederlande und die USA.*
 
+## IFG-Anfragen
+
+Es laufen zu diesem Thema aktuell IFG-Anfragen auf fragdenstaat.de.
+
+- [Unterschiede zwischen kostenpflichtig lizenzierten Seekartendaten und OpenData-Angeboten](https://fragdenstaat.de/anfrage/unterschiede-zwischen-kostenpflichtig-lizenzierten-seekartendaten-und-opendata-angeboten/)
+- [Einschränkung öffentlich bereitgestellter Seekartendaten](https://fragdenstaat.de/anfrage/einschraenkung-oeffentlich-bereitgestellter-seekartendaten/)
+- [Einnahmen aus dem Verkauf von Kartendaten](https://fragdenstaat.de/anfrage/einnahmen-aus-dem-verkauf-von-kartendaten-und-gesamthaushalt-des-bsh/)
+- [Entfernung bislang frei zugänglicher Daten](https://fragdenstaat.de/anfrage/entfernung-bislang-frei-zugaenglicher-daten/)
+
 ---
 
 ## Der Fall freenauticalchart.net
