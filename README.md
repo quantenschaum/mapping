@@ -35,8 +35,8 @@ Einzelne Layer wurden selektiv aus den oben genannten Endpunken zu späteren Zei
 
 |   Datum    | Layer  | Beschreibung  |
 | :--------: | :----: | :------------ |
-| 2026-05-27 | DEPARE | Konturflächen |
-| 2026-05-27 | DEPCNT | Tiefenlinien  |
+| 2026-07-03 | DEPARE | Konturflächen |
+| 2026-07-03 | DEPCNT | Tiefenlinien  |
 
 ## NfS-Korrekturen
 
