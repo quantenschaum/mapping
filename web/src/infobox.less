@@ -9,7 +9,7 @@ dialog.infobox {
     border-bottom: 1px solid black;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 800px) {
     img:first-child {
       display: none;
     }
@@ -21,16 +21,20 @@ dialog.infobox {
     }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     .info {
       display: none;
     }
+    font-size: 0.6em;
+    font-size: calc(1em * min(1, 100vw / 600px) * min(1, 100vh / 600px));
   }
 
-  @media (max-height: 500px) {
+  @media (max-height: 600px) {
     .info {
       display: none;
     }
+    font-size: 0.6em;
+    font-size: calc(1em * min(1, 100vw / 600px) * min(1, 100vh / 600px));
   }
 
   button {
