@@ -59,3 +59,4 @@ Einzelne Layer wurden selektiv aus den oben genannten Endpunken zu späteren Zei
 | 26/2026 |     ✓      |       ✓       |
 | 27/2026 |     ✓      |       ✓       |
 | 28/2026 |     ✓      |       ✓       |
+| 29/2026 |     ✓      |       ✓       |
