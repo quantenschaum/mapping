@@ -190,10 +190,18 @@ if (isDevMode || params.get("pm") == "1") {
 }
 
 if (!isStandalone) {
-  overlays["QMAP DE 2025-02"] = L.tileLayer.fallback(
-    baseurl + "/qmap-de.2025-02-06/{z}/{x}/{y}.png",
+  overlays["FNC DE 2026-08"] = L.tileLayer.fallback(
+    baseurl + "/fnc-de.2026-08-03/{z}/{x}/{y}.png",
     {
-      attribution: '<a href="/download/">QMAP DE 2025-02</a>',
+      attribution: '<a href="/download/">FNC DE 2026-08</a>',
+      bounds: boundsDE,
+      crossOrigin: cors,
+    },
+  );
+  overlays["FNC DE 2026-06"] = L.tileLayer.fallback(
+    baseurl + "/fnc-de.2026-06-28/{z}/{x}/{y}.png",
+    {
+      attribution: '<a href="/download/">FNC DE 2026-06</a>',
       bounds: boundsDE,
       crossOrigin: cors,
     },
@@ -202,6 +210,22 @@ if (!isStandalone) {
     baseurl + "/qmap-de.2026-03-02/{z}/{x}/{y}.png",
     {
       attribution: '<a href="/download/">QMAP DE 2026-03</a>',
+      bounds: boundsDE,
+      crossOrigin: cors,
+    },
+  );
+  overlays["QMAP DE 2025-02"] = L.tileLayer.fallback(
+    baseurl + "/qmap-de.2025-02-06/{z}/{x}/{y}.png",
+    {
+      attribution: '<a href="/download/">QMAP DE 2025-02</a>',
+      bounds: boundsDE,
+      crossOrigin: cors,
+    },
+  );
+  overlays["FNC NL 2026-08"] = L.tileLayer.fallback(
+    baseurl + "/fnc-nl.2026-08-03/{z}/{x}/{y}.png",
+    {
+      attribution: '<a href="/download/">FNC NL 2026-08</a>',
       bounds: boundsDE,
       crossOrigin: cors,
     },
@@ -379,7 +403,7 @@ new ChartTools().addTo(map);
         <div id="info-en">
           <p class="info">is an open source and open data project that aims to provide free nautical charts for sailors, water and mapping enthousiasts and developers. It focuses on making official chart data easy to access. It is based on data that is available as open data.</p>
 
-          <p style="background:yellow; padding:1ex;">Further parts of the previously freely accessible data have been removed from the BSH server, and access has been made more difficult. <b>The German part of the map now reflects the status as of 2026-04-27 and the last available depth data from 2026-03-02, including corrections based on the NTM.</b> More information: <a href="download/de/opendata/">Open Data</a>.</p>
+          <p style="background:yellow; padding:1ex;">Further parts of the previously freely accessible data have been removed from the BSH server, and access has been made more difficult. <b>The German part of the map now reflects the status as of 2026-04-27 and the last available depth data from 2026-03-02, including corrections based on the NTM. Contour lines and depth values may differ from each other.</b> More information: <a href="download/de/opendata/">Open Data</a>.</p>
 
           <p>For more details, usage instructions and downloads, see the <a href="download/">documentation</a>. Please read the important notes.</p>
 
@@ -391,7 +415,7 @@ new ChartTools().addTo(map);
         <div id="info-de" style="display:none;">
           <p class="info">ist ein Open-Source- und Open-Data-Projekt, das kostenlose Seekarten für Segler, Wasser- und Kartografie-Enthusiasten sowie Entwickler bereitstellt. Es hat zum Ziel, amtliche Kartendaten leicht zugänglich zu machen. Es basiert auf Daten, die als Open Data verfügbar sind.</p>
 
-          <p style="background:yellow; padding:1ex;">Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. <b>Der deutsche Teil der Karte zeigt jetzt den Stand vom 27.04.2026 und die zuletzt verfügbaren Tiefenangaben vom 02.03.2026 sowie Korrekturen auf Basis der NfS.</b> Weitere Informationen: <a href="download/de/opendata/">Open Data</a>.</p>
+          <p style="background:yellow; padding:1ex;">Auf dem Server des BSH wurden weitere Teile der bislang frei zugänglichen Daten entfernt und der Zugriff erschwert. <b>Der deutsche Teil der Karte zeigt jetzt den Stand vom 27.04.2026 und die zuletzt verfügbaren Tiefenangaben vom 02.03.2026 sowie Korrekturen auf Basis der NfS. Konturlinien und Tiefenangaben können voneinander abweichen.</b> Weitere Informationen: <a href="download/de/opendata/">Open Data</a>.</p>
 
           <p>Weitere Informationen, Anleitungen und Downloads finden Sie in der <a href="download/de/">Dokumentation</a>. Beachten Sie die wichtigen Hinweise.</p>
 
@@ -403,7 +427,7 @@ new ChartTools().addTo(map);
         <div id="info-nl" style="display:none;">
           <p class="info">is een open-source en open-data project dat gratis zeekaarten biedt voor zeilers, watersport- en cartografie‑enthousiastelingen en ontwikkelaars. Het heeft als doel officiële kaartgegevens gemakkelijker toegankelijk te maken. Het is gebaseerd op gegevens die als open data beschikbaar zijn.</p>
 
-          <p style="background:yellow; padding:1ex;">Op de server van het BSH zijn nog meer delen van de voorheen vrij toegankelijke gegevens verwijderd en is de toegang bemoeilijkt. <b>Het Duitse deel van de kaart toont nu de stand van 27-04-2026 en de laatst beschikbare dieptegegevens van 02-03-2026, inclusief correcties op basis van de BaZ.</b> Meer informatie: <a href="download/de/opendata/">Open Data</a>.</p>
+          <p style="background:yellow; padding:1ex;">Op de server van het BSH zijn nog meer delen van de voorheen vrij toegankelijke gegevens verwijderd en is de toegang bemoeilijkt. <b>Het Duitse deel van de kaart toont nu de stand van 27-04-2026 en de laatst beschikbare dieptegegevens van 02-03-2026, inclusief correcties op basis van de BaZ. Contourlijnen en dieptegegevens kunnen van elkaar afwijken.</b> Meer informatie: <a href="download/de/opendata/">Open Data</a>.</p>
 
           <p>Meer informatie, gebruiksaanwijzingen en downloads vind je in de <a href="download/nl/">documentatie</a>. Lees de belangrijke opmerkingen.</p>
 
