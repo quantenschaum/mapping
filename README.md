@@ -32,11 +32,12 @@ Eine Einschränkung der Nutungszwecke ist im Rahmen der GeoNutzV nicht vorgesehe
 ## Updates
 
 Einzelne Layer wurden selektiv aus den oben genannten Endpunken zu späteren Zeitpunkten aktualisiert.
+Die Einzellotungen wurdeen mangels Verfügbarkeit nicht aktualisiert, es kann also zu Abweichungen zwischen Tiefenangaben und Konturlinien kommen, die Konturlinien sind aktueller.
 
 |   Datum    | Layer  | Beschreibung  |
 | :--------: | :----: | :------------ |
-| 2026-07-03 | DEPARE | Konturflächen |
-| 2026-07-03 | DEPCNT | Tiefenlinien  |
+| 2026-08-08 | DEPARE | Konturflächen |
+| 2026-08-08 | DEPCNT | Tiefenlinien  |
 
 ## NfS-Korrekturen
 
