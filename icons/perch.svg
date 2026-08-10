@@ -1,54 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   version="1.0"
-   width="11"
-   height="14"
-   id="svg2"
-   sodipodi:docname="perch.svg"
-   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs1" />
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     showguides="true"
-     inkscape:zoom="59.125"
-     inkscape:cx="3.0021142"
-     inkscape:cy="10.317125"
-     inkscape:window-width="3840"
-     inkscape:window-height="2094"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg2">
-    <sodipodi:guide
-       position="1.4522331,2"
-       orientation="0,1"
-       id="guide1"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="5.5,6.7258192"
-       orientation="-1,0"
-       id="guide2"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-  </sodipodi:namedview>
-  <style
-     type="text/css"
-     id="base">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="11" height="14" id="svg2">
+  <style type="text/css" id="base">
       .outline {
         fill: none;
         stroke: black;
@@ -77,29 +29,21 @@
       COLORING{}
   </style>
   <path
-     class="outline uniform horizontal02 horizontal03"
-     d="M 5.5,0.840764 V 12"
-     id="BCNSHP_1" />
+      class="outline uniform horizontal02 horizontal03"
+      d="M 5.5,0.840764 V 12" id="BCNSHP_1"/>
   <path
-     class="inline horizontal12"
-     d="M 5.5,6.420382 V 12"
-     id="path294" />
+      class="inline horizontal12"
+      d="M 5.5,6.420382 V 12"/>
   <path
-     class="inline horizontal13"
-     d="M 5.5,4.0255979 V 12"
-     id="path295" />
+      class="inline horizontal13"
+      d="M 5.5,4.0255979 V 12"/>
   <path
-     class="inline horizontal23"
-     d="M 5.5,8.012799 V 12"
-     id="path393" />
+      class="inline horizontal23"
+      d="M 5.5,8.012799 V 12"/>
   <path
-     class="baseline"
-     d="m 2.5,12 h 6"
-     id="path5181" />
+      class="baseline"
+      d="m 2.5,12 h 6"/>
   <circle
-     class="basepoint"
-     id="path5349"
-     cx="5.5"
-     cy="12"
-     r="1" />
+      class="basepoint"
+      cx="5.5" cy="12" r="1"/>
 </svg>

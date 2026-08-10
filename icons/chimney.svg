@@ -1,98 +1,30 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   version="1.0"
-   width="11"
-   height="14"
-   id="svg2"
-   sodipodi:docname="chimney.svg"
-   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs1" />
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     showguides="true"
-     inkscape:zoom="90.509668"
-     inkscape:cx="2.2262815"
-     inkscape:cy="6.728563"
-     inkscape:window-width="3840"
-     inkscape:window-height="2094"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg2">
-    <sodipodi:guide
-       position="11.075581,2"
-       orientation="0,1"
-       id="guide1"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="5.5,8.3082717"
-       orientation="-1,0"
-       id="guide2"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-  </sodipodi:namedview>
-  <g
-     id="CATLMK_3"
-     transform="matrix(1.3333333,0,0,-1.3333333,-100.11372,639.09585)">
-    <g
-       id="g1558"
-       transform="translate(77.9363,470.3163)"
-       clip-path="url(#clipPath115752)">
-      <path
-         d="m 0,0 0.709,5.345 h 1.13 L 2.548,0.032"
-         style="fill:none;stroke:#231f20;stroke-width:0.397;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
-         id="path1560" />
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="11" height="14" id="svg2">
+  <g id="CATLMK_3">
+    <g>
+      <path d="m 0,0 0.709,5.345 h 1.13 L 2.548,0.032"
+      style="fill:none;stroke:#231f20;stroke-width:0.397;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+      transform="matrix(1.333333,0,0,-1.333333,3.801344,12.007466)"/>
     </g>
-    <g
-       id="g1562"
-       transform="translate(78.6663,476.1124)"
-       clip-path="url(#clipPath115746)">
-      <path
-         d="M 0,0 C 0.047,1.109 0.612,1.928 1.847,1.584 3.409,2.614 4.276,0.968 3.776,0.187 3.472,-0.289 2.551,-0.576 1.705,0.524 1.611,0.352 1.187,0 0.969,-0.095"
-         style="fill:none;stroke:#231f20;stroke-width:0.283;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
-         id="path1564" />
+    <g>
+      <path d="M 0,0 C 0.047,1.109 0.612,1.928 1.847,1.584 3.409,2.614 4.276,0.968 3.776,0.187 3.472,-0.289 2.551,-0.576 1.705,0.524 1.611,0.352 1.187,0 0.969,-0.095"
+      style="fill:none;stroke:#231f20;stroke-width:0.283;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+      transform="matrix(1.333333,0,0,-1.333333,4.774677,4.279333)"/>
     </g>
-    <g
-       id="g1566"
-       transform="translate(78.5293,470.3224)"
-       clip-path="url(#clipPath115740)">
-      <path
-         d="M 0,0 C 0,0.376 0.305,0.68 0.68,0.68 1.056,0.68 1.361,0.376 1.361,0 1.361,-0.376 1.056,-0.681 0.68,-0.681 0.305,-0.681 0,-0.376 0,0 Z"
-         style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
-         id="path1568" />
+    <g>
+      <path d="M 0,0 C 0,0.376 0.305,0.68 0.68,0.68 1.056,0.68 1.361,0.376 1.361,0 1.361,-0.376 1.056,-0.681 0.68,-0.681 0.305,-0.681 0,-0.376 0,0 Z"
+      style="fill:none;stroke:#231f20;stroke-width:0.34;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+      transform="matrix(1.333333,0,0,-1.333333,4.592011,11.999332)"/>
     </g>
-    <g
-       id="g1570"
-       transform="translate(79.9213,470.4933)"
-       clip-path="url(#clipPath115734)">
-      <path
-         d="M 0,0 H 1.697 V -0.341 H -0.012 Z"
-         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path1572" />
+    <g>
+      <path d="M 0,0 H 1.697 V -0.341 H -0.012 Z"
+      style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+      transform="matrix(1.333333,0,0,-1.333333,6.448011,11.771466)"/>
     </g>
-    <g
-       id="g1574"
-       transform="translate(78.5153,470.1523)"
-       clip-path="url(#clipPath115728)">
-      <path
-         d="M 0,0 H -1.716 V 0.34 H 0.012 Z"
-         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path1576" />
+    <g>
+      <path d="M 0,0 H -1.716 V 0.34 H 0.012 Z"
+      style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+      transform="matrix(1.333333,0,0,-1.333333,4.573344,12.226132)"/>
     </g>
   </g>
 </svg>

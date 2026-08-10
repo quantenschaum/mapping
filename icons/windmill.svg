@@ -1,76 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   version="1.0"
-   width="11"
-   height="9"
-   id="svg2"
-   sodipodi:docname="windmill.svg"
-   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs1" />
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     showguides="true"
-     inkscape:zoom="59.125"
-     inkscape:cx="3.205074"
-     inkscape:cy="5.564482"
-     inkscape:window-width="3840"
-     inkscape:window-height="2094"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg2">
-    <sodipodi:guide
-       position="16.384249,2"
-       orientation="0,1"
-       id="guide1"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="5.5,6.9137817"
-       orientation="-1,0"
-       id="guide2"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-  </sodipodi:namedview>
-  <g
-     id="CATLMK_18"
-     transform="matrix(1.3333333,0,0,-1.3333333,2.5599997,7.527867)"
-     clip-path="url(#clipPath115650)">
-    <path
-       d="M 0,0 4.41,4.353"
-       style="fill:none;stroke:#231f20;stroke-width:0.567;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
-       id="path1628" />
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="11" height="9" id="svg2">
+  <g id="CATLMK_18">
+    <path d="M 0,0 4.41,4.353"
+      style="fill:none;stroke:#231f20;stroke-width:0.567;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+      transform="matrix(1.333333,0,0,-1.333333,2.56,7.527867)"/>
   </g>
-  <g
-     id="g1630"
-     transform="matrix(1.3333333,0,0,-1.3333333,8.4399997,7.527867)"
-     clip-path="url(#clipPath115644)">
-    <path
-       d="M 0,0 -4.41,4.353"
-       style="fill:none;stroke:#231f20;stroke-width:0.567;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
-       id="path1632" />
+  <g>
+    <path d="M 0,0 -4.41,4.353"
+      style="fill:none;stroke:#231f20;stroke-width:0.567;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+      transform="matrix(1.333333,0,0,-1.333333,8.44,7.527867)"/>
   </g>
-  <g
-     id="g1634"
-     transform="matrix(1.3333333,0,0,-1.3333333,3.9506667,7)"
-     clip-path="url(#clipPath115638)">
-    <path
-       d="M 0,0 C 0,0.642 0.52,1.162 1.162,1.162 1.804,1.162 2.324,0.642 2.324,0 2.324,-0.643 1.804,-1.162 1.162,-1.162 0.52,-1.162 0,-0.643 0,0 Z"
-       style="fill:none;stroke:#231f20;stroke-width:0.51;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
-       id="path1636" />
+  <g>
+    <path d="M 0,0 C 0,0.642 0.52,1.162 1.162,1.162 1.804,1.162 2.324,0.642 2.324,0 2.324,-0.643 1.804,-1.162 1.162,-1.162 0.52,-1.162 0,-0.643 0,0 Z"
+      style="fill:none;stroke:#231f20;stroke-width:0.51;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"
+      transform="matrix(1.333333,0,0,-1.333333,3.950667,7)"/>
   </g>
 </svg>
