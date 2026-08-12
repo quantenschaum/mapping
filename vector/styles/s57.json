@@ -17,7 +17,7 @@
       "tileSize": 256,
       "attribution": "OSM"
     },
-    "s57": { "type": "vector", "url": "http://localhost:8000/data/fnc-nl.json" }
+    "s57": { "type": "vector", "url": "http://localhost:8000/data/fnc-de.json" }
   },
   "sprite": "http://localhost:8000/styles/fnc-de/sprite",
   "glyphs": "http://localhost:8000/fonts/{fontstack}/{range}.pbf",
@@ -1774,7 +1774,7 @@
       "type": "symbol",
       "source": "s57",
       "source-layer": "buoys",
-      "filter": ["all", ["==", "CONRAD", 3]],
+      "filter": ["all", ["==", ["get", "CONRAD"], 3]],
       "layout": {
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
@@ -1799,7 +1799,7 @@
       "type": "symbol",
       "source": "s57",
       "source-layer": "beacons",
-      "filter": ["all", ["==", "CONRAD", 3]],
+      "filter": ["all", ["==", ["get", "CONRAD"], 3]],
       "layout": {
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
@@ -2305,6 +2305,7 @@
       "type": "symbol",
       "source": "s57",
       "source-layer": "TOPMAR",
+      "filter": ["!=", ["get", "TOPSHP"], 33],
       "layout": {
         "icon-rotate": [
           "match",
