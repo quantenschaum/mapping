@@ -133,5 +133,6 @@
 {"type": "Feature", "properties": {"nfs": "32/2026", "bfs": "WSA Ostsee 220, 224/26", "name": "MP 5", "desc": "delete spherical Y", "pos": "54\u00b0 28,68\u2019 N 013\u00b0 35,17\u2019 E"}, "geometry": {"type": "Point", "coordinates": [13.586166666666667, 54.478]}},
 {"type": "Feature", "properties": {"nfs": "32/2026", "bfs": "WSA Ostsee 220, 224/26", "name": "MP 6", "desc": "delete spherical Y", "pos": "54\u00b0 28,3\u2019 N 013\u00b0 35,0\u2019 E"}, "geometry": {"type": "Point", "coordinates": [13.583333333333334, 54.471666666666664]}},
 {"type": "Feature", "properties": {"nfs": "32/2026", "bfs": "WSA Ostsee 220, 224/26", "name": "MP 8", "desc": "delete spherical Y", "pos": "54\u00b0 27,9\u2019 N 013\u00b0 35,1\u2019 E"}, "geometry": {"type": "Point", "coordinates": [13.585, 54.465]}},
-{"type": "Feature", "properties": {"nfs": "33/2026", "bfs": "", "name": "", "desc": "", "pos": ""}}
+{"type": "Feature", "properties": {"nfs": "33/2026", "bfs": "WSA Ostsee 351/25", "name": "Eutiner Br\u00fccke", "desc": "Br\u00fccke wieder ge\u00f6ffnet, H\u00f6he 4.1", "pos": "53\u00b0 52,39\u2019 N 010\u00b0 40,70\u2019 E"}, "geometry": {"type": "Point", "coordinates": [10.678333333333333, 53.87316666666667]}},
+{"type": "Feature", "properties": {"nfs": "34/2026", "bfs": "", "name": "", "desc": "", "pos": ""}}
 ]}

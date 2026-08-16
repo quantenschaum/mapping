@@ -63,3 +63,4 @@ Die Einzellotungen wurdeen mangels Verfügbarkeit nicht aktualisiert, es kann al
 | 29/2026 |     ✓      |       ✓       |
 | 30/2026 |     ✓      |       ✓       |
 | 32/2026 |     ✓      |       ✓       |
+| 33/2026 |     ✓      |       ✓       |
