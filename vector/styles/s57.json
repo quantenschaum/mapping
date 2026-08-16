@@ -1,6 +1,6 @@
 {
   "version": 8,
-  "name": "fnc-de",
+  "name": "bsh-de",
   "metadata": { "maputnik:renderer": "mlgl" },
   "center": [9.5, 54.3],
   "zoom": 6,
@@ -17,9 +17,9 @@
       "tileSize": 256,
       "attribution": "OSM"
     },
-    "s57": { "type": "vector", "url": "http://localhost:8000/data/fnc-de.json" }
+    "s57": { "type": "vector", "url": "http://localhost:8000/data/bsh-de.json" }
   },
-  "sprite": "http://localhost:8000/styles/fnc-de/sprite",
+  "sprite": "http://localhost:8000/styles/bsh-de/sprite",
   "glyphs": "http://localhost:8000/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -107,6 +107,22 @@
       "source-layer": "LNDARE",
       "filter": ["==", ["geometry-type"], "Polygon"],
       "paint": { "fill-color": "#F9ECC0" }
+    },
+    {
+      "id": "river-area",
+      "type": "fill",
+      "source": "s57",
+      "source-layer": "RIVERS",
+      "filter": ["==", ["geometry-type"], "Polygon"],
+      "paint": { "fill-color": "#2A8FDC" }
+    },
+    {
+      "id": "river-line",
+      "type": "line",
+      "source": "s57",
+      "source-layer": "RIVERS",
+      "filter": ["==", ["geometry-type"], "LineString"],
+      "paint": { "line-color": "#2A8FDC", "line-width": 3 }
     },
     {
       "id": "vegetation-line",
@@ -357,22 +373,6 @@
       "type": "line",
       "source": "s57",
       "source-layer": "CANALS",
-      "filter": ["==", ["geometry-type"], "LineString"],
-      "paint": { "line-color": "#2A8FDC", "line-width": 3 }
-    },
-    {
-      "id": "river-area",
-      "type": "fill",
-      "source": "s57",
-      "source-layer": "RIVERS",
-      "filter": ["==", ["geometry-type"], "Polygon"],
-      "paint": { "fill-color": "#2A8FDC" }
-    },
-    {
-      "id": "river-line",
-      "type": "line",
-      "source": "s57",
-      "source-layer": "RIVERS",
       "filter": ["==", ["geometry-type"], "LineString"],
       "paint": { "line-color": "#2A8FDC", "line-width": 3 }
     },
