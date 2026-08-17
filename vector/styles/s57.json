@@ -1,6 +1,6 @@
 {
   "version": 8,
-  "name": "bsh-de",
+  "name": "fnc-de",
   "metadata": { "maputnik:renderer": "mlgl" },
   "center": [9.5, 54.3],
   "zoom": 6,
@@ -17,9 +17,9 @@
       "tileSize": 256,
       "attribution": "OSM"
     },
-    "s57": { "type": "vector", "url": "http://localhost:8000/data/bsh-de.json" }
+    "s57": { "type": "vector", "url": "http://localhost:8000/data/fnc-de.json" }
   },
-  "sprite": "http://localhost:8000/styles/bsh-de/sprite",
+  "sprite": "http://localhost:8000/styles/fnc-de/sprite",
   "glyphs": "http://localhost:8000/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -1623,6 +1623,120 @@
         "icon-size": 0.8,
         "icon-allow-overlap": true,
         "icon-ignore-placement": true
+      }
+    },
+    {
+      "id": "soundings",
+      "type": "symbol",
+      "source": "s57",
+      "source-layer": "SOUNDG",
+      "layout": {
+        "text-field": [
+          "let",
+          "val",
+          ["get", "VALSOU"],
+          [
+            "let",
+            "isNegative",
+            ["<", ["var", "val"], 0],
+            [
+              "let",
+              "absVal",
+              ["*", ["var", "val"], ["case", ["var", "isNegative"], -1, 1]],
+              [
+                "let",
+                "valTimes10",
+                ["floor", ["*", ["var", "absVal"], 10]],
+                [
+                  "let",
+                  "valStr",
+                  ["to-string", ["var", "valTimes10"]],
+                  [
+                    "let",
+                    "len",
+                    ["length", ["var", "valStr"]],
+                    [
+                      "let",
+                      "intPart",
+                      [
+                        "case",
+                        ["<", ["var", "len"], 2],
+                        "0",
+                        [
+                          "slice",
+                          ["var", "valStr"],
+                          0,
+                          ["-", ["var", "len"], 1]
+                        ]
+                      ],
+                      [
+                        "let",
+                        "decDigit",
+                        [
+                          "slice",
+                          ["var", "valStr"],
+                          ["-", ["var", "len"], 1],
+                          ["var", "len"]
+                        ],
+                        [
+                          "let",
+                          "subDigit",
+                          [
+                            "match",
+                            ["var", "decDigit"],
+                            "0",
+                            "",
+                            "1",
+                            "₁",
+                            "2",
+                            "₂",
+                            "3",
+                            "₃",
+                            "4",
+                            "₄",
+                            "5",
+                            "₅",
+                            "6",
+                            "₆",
+                            "7",
+                            "₇",
+                            "8",
+                            "₈",
+                            "9",
+                            "₉",
+                            "?"
+                          ],
+                          [
+                            "concat",
+                            ["case", ["var", "isNegative"], "-", ""],
+                            ["var", "intPart"],
+                            ["var", "subDigit"]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        "text-size": 13,
+        "text-font": ["Noto Sans Regular"],
+        "text-anchor": "center",
+        "symbol-sort-key": ["get", "VALSOU"],
+        "visibility": "visible",
+        "text-optional": false
+      },
+      "paint": {
+        "text-color": [
+          "case",
+          [">", 0, ["get", "VALSOU"]],
+          "green",
+          ["<", 5, ["get", "VALSOU"]],
+          "gray",
+          "black"
+        ]
       }
     },
     {
@@ -3399,119 +3513,6 @@
           ]
         ],
         "icon-opacity": 0.8
-      }
-    },
-    {
-      "id": "soundings",
-      "type": "symbol",
-      "source": "s57",
-      "source-layer": "SOUNDG",
-      "layout": {
-        "text-field": [
-          "let",
-          "val",
-          ["get", "VALSOU"],
-          [
-            "let",
-            "isNegative",
-            ["<", ["var", "val"], 0],
-            [
-              "let",
-              "absVal",
-              ["*", ["var", "val"], ["case", ["var", "isNegative"], -1, 1]],
-              [
-                "let",
-                "valTimes10",
-                ["floor", ["*", ["var", "absVal"], 10]],
-                [
-                  "let",
-                  "valStr",
-                  ["to-string", ["var", "valTimes10"]],
-                  [
-                    "let",
-                    "len",
-                    ["length", ["var", "valStr"]],
-                    [
-                      "let",
-                      "intPart",
-                      [
-                        "case",
-                        ["<", ["var", "len"], 2],
-                        "0",
-                        [
-                          "slice",
-                          ["var", "valStr"],
-                          0,
-                          ["-", ["var", "len"], 1]
-                        ]
-                      ],
-                      [
-                        "let",
-                        "decDigit",
-                        [
-                          "slice",
-                          ["var", "valStr"],
-                          ["-", ["var", "len"], 1],
-                          ["var", "len"]
-                        ],
-                        [
-                          "let",
-                          "subDigit",
-                          [
-                            "match",
-                            ["var", "decDigit"],
-                            "0",
-                            "",
-                            "1",
-                            "₁",
-                            "2",
-                            "₂",
-                            "3",
-                            "₃",
-                            "4",
-                            "₄",
-                            "5",
-                            "₅",
-                            "6",
-                            "₆",
-                            "7",
-                            "₇",
-                            "8",
-                            "₈",
-                            "9",
-                            "₉",
-                            "?"
-                          ],
-                          [
-                            "concat",
-                            ["case", ["var", "isNegative"], "-", ""],
-                            ["var", "intPart"],
-                            ["var", "subDigit"]
-                          ]
-                        ]
-                      ]
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ],
-        "text-size": 13,
-        "text-font": ["Noto Sans Regular"],
-        "text-anchor": "center",
-        "symbol-sort-key": ["get", "VALSOU"],
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-color": [
-          "case",
-          [">", 0, ["get", "VALSOU"]],
-          "green",
-          ["<", 5, ["get", "VALSOU"]],
-          "gray",
-          "black"
-        ]
       }
     },
     {
