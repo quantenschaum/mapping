@@ -47,7 +47,7 @@ BASE=http://localhost:5173
 public/%.json: styles/s57.json
 	mkdir -p public
 	N=$(patsubst public/%.json,%,$@); \
-	jq '.name="'$$N'" | .sources.s57.url="pmtiles://$(BASE)/'$$N'.pmtiles" | .sprite="$(BASE)/icons" | .glyphs="$(BASE)/fonts/{fontstack}/{range}.pbf"' $< > $@
+	jq '.name="'$$N'" | .sources.s57.url="pmtiles://$(BASE)/'$$N'.pmtiles" | .sources.s57.attribution="'$$N' $(TODAY)" | .sprite="$(BASE)/icons" | .glyphs="$(BASE)/fonts/{fontstack}/{range}.pbf"' $< > $@
 
 sprites:
 	cd .. && make -B icons/gen && rm icons/gen/compass-*
