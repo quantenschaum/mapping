@@ -15,18 +15,18 @@ tools:
 
 dev:
 	make -B styles
-	npx vite
+	pnpx vite
 
 open:
-	npx vite --open
+	pnpx vite --open
 
 build:
 	make -B styles BASE=https://freenauticalchart.net/vector
 	pnpm install
-	npx vite build
+	pnpx vite build
 
 preview:
-	npx vite preview
+	pnpx vite preview
 
 deploy: build
 	rsync -hrtlv dist/ nas:mapping/www/vector/
