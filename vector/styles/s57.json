@@ -1881,7 +1881,8 @@
         "icon-image": "fogsignal",
         "icon-allow-overlap": true,
         "icon-ignore-placement": true
-      }
+      },
+      "paint": { "icon-opacity": 0.6 }
     },
     {
       "id": "radar-reflector-buoy",
@@ -2391,7 +2392,7 @@
       "source": "s57",
       "source-layer": "DAYMAR",
       "layout": {
-        "icon-offset": [0, -22],
+        "icon-offset": [0, -20],
         "icon-image": [
           "coalesce",
           [
@@ -2406,7 +2407,7 @@
               ["coalesce", ["get", "COLOUR"], "0"]
             ]
           ],
-          "TOPSHP/3/0/0"
+          ["concat", "TOPSHP/", ["coalesce", ["get", "TOPSHP"], "3"], "/0/0"]
         ],
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
@@ -2436,14 +2437,14 @@
             [
               "concat",
               "TOPSHP/",
-              ["coalesce", ["get", "TOPSHP"], 3],
+              ["coalesce", ["get", "TOPSHP"], "3"],
               "/",
-              ["coalesce", ["get", "COLPAT"], 0],
+              ["coalesce", ["get", "COLPAT"], "0"],
               "/",
-              ["coalesce", ["get", "COLOUR"], 0]
+              ["coalesce", ["get", "COLOUR"], "0"]
             ]
           ],
-          "TOPSHP/3/0/0"
+          ["concat", "TOPSHP/", ["coalesce", ["get", "TOPSHP"], "3"], "/0/0"]
         ],
         "visibility": "visible",
         "icon-allow-overlap": true,
@@ -3558,7 +3559,8 @@
         "text-anchor": "bottom-left",
         "text-justify": "auto",
         "text-radial-offset": 1,
-        "visibility": "visible"
+        "visibility": "visible",
+        "text-variable-anchor": ["bottom-left", "bottom-right"]
       }
     },
     {
@@ -3570,10 +3572,10 @@
         "text-size": 12,
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Semi Bold"],
-        "text-anchor": "bottom-left",
-        "text-justify": "auto",
         "text-radial-offset": 1,
-        "visibility": "visible"
+        "visibility": "visible",
+        "text-variable-anchor": ["bottom-left", "bottom-right"],
+        "text-justify": "auto"
       }
     },
     {
@@ -3658,7 +3660,7 @@
             "Al",
             29,
             "Al.FFl",
-            ""
+            "?"
           ],
           [
             "case",
@@ -3710,7 +3712,8 @@
           ]
         ],
         "text-radial-offset": 1,
-        "text-anchor": "top-left"
+        "text-anchor": "top-left",
+        "text-justify": "auto"
       }
     },
     {
