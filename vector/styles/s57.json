@@ -1626,6 +1626,88 @@
       }
     },
     {
+      "id": "label-region",
+      "type": "symbol",
+      "source": "s57",
+      "source-layer": "LNDRGN",
+      "filter": ["all"],
+      "layout": {
+        "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
+        "text-size": 13,
+        "text-font": ["Noto Sans Italic"]
+      },
+      "paint": { "text-color": "#333" }
+    },
+    {
+      "id": "label-sea",
+      "type": "symbol",
+      "source": "s57",
+      "source-layer": "SEAARE",
+      "layout": {
+        "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
+        "text-size": 13,
+        "text-font": ["Noto Sans Italic"]
+      },
+      "paint": { "text-color": "#333" }
+    },
+    {
+      "id": "label-fairway",
+      "type": "symbol",
+      "source": "s57",
+      "source-layer": "FAIRWY",
+      "layout": {
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 12,
+        "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
+        "symbol-placement": "point",
+        "text-anchor": "bottom",
+        "visibility": "visible"
+      },
+      "paint": { "text-color": "gray" }
+    },
+    {
+      "id": "label-anchorage",
+      "type": "symbol",
+      "source": "s57",
+      "source-layer": "ACHARE",
+      "layout": {
+        "symbol-spacing": 200,
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 12,
+        "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
+        "text-anchor": "top",
+        "text-radial-offset": 1,
+        "icon-image": [
+          "case",
+          ["==", ["geometry-type"], "Point"],
+          "anchor",
+          ""
+        ],
+        "icon-offset": [0, -10],
+        "icon-size": 0.8,
+        "visibility": "visible"
+      },
+      "paint": { "text-color": "magenta" }
+    },
+    {
+      "id": "label-chart",
+      "type": "symbol",
+      "source": "s57",
+      "source-layer": "M_COVR",
+      "filter": ["!", ["has", "ORIENT"]],
+      "layout": {
+        "text-field": ["get", "cell"],
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 12,
+        "symbol-placement": "line",
+        "text-anchor": "center",
+        "symbol-spacing": 300,
+        "text-offset": [0, 0.7],
+        "visibility": "visible"
+      },
+      "paint": { "text-color": "gray", "text-opacity": 0.5 }
+    },
+    {
       "id": "soundings",
       "type": "symbol",
       "source": "s57",
@@ -2981,48 +3063,6 @@
       }
     },
     {
-      "id": "label-chart",
-      "type": "symbol",
-      "source": "s57",
-      "source-layer": "M_COVR",
-      "filter": ["!", ["has", "ORIENT"]],
-      "layout": {
-        "text-field": ["get", "cell"],
-        "text-font": ["Noto Sans Regular"],
-        "text-size": 12,
-        "symbol-placement": "line",
-        "text-anchor": "center",
-        "symbol-spacing": 300,
-        "text-offset": [0, 0.7]
-      },
-      "paint": { "text-color": "gray", "text-opacity": 0.5 }
-    },
-    {
-      "id": "label-region",
-      "type": "symbol",
-      "source": "s57",
-      "source-layer": "LNDRGN",
-      "filter": ["all"],
-      "layout": {
-        "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
-        "text-size": 13,
-        "text-font": ["Noto Sans Italic"]
-      },
-      "paint": { "text-color": "#333" }
-    },
-    {
-      "id": "label-sea",
-      "type": "symbol",
-      "source": "s57",
-      "source-layer": "SEAARE",
-      "layout": {
-        "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
-        "text-size": 13,
-        "text-font": ["Noto Sans Italic"]
-      },
-      "paint": { "text-color": "#333" }
-    },
-    {
       "id": "label-lake",
       "type": "symbol",
       "source": "s57",
@@ -3083,20 +3123,6 @@
         "text-variable-anchor": ["center", "left", "right", "top", "bottom"]
       },
       "paint": { "text-color": "#333" }
-    },
-    {
-      "id": "label-fairway",
-      "type": "symbol",
-      "source": "s57",
-      "source-layer": "FAIRWY",
-      "layout": {
-        "text-font": ["Noto Sans Regular"],
-        "text-size": 12,
-        "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
-        "symbol-placement": "point",
-        "text-anchor": "bottom"
-      },
-      "paint": { "text-color": "gray" }
     },
     {
       "id": "label-shoreline",
@@ -3254,29 +3280,6 @@
         "text-anchor": "bottom",
         "text-radial-offset": 1
       }
-    },
-    {
-      "id": "label-anchorage",
-      "type": "symbol",
-      "source": "s57",
-      "source-layer": "ACHARE",
-      "layout": {
-        "symbol-spacing": 200,
-        "text-font": ["Noto Sans Regular"],
-        "text-size": 12,
-        "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
-        "text-anchor": "top",
-        "text-radial-offset": 1,
-        "icon-image": [
-          "case",
-          ["==", ["geometry-type"], "Point"],
-          "anchor",
-          ""
-        ],
-        "icon-offset": [0, -10],
-        "icon-size": 0.8
-      },
-      "paint": { "text-color": "magenta" }
     },
     {
       "id": "label-radar-range",
