@@ -14,14 +14,14 @@ tools:
 	make -C $@
 
 dev:
-	make -B styles
+	make -Bj styles
 	pnpx vite
 
 open:
 	pnpx vite --open
 
 build:
-	make -B styles BASE=https://freenauticalchart.net/vector
+	make -Bj styles BASE=https://freenauticalchart.net/vector
 	pnpm install
 	pnpx vite build
 
@@ -79,14 +79,15 @@ MERGE=jq -sc '{type:"FeatureCollection", features: map(.features // []) | add}'
 
 SRC=../data/bsh
 DST=fnc-de
+ATT=FNC/BSH
 
 split/%.json: $(SRC)/%.json
-	mapshaper $< -filter 'uband>0' -o $@
+	mapshaper $< -each 'if (typeof uband=="undefined" || uband==null) uband=parseInt((chart||"").slice(2,3))' -filter 'uband>0' -o $@
 
 split: $(SRC)
 	rm -rf $@ && mkdir -p $@
 	touch $@/.nobackup
-	nice make $(patsubst $</%.json,$@/%.json,$(wildcard $</??????.json)) -j10
+	nice parallel -j50% --bar make ::: $(patsubst $</%.json,$@/%.json,$(wildcard $</??????.json))
 	$(MERGE) $@/BOY*.json > $@/buoys.json
 	$(MERGE) $@/BCN*.json > $@/beacons.json
 	rm $@/BOY*.json $@/BCN*.json
@@ -95,6 +96,7 @@ split: $(SRC)
 		mapshaper $@/M_NSYS.json -filter 'ORIENT==null' -o $@/M_COVR.json
 	mapshaper $@/M_COVR.json -each 'cell=chart' -o force $@/M_COVR.json
 	mapshaper $@/DEPARE.json -each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' -dissolve allow-overlaps uband,areatype calc='DRVAL1=min(DRVAL1), DRVAL2=max(DRVAL2)' -explode -each 'area=this.area/1e6' -o force $@/DEPARE.json
+	mapshaper $@/SOUNDG.json -each 'VALSOU=DEPTH' -o force $@/SOUNDG.json || true
 
 merged/_M%.json: split
 	mapshaper $</M_COVR.json -filter "uband==$(patsubst merged/_M%.json,%,$@)" -dissolve -o $@
@@ -114,7 +116,7 @@ merged: split
 	rm -rf $@ && mkdir -p $@/UB1 $@/UB2 $@/UB3 $@/UB4 $@/UB5 $@/UB6
 	touch $@/.nobackup
 	for U in $$(seq 6); do make $@/_M$$U.json; done
-	nice make $(patsubst $</%.json,$@/%.json,$(wildcard $</*.json)) -j10
+	nice parallel -j50% --bar make ::: $(patsubst $</%.json,$@/%.json,$(wildcard $</*.json))
 	rm -f $@/*.json
 	for F in $@/*/*1.json; do $(MERGE) $${F//1./?.} > $${F//1./.} && rm $${F//1./?.}; done
 	# for F in $$(cd $@/UB6 && echo *.json); do $(MERGE) $@/UB?/$$F >$@/$$F; done
@@ -124,15 +126,15 @@ merged: split
 # include only fields used in the style
 Y=$(shell jq '.. | arrays | select(.[0]=="get" or .[0]=="has") | .[1]' styles/s57.json | sort | uniq | sed 's/^/-y /')
 
-bsh.tiles: merged
+enc.tiles: merged
 	# tippecanoe $</M_COVR.json -f -y uband $(Y) -Z6 -z13 -j '{"*":["any",["all",["<=","$$zoom",6],[">","uband",1]],["all",["<=","$$zoom",8],[">","uband",2]],["all",["<=","$$zoom",10],[">","uband",3]],["all",["<=","$$zoom",12],[">","uband",4]],["all",["<=","$$zoom",13],[">","uband",5]]]}' -o UB0.mbtiles # charts outlines
-	tippecanoe $</UB1/*.json -f -r1 -ao -ac $(Y) -Z6  -z8  -o UB1.mbtiles # 1 Overview
-	tippecanoe $</UB2/*.json -f -r1 -ao -ac $(Y) -Z9  -z9  -o UB2.mbtiles # 2 General
-	tippecanoe $</UB3/*.json -f -r1 -ao -ac $(Y) -Z10 -z10 -o UB3.mbtiles # 3 Coastal
-	tippecanoe $</UB4/*.json -f -r1 -ao -ac $(Y) -Z11 -z12 -o UB4.mbtiles # 4 Approach
-	tippecanoe $</UB5/*.json -f -r1 -ao -ac $(Y) -Z13 -z13 -o UB5.mbtiles # 5 Harbour
-	tippecanoe $</UB6/*.json -f -r1 -ao -ac $(Y) -Z14 -z14 -o UB6.mbtiles # 6 Berthing
-	tile-join -n $(DST) -N "$(TODAY)" -A FNC/BSH -f -o $(DST).mbtiles UB?.mbtiles
+	nice tippecanoe $</UB1/*.json -f -r1 -ao -ac $(Y) -Z6  -z8  -o UB1.mbtiles ||true # 1 Overview
+	nice tippecanoe $</UB2/*.json -f -r1 -ao -ac $(Y) -Z9  -z9  -o UB2.mbtiles # 2 General
+	nice tippecanoe $</UB3/*.json -f -r1 -ao -ac $(Y) -Z10 -z10 -o UB3.mbtiles # 3 Coastal
+	nice tippecanoe $</UB4/*.json -f -r1 -ao -ac $(Y) -Z11 -z12 -o UB4.mbtiles # 4 Approach
+	nice tippecanoe $</UB5/*.json -f -r1 -ao -ac $(Y) -Z13 -z13 -o UB5.mbtiles # 5 Harbour
+	nice tippecanoe $</UB6/*.json -f -r1 -ao -ac $(Y) -Z14 -z14 -o UB6.mbtiles ||true # 6 Berthing
+	nice tile-join -n $(DST) -N "$(TODAY)" -A "$(ATT)" -f -o $(DST).mbtiles UB?.mbtiles
 	pmtiles convert $(DST).mbtiles $(DST).pmtiles
 	ls -lh *tiles
 	mv $(DST).mbtiles data
@@ -140,6 +142,10 @@ bsh.tiles: merged
 	rm UB*.mbtiles
 
 styles: data/styles/fnc-de.json public/fnc-de.json
+
+fnc:
+	rm -rf split merged
+	make enc.tiles
 
 rws: ../data/rws.layers
 	rm -rf $@ && cp -r $< $@
@@ -162,9 +168,9 @@ rws: ../data/rws.layers
 	mapshaper $@/M_COVR.json -filter 'CATCOV==1' -each 'cell=chart' -o force $@/M_COVR.json
 
 rws.tiles: rws
-	tippecanoe $</M_COVR.json $</LNDARE.json $</DEPARE.json $</COALNE.json $</BUAARE.json $</LNDRGN.json $</SEAARE.json -f -ao -ac -Z8 -z9 $(Y) -o $<0.mbtiles
-	tippecanoe $</*.json -f -r1 -ao -ac -Z10 -z14 -y SCAMIN $(Y) -o $<1.mbtiles -j '{ "SOUNDG": ["any", ["all", ["==", "$$zoom", 11], [">=", "SCAMIN", 160000] ], ["all", ["==", "$$zoom", 12], [">=", "SCAMIN", 80000] ], ["all", ["==", "$$zoom", 13], [">=", "SCAMIN", 40000] ], ["all", [">=", "$$zoom", 14]] ], "buoys":[">=","$$zoom",11], "beacons":[">=","$$zoom",11], "LIGHTS":[">=","$$zoom",11], "TOPMAR":[">=","$$zoom",11], "DAYMAR":[">=","$$zoom",11], "DEPCNT":[">=","$$zoom",11] }'
-	tile-join -n "fnc-nl" -N "$(TODAY)" -A "FNC/RWS" -f -o fnc-nl.mbtiles $<?.mbtiles
+	nice tippecanoe $</M_COVR.json $</LNDARE.json $</DEPARE.json $</COALNE.json $</BUAARE.json $</LNDRGN.json $</SEAARE.json -f -ao -ac -Z8 -z9 $(Y) -o $<0.mbtiles
+	nice tippecanoe $</*.json -f -r1 -ao -ac -Z10 -z14 -y SCAMIN $(Y) -o $<1.mbtiles -j '{ "SOUNDG": ["any", ["all", ["==", "$$zoom", 11], [">=", "SCAMIN", 160000] ], ["all", ["==", "$$zoom", 12], [">=", "SCAMIN", 80000] ], ["all", ["==", "$$zoom", 13], [">=", "SCAMIN", 40000] ], ["all", [">=", "$$zoom", 14]] ], "buoys":[">=","$$zoom",11], "beacons":[">=","$$zoom",11], "LIGHTS":[">=","$$zoom",11], "TOPMAR":[">=","$$zoom",11], "DAYMAR":[">=","$$zoom",11], "DEPCNT":[">=","$$zoom",11] }'
+	nice tile-join -n "fnc-nl" -N "$(TODAY)" -A "FNC/RWS" -f -o fnc-nl.mbtiles $<?.mbtiles
 	pmtiles convert fnc-nl.mbtiles fnc-nl.pmtiles
 	ls -lh *tiles
 	mv fnc-nl.mbtiles data
@@ -173,7 +179,7 @@ rws.tiles: rws
 
 styles: data/styles/fnc-nl.json public/fnc-nl.json
 
-tiles: bsh.tiles rws.tiles
+tiles: enc.tiles rws.tiles
 
 clean: clean-cache
 	rm -rf dist split merged rws *.gpkg *.mbtiles *.pmtiles *@2x.yaml depth-de*
@@ -235,7 +241,7 @@ depth-nl: rws
 	for F in $@/*.json; do ogr2ogr $${F//.json/.gpkg} $$F; done
 
 serve:
-	make -B styles
+	make -Bj styles
 	mkdir -p cache_data && touch cache_data/.nobackup
 	docker compose up
 
