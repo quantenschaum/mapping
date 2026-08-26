@@ -1,5 +1,6 @@
 SHELL=/bin/bash
 export PATH:=$(PWD)/tools/bin:$(PWD)/node_modules/.bin:$(PATH)
+export NODE_OPTIONS="--max-old-space-size=8192"
 TODAY=$(shell date +%F)
 
 # usesful tools
@@ -74,7 +75,6 @@ fonts:
 		mkdir -p "$@/$$D"; \
 		build-glyphs $$F "$@/$$D"; done
 
-
 MERGE=jq -sc '{type:"FeatureCollection", features: map(.features // []) | add}'
 
 SRC=../data/bsh
@@ -82,7 +82,7 @@ DST=fnc-de
 ATT=FNC/BSH
 
 split/%.json: $(SRC)/%.json
-	mapshaper $< -each 'if (typeof uband=="undefined" || uband==null) uband=parseInt((chart||"").slice(2,3))' -filter 'uband>0' -o $@
+	mapshaper $< -filter 'uband>0' -o $@
 
 split: $(SRC)
 	rm -rf $@ && mkdir -p $@
@@ -98,41 +98,59 @@ split: $(SRC)
 	mapshaper $@/DEPARE.json -each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' -dissolve allow-overlaps uband,areatype calc='DRVAL1=min(DRVAL1), DRVAL2=max(DRVAL2)' -explode -each 'area=this.area/1e6' -o force $@/DEPARE.json
 	mapshaper $@/SOUNDG.json -each 'VALSOU=DEPTH' -o force $@/SOUNDG.json || true
 
-merged/_M%.json: split
-	mapshaper $</M_COVR.json -filter "uband==$(patsubst merged/_M%.json,%,$@)" -dissolve -o $@
+merged/M/%.json: split
+	mkdir -p merged/M
+	mapshaper $</M_COVR.json -filter "uband==$(patsubst merged/M/%.json,%,$@)" -dissolve -each 'mask=1' -o $@
 
 merged/%.json: split/%.json
 	L=$(patsubst merged/%.json,%,$@); \
-	for U in $$(seq 6); do echo -e "\e[33m$$L $$U\e[0m"; \
-		rm -f merged/__*$$L.json; \
-		[[ -f $@ ]] && mapshaper $@ -erase merged/_M$$U.json -o merged/__A$$U-$$L.json; \
-  	mapshaper $< -filter "uband==$$U" -o merged/__B$$U-$$L.json && \
-   	$(MERGE) merged/__?$$U-$$L.json > $@ && \
-		mapshaper $@ -each uband=$$U -o force $@ && \
-		cp $@ merged/UB$$U/ && \
-		rm merged/__*$$L.json || break; done
+	for U in $$(seq 6); do \
+		if (( $$U < 2 )); then \
+			echo -e "\e[33m $$L $$U\e[0m"; \
+			mapshaper $< -filter "uband==$$U" -o merged/UB$$U/$$L.json; \
+		else \
+			echo -e "\e[31m $$L $$U\e[0m"; \
+			rm -f merged/$$L*.json; \
+			V=$$((U-1)); W=$$((U-2)); \
+			mapshaper $< -filter "uband==$$W" -erase merged/M/$$V.json -erase merged/M/$$U.json -o merged/$$L-$$W.json; \
+			mapshaper $< -filter "uband==$$V" -erase merged/M/$$U.json -o merged/$$L-$$V.json; \
+			# mapshaper merged/UB$$V/$$L.json -erase merged/M/$$U.json -o merged/$$L-$$V.json; \
+			mapshaper $< -filter "uband==$$U" -o merged/$$L-$$U.json && \
+			$(MERGE) merged/$$L*.json > $@ && \
+			mapshaper $@ -each uband=$$U -o force $@ && \
+			mv $@ merged/UB$$U/ && \
+			rm merged/$$L*.json || break; \
+		fi; \
+	done
+
+	L=$(patsubst merged/%.json,%,$@); \
+	for U in $$(seq 6); do \
+		mapshaper $< -filter "uband==$$U" -o merged/$$L-$$U.json; \
+	done; \
+	rm merged/$$L*.json
+
+
 
 merged: split
 	rm -rf $@ && mkdir -p $@/UB1 $@/UB2 $@/UB3 $@/UB4 $@/UB5 $@/UB6
 	touch $@/.nobackup
-	for U in $$(seq 6); do make $@/_M$$U.json; done
+	parallel --bar make $@/M/{}.json ::: $$(seq 6)
 	nice parallel -j50% --bar make ::: $(patsubst $</%.json,$@/%.json,$(wildcard $</*.json))
-	rm -f $@/*.json
+	# rm -f $@/*.json
 	for F in $@/*/*1.json; do $(MERGE) $${F//1./?.} > $${F//1./.} && rm $${F//1./?.}; done
 	# for F in $$(cd $@/UB6 && echo *.json); do $(MERGE) $@/UB?/$$F >$@/$$F; done
-	# for U in $$(seq 6); do cp $</M_COVR.json $@/UB$$U; done
-	# mapshaper $</M_COVR.json -lines each='uband=A.uband||B.uband,cell=A.cell||B.cell' -o $@/M_COVR.json
+	mapshaper $</M_COVR.json -lines each='uband=A.uband||B.uband,cell=A.cell||B.cell' -o $@/M_COVR.json
 
 # include only fields used in the style
 Y=$(shell jq '.. | arrays | select(.[0]=="get" or .[0]=="has") | .[1]' styles/s57.json | sort | uniq | sed 's/^/-y /')
 
 enc.tiles: merged
-	# tippecanoe $</M_COVR.json -f -y uband $(Y) -Z6 -z13 -j '{"*":["any",["all",["<=","$$zoom",6],[">","uband",1]],["all",["<=","$$zoom",8],[">","uband",2]],["all",["<=","$$zoom",10],[">","uband",3]],["all",["<=","$$zoom",12],[">","uband",4]],["all",["<=","$$zoom",13],[">","uband",5]]]}' -o UB0.mbtiles # charts outlines
+	tippecanoe $</M_COVR.json -f -y uband $(Y) -Z1 -z13 -j '{"*":["any",["all",["<","$$zoom",6]],["all",["<=","$$zoom",8],[">","uband",1]],["all",["<=","$$zoom",9],[">","uband",2]],["all",["<=","$$zoom",10],[">","uband",3]],["all",["<=","$$zoom",12],[">","uband",4]],["all",["<=","$$zoom",13],[">","uband",5]]]}' -o UB0.mbtiles # charts outlines
 	nice tippecanoe $</UB1/*.json -f -r1 -ao -ac $(Y) -Z6  -z8  -o UB1.mbtiles ||true # 1 Overview
-	nice tippecanoe $</UB2/*.json -f -r1 -ao -ac $(Y) -Z9  -z9  -o UB2.mbtiles # 2 General
-	nice tippecanoe $</UB3/*.json -f -r1 -ao -ac $(Y) -Z10 -z10 -o UB3.mbtiles # 3 Coastal
-	nice tippecanoe $</UB4/*.json -f -r1 -ao -ac $(Y) -Z11 -z12 -o UB4.mbtiles # 4 Approach
-	nice tippecanoe $</UB5/*.json -f -r1 -ao -ac $(Y) -Z13 -z13 -o UB5.mbtiles # 5 Harbour
+	nice tippecanoe $</UB2/*.json -f -r1 -ao -ac $(Y) -Z9  -z9  -o UB2.mbtiles ||true # 2 General
+	nice tippecanoe $</UB3/*.json -f -r1 -ao -ac $(Y) -Z10 -z10 -o UB3.mbtiles ||true # 3 Coastal
+	nice tippecanoe $</UB4/*.json -f -r1 -ao -ac $(Y) -Z11 -z12 -o UB4.mbtiles ||true # 4 Approach
+	nice tippecanoe $</UB5/*.json -f -r1 -ao -ac $(Y) -Z13 -z13 -o UB5.mbtiles ||true # 5 Harbour
 	nice tippecanoe $</UB6/*.json -f -r1 -ao -ac $(Y) -Z14 -z14 -o UB6.mbtiles ||true # 6 Berthing
 	nice tile-join -n $(DST) -N "$(TODAY)" -A "$(ATT)" -f -o $(DST).mbtiles UB?.mbtiles
 	pmtiles convert $(DST).mbtiles $(DST).pmtiles
@@ -141,27 +159,35 @@ enc.tiles: merged
 	mv $(DST).pmtiles public
 	rm UB*.mbtiles
 
-styles: data/styles/fnc-de.json public/fnc-de.json
-
 fnc:
 	rm -rf split merged
 	make enc.tiles
 
+styles: data/styles/fnc-de.json public/fnc-de.json
+
+noaa:
+	rm -rf split merged
+	make enc.tiles SRC=../data/$@.layers DST=$@ ATT=NOAA
+
+styles: data/styles/noaa.json public/noaa.json
+
 rws: ../data/rws.layers
 	rm -rf $@ && cp -r $< $@
 	touch $@/.nobackup
-	for F in $@/*; do B=$${F#*/}; B=$${B%.*}; mv $$F $@/$${B^^}.json; done
+	# for F in $@/*; do B=$${F#*/}; B=$${B%.*}; mv $$F $@/$${B^^}.json; done
 	$(MERGE) $@/BOY*.json > $@/buoys.json
 	$(MERGE) $@/BCN*.json > $@/beacons.json
 	rm $@/BOY*.json $@/BCN*.json
-	mapshaper ../data/vwm/drijvend.s57.json -filter 'layer.startsWith("BOY")' -o $@/buoys.json
-	mapshaper ../data/vwm/drijvend.s57.json -filter 'layer=="LIGHTS"' -o $@/lights1.json
-	mapshaper ../data/vwm/drijvend.s57.json -filter 'layer=="TOPMAR"' -o $@/topmar1.json
-	# mapshaper ../data/vwm/vast.s57.json -filter 'layer.startsWith("BCN")' -o $@/beacons.json
-	mapshaper ../data/vwm/vast.s57.json -filter 'layer=="LIGHTS"' -o $@/lights2.json
-	mapshaper ../data/vwm/vast.s57.json -filter 'layer=="TOPMAR"' -o $@/topmar2.json
-	$(MERGE) $@/lights?.json > $@/LIGHTS.json && rm $@/lights?.json
-	$(MERGE) $@/topmar?.json > $@/TOPMAR.json && rm $@/topmar?.json
+
+	# mapshaper ../data/vwm/drijvend.s57.json -filter 'layer.startsWith("BOY")' -o $@/buoys.json
+	# mapshaper ../data/vwm/drijvend.s57.json -filter 'layer=="LIGHTS"' -o $@/lights1.json
+	# mapshaper ../data/vwm/drijvend.s57.json -filter 'layer=="TOPMAR"' -o $@/topmar1.json
+	# # mapshaper ../data/vwm/vast.s57.json -filter 'layer.startsWith("BCN")' -o $@/beacons.json
+	# mapshaper ../data/vwm/vast.s57.json -filter 'layer=="LIGHTS"' -o $@/lights2.json
+	# mapshaper ../data/vwm/vast.s57.json -filter 'layer=="TOPMAR"' -o $@/topmar2.json
+	# $(MERGE) $@/lights?.json > $@/LIGHTS.json && rm $@/lights?.json
+	# $(MERGE) $@/topmar?.json > $@/TOPMAR.json && rm $@/topmar?.json
+
 	mapshaper $@/DEPARE.json -each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' -dissolve areatype calc='DRVAL1=min(DRVAL1), DRVAL2=max(DRVAL2)' -o force $@/DEPARE.json
 	mapshaper $@/DEPCNT.json -filter 'VALDCO<=0 || [1,2,3,5,10,20,50].includes(VALDCO)' -o force $@/DEPCNT.json
 	mapshaper $@/SOUNDG.json -each 'VALSOU=DEPTH' -o force $@/SOUNDG.json
@@ -175,7 +201,7 @@ rws.tiles: rws
 	ls -lh *tiles
 	mv fnc-nl.mbtiles data
 	mv fnc-nl.pmtiles public
-	rm rws*.mbtiles
+	rm $<*.mbtiles
 
 styles: data/styles/fnc-nl.json public/fnc-nl.json
 
