@@ -55,9 +55,9 @@ lights = {
 }
 
 color_types = {  # to reduce numer of combinations
-    "pillar spar can spherical barrel super-buoy conical light_float": "white black red green yellow grey",
+    "pillar spar can spherical barrel super-buoy conical light_float": "white black red green yellow grey orange",
     "tower lattice pile stake cairn": "white black red green yellow brown grey orange blue",
-    "sphere": "black white red green yellow",
+    "sphere": "black white red green yellow orange",
     "x-shape cross": "white black yellow",
     "2_spheres 2_cones_up 2_cones_down 2_cones_base_together 2_cones_point_together": "black red green yellow",
     "cylinder cone_point_down cone_point_up": "black white red green yellow",
