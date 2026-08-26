@@ -89,8 +89,20 @@
       "source-layer": "DEPCNT",
       "filter": ["has", "VALDCO"],
       "paint": {
-        "line-color": ["match", ["get", "VALDCO"], 2, "red", 0, "#333", "gray"],
-        "line-width": ["match", ["get", "VALDCO"], 5, 1.6, 1]
+        "line-color": [
+          "case",
+          ["all", ["<", 1, ["get", "VALDCO"]], [">=", 2, ["get", "VALDCO"]]],
+          "red",
+          ["==", 0, ["get", "VALDCO"]],
+          "#333",
+          "gray"
+        ],
+        "line-width": [
+          "case",
+          ["all", ["<=", 5, ["get", "VALDCO"]], [">", 6, ["get", "VALDCO"]]],
+          1.6,
+          1
+        ]
       }
     },
     {
@@ -2528,7 +2540,7 @@
           ],
           ["concat", "TOPSHP/", ["coalesce", ["get", "TOPSHP"], "3"], "/0/0"]
         ],
-        "visibility": "visible",
+        "visibility": "none",
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
         "icon-anchor": "bottom",
@@ -3544,10 +3556,10 @@
         "text-size": 12,
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Semi Bold"],
-        "text-anchor": "bottom-left",
         "text-justify": "auto",
         "text-radial-offset": 1,
-        "visibility": "visible"
+        "visibility": "visible",
+        "text-anchor": "bottom-left"
       }
     },
     {
@@ -3559,11 +3571,9 @@
         "text-size": 12,
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Semi Bold"],
-        "text-anchor": "bottom-left",
+        "text-variable-anchor": ["bottom-left", "bottom-right"],
         "text-justify": "auto",
-        "text-radial-offset": 1,
-        "visibility": "visible",
-        "text-variable-anchor": ["bottom-left", "bottom-right"]
+        "text-radial-offset": 1
       }
     },
     {
@@ -3575,10 +3585,15 @@
         "text-size": 12,
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Semi Bold"],
-        "text-radial-offset": 1,
-        "visibility": "visible",
         "text-variable-anchor": ["bottom-left", "bottom-right"],
-        "text-justify": "auto"
+        "text-variable-anchor-offset": [
+          "bottom-left",
+          [1, -0.7],
+          "bottom-right",
+          [-0.4, -0.7]
+        ],
+        "text-justify": "auto",
+        "text-radial-offset": 1
       }
     },
     {
@@ -3714,8 +3729,8 @@
             ""
           ]
         ],
-        "text-radial-offset": 1,
         "text-anchor": "top-left",
+        "text-radial-offset": 1,
         "text-justify": "auto"
       }
     },
