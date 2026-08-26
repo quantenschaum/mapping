@@ -1,7 +1,11 @@
 SHELL=/bin/bash
 export PATH:=$(PWD)/scripts:$(PWD)/vector/tools/bin:$(PATH)
 export OGR_S57_OPTIONS=LNAM_REFS=ON,SPLIT_MULTIPOINT=ON,ADD_SOUNDG_DEPTH=ON,LIST_AS_STRING=ON
+export OGR_SQLITE_SYNCHRONOUS=OFF
+export OGR_SQLITE_JOURNAL=MEMORY
 TODAY=$(shell date +%F)
+OO=-unsetFieldWidth -gt 65536 -ds_transaction
+mapshaper=pnpx mapshaper
 
 .PHONY: icons obf vwm charts qgis mapproxy www web
 
@@ -10,50 +14,83 @@ help:
 
 build:
 # 	$(MAKE) lightsectors.obf
-	$(MAKE) vwm rws
+	$(MAKE) -B vwm rws
 	$(MAKE) fnc-de.zip fnc-nl.zip #fnc-de.obf
-	# $(MAKE) clean-cache
-	# $(MAKE) docker-seed
-	cd vector && $(MAKE) clean split
-	cd vector && $(MAKE) tiles seed seed2x
+	cd vector && $(MAKE) clean && $(MAKE) tiles seed seed2x
 	# $(MAKE) charts tiles zips www
 	$(MAKE) charts tiles www
 
-vwm:
-	rm -rf data/vwm && mkdir -p data/vwm
-	wget -O data/vwm/drijvend.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_drijvend&outputFormat=json"
-	wget -O data/vwm/vast.json     "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_vast&outputFormat=json"
+vwm: data/vwm.gpkg
+rws: data/rws.layers
+noaa: data/noaa.layers
+CGD%: data/CGD%.layers
+	echo $@
 
-	vconvert.py data/vwm/drijvend.json data/vwm/drijvend.s57.json
-	vconvert.py data/vwm/vast.json data/vwm/vast.s57.json
-
-	rm -f data/vwm.gpkg
-	for F in $$(find data/vwm -name "*.json"); do ogr2ogr data/vwm.gpkg $$F -append; done
-
-csv:  scripts/s57objectclasses.csv scripts/s57attributes.csv
+csv: scripts/s57objectclasses.csv scripts/s57attributes.csv
 
 %.csv:
 	curl https://raw.githubusercontent.com/OpenCPN/OpenCPN/refs/heads/master/data/s57data/$(notdir $@) >$@
 
-%.zip:
-	wget -O data/$@ "`rwsget.py $(basename $@)`"
+data/rws.zip:
+	# https://www.vaarweginformatie.nl/frp/page/infra_enc
+	rm -f data/rws*.zip
+	parallel --bar 'wget -q -O data/rws_{}.zip "$$(rwsget.py {})"' ::: waddenzee zeeland port nederland
+	zipmerge $@ data/rws_*.zip
+	rm data/rws_*.zip
 
-%.enc: %.zip
-	rm -rf data/$@ data/$(basename $@).gpkg data/$(basename $@)-covr.gpkg
-	unzip -j -n data/$(basename $@).zip -d data/$@
-	for F in $$(find data/$@ -name "*.000"); do S57_CSV="$(PWD)/scripts" ogr2ogr -q $${F//.000/.gpkg} $$F; done
-	for F in $$(find data/$@ -name "*.gpkg"); do C=$${F##*/}; C=$${C%.gpkg}; for L in `ogrinfo -q $$F |grep : |cut -d ' ' -f 2`; do echo "$$C $$L"; ogrinfo $$F -q -sql "ALTER TABLE $$L ADD COLUMN chart TEXT"; ogrinfo $$F -q -sql "UPDATE $$L SET chart = '$$C'"; done; done
-	for F in $$(find data/$@ -name "*.gpkg"); do ogr2ogr data/$(basename $@).gpkg $$F -append; done
-	rm -rf data/$@
+data/noaa.zip:
+	# https://charts.noaa.gov/ENCs/ENCs.shtml
+	rm -f data/noaa*.zip
+	# wget -O $@ https://charts.noaa.gov/ENCs/All_ENCs.zip
+	# parallel -j4 --bar wget -q -O data/noaa_{}.zip https://charts.noaa.gov/ENCs/{}_ENCs.zip ::: RI #MA CT NY NJ
+	# parallel -j4 --bar wget -q -O data/noaa_CGD{}.zip https://charts.noaa.gov/ENCs/{}CGD_ENCs.zip ::: 01 05 07 08 09
+	parallel -j4 --bar wget -q -O data/noaa_CGD{}.zip https://charts.noaa.gov/ENCs/{}CGD_ENCs.zip ::: 11 13 14 17
+	# parallel -j4 --bar wget -q -O data/noaa_{}.zip https://charts.noaa.gov/ENCs/{}Region_ENCs.zip ::: 02 03 04 06 07 08 10 12 13 14 15 17 22 24 26 30 32 34 36 40
+	zipmerge $@ data/noaa_*.zip
+	rm data/noaa_*.zip
 
-rws: waddenzee.enc zeeland.enc
-	cp data/waddenzee.gpkg data/$@.gpkg
-	ogr2ogr data/$@.gpkg data/zeeland.gpkg -append
-	ogr2ogr data/$@-covr.gpkg data/$@.gpkg M_COVR
+data/CGD%.zip:
+	N=$@; wget -O $@ https://charts.noaa.gov/ENCs/$${N:8:2}CGD_ENCs.zip
 
-%.layers: data/%.gpkg
-	rm -rf data/$@ && mkdir data/$@
-	for L in `ogrinfo -q $< |grep : |cut -d ' ' -f 2`; do echo $$L; ogr2ogr -q -f GeoJSON data/$@/$$L.json $< $$L; done
+data/%.000.gpkg:
+	S57_CSV="$(PWD)/scripts" ogr2ogr -q $(OO) $@ $(basename $@)
+	C=$(basename $(basename $(notdir $@))); U=$${C:2:1}; { \
+		echo "PRAGMA journal_mode=MEMORY;"; \
+		echo "PRAGMA synchronous=OFF;"; \
+		echo "BEGIN;"; \
+		spatialite -silent "$@" " \
+		  SELECT 'ALTER TABLE \"' || table_name || '\" ADD COLUMN chart TEXT;' \
+		  FROM gpkg_contents WHERE data_type IN ('features','attributes') AND NOT EXISTS ( SELECT 1 FROM pragma_table_info(table_name) WHERE name='chart' ); \
+		  SELECT 'ALTER TABLE \"' || table_name || '\" ADD COLUMN uband INTEGER;' \
+		  FROM gpkg_contents WHERE data_type IN ('features','attributes') AND NOT EXISTS ( SELECT 1 FROM pragma_table_info(table_name) WHERE name='uband' ); \
+		  SELECT 'UPDATE \"' || table_name || '\" SET chart=''' || '$${C^^}' || ''',uband=' || '$$U' || ';' \
+		  FROM gpkg_contents WHERE data_type IN ('features','attributes'); "; \
+		echo "COMMIT;"; } | spatialite -silent "$@"
+
+data/%.enc: data/%.zip
+	rm -rf $@
+	unzip -j -n $< -d $@
+	nice parallel -j50% --bar 'make {}.gpkg >/dev/null' ::: $$(find $@ -name "*.000")
+
+.PRECIOUS: data/%.gpkg
+data/%.gpkg: data/%.enc
+	rm -f $@
+	parallel -j1 --bar ogr2ogr $@ -q -append -addfields $(OO) ::: $</*.gpkg
+	rm -rf $<
+
+data/%.layers: data/%.gpkg
+	rm -rf $@ && mkdir $@
+	parallel -j50% --bar ogr2ogr -q -f GeoJSON $@/{}.json $< {} ::: $$(ogrinfo -q $< |grep : |cut -d ' ' -f 2)
+	for F in $@/*.json; do B=$${F##*/}; B=$${B%.*}; mv $$F $@/$${B^^}.json || true; done
+
+data/vwm:
+	rm -rf $@ && mkdir -p $@
+	parallel --bar 'wget -q -O $@/{}.json "https://geo.rijkswaterstaat.nl/services/ogc/gdr/vaarweg_markeringen/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=vaarweg_markering_{}&outputFormat=json"' ::: drijvend vast
+	parallel --bar vconvert.py {} {.}.s57.json ::: $@/*.json
+
+data/vwm.gpkg: data/vwm
+	rm -f $@
+	parallel -j1 ogr2ogr $@ -append ::: $</*.json
 
 dybde-no.gpkg:
 	echo "download data from https://kartkatalog.geonorge.no/metadata/sjoekart-dybdedata/2751aacf-5472-4850-a208-3532a51c529a"
@@ -223,21 +260,6 @@ vwm-update:
 
 ########################################################################################################################
 
-
-CGDS=01 05 07 08 09 11 13 14 17
-CGDS=01
-
-data/us:
-	rm -rf $@
-	mkdir -p $@
-	for I in $(CGDS); do wget -O $@/$${I}CGD_ENCs.zip https://charts.noaa.gov/ENCs/$${I}CGD_ENCs.zip; done
-	for F in $@/*.zip; do unzip $$F -d $@; done
-
-us: data/us
-	for F in $$(find $< -name "*.000"); do echo $$F; ogr2ogr data/us.gpkg $$F -skipfailures -append; done
-
-
-
 marrekrite.gpx:
 	wget -O data/$@ "https://github.com/marcelrv/OpenCPN-Waypoints/raw/main/Marrekrite-Aanlegplaatsen.gpx"
 
@@ -314,7 +336,7 @@ fnc-de.zip:
 	rm -f charts/$@
 	zip charts/$@ -r fnc-de
 
-fnc-nl.zip: rws.layers
+fnc-nl.zip:
 	rm -rf $(basename $@)/
 # 	cp -v data/vwm/layers/*.json data/rws.layers
 	sconvert.py -o $(basename $@) data/rws.layers/*.json -t "FNC-NL `date +%F`" -u4 -j0
