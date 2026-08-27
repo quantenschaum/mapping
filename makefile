@@ -41,12 +41,12 @@ data/rws.zip:
 data/noaa.zip:
 	# https://charts.noaa.gov/ENCs/ENCs.shtml
 	rm -f data/noaa*.zip
-	# wget -O $@ https://charts.noaa.gov/ENCs/All_ENCs.zip
-	# parallel -j4 --bar wget -q -O data/noaa_{}.zip https://charts.noaa.gov/ENCs/{}_ENCs.zip ::: RI #MA CT NY NJ
+	wget -O $@ https://charts.noaa.gov/ENCs/All_ENCs.zip
+	# parallel -j4 --bar wget -q -O data/noaa_{}.zip https://charts.noaa.gov/ENCs/{}_ENCs.zip ::: MA # RI MA CT NY NJ
 	# parallel -j4 --bar wget -q -O data/noaa_CGD{}.zip https://charts.noaa.gov/ENCs/{}CGD_ENCs.zip ::: 01 05 07 08 09
-	parallel -j4 --bar wget -q -O data/noaa_CGD{}.zip https://charts.noaa.gov/ENCs/{}CGD_ENCs.zip ::: 11 13 14 17
+	# parallel -j4 --bar wget -q -O data/noaa_CGD{}.zip https://charts.noaa.gov/ENCs/{}CGD_ENCs.zip ::: 11 13 14 17
 	# parallel -j4 --bar wget -q -O data/noaa_{}.zip https://charts.noaa.gov/ENCs/{}Region_ENCs.zip ::: 02 03 04 06 07 08 10 12 13 14 15 17 22 24 26 30 32 34 36 40
-	zipmerge $@ data/noaa_*.zip
+	# zipmerge $@ data/noaa_*.zip
 	rm data/noaa_*.zip
 
 data/CGD%.zip:
@@ -70,6 +70,7 @@ data/%.000.gpkg:
 data/%.enc: data/%.zip
 	rm -rf $@
 	unzip -j -n $< -d $@
+	touch $@/.nobackup
 	nice parallel -j50% --bar 'make {}.gpkg >/dev/null' ::: $$(find $@ -name "*.000")
 
 .PRECIOUS: data/%.gpkg
@@ -79,7 +80,7 @@ data/%.gpkg: data/%.enc
 	rm -rf $<
 
 data/%.layers: data/%.gpkg
-	rm -rf $@ && mkdir $@
+	rm -rf $@ && mkdir $@ && touch $@/.nobackup
 	parallel -j50% --bar ogr2ogr -q -f GeoJSON $@/{}.json $< {} ::: $$(ogrinfo -q $< |grep : |cut -d ' ' -f 2)
 	for F in $@/*.json; do B=$${F##*/}; B=$${B%.*}; mv $$F $@/$${B^^}.json || true; done
 
