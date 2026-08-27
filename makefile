@@ -34,7 +34,7 @@ csv: scripts/s57objectclasses.csv scripts/s57attributes.csv
 data/rws.zip:
 	# https://www.vaarweginformatie.nl/frp/page/infra_enc
 	rm -f data/rws*.zip
-	parallel --bar 'wget -q -O data/rws_{}.zip "$$(rwsget.py {})"' ::: waddenzee zeeland port nederland
+	parallel --bar 'wget -q -O data/rws_{}.zip "$$(rwsget.py {})"' ::: waddenzee zeeland #port nederland
 	zipmerge $@ data/rws_*.zip
 	rm data/rws_*.zip
 
