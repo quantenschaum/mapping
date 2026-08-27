@@ -76,7 +76,7 @@ layerToggle({
 layerToggle({
   text: "L",
   title: "Lights",
-  prefix: /^light/,
+  prefix: /light/,
 });
 
 layerToggle({
@@ -90,3 +90,19 @@ layerToggle({
   title: "OSM",
   prefix: "openseamarks",
 });
+
+let isNight = false;
+
+map.addControl(
+  buttonControl({
+    text: "🌜",
+    title: "Night Mode",
+    onClick: () => {
+      isNight = !isNight;
+      map.getContainer().style.filter = isNight
+        ? "invert(100%) hue-rotate(180deg) brightness(60%)"
+        : "";
+    },
+  }),
+  "top-left",
+);
