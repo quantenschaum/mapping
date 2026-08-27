@@ -15,14 +15,14 @@ tools:
 	make -C $@
 
 dev:
-	make -Bj styles
+	make -B styles
 	pnpx vite
 
 open:
 	pnpx vite --open
 
 build:
-	make -Bj styles BASE=https://freenauticalchart.net/vector
+	make -B styles BASE=https://freenauticalchart.net/vector
 	pnpm install
 	pnpx vite build
 
@@ -37,18 +37,24 @@ tunnel:
 
 OSM=visible
 
+.PRECIOUS: data/styles/%.json
+
 data/styles/%.json: styles/s57.json
 	mkdir -p data/styles
 	N=$(patsubst data/styles/%.json,%,$@); \
-	jq '.name="'$$N'" | .sources.s57.url="mbtiles://{'$$N'}" | .sprite="icons" | .glyphs="{fontstack}/{range}.pbf" | .layers[0].layout.visibility="$(OSM)"' $< > $@
+	C=$$(pmtiles show public/$$N.pmtiles |grep center:); \
+	[[ $$C =~ long:[[:space:]]*([-0-9.]+),[[:space:]]*lat:[[:space:]]*([-0-9.]+) ]] && \
+	lon="$${BASH_REMATCH[1]}" && lat="$${BASH_REMATCH[2]}"; \
+	[[ ! -v lat ]] || LL="| .center=[$$lon,$$lat]"; \
+	jq ".name=\"$$N\" | .sources.s57.url=\"mbtiles://{$$N}\" | .sprite=\"icons\" | .glyphs=\"{fontstack}/{range}.pbf\" | .layers[0].layout.visibility=\"$(OSM)\" $$LL" $< > $@
 	gl-style-validate $@
 
 BASE=http://localhost:5173
 
-public/%.json: styles/s57.json
+public/%.json: data/styles/%.json
 	mkdir -p public
 	N=$(patsubst public/%.json,%,$@); \
-	jq '.name="'$$N'" | .sources.s57.url="pmtiles://$(BASE)/'$$N'.pmtiles" | .sources.s57.attribution="'$$N' $(TODAY)" | .sprite="$(BASE)/icons" | .glyphs="$(BASE)/fonts/{fontstack}/{range}.pbf"' $< > $@
+	jq ".name=\"$$N\" | .sources.s57.url=\"pmtiles://$(BASE)/$$N.pmtiles\" | .sources.s57.attribution=\"$$N $(TODAY)\" | .sprite=\"$(BASE)/icons\" | .glyphs=\"$(BASE)/fonts/{fontstack}/{range}.pbf\"" $< > $@
 
 sprites:
 	cd .. && make -B icons/gen && rm icons/gen/compass-*
@@ -82,7 +88,8 @@ DST=fnc-de
 ATT=FNC/BSH
 
 split/%.json: $(SRC)/%.json
-	mapshaper $< -filter 'uband>0' -o $@
+	# split by type and remove unused fields
+	mapshaper $< -filter 'uband>0' -drop fields=RCID,PRIM,GRUP,OBJL,RVER,AGEN,FIDN,FIDS,LNAM,LNAM_REFS,FFPT_RIND -o $@
 
 split: $(SRC)
 	rm -rf $@ && mkdir -p $@
@@ -95,46 +102,62 @@ split: $(SRC)
 		mapshaper $@/M_COVR.json -filter 'CATCOV==1' -o force $@/M_COVR.json || \
 		mapshaper $@/M_NSYS.json -filter 'ORIENT==null' -o $@/M_COVR.json
 	mapshaper $@/M_COVR.json -each 'cell=chart' -o force $@/M_COVR.json
-	mapshaper $@/DEPARE.json -each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' -dissolve allow-overlaps uband,areatype calc='DRVAL1=min(DRVAL1), DRVAL2=max(DRVAL2)' -explode -each 'area=this.area/1e6' -o force $@/DEPARE.json
-	mapshaper $@/SOUNDG.json -each 'VALSOU=DEPTH' -o force $@/SOUNDG.json || true
+	# mapshaper $@/DEPARE.json -each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' -filter-fields uband,areatype,DRVAL1,DRVAL2 -each 'area=this.area/1e6' -o force $@/DEPARE.json
+	mapshaper $@/DEPARE.json -each 'areatype=DRVAL1>=9.1?10:DRVAL1>=5?5:DRVAL1>=1.8?2:DRVAL1>=0?0:-1' -dissolve allow-overlaps uband,areatype calc='DRVAL1=min(DRVAL1), DRVAL2=max(DRVAL2)' -explode -each 'area=this.area/1e6' -o force $@/DEPARE.json
+	# mapshaper $@/SOUNDG.json -each 'VALSOU=DEPTH' -o force $@/SOUNDG.json || true
+	# mapshaper $@/SOUNDG.json -each 'VALSOU=DEPTH' -filter-fields uband,VALSOU -o force $@/SOUNDG.json || true
+	mapshaper $@/SOUNDG.json -each 'VALSOU=DEPTH' -dissolve group-points uband,VALSOU -o force $@/SOUNDG.json || true
 
 merged/M/%.json: split
 	mkdir -p merged/M
 	mapshaper $</M_COVR.json -filter "uband==$(patsubst merged/M/%.json,%,$@)" -dissolve -each 'mask=1' -o $@
 
+xmerged/%.json: split/%.json
+	# separate usage bands
+	for U in {1..6}; do mapshaper $< -filter "uband==$$U" -o merged/UB$$U/$(notdir $@).json; done
+
+xmerged/%.json: split/%.json
+	# higher usage bands merged with all lower bands
+	B=$(basename $@); \
+	for U in {1..6}; do mapshaper $< -filter "uband==$$U" -o $$B-$$U.json; done; \
+	$(MERGE) $$B-1.json > $@ && cp $@ merged/UB1; \
+	mapshaper $@ -erase merged/M/2.json -o $$B-1.json; \
+	$(MERGE) $$B-{1,2}.json > $@ && cp $@ merged/UB2; \
+	mapshaper $@ -erase merged/M/3.json -o $$B-1.json; \
+	$(MERGE) $$B-{1,3}.json > $@ && cp $@ merged/UB3; \
+	mapshaper $@ -erase merged/M/4.json -o $$B-1.json; \
+	$(MERGE) $$B-{1,4}.json > $@ && cp $@ merged/UB4; \
+	mapshaper $@ -erase merged/M/5.json -o $$B-1.json; \
+	$(MERGE) $$B-{1,5}.json > $@ && cp $@ merged/UB5; \
+	mapshaper $@ -erase merged/M/6.json -o $$B-1.json; \
+	$(MERGE) $$B-{1,6}.json > $@ && cp $@ merged/UB6; \
+	rm $$B*.json
+
 merged/%.json: split/%.json
-	L=$(patsubst merged/%.json,%,$@); \
-	for U in $$(seq 6); do \
-		if (( $$U < 2 )); then \
-			echo -e "\e[33m $$L $$U\e[0m"; \
-			mapshaper $< -filter "uband==$$U" -o merged/UB$$U/$$L.json; \
-		else \
-			echo -e "\e[31m $$L $$U\e[0m"; \
-			rm -f merged/$$L*.json; \
-			V=$$((U-1)); W=$$((U-2)); \
-			mapshaper $< -filter "uband==$$W" -erase merged/M/$$V.json -erase merged/M/$$U.json -o merged/$$L-$$W.json; \
-			mapshaper $< -filter "uband==$$V" -erase merged/M/$$U.json -o merged/$$L-$$V.json; \
-			# mapshaper merged/UB$$V/$$L.json -erase merged/M/$$U.json -o merged/$$L-$$V.json; \
-			mapshaper $< -filter "uband==$$U" -o merged/$$L-$$U.json && \
-			$(MERGE) merged/$$L*.json > $@ && \
-			mapshaper $@ -each uband=$$U -o force $@ && \
-			mv $@ merged/UB$$U/ && \
-			rm merged/$$L*.json || break; \
-		fi; \
-	done
-
-	L=$(patsubst merged/%.json,%,$@); \
-	for U in $$(seq 6); do \
-		mapshaper $< -filter "uband==$$U" -o merged/$$L-$$U.json; \
-	done; \
-	rm merged/$$L*.json
-
-
+	# higher usage bands merged with 2 previous bands
+	B=$(basename $@); \
+	for U in {1..6}; do mapshaper $< -filter "uband==$$U" -o $$B-$$U.json; done; \
+	$(MERGE) $$B-{1..1}.json > $@ && mv $@ merged/UB1; \
+	mapshaper $$B-1.json -erase merged/M/2.json -o force $$B-1.json; \
+	$(MERGE) $$B-{1..2}.json > $@ && mv $@ merged/UB2; \
+	mapshaper $$B-1.json -erase merged/M/3.json -o force $$B-1.json; \
+	mapshaper $$B-2.json -erase merged/M/3.json -o force $$B-2.json; \
+	$(MERGE) $$B-{1..3}.json > $@ && mv $@ merged/UB3; \
+	mapshaper $$B-2.json -erase merged/M/4.json -o force $$B-2.json; \
+	mapshaper $$B-3.json -erase merged/M/4.json -o force $$B-3.json; \
+	$(MERGE) $$B-{2..4}.json > $@ && mv $@ merged/UB4; \
+	mapshaper $$B-3.json -erase merged/M/5.json -o force $$B-3.json; \
+	mapshaper $$B-4.json -erase merged/M/5.json -o force $$B-4.json; \
+	$(MERGE) $$B-{3..5}.json > $@ && mv $@ merged/UB5; \
+	mapshaper $$B-4.json -erase merged/M/6.json -o force $$B-4.json; \
+	mapshaper $$B-5.json -erase merged/M/6.json -o force $$B-5.json; \
+	$(MERGE) $$B-{4..6}.json > $@ && mv $@ merged/UB6; \
+	rm $$B*.json
 
 merged: split
-	rm -rf $@ && mkdir -p $@/UB1 $@/UB2 $@/UB3 $@/UB4 $@/UB5 $@/UB6
+	rm -rf $@ && mkdir -p $@/UB{1..6}
 	touch $@/.nobackup
-	parallel --bar make $@/M/{}.json ::: $$(seq 6)
+	parallel --bar make $@/M/{}.json ::: {1..6}
 	nice parallel -j50% --bar make ::: $(patsubst $</%.json,$@/%.json,$(wildcard $</*.json))
 	# rm -f $@/*.json
 	for F in $@/*/*1.json; do $(MERGE) $${F//1./?.} > $${F//1./.} && rm $${F//1./?.}; done
@@ -163,13 +186,13 @@ fnc:
 	rm -rf split merged
 	make enc.tiles
 
-styles: data/styles/fnc-de.json public/fnc-de.json
+styles: public/fnc-de.json
 
 noaa:
 	rm -rf split merged
 	make enc.tiles SRC=../data/$@.layers DST=$@ ATT=NOAA
 
-styles: data/styles/noaa.json public/noaa.json
+styles: public/noaa.json
 
 rws: ../data/rws.layers
 	rm -rf $@ && cp -r $< $@
@@ -203,7 +226,7 @@ rws.tiles: rws
 	mv fnc-nl.pmtiles public
 	rm $<*.mbtiles
 
-styles: data/styles/fnc-nl.json public/fnc-nl.json
+styles: public/fnc-nl.json
 
 tiles: enc.tiles rws.tiles
 
@@ -267,7 +290,7 @@ depth-nl: rws
 	for F in $@/*.json; do ogr2ogr $${F//.json/.gpkg} $$F; done
 
 serve:
-	make -Bj styles
+	make -B styles
 	mkdir -p cache_data && touch cache_data/.nobackup
 	docker compose up
 
