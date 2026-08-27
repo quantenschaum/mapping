@@ -70,13 +70,13 @@
           "#eee",
           ["<", ["get", "DRVAL1"], 0],
           "#CADBC1",
-          ["<", ["get", "DRVAL1"], 2],
+          ["<", ["get", "DRVAL1"], 1.8],
           "#AFCCE3",
           ["<", ["get", "DRVAL1"], 5],
           "#CADEEF",
-          ["<", ["get", "DRVAL1"], 10],
+          ["<", ["get", "DRVAL1"], 9.1],
           "#F1F6FC",
-          [">=", ["get", "DRVAL1"], 10],
+          [">=", ["get", "DRVAL1"], 9.1],
           "white",
           "gray"
         ]
@@ -91,7 +91,11 @@
       "paint": {
         "line-color": [
           "case",
-          ["all", ["<", 1, ["get", "VALDCO"]], [">=", 2, ["get", "VALDCO"]]],
+          [
+            "all",
+            ["<=", 1.5, ["get", "VALDCO"]],
+            [">=", 2.5, ["get", "VALDCO"]]
+          ],
           "red",
           ["==", 0, ["get", "VALDCO"]],
           "#333",
@@ -99,7 +103,11 @@
         ],
         "line-width": [
           "case",
-          ["all", ["<=", 5, ["get", "VALDCO"]], [">", 6, ["get", "VALDCO"]]],
+          [
+            "all",
+            ["<=", 4.5, ["get", "VALDCO"]],
+            [">=", 5.5, ["get", "VALDCO"]]
+          ],
           1.6,
           1
         ]
@@ -3802,35 +3810,69 @@
       }
     },
     {
-      "id": "data-quality",
+      "id": "quality-area",
+      "type": "fill",
+      "source": "s57",
+      "source-layer": "M_QUAL",
+      "layout": { "visibility": "none" },
+      "paint": {
+        "fill-opacity": 0.2,
+        "fill-color": [
+          "match",
+          ["get", "CATZOC"],
+          1,
+          "lightgreen",
+          2,
+          "green",
+          3,
+          "yellow",
+          4,
+          "orange",
+          5,
+          "red",
+          "grey"
+        ]
+      }
+    },
+    {
+      "id": "quality-label",
       "type": "symbol",
       "source": "s57",
       "source-layer": "M_QUAL",
       "layout": {
         "text-field": [
-          "match",
-          ["get", "CATZOC"],
-          1,
-          "A1",
-          2,
-          "A2",
-          3,
-          "B",
-          4,
-          "C",
-          5,
-          "D",
-          6,
-          "U",
-          ""
+          "format",
+          [
+            "match",
+            ["get", "CATZOC"],
+            1,
+            "A1",
+            2,
+            "A2",
+            3,
+            "B",
+            4,
+            "C",
+            5,
+            "D",
+            "U"
+          ],
+          ["concat", "\n", ["get", "SUREND"]],
+          { "font-scale": 0.3 }
         ],
         "text-size": 40,
         "text-allow-overlap": true,
         "text-font": ["Noto Sans Bold"],
         "text-ignore-placement": true,
-        "visibility": "none"
+        "visibility": "none",
+        "icon-ignore-placement": false
       },
-      "paint": { "text-opacity": 0.5 }
+      "paint": {
+        "text-opacity": 0.5,
+        "text-halo-width": 3,
+        "text-halo-color": "white",
+        "text-color": "#000000"
+      }
     },
     {
       "id": "DEBUG",
