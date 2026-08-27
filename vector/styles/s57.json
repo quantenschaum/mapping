@@ -1706,7 +1706,11 @@
       "type": "symbol",
       "source": "s57",
       "source-layer": "M_COVR",
-      "filter": ["!", ["has", "ORIENT"]],
+      "filter": [
+        "all",
+        ["!", ["has", "ORIENT"]],
+        ["!=", ["geometry-type"], "LineString"]
+      ],
       "layout": {
         "text-field": ["get", "cell"],
         "text-font": ["Noto Sans Regular"],
@@ -1989,7 +1993,7 @@
         "icon-ignore-placement": true,
         "icon-anchor": "bottom",
         "icon-image": "radar-reflector",
-        "visibility": "visible",
+        "visibility": "none",
         "icon-offset": [
           "case",
           ["==", ["get", "BOYSHP"], 1],
@@ -3787,9 +3791,14 @@
       "filter": ["!", ["has", "ORIENT"]],
       "layout": { "visibility": "visible" },
       "paint": {
-        "line-opacity": 0.5,
+        "line-opacity": 0.4,
         "line-color": "gray",
-        "line-dasharray": [4, 2]
+        "line-dasharray": [
+          "case",
+          ["==", ["geometry-type"], "LineString"],
+          ["literal", [4, 2]],
+          ["literal", [4]]
+        ]
       }
     },
     {
