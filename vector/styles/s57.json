@@ -103,7 +103,11 @@
         ],
         "line-width": [
           "case",
-          ["all", ["<=", 4.5, ["get", "VALDCO"]], [">=", 5, ["get", "VALDCO"]]],
+          [
+            "all",
+            ["<=", 4.5, ["get", "VALDCO"]],
+            [">=", 5.5, ["get", "VALDCO"]]
+          ],
           1.6,
           1
         ]
