@@ -3857,7 +3857,11 @@
             "D",
             "?"
           ],
-          ["concat", "\n", ["get", "SUREND"]],
+          [
+            "concat",
+            "\n",
+            ["slice", ["coalesce", ["get", "SUREND"], ""], 0, 4]
+          ],
           { "font-scale": 0.5 }
         ],
         "text-size": 30,
