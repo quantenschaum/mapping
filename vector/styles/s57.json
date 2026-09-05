@@ -3802,8 +3802,8 @@
         "line-opacity": [
           "case",
           ["==", ["geometry-type"], "LineString"],
-          0.4,
-          0.6
+          0.3,
+          0.4
         ],
         "line-color": "gray",
         "line-dasharray": [4, 2]
