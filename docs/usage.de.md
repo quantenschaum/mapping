@@ -62,7 +62,7 @@ Die verfügbaren Werkzeuge sind (von links nach rechts)
 - **Peilung** - Peilungslinie zeichnen, rechtweisender und missweisender Wert wird angezeigt
 - **Distanz** - Distanzkreis zeichnen
 - **Peilung & Distanz** - Peilungslinie zeichnen und Distanzmarkierung setzen (Radar-Fix)
-- **Verseglte Peilung** - Peilungslinie zeichnen, dann parallel entlang eines Kursvektors verschieben
+- **Versegelte Peilung** - Peilungslinie zeichnen, dann parallel entlang eines Kursvektors verschieben
 - **Fix** - einen Schiffsort-Marker setzen
 - **Koppeln** - Koppel-Linie mit Richtung und Distanz zeichnen
 - **Stromaufgabe 1** - Stromdreieck, Koppel-Linie zeichnen, dann Stromvektor
