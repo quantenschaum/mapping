@@ -3799,14 +3799,14 @@
       "filter": ["!", ["has", "ORIENT"]],
       "layout": { "visibility": "visible" },
       "paint": {
-        "line-opacity": 0.4,
-        "line-color": "gray",
-        "line-dasharray": [
+        "line-opacity": [
           "case",
           ["==", ["geometry-type"], "LineString"],
-          ["literal", [4, 2]],
-          ["literal", [4]]
-        ]
+          0.4,
+          0.6
+        ],
+        "line-color": "gray",
+        "line-dasharray": [4, 2]
       }
     },
     {
