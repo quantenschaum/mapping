@@ -77,6 +77,7 @@ data/%.enc: data/%.zip
 data/%.gpkg: data/%.enc
 	rm -f $@
 	parallel -j1 --bar ogr2ogr $@ -q -append -addfields $(OO) ::: $</*.gpkg
+	ls -lh $@
 	rm -rf $<
 
 data/%.layers: data/%.gpkg
