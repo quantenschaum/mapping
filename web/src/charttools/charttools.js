@@ -4,6 +4,7 @@ import "./charttools.less";
 import { degmin } from "../graticule";
 import { deg, rad, to180, to360, p2c, c2p, clamp } from "../utils";
 import { declination } from "./declination";
+import { ackee } from "../ackee";
 const icons = import.meta.glob("./charttools-*.svg", { eager: true });
 
 const isDevMode = import.meta.env.DEV;
@@ -622,6 +623,10 @@ export const ChartTools = L.Control.extend({
       b.title = name;
       if (action)
         b.addEventListener("click", (e) => {
+          ackee.action("b86efd17-234c-49e0-bf2a-0a949fea2a5c", {
+            key: name,
+            value: 1,
+          });
           if (cancelAction) cancelAction();
           action();
         });
