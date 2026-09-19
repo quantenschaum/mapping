@@ -1578,7 +1578,11 @@
       "source-layer": "SBDARE",
       "filter": ["match", ["get", "NATSUR"], "9", true, "14", true, false],
       "layout": { "visibility": "visible" },
-      "paint": { "fill-pattern": "rock-area", "fill-antialias": false }
+      "paint": {
+        "fill-pattern": "rock-area",
+        "fill-antialias": false,
+        "fill-opacity": 0.6
+      }
     },
     {
       "id": "seabed-reef",
