@@ -1572,6 +1572,47 @@
       "paint": { "text-color": "gray" }
     },
     {
+      "id": "seabed-area",
+      "type": "fill",
+      "source": "s57",
+      "source-layer": "SBDARE",
+      "filter": ["match", ["get", "NATSUR"], "9", true, "14", true, false],
+      "layout": { "visibility": "visible" },
+      "paint": { "fill-pattern": "rock-area", "fill-antialias": false }
+    },
+    {
+      "id": "seabed-reef",
+      "type": "line",
+      "source": "s57",
+      "source-layer": "SBDARE",
+      "filter": ["match", ["get", "NATSUR"], "9", true, "14", true, false],
+      "layout": { "visibility": "none" },
+      "paint": {
+        "line-pattern": [
+          "match",
+          ["get", "NATSUR"],
+          "14",
+          "reef-coral-i",
+          "reef-rock-i"
+        ],
+        "line-width": {
+          "stops": [
+            [12, 6],
+            [14, 12]
+          ]
+        }
+      }
+    },
+    {
+      "id": "seabed-reef-line",
+      "type": "line",
+      "source": "s57",
+      "source-layer": "SBDARE",
+      "filter": ["match", ["get", "NATSUR"], "9", true, "14", true, false],
+      "layout": { "visibility": "visible" },
+      "paint": { "line-opacity": 0.6, "line-dasharray": [4, 2] }
+    },
+    {
       "id": "flood-ebb",
       "type": "symbol",
       "source": "s57",
@@ -1913,6 +1954,22 @@
       "paint": {
         "text-color": ["case", [">", ["get", "VALSOU"], 5], "gray", "black"]
       }
+    },
+    {
+      "id": "obstructions-area",
+      "type": "fill",
+      "source": "s57",
+      "source-layer": "OBSTRN",
+      "filter": ["==", ["get", "CATOBS"], 6],
+      "paint": { "fill-pattern": "foul-area" }
+    },
+    {
+      "id": "obstructions-area-line",
+      "type": "line",
+      "source": "s57",
+      "source-layer": "OBSTRN",
+      "filter": ["==", ["get", "CATOBS"], 6],
+      "paint": { "line-opacity": 0.8, "line-dasharray": [2, 2] }
     },
     {
       "id": "rocks",
