@@ -1578,11 +1578,7 @@
       "source-layer": "SBDARE",
       "filter": ["match", ["get", "NATSUR"], "9", true, "14", true, false],
       "layout": { "visibility": "visible" },
-      "paint": {
-        "fill-pattern": "rock-area",
-        "fill-antialias": false,
-        "fill-opacity": 0.6
-      }
+      "paint": { "fill-pattern": "rock-area", "fill-opacity": 0.6 }
     },
     {
       "id": "seabed-reef",
@@ -1615,6 +1611,26 @@
       "filter": ["match", ["get", "NATSUR"], "9", true, "14", true, false],
       "layout": { "visibility": "visible" },
       "paint": { "line-opacity": 0.6, "line-dasharray": [4, 2] }
+    },
+    {
+      "id": "landtype-area",
+      "type": "fill",
+      "source": "s57",
+      "source-layer": "LNDRGN",
+      "filter": ["match", ["get", "CATLND"], "2", true, false],
+      "paint": { "fill-pattern": "marsh-area", "fill-opacity": 0.6 }
+    },
+    {
+      "id": "landtype-area-line",
+      "type": "line",
+      "source": "s57",
+      "source-layer": "LNDRGN",
+      "filter": ["match", ["get", "CATLND"], "2", true, false],
+      "paint": {
+        "line-dasharray": [2, 2],
+        "line-opacity": 0.6,
+        "line-color": "gray"
+      }
     },
     {
       "id": "flood-ebb",
@@ -1697,7 +1713,54 @@
       "source-layer": "LNDRGN",
       "filter": ["all"],
       "layout": {
-        "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
+        "text-field": [
+          "coalesce",
+          ["get", "NOBJNM"],
+          ["get", "OBJNAM"],
+          [
+            "match",
+            ["get", "CATLND"],
+            "1",
+            "fen",
+            "-2",
+            "marsh",
+            "3",
+            "bog",
+            "4",
+            "heath",
+            "5",
+            "mountain",
+            "6",
+            "lowland",
+            "7",
+            "canyon",
+            "8",
+            "paddy",
+            "9",
+            "farmland",
+            "10",
+            "grass",
+            "11",
+            "park",
+            "12",
+            "swamp",
+            "13",
+            "landslide",
+            "14",
+            "lava",
+            "15",
+            "salt pan",
+            "16",
+            "moraine",
+            "17",
+            "crater",
+            "19",
+            "pinnacle",
+            "20",
+            "cay",
+            ""
+          ]
+        ],
         "text-size": 13,
         "text-font": ["Noto Sans Italic"]
       },
