@@ -16,7 +16,7 @@ build:
 # 	$(MAKE) lightsectors.obf
 	$(MAKE) -B vwm rws
 	$(MAKE) fnc-de.zip fnc-nl.zip #fnc-de.obf
-	cd vector && $(MAKE) clean && $(MAKE) tiles seed seed2x
+	cd vector && $(MAKE) clean && $(MAKE) sprites tiles seed seed2x
 	# $(MAKE) charts tiles zips www
 	$(MAKE) charts tiles www
 

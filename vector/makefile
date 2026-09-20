@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 export PATH:=$(PWD)/tools/bin:$(PWD)/node_modules/.bin:$(PATH)
-export NODE_OPTIONS="--max-old-space-size=8192"
+export NODE_OPTIONS="--max-old-space-size=16384"
 TODAY=$(shell date +%F)
 
 # usesful tools
