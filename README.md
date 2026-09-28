@@ -36,8 +36,8 @@ Die Einzellotungen wurdeen mangels Verfügbarkeit nicht aktualisiert, es kann al
 
 |   Datum    | Layer  | Beschreibung  |
 | :--------: | :----: | :------------ |
-| 2026-08-08 | DEPARE | Konturflächen |
-| 2026-08-08 | DEPCNT | Tiefenlinien  |
+| 2026-09-29 | DEPARE | Konturflächen |
+| 2026-09-29 | DEPCNT | Tiefenlinien  |
 
 ## NfS-Korrekturen
 
@@ -69,3 +69,4 @@ Die Einzellotungen wurdeen mangels Verfügbarkeit nicht aktualisiert, es kann al
 | 36/2026 |     ✓      |       ✓       |
 | 37/2026 |     ✓      |       ✓       |
 | 38/2026 |     ✓      |       -       |
+| 39/2026 |     ✓      |       ✓       |
