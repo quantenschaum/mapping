@@ -16,7 +16,7 @@ build:
 # 	$(MAKE) lightsectors.obf
 	$(MAKE) -B vwm rws
 	$(MAKE) fnc-de.zip fnc-nl.zip #fnc-de.obf
-	cd vector && $(MAKE) clean && $(MAKE) obf sprites tiles seed seed2x
+	cd vector && $(MAKE) clean && $(MAKE) obf sprites tiles deploy seed seed2x
 	# $(MAKE) charts tiles zips www
 	$(MAKE) charts tiles www
 
@@ -373,11 +373,6 @@ lightsectors.obf:
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/lightsectors.obf obf/*.obf
 
-depth+de.obf:
-	rm -rf obf
-	rm -rf osm && mkdir -p osm
-	cp data/depth-de-2.osm osm
-	$(MAKE) obf BLEVEL=0
 
 depth-de.depth.obf:
 	rm -rf obf osm
