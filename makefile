@@ -379,22 +379,7 @@ depth+de.obf:
 	cp data/depth-de-2.osm osm
 	$(MAKE) obf BLEVEL=0
 
-	rm -rf osm && mkdir -p osm
-	cp data/depth-de-3.osm osm
-	$(MAKE) obf BLEVEL=1
-
-	rm -rf osm && mkdir -p osm
-	cp data/depth-de-4.osm osm
-	$(MAKE) obf BLEVEL=2
-
-	rm -rf osm && mkdir -p osm
-	cp data/depth-de-6.osm osm
-	$(MAKE) obf BLEVEL=3
-
-	mkdir -p charts
-	data/omc/inspector.sh -c charts/$@ obf/*.obf
-
-de.depth.obf:
+depth-de.depth.obf:
 	rm -rf obf osm
 	mkdir -p osm
 	cp vector/depth-de/*.osm osm
@@ -402,7 +387,7 @@ de.depth.obf:
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/$@ obf/*.obf
 
-nl.depth.obf:
+depth-nl.depth.obf:
 	rm -rf obf
 	rm -rf osm && mkdir -p osm
 	cp vector/depth-nl/DEP*.osm osm

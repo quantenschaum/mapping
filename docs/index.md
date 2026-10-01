@@ -49,8 +49,8 @@ Here you find precompiled charts for download in various formats usable in diffe
 
 Vector charts and styles for OsmAnd can be installed by simply opening the `obf` or `xml` file with the OsmAnd app, it will automatically import the file and use it as part of the "offline vector chart". 
 
-- [:de: Depth Data DE](de.depth.obf){:download}
-- [:nl: Depth Data NL](nl.depth.obf){:download}
+- [:de: Depth Data DE](depth-de.depth.obf){:download}
+- [:nl: Depth Data NL](depth-nl.depth.obf){:download}
 - [:globe_with_meridians: Light Sectors Worldwide](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download} (**important!**)
 
