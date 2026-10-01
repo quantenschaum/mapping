@@ -266,7 +266,7 @@ depth-de: merged/UB6
 	# ogr2ogr $@/$@.gpkg $@/DEPCNT.json -append
 	# ogr2ogr $@/$@.gpkg $@/SOUNDG.json -append
 	parallel --bar ogr2osm {} -o {.}.osm ::: $@/*.json
-	cd .. && make de.depth.obf
+	cd .. && make depth-de.depth.obf
 
 
 depth-nl: rws
@@ -293,7 +293,7 @@ depth-nl: rws
 	mapshaper $@/SOUNDG1.json -filter 'SCAMIN>=160000' -o $@/SOUNDG0.json
 	# for F in $@/*.json; do ogr2ogr $${F//.json/.gpkg} $$F; done
 	parallel --bar ogr2osm {} -o {.}.osm ::: $@/*.json
-	cd .. && make nl.depth.obf
+	cd .. && make depth-nl.depth.obf
 
 obf: depth-de depth-nl
 
