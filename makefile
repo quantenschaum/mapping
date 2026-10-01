@@ -394,17 +394,18 @@ depth+de.obf:
 	mkdir -p charts
 	data/omc/inspector.sh -c charts/$@ obf/*.obf
 
-depth-de.obf:
+de.depth.obf:
 	rm -rf obf osm
 	mkdir -p osm
-	cp vector/depth-de/depth-de.osm osm
+	cp vector/depth-de/*.osm osm
 	$(MAKE) obf
-	cp obf/depth-de.obf charts/$@
+	mkdir -p charts
+	data/omc/inspector.sh -c charts/$@ obf/*.obf
 
-depth-nl.obf:
+nl.depth.obf:
 	rm -rf obf
 	rm -rf osm && mkdir -p osm
-	cp vector/depth-nl/DEPARE.osm vector/depth-nl/DEPCNT.osm osm
+	cp vector/depth-nl/DEP*.osm osm
 	$(MAKE) obf
 
 	rm -rf osm && mkdir -p osm
