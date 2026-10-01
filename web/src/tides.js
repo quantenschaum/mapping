@@ -153,16 +153,8 @@ async function reproject(geojson, fromCRS = "EPSG:25831", toCRS = "EPSG:4326") {
     return geom;
   }
 
-  let converted = JSON.parse(JSON.stringify(geojson)); // Deep clone
-  if (converted.type === "FeatureCollection") {
-    converted.features.forEach((f) => processGeometry(f.geometry));
-  } else if (converted.type === "Feature") {
-    processGeometry(converted.geometry);
-  } else {
-    processGeometry(converted);
-  }
-
-  return converted;
+  geojson.features.forEach((f) => processGeometry(f.geometry));
+  return geojson;
 }
 
 function localTZ(date) {
@@ -462,6 +454,8 @@ export async function addTideGaugesNL(map, kind = "astronomische-getij") {
     .then((data) => reproject(data))
     .catch(log);
 
+  // log(data);
+
   const layer = L.geoJSON(data, {
     pointToLayer: function (feature, latlng) {
       const props = feature.properties;
@@ -476,6 +470,7 @@ export async function addTideGaugesNL(map, kind = "astronomische-getij") {
     },
     onEachFeature: (feature, layer) => {
       const p = feature.properties;
+      // log(feature);
       const link = `https://waterinfo.rws.nl/publiek/${kind}/${p.locationCode}/details`;
       if (p.name) {
         layer.bindPopup(`<a href="${link}" target="_blank">${p.name}</a>`);
