@@ -236,28 +236,28 @@ clean: clean-cache
 clean-cache:
 	rm -rf cache_data
 
-depth-de: merged/UB6
+depth-de: merged
 	rm -rf $@ && mkdir -p $@
-	mapshaper $</DEPARE.json \
+	mapshaper $</UB6/DEPARE.json \
 		-each 'contourarea="depth"' \
 		-each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' \
 		-dissolve allow-overlaps fields=contourarea,areatype -explode \
 		-o $@/DEPARE.json
-	mapshaper $@/DEPARE.json -filter 'areatype==10' -erase $</LNDARE.json -o $@/DEPARE1.json
-	mapshaper $@/DEPARE.json -filter 'areatype==5'  -erase $</LNDARE.json -o $@/DEPARE2.json
-	mapshaper $@/DEPARE.json -filter 'areatype==2'  -erase $</LNDARE.json -o $@/DEPARE3.json
-	mapshaper $@/DEPARE.json -filter 'areatype==0'  -erase $</LNDARE.json -o $@/DEPARE4.json
-	mapshaper $@/DEPARE.json -filter 'areatype==-1' -erase $</LNDARE.json -o $@/DEPARE5.json
+	mapshaper $@/DEPARE.json -filter 'areatype==10' -erase $</UB6/LNDARE.json -o $@/DEPARE1.json
+	mapshaper $@/DEPARE.json -filter 'areatype==5'  -erase $</UB6/LNDARE.json -o $@/DEPARE2.json
+	mapshaper $@/DEPARE.json -filter 'areatype==2'  -erase $</UB6/LNDARE.json -o $@/DEPARE3.json
+	mapshaper $@/DEPARE.json -filter 'areatype==0'  -erase $</UB6/LNDARE.json -o $@/DEPARE4.json
+	mapshaper $@/DEPARE.json -filter 'areatype==-1' -erase $</UB6/LNDARE.json -o $@/DEPARE5.json
 	$(MERGE) $@/DEPARE?.json >$@/DEPARE.json
 	rm $@/DEPARE?.json
-	mapshaper $</DEPCNT.json \
+	mapshaper $</UB6/DEPCNT.json \
 		-filter 'VALDCO<0 || [0,1,2,3,4,5,10,20,50].includes(VALDCO)' \
 		-each 'contour="depth"' \
 		-each 'depth=VALDCO.toFixed(0)' \
 		-each 'contourtype=VALDCO<0?"-1":[0,1,2,3,4,5,10,20,50].includes(VALDCO)?VALDCO.toFixed(0)+"m":VALDCO%1000==0?"1000":VALDCO%100==0?"100":VALDCO%10==0?"10":VALDCO%5==0?"5":"1"' \
 		-dissolve contour,depth,contourtype \
 		-o $@/DEPCNT.json
-	mapshaper $</SOUNDG.json \
+	mapshaper $</UB6/SOUNDG.json \
 		-each 'point="depth"' \
 		-each 'depth=VALSOU>10||VALSOU%10==0?VALSOU.toFixed(0):VALSOU.toFixed(1)' \
 		-filter-fields point,depth \
