@@ -20,6 +20,6 @@
   "devDependencies": {
     "@maplibre/maplibre-gl-style-spec": "^24.10.0",
     "fontnik": "^0.7.7",
-    "mapshaper": "^0.7.61"
+    "mapshaper": "^0.7.69"
   }
 }

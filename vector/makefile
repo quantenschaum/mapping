@@ -231,7 +231,7 @@ styles: public/fnc-nl.json
 tiles: enc.tiles rws.tiles
 
 clean: clean-cache
-	rm -rf dist split merged rws *.gpkg *.mbtiles *.pmtiles *@2x.yaml depth-de*
+	rm -rf dist split merged rws *.gpkg *.mbtiles *.pmtiles *@2x.yaml depth-*/
 
 clean-cache:
 	rm -rf cache_data
@@ -241,7 +241,7 @@ depth-de: merged/UB6
 	mapshaper $</DEPARE.json \
 		-each 'contourarea="depth"' \
 		-each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' \
-		-dissolve allow-overlaps fields=contourarea,areatype \
+		-dissolve allow-overlaps fields=contourarea,areatype -explode \
 		-o $@/DEPARE.json
 	mapshaper $@/DEPARE.json -filter 'areatype==10' -erase $</LNDARE.json -o $@/DEPARE1.json
 	mapshaper $@/DEPARE.json -filter 'areatype==5'  -erase $</LNDARE.json -o $@/DEPARE2.json
@@ -249,6 +249,7 @@ depth-de: merged/UB6
 	mapshaper $@/DEPARE.json -filter 'areatype==0'  -erase $</LNDARE.json -o $@/DEPARE4.json
 	mapshaper $@/DEPARE.json -filter 'areatype==-1' -erase $</LNDARE.json -o $@/DEPARE5.json
 	$(MERGE) $@/DEPARE?.json >$@/DEPARE.json
+	rm $@/DEPARE?.json
 	mapshaper $</DEPCNT.json \
 		-filter 'VALDCO<0 || [0,1,2,3,4,5,10,20,50].includes(VALDCO)' \
 		-each 'contour="depth"' \
@@ -261,16 +262,19 @@ depth-de: merged/UB6
 		-each 'depth=VALSOU>10||VALSOU%10==0?VALSOU.toFixed(0):VALSOU.toFixed(1)' \
 		-filter-fields point,depth \
 		-o $@/SOUNDG.json
-	ogr2ogr $@/$@.gpkg $@/DEPARE.json
-	ogr2ogr $@/$@.gpkg $@/DEPCNT.json -append
-	ogr2ogr $@/$@.gpkg $@/SOUNDG.json -append
+	# ogr2ogr $@/$@.gpkg $@/DEPARE.json
+	# ogr2ogr $@/$@.gpkg $@/DEPCNT.json -append
+	# ogr2ogr $@/$@.gpkg $@/SOUNDG.json -append
+	parallel --bar ogr2osm {} -o {.}.osm ::: $@/*.json
+	cd .. && make de.depth.obf
+
 
 depth-nl: rws
 	rm -rf $@ && mkdir -p $@
 	mapshaper $</DEPARE.json \
 		-each 'contourarea="depth"' \
 		-each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' \
-		-dissolve allow-overlaps fields=contourarea,areatype \
+		-dissolve allow-overlaps fields=contourarea,areatype -explode \
 		-o $@/DEPARE.json
 	mapshaper $</DEPCNT.json \
 		-filter 'VALDCO<0 || [0,1,2,3,4,5,10,20,50].includes(VALDCO)' \
@@ -287,7 +291,11 @@ depth-nl: rws
 	mapshaper $@/SOUNDG3.json -filter 'SCAMIN>=40000'  -o $@/SOUNDG2.json
 	mapshaper $@/SOUNDG2.json -filter 'SCAMIN>=80000'  -o $@/SOUNDG1.json
 	mapshaper $@/SOUNDG1.json -filter 'SCAMIN>=160000' -o $@/SOUNDG0.json
-	for F in $@/*.json; do ogr2ogr $${F//.json/.gpkg} $$F; done
+	# for F in $@/*.json; do ogr2ogr $${F//.json/.gpkg} $$F; done
+	parallel --bar ogr2osm {} -o {.}.osm ::: $@/*.json
+	cd .. && make nl.depth.obf
+
+obf: depth-de depth-nl
 
 serve:
 	make -B styles
