@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "name": "LITVES",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJNAM": "GB",
+        "COLPAT": null,
+        "COLOUR": "3",
+        "uband": 1,
+        "chart": "DE1NO000",
+        "layer": "LITVES"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.458762, 54.179604] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJNAM": "GB",
+        "COLPAT": null,
+        "COLOUR": "3",
+        "uband": 2,
+        "chart": "DE2NO000",
+        "layer": "LITVES"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.458762, 54.179604] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJNAM": "GB",
+        "COLPAT": null,
+        "COLOUR": "3",
+        "uband": 3,
+        "chart": "DE3NO02D",
+        "layer": "LITVES"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.458762, 54.179604] }
+    }
+  ]
+}
