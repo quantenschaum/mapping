@@ -11,7 +11,7 @@ function track(x) {
   });
 }
 
-export async function addBfS(map, only_valid = true) {
+export async function addBfS(map) {
   const log = logger("BfS", "orange");
   const now = new Date();
   const index = await fetch("/bfs/index.json")
@@ -37,8 +37,6 @@ export async function addBfS(map, only_valid = true) {
     // log(now);
     // log(t1);
 
-    if (!valid && only_valid) return;
-
     const layer = L.geoJSON(data, {
       // ...opts,
       onEachFeature: (f, l) => {
@@ -60,8 +58,8 @@ export async function addBfS(map, only_valid = true) {
         L.circleMarker(latlng, {
           radius: 4,
           weight: 3,
-          color: "gold",
-          fillColor: valid ? "green" : "darkred",
+          color: "red",
+          fillColor: valid ? "white" : "black",
           fillOpacity: 1,
         }),
     });
@@ -70,56 +68,47 @@ export async function addBfS(map, only_valid = true) {
   });
 }
 
-export async function addNfS(map, year = 2025) {
+export async function addNfS(map) {
   const log = logger("NfS", "gold");
   const now = new Date();
-  const index = await fetch(`/nfs/${year}/index.json`)
+  const data = await fetch(`/nfs/nfs.json`)
     .then((r) => r.json())
     .catch(log);
-  index.forEach(async (i) => {
-    log("NfS", i);
-    const data = await fetch(`/nfs/${year}/${String(i).padStart(2, "0")}.json`)
-      .then((r) => r.json())
-      .catch(log);
-    if (!data) return;
-    const props = data.properties;
-    log(props);
-    const { number, source, issued } = props;
-
-    const layer = L.geoJSON(data, {
-      // ...opts,
-      onEachFeature: (f, l) => {
-        const fp = f.properties;
-        log(fp);
-        l.bindPopup(`<div class="bfs">
-          <div class="title">${fp.action}</div>
-          <div class="text">${fp.desc}</div>
-          <div class="source"><a href="${source}" target="_blank">NfS ${number}/${year}</a> ${issued}</div>
-          </div>`);
-        if (fp.action) {
-          let desc = fp.desc || "";
-          if (desc.length > 30) desc = desc.slice(0, 30) + "...";
-          l.bindTooltip(fp.action + ": " + desc);
-        }
-      },
-      pointToLayer: (f, latlng) => {
-        const fp = f.properties;
-        return L.circleMarker(latlng, {
-          radius: 4,
-          weight: 3,
-          color: "lightblue",
-          fillColor: fp.action.includes("del")
-            ? "darkred"
-            : fp.action.includes("ins")
-              ? "green"
-              : fp.action.includes("re")
-                ? "orange"
-                : "white",
-          fillOpacity: 1,
-        });
-      },
-    });
-
-    layer.addTo(map);
+  log(data);
+  const layer = L.geoJSON(data, {
+    onEachFeature: (f, l) => {
+      const p = f.properties;
+      log(p);
+      const [nr, year] = p.nfs.split("/");
+      l.bindPopup(`<div class="bfs">
+        <div class="title">${p.name}</div>
+        <div class="text">${p.desc}</div>
+        <div class="source"><a href="https://www2.bsh.de/daten/NFS/NfS${year}/nfs-heft${nr}-${year}.pdf" target="_blank">NfS ${p.nfs}</a><br/>${p.bfs}</div>
+        </div>`);
+      if (p.action) {
+        let desc = p.desc || "";
+        if (desc.length > 30) desc = desc.slice(0, 30) + "...";
+        l.bindTooltip(p.action + ": " + desc);
+      }
+    },
+    pointToLayer: (f, latlng) => {
+      const p = f.properties;
+      return L.circleMarker(latlng, {
+        radius: 4,
+        weight: 3,
+        color: "green",
+        // fillColor: "lightblue",
+        fillColor: p?.desc.includes("insert")
+          ? "lightgreen"
+          : p?.desc.includes("delete")
+            ? "red"
+            : p?.desc.includes("reloc")
+              ? "orange"
+              : "lightblue",
+        fillOpacity: 1,
+      });
+    },
   });
+
+  layer.addTo(map);
 }

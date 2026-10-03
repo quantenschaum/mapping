@@ -407,8 +407,12 @@ export async function addTideGaugesDE(map) {
           let m = L.circleMarker([p.latitude, p.longitude], {
             radius: 4,
             weight: 3,
-            color: p.gauge_label.includes("Helgoland") ? "darkred" : "blue",
-            fillColor: p.bsh_url_waterlevel ? "white" : "lightblue",
+            color: "blue",
+            fillColor: p.gauge_label.includes("Helgoland")
+              ? "magenta"
+              : p.bsh_url_waterlevel
+                ? "white"
+                : "lightblue",
             fillOpacity: 1,
           })
             .bindPopup(
