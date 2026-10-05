@@ -46,12 +46,12 @@ export async function addBfS(map, start_date) {
             <div class="date ${expired ? "expired" : valid ? "" : "invalid"}">${p.from} - ${p.to}</div>
           <div class="text">${fp?.desc || text}</div>
             </div>`);
-        if (fp?.name || bfs) {
-          let desc = fp?.desc || "";
-          if (desc.length > 20) desc = desc.slice(0, 20) + "...";
-          l.bindTooltip((fp?.name || bfs) + ": " + desc);
-        }
-        l.on;
+        // if (fp?.name || bfs) {
+        //   let desc = fp?.desc || "";
+        //   if (desc.length > 20) desc = desc.slice(0, 20) + "...";
+        //   l.bindTooltip((fp?.name || bfs) + ": " + desc);
+        // }
+        // l.on;
       },
       pointToLayer: (f, latlng) =>
         L.circleMarker(latlng, {
@@ -84,11 +84,11 @@ export async function addNfS(map) {
         <div class="text">${p.desc}</div>
         <div class="source"><a href="https://www2.bsh.de/daten/NFS/NfS${year}/nfs-heft${nr}-${year}.pdf" target="_blank">NfS ${p.nfs}</a><br/>${p.bfs}</div>
         </div>`);
-      if (p.action) {
-        let desc = p.desc || "";
-        if (desc.length > 30) desc = desc.slice(0, 30) + "...";
-        l.bindTooltip(p.action + ": " + desc);
-      }
+      // if (p.action) {
+      //   let desc = p.desc || "";
+      //   if (desc.length > 30) desc = desc.slice(0, 30) + "...";
+      //   l.bindTooltip(p.action + ": " + desc);
+      // }
     },
     pointToLayer: (f, latlng) => {
       const p = f.properties;
