@@ -11,7 +11,7 @@ function track(x) {
   });
 }
 
-export async function addBfS(map) {
+export async function addBfS(map, start_date) {
   const log = logger("BfS", "orange");
   const now = new Date();
   const index = await fetch("/bfs/index.json")
@@ -31,11 +31,10 @@ export async function addBfS(map) {
     const expired = t1 < now;
     const valid = p.valid && t0 <= now && now <= t1;
     const temp = p.temporary || bfs.includes("T");
+    if (!valid) return;
+    if (!!start_date && start_date.length == 10 && p.from < start_date) return;
     log(i, bfs, valid, temp);
     log(p);
-    // log(t0);
-    // log(now);
-    // log(t1);
 
     const layer = L.geoJSON(data, {
       // ...opts,
@@ -44,7 +43,7 @@ export async function addBfS(map) {
         l.bindPopup(`<div class="bfs">
           <div class="title">${fp?.name || bfs}</div>
           <div class="source"><a href="${url}" target="_blank">BfS ${bfs} ${amt}</a></div>
-            <div class="date ${expired ? "expired" : valid ? "" : "invalid"}">${t0.toISOString().replace(/T.*/, "")} - ${t1.toISOString().replace(/T.*/, "")}</div>
+            <div class="date ${expired ? "expired" : valid ? "" : "invalid"}">${p.from} - ${p.to}</div>
           <div class="text">${fp?.desc || text}</div>
             </div>`);
         if (fp?.name || bfs) {
@@ -59,7 +58,7 @@ export async function addBfS(map) {
           radius: 4,
           weight: 3,
           color: "red",
-          fillColor: valid ? "white" : "black",
+          fillColor: valid ? (temp ? "blue" : "white") : "black",
           fillOpacity: 1,
         }),
     });
