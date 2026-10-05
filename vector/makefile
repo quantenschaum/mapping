@@ -2,6 +2,7 @@ SHELL=/bin/bash
 export PATH:=$(PWD)/tools/bin:$(PWD)/node_modules/.bin:$(PATH)
 export NODE_OPTIONS="--max-old-space-size=16384"
 TODAY=$(shell date +%F)
+BAR=$(shell test -t 1 && echo --bar || true)
 
 # usesful tools
 # https://stevage.github.io/vector-inspector/
@@ -94,7 +95,7 @@ split/%.json: $(SRC)/%.json
 split: $(SRC)
 	rm -rf $@ && mkdir -p $@
 	touch $@/.nobackup
-	nice parallel -j50% --bar make ::: $(patsubst $</%.json,$@/%.json,$(wildcard $</??????.json))
+	nice parallel -j50% $(BAR) make ::: $(patsubst $</%.json,$@/%.json,$(wildcard $</??????.json))
 	$(MERGE) $@/BOY*.json > $@/buoys.json
 	$(MERGE) $@/BCN*.json > $@/beacons.json
 	rm $@/BOY*.json $@/BCN*.json
@@ -157,8 +158,8 @@ merged/%.json: split/%.json
 merged: split
 	rm -rf $@ && mkdir -p $@/UB{1..6}
 	touch $@/.nobackup
-	parallel --bar make $@/M/{}.json ::: {1..6}
-	nice parallel -j50% --bar make ::: $(patsubst $</%.json,$@/%.json,$(wildcard $</*.json))
+	parallel $(BAR) make $@/M/{}.json ::: {1..6}
+	nice parallel -j50% $(BAR) make ::: $(patsubst $</%.json,$@/%.json,$(wildcard $</*.json))
 	# rm -f $@/*.json
 	for F in $@/*/*1.json; do $(MERGE) $${F//1./?.} > $${F//1./.} && rm $${F//1./?.}; done
 	# for F in $$(cd $@/UB6 && echo *.json); do $(MERGE) $@/UB?/$$F >$@/$$F; done
@@ -243,13 +244,15 @@ depth-de: merged
 		-each 'areatype=DRVAL1>=10?10:DRVAL1>=5?5:DRVAL1>=2?2:DRVAL1>=0?0:-1' \
 		-dissolve allow-overlaps fields=contourarea,areatype -explode \
 		-o $@/DEPARE.json
-	mapshaper $@/DEPARE.json -filter 'areatype==10' -erase $</UB6/LNDARE.json -o $@/DEPARE1.json
-	mapshaper $@/DEPARE.json -filter 'areatype==5'  -erase $</UB6/LNDARE.json -o $@/DEPARE2.json
-	mapshaper $@/DEPARE.json -filter 'areatype==2'  -erase $</UB6/LNDARE.json -o $@/DEPARE3.json
-	mapshaper $@/DEPARE.json -filter 'areatype==0'  -erase $</UB6/LNDARE.json -o $@/DEPARE4.json
-	mapshaper $@/DEPARE.json -filter 'areatype==-1' -erase $</UB6/LNDARE.json -o $@/DEPARE5.json
+	mapshaper $</UB6/LNDARE.json -o $@/LNDARE.json
+	cp $@/LNDARE1.json $@/LNDARE.json || true
+	mapshaper $@/DEPARE.json -filter 'areatype==10' -erase $@/LNDARE.json -o $@/DEPARE1.json
+	mapshaper $@/DEPARE.json -filter 'areatype==5'  -erase $@/LNDARE.json -o $@/DEPARE2.json
+	mapshaper $@/DEPARE.json -filter 'areatype==2'  -erase $@/LNDARE.json -o $@/DEPARE3.json
+	mapshaper $@/DEPARE.json -filter 'areatype==0'  -erase $@/LNDARE.json -o $@/DEPARE4.json
+	mapshaper $@/DEPARE.json -filter 'areatype==-1' -erase $@/LNDARE.json -o $@/DEPARE5.json
 	$(MERGE) $@/DEPARE?.json >$@/DEPARE.json
-	rm $@/DEPARE?.json
+	rm $@/DEPARE?.json $@/LNDARE*.json
 	mapshaper $</UB6/DEPCNT.json \
 		-filter 'VALDCO<0 || [0,1,2,3,4,5,10,20,50].includes(VALDCO)' \
 		-each 'contour="depth"' \
@@ -265,7 +268,7 @@ depth-de: merged
 	# ogr2ogr $@/$@.gpkg $@/DEPARE.json
 	# ogr2ogr $@/$@.gpkg $@/DEPCNT.json -append
 	# ogr2ogr $@/$@.gpkg $@/SOUNDG.json -append
-	parallel --bar ogr2osm {} -o {.}.osm ::: $@/*.json
+	parallel $(BAR) ogr2osm {} -o {.}.osm ::: $@/*.json
 	cd .. && make depth-de.depth.obf
 
 
@@ -292,7 +295,7 @@ depth-nl: rws
 	mapshaper $@/SOUNDG2.json -filter 'SCAMIN>=80000'  -o $@/SOUNDG1.json
 	mapshaper $@/SOUNDG1.json -filter 'SCAMIN>=160000' -o $@/SOUNDG0.json
 	# for F in $@/*.json; do ogr2ogr $${F//.json/.gpkg} $$F; done
-	parallel --bar ogr2osm {} -o {.}.osm ::: $@/*.json
+	parallel $(BAR) ogr2osm {} -o {.}.osm ::: $@/*.json
 	cd .. && make depth-nl.depth.obf
 
 obf: depth-de depth-nl
