@@ -2,7 +2,7 @@ SHELL=/bin/bash
 export PATH:=$(PWD)/tools/bin:$(PWD)/node_modules/.bin:$(PATH)
 export NODE_OPTIONS="--max-old-space-size=16384"
 TODAY=$(shell date +%F)
-BAR=$(shell test -t 1 && echo --bar || true)
+BAR=$(shell test -t 0 && echo --bar || true)
 
 # usesful tools
 # https://stevage.github.io/vector-inspector/

@@ -6,7 +6,7 @@ export OGR_SQLITE_JOURNAL=MEMORY
 TODAY=$(shell date +%F)
 OO=-unsetFieldWidth -gt 65536 -ds_transaction
 mapshaper=pnpx mapshaper
-BAR=$(shell test -t 1 && echo --bar || true)
+BAR=$(shell test -t 0 && echo --bar || true)
 
 .PHONY: icons obf vwm charts qgis mapproxy www web
 
@@ -35,7 +35,7 @@ csv: scripts/s57objectclasses.csv scripts/s57attributes.csv
 data/rws.zip:
 	# https://www.vaarweginformatie.nl/frp/page/infra_enc
 	rm -f data/rws*.zip
-	parallel $(BAR) 'wget -q -O data/rws_{}.zip "$$(rwsget.py {})"' ::: waddenzee zeeland #port nederland
+	parallel $(BAR) 'wget -q -O data/rws_{}.zip "$$(rwsget.py {})"' ::: 'waddenzee met diepte' 'zeeland met diepte' #port nederland
 	zipmerge $@ data/rws_*.zip
 	rm data/rws_*.zip
 

@@ -23,7 +23,8 @@ def main():
 
     data = r.json()
     for e in data:
-        if e["name"].lower().startswith(name):
+        if name in e["name"].lower():
+            # if e["name"].lower().startswith(name):
             # print(e)
             file_id = e["fileId"]
             url = f"https://www.vaarweginformatie.nl/fdd/{path}{file_id}"
