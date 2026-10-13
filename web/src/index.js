@@ -615,7 +615,7 @@ updateOpacityControl();
 
 map.on("overlayadd overlayremove", debounce(updateOpacityControl));
 
-if (isDevMode || isStandalone) {
+if (isDevMode || isStandalone || isSet("kalman")) {
   L.control.boating().addTo(map);
   new NightSwitch().addTo(map);
   new WeatherForecast().addTo(map);
@@ -789,4 +789,8 @@ if (isSet("zones")) {
   })();
 } else {
   restoreLayers(layers, params.get("l"));
+}
+
+if (isSet("kalman") || isDevMode) {
+  import("./kalman").then(({ init }) => init(map));
 }

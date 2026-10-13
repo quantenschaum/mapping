@@ -3,6 +3,7 @@ import L from "leaflet";
 import "./boating.less";
 import { degmin } from "./graticule";
 import { ackee } from "./ackee";
+import { to360 } from "./utils";
 
 const isDevMode = import.meta.env.DEV;
 
@@ -23,7 +24,7 @@ L.Control.Boating = L.Control.extend({
     position: "topleft",
     legendPosition: "bottomleft",
     smoothing: 0.5,
-    vectorLength: 10, // minutes
+    vectorLength: 6, // minutes
     shiftSpeed: 5,
   },
 
@@ -107,7 +108,12 @@ L.Control.Boating = L.Control.extend({
     this._map.on("dragstart", this.onDragStart, this);
     this._map.on("locationfound", this.onLocationFound, this);
     this._map.on("locationerror", this.onLocationError, this);
-    this._map.locate({ watch: true, enableHighAccuracy: true });
+    this._map.locate({
+      watch: true,
+      enableHighAccuracy: true,
+      maximumAge: 0,
+      timeout: 10000,
+    });
     this.icon.classList.remove("following");
     this.icon.classList.remove("locating");
     this.icon.classList.add("requesting");
@@ -154,6 +160,25 @@ L.Control.Boating = L.Control.extend({
   },
 
   onLocationFound: function (e) {
+    if (this.lastPosition) {
+      const l = this.lastPosition;
+      const t0 = l.timestamp;
+      const lon0 = l.latlng.lng;
+      const lat0 = l.latlng.lat;
+      const t1 = e.timestamp;
+      const lon1 = e.latlng.lng;
+      const lat1 = e.latlng.lat;
+      const dt = (t1 - t0) / 1000;
+      if (dt > 0) {
+        // speed seems to inacurate and heading is compass heading
+        const dLat = (lat1 - lat0) * 111_320;
+        const dLng = (lon1 - lon0) * 111_320 * cosDeg((lat0 + lat1) / 2);
+        const dist = Math.sqrt(dLat * dLat + dLng * dLng);
+        e.speed = dist / dt;
+        e.heading = atan2Deg(dLng, dLat);
+      }
+    }
+    this.lastPosition = e;
     if (isDevMode) this._map.stopLocate();
     e.speedVector = this.smoothSpeed(e);
     if (this.isRequesting()) {
@@ -170,9 +195,9 @@ L.Control.Boating = L.Control.extend({
     this.updateCircle(e);
     this.updateLine(e);
     this.updateBoat(e);
-    this.lastPosition = e;
     clearTimeout(this.timer);
     this.timer = setTimeout(() => this.stop(), 120_000);
+    if (this._map.onLoc) this._map.onLoc(e);
   },
 
   onLocationError: function (e) {
@@ -219,7 +244,7 @@ L.Control.Boating = L.Control.extend({
       return;
     }
     const length =
-      (((speed * 3600) / 1852 / 60) * this.options.vectorLength) / 60; // distance covered in 10 minutes
+      (((speed * 3600) / 1852 / 60) * this.options.vectorLength) / 60; // distance covered
     const p0 = e.latlng;
     const p1 = L.latLng(
       p0.lat + length * cosDeg(heading),
@@ -236,10 +261,11 @@ L.Control.Boating = L.Control.extend({
     let html = "";
     if (!isNaN(heading))
       html += `<div class="heading">${heading.toFixed(0).padStart(3, "0")}&deg;</div>`;
-    if (!isNaN(speed))
+    if (!isNaN(speed)) {
       html += `<div class="speed">${speed.toFixed(1)}&ThinSpace;kn</div>`;
+      // html += `<div class="speed">${((e.speed * 3600) / 1000).toFixed(1)}&ThinSpace;km/h</div>`;
+    }
     html += `<div class="position">${lat}<br/>${lng}</div>`;
-    // html += `<div class="position">${lat}<br/>${lng}<br/>${this.olc.encode(e.latlng.lat, e.latlng.lng)}</div>`;
     html += `<div class="line-legend">${this.options.vectorLength}&ThinSpace;min</div>`;
     this.legend.container.innerHTML = html;
   },
@@ -273,7 +299,6 @@ L.Control.Boating = L.Control.extend({
     return function (e) {
       /////////////////////////////////////////////////////////////////////////////////////////
       if (isDevMode) {
-        const t = this;
         const ee = {
           ...e,
           // speed: 1852 / 3600 * (5 + Math.random() * 0.5),
@@ -288,6 +313,7 @@ L.Control.Boating = L.Control.extend({
           ee.latlng.lat + v[0] * 0.001,
           ee.latlng.lng + (v[1] * 0.001) / cosDeg(ee.latlng.lat),
         );
+        const t = this;
         setTimeout(() => t.onLocationFound(ee), 1000);
       }
       /////////////////////////////////////////////////////////////////////////////////////////

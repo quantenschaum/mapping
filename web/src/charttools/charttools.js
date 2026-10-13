@@ -302,6 +302,7 @@ export const ChartTools = L.Control.extend({
           });
           offMouse(marker);
           showMouse(marker);
+          if (name == "fix" && map.onFix) map.onFix(p.lng, p.lat);
         }
       }
       onMouse(draw, marker);
@@ -343,6 +344,7 @@ export const ChartTools = L.Control.extend({
             circle.setStyle(LINE_OPTS);
             offMouse(group);
             showMouse(xmark);
+            if (map.onBrg) map.onBrg(center.lng, center.lat, null, dst);
           }
         }
       }
@@ -414,6 +416,7 @@ export const ChartTools = L.Control.extend({
             offMouse(group);
             showMouse(xmark);
             if (then) then(points);
+            else if (map.onBrg) map.onBrg(points[0].lng, points[0].lat, brg1);
           }
         }
       }
@@ -491,6 +494,8 @@ export const ChartTools = L.Control.extend({
               offMouse(group);
               showMouse(marker);
               if (then) then(points);
+              else if (map.onBrg)
+                map.onBrg(points[0].lng, points[0].lat, brg1, dst);
             }
           }
         }
