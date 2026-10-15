@@ -164,5 +164,6 @@
 {"type": "Feature", "properties": {"nfs": "41/2026", "bfs": "WSA Ostsee, Survey LP31494/26", "name": "1.4m", "desc": "insert", "pos": "54\u00b0 26,676\u2019 N 013\u00b0 03,758\u2019 E"}, "geometry": {"type": "Point", "coordinates": [13.062633333333334, 54.4446]}},
 {"type": "Feature", "properties": {"nfs": "41/2026", "bfs": "WSA Ostsee 291/26", "name": "Zecheriner Br\u00fccke", "desc": "add Ru", "pos": "53\u00b0 51,903\u2019 N 013\u00b0 49,641\u2019 E"}, "geometry": {"type": "Point", "coordinates": [13.82735, 53.86505]}},
 {"type": "Feature", "properties": {"nfs": "41/2026", "bfs": "PL 39/497/26", "name": "4 wreck2 8.4m", "desc": "replace 2 wrecks", "pos": "53\u00b0 56,33\u2019 N 014\u00b0 16,84\u2019 E"}, "geometry": {"type": "Point", "coordinates": [14.280666666666667, 53.938833333333335]}},
-{"type": "Feature", "properties": {"nfs": "41/2026", "bfs": "", "name": "", "desc": "", "pos": ""}}
+{"type": "Feature", "properties": {"nfs": "42/2026", "bfs": "WSA Weser-Jade-Nordsee, Survey LP31731/26", "name": "7.8", "desc": "replace 8.4", "pos": "53\u00b0 44,29\u2019 N 008\u00b0 05,01\u2019 E"}, "geometry": {"type": "Point", "coordinates": [8.0835, 53.738166666666665]}},
+{"type": "Feature", "properties": {"nfs": "xx/2026", "bfs": "", "name": "", "desc": "", "pos": ""}}
 ]}
