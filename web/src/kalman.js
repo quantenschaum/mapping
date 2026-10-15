@@ -205,8 +205,8 @@ class Boat extends Kalman {
    * State: [x, y, vtw_x, vtw_y] (reduced) or [x, y, vtw_x, vtw_y, vcr_x, vcr_y]
    * x = east, y = north, angles are clockwise from north (atan2(x, y)).
    */
-  constructor(reduced = false, qv = 0.01, qw = 0.005) {
-    super(reduced ? 4 : 6);
+  constructor(qv = 0.01, qw) {
+    super(qw ? 6 : 4);
     this.qv = qv;
     this.qw = qw;
     this.t = 0;
@@ -484,9 +484,22 @@ function button(label, title, callback, className = "") {
   return new ButtonControl();
 }
 
-export async function init(map) {
-  log("init");
-  const proj4 = (await import("proj4")).default;
+const R = 6378137;
+
+function toWebmercator(lon, lat) {
+  const x = R * radians(lon);
+  const y = R * Math.log(Math.tan(Math.PI / 4 + radians(lat) / 2));
+  return [x, y];
+}
+
+function toWGS84(x, y) {
+  const lon = degrees(x / R);
+  const lat = degrees(2 * Math.atan(Math.exp(y / R)) - Math.PI / 2);
+  return [lon, lat];
+}
+
+export function init(map) {
+  log("kalman");
 
   map.onFix = (lon, lat) => log("fix", lon, lat);
   map.onBrg = (lon, lat, brg, dst) => log("brg", lon, lat, brg, dst);
@@ -495,19 +508,11 @@ export async function init(map) {
 
   let boat;
   let toGrid;
-  let toWGS;
-  let x0, y0;
+  let toLonLat;
+  let x0, y0, s0, t0;
   let loop;
 
   function startFilter(lon, lat) {
-    const zone = Math.floor((lon + 180) / 6) + 1;
-    log("zone", zone);
-    const epsg = `EPSG:${lat >= 0 ? 32600 : 32700}${String(zone).padStart(2, "0")}`;
-    proj4.defs(
-      epsg,
-      `+proj=utm +zone=${zone} ${lat >= 0 ? "+north" : "+south"} +ellps=WGS84 +units=m +no_defs`,
-    );
-
     if (!boat) {
       button("🧭", "change course and speed", (c) => {
         askCourseSpeed(true);
@@ -517,41 +522,52 @@ export async function init(map) {
       }).addTo(map);
     }
 
-    const c = params.get("c"); // with current
-    const q = params.get("q") || 0.01;
-    boat = new Boat(!c, q, q);
-    boat.t = Date.now() / 1000;
-    [x0, y0] = proj4("EPSG:4326", epsg, [lon, lat]);
+    const qv = params.get("qv") || 0.02;
+    const qw = params.get("qw");
+    boat = new Boat(qv, qw);
+    t0 = Date.now() / 1000;
+    [x0, y0] = toWebmercator(lon, lat);
+    s0 = Math.cos(radians(lat)); //local length scale factor
     toGrid = (lon, lat) => {
-      const [x, y] = proj4("EPSG:4326", epsg, [lon, lat]);
-      return [x - x0, y - y0];
+      const [x, y] = toWebmercator(lon, lat);
+      return [(x - x0) * s0, (y - y0) * s0];
     };
-    toWGS = (x, y) => proj4(epsg, "EPSG:4326", [x + x0, y + y0]);
+    toLonLat = (x, y) => toWGS84(x / s0 + x0, y / s0 + y0);
     map.onFix = (lon, lat) => {
+      updateTrack(1);
       const [x, y] = toGrid(lon, lat);
       boat.measurePosition(x, y);
+      updateTrack(2);
+      updateMarker();
     };
     map.onBrg = (lon, lat, brg, dst) => {
+      updateTrack(1);
       const [x, y] = toGrid(lon, lat);
       if (brg != null) boat.measureBearing(x, y, brg);
       if (dst != null) boat.measureRange(x, y, dst / nm);
+      updateTrack(2);
+      updateMarker();
     };
     const g = params.get("g");
     if (g == 1) {
       map.onLoc = (e) => {
+        updateTrack(1);
         map.loc = e;
         if (e.speed == null) return;
         if (e.heading == null) boat.measureVelocity(0, 0);
         else boat.measureVelocity(e.heading, e.speed);
+        updateMarker();
       };
     }
     if (g == 2) {
       map.onLoc = (e) => {
+        updateTrack(1);
         map.loc = e;
         if (e.latlng == null) return;
         log(e);
         const [x, y] = toGrid(e.latlng.lng, e.latlng.lat);
         boat.measurePosition(x, y, e.accuracy ?? 10);
+        updateMarker();
       };
     }
     if (loop) clearInterval(loop);
@@ -574,20 +590,13 @@ export async function init(map) {
 
   function predict() {
     const now = Date.now() / 1000;
-    boat.predict(speedup * (now - boat.t));
-    boat.t = now;
+    boat.predict(speedup * (now - t0));
+    t0 = now;
     updateMarker();
     updateSpeedVector();
+    updateTrack();
     p.forEach(updateEllipse);
-    // log("x", boat.x);
-    // log(
-    //   "P",
-    //   boat.P.map(
-    //     (row) =>
-    //       "\n" +
-    //       row.map((v) => (Number.isFinite(v) ? +v.toFixed(6) : v)).join(" "),
-    //   ).join(""),
-    // );
+    // log("t", boat.t, "x", boat.x);
   }
 
   const cogVector = L.polyline([], {
@@ -612,10 +621,10 @@ export async function init(map) {
 
   function updateSpeedVector(time = 360) {
     const [x, y] = boat.pos;
-    const [lon1, lat1] = toWGS(x, y);
+    const [lon1, lat1] = toLonLat(x, y);
     {
       const [vx, vy] = boat.vog;
-      const [lon2, lat2] = toWGS(x + vx * time, y + vy * time);
+      const [lon2, lat2] = toLonLat(x + vx * time, y + vy * time);
       cogVector.setLatLngs([
         [lat1, lon1],
         [lat2, lon2],
@@ -623,7 +632,7 @@ export async function init(map) {
     }
     if (boat.n > 4) {
       const [vx, vy] = boat.vtw;
-      const [lon2, lat2] = toWGS(x + vx * time, y + vy * time);
+      const [lon2, lat2] = toLonLat(x + vx * time, y + vy * time);
       hdtVector.setLatLngs([
         [lat1, lon1],
         [lat2, lon2],
@@ -631,7 +640,7 @@ export async function init(map) {
     }
     if (boat.n > 4) {
       const [vx, vy] = boat.vcr;
-      const [lon2, lat2] = toWGS(x + vx * time, y + vy * time);
+      const [lon2, lat2] = toLonLat(x + vx * time, y + vy * time);
       tideVector.setLatLngs([
         [lat1, lon1],
         [lat2, lon2],
@@ -650,7 +659,7 @@ export async function init(map) {
 
   function updateMarker() {
     const [x, y] = boat.pos;
-    const [lon, lat] = toWGS(x, y);
+    const [lon, lat] = toLonLat(x, y);
     marker.setLatLng([lat, lon]);
     marker.bringToFront();
     marker.bindPopup(
@@ -696,11 +705,31 @@ export async function init(map) {
     {
       const [xs, ys] = covEllipse(boat.pos, Pxy, p / 100, 128);
       const latlngs = xs.map((x, i) => {
-        const [lon, lat] = toWGS(x, ys[i]);
+        const [lon, lat] = toLonLat(x, ys[i]);
         return [lat, lon];
       });
       ellipse.setLatLngs(latlngs);
     }
+  }
+
+  const track = L.polyline([], {
+    color: COLOR,
+    weight: 2,
+    opacity: 0.8,
+  }).addTo(map);
+
+  const maxPoints = 1000;
+  function updateTrack(n = 0) {
+    const [x, y] = boat.pos;
+    const [lon, lat] = toLonLat(x, y);
+    const ll = track.getLatLngs();
+    if (ll.length > 1 && n <= 0) ll.pop();
+    if (n <= 0) n = 1;
+    for (let i = 0; i < n; i++) ll.push([lat, lon]);
+    if (maxPoints > 0 && ll.length > maxPoints) {
+      ll.splice(0, ll.length - maxPoints); // trim from start
+    }
+    track.setLatLngs(ll);
   }
 
   function askCourseSpeed(hardSet = false) {
@@ -718,6 +747,7 @@ export async function init(map) {
       boat.x[2] = (speed / kn) * Math.sin(c);
       boat.x[3] = (speed / kn) * Math.cos(c);
     }
+    updateTrack(1);
     boat.measureVelocity(course, speed / kn);
   }
 }
