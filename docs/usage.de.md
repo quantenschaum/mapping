@@ -79,6 +79,22 @@ Da man das Gerät nicht waagrecht halten muss, kann man es leicht nach links ode
 !!! warning "Kompasskalibrierung"
     Für genaue Messwerte ist es unbedingt notwendig, **vor dem Peilen eine Kompasskalibrierung durchzuführen**. Dies lässt sich in der Regel in der Standard-Karten-App aufrufen, indem man den Positionsmarker antippt, oder man verwendet eine App wie [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
 
+### Koppelnavigation
+
+Ein Modus für Koppelnavigation ist als **experimentelle Funktion** verfügbar und kann über [diesen Link](/?kalman=1) aktiviert werden.
+
+Wenn aktiviert, werden Eingaben aus den oben beschriebenen Karten‑Werkzeugen (**Fix** und **Peilung**) in einen [Kalman-Filter](https://de.wikipedia.org/wiki/Kalman-Filter) eingespeist, der kontinuierlich Position, Kurs und Geschwindigkeit schätzt.
+
+Zum Start setzt man mit dem Werkzeug **Fix** eine Anfangsposition. Kurs und Geschwindigkeit können über die Schaltfläche mit dem Kompasssymbol eingestellt werden. Die geschätzte Position wird auf der Karte als **roter Punkt** mit einem **6‑Minuten‑Geschwindigkeitsvektor** angezeigt. Der zurückgelegte Track erscheint als **rote gestrichelte Linie**. Ein Klick auf den roten Punkt zeigt die aktuellen Werte an.
+
+Eine rote Ellipse um den Positionspunkt zeigt die Kovarianzellipse auf dem **50‑%‑Konfidenzniveau**. Mit zusätzlichen Beobachtungen verbessert sich die Schätzung. Peilungen können entweder manuell eingegeben oder, falls verfügbar, mit dem elektronischen Kompass des Geräts aufgenommen werden. Kreuzpeilungen erhält man, indem man nacheinander verschiedene Objekte peilt, diese werden automatisch zusammengeführt. Peilungen desselben Objekts zu unterschiedlichen Zeitpunkten sind ebenfalls möglich, daraus wird automatisch eine versegelt Peilung berechnet.
+
+Das Modell verwendet einen 4D‑Zustand (Position und Geschwindigkeit) mit der einfachen Koppelannahme konstanter Geschwindigkeit. Bei Kursänderungen sollten neuer Kurs und neue Geschwindigkeit eingegeben werden, damit der Filter dies berücksichtigt. So entsteht eine laufend aktualisierte Koppel-Position mit abgeschätzter Genauigkeitsangabe, in die neue Beobachtungen automatisch einfließen.
+
+Damit wird klassische Koppelnavigation direkt in der elektronischen Seekarte möglich, kombiniert mit terrestrischer Navigation durch Peilungen und laufende Aktualisierung der DR‑Schätzung. Die erlaubt elektronische Navigation auch ohne GPS.
+
+Zum Ausprobieren kann die Zeit für Simulationszwecke über [diesen Link](/?kalman=1&s=10) beschleunigt werden.
+
 ## Zeitliche Veränderungen
 
 ![Comparison](img/compare.webp)

@@ -83,6 +83,22 @@ Since you don't have to hold the device level, you can tilt it slightly left or 
     To get accurate readings it is vital to **perform a compass calibration before taking bearings**.
     This can usually be done from within the maps app by tapping the position marker, or you can use an app like [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
 
+### Dead Reckoning
+
+A dead reckoning mode is available as an **experimental feature** and can be enabled via [this link](/?kalman=1). 
+
+When enabled, inputs from the chart tools above (**Fix** and **Bearing**) are fed into a [Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter) that continuously estimates your position, course and speed.
+
+To start, place an initial fix with the **Fix** tool. Course and speed can be set with the button showing the compass icon. The estimated position is displayed on the chart as a **red dot** with a **6-minute speed vector**. Your covered track is shown as a **red dashed line**. Click on the red dot to show the current values.
+
+A red ellipse around the position dot indicates the covariance ellipse at the **50% confidence level**. As more observations are added, the estimate improves. Just take bearings by either entering them manually or by using the electronic compass of your device if available. Enter cross bearing by simply taking consecutive bearings to diffrent objects, they get merged automatically. You can also take bearings of the same object at different times, it will automatically do a running fix.
+
+The model uses a 4D state (position and velocity) with a simple constant-speed dead-reckoning assumption. When changing course, enter new course and speed, so the filter knows. It provides a live DR position with estimated accuracy and automatically incorporates additional observations as they are entered.
+
+This allows classical dead-reckoning navigation directly on the electronic chart, while also combining it with terrestrial navigation by taking bearings and updating the DR estimate on the fly without relying on GPS.
+
+If you want to play with it, time can be sped up for simulation purposes via [this link](/?kalman=1&s=10).
+
 ## Changes over Time
 
 ![Comparison](img/compare.webp)

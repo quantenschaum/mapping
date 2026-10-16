@@ -80,6 +80,21 @@ Omdat je het apparaat niet horizontaal hoeft te houden, kun je het licht naar li
 !!! warning "Kompascalibratie"
     Voor nauwkeurige meetwaarden is het absoluut noodzakelijk om **voor het peilen een kompascalibratie uit te voeren**. Dit is meestal op te roepen in de standaard kaarten-app door op de positie-marker te tikken, of gebruik een app zoals [GPS Status](https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus2).
 
+### Gegist bestek
+
+Een modus voor gegist bestek is beschikbaar als **experimentele functie** en kan via [deze link](/?kalman=1) worden ingeschakeld.
+
+Wanneer deze functie actief is, worden invoeren van de bovenstaande kaartgereedschappen (**Fix** en **Peiling**) verwerkt in een [Kalman-filter](https://nl.wikipedia.org/wiki/Kalman-filter) dat continu je positie, koers en snelheid schat.
+
+Om te beginnen plaats je een eerste fix met het gereedschap **Fix**. Koers en snelheid stel je in met de knop met het kompaspictogram. De geschatte positie wordt op de kaart weergegeven als een **rode stip** met een **6‑minuten-snelheidsvector**. Je afgelegde spoor wordt weergegeven als een **rode gestippelde lijn**. Klik op de rode stip om de actuele waarden te tonen.
+
+Een rode ellips rond de positiestip geeft de covariantie-ellips aan op het **50%-betrouwbaarheidsniveau**. Naarmate meer waarnemingen worden toegevoegd, wordt de schatting beter. Neem peilingen door ze handmatig in te voeren of, indien beschikbaar, met het elektronische kompas van je apparaat. Kruispeilingen voer je eenvoudig uit door opeenvolgende peilingen naar verschillende objecten te nemen, die worden automatisch samengevoegd. Je kunt ook op verschillende tijdstippen peilingen op hetzelfde object nemen, dan wordt automatisch een verzeilde peiling toegepast.
+
+Het model gebruikt een 4D-toestand (positie en snelheid) met een eenvoudige aanname van constant-snelheid voor gegist bestek. Bij koerswijzigingen voer je de nieuwe koers en snelheid in, zodat het filter dit kan meenemen. Zo krijg je een live GB-positie met geschatte nauwkeurigheid, waarbij extra waarnemingen automatisch worden verwerkt zodra je ze invoert.
+
+Dit maakt klassieke navigatie op gegist bestek rechtstreeks op de elektronische kaart mogelijk, gecombineerd met terrestrische navigatie door peilingen te nemen en de GB-schatting onderweg bij te werken, zonder afhankelijk te zijn van GPS.
+
+Wil je ermee experimenteren, dan kun je de tijd voor simulaties versnellen via [deze link](/?kalman=1&s=10).
 
 ## Tijdelijke veranderingen
 

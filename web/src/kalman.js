@@ -1,6 +1,7 @@
 import L from "leaflet";
 import { logger } from "./utils";
 import { degmin } from "./graticule";
+import { ackee } from "./ackee";
 const isDevMode = import.meta.env.DEV;
 const log = logger("KF", "red");
 const params = new URLSearchParams(window.location.search);
@@ -20,6 +21,8 @@ const radians = (deg) => (deg * Math.PI) / 180;
 const degrees = (rad) => (rad * 180) / Math.PI;
 const topi = (a) => a - 2 * Math.PI * Math.round(a / (2 * Math.PI)); // wrap angle to [-pi, pi]
 const to360 = (d) => (d + 360) % 360;
+isNaN = (x) => x == null || Number.isNaN(x);
+// unit conversion factors, internal units are meters and seconds
 const nm = 1 / 1852; // m -> nm
 const kn = 3600 / 1852; // m/s -> kn
 const kmh = 3600 / 1000; // m/s -> km/h
@@ -313,16 +316,24 @@ class Boat extends Kalman {
 
   /**
    * Velocity measurement. course in degrees, speed in speed units.
-   * Pass NaN for course or speed if only one is available.
+   * Pass NaN/null for course or speed if only one is available.
    */
-  measureVelocity(course, speed, courseError = 2, speedError = 0.2 / kn) {
+  measureVelocity(
+    course,
+    speed,
+    reset = false, // reset velocity vector and covariance
+    courseError = 2,
+    speedError = 0.2 / kn,
+  ) {
+    if (isNaN(course) && isNaN(speed)) return;
+
     course = radians(course);
     courseError = radians(courseError);
 
     let r = null;
     let z, R, h, H;
 
-    if (speed < 1e-6 || Number.isNaN(course)) {
+    if ((!isNaN(speed) && speed < 1e-6) || isNaN(course)) {
       // speed only (course ignored when stationary)
       if (this.stw < 1e-6) return; // avoids zero division
       z = [speed];
@@ -334,7 +345,7 @@ class Boat extends Kalman {
         const v = Math.hypot(vx, vy);
         return [[0, 0, vx / v, vy / v]];
       };
-    } else if (Number.isNaN(speed)) {
+    } else if (isNaN(speed)) {
       // course only
       if (this.stw < 1e-6) return;
       z = [course];
@@ -348,8 +359,8 @@ class Boat extends Kalman {
         return [[0, 0, vy / v2, -vx / v2]];
       };
       r = (x) => [topi(x[0])];
-    } else if (this.stw < 1e-6) {
-      // cartesian velocity measurement, avoids zero division
+    } else if (this.stw < 1e-6 || reset) {
+      // cartesian velocity measurement, avoids zero division if current stw=0
       const c = course;
       const s = speed;
       const sc = Math.sin(c);
@@ -371,8 +382,16 @@ class Boat extends Kalman {
         [0, 0, 1, 0],
         [0, 0, 0, 1],
       ]; // constant -> plain EKF
+      if (reset) {
+        // reset velocity covariance by injecting measurement covariance into P[2:4,2:4]
+        this.x[2] = z[0];
+        this.x[3] = z[1];
+        for (let i = 0; i < 2; i++)
+          for (let j = 0; j < 2; j++) this.P[2 + i][2 + j] = R[i][j];
+        return;
+      }
     } else {
-      // polar
+      // polar course/speed update
       z = [course, speed];
       R = [
         [courseError ** 2, 0],
@@ -393,7 +412,7 @@ class Boat extends Kalman {
           [0, 0, vx / v, vy / v],
         ];
       };
-      r = (x) => [topi(x[0]), x[1]];
+      r = (x) => [topi(x[0]), x[1]]; // wrap course residuum
     }
 
     this.correction(z, R, H, h, r);
@@ -513,16 +532,20 @@ export function init(map) {
   let loop;
 
   function startFilter(lon, lat) {
+    ackee.action("b86efd17-234c-49e0-bf2a-0a949fea2a5c", {
+      key: "kalman-filter",
+      value: 1,
+    });
     if (!boat) {
       button("🧭", "change course and speed", (c) => {
-        askCourseSpeed(true);
+        askCourseSpeed();
       }).addTo(map);
       button("🛑", "stop filter", (c) => {
         stopFilter();
       }).addTo(map);
     }
 
-    const qv = params.get("qv") || 0.02;
+    const qv = params.get("qv") || 0.01;
     const qw = params.get("qw");
     boat = new Boat(qv, qw);
     t0 = Date.now() / 1000;
@@ -534,40 +557,29 @@ export function init(map) {
     };
     toLonLat = (x, y) => toWGS84(x / s0 + x0, y / s0 + y0);
     map.onFix = (lon, lat) => {
-      updateTrack(1);
       const [x, y] = toGrid(lon, lat);
       boat.measurePosition(x, y);
-      updateTrack(2);
-      updateMarker();
     };
     map.onBrg = (lon, lat, brg, dst) => {
-      updateTrack(1);
       const [x, y] = toGrid(lon, lat);
       if (brg != null) boat.measureBearing(x, y, brg);
       if (dst != null) boat.measureRange(x, y, dst / nm);
-      updateTrack(2);
-      updateMarker();
     };
     const g = params.get("g");
     if (g == 1) {
       map.onLoc = (e) => {
-        updateTrack(1);
         map.loc = e;
         if (e.speed == null) return;
         if (e.heading == null) boat.measureVelocity(0, 0);
         else boat.measureVelocity(e.heading, e.speed);
-        updateMarker();
       };
     }
     if (g == 2) {
       map.onLoc = (e) => {
-        updateTrack(1);
         map.loc = e;
         if (e.latlng == null) return;
-        log(e);
         const [x, y] = toGrid(e.latlng.lng, e.latlng.lat);
         boat.measurePosition(x, y, e.accuracy ?? 10);
-        updateMarker();
       };
     }
     if (loop) clearInterval(loop);
@@ -586,7 +598,6 @@ export function init(map) {
     .split(",")
     .map((s) => parseInt(s.trim(), 10))
     .filter((n) => Number.isFinite(n));
-  log("p", p);
 
   function predict() {
     const now = Date.now() / 1000;
@@ -609,7 +620,7 @@ export function init(map) {
     color: "blue",
     weight: 2,
     opacity: 0.9,
-    dashArray: "6, 6",
+    dashArray: "6,6",
     pane: "overlayPane",
   }).addTo(map);
   const tideVector = L.polyline([], {
@@ -716,38 +727,36 @@ export function init(map) {
     color: COLOR,
     weight: 2,
     opacity: 0.8,
+    dashArray: "4,4",
   }).addTo(map);
 
-  const maxPoints = 1000;
-  function updateTrack(n = 0) {
+  const maxPoints = 5000;
+  function updateTrack() {
     const [x, y] = boat.pos;
     const [lon, lat] = toLonLat(x, y);
+    track.addLatLng([lat, lon]);
     const ll = track.getLatLngs();
-    if (ll.length > 1 && n <= 0) ll.pop();
-    if (n <= 0) n = 1;
-    for (let i = 0; i < n; i++) ll.push([lat, lon]);
     if (maxPoints > 0 && ll.length > maxPoints) {
-      ll.splice(0, ll.length - maxPoints); // trim from start
+      ll.splice(0, 10 + ll.length - maxPoints); // trim from start
+      track.setLatLngs(ll);
     }
-    track.setLatLngs(ll);
   }
 
-  function askCourseSpeed(hardSet = false) {
+  function askCourseSpeed() {
     const value = window.prompt(
       "Enter course and speed like '123 5' for 123° and 5kn",
     );
     if (!value) return;
     const parts = value.trim().split(/\s+/);
-    if (parts.length < 2) return;
+    if (parts.length < 1) return;
     const course = parseFloat(parts[0]);
     const speed = parseFloat(parts[1]);
-    if (!Number.isFinite(course) || !Number.isFinite(speed)) return;
-    if (hardSet) {
-      const c = radians(course);
-      boat.x[2] = (speed / kn) * Math.sin(c);
-      boat.x[3] = (speed / kn) * Math.cos(c);
-    }
-    updateTrack(1);
-    boat.measureVelocity(course, speed / kn);
+    if (isNaN(course) || isNaN(speed)) return;
+    boat.measureVelocity(course, speed / kn, true);
+  }
+
+  if (isDevMode) {
+    startFilter(7.90567, 54.1685);
+    boat.measureVelocity(120, 5 / kn, true);
   }
 }
