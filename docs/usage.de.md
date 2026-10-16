@@ -95,6 +95,8 @@ Damit wird klassische Koppelnavigation direkt in der elektronischen Seekarte mö
 
 Zum Ausprobieren kann die Zeit für Simulationszwecke über [diesen Link](/?kalman=1&s=10) beschleunigt werden.
 
+![Kalman-Filter](img/kalman.webp)
+
 ## Zeitliche Veränderungen
 
 ![Comparison](img/compare.webp)

@@ -96,6 +96,8 @@ Dit maakt klassieke navigatie op gegist bestek rechtstreeks op de elektronische 
 
 Wil je ermee experimenteren, dan kun je de tijd voor simulaties versnellen via [deze link](/?kalman=1&s=10).
 
+![Kalman-Filter](img/kalman.webp)
+
 ## Tijdelijke veranderingen
 
 ![Comparison](img/compare.webp)

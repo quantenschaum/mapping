@@ -99,6 +99,8 @@ This allows classical dead-reckoning navigation directly on the electronic chart
 
 If you want to play with it, time can be sped up for simulation purposes via [this link](/?kalman=1&s=10).
 
+![Kalman-Filter](img/kalman.webp)
+
 ## Changes over Time
 
 ![Comparison](img/compare.webp)
