@@ -2,7 +2,7 @@ import L from "leaflet";
 import "leaflet-rotatedmarker";
 import "./charttools.less";
 import { degmin } from "../graticule";
-import { deg, rad, to180, to360, p2c, c2p, clamp } from "../utils";
+import { deg, rad, to180, to360, p2c, c2p, clamp, log } from "../utils";
 import { declination } from "./declination";
 import { ackee } from "../ackee";
 const icons = import.meta.glob("./charttools-*.svg", { eager: true });
@@ -10,6 +10,11 @@ const icons = import.meta.glob("./charttools-*.svg", { eager: true });
 const isDevMode = import.meta.env.DEV;
 const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 console.log("touch device", isTouch);
+const isApple =
+  /iPad|iPhone|iPod/.test(
+    navigator.userAgent || navigator.vendor || window.opera,
+  ) ||
+  (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
 let DEC = 0;
 
@@ -249,7 +254,7 @@ export const ChartTools = L.Control.extend({
       map.on("mousemove", mouseAction);
       map.on("contextmenu", cancelAction);
       touchOffset = 1;
-      stopSensor();
+      stopCompass();
     }
 
     function offMouse(layer) {
@@ -262,7 +267,7 @@ export const ChartTools = L.Control.extend({
       }
       cancelAction = null;
       touchOffset = 1;
-      stopSensor();
+      stopCompass();
     }
 
     function hideMouse(m) {
@@ -374,7 +379,7 @@ export const ChartTools = L.Control.extend({
             const nw = map.getBounds().getNorthWest();
             const se = map.getBounds().getSouthEast();
             size = distance(nw, se) * 0.4;
-            readHeading((h) => {
+            startCompass((h) => {
               heading = h;
               mapContainer.dispatchEvent(
                 new MouseEvent("mousemove", {
@@ -642,7 +647,7 @@ export const ChartTools = L.Control.extend({
 
     const pb = L.DomUtil.create(
       "div",
-      "buttons " + HIDE + (isDevMode ? "x" : ""),
+      "buttons " + HIDE + (isDevMode ? "" : ""),
     );
     div.appendChild(pb);
     pb.appendChild(
@@ -650,6 +655,12 @@ export const ChartTools = L.Control.extend({
         // toggleVisibility();
         if (pb.classList.contains(HIDE)) pb.classList.remove(HIDE);
         else pb.classList.add(HIDE);
+
+        b2.style.display = "none";
+        startCompass((h) => {
+          b2.style.display = null;
+          stopCompass();
+        });
       }),
     );
     pb.appendChild(button("erase", clear));
@@ -672,12 +683,6 @@ export const ChartTools = L.Control.extend({
         drawBearingRange("a3", "x", drawCourseToSteer),
       ),
     );
-
-    b2.style.display = "none";
-    readHeading((h) => {
-      b2.style.display = null;
-      stopSensor();
-    });
 
     return div;
   },
@@ -707,50 +712,103 @@ function quaternionToHeading(quaternion) {
   return to360(360 - deg(yaw));
 }
 
-let sensor;
+let heading;
+let compass;
+let stopCompass = () => null;
 
-function startSensor(
+function startCompass(
   callback,
   stype = "AbsoluteOrientationSensor",
-  frequency = 10,
+  frequency = 30,
 ) {
-  try {
-    if (!window[stype]) return;
-    console.log("starting", stype, frequency);
-    sensor = new window[stype]({ frequency: frequency });
-    if (callback) {
-      sensor.addEventListener("reading", (e) => callback(sensor, e));
+  function stop() {
+    if (compass) {
+      compass.stop();
+      compass = null;
     }
-    sensor.addEventListener("error", (event) => {
-      console.error(`${sensor} ${event.error.name} ${event.error.message}`);
-      stopSensor();
-    });
-    sensor.start();
-  } catch (x) {
-    console.error(x);
-    stopSensor();
+  }
+
+  stopCompass = stop;
+
+  function start() {
+    try {
+      if (!window[stype]) return;
+      console.log("starting", stype, frequency);
+      compass = new window[stype]({ frequency: frequency });
+      compass.addEventListener("error", (e) => {
+        console.error(`${compass} ${e.error.name} ${e.error.message}`);
+        stop();
+      });
+      compass.addEventListener("reading", (e) => {
+        let hdg = quaternionToHeading(compass.quaternion) + DEC;
+        if (!isFinite(hdg)) {
+          stop();
+          return;
+        }
+        if (!heading) heading = hdg;
+        let delta = to180(hdg - heading);
+        let alpha = clamp(0.2, (0.5 * Math.abs(delta)) / 10, 1);
+        heading = to360(heading + alpha * delta);
+        callback(heading);
+      });
+      compass.start();
+    } catch (x) {
+      console.error(x);
+      stop();
+    }
+  }
+
+  start();
+}
+
+let handler;
+
+function startCompassIOS(callback) {
+  function stop() {
+    if (handler) {
+      window.removeEventListener("deviceorientation", handler, true);
+      handler = null;
+    }
+  }
+
+  stopCompass = stop;
+
+  function start() {
+    stop();
+    handler = (event) => {
+      let hdg = null;
+
+      if (typeof event.webkitCompassHeading === "number") {
+        hdg = event.webkitCompassHeading;
+      } else if (typeof event.alpha === "number") {
+        hdg = 360 - event.alpha;
+      }
+
+      if (!isFinite(hdg)) return;
+
+      hdg = to360(hdg + DEC);
+      if (heading == null) heading = hdg;
+
+      const delta = to180(hdg - heading);
+      const alpha = clamp(0.2, (0.5 * Math.abs(delta)) / 10, 1);
+      heading = to360(heading + alpha * delta);
+      callback(heading);
+    };
+    window.addEventListener("deviceorientation", handler, true);
+  }
+
+  if (
+    typeof DeviceOrientationEvent !== "undefined" &&
+    typeof DeviceOrientationEvent.requestPermission === "function"
+  ) {
+    DeviceOrientationEvent.requestPermission()
+      .then((state) => {
+        if (state === "granted") start();
+      })
+      .catch((err) => console.error(err));
+  } else {
+    start();
   }
 }
 
-function stopSensor() {
-  if (!sensor) return;
-  console.log("stopping", sensor);
-  sensor.stop();
-  sensor = null;
-}
-
-function readHeading(callback) {
-  let heading;
-  startSensor((sensor) => {
-    let hdg = quaternionToHeading(sensor.quaternion) + DEC;
-    if (!isFinite(hdg)) {
-      stopSensor();
-      return;
-    }
-    if (!heading) heading = hdg;
-    let delta = to180(hdg - heading);
-    let alpha = clamp(0.5, (0.5 * Math.abs(delta)) / 10, 1);
-    heading = to360(heading + alpha * delta);
-    callback(heading);
-  });
-}
+if (isApple) startCompass = startCompassIOS;
