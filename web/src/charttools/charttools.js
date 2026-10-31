@@ -731,6 +731,8 @@ function startCompass(
   stopCompass = stop;
 
   function start() {
+    stop();
+    heading = null;
     try {
       if (!window[stype]) return;
       console.log("starting", stype, frequency);
@@ -767,6 +769,7 @@ function startCompassIOS(callback) {
   function stop() {
     if (handler) {
       window.removeEventListener("deviceorientation", handler, true);
+      window.removeEventListener("deviceorientationabsolute", handler, true);
       handler = null;
     }
   }
@@ -775,6 +778,8 @@ function startCompassIOS(callback) {
 
   function start() {
     stop();
+    heading = null;
+
     handler = (event) => {
       let hdg = null;
 
@@ -794,7 +799,10 @@ function startCompassIOS(callback) {
       heading = to360(heading + alpha * delta);
       callback(heading);
     };
+
+    // iPadOS may emit one or the other depending on Safari/iOS version.
     window.addEventListener("deviceorientation", handler, true);
+    window.addEventListener("deviceorientationabsolute", handler, true);
   }
 
   if (
