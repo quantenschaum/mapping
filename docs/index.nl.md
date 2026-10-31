@@ -50,13 +50,15 @@ Vectorkaarten en stijlen voor OsmAnd kunnen geïnstalleerd worden door simpelweg
 
 - [:de: Dieptegegevens DE](depth-de.depth.obf){:download}
 - [:nl: Dieptegegevens NL](depth-nl.depth.obf){:download}
-- [:globe_with_meridians: Lichtsectoren wereldwijd](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
 
 !!! failure "Gebruik de Marine Rendering Style!"
     De vectorkaart wordt niet correct weergegeven zonder de Marine Rendering Style en render engine 2 (OpenGL)!  
     **Het werkt alleen bij gebruik van de Marine Rendering Style!**  
     De Marine Rendering Style is nu standaard opgenomen in OsmAnd.
+
+!!! note "Lichtsectoren wereldwijd"
+    Lichtsectoren wereldwijd zijn nu opgenomen in de wereldwijde zeemarkeringen van OsmAnd.
 
 ### Rasterkaarten
 

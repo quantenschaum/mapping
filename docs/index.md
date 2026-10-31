@@ -51,13 +51,15 @@ Vector charts and styles for OsmAnd can be installed by simply opening the `obf`
 
 - [:de: Depth Data DE](depth-de.depth.obf){:download}
 - [:nl: Depth Data NL](depth-nl.depth.obf){:download}
-- [:globe_with_meridians: Light Sectors Worldwide](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download} (**important!**)
 
 !!! failure "Use the Marine Rendering Style!"
     The vector chart will not be rendered properly without the marine rendering style and render engine 2 (OpenGL)!  
     **It will only work when using the Marine Rendering Style!**  
     The Marine Rendering Style is now included in OsmAnd by default.
+
+!!! note "Light Sectors Worldwide"
+    Light Sectors Worldwide are now included in the worldwide seamrks by OsmAnd.
   
 ### Raster Charts
 

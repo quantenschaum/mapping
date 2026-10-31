@@ -50,14 +50,16 @@ Vektorkarten und Stile für OsmAnd können durch einfaches Öffnen der `obf`- od
 
 - [:de: Tiefendaten DE](depth-de.depth.obf){:download}
 - [:nl: Tiefendaten NL](depth-nl.depth.obf){:download}
-- [:globe_with_meridians: Feuersektoren, weltweit](lightsectors.obf){:download}
 - [:material-xml: Marine Rendering Style](marine.render.xml){:download}
 
 !!! failure "Marine Rendering Style verwenden!"
     Die Vektorkarte wird ohne den Marine Rendering Style und Renderengine 2 (OpenGL) nicht korrekt dargestellt!  
     **Die Darstellung funktioniert ausschließlich mit dem Marine Rendering Style!**  
     Der Marine Rendering Style ist jetzt in OsmAnd bereits enthalten.
-
+    
+!!! note "Feuersektoren weltweit"
+    Feuersektoren weltweit sind jetzt in den weltweiten Seezeichen von OsmAnd enthalten.
+    
 ### Raster-Karten
 
 Die Rasterkarten werden importiert, indem die `sqlitedb`-Dateien mit der App geöffnet werden. 
