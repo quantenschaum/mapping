@@ -73,3 +73,5 @@ Die Einzellotungen wurdeen mangels Verfügbarkeit nicht aktualisiert, es kann al
 | 40/2026 |     ✓      |       ✓       |
 | 41/2026 |     ✓      |       ✓       |
 | 42/2026 |     ✓      |       ✓       |
+| 43/2026 |     ✓      |       -       |
+| 44/2026 |     ✓      |       ✓       |
