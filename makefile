@@ -17,7 +17,7 @@ build:
 # 	$(MAKE) lightsectors.obf
 	$(MAKE) -B vwm rws
 	$(MAKE) fnc-de.zip fnc-nl.zip #fnc-de.obf
-	cd vector && $(MAKE) clean && $(MAKE) sprites tiles obf deploy seed seed2x
+	cd vector && $(MAKE) clean && $(MAKE) sprites tiles depth-nl deploy seed seed2x
 	# $(MAKE) charts tiles zips www
 	$(MAKE) charts tiles www
 
@@ -204,7 +204,8 @@ www/%/: charts/%.mbtiles
 	chmod +rX -R $@
 
 www/%.pmtiles: charts/%.mbtiles
-	pmtiles convert $< $@
+	pmtiles convert $< .$@
+	mv .$@ $@
 
 data/chartconvert:
 	mkdir -p data
@@ -215,13 +216,13 @@ data/chartconvert:
 charts/%.gemf: charts/%.mbtiles data/chartconvert
 	data/chartconvert/convert_mbtiles.py tms $@ $<
 
-tiles: $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles)) \
-       $(patsubst cache_data/%.mbtiles,www/%.pmtiles,$(wildcard cache_data/*.mbtiles))
+tiles: $(patsubst cache_data/%.mbtiles,www/%.pmtiles,$(wildcard cache_data/*.mbtiles))
+       # $(patsubst cache_data/%.mbtiles,www/%/,$(wildcard cache_data/*.mbtiles))
 	make updated
 
 charts: $(patsubst cache_data/%.mbtiles,charts/%.mbtiles,$(wildcard cache_data/*.mbtiles)) \
         $(patsubst cache_data/%.mbtiles,charts/%.sqlitedb,$(wildcard cache_data/*.mbtiles))
-#         $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles)
+        # $(patsubst cache_data/%.mbtiles,charts/%.gemf,$(wildcard cache_data/*.mbtiles)
 
 updated:
 	jq -n --slurpfile meta data/bsh/meta.json '{"fnc-de": $$meta[0], "fnc-nl": "$(TODAY)"}' >www/updated
