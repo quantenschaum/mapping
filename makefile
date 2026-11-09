@@ -204,8 +204,8 @@ www/%/: charts/%.mbtiles
 	chmod +rX -R $@
 
 www/%.pmtiles: charts/%.mbtiles
-	pmtiles convert $< .$@
-	mv .$@ $@
+	pmtiles convert $< $@-
+	mv $@- $@
 
 data/chartconvert:
 	mkdir -p data
