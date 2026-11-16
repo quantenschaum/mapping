@@ -4,36 +4,6 @@
   "metadata": { "maputnik:renderer": "mlgl" },
   "center": [9.5, 54.3],
   "zoom": 6,
-  "state": {
-    "fontSize": {
-      "default": 12,
-      "type": "NUMBER",
-      "description": "font size",
-      "list": [6, 30]
-    },
-    "soundgSize": {
-      "default": 14,
-      "type": "NUMBER",
-      "description": "soundings size",
-      "list": [6, 30]
-    },
-    "safetyContour": {
-      "default": 2,
-      "type": "NUMBER",
-      "description": "red contour line",
-      "list": [0, 10]
-    },
-    "showLights": {
-      "default": true,
-      "type": "BOOLEAN",
-      "description": "show lights"
-    },
-    "showQuality": {
-      "default": false,
-      "type": "BOOLEAN",
-      "description": "show data quality info"
-    }
-  },
   "sources": {
     "osm": {
       "type": "raster",
@@ -123,16 +93,8 @@
           "case",
           [
             "all",
-            [
-              "<=",
-              ["-", ["global-state", "safetyContour"], 0.5],
-              ["get", "VALDCO"]
-            ],
-            [
-              ">=",
-              ["+", ["global-state", "safetyContour"], 0.5],
-              ["get", "VALDCO"]
-            ]
+            ["<=", 1.5, ["get", "VALDCO"]],
+            [">=", 2.5, ["get", "VALDCO"]]
           ],
           "red",
           ["==", 0, ["get", "VALDCO"]],
@@ -372,7 +334,7 @@
           ""
         ],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]]
+        "text-size": 12
       }
     },
     {
@@ -723,7 +685,7 @@
         "icon-size": 0.8,
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-variable-anchor": ["top", "bottom", "left", "right"],
         "text-radial-offset": 1.5
       }
@@ -898,7 +860,7 @@
           ]
         ],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-offset": [0, 0.5],
         "symbol-spacing": 300
       },
@@ -1034,7 +996,7 @@
       "source-layer": "RDOSTA",
       "layout": {
         "text-field": ["concat", ["get", "OBJNAM"], " ", ["get", "INFORM"]],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-font": ["Noto Sans Bold"],
         "text-allow-overlap": true,
         "text-variable-anchor": [
@@ -1069,7 +1031,7 @@
       "layout": {
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "symbol-placement": "line",
         "text-offset": [0, -0.8]
       },
@@ -1093,7 +1055,7 @@
           ["get", "COMCHA"]
         ],
         "text-font": ["Noto Sans Semi Bold"],
-        "text-size": ["*", 1.16, ["global-state", "fontSize"]],
+        "text-size": 13,
         "text-radial-offset": 1,
         "icon-rotate": ["get", "ORIENT"],
         "icon-size": 0.8,
@@ -1112,7 +1074,7 @@
       "layout": {
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-variable-anchor": ["top", "left", "right", "bottom"],
         "text-radial-offset": 1.5
       },
@@ -1128,7 +1090,7 @@
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
         "text-field": ["get", "OBJNAM"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-font": ["Noto Sans Regular"],
         "text-variable-anchor": ["top", "left", "right", "bottom"],
         "text-radial-offset": 1
@@ -1156,7 +1118,7 @@
         "icon-ignore-placement": true,
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Semi Bold"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-radial-offset": 1,
         "text-anchor": "bottom-left",
         "text-variable-anchor": ["bottom-left", "bottom-right"],
@@ -1455,7 +1417,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-variable-anchor": ["top", "left", "bottom", "right"],
         "text-justify": "auto",
         "icon-image": [
@@ -1509,7 +1471,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-anchor": "center",
         "visibility": "visible",
         "icon-image": [
@@ -1603,7 +1565,7 @@
           ]
         ],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-anchor": "center",
         "visibility": "visible"
       },
@@ -1677,7 +1639,7 @@
       "source-layer": "TS_FEB",
       "layout": {
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["get", "CURVEL"],
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
@@ -1692,7 +1654,7 @@
       "source-layer": "DISMAR",
       "layout": {
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": [
           "concat",
           "[",
@@ -1719,7 +1681,7 @@
         ],
         "text-field": "SS",
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-variable-anchor": ["bottom", "left", "right", "top"],
         "text-radial-offset": 1,
         "icon-size": 0.8,
@@ -1736,7 +1698,7 @@
         "icon-image": "signal",
         "text-field": "SS",
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-variable-anchor": ["bottom", "left", "right", "top"],
         "text-radial-offset": 1,
         "icon-size": 0.8,
@@ -1799,7 +1761,7 @@
             ""
           ]
         ],
-        "text-size": ["*", 1.16, ["global-state", "fontSize"]],
+        "text-size": 13,
         "text-font": ["Noto Sans Italic"]
       },
       "paint": { "text-color": "#333" }
@@ -1811,7 +1773,7 @@
       "source-layer": "SEAARE",
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
-        "text-size": ["*", 1.16, ["global-state", "fontSize"]],
+        "text-size": 13,
         "text-font": ["Noto Sans Italic"]
       },
       "paint": { "text-color": "#333" }
@@ -1823,7 +1785,7 @@
       "source-layer": "FAIRWY",
       "layout": {
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "symbol-placement": "point",
         "text-anchor": "bottom",
@@ -1839,7 +1801,7 @@
       "layout": {
         "symbol-spacing": 200,
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-anchor": "top",
         "text-radial-offset": 1,
@@ -1868,7 +1830,7 @@
       "layout": {
         "text-field": ["get", "cell"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "symbol-placement": "line",
         "text-anchor": "center",
         "symbol-spacing": 300,
@@ -1973,7 +1935,7 @@
             ]
           ]
         ],
-        "text-size": ["*", 1, ["global-state", "soundgSize"]],
+        "text-size": 13,
         "text-font": ["Noto Sans Regular"],
         "text-anchor": "center",
         "symbol-sort-key": ["get", "VALSOU"],
@@ -2134,7 +2096,7 @@
         "icon-image": "pilpnt",
         "text-optional": true,
         "text-field": ["get", "OBJNAM"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-font": ["Noto Sans Semi Bold"],
         "text-justify": "auto",
         "text-variable-anchor": ["bottom-left", "bottom-right"],
@@ -2204,7 +2166,6 @@
       "minzoom": 9,
       "filter": [
         "all",
-        ["global-state", "showLights"],
         ["!", ["in", ",11,", ["concat", ",", ["get", "STATUS"], ","]]]
       ],
       "layout": {
@@ -2272,7 +2233,6 @@
       "minzoom": 11,
       "filter": [
         "all",
-        ["global-state", "showLights"],
         ["has", "SECTR1"],
         ["!", ["in", ",11,", ["concat", ",", ["get", "STATUS"], ","]]],
         ["all", ["!=", ["get", "SECTR1"], 0], ["!=", ["get", "SECTR2"], 359.9]]
@@ -2310,7 +2270,6 @@
       "minzoom": 11,
       "filter": [
         "all",
-        ["global-state", "showLights"],
         ["has", "SECTR2"],
         ["!", ["in", ",11,", ["concat", ",", ["get", "STATUS"], ","]]],
         ["all", ["!=", ["get", "SECTR1"], 0], ["!=", ["get", "SECTR2"], 359.9]]
@@ -2348,7 +2307,6 @@
       "minzoom": 11,
       "filter": [
         "all",
-        ["global-state", "showLights"],
         ["has", "SECTR1"],
         ["has", "SECTR2"],
         ["!", ["in", ",11,", ["concat", ",", ["get", "STATUS"], ","]]],
@@ -2425,7 +2383,6 @@
       "minzoom": 11,
       "filter": [
         "all",
-        ["global-state", "showLights"],
         ["has", "SECTR1"],
         ["has", "SECTR2"],
         ["!", ["in", ",11,", ["concat", ",", ["get", "STATUS"], ","]]],
@@ -2530,7 +2487,6 @@
       "minzoom": 11,
       "filter": [
         "all",
-        ["global-state", "showLights"],
         ["has", "SECTR1"],
         ["has", "SECTR2"],
         ["!", ["in", ",11,", ["concat", ",", ["get", "STATUS"], ","]]],
@@ -2634,7 +2590,6 @@
       "minzoom": 11,
       "filter": [
         "all",
-        ["global-state", "showLights"],
         [">", ["get", "VALNMR"], 20],
         ["!", ["has", "ORIENT"]],
         ["!", ["has", "SECTR1"]],
@@ -2874,7 +2829,7 @@
         ],
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Semi Bold"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-radial-offset": 1,
         "text-variable-anchor": ["bottom-left", "bottom-right"],
         "icon-anchor": "bottom",
@@ -3056,7 +3011,7 @@
       "type": "symbol",
       "source": "s57",
       "source-layer": "LIGHTS",
-      "filter": ["all", ["global-state", "showLights"], ["has", "VALNMR"]],
+      "filter": ["has", "VALNMR"],
       "layout": {
         "icon-image": [
           "case",
@@ -3079,7 +3034,7 @@
           ""
         ],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "visibility": "visible"
       }
     },
@@ -3092,7 +3047,7 @@
       "layout": {
         "text-field": ["get", "INFORM"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]]
+        "text-size": 12
       },
       "paint": { "text-color": "magenta" }
     },
@@ -3130,7 +3085,7 @@
           "V",
           ["get", "OBJNAM"]
         ],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-font": ["Noto Sans Semi Bold"],
         "text-allow-overlap": true,
         "text-ignore-placement": true
@@ -3144,7 +3099,7 @@
       "source-layer": "BERTHS",
       "layout": {
         "text-field": ["get", "OBJNAM"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-font": ["Noto Sans Semi Bold"]
       },
       "paint": { "text-color": "magenta" }
@@ -3165,7 +3120,7 @@
           ")"
         ],
         "text-font": ["Noto Sans Bold"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-allow-overlap": false,
         "visibility": "none"
       },
@@ -3188,7 +3143,7 @@
           "clearance"
         ],
         "text-field": ["coalesce", ["get", "VERCSA"], ["get", "VERCLR"]],
-        "text-size": ["*", 1.16, ["global-state", "fontSize"]],
+        "text-size": 14,
         "symbol-placement": "point",
         "text-font": ["Noto Sans Bold"],
         "visibility": "visible",
@@ -3218,7 +3173,7 @@
           "clearance"
         ],
         "text-field": ["coalesce", ["get", "VERCSA"], ["get", "VERCLR"]],
-        "text-size": ["*", 1.16, ["global-state", "fontSize"]],
+        "text-size": 14,
         "symbol-placement": "line-center",
         "text-font": ["Noto Sans Bold"],
         "text-allow-overlap": true,
@@ -3247,7 +3202,7 @@
           "clearance"
         ],
         "text-field": ["coalesce", ["get", "VERCSA"], ["get", "VERCLR"]],
-        "text-size": ["*", 1.16, ["global-state", "fontSize"]],
+        "text-size": 14,
         "symbol-placement": "line-center",
         "text-font": ["Noto Sans Bold"],
         "text-allow-overlap": true,
@@ -3267,7 +3222,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]]
+        "text-size": 12
       }
     },
     {
@@ -3277,7 +3232,7 @@
       "source-layer": "PRDARE",
       "layout": {
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]]
       },
       "paint": { "text-color": "#333" }
@@ -3289,7 +3244,7 @@
       "source-layer": "BUAARE",
       "layout": {
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-variable-anchor": ["top", "left", "right", "bottom"],
         "text-radial-offset": 0.5
@@ -3303,7 +3258,7 @@
       "source-layer": "LNDELV",
       "layout": {
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["get", "ELEVAT"]
       },
       "paint": { "text-color": "rgba(86, 45, 0, 1)" }
@@ -3316,7 +3271,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-variable-anchor": ["center", "left", "right", "top", "bottom"]
       },
       "paint": { "text-color": "#333" }
@@ -3328,7 +3283,7 @@
       "source-layer": "SLCONS",
       "layout": {
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "symbol-placement": "line",
         "text-anchor": "bottom",
@@ -3344,7 +3299,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-variable-anchor": ["center", "left", "right", "top", "bottom"]
       },
       "paint": { "text-color": "#333" }
@@ -3357,7 +3312,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]]
+        "text-size": 12
       }
     },
     {
@@ -3368,7 +3323,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]]
+        "text-size": 12
       }
     },
     {
@@ -3380,7 +3335,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "symbol-placement": "point",
         "text-anchor": "bottom"
       }
@@ -3394,7 +3349,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "symbol-placement": "line-center",
         "text-anchor": "bottom"
       }
@@ -3408,7 +3363,7 @@
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-justify": "auto",
         "text-variable-anchor": ["left", "right", "bottom", "top"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-font": ["Noto Sans Italic"],
         "symbol-placement": "point",
         "text-radial-offset": 1
@@ -3424,7 +3379,7 @@
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-justify": "auto",
         "text-variable-anchor": ["left", "right", "bottom", "top"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-font": ["Noto Sans Italic"],
         "symbol-placement": "point",
         "text-radial-offset": 1
@@ -3439,7 +3394,7 @@
       "layout": {
         "text-field": ["get", "VALDCO"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-anchor": "center",
         "symbol-placement": "line",
         "symbol-spacing": 200
@@ -3459,7 +3414,7 @@
       "layout": {
         "text-field": ["concat", ["get", "DRVAL1"], "m"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-allow-overlap": true
       },
       "paint": { "text-color": "#333" }
@@ -3472,7 +3427,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NOBJNM"], ["get", "OBJNAM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "symbol-placement": "line-center",
         "text-anchor": "bottom",
         "text-radial-offset": 1
@@ -3487,7 +3442,7 @@
         "symbol-placement": "line",
         "text-field": ["concat", ["get", "OBJNAM"], " ", ["get", "COMCHA"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-anchor": "center",
         "symbol-spacing": 500,
         "text-offset": [0, 1]
@@ -3503,7 +3458,7 @@
         "symbol-placement": "line",
         "text-field": ["coalesce", ["get", "OBJNAM"], ["get", "INFORM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-anchor": "bottom"
       },
       "paint": { "text-color": "magenta" }
@@ -3517,7 +3472,7 @@
         "symbol-placement": "line",
         "text-field": ["coalesce", ["get", "OBJNAM"], ["get", "INFORM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-anchor": "bottom"
       },
       "paint": { "text-color": "magenta" }
@@ -3531,7 +3486,7 @@
         "symbol-placement": "line",
         "text-field": ["concat", ["get", "OBJNAM"], " ", ["get", "ORIENT"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-anchor": "bottom",
         "symbol-spacing": 500
       },
@@ -3545,7 +3500,7 @@
       "layout": {
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "symbol-placement": "line-center",
         "text-anchor": "bottom"
       },
@@ -3559,7 +3514,7 @@
       "layout": {
         "text-field": ["get", "ORIENT"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-allow-overlap": true,
         "symbol-placement": "line-center",
         "symbol-z-order": "auto",
@@ -3575,7 +3530,7 @@
       "layout": {
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]]
+        "text-size": 12
       },
       "paint": { "text-color": "gray" }
     },
@@ -3587,7 +3542,7 @@
       "layout": {
         "text-field": ["concat", ["get", "OBJNAM"], " ", ["get", "INFORM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-allow-overlap": false
       },
       "paint": { "text-color": "magenta", "text-opacity": 0.5 }
@@ -3623,7 +3578,7 @@
           ]
         ],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-allow-overlap": false
       },
       "paint": {
@@ -3659,7 +3614,7 @@
           ]
         ],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "icon-image": [
           "let",
           "CATREA",
@@ -3722,7 +3677,7 @@
       "source": "s57",
       "source-layer": "beacons",
       "layout": {
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["get", "MORFAC"],
         "text-font": ["Noto Sans Semi Bold"],
         "text-anchor": "bottom-left",
@@ -3738,7 +3693,7 @@
       "source": "s57",
       "source-layer": "LNDMRK",
       "layout": {
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Semi Bold"],
         "text-justify": "auto",
@@ -3753,7 +3708,7 @@
       "source": "s57",
       "source-layer": "beacons",
       "layout": {
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Semi Bold"],
         "text-variable-anchor": ["bottom-left", "bottom-right"],
@@ -3767,7 +3722,7 @@
       "source": "s57",
       "source-layer": "buoys",
       "layout": {
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-field": ["get", "OBJNAM"],
         "text-font": ["Noto Sans Semi Bold"],
         "text-variable-anchor": ["bottom-left", "bottom-right"],
@@ -3789,7 +3744,6 @@
       "minzoom": 9,
       "filter": [
         "all",
-        ["global-state", "showLights"],
         [
           "!",
           [
@@ -3946,7 +3900,7 @@
       "layout": {
         "text-field": ["coalesce", ["get", "NINFOM"], ["get", "INFORM"]],
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]],
+        "text-size": 12,
         "text-allow-overlap": true,
         "text-ignore-placement": true,
         "symbol-placement": "line",
@@ -3988,7 +3942,7 @@
       "type": "fill",
       "source": "s57",
       "source-layer": "M_QUAL",
-      "filter": ["global-state", "showQuality"],
+      "layout": { "visibility": "none" },
       "paint": {
         "fill-opacity": 0.2,
         "fill-color": [
@@ -4013,7 +3967,6 @@
       "type": "symbol",
       "source": "s57",
       "source-layer": "M_QUAL",
-      "filter": ["global-state", "showQuality"],
       "layout": {
         "text-field": [
           "format",
@@ -4043,6 +3996,7 @@
         "text-allow-overlap": false,
         "text-font": ["Noto Sans Bold"],
         "text-ignore-placement": false,
+        "visibility": "none",
         "icon-ignore-placement": false
       },
       "paint": {
@@ -4083,7 +4037,7 @@
         "text-allow-overlap": true,
         "text-ignore-placement": true,
         "text-font": ["Noto Sans Regular"],
-        "text-size": ["*", 1, ["global-state", "fontSize"]]
+        "text-size": 12
       },
       "paint": { "text-opacity": 0.5, "text-color": "blue" }
     },
